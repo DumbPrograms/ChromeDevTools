@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)</OutputPath>
+  </PropertyGroup>
+
+  <Target Name="GenerateProtocolFiles" BeforeTargets="Build">
+    <!--
+    <DownloadFile SourceUrl="https://github.com/ChromeDevTools/devtools-protocol/raw/master/json/browser_protocol.json"
+                  SkipUnchangedFiles="true" DestinationFolder="$(ProjectDir)" />
+    <DownloadFile SourceUrl="https://github.com/ChromeDevTools/devtools-protocol/raw/master/json/js_protocol.json"
+                  SkipUnchangedFiles="true" DestinationFolder="$(ProjectDir)" />
+    -->
+    <Exec Command="dotnet $(SolutionDir)bin\$(Configuration)\netcoreapp2.0\DumbPrograms.ChromeDevTools.Generator.dll" />
+  </Target>
+
+</Project>
