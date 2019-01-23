@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <Target Name="DownloadProtocolJsonFiles">
-    <DownloadFile DestinationFolder="$(ProjectDir)" SourceUrl="https://github.com/ChromeDevTools/devtools-protocol/raw/master/json/browser_protocol.json" />
-    <DownloadFile DestinationFolder="$(ProjectDir)" SourceUrl="https://github.com/ChromeDevTools/devtools-protocol/raw/master/json/js_protocol.json" />
+    <DownloadFile DestinationFolder="$(ProjectDir)Generated" SourceUrl="https://github.com/ChromeDevTools/devtools-protocol/raw/master/json/browser_protocol.json" />
+    <DownloadFile DestinationFolder="$(ProjectDir)Generated" SourceUrl="https://github.com/ChromeDevTools/devtools-protocol/raw/master/json/js_protocol.json" />
   </Target>
   <Target Name="GenerateProtocolFiles" BeforeTargets="BeforeBuild">
     <CallTarget Condition="$(RefreshProtocolJsonFiles) == true" Targets="DownloadProtocolJsonFiles" />
-    <Exec Command="dotnet $(SolutionDir)bin\$(Configuration)\netcoreapp2.0\DumbPrograms.ChromeDevTools.Generator.dll" />
+    <Exec Command="dotnet $(SolutionDir)bin\$(Configuration)\netcoreapp2.0\DumbPrograms.ChromeDevTools.Generator.dll Generated" />
   </Target>
 
 </Project>

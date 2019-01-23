@@ -1,8 +1,11 @@
-﻿namespace DumbPrograms.ChromeDevTools.Generator
+﻿using Newtonsoft.Json;
+
+namespace DumbPrograms.ChromeDevTools.Generator
 {
     public class DomainDescriptor
     {
-        public string Domain { get; set; }
+        [JsonProperty("domain")]
+        public string Name { get; set; }
         public string Description { get; set; }
         public string[] Dependencies { get; set; }
         public bool Experimental { get; set; }
@@ -12,7 +15,7 @@
 
         public override string ToString()
         {
-            return $"{Domain}{(Experimental ? "(experimental)" : "")}";
+            return $"{Name}{(Experimental ? "(experimental)" : "")}";
         }
     }
 }

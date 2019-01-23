@@ -8,7 +8,13 @@ namespace DumbPrograms.ChromeDevTools.Generator
     {
         static void Main(string[] args)
         {
-            foreach (var path in Directory.EnumerateFiles(Environment.CurrentDirectory, "*.json"))
+            var workingDir = Environment.CurrentDirectory;
+            if (args?.Length > 0)
+            {
+                workingDir = Path.Combine(Environment.CurrentDirectory, args[0]);
+            }
+
+            foreach (var path in Directory.EnumerateFiles(workingDir, "*.json"))
             {
                 var filename = Path.GetFileName(path);
                 Console.WriteLine($"Processing {filename}..");
@@ -16,7 +22,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                 var json = File.ReadAllText(path);
                 var protocol = JsonConvert.DeserializeObject<ProtocolDescriptor>(json);
 
-                using (var writer = File.CreateText(filename + ".cs"))
+                using (var writer = File.CreateText(Path.Combine(workingDir, filename + ".cs")))
                 {
                     new ProtocolCodeGenerator(writer).WriteProtocolCode(protocol);
                 }

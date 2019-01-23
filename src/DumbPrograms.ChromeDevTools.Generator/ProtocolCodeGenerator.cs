@@ -15,19 +15,24 @@ namespace DumbPrograms.ChromeDevTools.Generator
             Indent = 0;
             Writer = writer;
 
-            WL("using System;");
+            WIL("using System;");
         }
 
         public void WriteProtocolCode(ProtocolDescriptor protocol)
         {
+            WL();
+
+            WIL("namespace DumbPrograms.ChromeDevTools.Protocol");
+            WILOpen();
+
             foreach (var domain in protocol.Domains)
             {
                 WL();
 
-                WLSummary(domain.Description);
+                WILSummary(domain.Description);
 
-                WL($"namespace DumbPrograms.ChromeDevTools.Protocol.{domain.Domain}");
-                WLOpen();
+                WIL($"namespace {domain.Name}");
+                WILOpen();
 
                 if (domain.Types != null)
                 {
@@ -35,18 +40,18 @@ namespace DumbPrograms.ChromeDevTools.Generator
                     {
                         WL();
 
-                        WLSummary(type.Description);
+                        WILSummary(type.Description);
 
                         if (type.Deprecated)
                         {
-                            WL("[Obsolete]");
+                            WIL("[Obsolete]");
                         }
 
-                        WL($"public class {type.Name}");
-                        WLOpen();
+                        WIL($"public class {type.Name}");
+                        WILOpen();
 
 
-                        WLClose();
+                        WILClose();
                     }
                 }
 
@@ -56,23 +61,53 @@ namespace DumbPrograms.ChromeDevTools.Generator
                     {
                         WL();
 
-                        WLSummary(command.Description);
+                        WILSummary(command.Description);
 
                         if (command.Deprecated)
                         {
-                            WL("[Obsolete]");
+                            WIL("[Obsolete]");
                         }
 
-                        WL($"public class {command.Name}Command");
-                        WLOpen();
-                        WLClose();
+                        var commandClassName = Char.ToUpperInvariant(command.Name[0]) + command.Name.Substring(1, command.Name.Length - 1);
+
+                        WI($"public class {commandClassName}Command : ICommand");
+
+                        if (command.Returns != null)
+                        {
+                            WL($"<{commandClassName}Response>");
+                        }
+                        else
+                        {
+                            WL();
+                        }
+
+                        WILOpen();
+
+                        WIL($"string ICommand.Name {{ get; }} = \"{domain.Name}.{command.Name}\";");
+
+                        WILClose();
+
+                        if (command.Returns != null)
+                        {
+                            WL();
+                            WIL($"public class {commandClassName}Response");
+                            WILOpen();
+                            WILClose();
+                        }
                     }
                 }
 
-                WLClose();
+                WILClose();
             }
 
+            WILClose();
+
             Writer.Flush();
+        }
+
+        void W(string content)
+        {
+            Writer.Write(content);
         }
 
         void WL()
@@ -82,27 +117,42 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
         void WL(string line)
         {
-            for (int i = 0; i < Indent; i++)
-            {
-                Writer.Write("    ");
-            }
-
             Writer.WriteLine(line);
         }
 
-        void WLOpen()
+        void WI()
         {
-            WL("{");
+            for (int i = 0; i < Indent; i++)
+            {
+                W("    ");
+            }
+        }
+
+        void WI(string content)
+        {
+            WI();
+            W(content);
+        }
+
+        void WIL(string line)
+        {
+            WI();
+            Writer.WriteLine(line);
+        }
+
+        void WILOpen()
+        {
+            WIL("{");
             Indent++;
         }
 
-        void WLClose()
+        void WILClose()
         {
             Indent--;
-            WL("}");
+            WIL("}");
         }
 
-        private void WLSummary(string description)
+        void WILSummary(string description)
         {
             if (String.IsNullOrWhiteSpace(description))
             {
@@ -112,7 +162,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
             var xml = new XElement("summary", Environment.NewLine + description + Environment.NewLine).ToString();
             foreach (var line in xml.Split(Environment.NewLine))
             {
-                WL("/// " + line);
+                WIL("/// " + line);
             }
         }
     }
