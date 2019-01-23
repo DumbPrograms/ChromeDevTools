@@ -10,12 +10,13 @@ namespace DumbPrograms.ChromeDevTools.Generator
         {
             foreach (var path in Directory.EnumerateFiles(Environment.CurrentDirectory, "*.json"))
             {
-                Console.WriteLine($"Processing {Path.GetFileName(path)}..");
+                var filename = Path.GetFileName(path);
+                Console.WriteLine($"Processing {filename}..");
 
                 var json = File.ReadAllText(path);
                 var protocol = JsonConvert.DeserializeObject<ProtocolDescriptor>(json);
 
-                using (var writer = File.CreateText($"{Path.GetFileNameWithoutExtension(path)}.g.cs"))
+                using (var writer = File.CreateText(filename + ".cs"))
                 {
                     new ProtocolCodeGenerator(writer).WriteProtocolCode(protocol);
                 }
