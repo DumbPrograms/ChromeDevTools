@@ -9,29 +9,88 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique accessibility node identifier.
         /// </summary>
-        public class AXNodeId
+        public struct AXNodeId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public AXNodeId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Enum of possible property types.
         /// </summary>
-        public class AXValueType
+        public struct AXValueType : IEnum
         {
+            public string Value { get; private set; }
+
+            public AXValueType(string value)
+            {
+                Value = value;
+            }
+
+            public static AXValueType Boolean => new AXValueType("boolean");
+            public static AXValueType Tristate => new AXValueType("tristate");
+            public static AXValueType BooleanOrUndefined => new AXValueType("booleanOrUndefined");
+            public static AXValueType Idref => new AXValueType("idref");
+            public static AXValueType IdrefList => new AXValueType("idrefList");
+            public static AXValueType Integer => new AXValueType("integer");
+            public static AXValueType Node => new AXValueType("node");
+            public static AXValueType NodeList => new AXValueType("nodeList");
+            public static AXValueType Number => new AXValueType("number");
+            public static AXValueType String => new AXValueType("string");
+            public static AXValueType ComputedString => new AXValueType("computedString");
+            public static AXValueType Token => new AXValueType("token");
+            public static AXValueType TokenList => new AXValueType("tokenList");
+            public static AXValueType DomRelation => new AXValueType("domRelation");
+            public static AXValueType Role => new AXValueType("role");
+            public static AXValueType InternalRole => new AXValueType("internalRole");
+            public static AXValueType ValueUndefined => new AXValueType("valueUndefined");
         }
 
         /// <summary>
         /// Enum of possible property sources.
         /// </summary>
-        public class AXValueSourceType
+        public struct AXValueSourceType : IEnum
         {
+            public string Value { get; private set; }
+
+            public AXValueSourceType(string value)
+            {
+                Value = value;
+            }
+
+            public static AXValueSourceType Attribute => new AXValueSourceType("attribute");
+            public static AXValueSourceType Implicit => new AXValueSourceType("implicit");
+            public static AXValueSourceType Style => new AXValueSourceType("style");
+            public static AXValueSourceType Contents => new AXValueSourceType("contents");
+            public static AXValueSourceType Placeholder => new AXValueSourceType("placeholder");
+            public static AXValueSourceType RelatedElement => new AXValueSourceType("relatedElement");
         }
 
         /// <summary>
         /// Enum of possible native property sources (as a subtype of a particular AXValueSourceType).
         /// </summary>
-        public class AXValueNativeSourceType
+        public struct AXValueNativeSourceType : IEnum
         {
+            public string Value { get; private set; }
+
+            public AXValueNativeSourceType(string value)
+            {
+                Value = value;
+            }
+
+            public static AXValueNativeSourceType Figcaption => new AXValueNativeSourceType("figcaption");
+            public static AXValueNativeSourceType Label => new AXValueNativeSourceType("label");
+            public static AXValueNativeSourceType Labelfor => new AXValueNativeSourceType("labelfor");
+            public static AXValueNativeSourceType Labelwrapped => new AXValueNativeSourceType("labelwrapped");
+            public static AXValueNativeSourceType Legend => new AXValueNativeSourceType("legend");
+            public static AXValueNativeSourceType Tablecaption => new AXValueNativeSourceType("tablecaption");
+            public static AXValueNativeSourceType Title => new AXValueNativeSourceType("title");
+            public static AXValueNativeSourceType Other => new AXValueNativeSourceType("other");
         }
 
         /// <summary>
@@ -64,8 +123,54 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// - from 'checked' to 'selected': states which apply to widgets
         /// - from 'activedescendant' to 'owns' - relationships between elements other than parent/child/sibling.
         /// </summary>
-        public class AXPropertyName
+        public struct AXPropertyName : IEnum
         {
+            public string Value { get; private set; }
+
+            public AXPropertyName(string value)
+            {
+                Value = value;
+            }
+
+            public static AXPropertyName Busy => new AXPropertyName("busy");
+            public static AXPropertyName Disabled => new AXPropertyName("disabled");
+            public static AXPropertyName Editable => new AXPropertyName("editable");
+            public static AXPropertyName Focusable => new AXPropertyName("focusable");
+            public static AXPropertyName Focused => new AXPropertyName("focused");
+            public static AXPropertyName Hidden => new AXPropertyName("hidden");
+            public static AXPropertyName HiddenRoot => new AXPropertyName("hiddenRoot");
+            public static AXPropertyName Invalid => new AXPropertyName("invalid");
+            public static AXPropertyName Keyshortcuts => new AXPropertyName("keyshortcuts");
+            public static AXPropertyName Settable => new AXPropertyName("settable");
+            public static AXPropertyName Roledescription => new AXPropertyName("roledescription");
+            public static AXPropertyName Live => new AXPropertyName("live");
+            public static AXPropertyName Atomic => new AXPropertyName("atomic");
+            public static AXPropertyName Relevant => new AXPropertyName("relevant");
+            public static AXPropertyName Root => new AXPropertyName("root");
+            public static AXPropertyName Autocomplete => new AXPropertyName("autocomplete");
+            public static AXPropertyName HasPopup => new AXPropertyName("hasPopup");
+            public static AXPropertyName Level => new AXPropertyName("level");
+            public static AXPropertyName Multiselectable => new AXPropertyName("multiselectable");
+            public static AXPropertyName Orientation => new AXPropertyName("orientation");
+            public static AXPropertyName Multiline => new AXPropertyName("multiline");
+            public static AXPropertyName Readonly => new AXPropertyName("readonly");
+            public static AXPropertyName Required => new AXPropertyName("required");
+            public static AXPropertyName Valuemin => new AXPropertyName("valuemin");
+            public static AXPropertyName Valuemax => new AXPropertyName("valuemax");
+            public static AXPropertyName Valuetext => new AXPropertyName("valuetext");
+            public static AXPropertyName Checked => new AXPropertyName("checked");
+            public static AXPropertyName Expanded => new AXPropertyName("expanded");
+            public static AXPropertyName Modal => new AXPropertyName("modal");
+            public static AXPropertyName Pressed => new AXPropertyName("pressed");
+            public static AXPropertyName Selected => new AXPropertyName("selected");
+            public static AXPropertyName Activedescendant => new AXPropertyName("activedescendant");
+            public static AXPropertyName Controls => new AXPropertyName("controls");
+            public static AXPropertyName Describedby => new AXPropertyName("describedby");
+            public static AXPropertyName Details => new AXPropertyName("details");
+            public static AXPropertyName Errormessage => new AXPropertyName("errormessage");
+            public static AXPropertyName Flowto => new AXPropertyName("flowto");
+            public static AXPropertyName Labelledby => new AXPropertyName("labelledby");
+            public static AXPropertyName Owns => new AXPropertyName("owns");
         }
 
         /// <summary>
@@ -337,15 +442,33 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     namespace Browser
     {
 
-        public class WindowID
+        public struct WindowID : IAlias<int>
         {
+            public int Value { get; private set; }
+
+            public WindowID(int value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// The state of the browser window.
         /// </summary>
-        public class WindowState
+        public struct WindowState : IEnum
         {
+            public string Value { get; private set; }
+
+            public WindowState(string value)
+            {
+                Value = value;
+            }
+
+            public static WindowState Normal => new WindowState("normal");
+            public static WindowState Minimized => new WindowState("minimized");
+            public static WindowState Maximized => new WindowState("maximized");
+            public static WindowState Fullscreen => new WindowState("fullscreen");
         }
 
         /// <summary>
@@ -355,8 +478,31 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
         }
 
-        public class PermissionType
+        public struct PermissionType : IEnum
         {
+            public string Value { get; private set; }
+
+            public PermissionType(string value)
+            {
+                Value = value;
+            }
+
+            public static PermissionType AccessibilityEvents => new PermissionType("accessibilityEvents");
+            public static PermissionType AudioCapture => new PermissionType("audioCapture");
+            public static PermissionType BackgroundSync => new PermissionType("backgroundSync");
+            public static PermissionType BackgroundFetch => new PermissionType("backgroundFetch");
+            public static PermissionType ClipboardRead => new PermissionType("clipboardRead");
+            public static PermissionType ClipboardWrite => new PermissionType("clipboardWrite");
+            public static PermissionType DurableStorage => new PermissionType("durableStorage");
+            public static PermissionType Flash => new PermissionType("flash");
+            public static PermissionType Geolocation => new PermissionType("geolocation");
+            public static PermissionType Midi => new PermissionType("midi");
+            public static PermissionType MidiSysex => new PermissionType("midiSysex");
+            public static PermissionType Notifications => new PermissionType("notifications");
+            public static PermissionType PaymentHandler => new PermissionType("paymentHandler");
+            public static PermissionType ProtectedMediaIdentifier => new PermissionType("protectedMediaIdentifier");
+            public static PermissionType Sensors => new PermissionType("sensors");
+            public static PermissionType VideoCapture => new PermissionType("videoCapture");
         }
 
         /// <summary>
@@ -506,8 +652,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     namespace CSS
     {
 
-        public class StyleSheetId
+        public struct StyleSheetId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public StyleSheetId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -515,8 +668,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// stylesheets, "inspector" for stylesheets created by the inspector (i.e. those holding the "via
         /// inspector" rules), "regular" for regular stylesheets.
         /// </summary>
-        public class StyleSheetOrigin
+        public struct StyleSheetOrigin : IEnum
         {
+            public string Value { get; private set; }
+
+            public StyleSheetOrigin(string value)
+            {
+                Value = value;
+            }
+
+            public static StyleSheetOrigin Injected => new StyleSheetOrigin("injected");
+            public static StyleSheetOrigin UserAgent => new StyleSheetOrigin("user-agent");
+            public static StyleSheetOrigin Inspector => new StyleSheetOrigin("inspector");
+            public static StyleSheetOrigin Regular => new StyleSheetOrigin("regular");
         }
 
         /// <summary>
@@ -916,15 +1080,35 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique identifier of the Cache object.
         /// </summary>
-        public class CacheId
+        public struct CacheId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public CacheId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// type of HTTP response cached
         /// </summary>
-        public class CachedResponseType
+        public struct CachedResponseType : IEnum
         {
+            public string Value { get; private set; }
+
+            public CachedResponseType(string value)
+            {
+                Value = value;
+            }
+
+            public static CachedResponseType Basic => new CachedResponseType("basic");
+            public static CachedResponseType Cors => new CachedResponseType("cors");
+            public static CachedResponseType Default => new CachedResponseType("default");
+            public static CachedResponseType Error => new CachedResponseType("error");
+            public static CachedResponseType OpaqueResponse => new CachedResponseType("opaqueResponse");
+            public static CachedResponseType OpaqueRedirect => new CachedResponseType("opaqueRedirect");
         }
 
         /// <summary>
@@ -1073,16 +1257,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique DOM node identifier.
         /// </summary>
-        public class NodeId
+        public struct NodeId : IAlias<int>
         {
+            public int Value { get; private set; }
+
+            public NodeId(int value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Unique DOM node identifier used to reference a node that may not have been pushed to the
         /// front-end.
         /// </summary>
-        public class BackendNodeId
+        public struct BackendNodeId : IAlias<int>
         {
+            public int Value { get; private set; }
+
+            public BackendNodeId(int value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -1095,15 +1293,47 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Pseudo element type.
         /// </summary>
-        public class PseudoType
+        public struct PseudoType : IEnum
         {
+            public string Value { get; private set; }
+
+            public PseudoType(string value)
+            {
+                Value = value;
+            }
+
+            public static PseudoType FirstLine => new PseudoType("first-line");
+            public static PseudoType FirstLetter => new PseudoType("first-letter");
+            public static PseudoType Before => new PseudoType("before");
+            public static PseudoType After => new PseudoType("after");
+            public static PseudoType Backdrop => new PseudoType("backdrop");
+            public static PseudoType Selection => new PseudoType("selection");
+            public static PseudoType FirstLineInherited => new PseudoType("first-line-inherited");
+            public static PseudoType Scrollbar => new PseudoType("scrollbar");
+            public static PseudoType ScrollbarThumb => new PseudoType("scrollbar-thumb");
+            public static PseudoType ScrollbarButton => new PseudoType("scrollbar-button");
+            public static PseudoType ScrollbarTrack => new PseudoType("scrollbar-track");
+            public static PseudoType ScrollbarTrackPiece => new PseudoType("scrollbar-track-piece");
+            public static PseudoType ScrollbarCorner => new PseudoType("scrollbar-corner");
+            public static PseudoType Resizer => new PseudoType("resizer");
+            public static PseudoType InputListButton => new PseudoType("input-list-button");
         }
 
         /// <summary>
         /// Shadow root type.
         /// </summary>
-        public class ShadowRootType
+        public struct ShadowRootType : IEnum
         {
+            public string Value { get; private set; }
+
+            public ShadowRootType(string value)
+            {
+                Value = value;
+            }
+
+            public static ShadowRootType UserAgent => new ShadowRootType("user-agent");
+            public static ShadowRootType Open => new ShadowRootType("open");
+            public static ShadowRootType Closed => new ShadowRootType("closed");
         }
 
         /// <summary>
@@ -1124,8 +1354,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// An array of quad vertices, x immediately followed by y for each point, points clock-wise.
         /// </summary>
-        public class Quad
+        public struct Quad : IAlias<double[]>
         {
+            public double[] Value { get; private set; }
+
+            public Quad(double[] value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -1602,8 +1839,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// DOM breakpoint type.
         /// </summary>
-        public class DOMBreakpointType
+        public struct DOMBreakpointType : IEnum
         {
+            public string Value { get; private set; }
+
+            public DOMBreakpointType(string value)
+            {
+                Value = value;
+            }
+
+            public static DOMBreakpointType SubtreeModified => new DOMBreakpointType("subtree-modified");
+            public static DOMBreakpointType AttributeModified => new DOMBreakpointType("attribute-modified");
+            public static DOMBreakpointType NodeRemoved => new DOMBreakpointType("node-removed");
         }
 
         /// <summary>
@@ -1735,15 +1982,29 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Index of the string in the strings table.
         /// </summary>
-        public class StringIndex
+        public struct StringIndex : IAlias<int>
         {
+            public int Value { get; private set; }
+
+            public StringIndex(int value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Index of the string in the strings table.
         /// </summary>
-        public class ArrayOfStrings
+        public struct ArrayOfStrings : IAlias<StringIndex[]>
         {
+            public StringIndex[] Value { get; private set; }
+
+            public ArrayOfStrings(StringIndex[] value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -1761,8 +2022,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
         }
 
-        public class Rectangle
+        public struct Rectangle : IAlias<double[]>
         {
+            public double[] Value { get; private set; }
+
+            public Rectangle(double[] value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -1858,8 +2126,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// DOM Storage item.
         /// </summary>
-        public class Item
+        public struct Item : IAlias<string[]>
         {
+            public string[] Value { get; private set; }
+
+            public Item(string[] value)
+            {
+                Value = value;
+            }
+
         }
 
         public class ClearCommand : ICommand
@@ -1909,8 +2184,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique identifier of Database object.
         /// </summary>
-        public class DatabaseId
+        public struct DatabaseId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public DatabaseId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -2001,8 +2283,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// pauseIfNetworkFetchesPending: The virtual time base may not advance if there are any pending
         /// resource fetches.
         /// </summary>
-        public class VirtualTimePolicy
+        public struct VirtualTimePolicy : IEnum
         {
+            public string Value { get; private set; }
+
+            public VirtualTimePolicy(string value)
+            {
+                Value = value;
+            }
+
+            public static VirtualTimePolicy Advance => new VirtualTimePolicy("advance");
+            public static VirtualTimePolicy Pause => new VirtualTimePolicy("pause");
+            public static VirtualTimePolicy PauseIfNetworkFetchesPending => new VirtualTimePolicy("pauseIfNetworkFetchesPending");
         }
 
         /// <summary>
@@ -2229,8 +2521,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// This is either obtained from another method or specifed as `blob:&amp;lt;uuid&amp;gt;` where
         /// `&amp;lt;uuid&amp;gt` is an UUID of a Blob.
         /// </summary>
-        public class StreamHandle
+        public struct StreamHandle : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public StreamHandle(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -2402,15 +2701,32 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
         }
 
-        public class GestureSourceType
+        public struct GestureSourceType : IEnum
         {
+            public string Value { get; private set; }
+
+            public GestureSourceType(string value)
+            {
+                Value = value;
+            }
+
+            public static GestureSourceType Default => new GestureSourceType("default");
+            public static GestureSourceType Touch => new GestureSourceType("touch");
+            public static GestureSourceType Mouse => new GestureSourceType("mouse");
         }
 
         /// <summary>
         /// UTC time in seconds, counted from January 1, 1970.
         /// </summary>
-        public class TimeSinceEpoch
+        public struct TimeSinceEpoch : IAlias<double>
         {
+            public double Value { get; private set; }
+
+            public TimeSinceEpoch(double value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -2513,15 +2829,29 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique Layer identifier.
         /// </summary>
-        public class LayerId
+        public struct LayerId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public LayerId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Unique snapshot identifier.
         /// </summary>
-        public class SnapshotId
+        public struct SnapshotId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public SnapshotId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -2555,8 +2885,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Array of timings, one per paint step.
         /// </summary>
-        public class PaintProfile
+        public struct PaintProfile : IAlias<double[]>
         {
+            public double[] Value { get; private set; }
+
+            public PaintProfile(double[] value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -2721,8 +3058,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Memory pressure level.
         /// </summary>
-        public class PressureLevel
+        public struct PressureLevel : IEnum
         {
+            public string Value { get; private set; }
+
+            public PressureLevel(string value)
+            {
+                Value = value;
+            }
+
+            public static PressureLevel Moderate => new PressureLevel("moderate");
+            public static PressureLevel Critical => new PressureLevel("critical");
         }
 
         /// <summary>
@@ -2842,50 +3188,129 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Resource type as it was perceived by the rendering engine.
         /// </summary>
-        public class ResourceType
+        public struct ResourceType : IEnum
         {
+            public string Value { get; private set; }
+
+            public ResourceType(string value)
+            {
+                Value = value;
+            }
+
+            public static ResourceType Document => new ResourceType("Document");
+            public static ResourceType Stylesheet => new ResourceType("Stylesheet");
+            public static ResourceType Image => new ResourceType("Image");
+            public static ResourceType Media => new ResourceType("Media");
+            public static ResourceType Font => new ResourceType("Font");
+            public static ResourceType Script => new ResourceType("Script");
+            public static ResourceType TextTrack => new ResourceType("TextTrack");
+            public static ResourceType XHR => new ResourceType("XHR");
+            public static ResourceType Fetch => new ResourceType("Fetch");
+            public static ResourceType EventSource => new ResourceType("EventSource");
+            public static ResourceType WebSocket => new ResourceType("WebSocket");
+            public static ResourceType Manifest => new ResourceType("Manifest");
+            public static ResourceType SignedExchange => new ResourceType("SignedExchange");
+            public static ResourceType Ping => new ResourceType("Ping");
+            public static ResourceType CSPViolationReport => new ResourceType("CSPViolationReport");
+            public static ResourceType Other => new ResourceType("Other");
         }
 
         /// <summary>
         /// Unique loader identifier.
         /// </summary>
-        public class LoaderId
+        public struct LoaderId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public LoaderId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Unique request identifier.
         /// </summary>
-        public class RequestId
+        public struct RequestId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public RequestId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Unique intercepted request identifier.
         /// </summary>
-        public class InterceptionId
+        public struct InterceptionId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public InterceptionId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Network level fetch failure reason.
         /// </summary>
-        public class ErrorReason
+        public struct ErrorReason : IEnum
         {
+            public string Value { get; private set; }
+
+            public ErrorReason(string value)
+            {
+                Value = value;
+            }
+
+            public static ErrorReason Failed => new ErrorReason("Failed");
+            public static ErrorReason Aborted => new ErrorReason("Aborted");
+            public static ErrorReason TimedOut => new ErrorReason("TimedOut");
+            public static ErrorReason AccessDenied => new ErrorReason("AccessDenied");
+            public static ErrorReason ConnectionClosed => new ErrorReason("ConnectionClosed");
+            public static ErrorReason ConnectionReset => new ErrorReason("ConnectionReset");
+            public static ErrorReason ConnectionRefused => new ErrorReason("ConnectionRefused");
+            public static ErrorReason ConnectionAborted => new ErrorReason("ConnectionAborted");
+            public static ErrorReason ConnectionFailed => new ErrorReason("ConnectionFailed");
+            public static ErrorReason NameNotResolved => new ErrorReason("NameNotResolved");
+            public static ErrorReason InternetDisconnected => new ErrorReason("InternetDisconnected");
+            public static ErrorReason AddressUnreachable => new ErrorReason("AddressUnreachable");
+            public static ErrorReason BlockedByClient => new ErrorReason("BlockedByClient");
+            public static ErrorReason BlockedByResponse => new ErrorReason("BlockedByResponse");
         }
 
         /// <summary>
         /// UTC time in seconds, counted from January 1, 1970.
         /// </summary>
-        public class TimeSinceEpoch
+        public struct TimeSinceEpoch : IAlias<double>
         {
+            public double Value { get; private set; }
+
+            public TimeSinceEpoch(double value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Monotonically increasing time in seconds since an arbitrary point in the past.
         /// </summary>
-        public class MonotonicTime
+        public struct MonotonicTime : IAlias<double>
         {
+            public double Value { get; private set; }
+
+            public MonotonicTime(double value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -2898,16 +3323,41 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// The underlying connection technology that the browser is supposedly using.
         /// </summary>
-        public class ConnectionType
+        public struct ConnectionType : IEnum
         {
+            public string Value { get; private set; }
+
+            public ConnectionType(string value)
+            {
+                Value = value;
+            }
+
+            public static ConnectionType None => new ConnectionType("none");
+            public static ConnectionType Cellular2g => new ConnectionType("cellular2g");
+            public static ConnectionType Cellular3g => new ConnectionType("cellular3g");
+            public static ConnectionType Cellular4g => new ConnectionType("cellular4g");
+            public static ConnectionType Bluetooth => new ConnectionType("bluetooth");
+            public static ConnectionType Ethernet => new ConnectionType("ethernet");
+            public static ConnectionType Wifi => new ConnectionType("wifi");
+            public static ConnectionType Wimax => new ConnectionType("wimax");
+            public static ConnectionType Other => new ConnectionType("other");
         }
 
         /// <summary>
         /// Represents the cookie's 'SameSite' status:
         /// https://tools.ietf.org/html/draft-west-first-party-cookies
         /// </summary>
-        public class CookieSameSite
+        public struct CookieSameSite : IEnum
         {
+            public string Value { get; private set; }
+
+            public CookieSameSite(string value)
+            {
+                Value = value;
+            }
+
+            public static CookieSameSite Strict => new CookieSameSite("Strict");
+            public static CookieSameSite Lax => new CookieSameSite("Lax");
         }
 
         /// <summary>
@@ -2920,8 +3370,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Loading priority of a resource request.
         /// </summary>
-        public class ResourcePriority
+        public struct ResourcePriority : IEnum
         {
+            public string Value { get; private set; }
+
+            public ResourcePriority(string value)
+            {
+                Value = value;
+            }
+
+            public static ResourcePriority VeryLow => new ResourcePriority("VeryLow");
+            public static ResourcePriority Low => new ResourcePriority("Low");
+            public static ResourcePriority Medium => new ResourcePriority("Medium");
+            public static ResourcePriority High => new ResourcePriority("High");
+            public static ResourcePriority VeryHigh => new ResourcePriority("VeryHigh");
         }
 
         /// <summary>
@@ -2948,15 +3410,40 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Whether the request complied with Certificate Transparency policy.
         /// </summary>
-        public class CertificateTransparencyCompliance
+        public struct CertificateTransparencyCompliance : IEnum
         {
+            public string Value { get; private set; }
+
+            public CertificateTransparencyCompliance(string value)
+            {
+                Value = value;
+            }
+
+            public static CertificateTransparencyCompliance Unknown => new CertificateTransparencyCompliance("unknown");
+            public static CertificateTransparencyCompliance NotCompliant => new CertificateTransparencyCompliance("not-compliant");
+            public static CertificateTransparencyCompliance Compliant => new CertificateTransparencyCompliance("compliant");
         }
 
         /// <summary>
         /// The reason why request was blocked.
         /// </summary>
-        public class BlockedReason
+        public struct BlockedReason : IEnum
         {
+            public string Value { get; private set; }
+
+            public BlockedReason(string value)
+            {
+                Value = value;
+            }
+
+            public static BlockedReason Other => new BlockedReason("other");
+            public static BlockedReason Csp => new BlockedReason("csp");
+            public static BlockedReason MixedContent => new BlockedReason("mixed-content");
+            public static BlockedReason Origin => new BlockedReason("origin");
+            public static BlockedReason Inspector => new BlockedReason("inspector");
+            public static BlockedReason SubresourceFilter => new BlockedReason("subresource-filter");
+            public static BlockedReason ContentType => new BlockedReason("content-type");
+            public static BlockedReason CollapsedByClient => new BlockedReason("collapsed-by-client");
         }
 
         /// <summary>
@@ -3033,8 +3520,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Stages of the interception to begin intercepting. Request will intercept before the request is
         /// sent. Response will intercept after the response is received.
         /// </summary>
-        public class InterceptionStage
+        public struct InterceptionStage : IEnum
         {
+            public string Value { get; private set; }
+
+            public InterceptionStage(string value)
+            {
+                Value = value;
+            }
+
+            public static InterceptionStage Request => new InterceptionStage("Request");
+            public static InterceptionStage HeadersReceived => new InterceptionStage("HeadersReceived");
         }
 
         /// <summary>
@@ -3063,8 +3559,21 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Field type for a signed exchange related error.
         /// </summary>
-        public class SignedExchangeErrorField
+        public struct SignedExchangeErrorField : IEnum
         {
+            public string Value { get; private set; }
+
+            public SignedExchangeErrorField(string value)
+            {
+                Value = value;
+            }
+
+            public static SignedExchangeErrorField SignatureSig => new SignedExchangeErrorField("signatureSig");
+            public static SignedExchangeErrorField SignatureIntegrity => new SignedExchangeErrorField("signatureIntegrity");
+            public static SignedExchangeErrorField SignatureCertUrl => new SignedExchangeErrorField("signatureCertUrl");
+            public static SignedExchangeErrorField SignatureCertSha256 => new SignedExchangeErrorField("signatureCertSha256");
+            public static SignedExchangeErrorField SignatureValidityUrl => new SignedExchangeErrorField("signatureValidityUrl");
+            public static SignedExchangeErrorField SignatureTimestamps => new SignedExchangeErrorField("signatureTimestamps");
         }
 
         /// <summary>
@@ -3380,8 +3889,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
         }
 
-        public class InspectMode
+        public struct InspectMode : IEnum
         {
+            public string Value { get; private set; }
+
+            public InspectMode(string value)
+            {
+                Value = value;
+            }
+
+            public static InspectMode SearchForNode => new InspectMode("searchForNode");
+            public static InspectMode SearchForUAShadowDOM => new InspectMode("searchForUAShadowDOM");
+            public static InspectMode None => new InspectMode("none");
         }
 
         /// <summary>
@@ -3530,8 +4049,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique frame identifier.
         /// </summary>
-        public class FrameId
+        public struct FrameId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public FrameId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -3565,15 +4091,42 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique script identifier.
         /// </summary>
-        public class ScriptIdentifier
+        public struct ScriptIdentifier : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public ScriptIdentifier(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Transition type.
         /// </summary>
-        public class TransitionType
+        public struct TransitionType : IEnum
         {
+            public string Value { get; private set; }
+
+            public TransitionType(string value)
+            {
+                Value = value;
+            }
+
+            public static TransitionType Link => new TransitionType("link");
+            public static TransitionType Typed => new TransitionType("typed");
+            public static TransitionType Address_bar => new TransitionType("address_bar");
+            public static TransitionType Auto_bookmark => new TransitionType("auto_bookmark");
+            public static TransitionType Auto_subframe => new TransitionType("auto_subframe");
+            public static TransitionType Manual_subframe => new TransitionType("manual_subframe");
+            public static TransitionType Generated => new TransitionType("generated");
+            public static TransitionType Auto_toplevel => new TransitionType("auto_toplevel");
+            public static TransitionType Form_submit => new TransitionType("form_submit");
+            public static TransitionType Reload => new TransitionType("reload");
+            public static TransitionType Keyword => new TransitionType("keyword");
+            public static TransitionType Keyword_generated => new TransitionType("keyword_generated");
+            public static TransitionType Other => new TransitionType("other");
         }
 
         /// <summary>
@@ -3593,8 +4146,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Javascript dialog type.
         /// </summary>
-        public class DialogType
+        public struct DialogType : IEnum
         {
+            public string Value { get; private set; }
+
+            public DialogType(string value)
+            {
+                Value = value;
+            }
+
+            public static DialogType Alert => new DialogType("alert");
+            public static DialogType Confirm => new DialogType("confirm");
+            public static DialogType Prompt => new DialogType("prompt");
+            public static DialogType Beforeunload => new DialogType("beforeunload");
         }
 
         /// <summary>
@@ -4182,23 +4746,52 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// An internal certificate ID value.
         /// </summary>
-        public class CertificateId
+        public struct CertificateId : IAlias<int>
         {
+            public int Value { get; private set; }
+
+            public CertificateId(int value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// A description of mixed content (HTTP resources on HTTPS pages), as defined by
         /// https://www.w3.org/TR/mixed-content/#categories
         /// </summary>
-        public class MixedContentType
+        public struct MixedContentType : IEnum
         {
+            public string Value { get; private set; }
+
+            public MixedContentType(string value)
+            {
+                Value = value;
+            }
+
+            public static MixedContentType Blockable => new MixedContentType("blockable");
+            public static MixedContentType OptionallyBlockable => new MixedContentType("optionally-blockable");
+            public static MixedContentType None => new MixedContentType("none");
         }
 
         /// <summary>
         /// The security level of a page or resource.
         /// </summary>
-        public class SecurityState
+        public struct SecurityState : IEnum
         {
+            public string Value { get; private set; }
+
+            public SecurityState(string value)
+            {
+                Value = value;
+            }
+
+            public static SecurityState Unknown => new SecurityState("unknown");
+            public static SecurityState Neutral => new SecurityState("neutral");
+            public static SecurityState Insecure => new SecurityState("insecure");
+            public static SecurityState Secure => new SecurityState("secure");
+            public static SecurityState Info => new SecurityState("info");
         }
 
         /// <summary>
@@ -4219,8 +4812,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// The action to take when a certificate error occurs. continue will continue processing the
         /// request and cancel will cancel the request.
         /// </summary>
-        public class CertificateErrorAction
+        public struct CertificateErrorAction : IEnum
         {
+            public string Value { get; private set; }
+
+            public CertificateErrorAction(string value)
+            {
+                Value = value;
+            }
+
+            public static CertificateErrorAction Continue => new CertificateErrorAction("continue");
+            public static CertificateErrorAction Cancel => new CertificateErrorAction("cancel");
         }
 
         /// <summary>
@@ -4277,12 +4879,36 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
         }
 
-        public class ServiceWorkerVersionRunningStatus
+        public struct ServiceWorkerVersionRunningStatus : IEnum
         {
+            public string Value { get; private set; }
+
+            public ServiceWorkerVersionRunningStatus(string value)
+            {
+                Value = value;
+            }
+
+            public static ServiceWorkerVersionRunningStatus Stopped => new ServiceWorkerVersionRunningStatus("stopped");
+            public static ServiceWorkerVersionRunningStatus Starting => new ServiceWorkerVersionRunningStatus("starting");
+            public static ServiceWorkerVersionRunningStatus Running => new ServiceWorkerVersionRunningStatus("running");
+            public static ServiceWorkerVersionRunningStatus Stopping => new ServiceWorkerVersionRunningStatus("stopping");
         }
 
-        public class ServiceWorkerVersionStatus
+        public struct ServiceWorkerVersionStatus : IEnum
         {
+            public string Value { get; private set; }
+
+            public ServiceWorkerVersionStatus(string value)
+            {
+                Value = value;
+            }
+
+            public static ServiceWorkerVersionStatus New => new ServiceWorkerVersionStatus("new");
+            public static ServiceWorkerVersionStatus Installing => new ServiceWorkerVersionStatus("installing");
+            public static ServiceWorkerVersionStatus Installed => new ServiceWorkerVersionStatus("installed");
+            public static ServiceWorkerVersionStatus Activating => new ServiceWorkerVersionStatus("activating");
+            public static ServiceWorkerVersionStatus Activated => new ServiceWorkerVersionStatus("activated");
+            public static ServiceWorkerVersionStatus Redundant => new ServiceWorkerVersionStatus("redundant");
         }
 
         /// <summary>
@@ -4366,8 +4992,26 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enum of possible storage types.
         /// </summary>
-        public class StorageType
+        public struct StorageType : IEnum
         {
+            public string Value { get; private set; }
+
+            public StorageType(string value)
+            {
+                Value = value;
+            }
+
+            public static StorageType Appcache => new StorageType("appcache");
+            public static StorageType Cookies => new StorageType("cookies");
+            public static StorageType File_systems => new StorageType("file_systems");
+            public static StorageType Indexeddb => new StorageType("indexeddb");
+            public static StorageType Local_storage => new StorageType("local_storage");
+            public static StorageType Shader_cache => new StorageType("shader_cache");
+            public static StorageType Websql => new StorageType("websql");
+            public static StorageType Service_workers => new StorageType("service_workers");
+            public static StorageType Cache_storage => new StorageType("cache_storage");
+            public static StorageType All => new StorageType("all");
+            public static StorageType Other => new StorageType("other");
         }
 
         /// <summary>
@@ -4488,19 +5132,40 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     namespace Target
     {
 
-        public class TargetID
+        public struct TargetID : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public TargetID(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Unique identifier of attached debugging session.
         /// </summary>
-        public class SessionID
+        public struct SessionID : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public SessionID(string value)
+            {
+                Value = value;
+            }
+
         }
 
-        public class BrowserContextID
+        public struct BrowserContextID : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public BrowserContextID(string value)
+            {
+                Value = value;
+            }
+
         }
 
         public class TargetInfo
@@ -4725,8 +5390,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Compression type to use for traces returned via streams.
         /// </summary>
-        public class StreamCompression
+        public struct StreamCompression : IEnum
         {
+            public string Value { get; private set; }
+
+            public StreamCompression(string value)
+            {
+                Value = value;
+            }
+
+            public static StreamCompression None => new StreamCompression("none");
+            public static StreamCompression Gzip => new StreamCompression("gzip");
         }
 
         /// <summary>
@@ -4803,8 +5477,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique request identifier.
         /// </summary>
-        public class RequestId
+        public struct RequestId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public RequestId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -4812,8 +5493,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// sent. Response will intercept after the response is received (but before response
         /// body is received.
         /// </summary>
-        public class RequestStage
+        public struct RequestStage : IEnum
         {
+            public string Value { get; private set; }
+
+            public RequestStage(string value)
+            {
+                Value = value;
+            }
+
+            public static RequestStage Request => new RequestStage("Request");
+            public static RequestStage Response => new RequestStage("Response");
         }
 
         public class RequestPattern

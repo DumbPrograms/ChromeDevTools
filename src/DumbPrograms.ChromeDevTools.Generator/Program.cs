@@ -20,7 +20,11 @@ namespace DumbPrograms.ChromeDevTools.Generator
                 Console.WriteLine($"Processing {filename}..");
 
                 var json = File.ReadAllText(path);
-                var protocol = JsonConvert.DeserializeObject<ProtocolDescriptor>(json);
+                var settings = new JsonSerializerSettings
+                {
+                    MetadataPropertyHandling = MetadataPropertyHandling.Ignore
+                };
+                var protocol = JsonConvert.DeserializeObject<ProtocolDescriptor>(json, settings);
 
                 using (var writer = File.CreateText(Path.Combine(workingDir, filename + ".cs")))
                 {

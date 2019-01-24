@@ -12,9 +12,9 @@ namespace DumbPrograms.ChromeDevTools.Generator
         [JsonProperty("enum")]
         public string[] EnumValues { get; set; }
         [JsonProperty("$ref")]
-        public string EnumType { get; set; }
+        public string TypeReference { get; set; }
         [JsonProperty("items")]
-        public PropertyDescriptor ItemType { get; set; }
+        public PropertyDescriptor ArrayType { get; set; }
 
         public override string ToString()
         {

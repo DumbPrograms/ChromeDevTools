@@ -22,85 +22,117 @@ namespace DumbPrograms.ChromeDevTools.Generator
         {
             WL();
 
-            WIL("namespace DumbPrograms.ChromeDevTools.Protocol");
-            WILOpen();
-
-            foreach (var domain in protocol.Domains)
+            using (WILBlock("namespace DumbPrograms.ChromeDevTools.Protocol"))
             {
-                WL();
-
-                WILSummary(domain.Description);
-
-                WIL($"namespace {domain.Name}");
-                WILOpen();
-
-                if (domain.Types != null)
+                foreach (var domain in protocol.Domains)
                 {
-                    foreach (var type in domain.Types)
+                    WL();
+
+                    WILSummary(domain.Description);
+
+                    using (WILBlock($"namespace {domain.Name}"))
                     {
-                        WL();
-
-                        WILSummary(type.Description);
-
-                        if (type.Deprecated)
+                        if (domain.Types != null)
                         {
-                            WIL("[Obsolete]");
+                            foreach (var type in domain.Types)
+                            {
+                                WL();
+
+                                WILSummary(type.Description);
+                                if (type.Deprecated)
+                                {
+                                    WIL("[Obsolete]");
+                                }
+
+                                switch (type.Type)
+                                {
+                                    case JsonTypes.Any:
+                                    case JsonTypes.Boolean:
+                                    case JsonTypes.Integer:
+                                    case JsonTypes.Number:
+                                    case JsonTypes.Array:
+                                    case JsonTypes.String:
+                                        var csTypeName = GetCSharpTypeName(type.Type, type.ArrayType);
+                                        using (WILBlock($"public struct {type.Name} : I{(type.EnumValues != null ? "Enum" : $"Alias<{csTypeName}>")}"))
+                                        {
+
+                                            WIL($"public {csTypeName} Value {{ get; private set; }}");
+
+                                            WL();
+
+                                            using (WILBlock($"public {type.Name}({csTypeName} value)"))
+                                            {
+                                                WIL("Value = value;");
+                                            }
+
+                                            WL();
+
+                                            if (type.EnumValues != null)
+                                            {
+                                                foreach (var value in type.EnumValues)
+                                                {
+                                                    WIL($"public static {type.Name} {GetCSharpIdentifierName(value)} => new {type.Name}(\"{value}\");");
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case JsonTypes.Object:
+                                        using (WILBlock($"public class {type.Name}"))
+                                        {
+
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
                         }
 
-                        WIL($"public class {type.Name}");
-                        WILOpen();
+                        if (domain.Commands != null)
+                        {
+                            foreach (var command in domain.Commands)
+                            {
+                                WL();
 
+                                WILSummary(command.Description);
 
-                        WILClose();
+                                if (command.Deprecated)
+                                {
+                                    WIL("[Obsolete]");
+                                }
+
+                                var commandClassName = GetCSharpIdentifierName(command.Name);
+
+                                WI($"public class {commandClassName}Command : ICommand");
+
+                                if (command.Returns != null)
+                                {
+                                    WL($"<{commandClassName}Response>");
+                                }
+                                else
+                                {
+                                    WL();
+                                }
+
+                                WILOpen();
+
+                                WIL($"string ICommand.Name {{ get; }} = \"{domain.Name}.{command.Name}\";");
+
+                                WILClose();
+
+                                if (command.Returns != null)
+                                {
+                                    WL();
+                                    WIL($"public class {commandClassName}Response");
+                                    WILOpen();
+                                    WILClose();
+                                }
+                            }
+                        }
+
                     }
                 }
-
-                if (domain.Commands != null)
-                {
-                    foreach (var command in domain.Commands)
-                    {
-                        WL();
-
-                        WILSummary(command.Description);
-
-                        if (command.Deprecated)
-                        {
-                            WIL("[Obsolete]");
-                        }
-
-                        var commandClassName = Char.ToUpperInvariant(command.Name[0]) + command.Name.Substring(1, command.Name.Length - 1);
-
-                        WI($"public class {commandClassName}Command : ICommand");
-
-                        if (command.Returns != null)
-                        {
-                            WL($"<{commandClassName}Response>");
-                        }
-                        else
-                        {
-                            WL();
-                        }
-
-                        WILOpen();
-
-                        WIL($"string ICommand.Name {{ get; }} = \"{domain.Name}.{command.Name}\";");
-
-                        WILClose();
-
-                        if (command.Returns != null)
-                        {
-                            WL();
-                            WIL($"public class {commandClassName}Response");
-                            WILOpen();
-                            WILClose();
-                        }
-                    }
-                }
-
-                WILClose();
             }
-
-            WILClose();
 
             Writer.Flush();
         }
@@ -163,6 +195,67 @@ namespace DumbPrograms.ChromeDevTools.Generator
             foreach (var line in xml.Split(Environment.NewLine))
             {
                 WIL("/// " + line);
+            }
+        }
+
+        BlockStructureWriter WILBlock(string header) => new BlockStructureWriter(this, header);
+
+        string GetCSharpIdentifierName(string name)
+            => String.Join("", name.Split('-', ' ').Select(n => Char.ToUpperInvariant(n[0]) + n.Substring(1, n.Length - 1)));
+
+        string GetCSharpTypeName(JsonTypes jsonType, PropertyDescriptor arrayType)
+        {
+            switch (jsonType)
+            {
+                case JsonTypes.Any:
+                    return "object";
+                case JsonTypes.Boolean:
+                    return "boolean";
+                case JsonTypes.Integer:
+                    return "int";
+                case JsonTypes.Number:
+                    return "double";
+                case JsonTypes.String:
+                    return "string";
+                case JsonTypes.Array:
+                    if (arrayType == null)
+                    {
+                        return "Array";
+                    }
+                    else if (arrayType.TypeReference != null)
+                    {
+                        return arrayType.TypeReference + "[]";
+                    }
+                    else if (arrayType.Type != null)
+                    {
+                        return GetCSharpTypeName(arrayType.Type.Value, arrayType.ArrayType) + "[]";
+                    }
+                    else
+                    {
+                        throw new NotImplementedException();
+                    }
+                case JsonTypes.Object:
+
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        class BlockStructureWriter : IDisposable
+        {
+            private readonly ProtocolCodeGenerator Generator;
+
+            public BlockStructureWriter(ProtocolCodeGenerator generator, string header)
+            {
+                Generator = generator;
+
+                generator.WIL(header);
+                generator.WILOpen();
+            }
+
+            public void Dispose()
+            {
+                Generator.WILClose();
             }
         }
     }

@@ -10,7 +10,10 @@ namespace DumbPrograms.ChromeDevTools.Generator
         public bool Experimental { get; set; }
         public bool Deprecated { get; set; }
         public JsonTypes Type { get; set; }
-        public string[] Enum { get; set; }
+        [JsonProperty("enum")]
+        public string[] EnumValues { get; set; }
+        [JsonProperty("items")]
+        public PropertyDescriptor ArrayType { get; set; }
         public PropertyDescriptor[] Properties { get; set; }
     }
 }

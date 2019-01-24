@@ -52,15 +52,29 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Breakpoint identifier.
         /// </summary>
-        public class BreakpointId
+        public struct BreakpointId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public BreakpointId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Call frame identifier.
         /// </summary>
-        public class CallFrameId
+        public struct CallFrameId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public CallFrameId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -388,8 +402,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Heap snapshot object id.
         /// </summary>
-        public class HeapSnapshotObjectId
+        public struct HeapSnapshotObjectId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public HeapSnapshotObjectId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -679,23 +700,44 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique script identifier.
         /// </summary>
-        public class ScriptId
+        public struct ScriptId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public ScriptId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Unique object identifier.
         /// </summary>
-        public class RemoteObjectId
+        public struct RemoteObjectId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public RemoteObjectId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Primitive value which cannot be JSON-stringified. Includes values `-0`, `NaN`, `Infinity`,
         /// `-Infinity`, and bigint literals.
         /// </summary>
-        public class UnserializableValue
+        public struct UnserializableValue : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public UnserializableValue(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -749,8 +791,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Id of an execution context.
         /// </summary>
-        public class ExecutionContextId
+        public struct ExecutionContextId : IAlias<int>
         {
+            public int Value { get; private set; }
+
+            public ExecutionContextId(int value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -771,15 +820,29 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Number of milliseconds since epoch.
         /// </summary>
-        public class Timestamp
+        public struct Timestamp : IAlias<double>
         {
+            public double Value { get; private set; }
+
+            public Timestamp(double value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
         /// Number of milliseconds.
         /// </summary>
-        public class TimeDelta
+        public struct TimeDelta : IAlias<double>
         {
+            public double Value { get; private set; }
+
+            public TimeDelta(double value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
@@ -799,8 +862,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique identifier of current debugger.
         /// </summary>
-        public class UniqueDebuggerId
+        public struct UniqueDebuggerId : IAlias<string>
         {
+            public string Value { get; private set; }
+
+            public UniqueDebuggerId(string value)
+            {
+                Value = value;
+            }
+
         }
 
         /// <summary>
