@@ -79,7 +79,28 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     case JsonTypes.Object:
                                         using (WILBlock($"public class {type.Name}"))
                                         {
+                                            if (type.Properties != null)
+                                            {
+                                                foreach (var property in type.Properties)
+                                                {
+                                                    string csPropType;
+                                                    if (property.Type != null)
+                                                    {
+                                                        csPropType = GetCSharpTypeName(property.Type.Value, property.ArrayType);
+                                                    }
+                                                    else if (property.EnumValues != null)
+                                                    {
+                                                        csPropType = $"{domain.Name}.{type.Name}.{property.Name}";
+                                                        //throw new NotImplementedException();
+                                                    }
+                                                    else
+                                                    {
+                                                        csPropType = property.TypeReference;
+                                                    }
 
+                                                    WIL($"// public {csPropType}");
+                                                }
+                                            }
                                         }
                                         break;
                                     default:
@@ -208,6 +229,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
             switch (jsonType)
             {
                 case JsonTypes.Any:
+                case JsonTypes.Object:
                     return "object";
                 case JsonTypes.Boolean:
                     return "boolean";
@@ -234,8 +256,6 @@ namespace DumbPrograms.ChromeDevTools.Generator
                     {
                         throw new NotImplementedException();
                     }
-                case JsonTypes.Object:
-
                 default:
                     throw new NotImplementedException();
             }

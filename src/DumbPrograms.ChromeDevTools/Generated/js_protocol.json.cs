@@ -14,6 +14,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ConsoleMessage
         {
+            // public string
+            // public string
+            // public string
+            // public string
+            // public int
+            // public int
         }
 
         /// <summary>
@@ -82,6 +88,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Location
         {
+            // public Runtime.ScriptId
+            // public int
+            // public int
         }
 
         /// <summary>
@@ -89,6 +98,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScriptPosition
         {
+            // public int
+            // public int
         }
 
         /// <summary>
@@ -96,6 +107,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CallFrame
         {
+            // public CallFrameId
+            // public string
+            // public Location
+            // public Location
+            // public string
+            // public Scope[]
+            // public Runtime.RemoteObject
+            // public Runtime.RemoteObject
         }
 
         /// <summary>
@@ -103,6 +122,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Scope
         {
+            // public string
+            // public Runtime.RemoteObject
+            // public string
+            // public Location
+            // public Location
         }
 
         /// <summary>
@@ -110,10 +134,16 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SearchMatch
         {
+            // public double
+            // public string
         }
 
         public class BreakLocation
         {
+            // public Runtime.ScriptId
+            // public int
+            // public int
+            // public string
         }
 
         /// <summary>
@@ -418,6 +448,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SamplingHeapProfileNode
         {
+            // public Runtime.CallFrame
+            // public double
+            // public int
+            // public SamplingHeapProfileNode[]
         }
 
         /// <summary>
@@ -425,6 +459,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SamplingHeapProfileSample
         {
+            // public double
+            // public int
+            // public double
         }
 
         /// <summary>
@@ -432,6 +469,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SamplingHeapProfile
         {
+            // public SamplingHeapProfileNode
+            // public SamplingHeapProfileSample[]
         }
 
         /// <summary>
@@ -523,6 +562,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ProfileNode
         {
+            // public int
+            // public Runtime.CallFrame
+            // public int
+            // public int[]
+            // public string
+            // public PositionTickInfo[]
         }
 
         /// <summary>
@@ -530,6 +575,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Profile
         {
+            // public ProfileNode[]
+            // public double
+            // public double
+            // public int[]
+            // public int[]
         }
 
         /// <summary>
@@ -537,6 +587,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class PositionTickInfo
         {
+            // public int
+            // public int
         }
 
         /// <summary>
@@ -544,6 +596,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CoverageRange
         {
+            // public int
+            // public int
+            // public int
         }
 
         /// <summary>
@@ -551,6 +606,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FunctionCoverage
         {
+            // public string
+            // public CoverageRange[]
+            // public boolean
         }
 
         /// <summary>
@@ -558,6 +616,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScriptCoverage
         {
+            // public Runtime.ScriptId
+            // public string
+            // public FunctionCoverage[]
         }
 
         /// <summary>
@@ -565,6 +626,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class TypeObject
         {
+            // public string
         }
 
         /// <summary>
@@ -572,6 +634,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class TypeProfileEntry
         {
+            // public int
+            // public TypeObject[]
         }
 
         /// <summary>
@@ -579,6 +643,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScriptTypeProfile
         {
+            // public Runtime.ScriptId
+            // public string
+            // public TypeProfileEntry[]
         }
 
         public class DisableCommand : ICommand
@@ -745,10 +812,21 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class RemoteObject
         {
+            // public string
+            // public string
+            // public string
+            // public object
+            // public UnserializableValue
+            // public string
+            // public RemoteObjectId
+            // public ObjectPreview
+            // public CustomPreview
         }
 
         public class CustomPreview
         {
+            // public string
+            // public RemoteObjectId
         }
 
         /// <summary>
@@ -756,14 +834,27 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ObjectPreview
         {
+            // public string
+            // public string
+            // public string
+            // public boolean
+            // public PropertyPreview[]
+            // public EntryPreview[]
         }
 
         public class PropertyPreview
         {
+            // public string
+            // public string
+            // public string
+            // public ObjectPreview
+            // public string
         }
 
         public class EntryPreview
         {
+            // public ObjectPreview
+            // public ObjectPreview
         }
 
         /// <summary>
@@ -771,6 +862,16 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class PropertyDescriptor
         {
+            // public string
+            // public RemoteObject
+            // public boolean
+            // public RemoteObject
+            // public RemoteObject
+            // public boolean
+            // public boolean
+            // public boolean
+            // public boolean
+            // public RemoteObject
         }
 
         /// <summary>
@@ -778,6 +879,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class InternalPropertyDescriptor
         {
+            // public string
+            // public RemoteObject
         }
 
         /// <summary>
@@ -786,6 +889,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CallArgument
         {
+            // public object
+            // public UnserializableValue
+            // public RemoteObjectId
         }
 
         /// <summary>
@@ -807,6 +913,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ExecutionContextDescription
         {
+            // public ExecutionContextId
+            // public string
+            // public string
+            // public object
         }
 
         /// <summary>
@@ -815,6 +925,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ExceptionDetails
         {
+            // public int
+            // public string
+            // public int
+            // public int
+            // public ScriptId
+            // public string
+            // public StackTrace
+            // public RemoteObject
+            // public ExecutionContextId
         }
 
         /// <summary>
@@ -850,6 +969,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CallFrame
         {
+            // public string
+            // public ScriptId
+            // public string
+            // public int
+            // public int
         }
 
         /// <summary>
@@ -857,6 +981,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class StackTrace
         {
+            // public string
+            // public CallFrame[]
+            // public StackTrace
+            // public StackTraceId
         }
 
         /// <summary>
@@ -879,6 +1007,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class StackTraceId
         {
+            // public string
+            // public UniqueDebuggerId
         }
 
         /// <summary>
@@ -1114,6 +1244,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Domain
         {
+            // public string
+            // public string
         }
 
         /// <summary>

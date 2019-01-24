@@ -98,14 +98,28 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AXValueSource
         {
+            // public AXValueSourceType
+            // public AXValue
+            // public string
+            // public AXValue
+            // public boolean
+            // public AXValueNativeSourceType
+            // public AXValue
+            // public boolean
+            // public string
         }
 
         public class AXRelatedNode
         {
+            // public DOM.BackendNodeId
+            // public string
+            // public string
         }
 
         public class AXProperty
         {
+            // public AXPropertyName
+            // public AXValue
         }
 
         /// <summary>
@@ -113,6 +127,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AXValue
         {
+            // public AXValueType
+            // public object
+            // public AXRelatedNode[]
+            // public AXValueSource[]
         }
 
         /// <summary>
@@ -178,6 +196,16 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AXNode
         {
+            // public AXNodeId
+            // public boolean
+            // public AXProperty[]
+            // public AXValue
+            // public AXValue
+            // public AXValue
+            // public AXValue
+            // public AXProperty[]
+            // public AXNodeId[]
+            // public DOM.BackendNodeId
         }
 
         /// <summary>
@@ -230,6 +258,16 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Animation
         {
+            // public string
+            // public string
+            // public boolean
+            // public string
+            // public double
+            // public double
+            // public double
+            // public string
+            // public AnimationEffect
+            // public string
         }
 
         /// <summary>
@@ -237,6 +275,16 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AnimationEffect
         {
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public string
+            // public string
+            // public DOM.BackendNodeId
+            // public KeyframesRule
+            // public string
         }
 
         /// <summary>
@@ -244,6 +292,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class KeyframesRule
         {
+            // public string
+            // public KeyframeStyle[]
         }
 
         /// <summary>
@@ -251,6 +301,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class KeyframeStyle
         {
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -354,6 +406,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ApplicationCacheResource
         {
+            // public string
+            // public int
+            // public string
         }
 
         /// <summary>
@@ -361,6 +416,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ApplicationCache
         {
+            // public string
+            // public double
+            // public double
+            // public double
+            // public ApplicationCacheResource[]
         }
 
         /// <summary>
@@ -368,6 +428,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FrameWithManifest
         {
+            // public Page.FrameId
+            // public string
+            // public int
         }
 
         /// <summary>
@@ -476,6 +539,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Bounds
         {
+            // public int
+            // public int
+            // public int
+            // public int
+            // public WindowState
         }
 
         public struct PermissionType : IEnum
@@ -510,6 +578,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Bucket
         {
+            // public int
+            // public int
+            // public int
         }
 
         /// <summary>
@@ -517,6 +588,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Histogram
         {
+            // public string
+            // public int
+            // public int
+            // public Bucket[]
         }
 
         /// <summary>
@@ -688,6 +763,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class PseudoElementMatches
         {
+            // public DOM.PseudoType
+            // public RuleMatch[]
         }
 
         /// <summary>
@@ -695,6 +772,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class InheritedStyleEntry
         {
+            // public CSSStyle
+            // public RuleMatch[]
         }
 
         /// <summary>
@@ -702,6 +781,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class RuleMatch
         {
+            // public CSSRule
+            // public int[]
         }
 
         /// <summary>
@@ -709,6 +790,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Value
         {
+            // public string
+            // public SourceRange
         }
 
         /// <summary>
@@ -716,6 +799,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SelectorList
         {
+            // public Value[]
+            // public string
         }
 
         /// <summary>
@@ -723,6 +808,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSStyleSheetHeader
         {
+            // public StyleSheetId
+            // public Page.FrameId
+            // public string
+            // public string
+            // public StyleSheetOrigin
+            // public string
+            // public DOM.BackendNodeId
+            // public boolean
+            // public boolean
+            // public boolean
+            // public double
+            // public double
+            // public double
         }
 
         /// <summary>
@@ -730,6 +828,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSRule
         {
+            // public StyleSheetId
+            // public SelectorList
+            // public StyleSheetOrigin
+            // public CSSStyle
+            // public CSSMedia[]
         }
 
         /// <summary>
@@ -737,6 +840,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class RuleUsage
         {
+            // public StyleSheetId
+            // public double
+            // public double
+            // public boolean
         }
 
         /// <summary>
@@ -744,14 +851,23 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SourceRange
         {
+            // public int
+            // public int
+            // public int
+            // public int
         }
 
         public class ShorthandEntry
         {
+            // public string
+            // public string
+            // public boolean
         }
 
         public class CSSComputedStyleProperty
         {
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -759,6 +875,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSStyle
         {
+            // public StyleSheetId
+            // public CSSProperty[]
+            // public ShorthandEntry[]
+            // public string
+            // public SourceRange
         }
 
         /// <summary>
@@ -766,6 +887,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSProperty
         {
+            // public string
+            // public string
+            // public boolean
+            // public boolean
+            // public string
+            // public boolean
+            // public boolean
+            // public SourceRange
         }
 
         /// <summary>
@@ -773,6 +902,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSMedia
         {
+            // public string
+            // public string
+            // public string
+            // public SourceRange
+            // public StyleSheetId
+            // public MediaQuery[]
         }
 
         /// <summary>
@@ -780,6 +915,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class MediaQuery
         {
+            // public MediaQueryExpression[]
+            // public boolean
         }
 
         /// <summary>
@@ -787,6 +924,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class MediaQueryExpression
         {
+            // public double
+            // public string
+            // public string
+            // public SourceRange
+            // public double
         }
 
         /// <summary>
@@ -794,6 +936,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class PlatformFontUsage
         {
+            // public string
+            // public boolean
+            // public double
         }
 
         /// <summary>
@@ -801,6 +946,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FontFace
         {
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -808,6 +961,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSKeyframesRule
         {
+            // public Value
+            // public CSSKeyframeRule[]
         }
 
         /// <summary>
@@ -815,6 +970,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSKeyframeRule
         {
+            // public StyleSheetId
+            // public StyleSheetOrigin
+            // public Value
+            // public CSSStyle
         }
 
         /// <summary>
@@ -822,6 +981,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class StyleDeclarationEdit
         {
+            // public StyleSheetId
+            // public SourceRange
+            // public string
         }
 
         /// <summary>
@@ -1116,6 +1278,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class DataEntry
         {
+            // public string
+            // public string
+            // public Header[]
+            // public double
+            // public int
+            // public string
+            // public CachedResponseType
+            // public Header[]
         }
 
         /// <summary>
@@ -1123,10 +1293,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Cache
         {
+            // public CacheId
+            // public string
+            // public string
         }
 
         public class Header
         {
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -1134,6 +1309,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CachedResponse
         {
+            // public string
         }
 
         /// <summary>
@@ -1288,6 +1464,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class BackendNode
         {
+            // public int
+            // public string
+            // public BackendNodeId
         }
 
         /// <summary>
@@ -1342,6 +1521,34 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Node
         {
+            // public NodeId
+            // public NodeId
+            // public BackendNodeId
+            // public int
+            // public string
+            // public string
+            // public string
+            // public int
+            // public Node[]
+            // public string[]
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public PseudoType
+            // public ShadowRootType
+            // public Page.FrameId
+            // public Node
+            // public Node[]
+            // public Node
+            // public Node[]
+            // public Node
+            // public BackendNode[]
+            // public boolean
         }
 
         /// <summary>
@@ -1349,6 +1556,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class RGBA
         {
+            // public int
+            // public int
+            // public int
+            // public double
         }
 
         /// <summary>
@@ -1370,6 +1581,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class BoxModel
         {
+            // public Quad
+            // public Quad
+            // public Quad
+            // public Quad
+            // public int
+            // public int
+            // public ShapeOutsideInfo
         }
 
         /// <summary>
@@ -1377,6 +1595,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ShapeOutsideInfo
         {
+            // public Quad
+            // public object[]
+            // public object[]
         }
 
         /// <summary>
@@ -1384,6 +1605,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Rect
         {
+            // public double
+            // public double
+            // public double
+            // public double
         }
 
         /// <summary>
@@ -1858,6 +2083,16 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class EventListener
         {
+            // public string
+            // public boolean
+            // public boolean
+            // public boolean
+            // public Runtime.ScriptId
+            // public int
+            // public int
+            // public Runtime.RemoteObject
+            // public Runtime.RemoteObject
+            // public DOM.BackendNodeId
         }
 
         /// <summary>
@@ -1948,6 +2183,34 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class DOMNode
         {
+            // public int
+            // public string
+            // public string
+            // public string
+            // public string
+            // public boolean
+            // public boolean
+            // public DOM.BackendNodeId
+            // public int[]
+            // public NameValue[]
+            // public int[]
+            // public int
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public Page.FrameId
+            // public int
+            // public DOM.PseudoType
+            // public DOM.ShadowRootType
+            // public boolean
+            // public DOMDebugger.EventListener[]
+            // public string
+            // public string
+            // public double
+            // public double
         }
 
         /// <summary>
@@ -1956,6 +2219,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class InlineTextBox
         {
+            // public DOM.Rect
+            // public int
+            // public int
         }
 
         /// <summary>
@@ -1963,6 +2229,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class LayoutTreeNode
         {
+            // public int
+            // public DOM.Rect
+            // public string
+            // public InlineTextBox[]
+            // public int
+            // public int
+            // public boolean
         }
 
         /// <summary>
@@ -1970,6 +2243,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ComputedStyle
         {
+            // public NameValue[]
         }
 
         /// <summary>
@@ -1977,6 +2251,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class NameValue
         {
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -2012,14 +2288,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class RareStringData
         {
+            // public int[]
+            // public StringIndex[]
         }
 
         public class RareBooleanData
         {
+            // public int[]
         }
 
         public class RareIntegerData
         {
+            // public int[]
+            // public int[]
         }
 
         public struct Rectangle : IAlias<double[]>
@@ -2038,6 +2319,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class DocumentSnapshot
         {
+            // public StringIndex
+            // public StringIndex
+            // public StringIndex
+            // public StringIndex
+            // public StringIndex
+            // public StringIndex
+            // public StringIndex
+            // public NodeTreeSnapshot
+            // public LayoutTreeSnapshot
+            // public TextBoxSnapshot
+            // public double
+            // public double
         }
 
         /// <summary>
@@ -2045,6 +2338,21 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class NodeTreeSnapshot
         {
+            // public int[]
+            // public int[]
+            // public StringIndex[]
+            // public StringIndex[]
+            // public DOM.BackendNodeId[]
+            // public ArrayOfStrings[]
+            // public RareStringData
+            // public RareStringData
+            // public RareBooleanData
+            // public RareBooleanData
+            // public RareIntegerData
+            // public RareStringData
+            // public RareBooleanData
+            // public RareStringData
+            // public RareStringData
         }
 
         /// <summary>
@@ -2052,6 +2360,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class LayoutTreeSnapshot
         {
+            // public int[]
+            // public ArrayOfStrings[]
+            // public Rectangle[]
+            // public StringIndex[]
+            // public RareBooleanData
         }
 
         /// <summary>
@@ -2060,6 +2373,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class TextBoxSnapshot
         {
+            // public int[]
+            // public Rectangle[]
+            // public int[]
+            // public int[]
         }
 
         /// <summary>
@@ -2121,6 +2438,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class StorageId
         {
+            // public string
+            // public boolean
         }
 
         /// <summary>
@@ -2200,6 +2519,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Database
         {
+            // public DatabaseId
+            // public string
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -2207,6 +2530,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Error
         {
+            // public string
+            // public int
         }
 
         /// <summary>
@@ -2275,6 +2600,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScreenOrientation
         {
+            // public string
+            // public int
         }
 
         /// <summary>
@@ -2477,6 +2804,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScreenshotParams
         {
+            // public string
+            // public int
         }
 
         /// <summary>
@@ -2573,6 +2902,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class DatabaseWithObjectStores
         {
+            // public string
+            // public double
+            // public ObjectStore[]
         }
 
         /// <summary>
@@ -2580,6 +2912,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ObjectStore
         {
+            // public string
+            // public KeyPath
+            // public boolean
+            // public ObjectStoreIndex[]
         }
 
         /// <summary>
@@ -2587,6 +2923,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ObjectStoreIndex
         {
+            // public string
+            // public KeyPath
+            // public boolean
+            // public boolean
         }
 
         /// <summary>
@@ -2594,6 +2934,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Key
         {
+            // public string
+            // public double
+            // public string
+            // public double
+            // public Key[]
         }
 
         /// <summary>
@@ -2601,6 +2946,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class KeyRange
         {
+            // public Key
+            // public Key
+            // public boolean
+            // public boolean
         }
 
         /// <summary>
@@ -2608,6 +2957,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class DataEntry
         {
+            // public Runtime.RemoteObject
+            // public Runtime.RemoteObject
+            // public Runtime.RemoteObject
         }
 
         /// <summary>
@@ -2615,6 +2967,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class KeyPath
         {
+            // public string
+            // public string
+            // public string[]
         }
 
         /// <summary>
@@ -2699,6 +3054,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class TouchPoint
         {
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
         }
 
         public struct GestureSourceType : IEnum
@@ -2859,6 +3221,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScrollRect
         {
+            // public DOM.Rect
+            // public string
         }
 
         /// <summary>
@@ -2866,6 +3230,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class StickyPositionConstraint
         {
+            // public DOM.Rect
+            // public DOM.Rect
+            // public LayerId
+            // public LayerId
         }
 
         /// <summary>
@@ -2873,6 +3241,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class PictureTile
         {
+            // public double
+            // public double
+            // public string
         }
 
         /// <summary>
@@ -2880,6 +3251,22 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Layer
         {
+            // public LayerId
+            // public LayerId
+            // public DOM.BackendNodeId
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double[]
+            // public double
+            // public double
+            // public double
+            // public int
+            // public boolean
+            // public boolean
+            // public ScrollRect[]
+            // public StickyPositionConstraint
         }
 
         /// <summary>
@@ -3001,6 +3388,16 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class LogEntry
         {
+            // public string
+            // public string
+            // public string
+            // public Runtime.Timestamp
+            // public string
+            // public int
+            // public Runtime.StackTrace
+            // public Network.RequestId
+            // public string
+            // public Runtime.RemoteObject[]
         }
 
         /// <summary>
@@ -3008,6 +3405,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ViolationSetting
         {
+            // public string
+            // public double
         }
 
         /// <summary>
@@ -3076,6 +3475,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SamplingProfileNode
         {
+            // public double
+            // public double
+            // public string[]
         }
 
         /// <summary>
@@ -3083,6 +3485,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SamplingProfile
         {
+            // public SamplingProfileNode[]
+            // public Module[]
         }
 
         /// <summary>
@@ -3090,6 +3494,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Module
         {
+            // public string
+            // public string
+            // public string
+            // public double
         }
 
         public class GetDOMCountersCommand : ICommand<GetDOMCountersResponse>
@@ -3365,6 +3773,22 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ResourceTiming
         {
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
         }
 
         /// <summary>
@@ -3391,6 +3815,16 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Request
         {
+            // public string
+            // public string
+            // public string
+            // public Headers
+            // public string
+            // public boolean
+            // public Security.MixedContentType
+            // public ResourcePriority
+            // public string
+            // public boolean
         }
 
         /// <summary>
@@ -3398,6 +3832,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SignedCertificateTimestamp
         {
+            // public string
+            // public string
+            // public string
+            // public string
+            // public TimeSinceEpoch
+            // public string
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -3405,6 +3847,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SecurityDetails
         {
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public Security.CertificateId
+            // public string
+            // public string[]
+            // public string
+            // public TimeSinceEpoch
+            // public TimeSinceEpoch
+            // public SignedCertificateTimestamp[]
+            // public CertificateTransparencyCompliance
         }
 
         /// <summary>
@@ -3451,6 +3906,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Response
         {
+            // public string
+            // public int
+            // public string
+            // public Headers
+            // public string
+            // public string
+            // public Headers
+            // public string
+            // public boolean
+            // public double
+            // public string
+            // public int
+            // public boolean
+            // public boolean
+            // public double
+            // public ResourceTiming
+            // public string
+            // public Security.SecurityState
+            // public SecurityDetails
         }
 
         /// <summary>
@@ -3458,6 +3932,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class WebSocketRequest
         {
+            // public Headers
         }
 
         /// <summary>
@@ -3465,6 +3940,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class WebSocketResponse
         {
+            // public int
+            // public string
+            // public Headers
+            // public string
+            // public Headers
+            // public string
         }
 
         /// <summary>
@@ -3472,6 +3953,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class WebSocketFrame
         {
+            // public double
+            // public boolean
+            // public string
         }
 
         /// <summary>
@@ -3479,6 +3963,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CachedResource
         {
+            // public string
+            // public ResourceType
+            // public Response
+            // public double
         }
 
         /// <summary>
@@ -3486,6 +3974,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Initiator
         {
+            // public string
+            // public Runtime.StackTrace
+            // public string
+            // public double
         }
 
         /// <summary>
@@ -3493,6 +3985,16 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Cookie
         {
+            // public string
+            // public string
+            // public string
+            // public string
+            // public double
+            // public int
+            // public boolean
+            // public boolean
+            // public boolean
+            // public CookieSameSite
         }
 
         /// <summary>
@@ -3500,6 +4002,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CookieParam
         {
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public boolean
+            // public boolean
+            // public CookieSameSite
+            // public TimeSinceEpoch
         }
 
         /// <summary>
@@ -3507,6 +4018,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AuthChallenge
         {
+            // public string
+            // public string
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -3514,6 +4029,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AuthChallengeResponse
         {
+            // public string
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -3538,6 +4056,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class RequestPattern
         {
+            // public string
+            // public ResourceType
+            // public InterceptionStage
         }
 
         /// <summary>
@@ -3546,6 +4067,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SignedExchangeSignature
         {
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public int
+            // public int
+            // public string[]
         }
 
         /// <summary>
@@ -3554,6 +4084,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SignedExchangeHeader
         {
+            // public string
+            // public string
+            // public int
+            // public Headers
+            // public SignedExchangeSignature[]
         }
 
         /// <summary>
@@ -3581,6 +4116,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SignedExchangeError
         {
+            // public string
+            // public int
+            // public SignedExchangeErrorField
         }
 
         /// <summary>
@@ -3588,6 +4126,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SignedExchangeInfo
         {
+            // public Response
+            // public SignedExchangeHeader
+            // public SecurityDetails
+            // public SignedExchangeError[]
         }
 
         /// <summary>
@@ -3887,6 +4429,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class HighlightConfig
         {
+            // public boolean
+            // public boolean
+            // public boolean
+            // public boolean
+            // public DOM.RGBA
+            // public DOM.RGBA
+            // public DOM.RGBA
+            // public DOM.RGBA
+            // public DOM.RGBA
+            // public DOM.RGBA
+            // public DOM.RGBA
+            // public string
+            // public DOM.RGBA
         }
 
         public struct InspectMode : IEnum
@@ -4065,6 +4620,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Frame
         {
+            // public string
+            // public string
+            // public Network.LoaderId
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -4072,6 +4635,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FrameResource
         {
+            // public string
+            // public Network.ResourceType
+            // public string
+            // public Network.TimeSinceEpoch
+            // public double
+            // public boolean
+            // public boolean
         }
 
         /// <summary>
@@ -4079,6 +4649,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FrameResourceTree
         {
+            // public Frame
+            // public FrameResourceTree[]
+            // public FrameResource[]
         }
 
         /// <summary>
@@ -4086,6 +4659,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FrameTree
         {
+            // public Frame
+            // public FrameTree[]
         }
 
         /// <summary>
@@ -4134,6 +4709,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class NavigationEntry
         {
+            // public int
+            // public string
+            // public string
+            // public string
+            // public TransitionType
         }
 
         /// <summary>
@@ -4141,6 +4721,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScreencastFrameMetadata
         {
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public Network.TimeSinceEpoch
         }
 
         /// <summary>
@@ -4166,6 +4753,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AppManifestError
         {
+            // public string
+            // public int
+            // public int
+            // public int
         }
 
         /// <summary>
@@ -4173,6 +4764,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class LayoutViewport
         {
+            // public int
+            // public int
+            // public int
+            // public int
         }
 
         /// <summary>
@@ -4180,6 +4775,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class VisualViewport
         {
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
         }
 
         /// <summary>
@@ -4187,6 +4790,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Viewport
         {
+            // public double
+            // public double
+            // public double
+            // public double
+            // public double
         }
 
         /// <summary>
@@ -4194,6 +4802,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FontFamilies
         {
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -4201,6 +4816,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FontSizes
         {
+            // public int
+            // public int
         }
 
         /// <summary>
@@ -4696,6 +5313,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Metric
         {
+            // public string
+            // public double
         }
 
         /// <summary>
@@ -4799,6 +5418,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SecurityStateExplanation
         {
+            // public SecurityState
+            // public string
+            // public string
+            // public string
+            // public MixedContentType
+            // public string[]
+            // public string[]
         }
 
         /// <summary>
@@ -4806,6 +5432,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class InsecureContentStatus
         {
+            // public boolean
+            // public boolean
+            // public boolean
+            // public boolean
+            // public boolean
+            // public SecurityState
+            // public SecurityState
         }
 
         /// <summary>
@@ -4877,6 +5510,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ServiceWorkerRegistration
         {
+            // public string
+            // public string
+            // public boolean
         }
 
         public struct ServiceWorkerVersionRunningStatus : IEnum
@@ -4916,6 +5552,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ServiceWorkerVersion
         {
+            // public string
+            // public string
+            // public string
+            // public ServiceWorkerVersionRunningStatus
+            // public ServiceWorkerVersionStatus
+            // public double
+            // public double
+            // public Target.TargetID[]
+            // public Target.TargetID
         }
 
         /// <summary>
@@ -4923,6 +5568,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ServiceWorkerErrorMessage
         {
+            // public string
+            // public string
+            // public string
+            // public string
+            // public int
+            // public int
         }
 
         public class DeliverPushMessageCommand : ICommand
@@ -5019,6 +5670,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class UsageForType
         {
+            // public StorageType
+            // public double
         }
 
         /// <summary>
@@ -5085,6 +5738,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class GPUDevice
         {
+            // public double
+            // public double
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -5092,6 +5749,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class GPUInfo
         {
+            // public GPUDevice[]
+            // public object
+            // public object
+            // public string[]
         }
 
         /// <summary>
@@ -5099,6 +5760,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ProcessInfo
         {
+            // public string
+            // public int
+            // public double
         }
 
         /// <summary>
@@ -5170,10 +5834,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class TargetInfo
         {
+            // public TargetID
+            // public string
+            // public string
+            // public string
+            // public boolean
+            // public TargetID
+            // public BrowserContextID
         }
 
         public class RemoteLocation
         {
+            // public string
+            // public int
         }
 
         /// <summary>
@@ -5385,6 +6058,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class TraceConfig
         {
+            // public string
+            // public boolean
+            // public boolean
+            // public boolean
+            // public string[]
+            // public string[]
+            // public string[]
+            // public MemoryDumpConfig
         }
 
         /// <summary>
@@ -5508,6 +6189,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class RequestPattern
         {
+            // public string
+            // public Network.ResourceType
+            // public RequestStage
         }
 
         /// <summary>
@@ -5515,6 +6199,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class HeaderEntry
         {
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -5522,6 +6208,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AuthChallenge
         {
+            // public string
+            // public string
+            // public string
+            // public string
         }
 
         /// <summary>
@@ -5529,6 +6219,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AuthChallengeResponse
         {
+            // public string
+            // public string
+            // public string
         }
 
         /// <summary>
