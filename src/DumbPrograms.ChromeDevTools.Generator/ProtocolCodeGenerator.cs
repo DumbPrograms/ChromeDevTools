@@ -52,7 +52,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     case JsonTypes.Number:
                                     case JsonTypes.Array:
                                     case JsonTypes.String:
-                                        var csTypeName = GetCSharpTypeName(type.Type, type.ArrayType);
+                                        var csTypeName = GetCSharpType(type.Type, type.ArrayType);
                                         using (WILBlock($"public struct {type.Name} : I{(type.EnumValues != null ? "Enum" : $"Alias<{csTypeName}>")}"))
                                         {
 
@@ -71,7 +71,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                             {
                                                 foreach (var value in type.EnumValues)
                                                 {
-                                                    WIL($"public static {type.Name} {GetCSharpIdentifierName(value)} => new {type.Name}(\"{value}\");");
+                                                    WIL($"public static {type.Name} {GetCSharpIdentifier(value)} => new {type.Name}(\"{value}\");");
                                                 }
                                             }
                                         }
@@ -86,7 +86,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                                     string csPropType;
                                                     if (property.Type != null)
                                                     {
-                                                        csPropType = GetCSharpTypeName(property.Type.Value, property.ArrayType);
+                                                        csPropType = GetCSharpType(property.Type.Value, property.ArrayType);
                                                     }
                                                     else if (property.EnumValues != null)
                                                     {
@@ -122,7 +122,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     WIL("[Obsolete]");
                                 }
 
-                                var commandClassName = GetCSharpIdentifierName(command.Name);
+                                var commandClassName = GetCSharpIdentifier(command.Name);
 
                                 WI($"public class {commandClassName}Command : ICommand");
 
@@ -221,10 +221,10 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
         BlockStructureWriter WILBlock(string header) => new BlockStructureWriter(this, header);
 
-        string GetCSharpIdentifierName(string name)
+        string GetCSharpIdentifier(string name)
             => String.Join("", name.Split('-', ' ').Select(n => Char.ToUpperInvariant(n[0]) + n.Substring(1, n.Length - 1)));
 
-        string GetCSharpTypeName(JsonTypes jsonType, PropertyDescriptor arrayType)
+        string GetCSharpType(JsonTypes jsonType, PropertyDescriptor arrayType)
         {
             switch (jsonType)
             {
@@ -250,7 +250,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                     }
                     else if (arrayType.Type != null)
                     {
-                        return GetCSharpTypeName(arrayType.Type.Value, arrayType.ArrayType) + "[]";
+                        return GetCSharpType(arrayType.Type.Value, arrayType.ArrayType) + "[]";
                     }
                     else
                     {
