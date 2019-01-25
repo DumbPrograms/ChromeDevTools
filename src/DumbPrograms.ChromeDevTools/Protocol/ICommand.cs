@@ -5,7 +5,7 @@
         string Name { get; }
     }
 
-    interface ICommand<TResponse> : ICommand
+    public interface ICommand<TResponse> : ICommand
     {
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace DumbPrograms.ChromeDevTools.Protocol
 {
@@ -98,28 +100,98 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AXValueSource
         {
-            // public AXValueSourceType
-            // public AXValue
-            // public string
-            // public AXValue
-            // public boolean
-            // public AXValueNativeSourceType
-            // public AXValue
-            // public boolean
-            // public string
+
+            /// <summary>
+            /// What type of source this is.
+            /// </summary>
+            [JsonProperty("type")]
+            public AXValueSourceType Type { get; set; }
+
+            /// <summary>
+            /// The value of this property source.
+            /// </summary>
+            [JsonProperty("value")]
+            public AXValue Value { get; set; }
+
+            /// <summary>
+            /// The name of the relevant attribute, if any.
+            /// </summary>
+            [JsonProperty("attribute")]
+            public string Attribute { get; set; }
+
+            /// <summary>
+            /// The value of the relevant attribute, if any.
+            /// </summary>
+            [JsonProperty("attributeValue")]
+            public AXValue AttributeValue { get; set; }
+
+            /// <summary>
+            /// Whether this source is superseded by a higher priority source.
+            /// </summary>
+            [JsonProperty("superseded")]
+            public bool Superseded { get; set; }
+
+            /// <summary>
+            /// The native markup source for this value, e.g. a &lt;label&gt; element.
+            /// </summary>
+            [JsonProperty("nativeSource")]
+            public AXValueNativeSourceType NativeSource { get; set; }
+
+            /// <summary>
+            /// The value, such as a node or node list, of the native source.
+            /// </summary>
+            [JsonProperty("nativeSourceValue")]
+            public AXValue NativeSourceValue { get; set; }
+
+            /// <summary>
+            /// Whether the value for this property is invalid.
+            /// </summary>
+            [JsonProperty("invalid")]
+            public bool Invalid { get; set; }
+
+            /// <summary>
+            /// Reason for the value being invalid, if it is.
+            /// </summary>
+            [JsonProperty("invalidReason")]
+            public string InvalidReason { get; set; }
         }
 
         public class AXRelatedNode
         {
-            // public DOM.BackendNodeId
-            // public string
-            // public string
+
+            /// <summary>
+            /// The BackendNodeId of the related DOM node.
+            /// </summary>
+            [JsonProperty("backendDOMNodeId")]
+            public DOM.BackendNodeId BackendDOMNodeId { get; set; }
+
+            /// <summary>
+            /// The IDRef value provided, if any.
+            /// </summary>
+            [JsonProperty("idref")]
+            public string Idref { get; set; }
+
+            /// <summary>
+            /// The text alternative of this node in the current context.
+            /// </summary>
+            [JsonProperty("text")]
+            public string Text { get; set; }
         }
 
         public class AXProperty
         {
-            // public AXPropertyName
-            // public AXValue
+
+            /// <summary>
+            /// The name of this property.
+            /// </summary>
+            [JsonProperty("name")]
+            public AXPropertyName Name { get; set; }
+
+            /// <summary>
+            /// The value of this property.
+            /// </summary>
+            [JsonProperty("value")]
+            public AXValue Value { get; set; }
         }
 
         /// <summary>
@@ -127,10 +199,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AXValue
         {
-            // public AXValueType
-            // public object
-            // public AXRelatedNode[]
-            // public AXValueSource[]
+
+            /// <summary>
+            /// The type of this value.
+            /// </summary>
+            [JsonProperty("type")]
+            public AXValueType Type { get; set; }
+
+            /// <summary>
+            /// The computed value of this property.
+            /// </summary>
+            [JsonProperty("value")]
+            public object Value { get; set; }
+
+            /// <summary>
+            /// One or more related nodes, if applicable.
+            /// </summary>
+            [JsonProperty("relatedNodes")]
+            public AXRelatedNode[] RelatedNodes { get; set; }
+
+            /// <summary>
+            /// The sources which contributed to the computation of this property.
+            /// </summary>
+            [JsonProperty("sources")]
+            public AXValueSource[] Sources { get; set; }
         }
 
         /// <summary>
@@ -196,16 +288,66 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AXNode
         {
-            // public AXNodeId
-            // public boolean
-            // public AXProperty[]
-            // public AXValue
-            // public AXValue
-            // public AXValue
-            // public AXValue
-            // public AXProperty[]
-            // public AXNodeId[]
-            // public DOM.BackendNodeId
+
+            /// <summary>
+            /// Unique identifier for this node.
+            /// </summary>
+            [JsonProperty("nodeId")]
+            public AXNodeId NodeId { get; set; }
+
+            /// <summary>
+            /// Whether this node is ignored for accessibility
+            /// </summary>
+            [JsonProperty("ignored")]
+            public bool Ignored { get; set; }
+
+            /// <summary>
+            /// Collection of reasons why this node is hidden.
+            /// </summary>
+            [JsonProperty("ignoredReasons")]
+            public AXProperty[] IgnoredReasons { get; set; }
+
+            /// <summary>
+            /// This `Node`'s role, whether explicit or implicit.
+            /// </summary>
+            [JsonProperty("role")]
+            public AXValue Role { get; set; }
+
+            /// <summary>
+            /// The accessible name for this `Node`.
+            /// </summary>
+            [JsonProperty("name")]
+            public AXValue Name { get; set; }
+
+            /// <summary>
+            /// The accessible description for this `Node`.
+            /// </summary>
+            [JsonProperty("description")]
+            public AXValue Description { get; set; }
+
+            /// <summary>
+            /// The value for this `Node`.
+            /// </summary>
+            [JsonProperty("value")]
+            public AXValue Value { get; set; }
+
+            /// <summary>
+            /// All other properties
+            /// </summary>
+            [JsonProperty("properties")]
+            public AXProperty[] Properties { get; set; }
+
+            /// <summary>
+            /// IDs for each of this node's child nodes.
+            /// </summary>
+            [JsonProperty("childIds")]
+            public AXNodeId[] ChildIds { get; set; }
+
+            /// <summary>
+            /// The backend ID for the associated DOM node, if any.
+            /// </summary>
+            [JsonProperty("backendDOMNodeId")]
+            public DOM.BackendNodeId BackendDOMNodeId { get; set; }
         }
 
         /// <summary>
@@ -258,16 +400,67 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Animation
         {
-            // public string
-            // public string
-            // public boolean
-            // public string
-            // public double
-            // public double
-            // public double
-            // public string
-            // public AnimationEffect
-            // public string
+
+            /// <summary>
+            /// `Animation`'s id.
+            /// </summary>
+            [JsonProperty("id")]
+            public string Id { get; set; }
+
+            /// <summary>
+            /// `Animation`'s name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// `Animation`'s internal paused state.
+            /// </summary>
+            [JsonProperty("pausedState")]
+            public bool PausedState { get; set; }
+
+            /// <summary>
+            /// `Animation`'s play state.
+            /// </summary>
+            [JsonProperty("playState")]
+            public string PlayState { get; set; }
+
+            /// <summary>
+            /// `Animation`'s playback rate.
+            /// </summary>
+            [JsonProperty("playbackRate")]
+            public double PlaybackRate { get; set; }
+
+            /// <summary>
+            /// `Animation`'s start time.
+            /// </summary>
+            [JsonProperty("startTime")]
+            public double StartTime { get; set; }
+
+            /// <summary>
+            /// `Animation`'s current time.
+            /// </summary>
+            [JsonProperty("currentTime")]
+            public double CurrentTime { get; set; }
+
+            /// <summary>
+            /// Animation type of `Animation`.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// `Animation`'s source animation node.
+            /// </summary>
+            [JsonProperty("source")]
+            public AnimationEffect Source { get; set; }
+
+            /// <summary>
+            /// A unique ID for `Animation` representing the sources that triggered this CSS
+            /// animation/transition.
+            /// </summary>
+            [JsonProperty("cssId")]
+            public string CssId { get; set; }
         }
 
         /// <summary>
@@ -275,16 +468,66 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AnimationEffect
         {
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public string
-            // public string
-            // public DOM.BackendNodeId
-            // public KeyframesRule
-            // public string
+
+            /// <summary>
+            /// `AnimationEffect`'s delay.
+            /// </summary>
+            [JsonProperty("delay")]
+            public double Delay { get; set; }
+
+            /// <summary>
+            /// `AnimationEffect`'s end delay.
+            /// </summary>
+            [JsonProperty("endDelay")]
+            public double EndDelay { get; set; }
+
+            /// <summary>
+            /// `AnimationEffect`'s iteration start.
+            /// </summary>
+            [JsonProperty("iterationStart")]
+            public double IterationStart { get; set; }
+
+            /// <summary>
+            /// `AnimationEffect`'s iterations.
+            /// </summary>
+            [JsonProperty("iterations")]
+            public double Iterations { get; set; }
+
+            /// <summary>
+            /// `AnimationEffect`'s iteration duration.
+            /// </summary>
+            [JsonProperty("duration")]
+            public double Duration { get; set; }
+
+            /// <summary>
+            /// `AnimationEffect`'s playback direction.
+            /// </summary>
+            [JsonProperty("direction")]
+            public string Direction { get; set; }
+
+            /// <summary>
+            /// `AnimationEffect`'s fill mode.
+            /// </summary>
+            [JsonProperty("fill")]
+            public string Fill { get; set; }
+
+            /// <summary>
+            /// `AnimationEffect`'s target node.
+            /// </summary>
+            [JsonProperty("backendNodeId")]
+            public DOM.BackendNodeId BackendNodeId { get; set; }
+
+            /// <summary>
+            /// `AnimationEffect`'s keyframes.
+            /// </summary>
+            [JsonProperty("keyframesRule")]
+            public KeyframesRule KeyframesRule { get; set; }
+
+            /// <summary>
+            /// `AnimationEffect`'s timing function.
+            /// </summary>
+            [JsonProperty("easing")]
+            public string Easing { get; set; }
         }
 
         /// <summary>
@@ -292,8 +535,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class KeyframesRule
         {
-            // public string
-            // public KeyframeStyle[]
+
+            /// <summary>
+            /// CSS keyframed animation's name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// List of animation keyframes.
+            /// </summary>
+            [JsonProperty("keyframes")]
+            public KeyframeStyle[] Keyframes { get; set; }
         }
 
         /// <summary>
@@ -301,8 +554,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class KeyframeStyle
         {
-            // public string
-            // public string
+
+            /// <summary>
+            /// Keyframe's time offset.
+            /// </summary>
+            [JsonProperty("offset")]
+            public string Offset { get; set; }
+
+            /// <summary>
+            /// `AnimationEffect`'s timing function.
+            /// </summary>
+            [JsonProperty("easing")]
+            public string Easing { get; set; }
         }
 
         /// <summary>
@@ -406,9 +669,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ApplicationCacheResource
         {
-            // public string
-            // public int
-            // public string
+
+            /// <summary>
+            /// Resource url.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Resource size.
+            /// </summary>
+            [JsonProperty("size")]
+            public int Size { get; set; }
+
+            /// <summary>
+            /// Resource type.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
         }
 
         /// <summary>
@@ -416,11 +694,36 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ApplicationCache
         {
-            // public string
-            // public double
-            // public double
-            // public double
-            // public ApplicationCacheResource[]
+
+            /// <summary>
+            /// Manifest URL.
+            /// </summary>
+            [JsonProperty("manifestURL")]
+            public string ManifestURL { get; set; }
+
+            /// <summary>
+            /// Application cache size.
+            /// </summary>
+            [JsonProperty("size")]
+            public double Size { get; set; }
+
+            /// <summary>
+            /// Application cache creation time.
+            /// </summary>
+            [JsonProperty("creationTime")]
+            public double CreationTime { get; set; }
+
+            /// <summary>
+            /// Application cache update time.
+            /// </summary>
+            [JsonProperty("updateTime")]
+            public double UpdateTime { get; set; }
+
+            /// <summary>
+            /// Application cache resources.
+            /// </summary>
+            [JsonProperty("resources")]
+            public ApplicationCacheResource[] Resources { get; set; }
         }
 
         /// <summary>
@@ -428,9 +731,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FrameWithManifest
         {
-            // public Page.FrameId
-            // public string
-            // public int
+
+            /// <summary>
+            /// Frame identifier.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public Page.FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// Manifest URL.
+            /// </summary>
+            [JsonProperty("manifestURL")]
+            public string ManifestURL { get; set; }
+
+            /// <summary>
+            /// Application cache status.
+            /// </summary>
+            [JsonProperty("status")]
+            public int Status { get; set; }
         }
 
         /// <summary>
@@ -539,11 +857,36 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Bounds
         {
-            // public int
-            // public int
-            // public int
-            // public int
-            // public WindowState
+
+            /// <summary>
+            /// The offset from the left edge of the screen to the window in pixels.
+            /// </summary>
+            [JsonProperty("left")]
+            public int Left { get; set; }
+
+            /// <summary>
+            /// The offset from the top edge of the screen to the window in pixels.
+            /// </summary>
+            [JsonProperty("top")]
+            public int Top { get; set; }
+
+            /// <summary>
+            /// The window width in pixels.
+            /// </summary>
+            [JsonProperty("width")]
+            public int Width { get; set; }
+
+            /// <summary>
+            /// The window height in pixels.
+            /// </summary>
+            [JsonProperty("height")]
+            public int Height { get; set; }
+
+            /// <summary>
+            /// The window state. Default to normal.
+            /// </summary>
+            [JsonProperty("windowState")]
+            public WindowState WindowState { get; set; }
         }
 
         public struct PermissionType : IEnum
@@ -578,9 +921,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Bucket
         {
-            // public int
-            // public int
-            // public int
+
+            /// <summary>
+            /// Minimum value (inclusive).
+            /// </summary>
+            [JsonProperty("low")]
+            public int Low { get; set; }
+
+            /// <summary>
+            /// Maximum value (exclusive).
+            /// </summary>
+            [JsonProperty("high")]
+            public int High { get; set; }
+
+            /// <summary>
+            /// Number of samples.
+            /// </summary>
+            [JsonProperty("count")]
+            public int Count { get; set; }
         }
 
         /// <summary>
@@ -588,10 +946,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Histogram
         {
-            // public string
-            // public int
-            // public int
-            // public Bucket[]
+
+            /// <summary>
+            /// Name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Sum of sample values.
+            /// </summary>
+            [JsonProperty("sum")]
+            public int Sum { get; set; }
+
+            /// <summary>
+            /// Total number of samples.
+            /// </summary>
+            [JsonProperty("count")]
+            public int Count { get; set; }
+
+            /// <summary>
+            /// Buckets.
+            /// </summary>
+            [JsonProperty("buckets")]
+            public Bucket[] Buckets { get; set; }
         }
 
         /// <summary>
@@ -763,8 +1141,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class PseudoElementMatches
         {
-            // public DOM.PseudoType
-            // public RuleMatch[]
+
+            /// <summary>
+            /// Pseudo element type.
+            /// </summary>
+            [JsonProperty("pseudoType")]
+            public DOM.PseudoType PseudoType { get; set; }
+
+            /// <summary>
+            /// Matches of CSS rules applicable to the pseudo style.
+            /// </summary>
+            [JsonProperty("matches")]
+            public RuleMatch[] Matches { get; set; }
         }
 
         /// <summary>
@@ -772,8 +1160,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class InheritedStyleEntry
         {
-            // public CSSStyle
-            // public RuleMatch[]
+
+            /// <summary>
+            /// The ancestor node's inline style, if any, in the style inheritance chain.
+            /// </summary>
+            [JsonProperty("inlineStyle")]
+            public CSSStyle InlineStyle { get; set; }
+
+            /// <summary>
+            /// Matches of CSS rules matching the ancestor node in the style inheritance chain.
+            /// </summary>
+            [JsonProperty("matchedCSSRules")]
+            public RuleMatch[] MatchedCSSRules { get; set; }
         }
 
         /// <summary>
@@ -781,8 +1179,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class RuleMatch
         {
-            // public CSSRule
-            // public int[]
+
+            /// <summary>
+            /// CSS rule in the match.
+            /// </summary>
+            [JsonProperty("rule")]
+            public CSSRule Rule { get; set; }
+
+            /// <summary>
+            /// Matching selector indices in the rule's selectorList selectors (0-based).
+            /// </summary>
+            [JsonProperty("matchingSelectors")]
+            public int[] MatchingSelectors { get; set; }
         }
 
         /// <summary>
@@ -790,8 +1198,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Value
         {
-            // public string
-            // public SourceRange
+
+            /// <summary>
+            /// Value text.
+            /// </summary>
+            [JsonProperty("text")]
+            public string Text { get; set; }
+
+            /// <summary>
+            /// Value range in the underlying resource (if available).
+            /// </summary>
+            [JsonProperty("range")]
+            public SourceRange Range { get; set; }
         }
 
         /// <summary>
@@ -799,8 +1217,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SelectorList
         {
-            // public Value[]
-            // public string
+
+            /// <summary>
+            /// Selectors in the list.
+            /// </summary>
+            [JsonProperty("selectors")]
+            public Value[] Selectors { get; set; }
+
+            /// <summary>
+            /// Rule selector text.
+            /// </summary>
+            [JsonProperty("text")]
+            public string Text { get; set; }
         }
 
         /// <summary>
@@ -808,19 +1236,85 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSStyleSheetHeader
         {
-            // public StyleSheetId
-            // public Page.FrameId
-            // public string
-            // public string
-            // public StyleSheetOrigin
-            // public string
-            // public DOM.BackendNodeId
-            // public boolean
-            // public boolean
-            // public boolean
-            // public double
-            // public double
-            // public double
+
+            /// <summary>
+            /// The stylesheet identifier.
+            /// </summary>
+            [JsonProperty("styleSheetId")]
+            public StyleSheetId StyleSheetId { get; set; }
+
+            /// <summary>
+            /// Owner frame identifier.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public Page.FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// Stylesheet resource URL.
+            /// </summary>
+            [JsonProperty("sourceURL")]
+            public string SourceURL { get; set; }
+
+            /// <summary>
+            /// URL of source map associated with the stylesheet (if any).
+            /// </summary>
+            [JsonProperty("sourceMapURL")]
+            public string SourceMapURL { get; set; }
+
+            /// <summary>
+            /// Stylesheet origin.
+            /// </summary>
+            [JsonProperty("origin")]
+            public StyleSheetOrigin Origin { get; set; }
+
+            /// <summary>
+            /// Stylesheet title.
+            /// </summary>
+            [JsonProperty("title")]
+            public string Title { get; set; }
+
+            /// <summary>
+            /// The backend id for the owner node of the stylesheet.
+            /// </summary>
+            [JsonProperty("ownerNode")]
+            public DOM.BackendNodeId OwnerNode { get; set; }
+
+            /// <summary>
+            /// Denotes whether the stylesheet is disabled.
+            /// </summary>
+            [JsonProperty("disabled")]
+            public bool Disabled { get; set; }
+
+            /// <summary>
+            /// Whether the sourceURL field value comes from the sourceURL comment.
+            /// </summary>
+            [JsonProperty("hasSourceURL")]
+            public bool HasSourceURL { get; set; }
+
+            /// <summary>
+            /// Whether this stylesheet is created for STYLE tag by parser. This flag is not set for
+            /// document.written STYLE tags.
+            /// </summary>
+            [JsonProperty("isInline")]
+            public bool IsInline { get; set; }
+
+            /// <summary>
+            /// Line offset of the stylesheet within the resource (zero based).
+            /// </summary>
+            [JsonProperty("startLine")]
+            public double StartLine { get; set; }
+
+            /// <summary>
+            /// Column offset of the stylesheet within the resource (zero based).
+            /// </summary>
+            [JsonProperty("startColumn")]
+            public double StartColumn { get; set; }
+
+            /// <summary>
+            /// Size of the content (in characters).
+            /// </summary>
+            [JsonProperty("length")]
+            public double Length { get; set; }
         }
 
         /// <summary>
@@ -828,11 +1322,38 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSRule
         {
-            // public StyleSheetId
-            // public SelectorList
-            // public StyleSheetOrigin
-            // public CSSStyle
-            // public CSSMedia[]
+
+            /// <summary>
+            /// The css style sheet identifier (absent for user agent stylesheet and user-specified
+            /// stylesheet rules) this rule came from.
+            /// </summary>
+            [JsonProperty("styleSheetId")]
+            public StyleSheetId StyleSheetId { get; set; }
+
+            /// <summary>
+            /// Rule selector data.
+            /// </summary>
+            [JsonProperty("selectorList")]
+            public SelectorList SelectorList { get; set; }
+
+            /// <summary>
+            /// Parent stylesheet's origin.
+            /// </summary>
+            [JsonProperty("origin")]
+            public StyleSheetOrigin Origin { get; set; }
+
+            /// <summary>
+            /// Associated style declaration.
+            /// </summary>
+            [JsonProperty("style")]
+            public CSSStyle Style { get; set; }
+
+            /// <summary>
+            /// Media list array (for rules involving media queries). The array enumerates media queries
+            /// starting with the innermost one, going outwards.
+            /// </summary>
+            [JsonProperty("media")]
+            public CSSMedia[] Media { get; set; }
         }
 
         /// <summary>
@@ -840,10 +1361,31 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class RuleUsage
         {
-            // public StyleSheetId
-            // public double
-            // public double
-            // public boolean
+
+            /// <summary>
+            /// The css style sheet identifier (absent for user agent stylesheet and user-specified
+            /// stylesheet rules) this rule came from.
+            /// </summary>
+            [JsonProperty("styleSheetId")]
+            public StyleSheetId StyleSheetId { get; set; }
+
+            /// <summary>
+            /// Offset of the start of the rule (including selector) from the beginning of the stylesheet.
+            /// </summary>
+            [JsonProperty("startOffset")]
+            public double StartOffset { get; set; }
+
+            /// <summary>
+            /// Offset of the end of the rule body from the beginning of the stylesheet.
+            /// </summary>
+            [JsonProperty("endOffset")]
+            public double EndOffset { get; set; }
+
+            /// <summary>
+            /// Indicates whether the rule was actually used by some element in the page.
+            /// </summary>
+            [JsonProperty("used")]
+            public bool Used { get; set; }
         }
 
         /// <summary>
@@ -851,23 +1393,68 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SourceRange
         {
-            // public int
-            // public int
-            // public int
-            // public int
+
+            /// <summary>
+            /// Start line of range.
+            /// </summary>
+            [JsonProperty("startLine")]
+            public int StartLine { get; set; }
+
+            /// <summary>
+            /// Start column of range (inclusive).
+            /// </summary>
+            [JsonProperty("startColumn")]
+            public int StartColumn { get; set; }
+
+            /// <summary>
+            /// End line of range
+            /// </summary>
+            [JsonProperty("endLine")]
+            public int EndLine { get; set; }
+
+            /// <summary>
+            /// End column of range (exclusive).
+            /// </summary>
+            [JsonProperty("endColumn")]
+            public int EndColumn { get; set; }
         }
 
         public class ShorthandEntry
         {
-            // public string
-            // public string
-            // public boolean
+
+            /// <summary>
+            /// Shorthand name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Shorthand value.
+            /// </summary>
+            [JsonProperty("value")]
+            public string Value { get; set; }
+
+            /// <summary>
+            /// Whether the property has "!important" annotation (implies `false` if absent).
+            /// </summary>
+            [JsonProperty("important")]
+            public bool Important { get; set; }
         }
 
         public class CSSComputedStyleProperty
         {
-            // public string
-            // public string
+
+            /// <summary>
+            /// Computed style property name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Computed style property value.
+            /// </summary>
+            [JsonProperty("value")]
+            public string Value { get; set; }
         }
 
         /// <summary>
@@ -875,11 +1462,37 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSStyle
         {
-            // public StyleSheetId
-            // public CSSProperty[]
-            // public ShorthandEntry[]
-            // public string
-            // public SourceRange
+
+            /// <summary>
+            /// The css style sheet identifier (absent for user agent stylesheet and user-specified
+            /// stylesheet rules) this rule came from.
+            /// </summary>
+            [JsonProperty("styleSheetId")]
+            public StyleSheetId StyleSheetId { get; set; }
+
+            /// <summary>
+            /// CSS properties in the style.
+            /// </summary>
+            [JsonProperty("cssProperties")]
+            public CSSProperty[] CssProperties { get; set; }
+
+            /// <summary>
+            /// Computed values for all shorthands found in the style.
+            /// </summary>
+            [JsonProperty("shorthandEntries")]
+            public ShorthandEntry[] ShorthandEntries { get; set; }
+
+            /// <summary>
+            /// Style declaration text (if available).
+            /// </summary>
+            [JsonProperty("cssText")]
+            public string CssText { get; set; }
+
+            /// <summary>
+            /// Style declaration range in the enclosing stylesheet (if available).
+            /// </summary>
+            [JsonProperty("range")]
+            public SourceRange Range { get; set; }
         }
 
         /// <summary>
@@ -887,14 +1500,54 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSProperty
         {
-            // public string
-            // public string
-            // public boolean
-            // public boolean
-            // public string
-            // public boolean
-            // public boolean
-            // public SourceRange
+
+            /// <summary>
+            /// The property name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// The property value.
+            /// </summary>
+            [JsonProperty("value")]
+            public string Value { get; set; }
+
+            /// <summary>
+            /// Whether the property has "!important" annotation (implies `false` if absent).
+            /// </summary>
+            [JsonProperty("important")]
+            public bool Important { get; set; }
+
+            /// <summary>
+            /// Whether the property is implicit (implies `false` if absent).
+            /// </summary>
+            [JsonProperty("implicit")]
+            public bool Implicit { get; set; }
+
+            /// <summary>
+            /// The full property text as specified in the style.
+            /// </summary>
+            [JsonProperty("text")]
+            public string Text { get; set; }
+
+            /// <summary>
+            /// Whether the property is understood by the browser (implies `true` if absent).
+            /// </summary>
+            [JsonProperty("parsedOk")]
+            public bool ParsedOk { get; set; }
+
+            /// <summary>
+            /// Whether the property is disabled by the user (present for source-based properties only).
+            /// </summary>
+            [JsonProperty("disabled")]
+            public bool Disabled { get; set; }
+
+            /// <summary>
+            /// The entire property range in the enclosing style declaration (if available).
+            /// </summary>
+            [JsonProperty("range")]
+            public SourceRange Range { get; set; }
         }
 
         /// <summary>
@@ -902,12 +1555,46 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSMedia
         {
-            // public string
-            // public string
-            // public string
-            // public SourceRange
-            // public StyleSheetId
-            // public MediaQuery[]
+
+            /// <summary>
+            /// Media query text.
+            /// </summary>
+            [JsonProperty("text")]
+            public string Text { get; set; }
+
+            /// <summary>
+            /// Source of the media query: "mediaRule" if specified by a @media rule, "importRule" if
+            /// specified by an @import rule, "linkedSheet" if specified by a "media" attribute in a linked
+            /// stylesheet's LINK tag, "inlineSheet" if specified by a "media" attribute in an inline
+            /// stylesheet's STYLE tag.
+            /// </summary>
+            [JsonProperty("source")]
+            public string Source { get; set; }
+
+            /// <summary>
+            /// URL of the document containing the media query description.
+            /// </summary>
+            [JsonProperty("sourceURL")]
+            public string SourceURL { get; set; }
+
+            /// <summary>
+            /// The associated rule (@media or @import) header range in the enclosing stylesheet (if
+            /// available).
+            /// </summary>
+            [JsonProperty("range")]
+            public SourceRange Range { get; set; }
+
+            /// <summary>
+            /// Identifier of the stylesheet containing this object (if exists).
+            /// </summary>
+            [JsonProperty("styleSheetId")]
+            public StyleSheetId StyleSheetId { get; set; }
+
+            /// <summary>
+            /// Array of media queries.
+            /// </summary>
+            [JsonProperty("mediaList")]
+            public MediaQuery[] MediaList { get; set; }
         }
 
         /// <summary>
@@ -915,8 +1602,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class MediaQuery
         {
-            // public MediaQueryExpression[]
-            // public boolean
+
+            /// <summary>
+            /// Array of media query expressions.
+            /// </summary>
+            [JsonProperty("expressions")]
+            public MediaQueryExpression[] Expressions { get; set; }
+
+            /// <summary>
+            /// Whether the media query condition is satisfied.
+            /// </summary>
+            [JsonProperty("active")]
+            public bool Active { get; set; }
         }
 
         /// <summary>
@@ -924,11 +1621,36 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class MediaQueryExpression
         {
-            // public double
-            // public string
-            // public string
-            // public SourceRange
-            // public double
+
+            /// <summary>
+            /// Media query expression value.
+            /// </summary>
+            [JsonProperty("value")]
+            public double Value { get; set; }
+
+            /// <summary>
+            /// Media query expression units.
+            /// </summary>
+            [JsonProperty("unit")]
+            public string Unit { get; set; }
+
+            /// <summary>
+            /// Media query expression feature.
+            /// </summary>
+            [JsonProperty("feature")]
+            public string Feature { get; set; }
+
+            /// <summary>
+            /// The associated range of the value text in the enclosing stylesheet (if available).
+            /// </summary>
+            [JsonProperty("valueRange")]
+            public SourceRange ValueRange { get; set; }
+
+            /// <summary>
+            /// Computed length of media query expression (if applicable).
+            /// </summary>
+            [JsonProperty("computedLength")]
+            public double ComputedLength { get; set; }
         }
 
         /// <summary>
@@ -936,9 +1658,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class PlatformFontUsage
         {
-            // public string
-            // public boolean
-            // public double
+
+            /// <summary>
+            /// Font's family name reported by platform.
+            /// </summary>
+            [JsonProperty("familyName")]
+            public string FamilyName { get; set; }
+
+            /// <summary>
+            /// Indicates if the font was downloaded or resolved locally.
+            /// </summary>
+            [JsonProperty("isCustomFont")]
+            public bool IsCustomFont { get; set; }
+
+            /// <summary>
+            /// Amount of glyphs that were rendered with this font.
+            /// </summary>
+            [JsonProperty("glyphCount")]
+            public double GlyphCount { get; set; }
         }
 
         /// <summary>
@@ -946,14 +1683,54 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FontFace
         {
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
+
+            /// <summary>
+            /// The font-family.
+            /// </summary>
+            [JsonProperty("fontFamily")]
+            public string FontFamily { get; set; }
+
+            /// <summary>
+            /// The font-style.
+            /// </summary>
+            [JsonProperty("fontStyle")]
+            public string FontStyle { get; set; }
+
+            /// <summary>
+            /// The font-variant.
+            /// </summary>
+            [JsonProperty("fontVariant")]
+            public string FontVariant { get; set; }
+
+            /// <summary>
+            /// The font-weight.
+            /// </summary>
+            [JsonProperty("fontWeight")]
+            public string FontWeight { get; set; }
+
+            /// <summary>
+            /// The font-stretch.
+            /// </summary>
+            [JsonProperty("fontStretch")]
+            public string FontStretch { get; set; }
+
+            /// <summary>
+            /// The unicode-range.
+            /// </summary>
+            [JsonProperty("unicodeRange")]
+            public string UnicodeRange { get; set; }
+
+            /// <summary>
+            /// The src.
+            /// </summary>
+            [JsonProperty("src")]
+            public string Src { get; set; }
+
+            /// <summary>
+            /// The resolved platform font family
+            /// </summary>
+            [JsonProperty("platformFontFamily")]
+            public string PlatformFontFamily { get; set; }
         }
 
         /// <summary>
@@ -961,8 +1738,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSKeyframesRule
         {
-            // public Value
-            // public CSSKeyframeRule[]
+
+            /// <summary>
+            /// Animation name.
+            /// </summary>
+            [JsonProperty("animationName")]
+            public Value AnimationName { get; set; }
+
+            /// <summary>
+            /// List of keyframes.
+            /// </summary>
+            [JsonProperty("keyframes")]
+            public CSSKeyframeRule[] Keyframes { get; set; }
         }
 
         /// <summary>
@@ -970,10 +1757,31 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CSSKeyframeRule
         {
-            // public StyleSheetId
-            // public StyleSheetOrigin
-            // public Value
-            // public CSSStyle
+
+            /// <summary>
+            /// The css style sheet identifier (absent for user agent stylesheet and user-specified
+            /// stylesheet rules) this rule came from.
+            /// </summary>
+            [JsonProperty("styleSheetId")]
+            public StyleSheetId StyleSheetId { get; set; }
+
+            /// <summary>
+            /// Parent stylesheet's origin.
+            /// </summary>
+            [JsonProperty("origin")]
+            public StyleSheetOrigin Origin { get; set; }
+
+            /// <summary>
+            /// Associated key text.
+            /// </summary>
+            [JsonProperty("keyText")]
+            public Value KeyText { get; set; }
+
+            /// <summary>
+            /// Associated style declaration.
+            /// </summary>
+            [JsonProperty("style")]
+            public CSSStyle Style { get; set; }
         }
 
         /// <summary>
@@ -981,9 +1789,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class StyleDeclarationEdit
         {
-            // public StyleSheetId
-            // public SourceRange
-            // public string
+
+            /// <summary>
+            /// The css style sheet identifier.
+            /// </summary>
+            [JsonProperty("styleSheetId")]
+            public StyleSheetId StyleSheetId { get; set; }
+
+            /// <summary>
+            /// The range of the style text in the enclosing stylesheet.
+            /// </summary>
+            [JsonProperty("range")]
+            public SourceRange Range { get; set; }
+
+            /// <summary>
+            /// New style text.
+            /// </summary>
+            [JsonProperty("text")]
+            public string Text { get; set; }
         }
 
         /// <summary>
@@ -1278,14 +2101,54 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class DataEntry
         {
-            // public string
-            // public string
-            // public Header[]
-            // public double
-            // public int
-            // public string
-            // public CachedResponseType
-            // public Header[]
+
+            /// <summary>
+            /// Request URL.
+            /// </summary>
+            [JsonProperty("requestURL")]
+            public string RequestURL { get; set; }
+
+            /// <summary>
+            /// Request method.
+            /// </summary>
+            [JsonProperty("requestMethod")]
+            public string RequestMethod { get; set; }
+
+            /// <summary>
+            /// Request headers
+            /// </summary>
+            [JsonProperty("requestHeaders")]
+            public Header[] RequestHeaders { get; set; }
+
+            /// <summary>
+            /// Number of seconds since epoch.
+            /// </summary>
+            [JsonProperty("responseTime")]
+            public double ResponseTime { get; set; }
+
+            /// <summary>
+            /// HTTP response status code.
+            /// </summary>
+            [JsonProperty("responseStatus")]
+            public int ResponseStatus { get; set; }
+
+            /// <summary>
+            /// HTTP response status text.
+            /// </summary>
+            [JsonProperty("responseStatusText")]
+            public string ResponseStatusText { get; set; }
+
+            /// <summary>
+            /// HTTP response type
+            /// </summary>
+            [JsonProperty("responseType")]
+            public CachedResponseType ResponseType { get; set; }
+
+            /// <summary>
+            /// Response headers
+            /// </summary>
+            [JsonProperty("responseHeaders")]
+            public Header[] ResponseHeaders { get; set; }
         }
 
         /// <summary>
@@ -1293,15 +2156,34 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Cache
         {
-            // public CacheId
-            // public string
-            // public string
+
+            /// <summary>
+            /// An opaque unique id of the cache.
+            /// </summary>
+            [JsonProperty("cacheId")]
+            public CacheId CacheId { get; set; }
+
+            /// <summary>
+            /// Security origin of the cache.
+            /// </summary>
+            [JsonProperty("securityOrigin")]
+            public string SecurityOrigin { get; set; }
+
+            /// <summary>
+            /// The name of the cache.
+            /// </summary>
+            [JsonProperty("cacheName")]
+            public string CacheName { get; set; }
         }
 
         public class Header
         {
-            // public string
-            // public string
+
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("value")]
+            public string Value { get; set; }
         }
 
         /// <summary>
@@ -1309,7 +2191,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CachedResponse
         {
-            // public string
+
+            /// <summary>
+            /// Entry content, base64-encoded.
+            /// </summary>
+            [JsonProperty("body")]
+            public string Body { get; set; }
         }
 
         /// <summary>
@@ -1464,9 +2351,21 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class BackendNode
         {
-            // public int
-            // public string
-            // public BackendNodeId
+
+            /// <summary>
+            /// `Node`'s nodeType.
+            /// </summary>
+            [JsonProperty("nodeType")]
+            public int NodeType { get; set; }
+
+            /// <summary>
+            /// `Node`'s nodeName.
+            /// </summary>
+            [JsonProperty("nodeName")]
+            public string NodeName { get; set; }
+
+            [JsonProperty("backendNodeId")]
+            public BackendNodeId BackendNodeId { get; set; }
         }
 
         /// <summary>
@@ -1521,34 +2420,176 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Node
         {
-            // public NodeId
-            // public NodeId
-            // public BackendNodeId
-            // public int
-            // public string
-            // public string
-            // public string
-            // public int
-            // public Node[]
-            // public string[]
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public PseudoType
-            // public ShadowRootType
-            // public Page.FrameId
-            // public Node
-            // public Node[]
-            // public Node
-            // public Node[]
-            // public Node
-            // public BackendNode[]
-            // public boolean
+
+            /// <summary>
+            /// Node identifier that is passed into the rest of the DOM messages as the `nodeId`. Backend
+            /// will only push node with given `id` once. It is aware of all requested nodes and will only
+            /// fire DOM events for nodes known to the client.
+            /// </summary>
+            [JsonProperty("nodeId")]
+            public NodeId NodeId { get; set; }
+
+            /// <summary>
+            /// The id of the parent node if any.
+            /// </summary>
+            [JsonProperty("parentId")]
+            public NodeId ParentId { get; set; }
+
+            /// <summary>
+            /// The BackendNodeId for this node.
+            /// </summary>
+            [JsonProperty("backendNodeId")]
+            public BackendNodeId BackendNodeId { get; set; }
+
+            /// <summary>
+            /// `Node`'s nodeType.
+            /// </summary>
+            [JsonProperty("nodeType")]
+            public int NodeType { get; set; }
+
+            /// <summary>
+            /// `Node`'s nodeName.
+            /// </summary>
+            [JsonProperty("nodeName")]
+            public string NodeName { get; set; }
+
+            /// <summary>
+            /// `Node`'s localName.
+            /// </summary>
+            [JsonProperty("localName")]
+            public string LocalName { get; set; }
+
+            /// <summary>
+            /// `Node`'s nodeValue.
+            /// </summary>
+            [JsonProperty("nodeValue")]
+            public string NodeValue { get; set; }
+
+            /// <summary>
+            /// Child count for `Container` nodes.
+            /// </summary>
+            [JsonProperty("childNodeCount")]
+            public int ChildNodeCount { get; set; }
+
+            /// <summary>
+            /// Child nodes of this node when requested with children.
+            /// </summary>
+            [JsonProperty("children")]
+            public Node[] Children { get; set; }
+
+            /// <summary>
+            /// Attributes of the `Element` node in the form of flat array `[name1, value1, name2, value2]`.
+            /// </summary>
+            [JsonProperty("attributes")]
+            public string[] Attributes { get; set; }
+
+            /// <summary>
+            /// Document URL that `Document` or `FrameOwner` node points to.
+            /// </summary>
+            [JsonProperty("documentURL")]
+            public string DocumentURL { get; set; }
+
+            /// <summary>
+            /// Base URL that `Document` or `FrameOwner` node uses for URL completion.
+            /// </summary>
+            [JsonProperty("baseURL")]
+            public string BaseURL { get; set; }
+
+            /// <summary>
+            /// `DocumentType`'s publicId.
+            /// </summary>
+            [JsonProperty("publicId")]
+            public string PublicId { get; set; }
+
+            /// <summary>
+            /// `DocumentType`'s systemId.
+            /// </summary>
+            [JsonProperty("systemId")]
+            public string SystemId { get; set; }
+
+            /// <summary>
+            /// `DocumentType`'s internalSubset.
+            /// </summary>
+            [JsonProperty("internalSubset")]
+            public string InternalSubset { get; set; }
+
+            /// <summary>
+            /// `Document`'s XML version in case of XML documents.
+            /// </summary>
+            [JsonProperty("xmlVersion")]
+            public string XmlVersion { get; set; }
+
+            /// <summary>
+            /// `Attr`'s name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// `Attr`'s value.
+            /// </summary>
+            [JsonProperty("value")]
+            public string Value { get; set; }
+
+            /// <summary>
+            /// Pseudo element type for this node.
+            /// </summary>
+            [JsonProperty("pseudoType")]
+            public PseudoType PseudoType { get; set; }
+
+            /// <summary>
+            /// Shadow root type.
+            /// </summary>
+            [JsonProperty("shadowRootType")]
+            public ShadowRootType ShadowRootType { get; set; }
+
+            /// <summary>
+            /// Frame ID for frame owner elements.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public Page.FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// Content document for frame owner elements.
+            /// </summary>
+            [JsonProperty("contentDocument")]
+            public Node ContentDocument { get; set; }
+
+            /// <summary>
+            /// Shadow root list for given element host.
+            /// </summary>
+            [JsonProperty("shadowRoots")]
+            public Node[] ShadowRoots { get; set; }
+
+            /// <summary>
+            /// Content document fragment for template elements.
+            /// </summary>
+            [JsonProperty("templateContent")]
+            public Node TemplateContent { get; set; }
+
+            /// <summary>
+            /// Pseudo elements associated with this node.
+            /// </summary>
+            [JsonProperty("pseudoElements")]
+            public Node[] PseudoElements { get; set; }
+
+            /// <summary>
+            /// Import document for the HTMLImport links.
+            /// </summary>
+            [JsonProperty("importedDocument")]
+            public Node ImportedDocument { get; set; }
+
+            /// <summary>
+            /// Distributed nodes for given insertion point.
+            /// </summary>
+            [JsonProperty("distributedNodes")]
+            public BackendNode[] DistributedNodes { get; set; }
+
+            /// <summary>
+            /// Whether the node is SVG.
+            /// </summary>
+            [JsonProperty("isSVG")]
+            public bool IsSVG { get; set; }
         }
 
         /// <summary>
@@ -1556,10 +2597,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class RGBA
         {
-            // public int
-            // public int
-            // public int
-            // public double
+
+            /// <summary>
+            /// The red component, in the [0-255] range.
+            /// </summary>
+            [JsonProperty("r")]
+            public int R { get; set; }
+
+            /// <summary>
+            /// The green component, in the [0-255] range.
+            /// </summary>
+            [JsonProperty("g")]
+            public int G { get; set; }
+
+            /// <summary>
+            /// The blue component, in the [0-255] range.
+            /// </summary>
+            [JsonProperty("b")]
+            public int B { get; set; }
+
+            /// <summary>
+            /// The alpha component, in the [0-1] range (default: 1).
+            /// </summary>
+            [JsonProperty("a")]
+            public double A { get; set; }
         }
 
         /// <summary>
@@ -1581,13 +2642,48 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class BoxModel
         {
-            // public Quad
-            // public Quad
-            // public Quad
-            // public Quad
-            // public int
-            // public int
-            // public ShapeOutsideInfo
+
+            /// <summary>
+            /// Content box
+            /// </summary>
+            [JsonProperty("content")]
+            public Quad Content { get; set; }
+
+            /// <summary>
+            /// Padding box
+            /// </summary>
+            [JsonProperty("padding")]
+            public Quad Padding { get; set; }
+
+            /// <summary>
+            /// Border box
+            /// </summary>
+            [JsonProperty("border")]
+            public Quad Border { get; set; }
+
+            /// <summary>
+            /// Margin box
+            /// </summary>
+            [JsonProperty("margin")]
+            public Quad Margin { get; set; }
+
+            /// <summary>
+            /// Node width
+            /// </summary>
+            [JsonProperty("width")]
+            public int Width { get; set; }
+
+            /// <summary>
+            /// Node height
+            /// </summary>
+            [JsonProperty("height")]
+            public int Height { get; set; }
+
+            /// <summary>
+            /// Shape outside coordinates
+            /// </summary>
+            [JsonProperty("shapeOutside")]
+            public ShapeOutsideInfo ShapeOutside { get; set; }
         }
 
         /// <summary>
@@ -1595,9 +2691,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ShapeOutsideInfo
         {
-            // public Quad
-            // public object[]
-            // public object[]
+
+            /// <summary>
+            /// Shape bounds
+            /// </summary>
+            [JsonProperty("bounds")]
+            public Quad Bounds { get; set; }
+
+            /// <summary>
+            /// Shape coordinate details
+            /// </summary>
+            [JsonProperty("shape")]
+            public object[] Shape { get; set; }
+
+            /// <summary>
+            /// Margin shape bounds
+            /// </summary>
+            [JsonProperty("marginShape")]
+            public object[] MarginShape { get; set; }
         }
 
         /// <summary>
@@ -1605,10 +2716,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Rect
         {
-            // public double
-            // public double
-            // public double
-            // public double
+
+            /// <summary>
+            /// X coordinate
+            /// </summary>
+            [JsonProperty("x")]
+            public double X { get; set; }
+
+            /// <summary>
+            /// Y coordinate
+            /// </summary>
+            [JsonProperty("y")]
+            public double Y { get; set; }
+
+            /// <summary>
+            /// Rectangle width
+            /// </summary>
+            [JsonProperty("width")]
+            public double Width { get; set; }
+
+            /// <summary>
+            /// Rectangle height
+            /// </summary>
+            [JsonProperty("height")]
+            public double Height { get; set; }
         }
 
         /// <summary>
@@ -2083,16 +3214,66 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class EventListener
         {
-            // public string
-            // public boolean
-            // public boolean
-            // public boolean
-            // public Runtime.ScriptId
-            // public int
-            // public int
-            // public Runtime.RemoteObject
-            // public Runtime.RemoteObject
-            // public DOM.BackendNodeId
+
+            /// <summary>
+            /// `EventListener`'s type.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// `EventListener`'s useCapture.
+            /// </summary>
+            [JsonProperty("useCapture")]
+            public bool UseCapture { get; set; }
+
+            /// <summary>
+            /// `EventListener`'s passive flag.
+            /// </summary>
+            [JsonProperty("passive")]
+            public bool Passive { get; set; }
+
+            /// <summary>
+            /// `EventListener`'s once flag.
+            /// </summary>
+            [JsonProperty("once")]
+            public bool Once { get; set; }
+
+            /// <summary>
+            /// Script id of the handler code.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public Runtime.ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// Line number in the script (0-based).
+            /// </summary>
+            [JsonProperty("lineNumber")]
+            public int LineNumber { get; set; }
+
+            /// <summary>
+            /// Column number in the script (0-based).
+            /// </summary>
+            [JsonProperty("columnNumber")]
+            public int ColumnNumber { get; set; }
+
+            /// <summary>
+            /// Event handler function value.
+            /// </summary>
+            [JsonProperty("handler")]
+            public Runtime.RemoteObject Handler { get; set; }
+
+            /// <summary>
+            /// Event original handler function value.
+            /// </summary>
+            [JsonProperty("originalHandler")]
+            public Runtime.RemoteObject OriginalHandler { get; set; }
+
+            /// <summary>
+            /// Node the listener is added to (if any).
+            /// </summary>
+            [JsonProperty("backendNodeId")]
+            public DOM.BackendNodeId BackendNodeId { get; set; }
         }
 
         /// <summary>
@@ -2183,34 +3364,177 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class DOMNode
         {
-            // public int
-            // public string
-            // public string
-            // public string
-            // public string
-            // public boolean
-            // public boolean
-            // public DOM.BackendNodeId
-            // public int[]
-            // public NameValue[]
-            // public int[]
-            // public int
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public Page.FrameId
-            // public int
-            // public DOM.PseudoType
-            // public DOM.ShadowRootType
-            // public boolean
-            // public DOMDebugger.EventListener[]
-            // public string
-            // public string
-            // public double
-            // public double
+
+            /// <summary>
+            /// `Node`'s nodeType.
+            /// </summary>
+            [JsonProperty("nodeType")]
+            public int NodeType { get; set; }
+
+            /// <summary>
+            /// `Node`'s nodeName.
+            /// </summary>
+            [JsonProperty("nodeName")]
+            public string NodeName { get; set; }
+
+            /// <summary>
+            /// `Node`'s nodeValue.
+            /// </summary>
+            [JsonProperty("nodeValue")]
+            public string NodeValue { get; set; }
+
+            /// <summary>
+            /// Only set for textarea elements, contains the text value.
+            /// </summary>
+            [JsonProperty("textValue")]
+            public string TextValue { get; set; }
+
+            /// <summary>
+            /// Only set for input elements, contains the input's associated text value.
+            /// </summary>
+            [JsonProperty("inputValue")]
+            public string InputValue { get; set; }
+
+            /// <summary>
+            /// Only set for radio and checkbox input elements, indicates if the element has been checked
+            /// </summary>
+            [JsonProperty("inputChecked")]
+            public bool InputChecked { get; set; }
+
+            /// <summary>
+            /// Only set for option elements, indicates if the element has been selected
+            /// </summary>
+            [JsonProperty("optionSelected")]
+            public bool OptionSelected { get; set; }
+
+            /// <summary>
+            /// `Node`'s id, corresponds to DOM.Node.backendNodeId.
+            /// </summary>
+            [JsonProperty("backendNodeId")]
+            public DOM.BackendNodeId BackendNodeId { get; set; }
+
+            /// <summary>
+            /// The indexes of the node's child nodes in the `domNodes` array returned by `getSnapshot`, if
+            /// any.
+            /// </summary>
+            [JsonProperty("childNodeIndexes")]
+            public int[] ChildNodeIndexes { get; set; }
+
+            /// <summary>
+            /// Attributes of an `Element` node.
+            /// </summary>
+            [JsonProperty("attributes")]
+            public NameValue[] Attributes { get; set; }
+
+            /// <summary>
+            /// Indexes of pseudo elements associated with this node in the `domNodes` array returned by
+            /// `getSnapshot`, if any.
+            /// </summary>
+            [JsonProperty("pseudoElementIndexes")]
+            public int[] PseudoElementIndexes { get; set; }
+
+            /// <summary>
+            /// The index of the node's related layout tree node in the `layoutTreeNodes` array returned by
+            /// `getSnapshot`, if any.
+            /// </summary>
+            [JsonProperty("layoutNodeIndex")]
+            public int LayoutNodeIndex { get; set; }
+
+            /// <summary>
+            /// Document URL that `Document` or `FrameOwner` node points to.
+            /// </summary>
+            [JsonProperty("documentURL")]
+            public string DocumentURL { get; set; }
+
+            /// <summary>
+            /// Base URL that `Document` or `FrameOwner` node uses for URL completion.
+            /// </summary>
+            [JsonProperty("baseURL")]
+            public string BaseURL { get; set; }
+
+            /// <summary>
+            /// Only set for documents, contains the document's content language.
+            /// </summary>
+            [JsonProperty("contentLanguage")]
+            public string ContentLanguage { get; set; }
+
+            /// <summary>
+            /// Only set for documents, contains the document's character set encoding.
+            /// </summary>
+            [JsonProperty("documentEncoding")]
+            public string DocumentEncoding { get; set; }
+
+            /// <summary>
+            /// `DocumentType` node's publicId.
+            /// </summary>
+            [JsonProperty("publicId")]
+            public string PublicId { get; set; }
+
+            /// <summary>
+            /// `DocumentType` node's systemId.
+            /// </summary>
+            [JsonProperty("systemId")]
+            public string SystemId { get; set; }
+
+            /// <summary>
+            /// Frame ID for frame owner elements and also for the document node.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public Page.FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// The index of a frame owner element's content document in the `domNodes` array returned by
+            /// `getSnapshot`, if any.
+            /// </summary>
+            [JsonProperty("contentDocumentIndex")]
+            public int ContentDocumentIndex { get; set; }
+
+            /// <summary>
+            /// Type of a pseudo element node.
+            /// </summary>
+            [JsonProperty("pseudoType")]
+            public DOM.PseudoType PseudoType { get; set; }
+
+            /// <summary>
+            /// Shadow root type.
+            /// </summary>
+            [JsonProperty("shadowRootType")]
+            public DOM.ShadowRootType ShadowRootType { get; set; }
+
+            /// <summary>
+            /// Whether this DOM node responds to mouse clicks. This includes nodes that have had click
+            /// event listeners attached via JavaScript as well as anchor tags that naturally navigate when
+            /// clicked.
+            /// </summary>
+            [JsonProperty("isClickable")]
+            public bool IsClickable { get; set; }
+
+            /// <summary>
+            /// Details of the node's event listeners, if any.
+            /// </summary>
+            [JsonProperty("eventListeners")]
+            public DOMDebugger.EventListener[] EventListeners { get; set; }
+
+            /// <summary>
+            /// The selected url for nodes with a srcset attribute.
+            /// </summary>
+            [JsonProperty("currentSourceURL")]
+            public string CurrentSourceURL { get; set; }
+
+            /// <summary>
+            /// The url of the script (if any) that generates this node.
+            /// </summary>
+            [JsonProperty("originURL")]
+            public string OriginURL { get; set; }
+
+            /// <summary>
+            /// Scroll offsets, set when this node is a Document.
+            /// </summary>
+            [JsonProperty("scrollOffsetX")]
+            public double ScrollOffsetX { get; set; }
+
+            [JsonProperty("scrollOffsetY")]
+            public double ScrollOffsetY { get; set; }
         }
 
         /// <summary>
@@ -2219,9 +3543,26 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class InlineTextBox
         {
-            // public DOM.Rect
-            // public int
-            // public int
+
+            /// <summary>
+            /// The bounding box in document coordinates. Note that scroll offset of the document is ignored.
+            /// </summary>
+            [JsonProperty("boundingBox")]
+            public DOM.Rect BoundingBox { get; set; }
+
+            /// <summary>
+            /// The starting index in characters, for this post layout textbox substring. Characters that
+            /// would be represented as a surrogate pair in UTF-16 have length 2.
+            /// </summary>
+            [JsonProperty("startCharacterIndex")]
+            public int StartCharacterIndex { get; set; }
+
+            /// <summary>
+            /// The number of characters in this post layout textbox substring. Characters that would be
+            /// represented as a surrogate pair in UTF-16 have length 2.
+            /// </summary>
+            [JsonProperty("numCharacters")]
+            public int NumCharacters { get; set; }
         }
 
         /// <summary>
@@ -2229,13 +3570,50 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class LayoutTreeNode
         {
-            // public int
-            // public DOM.Rect
-            // public string
-            // public InlineTextBox[]
-            // public int
-            // public int
-            // public boolean
+
+            /// <summary>
+            /// The index of the related DOM node in the `domNodes` array returned by `getSnapshot`.
+            /// </summary>
+            [JsonProperty("domNodeIndex")]
+            public int DomNodeIndex { get; set; }
+
+            /// <summary>
+            /// The bounding box in document coordinates. Note that scroll offset of the document is ignored.
+            /// </summary>
+            [JsonProperty("boundingBox")]
+            public DOM.Rect BoundingBox { get; set; }
+
+            /// <summary>
+            /// Contents of the LayoutText, if any.
+            /// </summary>
+            [JsonProperty("layoutText")]
+            public string LayoutText { get; set; }
+
+            /// <summary>
+            /// The post-layout inline text nodes, if any.
+            /// </summary>
+            [JsonProperty("inlineTextNodes")]
+            public InlineTextBox[] InlineTextNodes { get; set; }
+
+            /// <summary>
+            /// Index into the `computedStyles` array returned by `getSnapshot`.
+            /// </summary>
+            [JsonProperty("styleIndex")]
+            public int StyleIndex { get; set; }
+
+            /// <summary>
+            /// Global paint order index, which is determined by the stacking order of the nodes. Nodes
+            /// that are painted together will have the same index. Only provided if includePaintOrder in
+            /// getSnapshot was true.
+            /// </summary>
+            [JsonProperty("paintOrder")]
+            public int PaintOrder { get; set; }
+
+            /// <summary>
+            /// Set to true to indicate the element begins a new stacking context.
+            /// </summary>
+            [JsonProperty("isStackingContext")]
+            public bool IsStackingContext { get; set; }
         }
 
         /// <summary>
@@ -2243,7 +3621,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ComputedStyle
         {
-            // public NameValue[]
+
+            /// <summary>
+            /// Name/value pairs of computed style properties.
+            /// </summary>
+            [JsonProperty("properties")]
+            public NameValue[] Properties { get; set; }
         }
 
         /// <summary>
@@ -2251,8 +3634,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class NameValue
         {
-            // public string
-            // public string
+
+            /// <summary>
+            /// Attribute/property name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Attribute/property value.
+            /// </summary>
+            [JsonProperty("value")]
+            public string Value { get; set; }
         }
 
         /// <summary>
@@ -2288,19 +3681,29 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class RareStringData
         {
-            // public int[]
-            // public StringIndex[]
+
+            [JsonProperty("index")]
+            public int[] Index { get; set; }
+
+            [JsonProperty("value")]
+            public StringIndex[] Value { get; set; }
         }
 
         public class RareBooleanData
         {
-            // public int[]
+
+            [JsonProperty("index")]
+            public int[] Index { get; set; }
         }
 
         public class RareIntegerData
         {
-            // public int[]
-            // public int[]
+
+            [JsonProperty("index")]
+            public int[] Index { get; set; }
+
+            [JsonProperty("value")]
+            public int[] Value { get; set; }
         }
 
         public struct Rectangle : IAlias<double[]>
@@ -2319,18 +3722,75 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class DocumentSnapshot
         {
-            // public StringIndex
-            // public StringIndex
-            // public StringIndex
-            // public StringIndex
-            // public StringIndex
-            // public StringIndex
-            // public StringIndex
-            // public NodeTreeSnapshot
-            // public LayoutTreeSnapshot
-            // public TextBoxSnapshot
-            // public double
-            // public double
+
+            /// <summary>
+            /// Document URL that `Document` or `FrameOwner` node points to.
+            /// </summary>
+            [JsonProperty("documentURL")]
+            public StringIndex DocumentURL { get; set; }
+
+            /// <summary>
+            /// Base URL that `Document` or `FrameOwner` node uses for URL completion.
+            /// </summary>
+            [JsonProperty("baseURL")]
+            public StringIndex BaseURL { get; set; }
+
+            /// <summary>
+            /// Contains the document's content language.
+            /// </summary>
+            [JsonProperty("contentLanguage")]
+            public StringIndex ContentLanguage { get; set; }
+
+            /// <summary>
+            /// Contains the document's character set encoding.
+            /// </summary>
+            [JsonProperty("encodingName")]
+            public StringIndex EncodingName { get; set; }
+
+            /// <summary>
+            /// `DocumentType` node's publicId.
+            /// </summary>
+            [JsonProperty("publicId")]
+            public StringIndex PublicId { get; set; }
+
+            /// <summary>
+            /// `DocumentType` node's systemId.
+            /// </summary>
+            [JsonProperty("systemId")]
+            public StringIndex SystemId { get; set; }
+
+            /// <summary>
+            /// Frame ID for frame owner elements and also for the document node.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public StringIndex FrameId { get; set; }
+
+            /// <summary>
+            /// A table with dom nodes.
+            /// </summary>
+            [JsonProperty("nodes")]
+            public NodeTreeSnapshot Nodes { get; set; }
+
+            /// <summary>
+            /// The nodes in the layout tree.
+            /// </summary>
+            [JsonProperty("layout")]
+            public LayoutTreeSnapshot Layout { get; set; }
+
+            /// <summary>
+            /// The post-layout inline text nodes.
+            /// </summary>
+            [JsonProperty("textBoxes")]
+            public TextBoxSnapshot TextBoxes { get; set; }
+
+            /// <summary>
+            /// Scroll offsets.
+            /// </summary>
+            [JsonProperty("scrollOffsetX")]
+            public double ScrollOffsetX { get; set; }
+
+            [JsonProperty("scrollOffsetY")]
+            public double ScrollOffsetY { get; set; }
         }
 
         /// <summary>
@@ -2338,21 +3798,98 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class NodeTreeSnapshot
         {
-            // public int[]
-            // public int[]
-            // public StringIndex[]
-            // public StringIndex[]
-            // public DOM.BackendNodeId[]
-            // public ArrayOfStrings[]
-            // public RareStringData
-            // public RareStringData
-            // public RareBooleanData
-            // public RareBooleanData
-            // public RareIntegerData
-            // public RareStringData
-            // public RareBooleanData
-            // public RareStringData
-            // public RareStringData
+
+            /// <summary>
+            /// Parent node index.
+            /// </summary>
+            [JsonProperty("parentIndex")]
+            public int[] ParentIndex { get; set; }
+
+            /// <summary>
+            /// `Node`'s nodeType.
+            /// </summary>
+            [JsonProperty("nodeType")]
+            public int[] NodeType { get; set; }
+
+            /// <summary>
+            /// `Node`'s nodeName.
+            /// </summary>
+            [JsonProperty("nodeName")]
+            public StringIndex[] NodeName { get; set; }
+
+            /// <summary>
+            /// `Node`'s nodeValue.
+            /// </summary>
+            [JsonProperty("nodeValue")]
+            public StringIndex[] NodeValue { get; set; }
+
+            /// <summary>
+            /// `Node`'s id, corresponds to DOM.Node.backendNodeId.
+            /// </summary>
+            [JsonProperty("backendNodeId")]
+            public DOM.BackendNodeId[] BackendNodeId { get; set; }
+
+            /// <summary>
+            /// Attributes of an `Element` node. Flatten name, value pairs.
+            /// </summary>
+            [JsonProperty("attributes")]
+            public ArrayOfStrings[] Attributes { get; set; }
+
+            /// <summary>
+            /// Only set for textarea elements, contains the text value.
+            /// </summary>
+            [JsonProperty("textValue")]
+            public RareStringData TextValue { get; set; }
+
+            /// <summary>
+            /// Only set for input elements, contains the input's associated text value.
+            /// </summary>
+            [JsonProperty("inputValue")]
+            public RareStringData InputValue { get; set; }
+
+            /// <summary>
+            /// Only set for radio and checkbox input elements, indicates if the element has been checked
+            /// </summary>
+            [JsonProperty("inputChecked")]
+            public RareBooleanData InputChecked { get; set; }
+
+            /// <summary>
+            /// Only set for option elements, indicates if the element has been selected
+            /// </summary>
+            [JsonProperty("optionSelected")]
+            public RareBooleanData OptionSelected { get; set; }
+
+            /// <summary>
+            /// The index of the document in the list of the snapshot documents.
+            /// </summary>
+            [JsonProperty("contentDocumentIndex")]
+            public RareIntegerData ContentDocumentIndex { get; set; }
+
+            /// <summary>
+            /// Type of a pseudo element node.
+            /// </summary>
+            [JsonProperty("pseudoType")]
+            public RareStringData PseudoType { get; set; }
+
+            /// <summary>
+            /// Whether this DOM node responds to mouse clicks. This includes nodes that have had click
+            /// event listeners attached via JavaScript as well as anchor tags that naturally navigate when
+            /// clicked.
+            /// </summary>
+            [JsonProperty("isClickable")]
+            public RareBooleanData IsClickable { get; set; }
+
+            /// <summary>
+            /// The selected url for nodes with a srcset attribute.
+            /// </summary>
+            [JsonProperty("currentSourceURL")]
+            public RareStringData CurrentSourceURL { get; set; }
+
+            /// <summary>
+            /// The url of the script (if any) that generates this node.
+            /// </summary>
+            [JsonProperty("originURL")]
+            public RareStringData OriginURL { get; set; }
         }
 
         /// <summary>
@@ -2360,11 +3897,36 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class LayoutTreeSnapshot
         {
-            // public int[]
-            // public ArrayOfStrings[]
-            // public Rectangle[]
-            // public StringIndex[]
-            // public RareBooleanData
+
+            /// <summary>
+            /// The index of the related DOM node in the `domNodes` array returned by `getSnapshot`.
+            /// </summary>
+            [JsonProperty("nodeIndex")]
+            public int[] NodeIndex { get; set; }
+
+            /// <summary>
+            /// Index into the `computedStyles` array returned by `captureSnapshot`.
+            /// </summary>
+            [JsonProperty("styles")]
+            public ArrayOfStrings[] Styles { get; set; }
+
+            /// <summary>
+            /// The absolute position bounding box.
+            /// </summary>
+            [JsonProperty("bounds")]
+            public Rectangle[] Bounds { get; set; }
+
+            /// <summary>
+            /// Contents of the LayoutText, if any.
+            /// </summary>
+            [JsonProperty("text")]
+            public StringIndex[] Text { get; set; }
+
+            /// <summary>
+            /// Stacking context information.
+            /// </summary>
+            [JsonProperty("stackingContexts")]
+            public RareBooleanData StackingContexts { get; set; }
         }
 
         /// <summary>
@@ -2373,10 +3935,32 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class TextBoxSnapshot
         {
-            // public int[]
-            // public Rectangle[]
-            // public int[]
-            // public int[]
+
+            /// <summary>
+            /// Intex of th elayout tree node that owns this box collection.
+            /// </summary>
+            [JsonProperty("layoutIndex")]
+            public int[] LayoutIndex { get; set; }
+
+            /// <summary>
+            /// The absolute position bounding box.
+            /// </summary>
+            [JsonProperty("bounds")]
+            public Rectangle[] Bounds { get; set; }
+
+            /// <summary>
+            /// The starting index in characters, for this post layout textbox substring. Characters that
+            /// would be represented as a surrogate pair in UTF-16 have length 2.
+            /// </summary>
+            [JsonProperty("start")]
+            public int[] Start { get; set; }
+
+            /// <summary>
+            /// The number of characters in this post layout textbox substring. Characters that would be
+            /// represented as a surrogate pair in UTF-16 have length 2.
+            /// </summary>
+            [JsonProperty("length")]
+            public int[] Length { get; set; }
         }
 
         /// <summary>
@@ -2438,8 +4022,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class StorageId
         {
-            // public string
-            // public boolean
+
+            /// <summary>
+            /// Security origin for the storage.
+            /// </summary>
+            [JsonProperty("securityOrigin")]
+            public string SecurityOrigin { get; set; }
+
+            /// <summary>
+            /// Whether the storage is local storage (not session storage).
+            /// </summary>
+            [JsonProperty("isLocalStorage")]
+            public bool IsLocalStorage { get; set; }
         }
 
         /// <summary>
@@ -2519,10 +4113,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Database
         {
-            // public DatabaseId
-            // public string
-            // public string
-            // public string
+
+            /// <summary>
+            /// Database ID.
+            /// </summary>
+            [JsonProperty("id")]
+            public DatabaseId Id { get; set; }
+
+            /// <summary>
+            /// Database domain.
+            /// </summary>
+            [JsonProperty("domain")]
+            public string Domain { get; set; }
+
+            /// <summary>
+            /// Database name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Database version.
+            /// </summary>
+            [JsonProperty("version")]
+            public string Version { get; set; }
         }
 
         /// <summary>
@@ -2530,8 +4144,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Error
         {
-            // public string
-            // public int
+
+            /// <summary>
+            /// Error message.
+            /// </summary>
+            [JsonProperty("message")]
+            public string Message { get; set; }
+
+            /// <summary>
+            /// Error code.
+            /// </summary>
+            [JsonProperty("code")]
+            public int Code { get; set; }
         }
 
         /// <summary>
@@ -2600,8 +4224,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScreenOrientation
         {
-            // public string
-            // public int
+
+            /// <summary>
+            /// Orientation type.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// Orientation angle.
+            /// </summary>
+            [JsonProperty("angle")]
+            public int Angle { get; set; }
         }
 
         /// <summary>
@@ -2804,8 +4438,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScreenshotParams
         {
-            // public string
-            // public int
+
+            /// <summary>
+            /// Image compression format (defaults to png).
+            /// </summary>
+            [JsonProperty("format")]
+            public string Format { get; set; }
+
+            /// <summary>
+            /// Compression quality from range [0..100] (jpeg only).
+            /// </summary>
+            [JsonProperty("quality")]
+            public int Quality { get; set; }
         }
 
         /// <summary>
@@ -2902,9 +4546,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class DatabaseWithObjectStores
         {
-            // public string
-            // public double
-            // public ObjectStore[]
+
+            /// <summary>
+            /// Database name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Database version (type is not 'integer', as the standard
+            /// requires the version number to be 'unsigned long long')
+            /// </summary>
+            [JsonProperty("version")]
+            public double Version { get; set; }
+
+            /// <summary>
+            /// Object stores in this database.
+            /// </summary>
+            [JsonProperty("objectStores")]
+            public ObjectStore[] ObjectStores { get; set; }
         }
 
         /// <summary>
@@ -2912,10 +4572,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ObjectStore
         {
-            // public string
-            // public KeyPath
-            // public boolean
-            // public ObjectStoreIndex[]
+
+            /// <summary>
+            /// Object store name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Object store key path.
+            /// </summary>
+            [JsonProperty("keyPath")]
+            public KeyPath KeyPath { get; set; }
+
+            /// <summary>
+            /// If true, object store has auto increment flag set.
+            /// </summary>
+            [JsonProperty("autoIncrement")]
+            public bool AutoIncrement { get; set; }
+
+            /// <summary>
+            /// Indexes in this object store.
+            /// </summary>
+            [JsonProperty("indexes")]
+            public ObjectStoreIndex[] Indexes { get; set; }
         }
 
         /// <summary>
@@ -2923,10 +4603,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ObjectStoreIndex
         {
-            // public string
-            // public KeyPath
-            // public boolean
-            // public boolean
+
+            /// <summary>
+            /// Index name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Index key path.
+            /// </summary>
+            [JsonProperty("keyPath")]
+            public KeyPath KeyPath { get; set; }
+
+            /// <summary>
+            /// If true, index is unique.
+            /// </summary>
+            [JsonProperty("unique")]
+            public bool Unique { get; set; }
+
+            /// <summary>
+            /// If true, index allows multiple entries for a key.
+            /// </summary>
+            [JsonProperty("multiEntry")]
+            public bool MultiEntry { get; set; }
         }
 
         /// <summary>
@@ -2934,11 +4634,36 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Key
         {
-            // public string
-            // public double
-            // public string
-            // public double
-            // public Key[]
+
+            /// <summary>
+            /// Key type.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// Number value.
+            /// </summary>
+            [JsonProperty("number")]
+            public double Number { get; set; }
+
+            /// <summary>
+            /// String value.
+            /// </summary>
+            [JsonProperty("string")]
+            public string String { get; set; }
+
+            /// <summary>
+            /// Date value.
+            /// </summary>
+            [JsonProperty("date")]
+            public double Date { get; set; }
+
+            /// <summary>
+            /// Array value.
+            /// </summary>
+            [JsonProperty("array")]
+            public Key[] Array { get; set; }
         }
 
         /// <summary>
@@ -2946,10 +4671,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class KeyRange
         {
-            // public Key
-            // public Key
-            // public boolean
-            // public boolean
+
+            /// <summary>
+            /// Lower bound.
+            /// </summary>
+            [JsonProperty("lower")]
+            public Key Lower { get; set; }
+
+            /// <summary>
+            /// Upper bound.
+            /// </summary>
+            [JsonProperty("upper")]
+            public Key Upper { get; set; }
+
+            /// <summary>
+            /// If true lower bound is open.
+            /// </summary>
+            [JsonProperty("lowerOpen")]
+            public bool LowerOpen { get; set; }
+
+            /// <summary>
+            /// If true upper bound is open.
+            /// </summary>
+            [JsonProperty("upperOpen")]
+            public bool UpperOpen { get; set; }
         }
 
         /// <summary>
@@ -2957,9 +4702,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class DataEntry
         {
-            // public Runtime.RemoteObject
-            // public Runtime.RemoteObject
-            // public Runtime.RemoteObject
+
+            /// <summary>
+            /// Key object.
+            /// </summary>
+            [JsonProperty("key")]
+            public Runtime.RemoteObject Key { get; set; }
+
+            /// <summary>
+            /// Primary key object.
+            /// </summary>
+            [JsonProperty("primaryKey")]
+            public Runtime.RemoteObject PrimaryKey { get; set; }
+
+            /// <summary>
+            /// Value object.
+            /// </summary>
+            [JsonProperty("value")]
+            public Runtime.RemoteObject Value { get; set; }
         }
 
         /// <summary>
@@ -2967,9 +4727,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class KeyPath
         {
-            // public string
-            // public string
-            // public string[]
+
+            /// <summary>
+            /// Key path type.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// String value.
+            /// </summary>
+            [JsonProperty("string")]
+            public string String { get; set; }
+
+            /// <summary>
+            /// Array value.
+            /// </summary>
+            [JsonProperty("array")]
+            public string[] Array { get; set; }
         }
 
         /// <summary>
@@ -3054,13 +4829,49 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class TouchPoint
         {
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
+
+            /// <summary>
+            /// X coordinate of the event relative to the main frame's viewport in CSS pixels.
+            /// </summary>
+            [JsonProperty("x")]
+            public double X { get; set; }
+
+            /// <summary>
+            /// Y coordinate of the event relative to the main frame's viewport in CSS pixels. 0 refers to
+            /// the top of the viewport and Y increases as it proceeds towards the bottom of the viewport.
+            /// </summary>
+            [JsonProperty("y")]
+            public double Y { get; set; }
+
+            /// <summary>
+            /// X radius of the touch area (default: 1.0).
+            /// </summary>
+            [JsonProperty("radiusX")]
+            public double RadiusX { get; set; }
+
+            /// <summary>
+            /// Y radius of the touch area (default: 1.0).
+            /// </summary>
+            [JsonProperty("radiusY")]
+            public double RadiusY { get; set; }
+
+            /// <summary>
+            /// Rotation angle (default: 0.0).
+            /// </summary>
+            [JsonProperty("rotationAngle")]
+            public double RotationAngle { get; set; }
+
+            /// <summary>
+            /// Force (default: 1.0).
+            /// </summary>
+            [JsonProperty("force")]
+            public double Force { get; set; }
+
+            /// <summary>
+            /// Identifier used to track touch sources between events, must be unique within an event.
+            /// </summary>
+            [JsonProperty("id")]
+            public double Id { get; set; }
         }
 
         public struct GestureSourceType : IEnum
@@ -3221,8 +5032,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScrollRect
         {
-            // public DOM.Rect
-            // public string
+
+            /// <summary>
+            /// Rectangle itself.
+            /// </summary>
+            [JsonProperty("rect")]
+            public DOM.Rect Rect { get; set; }
+
+            /// <summary>
+            /// Reason for rectangle to force scrolling on the main thread
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
         }
 
         /// <summary>
@@ -3230,10 +5051,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class StickyPositionConstraint
         {
-            // public DOM.Rect
-            // public DOM.Rect
-            // public LayerId
-            // public LayerId
+
+            /// <summary>
+            /// Layout rectangle of the sticky element before being shifted
+            /// </summary>
+            [JsonProperty("stickyBoxRect")]
+            public DOM.Rect StickyBoxRect { get; set; }
+
+            /// <summary>
+            /// Layout rectangle of the containing block of the sticky element
+            /// </summary>
+            [JsonProperty("containingBlockRect")]
+            public DOM.Rect ContainingBlockRect { get; set; }
+
+            /// <summary>
+            /// The nearest sticky layer that shifts the sticky box
+            /// </summary>
+            [JsonProperty("nearestLayerShiftingStickyBox")]
+            public LayerId NearestLayerShiftingStickyBox { get; set; }
+
+            /// <summary>
+            /// The nearest sticky layer that shifts the containing block
+            /// </summary>
+            [JsonProperty("nearestLayerShiftingContainingBlock")]
+            public LayerId NearestLayerShiftingContainingBlock { get; set; }
         }
 
         /// <summary>
@@ -3241,9 +5082,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class PictureTile
         {
-            // public double
-            // public double
-            // public string
+
+            /// <summary>
+            /// Offset from owning layer left boundary
+            /// </summary>
+            [JsonProperty("x")]
+            public double X { get; set; }
+
+            /// <summary>
+            /// Offset from owning layer top boundary
+            /// </summary>
+            [JsonProperty("y")]
+            public double Y { get; set; }
+
+            /// <summary>
+            /// Base64-encoded snapshot data.
+            /// </summary>
+            [JsonProperty("picture")]
+            public string Picture { get; set; }
         }
 
         /// <summary>
@@ -3251,22 +5107,103 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Layer
         {
-            // public LayerId
-            // public LayerId
-            // public DOM.BackendNodeId
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double[]
-            // public double
-            // public double
-            // public double
-            // public int
-            // public boolean
-            // public boolean
-            // public ScrollRect[]
-            // public StickyPositionConstraint
+
+            /// <summary>
+            /// The unique id for this layer.
+            /// </summary>
+            [JsonProperty("layerId")]
+            public LayerId LayerId { get; set; }
+
+            /// <summary>
+            /// The id of parent (not present for root).
+            /// </summary>
+            [JsonProperty("parentLayerId")]
+            public LayerId ParentLayerId { get; set; }
+
+            /// <summary>
+            /// The backend id for the node associated with this layer.
+            /// </summary>
+            [JsonProperty("backendNodeId")]
+            public DOM.BackendNodeId BackendNodeId { get; set; }
+
+            /// <summary>
+            /// Offset from parent layer, X coordinate.
+            /// </summary>
+            [JsonProperty("offsetX")]
+            public double OffsetX { get; set; }
+
+            /// <summary>
+            /// Offset from parent layer, Y coordinate.
+            /// </summary>
+            [JsonProperty("offsetY")]
+            public double OffsetY { get; set; }
+
+            /// <summary>
+            /// Layer width.
+            /// </summary>
+            [JsonProperty("width")]
+            public double Width { get; set; }
+
+            /// <summary>
+            /// Layer height.
+            /// </summary>
+            [JsonProperty("height")]
+            public double Height { get; set; }
+
+            /// <summary>
+            /// Transformation matrix for layer, default is identity matrix
+            /// </summary>
+            [JsonProperty("transform")]
+            public double[] Transform { get; set; }
+
+            /// <summary>
+            /// Transform anchor point X, absent if no transform specified
+            /// </summary>
+            [JsonProperty("anchorX")]
+            public double AnchorX { get; set; }
+
+            /// <summary>
+            /// Transform anchor point Y, absent if no transform specified
+            /// </summary>
+            [JsonProperty("anchorY")]
+            public double AnchorY { get; set; }
+
+            /// <summary>
+            /// Transform anchor point Z, absent if no transform specified
+            /// </summary>
+            [JsonProperty("anchorZ")]
+            public double AnchorZ { get; set; }
+
+            /// <summary>
+            /// Indicates how many time this layer has painted.
+            /// </summary>
+            [JsonProperty("paintCount")]
+            public int PaintCount { get; set; }
+
+            /// <summary>
+            /// Indicates whether this layer hosts any content, rather than being used for
+            /// transform/scrolling purposes only.
+            /// </summary>
+            [JsonProperty("drawsContent")]
+            public bool DrawsContent { get; set; }
+
+            /// <summary>
+            /// Set if layer is not visible.
+            /// </summary>
+            [JsonProperty("invisible")]
+            public bool Invisible { get; set; }
+
+            /// <summary>
+            /// Rectangles scrolling on main thread only.
+            /// </summary>
+            [JsonProperty("scrollRects")]
+            public ScrollRect[] ScrollRects { get; set; }
+
+            /// <summary>
+            /// Sticky position constraint information
+            /// </summary>
+            [JsonProperty("stickyPositionConstraint")]
+            public StickyPositionConstraint StickyPositionConstraint { get; set; }
         }
 
         /// <summary>
@@ -3388,16 +5325,66 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class LogEntry
         {
-            // public string
-            // public string
-            // public string
-            // public Runtime.Timestamp
-            // public string
-            // public int
-            // public Runtime.StackTrace
-            // public Network.RequestId
-            // public string
-            // public Runtime.RemoteObject[]
+
+            /// <summary>
+            /// Log entry source.
+            /// </summary>
+            [JsonProperty("source")]
+            public string Source { get; set; }
+
+            /// <summary>
+            /// Log entry severity.
+            /// </summary>
+            [JsonProperty("level")]
+            public string Level { get; set; }
+
+            /// <summary>
+            /// Logged text.
+            /// </summary>
+            [JsonProperty("text")]
+            public string Text { get; set; }
+
+            /// <summary>
+            /// Timestamp when this entry was added.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public Runtime.Timestamp Timestamp { get; set; }
+
+            /// <summary>
+            /// URL of the resource if known.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Line number in the resource.
+            /// </summary>
+            [JsonProperty("lineNumber")]
+            public int LineNumber { get; set; }
+
+            /// <summary>
+            /// JavaScript stack trace.
+            /// </summary>
+            [JsonProperty("stackTrace")]
+            public Runtime.StackTrace StackTrace { get; set; }
+
+            /// <summary>
+            /// Identifier of the network request associated with this entry.
+            /// </summary>
+            [JsonProperty("networkRequestId")]
+            public Network.RequestId NetworkRequestId { get; set; }
+
+            /// <summary>
+            /// Identifier of the worker associated with this entry.
+            /// </summary>
+            [JsonProperty("workerId")]
+            public string WorkerId { get; set; }
+
+            /// <summary>
+            /// Call arguments.
+            /// </summary>
+            [JsonProperty("args")]
+            public Runtime.RemoteObject[] Args { get; set; }
         }
 
         /// <summary>
@@ -3405,8 +5392,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ViolationSetting
         {
-            // public string
-            // public double
+
+            /// <summary>
+            /// Violation type.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Time threshold to trigger upon.
+            /// </summary>
+            [JsonProperty("threshold")]
+            public double Threshold { get; set; }
         }
 
         /// <summary>
@@ -3475,9 +5472,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SamplingProfileNode
         {
-            // public double
-            // public double
-            // public string[]
+
+            /// <summary>
+            /// Size of the sampled allocation.
+            /// </summary>
+            [JsonProperty("size")]
+            public double Size { get; set; }
+
+            /// <summary>
+            /// Total bytes attributed to this sample.
+            /// </summary>
+            [JsonProperty("total")]
+            public double Total { get; set; }
+
+            /// <summary>
+            /// Execution stack at the point of allocation.
+            /// </summary>
+            [JsonProperty("stack")]
+            public string[] Stack { get; set; }
         }
 
         /// <summary>
@@ -3485,8 +5497,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SamplingProfile
         {
-            // public SamplingProfileNode[]
-            // public Module[]
+
+            [JsonProperty("samples")]
+            public SamplingProfileNode[] Samples { get; set; }
+
+            [JsonProperty("modules")]
+            public Module[] Modules { get; set; }
         }
 
         /// <summary>
@@ -3494,10 +5510,31 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Module
         {
-            // public string
-            // public string
-            // public string
-            // public double
+
+            /// <summary>
+            /// Name of the module.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// UUID of the module.
+            /// </summary>
+            [JsonProperty("uuid")]
+            public string Uuid { get; set; }
+
+            /// <summary>
+            /// Base address where the module is loaded into memory. Encoded as a decimal
+            /// or hexadecimal (0x prefixed) string.
+            /// </summary>
+            [JsonProperty("baseAddress")]
+            public string BaseAddress { get; set; }
+
+            /// <summary>
+            /// Size of the module in bytes.
+            /// </summary>
+            [JsonProperty("size")]
+            public double Size { get; set; }
         }
 
         public class GetDOMCountersCommand : ICommand<GetDOMCountersResponse>
@@ -3724,7 +5761,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Request / response headers as keys / values of JSON object.
         /// </summary>
-        public class Headers
+        public class Headers : Dictionary<string, object>
         {
         }
 
@@ -3773,22 +5810,103 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ResourceTiming
         {
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
+
+            /// <summary>
+            /// Timing's requestTime is a baseline in seconds, while the other numbers are ticks in
+            /// milliseconds relatively to this requestTime.
+            /// </summary>
+            [JsonProperty("requestTime")]
+            public double RequestTime { get; set; }
+
+            /// <summary>
+            /// Started resolving proxy.
+            /// </summary>
+            [JsonProperty("proxyStart")]
+            public double ProxyStart { get; set; }
+
+            /// <summary>
+            /// Finished resolving proxy.
+            /// </summary>
+            [JsonProperty("proxyEnd")]
+            public double ProxyEnd { get; set; }
+
+            /// <summary>
+            /// Started DNS address resolve.
+            /// </summary>
+            [JsonProperty("dnsStart")]
+            public double DnsStart { get; set; }
+
+            /// <summary>
+            /// Finished DNS address resolve.
+            /// </summary>
+            [JsonProperty("dnsEnd")]
+            public double DnsEnd { get; set; }
+
+            /// <summary>
+            /// Started connecting to the remote host.
+            /// </summary>
+            [JsonProperty("connectStart")]
+            public double ConnectStart { get; set; }
+
+            /// <summary>
+            /// Connected to the remote host.
+            /// </summary>
+            [JsonProperty("connectEnd")]
+            public double ConnectEnd { get; set; }
+
+            /// <summary>
+            /// Started SSL handshake.
+            /// </summary>
+            [JsonProperty("sslStart")]
+            public double SslStart { get; set; }
+
+            /// <summary>
+            /// Finished SSL handshake.
+            /// </summary>
+            [JsonProperty("sslEnd")]
+            public double SslEnd { get; set; }
+
+            /// <summary>
+            /// Started running ServiceWorker.
+            /// </summary>
+            [JsonProperty("workerStart")]
+            public double WorkerStart { get; set; }
+
+            /// <summary>
+            /// Finished Starting ServiceWorker.
+            /// </summary>
+            [JsonProperty("workerReady")]
+            public double WorkerReady { get; set; }
+
+            /// <summary>
+            /// Started sending request.
+            /// </summary>
+            [JsonProperty("sendStart")]
+            public double SendStart { get; set; }
+
+            /// <summary>
+            /// Finished sending request.
+            /// </summary>
+            [JsonProperty("sendEnd")]
+            public double SendEnd { get; set; }
+
+            /// <summary>
+            /// Time the server started pushing request.
+            /// </summary>
+            [JsonProperty("pushStart")]
+            public double PushStart { get; set; }
+
+            /// <summary>
+            /// Time the server finished pushing request.
+            /// </summary>
+            [JsonProperty("pushEnd")]
+            public double PushEnd { get; set; }
+
+            /// <summary>
+            /// Finished receiving response headers.
+            /// </summary>
+            [JsonProperty("receiveHeadersEnd")]
+            public double ReceiveHeadersEnd { get; set; }
         }
 
         /// <summary>
@@ -3815,16 +5933,66 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Request
         {
-            // public string
-            // public string
-            // public string
-            // public Headers
-            // public string
-            // public boolean
-            // public Security.MixedContentType
-            // public ResourcePriority
-            // public string
-            // public boolean
+
+            /// <summary>
+            /// Request URL (without fragment).
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Fragment of the requested URL starting with hash, if present.
+            /// </summary>
+            [JsonProperty("urlFragment")]
+            public string UrlFragment { get; set; }
+
+            /// <summary>
+            /// HTTP request method.
+            /// </summary>
+            [JsonProperty("method")]
+            public string Method { get; set; }
+
+            /// <summary>
+            /// HTTP request headers.
+            /// </summary>
+            [JsonProperty("headers")]
+            public Headers Headers { get; set; }
+
+            /// <summary>
+            /// HTTP POST request data.
+            /// </summary>
+            [JsonProperty("postData")]
+            public string PostData { get; set; }
+
+            /// <summary>
+            /// True when the request has POST data. Note that postData might still be omitted when this flag is true when the data is too long.
+            /// </summary>
+            [JsonProperty("hasPostData")]
+            public bool HasPostData { get; set; }
+
+            /// <summary>
+            /// The mixed content type of the request.
+            /// </summary>
+            [JsonProperty("mixedContentType")]
+            public Security.MixedContentType MixedContentType { get; set; }
+
+            /// <summary>
+            /// Priority of the resource request at the time request is sent.
+            /// </summary>
+            [JsonProperty("initialPriority")]
+            public ResourcePriority InitialPriority { get; set; }
+
+            /// <summary>
+            /// The referrer policy of the request, as defined in https://www.w3.org/TR/referrer-policy/
+            /// </summary>
+            [JsonProperty("referrerPolicy")]
+            public string ReferrerPolicy { get; set; }
+
+            /// <summary>
+            /// Whether is loaded via link preload.
+            /// </summary>
+            [JsonProperty("isLinkPreload")]
+            public bool IsLinkPreload { get; set; }
         }
 
         /// <summary>
@@ -3832,14 +6000,54 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SignedCertificateTimestamp
         {
-            // public string
-            // public string
-            // public string
-            // public string
-            // public TimeSinceEpoch
-            // public string
-            // public string
-            // public string
+
+            /// <summary>
+            /// Validation status.
+            /// </summary>
+            [JsonProperty("status")]
+            public string Status { get; set; }
+
+            /// <summary>
+            /// Origin.
+            /// </summary>
+            [JsonProperty("origin")]
+            public string Origin { get; set; }
+
+            /// <summary>
+            /// Log name / description.
+            /// </summary>
+            [JsonProperty("logDescription")]
+            public string LogDescription { get; set; }
+
+            /// <summary>
+            /// Log ID.
+            /// </summary>
+            [JsonProperty("logId")]
+            public string LogId { get; set; }
+
+            /// <summary>
+            /// Issuance date.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public TimeSinceEpoch Timestamp { get; set; }
+
+            /// <summary>
+            /// Hash algorithm.
+            /// </summary>
+            [JsonProperty("hashAlgorithm")]
+            public string HashAlgorithm { get; set; }
+
+            /// <summary>
+            /// Signature algorithm.
+            /// </summary>
+            [JsonProperty("signatureAlgorithm")]
+            public string SignatureAlgorithm { get; set; }
+
+            /// <summary>
+            /// Signature data.
+            /// </summary>
+            [JsonProperty("signatureData")]
+            public string SignatureData { get; set; }
         }
 
         /// <summary>
@@ -3847,19 +6055,84 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SecurityDetails
         {
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public Security.CertificateId
-            // public string
-            // public string[]
-            // public string
-            // public TimeSinceEpoch
-            // public TimeSinceEpoch
-            // public SignedCertificateTimestamp[]
-            // public CertificateTransparencyCompliance
+
+            /// <summary>
+            /// Protocol name (e.g. "TLS 1.2" or "QUIC").
+            /// </summary>
+            [JsonProperty("protocol")]
+            public string Protocol { get; set; }
+
+            /// <summary>
+            /// Key Exchange used by the connection, or the empty string if not applicable.
+            /// </summary>
+            [JsonProperty("keyExchange")]
+            public string KeyExchange { get; set; }
+
+            /// <summary>
+            /// (EC)DH group used by the connection, if applicable.
+            /// </summary>
+            [JsonProperty("keyExchangeGroup")]
+            public string KeyExchangeGroup { get; set; }
+
+            /// <summary>
+            /// Cipher name.
+            /// </summary>
+            [JsonProperty("cipher")]
+            public string Cipher { get; set; }
+
+            /// <summary>
+            /// TLS MAC. Note that AEAD ciphers do not have separate MACs.
+            /// </summary>
+            [JsonProperty("mac")]
+            public string Mac { get; set; }
+
+            /// <summary>
+            /// Certificate ID value.
+            /// </summary>
+            [JsonProperty("certificateId")]
+            public Security.CertificateId CertificateId { get; set; }
+
+            /// <summary>
+            /// Certificate subject name.
+            /// </summary>
+            [JsonProperty("subjectName")]
+            public string SubjectName { get; set; }
+
+            /// <summary>
+            /// Subject Alternative Name (SAN) DNS names and IP addresses.
+            /// </summary>
+            [JsonProperty("sanList")]
+            public string[] SanList { get; set; }
+
+            /// <summary>
+            /// Name of the issuing CA.
+            /// </summary>
+            [JsonProperty("issuer")]
+            public string Issuer { get; set; }
+
+            /// <summary>
+            /// Certificate valid from date.
+            /// </summary>
+            [JsonProperty("validFrom")]
+            public TimeSinceEpoch ValidFrom { get; set; }
+
+            /// <summary>
+            /// Certificate valid to (expiration) date
+            /// </summary>
+            [JsonProperty("validTo")]
+            public TimeSinceEpoch ValidTo { get; set; }
+
+            /// <summary>
+            /// List of signed certificate timestamps (SCTs).
+            /// </summary>
+            [JsonProperty("signedCertificateTimestampList")]
+            public SignedCertificateTimestamp[] SignedCertificateTimestampList { get; set; }
+
+            /// <summary>
+            /// Whether the request complied with Certificate Transparency policy
+            /// </summary>
+            [JsonProperty("certificateTransparencyCompliance")]
+            public CertificateTransparencyCompliance CertificateTransparencyCompliance { get; set; }
         }
 
         /// <summary>
@@ -3906,25 +6179,120 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Response
         {
-            // public string
-            // public int
-            // public string
-            // public Headers
-            // public string
-            // public string
-            // public Headers
-            // public string
-            // public boolean
-            // public double
-            // public string
-            // public int
-            // public boolean
-            // public boolean
-            // public double
-            // public ResourceTiming
-            // public string
-            // public Security.SecurityState
-            // public SecurityDetails
+
+            /// <summary>
+            /// Response URL. This URL can be different from CachedResource.url in case of redirect.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// HTTP response status code.
+            /// </summary>
+            [JsonProperty("status")]
+            public int Status { get; set; }
+
+            /// <summary>
+            /// HTTP response status text.
+            /// </summary>
+            [JsonProperty("statusText")]
+            public string StatusText { get; set; }
+
+            /// <summary>
+            /// HTTP response headers.
+            /// </summary>
+            [JsonProperty("headers")]
+            public Headers Headers { get; set; }
+
+            /// <summary>
+            /// HTTP response headers text.
+            /// </summary>
+            [JsonProperty("headersText")]
+            public string HeadersText { get; set; }
+
+            /// <summary>
+            /// Resource mimeType as determined by the browser.
+            /// </summary>
+            [JsonProperty("mimeType")]
+            public string MimeType { get; set; }
+
+            /// <summary>
+            /// Refined HTTP request headers that were actually transmitted over the network.
+            /// </summary>
+            [JsonProperty("requestHeaders")]
+            public Headers RequestHeaders { get; set; }
+
+            /// <summary>
+            /// HTTP request headers text.
+            /// </summary>
+            [JsonProperty("requestHeadersText")]
+            public string RequestHeadersText { get; set; }
+
+            /// <summary>
+            /// Specifies whether physical connection was actually reused for this request.
+            /// </summary>
+            [JsonProperty("connectionReused")]
+            public bool ConnectionReused { get; set; }
+
+            /// <summary>
+            /// Physical connection id that was actually used for this request.
+            /// </summary>
+            [JsonProperty("connectionId")]
+            public double ConnectionId { get; set; }
+
+            /// <summary>
+            /// Remote IP address.
+            /// </summary>
+            [JsonProperty("remoteIPAddress")]
+            public string RemoteIPAddress { get; set; }
+
+            /// <summary>
+            /// Remote port.
+            /// </summary>
+            [JsonProperty("remotePort")]
+            public int RemotePort { get; set; }
+
+            /// <summary>
+            /// Specifies that the request was served from the disk cache.
+            /// </summary>
+            [JsonProperty("fromDiskCache")]
+            public bool FromDiskCache { get; set; }
+
+            /// <summary>
+            /// Specifies that the request was served from the ServiceWorker.
+            /// </summary>
+            [JsonProperty("fromServiceWorker")]
+            public bool FromServiceWorker { get; set; }
+
+            /// <summary>
+            /// Total number of bytes received for this request so far.
+            /// </summary>
+            [JsonProperty("encodedDataLength")]
+            public double EncodedDataLength { get; set; }
+
+            /// <summary>
+            /// Timing information for the given request.
+            /// </summary>
+            [JsonProperty("timing")]
+            public ResourceTiming Timing { get; set; }
+
+            /// <summary>
+            /// Protocol used to fetch this request.
+            /// </summary>
+            [JsonProperty("protocol")]
+            public string Protocol { get; set; }
+
+            /// <summary>
+            /// Security state of the request resource.
+            /// </summary>
+            [JsonProperty("securityState")]
+            public Security.SecurityState SecurityState { get; set; }
+
+            /// <summary>
+            /// Security details for the request.
+            /// </summary>
+            [JsonProperty("securityDetails")]
+            public SecurityDetails SecurityDetails { get; set; }
         }
 
         /// <summary>
@@ -3932,7 +6300,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class WebSocketRequest
         {
-            // public Headers
+
+            /// <summary>
+            /// HTTP request headers.
+            /// </summary>
+            [JsonProperty("headers")]
+            public Headers Headers { get; set; }
         }
 
         /// <summary>
@@ -3940,12 +6313,42 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class WebSocketResponse
         {
-            // public int
-            // public string
-            // public Headers
-            // public string
-            // public Headers
-            // public string
+
+            /// <summary>
+            /// HTTP response status code.
+            /// </summary>
+            [JsonProperty("status")]
+            public int Status { get; set; }
+
+            /// <summary>
+            /// HTTP response status text.
+            /// </summary>
+            [JsonProperty("statusText")]
+            public string StatusText { get; set; }
+
+            /// <summary>
+            /// HTTP response headers.
+            /// </summary>
+            [JsonProperty("headers")]
+            public Headers Headers { get; set; }
+
+            /// <summary>
+            /// HTTP response headers text.
+            /// </summary>
+            [JsonProperty("headersText")]
+            public string HeadersText { get; set; }
+
+            /// <summary>
+            /// HTTP request headers.
+            /// </summary>
+            [JsonProperty("requestHeaders")]
+            public Headers RequestHeaders { get; set; }
+
+            /// <summary>
+            /// HTTP request headers text.
+            /// </summary>
+            [JsonProperty("requestHeadersText")]
+            public string RequestHeadersText { get; set; }
         }
 
         /// <summary>
@@ -3953,9 +6356,26 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class WebSocketFrame
         {
-            // public double
-            // public boolean
-            // public string
+
+            /// <summary>
+            /// WebSocket message opcode.
+            /// </summary>
+            [JsonProperty("opcode")]
+            public double Opcode { get; set; }
+
+            /// <summary>
+            /// WebSocket message mask.
+            /// </summary>
+            [JsonProperty("mask")]
+            public bool Mask { get; set; }
+
+            /// <summary>
+            /// WebSocket message payload data.
+            /// If the opcode is 1, this is a text message and payloadData is a UTF-8 string.
+            /// If the opcode isn't 1, then payloadData is a base64 encoded string representing binary data.
+            /// </summary>
+            [JsonProperty("payloadData")]
+            public string PayloadData { get; set; }
         }
 
         /// <summary>
@@ -3963,10 +6383,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CachedResource
         {
-            // public string
-            // public ResourceType
-            // public Response
-            // public double
+
+            /// <summary>
+            /// Resource URL. This is the url of the original network request.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Type of this resource.
+            /// </summary>
+            [JsonProperty("type")]
+            public ResourceType Type { get; set; }
+
+            /// <summary>
+            /// Cached response data.
+            /// </summary>
+            [JsonProperty("response")]
+            public Response Response { get; set; }
+
+            /// <summary>
+            /// Cached response body size.
+            /// </summary>
+            [JsonProperty("bodySize")]
+            public double BodySize { get; set; }
         }
 
         /// <summary>
@@ -3974,10 +6414,31 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Initiator
         {
-            // public string
-            // public Runtime.StackTrace
-            // public string
-            // public double
+
+            /// <summary>
+            /// Type of this initiator.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// Initiator JavaScript stack trace, set for Script only.
+            /// </summary>
+            [JsonProperty("stack")]
+            public Runtime.StackTrace Stack { get; set; }
+
+            /// <summary>
+            /// Initiator URL, set for Parser type or for Script type (when script is importing module) or for SignedExchange type.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Initiator line number, set for Parser type or for Script type (when script is importing
+            /// module) (0-based).
+            /// </summary>
+            [JsonProperty("lineNumber")]
+            public double LineNumber { get; set; }
         }
 
         /// <summary>
@@ -3985,16 +6446,66 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Cookie
         {
-            // public string
-            // public string
-            // public string
-            // public string
-            // public double
-            // public int
-            // public boolean
-            // public boolean
-            // public boolean
-            // public CookieSameSite
+
+            /// <summary>
+            /// Cookie name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Cookie value.
+            /// </summary>
+            [JsonProperty("value")]
+            public string Value { get; set; }
+
+            /// <summary>
+            /// Cookie domain.
+            /// </summary>
+            [JsonProperty("domain")]
+            public string Domain { get; set; }
+
+            /// <summary>
+            /// Cookie path.
+            /// </summary>
+            [JsonProperty("path")]
+            public string Path { get; set; }
+
+            /// <summary>
+            /// Cookie expiration date as the number of seconds since the UNIX epoch.
+            /// </summary>
+            [JsonProperty("expires")]
+            public double Expires { get; set; }
+
+            /// <summary>
+            /// Cookie size.
+            /// </summary>
+            [JsonProperty("size")]
+            public int Size { get; set; }
+
+            /// <summary>
+            /// True if cookie is http-only.
+            /// </summary>
+            [JsonProperty("httpOnly")]
+            public bool HttpOnly { get; set; }
+
+            /// <summary>
+            /// True if cookie is secure.
+            /// </summary>
+            [JsonProperty("secure")]
+            public bool Secure { get; set; }
+
+            /// <summary>
+            /// True in case of session cookie.
+            /// </summary>
+            [JsonProperty("session")]
+            public bool Session { get; set; }
+
+            /// <summary>
+            /// Cookie SameSite type.
+            /// </summary>
+            [JsonProperty("sameSite")]
+            public CookieSameSite SameSite { get; set; }
         }
 
         /// <summary>
@@ -4002,15 +6513,61 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CookieParam
         {
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public boolean
-            // public boolean
-            // public CookieSameSite
-            // public TimeSinceEpoch
+
+            /// <summary>
+            /// Cookie name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Cookie value.
+            /// </summary>
+            [JsonProperty("value")]
+            public string Value { get; set; }
+
+            /// <summary>
+            /// The request-URI to associate with the setting of the cookie. This value can affect the
+            /// default domain and path values of the created cookie.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Cookie domain.
+            /// </summary>
+            [JsonProperty("domain")]
+            public string Domain { get; set; }
+
+            /// <summary>
+            /// Cookie path.
+            /// </summary>
+            [JsonProperty("path")]
+            public string Path { get; set; }
+
+            /// <summary>
+            /// True if cookie is secure.
+            /// </summary>
+            [JsonProperty("secure")]
+            public bool Secure { get; set; }
+
+            /// <summary>
+            /// True if cookie is http-only.
+            /// </summary>
+            [JsonProperty("httpOnly")]
+            public bool HttpOnly { get; set; }
+
+            /// <summary>
+            /// Cookie SameSite type.
+            /// </summary>
+            [JsonProperty("sameSite")]
+            public CookieSameSite SameSite { get; set; }
+
+            /// <summary>
+            /// Cookie expiration date, session cookie if not set
+            /// </summary>
+            [JsonProperty("expires")]
+            public TimeSinceEpoch Expires { get; set; }
         }
 
         /// <summary>
@@ -4018,10 +6575,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AuthChallenge
         {
-            // public string
-            // public string
-            // public string
-            // public string
+
+            /// <summary>
+            /// Source of the authentication challenge.
+            /// </summary>
+            [JsonProperty("source")]
+            public string Source { get; set; }
+
+            /// <summary>
+            /// Origin of the challenger.
+            /// </summary>
+            [JsonProperty("origin")]
+            public string Origin { get; set; }
+
+            /// <summary>
+            /// The authentication scheme used, such as basic or digest
+            /// </summary>
+            [JsonProperty("scheme")]
+            public string Scheme { get; set; }
+
+            /// <summary>
+            /// The realm of the challenge. May be empty.
+            /// </summary>
+            [JsonProperty("realm")]
+            public string Realm { get; set; }
         }
 
         /// <summary>
@@ -4029,9 +6606,28 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AuthChallengeResponse
         {
-            // public string
-            // public string
-            // public string
+
+            /// <summary>
+            /// The decision on what to do in response to the authorization challenge.  Default means
+            /// deferring to the default behavior of the net stack, which will likely either the Cancel
+            /// authentication or display a popup dialog box.
+            /// </summary>
+            [JsonProperty("response")]
+            public string Response { get; set; }
+
+            /// <summary>
+            /// The username to provide, possibly empty. Should only be set if response is
+            /// ProvideCredentials.
+            /// </summary>
+            [JsonProperty("username")]
+            public string Username { get; set; }
+
+            /// <summary>
+            /// The password to provide, possibly empty. Should only be set if response is
+            /// ProvideCredentials.
+            /// </summary>
+            [JsonProperty("password")]
+            public string Password { get; set; }
         }
 
         /// <summary>
@@ -4056,9 +6652,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class RequestPattern
         {
-            // public string
-            // public ResourceType
-            // public InterceptionStage
+
+            /// <summary>
+            /// Wildcards ('*' -&gt; zero or more, '?' -&gt; exactly one) are allowed. Escape character is
+            /// backslash. Omitting is equivalent to "*".
+            /// </summary>
+            [JsonProperty("urlPattern")]
+            public string UrlPattern { get; set; }
+
+            /// <summary>
+            /// If set, only requests for matching resource types will be intercepted.
+            /// </summary>
+            [JsonProperty("resourceType")]
+            public ResourceType ResourceType { get; set; }
+
+            /// <summary>
+            /// Stage at wich to begin intercepting requests. Default is Request.
+            /// </summary>
+            [JsonProperty("interceptionStage")]
+            public InterceptionStage InterceptionStage { get; set; }
         }
 
         /// <summary>
@@ -4067,15 +6679,60 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SignedExchangeSignature
         {
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public int
-            // public int
-            // public string[]
+
+            /// <summary>
+            /// Signed exchange signature label.
+            /// </summary>
+            [JsonProperty("label")]
+            public string Label { get; set; }
+
+            /// <summary>
+            /// The hex string of signed exchange signature.
+            /// </summary>
+            [JsonProperty("signature")]
+            public string Signature { get; set; }
+
+            /// <summary>
+            /// Signed exchange signature integrity.
+            /// </summary>
+            [JsonProperty("integrity")]
+            public string Integrity { get; set; }
+
+            /// <summary>
+            /// Signed exchange signature cert Url.
+            /// </summary>
+            [JsonProperty("certUrl")]
+            public string CertUrl { get; set; }
+
+            /// <summary>
+            /// The hex string of signed exchange signature cert sha256.
+            /// </summary>
+            [JsonProperty("certSha256")]
+            public string CertSha256 { get; set; }
+
+            /// <summary>
+            /// Signed exchange signature validity Url.
+            /// </summary>
+            [JsonProperty("validityUrl")]
+            public string ValidityUrl { get; set; }
+
+            /// <summary>
+            /// Signed exchange signature date.
+            /// </summary>
+            [JsonProperty("date")]
+            public int Date { get; set; }
+
+            /// <summary>
+            /// Signed exchange signature expires.
+            /// </summary>
+            [JsonProperty("expires")]
+            public int Expires { get; set; }
+
+            /// <summary>
+            /// The encoded certificates.
+            /// </summary>
+            [JsonProperty("certificates")]
+            public string[] Certificates { get; set; }
         }
 
         /// <summary>
@@ -4084,11 +6741,36 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SignedExchangeHeader
         {
-            // public string
-            // public string
-            // public int
-            // public Headers
-            // public SignedExchangeSignature[]
+
+            /// <summary>
+            /// Signed exchange request URL.
+            /// </summary>
+            [JsonProperty("requestUrl")]
+            public string RequestUrl { get; set; }
+
+            /// <summary>
+            /// Signed exchange request method.
+            /// </summary>
+            [JsonProperty("requestMethod")]
+            public string RequestMethod { get; set; }
+
+            /// <summary>
+            /// Signed exchange response code.
+            /// </summary>
+            [JsonProperty("responseCode")]
+            public int ResponseCode { get; set; }
+
+            /// <summary>
+            /// Signed exchange response headers.
+            /// </summary>
+            [JsonProperty("responseHeaders")]
+            public Headers ResponseHeaders { get; set; }
+
+            /// <summary>
+            /// Signed exchange response signature.
+            /// </summary>
+            [JsonProperty("signatures")]
+            public SignedExchangeSignature[] Signatures { get; set; }
         }
 
         /// <summary>
@@ -4116,9 +6798,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SignedExchangeError
         {
-            // public string
-            // public int
-            // public SignedExchangeErrorField
+
+            /// <summary>
+            /// Error message.
+            /// </summary>
+            [JsonProperty("message")]
+            public string Message { get; set; }
+
+            /// <summary>
+            /// The index of the signature which caused the error.
+            /// </summary>
+            [JsonProperty("signatureIndex")]
+            public int SignatureIndex { get; set; }
+
+            /// <summary>
+            /// The field which caused the error.
+            /// </summary>
+            [JsonProperty("errorField")]
+            public SignedExchangeErrorField ErrorField { get; set; }
         }
 
         /// <summary>
@@ -4126,10 +6823,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SignedExchangeInfo
         {
-            // public Response
-            // public SignedExchangeHeader
-            // public SecurityDetails
-            // public SignedExchangeError[]
+
+            /// <summary>
+            /// The outer response of signed HTTP exchange which was received from network.
+            /// </summary>
+            [JsonProperty("outerResponse")]
+            public Response OuterResponse { get; set; }
+
+            /// <summary>
+            /// Information about the signed exchange header.
+            /// </summary>
+            [JsonProperty("header")]
+            public SignedExchangeHeader Header { get; set; }
+
+            /// <summary>
+            /// Security details for the signed exchange header.
+            /// </summary>
+            [JsonProperty("securityDetails")]
+            public SecurityDetails SecurityDetails { get; set; }
+
+            /// <summary>
+            /// Errors occurred while handling the signed exchagne.
+            /// </summary>
+            [JsonProperty("errors")]
+            public SignedExchangeError[] Errors { get; set; }
         }
 
         /// <summary>
@@ -4429,19 +7146,84 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class HighlightConfig
         {
-            // public boolean
-            // public boolean
-            // public boolean
-            // public boolean
-            // public DOM.RGBA
-            // public DOM.RGBA
-            // public DOM.RGBA
-            // public DOM.RGBA
-            // public DOM.RGBA
-            // public DOM.RGBA
-            // public DOM.RGBA
-            // public string
-            // public DOM.RGBA
+
+            /// <summary>
+            /// Whether the node info tooltip should be shown (default: false).
+            /// </summary>
+            [JsonProperty("showInfo")]
+            public bool ShowInfo { get; set; }
+
+            /// <summary>
+            /// Whether the node styles in the tooltip (default: false).
+            /// </summary>
+            [JsonProperty("showStyles")]
+            public bool ShowStyles { get; set; }
+
+            /// <summary>
+            /// Whether the rulers should be shown (default: false).
+            /// </summary>
+            [JsonProperty("showRulers")]
+            public bool ShowRulers { get; set; }
+
+            /// <summary>
+            /// Whether the extension lines from node to the rulers should be shown (default: false).
+            /// </summary>
+            [JsonProperty("showExtensionLines")]
+            public bool ShowExtensionLines { get; set; }
+
+            /// <summary>
+            /// The content box highlight fill color (default: transparent).
+            /// </summary>
+            [JsonProperty("contentColor")]
+            public DOM.RGBA ContentColor { get; set; }
+
+            /// <summary>
+            /// The padding highlight fill color (default: transparent).
+            /// </summary>
+            [JsonProperty("paddingColor")]
+            public DOM.RGBA PaddingColor { get; set; }
+
+            /// <summary>
+            /// The border highlight fill color (default: transparent).
+            /// </summary>
+            [JsonProperty("borderColor")]
+            public DOM.RGBA BorderColor { get; set; }
+
+            /// <summary>
+            /// The margin highlight fill color (default: transparent).
+            /// </summary>
+            [JsonProperty("marginColor")]
+            public DOM.RGBA MarginColor { get; set; }
+
+            /// <summary>
+            /// The event target element highlight fill color (default: transparent).
+            /// </summary>
+            [JsonProperty("eventTargetColor")]
+            public DOM.RGBA EventTargetColor { get; set; }
+
+            /// <summary>
+            /// The shape outside fill color (default: transparent).
+            /// </summary>
+            [JsonProperty("shapeColor")]
+            public DOM.RGBA ShapeColor { get; set; }
+
+            /// <summary>
+            /// The shape margin fill color (default: transparent).
+            /// </summary>
+            [JsonProperty("shapeMarginColor")]
+            public DOM.RGBA ShapeMarginColor { get; set; }
+
+            /// <summary>
+            /// Selectors to highlight relevant nodes.
+            /// </summary>
+            [JsonProperty("selectorList")]
+            public string SelectorList { get; set; }
+
+            /// <summary>
+            /// The grid layout color (default: transparent).
+            /// </summary>
+            [JsonProperty("cssGridColor")]
+            public DOM.RGBA CssGridColor { get; set; }
         }
 
         public struct InspectMode : IEnum
@@ -4620,14 +7402,54 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Frame
         {
-            // public string
-            // public string
-            // public Network.LoaderId
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
+
+            /// <summary>
+            /// Frame unique identifier.
+            /// </summary>
+            [JsonProperty("id")]
+            public string Id { get; set; }
+
+            /// <summary>
+            /// Parent frame identifier.
+            /// </summary>
+            [JsonProperty("parentId")]
+            public string ParentId { get; set; }
+
+            /// <summary>
+            /// Identifier of the loader associated with this frame.
+            /// </summary>
+            [JsonProperty("loaderId")]
+            public Network.LoaderId LoaderId { get; set; }
+
+            /// <summary>
+            /// Frame's name as specified in the tag.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Frame document's URL.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Frame document's security origin.
+            /// </summary>
+            [JsonProperty("securityOrigin")]
+            public string SecurityOrigin { get; set; }
+
+            /// <summary>
+            /// Frame document's mimeType as determined by the browser.
+            /// </summary>
+            [JsonProperty("mimeType")]
+            public string MimeType { get; set; }
+
+            /// <summary>
+            /// If the frame failed to load, this contains the URL that could not be loaded.
+            /// </summary>
+            [JsonProperty("unreachableUrl")]
+            public string UnreachableUrl { get; set; }
         }
 
         /// <summary>
@@ -4635,13 +7457,48 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FrameResource
         {
-            // public string
-            // public Network.ResourceType
-            // public string
-            // public Network.TimeSinceEpoch
-            // public double
-            // public boolean
-            // public boolean
+
+            /// <summary>
+            /// Resource URL.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Type of this resource.
+            /// </summary>
+            [JsonProperty("type")]
+            public Network.ResourceType Type { get; set; }
+
+            /// <summary>
+            /// Resource mimeType as determined by the browser.
+            /// </summary>
+            [JsonProperty("mimeType")]
+            public string MimeType { get; set; }
+
+            /// <summary>
+            /// last-modified timestamp as reported by server.
+            /// </summary>
+            [JsonProperty("lastModified")]
+            public Network.TimeSinceEpoch LastModified { get; set; }
+
+            /// <summary>
+            /// Resource content size.
+            /// </summary>
+            [JsonProperty("contentSize")]
+            public double ContentSize { get; set; }
+
+            /// <summary>
+            /// True if the resource failed to load.
+            /// </summary>
+            [JsonProperty("failed")]
+            public bool Failed { get; set; }
+
+            /// <summary>
+            /// True if the resource was canceled during loading.
+            /// </summary>
+            [JsonProperty("canceled")]
+            public bool Canceled { get; set; }
         }
 
         /// <summary>
@@ -4649,9 +7506,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FrameResourceTree
         {
-            // public Frame
-            // public FrameResourceTree[]
-            // public FrameResource[]
+
+            /// <summary>
+            /// Frame information for this tree item.
+            /// </summary>
+            [JsonProperty("frame")]
+            public Frame Frame { get; set; }
+
+            /// <summary>
+            /// Child frames.
+            /// </summary>
+            [JsonProperty("childFrames")]
+            public FrameResourceTree[] ChildFrames { get; set; }
+
+            /// <summary>
+            /// Information about frame resources.
+            /// </summary>
+            [JsonProperty("resources")]
+            public FrameResource[] Resources { get; set; }
         }
 
         /// <summary>
@@ -4659,8 +7531,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FrameTree
         {
-            // public Frame
-            // public FrameTree[]
+
+            /// <summary>
+            /// Frame information for this tree item.
+            /// </summary>
+            [JsonProperty("frame")]
+            public Frame Frame { get; set; }
+
+            /// <summary>
+            /// Child frames.
+            /// </summary>
+            [JsonProperty("childFrames")]
+            public FrameTree[] ChildFrames { get; set; }
         }
 
         /// <summary>
@@ -4691,16 +7573,16 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
             public static TransitionType Link => new TransitionType("link");
             public static TransitionType Typed => new TransitionType("typed");
-            public static TransitionType Address_bar => new TransitionType("address_bar");
-            public static TransitionType Auto_bookmark => new TransitionType("auto_bookmark");
-            public static TransitionType Auto_subframe => new TransitionType("auto_subframe");
-            public static TransitionType Manual_subframe => new TransitionType("manual_subframe");
+            public static TransitionType AddressBar => new TransitionType("address_bar");
+            public static TransitionType AutoBookmark => new TransitionType("auto_bookmark");
+            public static TransitionType AutoSubframe => new TransitionType("auto_subframe");
+            public static TransitionType ManualSubframe => new TransitionType("manual_subframe");
             public static TransitionType Generated => new TransitionType("generated");
-            public static TransitionType Auto_toplevel => new TransitionType("auto_toplevel");
-            public static TransitionType Form_submit => new TransitionType("form_submit");
+            public static TransitionType AutoToplevel => new TransitionType("auto_toplevel");
+            public static TransitionType FormSubmit => new TransitionType("form_submit");
             public static TransitionType Reload => new TransitionType("reload");
             public static TransitionType Keyword => new TransitionType("keyword");
-            public static TransitionType Keyword_generated => new TransitionType("keyword_generated");
+            public static TransitionType KeywordGenerated => new TransitionType("keyword_generated");
             public static TransitionType Other => new TransitionType("other");
         }
 
@@ -4709,11 +7591,36 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class NavigationEntry
         {
-            // public int
-            // public string
-            // public string
-            // public string
-            // public TransitionType
+
+            /// <summary>
+            /// Unique id of the navigation history entry.
+            /// </summary>
+            [JsonProperty("id")]
+            public int Id { get; set; }
+
+            /// <summary>
+            /// URL of the navigation history entry.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// URL that the user typed in the url bar.
+            /// </summary>
+            [JsonProperty("userTypedURL")]
+            public string UserTypedURL { get; set; }
+
+            /// <summary>
+            /// Title of the navigation history entry.
+            /// </summary>
+            [JsonProperty("title")]
+            public string Title { get; set; }
+
+            /// <summary>
+            /// Transition type.
+            /// </summary>
+            [JsonProperty("transitionType")]
+            public TransitionType TransitionType { get; set; }
         }
 
         /// <summary>
@@ -4721,13 +7628,48 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScreencastFrameMetadata
         {
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public Network.TimeSinceEpoch
+
+            /// <summary>
+            /// Top offset in DIP.
+            /// </summary>
+            [JsonProperty("offsetTop")]
+            public double OffsetTop { get; set; }
+
+            /// <summary>
+            /// Page scale factor.
+            /// </summary>
+            [JsonProperty("pageScaleFactor")]
+            public double PageScaleFactor { get; set; }
+
+            /// <summary>
+            /// Device screen width in DIP.
+            /// </summary>
+            [JsonProperty("deviceWidth")]
+            public double DeviceWidth { get; set; }
+
+            /// <summary>
+            /// Device screen height in DIP.
+            /// </summary>
+            [JsonProperty("deviceHeight")]
+            public double DeviceHeight { get; set; }
+
+            /// <summary>
+            /// Position of horizontal scroll in CSS pixels.
+            /// </summary>
+            [JsonProperty("scrollOffsetX")]
+            public double ScrollOffsetX { get; set; }
+
+            /// <summary>
+            /// Position of vertical scroll in CSS pixels.
+            /// </summary>
+            [JsonProperty("scrollOffsetY")]
+            public double ScrollOffsetY { get; set; }
+
+            /// <summary>
+            /// Frame swap timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public Network.TimeSinceEpoch Timestamp { get; set; }
         }
 
         /// <summary>
@@ -4753,10 +7695,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class AppManifestError
         {
-            // public string
-            // public int
-            // public int
-            // public int
+
+            /// <summary>
+            /// Error message.
+            /// </summary>
+            [JsonProperty("message")]
+            public string Message { get; set; }
+
+            /// <summary>
+            /// If criticial, this is a non-recoverable parse error.
+            /// </summary>
+            [JsonProperty("critical")]
+            public int Critical { get; set; }
+
+            /// <summary>
+            /// Error line.
+            /// </summary>
+            [JsonProperty("line")]
+            public int Line { get; set; }
+
+            /// <summary>
+            /// Error column.
+            /// </summary>
+            [JsonProperty("column")]
+            public int Column { get; set; }
         }
 
         /// <summary>
@@ -4764,10 +7726,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class LayoutViewport
         {
-            // public int
-            // public int
-            // public int
-            // public int
+
+            /// <summary>
+            /// Horizontal offset relative to the document (CSS pixels).
+            /// </summary>
+            [JsonProperty("pageX")]
+            public int PageX { get; set; }
+
+            /// <summary>
+            /// Vertical offset relative to the document (CSS pixels).
+            /// </summary>
+            [JsonProperty("pageY")]
+            public int PageY { get; set; }
+
+            /// <summary>
+            /// Width (CSS pixels), excludes scrollbar if present.
+            /// </summary>
+            [JsonProperty("clientWidth")]
+            public int ClientWidth { get; set; }
+
+            /// <summary>
+            /// Height (CSS pixels), excludes scrollbar if present.
+            /// </summary>
+            [JsonProperty("clientHeight")]
+            public int ClientHeight { get; set; }
         }
 
         /// <summary>
@@ -4775,14 +7757,54 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class VisualViewport
         {
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
+
+            /// <summary>
+            /// Horizontal offset relative to the layout viewport (CSS pixels).
+            /// </summary>
+            [JsonProperty("offsetX")]
+            public double OffsetX { get; set; }
+
+            /// <summary>
+            /// Vertical offset relative to the layout viewport (CSS pixels).
+            /// </summary>
+            [JsonProperty("offsetY")]
+            public double OffsetY { get; set; }
+
+            /// <summary>
+            /// Horizontal offset relative to the document (CSS pixels).
+            /// </summary>
+            [JsonProperty("pageX")]
+            public double PageX { get; set; }
+
+            /// <summary>
+            /// Vertical offset relative to the document (CSS pixels).
+            /// </summary>
+            [JsonProperty("pageY")]
+            public double PageY { get; set; }
+
+            /// <summary>
+            /// Width (CSS pixels), excludes scrollbar if present.
+            /// </summary>
+            [JsonProperty("clientWidth")]
+            public double ClientWidth { get; set; }
+
+            /// <summary>
+            /// Height (CSS pixels), excludes scrollbar if present.
+            /// </summary>
+            [JsonProperty("clientHeight")]
+            public double ClientHeight { get; set; }
+
+            /// <summary>
+            /// Scale relative to the ideal viewport (size at width=device-width).
+            /// </summary>
+            [JsonProperty("scale")]
+            public double Scale { get; set; }
+
+            /// <summary>
+            /// Page zoom factor (CSS to device independent pixels ratio).
+            /// </summary>
+            [JsonProperty("zoom")]
+            public double Zoom { get; set; }
         }
 
         /// <summary>
@@ -4790,11 +7812,36 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Viewport
         {
-            // public double
-            // public double
-            // public double
-            // public double
-            // public double
+
+            /// <summary>
+            /// X offset in device independent pixels (dip).
+            /// </summary>
+            [JsonProperty("x")]
+            public double X { get; set; }
+
+            /// <summary>
+            /// Y offset in device independent pixels (dip).
+            /// </summary>
+            [JsonProperty("y")]
+            public double Y { get; set; }
+
+            /// <summary>
+            /// Rectangle width in device independent pixels (dip).
+            /// </summary>
+            [JsonProperty("width")]
+            public double Width { get; set; }
+
+            /// <summary>
+            /// Rectangle height in device independent pixels (dip).
+            /// </summary>
+            [JsonProperty("height")]
+            public double Height { get; set; }
+
+            /// <summary>
+            /// Page scale factor.
+            /// </summary>
+            [JsonProperty("scale")]
+            public double Scale { get; set; }
         }
 
         /// <summary>
@@ -4802,13 +7849,48 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FontFamilies
         {
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
-            // public string
+
+            /// <summary>
+            /// The standard font-family.
+            /// </summary>
+            [JsonProperty("standard")]
+            public string Standard { get; set; }
+
+            /// <summary>
+            /// The fixed font-family.
+            /// </summary>
+            [JsonProperty("fixed")]
+            public string Fixed { get; set; }
+
+            /// <summary>
+            /// The serif font-family.
+            /// </summary>
+            [JsonProperty("serif")]
+            public string Serif { get; set; }
+
+            /// <summary>
+            /// The sansSerif font-family.
+            /// </summary>
+            [JsonProperty("sansSerif")]
+            public string SansSerif { get; set; }
+
+            /// <summary>
+            /// The cursive font-family.
+            /// </summary>
+            [JsonProperty("cursive")]
+            public string Cursive { get; set; }
+
+            /// <summary>
+            /// The fantasy font-family.
+            /// </summary>
+            [JsonProperty("fantasy")]
+            public string Fantasy { get; set; }
+
+            /// <summary>
+            /// The pictograph font-family.
+            /// </summary>
+            [JsonProperty("pictograph")]
+            public string Pictograph { get; set; }
         }
 
         /// <summary>
@@ -4816,8 +7898,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FontSizes
         {
-            // public int
-            // public int
+
+            /// <summary>
+            /// Default standard font size.
+            /// </summary>
+            [JsonProperty("standard")]
+            public int Standard { get; set; }
+
+            /// <summary>
+            /// Default fixed font size.
+            /// </summary>
+            [JsonProperty("fixed")]
+            public int Fixed { get; set; }
         }
 
         /// <summary>
@@ -5313,8 +8405,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Metric
         {
-            // public string
-            // public double
+
+            /// <summary>
+            /// Metric name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Metric value.
+            /// </summary>
+            [JsonProperty("value")]
+            public double Value { get; set; }
         }
 
         /// <summary>
@@ -5418,13 +8520,48 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SecurityStateExplanation
         {
-            // public SecurityState
-            // public string
-            // public string
-            // public string
-            // public MixedContentType
-            // public string[]
-            // public string[]
+
+            /// <summary>
+            /// Security state representing the severity of the factor being explained.
+            /// </summary>
+            [JsonProperty("securityState")]
+            public SecurityState SecurityState { get; set; }
+
+            /// <summary>
+            /// Title describing the type of factor.
+            /// </summary>
+            [JsonProperty("title")]
+            public string Title { get; set; }
+
+            /// <summary>
+            /// Short phrase describing the type of factor.
+            /// </summary>
+            [JsonProperty("summary")]
+            public string Summary { get; set; }
+
+            /// <summary>
+            /// Full text explanation of the factor.
+            /// </summary>
+            [JsonProperty("description")]
+            public string Description { get; set; }
+
+            /// <summary>
+            /// The type of mixed content described by the explanation.
+            /// </summary>
+            [JsonProperty("mixedContentType")]
+            public MixedContentType MixedContentType { get; set; }
+
+            /// <summary>
+            /// Page certificate.
+            /// </summary>
+            [JsonProperty("certificate")]
+            public string[] Certificate { get; set; }
+
+            /// <summary>
+            /// Recommendations to fix any issues.
+            /// </summary>
+            [JsonProperty("recommendations")]
+            public string[] Recommendations { get; set; }
         }
 
         /// <summary>
@@ -5432,13 +8569,50 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class InsecureContentStatus
         {
-            // public boolean
-            // public boolean
-            // public boolean
-            // public boolean
-            // public boolean
-            // public SecurityState
-            // public SecurityState
+
+            /// <summary>
+            /// True if the page was loaded over HTTPS and ran mixed (HTTP) content such as scripts.
+            /// </summary>
+            [JsonProperty("ranMixedContent")]
+            public bool RanMixedContent { get; set; }
+
+            /// <summary>
+            /// True if the page was loaded over HTTPS and displayed mixed (HTTP) content such as images.
+            /// </summary>
+            [JsonProperty("displayedMixedContent")]
+            public bool DisplayedMixedContent { get; set; }
+
+            /// <summary>
+            /// True if the page was loaded over HTTPS and contained a form targeting an insecure url.
+            /// </summary>
+            [JsonProperty("containedMixedForm")]
+            public bool ContainedMixedForm { get; set; }
+
+            /// <summary>
+            /// True if the page was loaded over HTTPS without certificate errors, and ran content such as
+            /// scripts that were loaded with certificate errors.
+            /// </summary>
+            [JsonProperty("ranContentWithCertErrors")]
+            public bool RanContentWithCertErrors { get; set; }
+
+            /// <summary>
+            /// True if the page was loaded over HTTPS without certificate errors, and displayed content
+            /// such as images that were loaded with certificate errors.
+            /// </summary>
+            [JsonProperty("displayedContentWithCertErrors")]
+            public bool DisplayedContentWithCertErrors { get; set; }
+
+            /// <summary>
+            /// Security state representing a page that ran insecure content.
+            /// </summary>
+            [JsonProperty("ranInsecureContentStyle")]
+            public SecurityState RanInsecureContentStyle { get; set; }
+
+            /// <summary>
+            /// Security state representing a page that displayed insecure content.
+            /// </summary>
+            [JsonProperty("displayedInsecureContentStyle")]
+            public SecurityState DisplayedInsecureContentStyle { get; set; }
         }
 
         /// <summary>
@@ -5510,9 +8684,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ServiceWorkerRegistration
         {
-            // public string
-            // public string
-            // public boolean
+
+            [JsonProperty("registrationId")]
+            public string RegistrationId { get; set; }
+
+            [JsonProperty("scopeURL")]
+            public string ScopeURL { get; set; }
+
+            [JsonProperty("isDeleted")]
+            public bool IsDeleted { get; set; }
         }
 
         public struct ServiceWorkerVersionRunningStatus : IEnum
@@ -5552,15 +8732,40 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ServiceWorkerVersion
         {
-            // public string
-            // public string
-            // public string
-            // public ServiceWorkerVersionRunningStatus
-            // public ServiceWorkerVersionStatus
-            // public double
-            // public double
-            // public Target.TargetID[]
-            // public Target.TargetID
+
+            [JsonProperty("versionId")]
+            public string VersionId { get; set; }
+
+            [JsonProperty("registrationId")]
+            public string RegistrationId { get; set; }
+
+            [JsonProperty("scriptURL")]
+            public string ScriptURL { get; set; }
+
+            [JsonProperty("runningStatus")]
+            public ServiceWorkerVersionRunningStatus RunningStatus { get; set; }
+
+            [JsonProperty("status")]
+            public ServiceWorkerVersionStatus Status { get; set; }
+
+            /// <summary>
+            /// The Last-Modified header value of the main script.
+            /// </summary>
+            [JsonProperty("scriptLastModified")]
+            public double ScriptLastModified { get; set; }
+
+            /// <summary>
+            /// The time at which the response headers of the main script were received from the server.
+            /// For cached script it is the last time the cache entry was validated.
+            /// </summary>
+            [JsonProperty("scriptResponseTime")]
+            public double ScriptResponseTime { get; set; }
+
+            [JsonProperty("controlledClients")]
+            public Target.TargetID[] ControlledClients { get; set; }
+
+            [JsonProperty("targetId")]
+            public Target.TargetID TargetId { get; set; }
         }
 
         /// <summary>
@@ -5568,12 +8773,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ServiceWorkerErrorMessage
         {
-            // public string
-            // public string
-            // public string
-            // public string
-            // public int
-            // public int
+
+            [JsonProperty("errorMessage")]
+            public string ErrorMessage { get; set; }
+
+            [JsonProperty("registrationId")]
+            public string RegistrationId { get; set; }
+
+            [JsonProperty("versionId")]
+            public string VersionId { get; set; }
+
+            [JsonProperty("sourceURL")]
+            public string SourceURL { get; set; }
+
+            [JsonProperty("lineNumber")]
+            public int LineNumber { get; set; }
+
+            [JsonProperty("columnNumber")]
+            public int ColumnNumber { get; set; }
         }
 
         public class DeliverPushMessageCommand : ICommand
@@ -5654,13 +8871,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
             public static StorageType Appcache => new StorageType("appcache");
             public static StorageType Cookies => new StorageType("cookies");
-            public static StorageType File_systems => new StorageType("file_systems");
+            public static StorageType FileSystems => new StorageType("file_systems");
             public static StorageType Indexeddb => new StorageType("indexeddb");
-            public static StorageType Local_storage => new StorageType("local_storage");
-            public static StorageType Shader_cache => new StorageType("shader_cache");
+            public static StorageType LocalStorage => new StorageType("local_storage");
+            public static StorageType ShaderCache => new StorageType("shader_cache");
             public static StorageType Websql => new StorageType("websql");
-            public static StorageType Service_workers => new StorageType("service_workers");
-            public static StorageType Cache_storage => new StorageType("cache_storage");
+            public static StorageType ServiceWorkers => new StorageType("service_workers");
+            public static StorageType CacheStorage => new StorageType("cache_storage");
             public static StorageType All => new StorageType("all");
             public static StorageType Other => new StorageType("other");
         }
@@ -5670,8 +8887,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class UsageForType
         {
-            // public StorageType
-            // public double
+
+            /// <summary>
+            /// Name of storage type.
+            /// </summary>
+            [JsonProperty("storageType")]
+            public StorageType StorageType { get; set; }
+
+            /// <summary>
+            /// Storage usage (bytes).
+            /// </summary>
+            [JsonProperty("usage")]
+            public double Usage { get; set; }
         }
 
         /// <summary>
@@ -5683,4 +8910,811 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         }
 
         /// <summary>
-        /
+        /// Returns usage and quota in bytes.
+        /// </summary>
+        public class GetUsageAndQuotaCommand : ICommand<GetUsageAndQuotaResponse>
+        {
+            string ICommand.Name { get; } = "Storage.getUsageAndQuota";
+        }
+
+        public class GetUsageAndQuotaResponse
+        {
+        }
+
+        /// <summary>
+        /// Registers origin to be notified when an update occurs to its cache storage list.
+        /// </summary>
+        public class TrackCacheStorageForOriginCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Storage.trackCacheStorageForOrigin";
+        }
+
+        /// <summary>
+        /// Registers origin to be notified when an update occurs to its IndexedDB.
+        /// </summary>
+        public class TrackIndexedDBForOriginCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Storage.trackIndexedDBForOrigin";
+        }
+
+        /// <summary>
+        /// Unregisters origin from receiving notifications for cache storage.
+        /// </summary>
+        public class UntrackCacheStorageForOriginCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Storage.untrackCacheStorageForOrigin";
+        }
+
+        /// <summary>
+        /// Unregisters origin from receiving notifications for IndexedDB.
+        /// </summary>
+        public class UntrackIndexedDBForOriginCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Storage.untrackIndexedDBForOrigin";
+        }
+    }
+
+    /// <summary>
+    /// The SystemInfo domain defines methods and events for querying low-level system information.
+    /// </summary>
+    namespace SystemInfo
+    {
+
+        /// <summary>
+        /// Describes a single graphics processor (GPU).
+        /// </summary>
+        public class GPUDevice
+        {
+
+            /// <summary>
+            /// PCI ID of the GPU vendor, if available; 0 otherwise.
+            /// </summary>
+            [JsonProperty("vendorId")]
+            public double VendorId { get; set; }
+
+            /// <summary>
+            /// PCI ID of the GPU device, if available; 0 otherwise.
+            /// </summary>
+            [JsonProperty("deviceId")]
+            public double DeviceId { get; set; }
+
+            /// <summary>
+            /// String description of the GPU vendor, if the PCI ID is not available.
+            /// </summary>
+            [JsonProperty("vendorString")]
+            public string VendorString { get; set; }
+
+            /// <summary>
+            /// String description of the GPU device, if the PCI ID is not available.
+            /// </summary>
+            [JsonProperty("deviceString")]
+            public string DeviceString { get; set; }
+        }
+
+        /// <summary>
+        /// Provides information about the GPU(s) on the system.
+        /// </summary>
+        public class GPUInfo
+        {
+
+            /// <summary>
+            /// The graphics devices on the system. Element 0 is the primary GPU.
+            /// </summary>
+            [JsonProperty("devices")]
+            public GPUDevice[] Devices { get; set; }
+
+            /// <summary>
+            /// An optional dictionary of additional GPU related attributes.
+            /// </summary>
+            [JsonProperty("auxAttributes")]
+            public object AuxAttributes { get; set; }
+
+            /// <summary>
+            /// An optional dictionary of graphics features and their status.
+            /// </summary>
+            [JsonProperty("featureStatus")]
+            public object FeatureStatus { get; set; }
+
+            /// <summary>
+            /// An optional array of GPU driver bug workarounds.
+            /// </summary>
+            [JsonProperty("driverBugWorkarounds")]
+            public string[] DriverBugWorkarounds { get; set; }
+        }
+
+        /// <summary>
+        /// Represents process info.
+        /// </summary>
+        public class ProcessInfo
+        {
+
+            /// <summary>
+            /// Specifies process type.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// Specifies process id.
+            /// </summary>
+            [JsonProperty("id")]
+            public int Id { get; set; }
+
+            /// <summary>
+            /// Specifies cumulative CPU usage in seconds across all threads of the
+            /// process since the process start.
+            /// </summary>
+            [JsonProperty("cpuTime")]
+            public double CpuTime { get; set; }
+        }
+
+        /// <summary>
+        /// Returns information about the system.
+        /// </summary>
+        public class GetInfoCommand : ICommand<GetInfoResponse>
+        {
+            string ICommand.Name { get; } = "SystemInfo.getInfo";
+        }
+
+        public class GetInfoResponse
+        {
+        }
+
+        /// <summary>
+        /// Returns information about all running processes.
+        /// </summary>
+        public class GetProcessInfoCommand : ICommand<GetProcessInfoResponse>
+        {
+            string ICommand.Name { get; } = "SystemInfo.getProcessInfo";
+        }
+
+        public class GetProcessInfoResponse
+        {
+        }
+    }
+
+    /// <summary>
+    /// Supports additional targets discovery and allows to attach to them.
+    /// </summary>
+    namespace Target
+    {
+
+        public struct TargetID : IAlias<string>
+        {
+            public string Value { get; private set; }
+
+            public TargetID(string value)
+            {
+                Value = value;
+            }
+
+        }
+
+        /// <summary>
+        /// Unique identifier of attached debugging session.
+        /// </summary>
+        public struct SessionID : IAlias<string>
+        {
+            public string Value { get; private set; }
+
+            public SessionID(string value)
+            {
+                Value = value;
+            }
+
+        }
+
+        public struct BrowserContextID : IAlias<string>
+        {
+            public string Value { get; private set; }
+
+            public BrowserContextID(string value)
+            {
+                Value = value;
+            }
+
+        }
+
+        public class TargetInfo
+        {
+
+            [JsonProperty("targetId")]
+            public TargetID TargetId { get; set; }
+
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            [JsonProperty("title")]
+            public string Title { get; set; }
+
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Whether the target has an attached client.
+            /// </summary>
+            [JsonProperty("attached")]
+            public bool Attached { get; set; }
+
+            /// <summary>
+            /// Opener target Id
+            /// </summary>
+            [JsonProperty("openerId")]
+            public TargetID OpenerId { get; set; }
+
+            [JsonProperty("browserContextId")]
+            public BrowserContextID BrowserContextId { get; set; }
+        }
+
+        public class RemoteLocation
+        {
+
+            [JsonProperty("host")]
+            public string Host { get; set; }
+
+            [JsonProperty("port")]
+            public int Port { get; set; }
+        }
+
+        /// <summary>
+        /// Activates (focuses) the target.
+        /// </summary>
+        public class ActivateTargetCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Target.activateTarget";
+        }
+
+        /// <summary>
+        /// Attaches to the target with given id.
+        /// </summary>
+        public class AttachToTargetCommand : ICommand<AttachToTargetResponse>
+        {
+            string ICommand.Name { get; } = "Target.attachToTarget";
+        }
+
+        public class AttachToTargetResponse
+        {
+        }
+
+        /// <summary>
+        /// Attaches to the browser target, only uses flat sessionId mode.
+        /// </summary>
+        public class AttachToBrowserTargetCommand : ICommand<AttachToBrowserTargetResponse>
+        {
+            string ICommand.Name { get; } = "Target.attachToBrowserTarget";
+        }
+
+        public class AttachToBrowserTargetResponse
+        {
+        }
+
+        /// <summary>
+        /// Closes the target. If the target is a page that gets closed too.
+        /// </summary>
+        public class CloseTargetCommand : ICommand<CloseTargetResponse>
+        {
+            string ICommand.Name { get; } = "Target.closeTarget";
+        }
+
+        public class CloseTargetResponse
+        {
+        }
+
+        /// <summary>
+        /// Inject object to the target's main frame that provides a communication
+        /// channel with browser target.
+        /// 
+        /// Injected object will be available as `window[bindingName]`.
+        /// 
+        /// The object has the follwing API:
+        /// - `binding.send(json)` - a method to send messages over the remote debugging protocol
+        /// - `binding.onmessage = json =&gt; handleMessage(json)` - a callback that will be called for the protocol notifications and command responses.
+        /// </summary>
+        public class ExposeDevToolsProtocolCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Target.exposeDevToolsProtocol";
+        }
+
+        /// <summary>
+        /// Creates a new empty BrowserContext. Similar to an incognito profile but you can have more than
+        /// one.
+        /// </summary>
+        public class CreateBrowserContextCommand : ICommand<CreateBrowserContextResponse>
+        {
+            string ICommand.Name { get; } = "Target.createBrowserContext";
+        }
+
+        public class CreateBrowserContextResponse
+        {
+        }
+
+        /// <summary>
+        /// Returns all browser contexts created with `Target.createBrowserContext` method.
+        /// </summary>
+        public class GetBrowserContextsCommand : ICommand<GetBrowserContextsResponse>
+        {
+            string ICommand.Name { get; } = "Target.getBrowserContexts";
+        }
+
+        public class GetBrowserContextsResponse
+        {
+        }
+
+        /// <summary>
+        /// Creates a new page.
+        /// </summary>
+        public class CreateTargetCommand : ICommand<CreateTargetResponse>
+        {
+            string ICommand.Name { get; } = "Target.createTarget";
+        }
+
+        public class CreateTargetResponse
+        {
+        }
+
+        /// <summary>
+        /// Detaches session with given id.
+        /// </summary>
+        public class DetachFromTargetCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Target.detachFromTarget";
+        }
+
+        /// <summary>
+        /// Deletes a BrowserContext. All the belonging pages will be closed without calling their
+        /// beforeunload hooks.
+        /// </summary>
+        public class DisposeBrowserContextCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Target.disposeBrowserContext";
+        }
+
+        /// <summary>
+        /// Returns information about a target.
+        /// </summary>
+        public class GetTargetInfoCommand : ICommand<GetTargetInfoResponse>
+        {
+            string ICommand.Name { get; } = "Target.getTargetInfo";
+        }
+
+        public class GetTargetInfoResponse
+        {
+        }
+
+        /// <summary>
+        /// Retrieves a list of available targets.
+        /// </summary>
+        public class GetTargetsCommand : ICommand<GetTargetsResponse>
+        {
+            string ICommand.Name { get; } = "Target.getTargets";
+        }
+
+        public class GetTargetsResponse
+        {
+        }
+
+        /// <summary>
+        /// Sends protocol message over session with given id.
+        /// </summary>
+        public class SendMessageToTargetCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Target.sendMessageToTarget";
+        }
+
+        /// <summary>
+        /// Controls whether to automatically attach to new targets which are considered to be related to
+        /// this one. When turned on, attaches to all existing related targets as well. When turned off,
+        /// automatically detaches from all currently attached targets.
+        /// </summary>
+        public class SetAutoAttachCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Target.setAutoAttach";
+        }
+
+        /// <summary>
+        /// Controls whether to discover available targets and notify via
+        /// `targetCreated/targetInfoChanged/targetDestroyed` events.
+        /// </summary>
+        public class SetDiscoverTargetsCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Target.setDiscoverTargets";
+        }
+
+        /// <summary>
+        /// Enables target discovery for the specified locations, when `setDiscoverTargets` was set to
+        /// `true`.
+        /// </summary>
+        public class SetRemoteLocationsCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Target.setRemoteLocations";
+        }
+    }
+
+    /// <summary>
+    /// The Tethering domain defines methods and events for browser port binding.
+    /// </summary>
+    namespace Tethering
+    {
+
+        /// <summary>
+        /// Request browser port binding.
+        /// </summary>
+        public class BindCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Tethering.bind";
+        }
+
+        /// <summary>
+        /// Request browser port unbinding.
+        /// </summary>
+        public class UnbindCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Tethering.unbind";
+        }
+    }
+
+    namespace Tracing
+    {
+
+        /// <summary>
+        /// Configuration for memory dump. Used only when "memory-infra" category is enabled.
+        /// </summary>
+        public class MemoryDumpConfig : Dictionary<string, object>
+        {
+        }
+
+        public class TraceConfig
+        {
+
+            /// <summary>
+            /// Controls how the trace buffer stores data.
+            /// </summary>
+            [JsonProperty("recordMode")]
+            public string RecordMode { get; set; }
+
+            /// <summary>
+            /// Turns on JavaScript stack sampling.
+            /// </summary>
+            [JsonProperty("enableSampling")]
+            public bool EnableSampling { get; set; }
+
+            /// <summary>
+            /// Turns on system tracing.
+            /// </summary>
+            [JsonProperty("enableSystrace")]
+            public bool EnableSystrace { get; set; }
+
+            /// <summary>
+            /// Turns on argument filter.
+            /// </summary>
+            [JsonProperty("enableArgumentFilter")]
+            public bool EnableArgumentFilter { get; set; }
+
+            /// <summary>
+            /// Included category filters.
+            /// </summary>
+            [JsonProperty("includedCategories")]
+            public string[] IncludedCategories { get; set; }
+
+            /// <summary>
+            /// Excluded category filters.
+            /// </summary>
+            [JsonProperty("excludedCategories")]
+            public string[] ExcludedCategories { get; set; }
+
+            /// <summary>
+            /// Configuration to synthesize the delays in tracing.
+            /// </summary>
+            [JsonProperty("syntheticDelays")]
+            public string[] SyntheticDelays { get; set; }
+
+            /// <summary>
+            /// Configuration for memory dump triggers. Used only when "memory-infra" category is enabled.
+            /// </summary>
+            [JsonProperty("memoryDumpConfig")]
+            public MemoryDumpConfig MemoryDumpConfig { get; set; }
+        }
+
+        /// <summary>
+        /// Compression type to use for traces returned via streams.
+        /// </summary>
+        public struct StreamCompression : IEnum
+        {
+            public string Value { get; private set; }
+
+            public StreamCompression(string value)
+            {
+                Value = value;
+            }
+
+            public static StreamCompression None => new StreamCompression("none");
+            public static StreamCompression Gzip => new StreamCompression("gzip");
+        }
+
+        /// <summary>
+        /// Stop trace events collection.
+        /// </summary>
+        public class EndCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Tracing.end";
+        }
+
+        /// <summary>
+        /// Gets supported tracing categories.
+        /// </summary>
+        public class GetCategoriesCommand : ICommand<GetCategoriesResponse>
+        {
+            string ICommand.Name { get; } = "Tracing.getCategories";
+        }
+
+        public class GetCategoriesResponse
+        {
+        }
+
+        /// <summary>
+        /// Record a clock sync marker in the trace.
+        /// </summary>
+        public class RecordClockSyncMarkerCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Tracing.recordClockSyncMarker";
+        }
+
+        /// <summary>
+        /// Request a global memory dump.
+        /// </summary>
+        public class RequestMemoryDumpCommand : ICommand<RequestMemoryDumpResponse>
+        {
+            string ICommand.Name { get; } = "Tracing.requestMemoryDump";
+        }
+
+        public class RequestMemoryDumpResponse
+        {
+        }
+
+        /// <summary>
+        /// Start trace events collection.
+        /// </summary>
+        public class StartCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Tracing.start";
+        }
+    }
+
+    /// <summary>
+    /// Testing domain is a dumping ground for the capabilities requires for browser or app testing that do not fit other
+    /// domains.
+    /// </summary>
+    namespace Testing
+    {
+
+        /// <summary>
+        /// Generates a report for testing.
+        /// </summary>
+        public class GenerateTestReportCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Testing.generateTestReport";
+        }
+    }
+
+    /// <summary>
+    /// A domain for letting clients substitute browser's network layer with client code.
+    /// </summary>
+    namespace Fetch
+    {
+
+        /// <summary>
+        /// Unique request identifier.
+        /// </summary>
+        public struct RequestId : IAlias<string>
+        {
+            public string Value { get; private set; }
+
+            public RequestId(string value)
+            {
+                Value = value;
+            }
+
+        }
+
+        /// <summary>
+        /// Stages of the request to handle. Request will intercept before the request is
+        /// sent. Response will intercept after the response is received (but before response
+        /// body is received.
+        /// </summary>
+        public struct RequestStage : IEnum
+        {
+            public string Value { get; private set; }
+
+            public RequestStage(string value)
+            {
+                Value = value;
+            }
+
+            public static RequestStage Request => new RequestStage("Request");
+            public static RequestStage Response => new RequestStage("Response");
+        }
+
+        public class RequestPattern
+        {
+
+            /// <summary>
+            /// Wildcards ('*' -&gt; zero or more, '?' -&gt; exactly one) are allowed. Escape character is
+            /// backslash. Omitting is equivalent to "*".
+            /// </summary>
+            [JsonProperty("urlPattern")]
+            public string UrlPattern { get; set; }
+
+            /// <summary>
+            /// If set, only requests for matching resource types will be intercepted.
+            /// </summary>
+            [JsonProperty("resourceType")]
+            public Network.ResourceType ResourceType { get; set; }
+
+            /// <summary>
+            /// Stage at wich to begin intercepting requests. Default is Request.
+            /// </summary>
+            [JsonProperty("requestStage")]
+            public RequestStage RequestStage { get; set; }
+        }
+
+        /// <summary>
+        /// Response HTTP header entry
+        /// </summary>
+        public class HeaderEntry
+        {
+
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("value")]
+            public string Value { get; set; }
+        }
+
+        /// <summary>
+        /// Authorization challenge for HTTP status code 401 or 407.
+        /// </summary>
+        public class AuthChallenge
+        {
+
+            /// <summary>
+            /// Source of the authentication challenge.
+            /// </summary>
+            [JsonProperty("source")]
+            public string Source { get; set; }
+
+            /// <summary>
+            /// Origin of the challenger.
+            /// </summary>
+            [JsonProperty("origin")]
+            public string Origin { get; set; }
+
+            /// <summary>
+            /// The authentication scheme used, such as basic or digest
+            /// </summary>
+            [JsonProperty("scheme")]
+            public string Scheme { get; set; }
+
+            /// <summary>
+            /// The realm of the challenge. May be empty.
+            /// </summary>
+            [JsonProperty("realm")]
+            public string Realm { get; set; }
+        }
+
+        /// <summary>
+        /// Response to an AuthChallenge.
+        /// </summary>
+        public class AuthChallengeResponse
+        {
+
+            /// <summary>
+            /// The decision on what to do in response to the authorization challenge.  Default means
+            /// deferring to the default behavior of the net stack, which will likely either the Cancel
+            /// authentication or display a popup dialog box.
+            /// </summary>
+            [JsonProperty("response")]
+            public string Response { get; set; }
+
+            /// <summary>
+            /// The username to provide, possibly empty. Should only be set if response is
+            /// ProvideCredentials.
+            /// </summary>
+            [JsonProperty("username")]
+            public string Username { get; set; }
+
+            /// <summary>
+            /// The password to provide, possibly empty. Should only be set if response is
+            /// ProvideCredentials.
+            /// </summary>
+            [JsonProperty("password")]
+            public string Password { get; set; }
+        }
+
+        /// <summary>
+        /// Disables the fetch domain.
+        /// </summary>
+        public class DisableCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Fetch.disable";
+        }
+
+        /// <summary>
+        /// Enables issuing of requestPaused events. A request will be paused until client
+        /// calls one of failRequest, fulfillRequest or continueRequest/continueWithAuth.
+        /// </summary>
+        public class EnableCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Fetch.enable";
+        }
+
+        /// <summary>
+        /// Causes the request to fail with specified reason.
+        /// </summary>
+        public class FailRequestCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Fetch.failRequest";
+        }
+
+        /// <summary>
+        /// Provides response to the request.
+        /// </summary>
+        public class FulfillRequestCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Fetch.fulfillRequest";
+        }
+
+        /// <summary>
+        /// Continues the request, optionally modifying some of its parameters.
+        /// </summary>
+        public class ContinueRequestCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Fetch.continueRequest";
+        }
+
+        /// <summary>
+        /// Continues a request supplying authChallengeResponse following authRequired event.
+        /// </summary>
+        public class ContinueWithAuthCommand : ICommand
+        {
+            string ICommand.Name { get; } = "Fetch.continueWithAuth";
+        }
+
+        /// <summary>
+        /// Causes the body of the response to be received from the server and
+        /// returned as a single string. May only be issued for a request that
+        /// is paused in the Response stage and is mutually exclusive with
+        /// takeResponseBodyForInterceptionAsStream. Calling other methods that
+        /// affect the request or disabling fetch domain before body is received
+        /// results in an undefined behavior.
+        /// </summary>
+        public class GetResponseBodyCommand : ICommand<GetResponseBodyResponse>
+        {
+            string ICommand.Name { get; } = "Fetch.getResponseBody";
+        }
+
+        public class GetResponseBodyResponse
+        {
+        }
+
+        /// <summary>
+        /// Returns a handle to the stream representing the response body.
+        /// The request must be paused in the HeadersReceived stage.
+        /// Note that after this command the request can't be continued
+        /// as is -- client either needs to cancel it or to provide the
+        /// response body.
+        /// The stream only supports sequential read, IO.read will fail if the position
+        /// is specified.
+        /// This method is mutually exclusive with getResponseBody.
+        /// Calling other methods that affect the request or disabling fetch
+        /// domain before body is received results in an undefined behavior.
+        /// </summary>
+        public class TakeResponseBodyAsStreamCommand : ICommand<TakeResponseBodyAsStreamResponse>
+        {
+            string ICommand.Name { get; } = "Fetch.takeResponseBodyAsStream";
+        }
+
+        public class TakeResponseBodyAsStreamResponse
+        {
+        }
+    }
+}

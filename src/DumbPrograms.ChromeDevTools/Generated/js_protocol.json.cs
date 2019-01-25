@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace DumbPrograms.ChromeDevTools.Protocol
 {
@@ -14,12 +16,42 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ConsoleMessage
         {
-            // public string
-            // public string
-            // public string
-            // public string
-            // public int
-            // public int
+
+            /// <summary>
+            /// Message source.
+            /// </summary>
+            [JsonProperty("source")]
+            public string Source { get; set; }
+
+            /// <summary>
+            /// Message severity.
+            /// </summary>
+            [JsonProperty("level")]
+            public string Level { get; set; }
+
+            /// <summary>
+            /// Message text.
+            /// </summary>
+            [JsonProperty("text")]
+            public string Text { get; set; }
+
+            /// <summary>
+            /// URL of the message origin.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Line number in the resource that generated this message (1-based).
+            /// </summary>
+            [JsonProperty("line")]
+            public int Line { get; set; }
+
+            /// <summary>
+            /// Column number in the resource that generated this message (1-based).
+            /// </summary>
+            [JsonProperty("column")]
+            public int Column { get; set; }
         }
 
         /// <summary>
@@ -88,9 +120,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Location
         {
-            // public Runtime.ScriptId
-            // public int
-            // public int
+
+            /// <summary>
+            /// Script identifier as reported in the `Debugger.scriptParsed`.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public Runtime.ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// Line number in the script (0-based).
+            /// </summary>
+            [JsonProperty("lineNumber")]
+            public int LineNumber { get; set; }
+
+            /// <summary>
+            /// Column number in the script (0-based).
+            /// </summary>
+            [JsonProperty("columnNumber")]
+            public int ColumnNumber { get; set; }
         }
 
         /// <summary>
@@ -98,8 +145,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScriptPosition
         {
-            // public int
-            // public int
+
+            [JsonProperty("lineNumber")]
+            public int LineNumber { get; set; }
+
+            [JsonProperty("columnNumber")]
+            public int ColumnNumber { get; set; }
         }
 
         /// <summary>
@@ -107,14 +158,54 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CallFrame
         {
-            // public CallFrameId
-            // public string
-            // public Location
-            // public Location
-            // public string
-            // public Scope[]
-            // public Runtime.RemoteObject
-            // public Runtime.RemoteObject
+
+            /// <summary>
+            /// Call frame identifier. This identifier is only valid while the virtual machine is paused.
+            /// </summary>
+            [JsonProperty("callFrameId")]
+            public CallFrameId CallFrameId { get; set; }
+
+            /// <summary>
+            /// Name of the JavaScript function called on this call frame.
+            /// </summary>
+            [JsonProperty("functionName")]
+            public string FunctionName { get; set; }
+
+            /// <summary>
+            /// Location in the source code.
+            /// </summary>
+            [JsonProperty("functionLocation")]
+            public Location FunctionLocation { get; set; }
+
+            /// <summary>
+            /// Location in the source code.
+            /// </summary>
+            [JsonProperty("location")]
+            public Location Location { get; set; }
+
+            /// <summary>
+            /// JavaScript script name or url.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Scope chain for this call frame.
+            /// </summary>
+            [JsonProperty("scopeChain")]
+            public Scope[] ScopeChain { get; set; }
+
+            /// <summary>
+            /// `this` object for this call frame.
+            /// </summary>
+            [JsonProperty("this")]
+            public Runtime.RemoteObject This { get; set; }
+
+            /// <summary>
+            /// The value being returned, if the function is at return point.
+            /// </summary>
+            [JsonProperty("returnValue")]
+            public Runtime.RemoteObject ReturnValue { get; set; }
         }
 
         /// <summary>
@@ -122,11 +213,35 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Scope
         {
-            // public string
-            // public Runtime.RemoteObject
-            // public string
-            // public Location
-            // public Location
+
+            /// <summary>
+            /// Scope type.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// Object representing the scope. For `global` and `with` scopes it represents the actual
+            /// object; for the rest of the scopes, it is artificial transient object enumerating scope
+            /// variables as its properties.
+            /// </summary>
+            [JsonProperty("object")]
+            public Runtime.RemoteObject Object { get; set; }
+
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Location in the source code where scope starts
+            /// </summary>
+            [JsonProperty("startLocation")]
+            public Location StartLocation { get; set; }
+
+            /// <summary>
+            /// Location in the source code where scope ends
+            /// </summary>
+            [JsonProperty("endLocation")]
+            public Location EndLocation { get; set; }
         }
 
         /// <summary>
@@ -134,16 +249,43 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SearchMatch
         {
-            // public double
-            // public string
+
+            /// <summary>
+            /// Line number in resource content.
+            /// </summary>
+            [JsonProperty("lineNumber")]
+            public double LineNumber { get; set; }
+
+            /// <summary>
+            /// Line with match content.
+            /// </summary>
+            [JsonProperty("lineContent")]
+            public string LineContent { get; set; }
         }
 
         public class BreakLocation
         {
-            // public Runtime.ScriptId
-            // public int
-            // public int
-            // public string
+
+            /// <summary>
+            /// Script identifier as reported in the `Debugger.scriptParsed`.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public Runtime.ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// Line number in the script (0-based).
+            /// </summary>
+            [JsonProperty("lineNumber")]
+            public int LineNumber { get; set; }
+
+            /// <summary>
+            /// Column number in the script (0-based).
+            /// </summary>
+            [JsonProperty("columnNumber")]
+            public int ColumnNumber { get; set; }
+
+            [JsonProperty("type")]
+            public string Type { get; set; }
         }
 
         /// <summary>
@@ -448,10 +590,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SamplingHeapProfileNode
         {
-            // public Runtime.CallFrame
-            // public double
-            // public int
-            // public SamplingHeapProfileNode[]
+
+            /// <summary>
+            /// Function location.
+            /// </summary>
+            [JsonProperty("callFrame")]
+            public Runtime.CallFrame CallFrame { get; set; }
+
+            /// <summary>
+            /// Allocations size in bytes for the node excluding children.
+            /// </summary>
+            [JsonProperty("selfSize")]
+            public double SelfSize { get; set; }
+
+            /// <summary>
+            /// Node id. Ids are unique across all profiles collected between startSampling and stopSampling.
+            /// </summary>
+            [JsonProperty("id")]
+            public int Id { get; set; }
+
+            /// <summary>
+            /// Child nodes.
+            /// </summary>
+            [JsonProperty("children")]
+            public SamplingHeapProfileNode[] Children { get; set; }
         }
 
         /// <summary>
@@ -459,9 +621,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SamplingHeapProfileSample
         {
-            // public double
-            // public int
-            // public double
+
+            /// <summary>
+            /// Allocation size in bytes attributed to the sample.
+            /// </summary>
+            [JsonProperty("size")]
+            public double Size { get; set; }
+
+            /// <summary>
+            /// Id of the corresponding profile tree node.
+            /// </summary>
+            [JsonProperty("nodeId")]
+            public int NodeId { get; set; }
+
+            /// <summary>
+            /// Time-ordered sample ordinal number. It is unique across all profiles retrieved
+            /// between startSampling and stopSampling.
+            /// </summary>
+            [JsonProperty("ordinal")]
+            public double Ordinal { get; set; }
         }
 
         /// <summary>
@@ -469,8 +647,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class SamplingHeapProfile
         {
-            // public SamplingHeapProfileNode
-            // public SamplingHeapProfileSample[]
+
+            [JsonProperty("head")]
+            public SamplingHeapProfileNode Head { get; set; }
+
+            [JsonProperty("samples")]
+            public SamplingHeapProfileSample[] Samples { get; set; }
         }
 
         /// <summary>
@@ -562,12 +744,43 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ProfileNode
         {
-            // public int
-            // public Runtime.CallFrame
-            // public int
-            // public int[]
-            // public string
-            // public PositionTickInfo[]
+
+            /// <summary>
+            /// Unique id of the node.
+            /// </summary>
+            [JsonProperty("id")]
+            public int Id { get; set; }
+
+            /// <summary>
+            /// Function location.
+            /// </summary>
+            [JsonProperty("callFrame")]
+            public Runtime.CallFrame CallFrame { get; set; }
+
+            /// <summary>
+            /// Number of samples where this node was on top of the call stack.
+            /// </summary>
+            [JsonProperty("hitCount")]
+            public int HitCount { get; set; }
+
+            /// <summary>
+            /// Child node ids.
+            /// </summary>
+            [JsonProperty("children")]
+            public int[] Children { get; set; }
+
+            /// <summary>
+            /// The reason of being not optimized. The function may be deoptimized or marked as don't
+            /// optimize.
+            /// </summary>
+            [JsonProperty("deoptReason")]
+            public string DeoptReason { get; set; }
+
+            /// <summary>
+            /// An array of source position ticks.
+            /// </summary>
+            [JsonProperty("positionTicks")]
+            public PositionTickInfo[] PositionTicks { get; set; }
         }
 
         /// <summary>
@@ -575,11 +788,37 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Profile
         {
-            // public ProfileNode[]
-            // public double
-            // public double
-            // public int[]
-            // public int[]
+
+            /// <summary>
+            /// The list of profile nodes. First item is the root node.
+            /// </summary>
+            [JsonProperty("nodes")]
+            public ProfileNode[] Nodes { get; set; }
+
+            /// <summary>
+            /// Profiling start timestamp in microseconds.
+            /// </summary>
+            [JsonProperty("startTime")]
+            public double StartTime { get; set; }
+
+            /// <summary>
+            /// Profiling end timestamp in microseconds.
+            /// </summary>
+            [JsonProperty("endTime")]
+            public double EndTime { get; set; }
+
+            /// <summary>
+            /// Ids of samples top nodes.
+            /// </summary>
+            [JsonProperty("samples")]
+            public int[] Samples { get; set; }
+
+            /// <summary>
+            /// Time intervals between adjacent samples in microseconds. The first delta is relative to the
+            /// profile startTime.
+            /// </summary>
+            [JsonProperty("timeDeltas")]
+            public int[] TimeDeltas { get; set; }
         }
 
         /// <summary>
@@ -587,8 +826,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class PositionTickInfo
         {
-            // public int
-            // public int
+
+            /// <summary>
+            /// Source line number (1-based).
+            /// </summary>
+            [JsonProperty("line")]
+            public int Line { get; set; }
+
+            /// <summary>
+            /// Number of samples attributed to the source line.
+            /// </summary>
+            [JsonProperty("ticks")]
+            public int Ticks { get; set; }
         }
 
         /// <summary>
@@ -596,9 +845,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CoverageRange
         {
-            // public int
-            // public int
-            // public int
+
+            /// <summary>
+            /// JavaScript script source offset for the range start.
+            /// </summary>
+            [JsonProperty("startOffset")]
+            public int StartOffset { get; set; }
+
+            /// <summary>
+            /// JavaScript script source offset for the range end.
+            /// </summary>
+            [JsonProperty("endOffset")]
+            public int EndOffset { get; set; }
+
+            /// <summary>
+            /// Collected execution count of the source range.
+            /// </summary>
+            [JsonProperty("count")]
+            public int Count { get; set; }
         }
 
         /// <summary>
@@ -606,9 +870,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class FunctionCoverage
         {
-            // public string
-            // public CoverageRange[]
-            // public boolean
+
+            /// <summary>
+            /// JavaScript function name.
+            /// </summary>
+            [JsonProperty("functionName")]
+            public string FunctionName { get; set; }
+
+            /// <summary>
+            /// Source ranges inside the function with coverage data.
+            /// </summary>
+            [JsonProperty("ranges")]
+            public CoverageRange[] Ranges { get; set; }
+
+            /// <summary>
+            /// Whether coverage data for this function has block granularity.
+            /// </summary>
+            [JsonProperty("isBlockCoverage")]
+            public bool IsBlockCoverage { get; set; }
         }
 
         /// <summary>
@@ -616,9 +895,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScriptCoverage
         {
-            // public Runtime.ScriptId
-            // public string
-            // public FunctionCoverage[]
+
+            /// <summary>
+            /// JavaScript script id.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public Runtime.ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// JavaScript script name or url.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Functions contained in the script that has coverage data.
+            /// </summary>
+            [JsonProperty("functions")]
+            public FunctionCoverage[] Functions { get; set; }
         }
 
         /// <summary>
@@ -626,7 +920,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class TypeObject
         {
-            // public string
+
+            /// <summary>
+            /// Name of a type collected with type profiling.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
         }
 
         /// <summary>
@@ -634,8 +933,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class TypeProfileEntry
         {
-            // public int
-            // public TypeObject[]
+
+            /// <summary>
+            /// Source offset of the parameter or end of function for return values.
+            /// </summary>
+            [JsonProperty("offset")]
+            public int Offset { get; set; }
+
+            /// <summary>
+            /// The types for this parameter or return value.
+            /// </summary>
+            [JsonProperty("types")]
+            public TypeObject[] Types { get; set; }
         }
 
         /// <summary>
@@ -643,9 +952,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ScriptTypeProfile
         {
-            // public Runtime.ScriptId
-            // public string
-            // public TypeProfileEntry[]
+
+            /// <summary>
+            /// JavaScript script id.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public Runtime.ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// JavaScript script name or url.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Type profile entries for parameters and return values of the functions in the script.
+            /// </summary>
+            [JsonProperty("entries")]
+            public TypeProfileEntry[] Entries { get; set; }
         }
 
         public class DisableCommand : ICommand
@@ -812,21 +1136,77 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class RemoteObject
         {
-            // public string
-            // public string
-            // public string
-            // public object
-            // public UnserializableValue
-            // public string
-            // public RemoteObjectId
-            // public ObjectPreview
-            // public CustomPreview
+
+            /// <summary>
+            /// Object type.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// Object subtype hint. Specified for `object` type values only.
+            /// </summary>
+            [JsonProperty("subtype")]
+            public string Subtype { get; set; }
+
+            /// <summary>
+            /// Object class (constructor) name. Specified for `object` type values only.
+            /// </summary>
+            [JsonProperty("className")]
+            public string ClassName { get; set; }
+
+            /// <summary>
+            /// Remote object value in case of primitive values or JSON values (if it was requested).
+            /// </summary>
+            [JsonProperty("value")]
+            public object Value { get; set; }
+
+            /// <summary>
+            /// Primitive value which can not be JSON-stringified does not have `value`, but gets this
+            /// property.
+            /// </summary>
+            [JsonProperty("unserializableValue")]
+            public UnserializableValue UnserializableValue { get; set; }
+
+            /// <summary>
+            /// String representation of the object.
+            /// </summary>
+            [JsonProperty("description")]
+            public string Description { get; set; }
+
+            /// <summary>
+            /// Unique object identifier (for non-primitive values).
+            /// </summary>
+            [JsonProperty("objectId")]
+            public RemoteObjectId ObjectId { get; set; }
+
+            /// <summary>
+            /// Preview containing abbreviated property values. Specified for `object` type values only.
+            /// </summary>
+            [JsonProperty("preview")]
+            public ObjectPreview Preview { get; set; }
+
+            [JsonProperty("customPreview")]
+            public CustomPreview CustomPreview { get; set; }
         }
 
         public class CustomPreview
         {
-            // public string
-            // public RemoteObjectId
+
+            /// <summary>
+            /// The JSON-stringified result of formatter.header(object, config) call.
+            /// It contains json ML array that represents RemoteObject.
+            /// </summary>
+            [JsonProperty("header")]
+            public string Header { get; set; }
+
+            /// <summary>
+            /// If formatter returns true as a result of formatter.hasBody call then bodyGetterId will
+            /// contain RemoteObjectId for the function that returns result of formatter.body(object, config) call.
+            /// The result value is json ML array.
+            /// </summary>
+            [JsonProperty("bodyGetterId")]
+            public RemoteObjectId BodyGetterId { get; set; }
         }
 
         /// <summary>
@@ -834,27 +1214,92 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ObjectPreview
         {
-            // public string
-            // public string
-            // public string
-            // public boolean
-            // public PropertyPreview[]
-            // public EntryPreview[]
+
+            /// <summary>
+            /// Object type.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// Object subtype hint. Specified for `object` type values only.
+            /// </summary>
+            [JsonProperty("subtype")]
+            public string Subtype { get; set; }
+
+            /// <summary>
+            /// String representation of the object.
+            /// </summary>
+            [JsonProperty("description")]
+            public string Description { get; set; }
+
+            /// <summary>
+            /// True iff some of the properties or entries of the original object did not fit.
+            /// </summary>
+            [JsonProperty("overflow")]
+            public bool Overflow { get; set; }
+
+            /// <summary>
+            /// List of the properties.
+            /// </summary>
+            [JsonProperty("properties")]
+            public PropertyPreview[] Properties { get; set; }
+
+            /// <summary>
+            /// List of the entries. Specified for `map` and `set` subtype values only.
+            /// </summary>
+            [JsonProperty("entries")]
+            public EntryPreview[] Entries { get; set; }
         }
 
         public class PropertyPreview
         {
-            // public string
-            // public string
-            // public string
-            // public ObjectPreview
-            // public string
+
+            /// <summary>
+            /// Property name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Object type. Accessor means that the property itself is an accessor property.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// User-friendly property value string.
+            /// </summary>
+            [JsonProperty("value")]
+            public string Value { get; set; }
+
+            /// <summary>
+            /// Nested value preview.
+            /// </summary>
+            [JsonProperty("valuePreview")]
+            public ObjectPreview ValuePreview { get; set; }
+
+            /// <summary>
+            /// Object subtype hint. Specified for `object` type values only.
+            /// </summary>
+            [JsonProperty("subtype")]
+            public string Subtype { get; set; }
         }
 
         public class EntryPreview
         {
-            // public ObjectPreview
-            // public ObjectPreview
+
+            /// <summary>
+            /// Preview of the key. Specified for map-like collection entries.
+            /// </summary>
+            [JsonProperty("key")]
+            public ObjectPreview Key { get; set; }
+
+            /// <summary>
+            /// Preview of the value.
+            /// </summary>
+            [JsonProperty("value")]
+            public ObjectPreview Value { get; set; }
         }
 
         /// <summary>
@@ -862,16 +1307,70 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class PropertyDescriptor
         {
-            // public string
-            // public RemoteObject
-            // public boolean
-            // public RemoteObject
-            // public RemoteObject
-            // public boolean
-            // public boolean
-            // public boolean
-            // public boolean
-            // public RemoteObject
+
+            /// <summary>
+            /// Property name or symbol description.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// The value associated with the property.
+            /// </summary>
+            [JsonProperty("value")]
+            public RemoteObject Value { get; set; }
+
+            /// <summary>
+            /// True if the value associated with the property may be changed (data descriptors only).
+            /// </summary>
+            [JsonProperty("writable")]
+            public bool Writable { get; set; }
+
+            /// <summary>
+            /// A function which serves as a getter for the property, or `undefined` if there is no getter
+            /// (accessor descriptors only).
+            /// </summary>
+            [JsonProperty("get")]
+            public RemoteObject Get { get; set; }
+
+            /// <summary>
+            /// A function which serves as a setter for the property, or `undefined` if there is no setter
+            /// (accessor descriptors only).
+            /// </summary>
+            [JsonProperty("set")]
+            public RemoteObject Set { get; set; }
+
+            /// <summary>
+            /// True if the type of this property descriptor may be changed and if the property may be
+            /// deleted from the corresponding object.
+            /// </summary>
+            [JsonProperty("configurable")]
+            public bool Configurable { get; set; }
+
+            /// <summary>
+            /// True if this property shows up during enumeration of the properties on the corresponding
+            /// object.
+            /// </summary>
+            [JsonProperty("enumerable")]
+            public bool Enumerable { get; set; }
+
+            /// <summary>
+            /// True if the result was thrown during the evaluation.
+            /// </summary>
+            [JsonProperty("wasThrown")]
+            public bool WasThrown { get; set; }
+
+            /// <summary>
+            /// True if the property is owned for the object.
+            /// </summary>
+            [JsonProperty("isOwn")]
+            public bool IsOwn { get; set; }
+
+            /// <summary>
+            /// Property symbol object, if the property is of the `symbol` type.
+            /// </summary>
+            [JsonProperty("symbol")]
+            public RemoteObject Symbol { get; set; }
         }
 
         /// <summary>
@@ -879,8 +1378,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class InternalPropertyDescriptor
         {
-            // public string
-            // public RemoteObject
+
+            /// <summary>
+            /// Conventional property name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// The value associated with the property.
+            /// </summary>
+            [JsonProperty("value")]
+            public RemoteObject Value { get; set; }
         }
 
         /// <summary>
@@ -889,9 +1398,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CallArgument
         {
-            // public object
-            // public UnserializableValue
-            // public RemoteObjectId
+
+            /// <summary>
+            /// Primitive value or serializable javascript object.
+            /// </summary>
+            [JsonProperty("value")]
+            public object Value { get; set; }
+
+            /// <summary>
+            /// Primitive value which can not be JSON-stringified.
+            /// </summary>
+            [JsonProperty("unserializableValue")]
+            public UnserializableValue UnserializableValue { get; set; }
+
+            /// <summary>
+            /// Remote object handle.
+            /// </summary>
+            [JsonProperty("objectId")]
+            public RemoteObjectId ObjectId { get; set; }
         }
 
         /// <summary>
@@ -913,10 +1437,31 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ExecutionContextDescription
         {
-            // public ExecutionContextId
-            // public string
-            // public string
-            // public object
+
+            /// <summary>
+            /// Unique id of the execution context. It can be used to specify in which execution context
+            /// script evaluation should be performed.
+            /// </summary>
+            [JsonProperty("id")]
+            public ExecutionContextId Id { get; set; }
+
+            /// <summary>
+            /// Execution context origin.
+            /// </summary>
+            [JsonProperty("origin")]
+            public string Origin { get; set; }
+
+            /// <summary>
+            /// Human readable name describing given context.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Embedder-specific auxiliary data.
+            /// </summary>
+            [JsonProperty("auxData")]
+            public object AuxData { get; set; }
         }
 
         /// <summary>
@@ -925,15 +1470,60 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class ExceptionDetails
         {
-            // public int
-            // public string
-            // public int
-            // public int
-            // public ScriptId
-            // public string
-            // public StackTrace
-            // public RemoteObject
-            // public ExecutionContextId
+
+            /// <summary>
+            /// Exception id.
+            /// </summary>
+            [JsonProperty("exceptionId")]
+            public int ExceptionId { get; set; }
+
+            /// <summary>
+            /// Exception text, which should be used together with exception object when available.
+            /// </summary>
+            [JsonProperty("text")]
+            public string Text { get; set; }
+
+            /// <summary>
+            /// Line number of the exception location (0-based).
+            /// </summary>
+            [JsonProperty("lineNumber")]
+            public int LineNumber { get; set; }
+
+            /// <summary>
+            /// Column number of the exception location (0-based).
+            /// </summary>
+            [JsonProperty("columnNumber")]
+            public int ColumnNumber { get; set; }
+
+            /// <summary>
+            /// Script ID of the exception location.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// URL of the exception location, to be used when the script was not reported.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// JavaScript stack trace if available.
+            /// </summary>
+            [JsonProperty("stackTrace")]
+            public StackTrace StackTrace { get; set; }
+
+            /// <summary>
+            /// Exception object if available.
+            /// </summary>
+            [JsonProperty("exception")]
+            public RemoteObject Exception { get; set; }
+
+            /// <summary>
+            /// Identifier of the context where exception happened.
+            /// </summary>
+            [JsonProperty("executionContextId")]
+            public ExecutionContextId ExecutionContextId { get; set; }
         }
 
         /// <summary>
@@ -969,11 +1559,36 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class CallFrame
         {
-            // public string
-            // public ScriptId
-            // public string
-            // public int
-            // public int
+
+            /// <summary>
+            /// JavaScript function name.
+            /// </summary>
+            [JsonProperty("functionName")]
+            public string FunctionName { get; set; }
+
+            /// <summary>
+            /// JavaScript script id.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// JavaScript script name or url.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// JavaScript script line number (0-based).
+            /// </summary>
+            [JsonProperty("lineNumber")]
+            public int LineNumber { get; set; }
+
+            /// <summary>
+            /// JavaScript script column number (0-based).
+            /// </summary>
+            [JsonProperty("columnNumber")]
+            public int ColumnNumber { get; set; }
         }
 
         /// <summary>
@@ -981,10 +1596,31 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class StackTrace
         {
-            // public string
-            // public CallFrame[]
-            // public StackTrace
-            // public StackTraceId
+
+            /// <summary>
+            /// String label of this stack trace. For async traces this may be a name of the function that
+            /// initiated the async call.
+            /// </summary>
+            [JsonProperty("description")]
+            public string Description { get; set; }
+
+            /// <summary>
+            /// JavaScript function name.
+            /// </summary>
+            [JsonProperty("callFrames")]
+            public CallFrame[] CallFrames { get; set; }
+
+            /// <summary>
+            /// Asynchronous JavaScript stack trace that preceded this stack, if available.
+            /// </summary>
+            [JsonProperty("parent")]
+            public StackTrace Parent { get; set; }
+
+            /// <summary>
+            /// Asynchronous JavaScript stack trace that preceded this stack, if available.
+            /// </summary>
+            [JsonProperty("parentId")]
+            public StackTraceId ParentId { get; set; }
         }
 
         /// <summary>
@@ -1007,8 +1643,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class StackTraceId
         {
-            // public string
-            // public UniqueDebuggerId
+
+            [JsonProperty("id")]
+            public string Id { get; set; }
+
+            [JsonProperty("debuggerId")]
+            public UniqueDebuggerId DebuggerId { get; set; }
         }
 
         /// <summary>
@@ -1244,8 +1884,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// </summary>
         public class Domain
         {
-            // public string
-            // public string
+
+            /// <summary>
+            /// Domain name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Domain version.
+            /// </summary>
+            [JsonProperty("version")]
+            public string Version { get; set; }
         }
 
         /// <summary>

@@ -16,6 +16,8 @@ namespace DumbPrograms.ChromeDevTools.Generator
             Writer = writer;
 
             WIL("using System;");
+            WIL("using System.Collections.Generic;");
+            WIL("using Newtonsoft.Json;");
         }
 
         public void WriteProtocolCode(ProtocolDescriptor protocol)
@@ -77,7 +79,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                         }
                                         break;
                                     case JsonTypes.Object:
-                                        using (WILBlock($"public class {type.Name}"))
+                                        using (WILBlock($"public class {type.Name}{(type.Properties == null ? " : Dictionary<string, object>" : "")}"))
                                         {
                                             if (type.Properties != null)
                                             {
@@ -88,17 +90,19 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                                     {
                                                         csPropType = GetCSharpType(property.Type.Value, property.ArrayType);
                                                     }
-                                                    else if (property.EnumValues != null)
-                                                    {
-                                                        csPropType = $"{domain.Name}.{type.Name}.{property.Name}";
-                                                        //throw new NotImplementedException();
-                                                    }
-                                                    else
+                                                    else if (property.TypeReference != null)
                                                     {
                                                         csPropType = property.TypeReference;
                                                     }
+                                                    else
+                                                    {
+                                                        throw new NotImplementedException();
+                                                    }
 
-                                                    WIL($"// public {csPropType}");
+                                                    WL();
+                                                    WILSummary(property.Description);
+                                                    WIL($"[JsonProperty(\"{property.Name}\")]");
+                                                    WIL($"public {csPropType} {GetCSharpIdentifier(property.Name)} {{ get; set; }}");
                                                 }
                                             }
                                         }
@@ -222,7 +226,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
         BlockStructureWriter WILBlock(string header) => new BlockStructureWriter(this, header);
 
         string GetCSharpIdentifier(string name)
-            => String.Join("", name.Split('-', ' ').Select(n => Char.ToUpperInvariant(n[0]) + n.Substring(1, n.Length - 1)));
+            => String.Join("", name.Split('_', '-', ' ').Select(n => Char.ToUpperInvariant(n[0]) + n.Substring(1, n.Length - 1)));
 
         string GetCSharpType(JsonTypes jsonType, PropertyDescriptor arrayType)
         {
@@ -232,7 +236,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                 case JsonTypes.Object:
                     return "object";
                 case JsonTypes.Boolean:
-                    return "boolean";
+                    return "bool";
                 case JsonTypes.Integer:
                     return "int";
                 case JsonTypes.Number:
