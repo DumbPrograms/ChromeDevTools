@@ -11,7 +11,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
         public bool Experimental { get; set; }
         public TypeDescriptor[] Types { get; set; }
         public CommandDescriptor[] Commands { get; set; }
-        public EventDescriptor[] Events { get; set; }
+        public CommandDescriptor[] Events { get; set; }
 
         public override string ToString()
         {

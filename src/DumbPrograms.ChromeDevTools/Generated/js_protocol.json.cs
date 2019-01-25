@@ -78,6 +78,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Console.enable";
         }
+
+        /// <summary>
+        /// Issued when new console message is added.
+        /// </summary>
+        public class MessageAddedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Console.messageAdded";
+
+            /// <summary>
+            /// Console message that has been added.
+            /// </summary>
+            [JsonProperty("message")]
+            public ConsoleMessage Message { get; set; }
+        }
     }
 
     /// <summary>
@@ -977,6 +991,276 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Debugger.stepOver";
         }
+
+        /// <summary>
+        /// Fired when breakpoint is resolved to an actual script and location.
+        /// </summary>
+        public class BreakpointResolvedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Debugger.breakpointResolved";
+
+            /// <summary>
+            /// Breakpoint unique identifier.
+            /// </summary>
+            [JsonProperty("breakpointId")]
+            public BreakpointId BreakpointId { get; set; }
+
+            /// <summary>
+            /// Actual breakpoint location.
+            /// </summary>
+            [JsonProperty("location")]
+            public Location Location { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.
+        /// </summary>
+        public class PausedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Debugger.paused";
+
+            /// <summary>
+            /// Call stack the virtual machine stopped on.
+            /// </summary>
+            [JsonProperty("callFrames")]
+            public CallFrame[] CallFrames { get; set; }
+
+            /// <summary>
+            /// Pause reason.
+            /// </summary>
+            [JsonProperty("reason")]
+            public string Reason { get; set; }
+
+            /// <summary>
+            /// Object containing break-specific auxiliary properties.
+            /// </summary>
+            [JsonProperty("data")]
+            public object Data { get; set; }
+
+            /// <summary>
+            /// Hit breakpoints IDs
+            /// </summary>
+            [JsonProperty("hitBreakpoints")]
+            public string[] HitBreakpoints { get; set; }
+
+            /// <summary>
+            /// Async stack trace, if any.
+            /// </summary>
+            [JsonProperty("asyncStackTrace")]
+            public Runtime.StackTrace AsyncStackTrace { get; set; }
+
+            /// <summary>
+            /// Async stack trace, if any.
+            /// </summary>
+            [JsonProperty("asyncStackTraceId")]
+            public Runtime.StackTraceId AsyncStackTraceId { get; set; }
+
+            /// <summary>
+            /// Just scheduled async call will have this stack trace as parent stack during async execution.
+            /// This field is available only after `Debugger.stepInto` call with `breakOnAsynCall` flag.
+            /// </summary>
+            [JsonProperty("asyncCallStackTraceId")]
+            public Runtime.StackTraceId AsyncCallStackTraceId { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when the virtual machine resumed execution.
+        /// </summary>
+        public class ResumedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Debugger.resumed";
+        }
+
+        /// <summary>
+        /// Fired when virtual machine fails to parse the script.
+        /// </summary>
+        public class ScriptFailedToParseEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Debugger.scriptFailedToParse";
+
+            /// <summary>
+            /// Identifier of the script parsed.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public Runtime.ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// URL or name of the script parsed (if any).
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Line offset of the script within the resource with given URL (for script tags).
+            /// </summary>
+            [JsonProperty("startLine")]
+            public int StartLine { get; set; }
+
+            /// <summary>
+            /// Column offset of the script within the resource with given URL.
+            /// </summary>
+            [JsonProperty("startColumn")]
+            public int StartColumn { get; set; }
+
+            /// <summary>
+            /// Last line of the script.
+            /// </summary>
+            [JsonProperty("endLine")]
+            public int EndLine { get; set; }
+
+            /// <summary>
+            /// Length of the last line of the script.
+            /// </summary>
+            [JsonProperty("endColumn")]
+            public int EndColumn { get; set; }
+
+            /// <summary>
+            /// Specifies script creation context.
+            /// </summary>
+            [JsonProperty("executionContextId")]
+            public Runtime.ExecutionContextId ExecutionContextId { get; set; }
+
+            /// <summary>
+            /// Content hash of the script.
+            /// </summary>
+            [JsonProperty("hash")]
+            public string Hash { get; set; }
+
+            /// <summary>
+            /// Embedder-specific auxiliary data.
+            /// </summary>
+            [JsonProperty("executionContextAuxData")]
+            public object ExecutionContextAuxData { get; set; }
+
+            /// <summary>
+            /// URL of source map associated with script (if any).
+            /// </summary>
+            [JsonProperty("sourceMapURL")]
+            public string SourceMapURL { get; set; }
+
+            /// <summary>
+            /// True, if this script has sourceURL.
+            /// </summary>
+            [JsonProperty("hasSourceURL")]
+            public bool HasSourceURL { get; set; }
+
+            /// <summary>
+            /// True, if this script is ES6 module.
+            /// </summary>
+            [JsonProperty("isModule")]
+            public bool IsModule { get; set; }
+
+            /// <summary>
+            /// This script length.
+            /// </summary>
+            [JsonProperty("length")]
+            public int Length { get; set; }
+
+            /// <summary>
+            /// JavaScript top stack frame of where the script parsed event was triggered if available.
+            /// </summary>
+            [JsonProperty("stackTrace")]
+            public Runtime.StackTrace StackTrace { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when virtual machine parses script. This event is also fired for all known and uncollected
+        /// scripts upon enabling debugger.
+        /// </summary>
+        public class ScriptParsedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Debugger.scriptParsed";
+
+            /// <summary>
+            /// Identifier of the script parsed.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public Runtime.ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// URL or name of the script parsed (if any).
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Line offset of the script within the resource with given URL (for script tags).
+            /// </summary>
+            [JsonProperty("startLine")]
+            public int StartLine { get; set; }
+
+            /// <summary>
+            /// Column offset of the script within the resource with given URL.
+            /// </summary>
+            [JsonProperty("startColumn")]
+            public int StartColumn { get; set; }
+
+            /// <summary>
+            /// Last line of the script.
+            /// </summary>
+            [JsonProperty("endLine")]
+            public int EndLine { get; set; }
+
+            /// <summary>
+            /// Length of the last line of the script.
+            /// </summary>
+            [JsonProperty("endColumn")]
+            public int EndColumn { get; set; }
+
+            /// <summary>
+            /// Specifies script creation context.
+            /// </summary>
+            [JsonProperty("executionContextId")]
+            public Runtime.ExecutionContextId ExecutionContextId { get; set; }
+
+            /// <summary>
+            /// Content hash of the script.
+            /// </summary>
+            [JsonProperty("hash")]
+            public string Hash { get; set; }
+
+            /// <summary>
+            /// Embedder-specific auxiliary data.
+            /// </summary>
+            [JsonProperty("executionContextAuxData")]
+            public object ExecutionContextAuxData { get; set; }
+
+            /// <summary>
+            /// True, if this script is generated as a result of the live edit operation.
+            /// </summary>
+            [JsonProperty("isLiveEdit")]
+            public bool IsLiveEdit { get; set; }
+
+            /// <summary>
+            /// URL of source map associated with script (if any).
+            /// </summary>
+            [JsonProperty("sourceMapURL")]
+            public string SourceMapURL { get; set; }
+
+            /// <summary>
+            /// True, if this script has sourceURL.
+            /// </summary>
+            [JsonProperty("hasSourceURL")]
+            public bool HasSourceURL { get; set; }
+
+            /// <summary>
+            /// True, if this script is ES6 module.
+            /// </summary>
+            [JsonProperty("isModule")]
+            public bool IsModule { get; set; }
+
+            /// <summary>
+            /// This script length.
+            /// </summary>
+            [JsonProperty("length")]
+            public int Length { get; set; }
+
+            /// <summary>
+            /// JavaScript top stack frame of where the script parsed event was triggered if available.
+            /// </summary>
+            [JsonProperty("stackTrace")]
+            public Runtime.StackTrace StackTrace { get; set; }
+        }
     }
 
     namespace HeapProfiler
@@ -1212,6 +1496,65 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("reportProgress")]
             public bool ReportProgress { get; set; }
+        }
+
+        public class AddHeapSnapshotChunkEvent : ICommand
+        {
+            string ICommand.Name { get; } = "HeapProfiler.addHeapSnapshotChunk";
+
+            [JsonProperty("chunk")]
+            public string Chunk { get; set; }
+        }
+
+        /// <summary>
+        /// If heap objects tracking has been started then backend may send update for one or more fragments
+        /// </summary>
+        public class HeapStatsUpdateEvent : ICommand
+        {
+            string ICommand.Name { get; } = "HeapProfiler.heapStatsUpdate";
+
+            /// <summary>
+            /// An array of triplets. Each triplet describes a fragment. The first integer is the fragment
+            /// index, the second integer is a total count of objects for the fragment, the third integer is
+            /// a total size of the objects for the fragment.
+            /// </summary>
+            [JsonProperty("statsUpdate")]
+            public int[] StatsUpdate { get; set; }
+        }
+
+        /// <summary>
+        /// If heap objects tracking has been started then backend regularly sends a current value for last
+        /// seen object id and corresponding timestamp. If the were changes in the heap since last event
+        /// then one or more heapStatsUpdate events will be sent before a new lastSeenObjectId event.
+        /// </summary>
+        public class LastSeenObjectIdEvent : ICommand
+        {
+            string ICommand.Name { get; } = "HeapProfiler.lastSeenObjectId";
+
+            [JsonProperty("lastSeenObjectId")]
+            public int LastSeenObjectId { get; set; }
+
+            [JsonProperty("timestamp")]
+            public double Timestamp { get; set; }
+        }
+
+        public class ReportHeapSnapshotProgressEvent : ICommand
+        {
+            string ICommand.Name { get; } = "HeapProfiler.reportHeapSnapshotProgress";
+
+            [JsonProperty("done")]
+            public int Done { get; set; }
+
+            [JsonProperty("total")]
+            public int Total { get; set; }
+
+            [JsonProperty("finished")]
+            public bool Finished { get; set; }
+        }
+
+        public class ResetProfilesEvent : ICommand
+        {
+            string ICommand.Name { get; } = "HeapProfiler.resetProfiles";
         }
     }
 
@@ -1596,6 +1939,52 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("result")]
             public ScriptTypeProfile[] Result { get; set; }
+        }
+
+        public class ConsoleProfileFinishedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Profiler.consoleProfileFinished";
+
+            [JsonProperty("id")]
+            public string Id { get; set; }
+
+            /// <summary>
+            /// Location of console.profileEnd().
+            /// </summary>
+            [JsonProperty("location")]
+            public Debugger.Location Location { get; set; }
+
+            [JsonProperty("profile")]
+            public Profile Profile { get; set; }
+
+            /// <summary>
+            /// Profile title passed as an argument to console.profile().
+            /// </summary>
+            [JsonProperty("title")]
+            public string Title { get; set; }
+        }
+
+        /// <summary>
+        /// Sent when new profile recording is started using console.profile() call.
+        /// </summary>
+        public class ConsoleProfileStartedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Profiler.consoleProfileStarted";
+
+            [JsonProperty("id")]
+            public string Id { get; set; }
+
+            /// <summary>
+            /// Location of console.profile().
+            /// </summary>
+            [JsonProperty("location")]
+            public Debugger.Location Location { get; set; }
+
+            /// <summary>
+            /// Profile title passed as an argument to console.profile().
+            /// </summary>
+            [JsonProperty("title")]
+            public string Title { get; set; }
         }
     }
 
@@ -2803,6 +3192,160 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
             [JsonProperty("name")]
             public string Name { get; set; }
+        }
+
+        /// <summary>
+        /// Notification is issued every time when binding is called.
+        /// </summary>
+        public class BindingCalledEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Runtime.bindingCalled";
+
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("payload")]
+            public string Payload { get; set; }
+
+            /// <summary>
+            /// Identifier of the context where the call was made.
+            /// </summary>
+            [JsonProperty("executionContextId")]
+            public ExecutionContextId ExecutionContextId { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when console API was called.
+        /// </summary>
+        public class ConsoleAPICalledEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Runtime.consoleAPICalled";
+
+            /// <summary>
+            /// Type of the call.
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// Call arguments.
+            /// </summary>
+            [JsonProperty("args")]
+            public RemoteObject[] Args { get; set; }
+
+            /// <summary>
+            /// Identifier of the context where the call was made.
+            /// </summary>
+            [JsonProperty("executionContextId")]
+            public ExecutionContextId ExecutionContextId { get; set; }
+
+            /// <summary>
+            /// Call timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public Timestamp Timestamp { get; set; }
+
+            /// <summary>
+            /// Stack trace captured when the call was made.
+            /// </summary>
+            [JsonProperty("stackTrace")]
+            public StackTrace StackTrace { get; set; }
+
+            /// <summary>
+            /// Console context descriptor for calls on non-default console context (not console.*):
+            /// 'anonymous#unique-logger-id' for call on unnamed context, 'name#unique-logger-id' for call
+            /// on named context.
+            /// </summary>
+            [JsonProperty("context")]
+            public string Context { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when unhandled exception was revoked.
+        /// </summary>
+        public class ExceptionRevokedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Runtime.exceptionRevoked";
+
+            /// <summary>
+            /// Reason describing why exception was revoked.
+            /// </summary>
+            [JsonProperty("reason")]
+            public string Reason { get; set; }
+
+            /// <summary>
+            /// The id of revoked exception, as reported in `exceptionThrown`.
+            /// </summary>
+            [JsonProperty("exceptionId")]
+            public int ExceptionId { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when exception was thrown and unhandled.
+        /// </summary>
+        public class ExceptionThrownEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Runtime.exceptionThrown";
+
+            /// <summary>
+            /// Timestamp of the exception.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public Timestamp Timestamp { get; set; }
+
+            [JsonProperty("exceptionDetails")]
+            public ExceptionDetails ExceptionDetails { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when new execution context is created.
+        /// </summary>
+        public class ExecutionContextCreatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Runtime.executionContextCreated";
+
+            /// <summary>
+            /// A newly created execution context.
+            /// </summary>
+            [JsonProperty("context")]
+            public ExecutionContextDescription Context { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when execution context is destroyed.
+        /// </summary>
+        public class ExecutionContextDestroyedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Runtime.executionContextDestroyed";
+
+            /// <summary>
+            /// Id of the destroyed context
+            /// </summary>
+            [JsonProperty("executionContextId")]
+            public ExecutionContextId ExecutionContextId { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when all executionContexts were cleared in browser
+        /// </summary>
+        public class ExecutionContextsClearedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Runtime.executionContextsCleared";
+        }
+
+        /// <summary>
+        /// Issued when object should be inspected (for example, as a result of inspect() command line API
+        /// call).
+        /// </summary>
+        public class InspectRequestedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Runtime.inspectRequested";
+
+            [JsonProperty("object")]
+            public RemoteObject Object { get; set; }
+
+            [JsonProperty("hints")]
+            public object Hints { get; set; }
         }
     }
 

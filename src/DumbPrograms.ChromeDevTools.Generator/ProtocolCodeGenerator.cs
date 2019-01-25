@@ -28,8 +28,6 @@ namespace DumbPrograms.ChromeDevTools.Generator
             {
                 foreach (var domain in protocol.Domains)
                 {
-                    WL();
-
                     WILSummary(domain.Description);
 
                     using (WILBlock($"namespace {domain.Name}"))
@@ -38,9 +36,8 @@ namespace DumbPrograms.ChromeDevTools.Generator
                         {
                             foreach (var type in domain.Types)
                             {
-                                WL();
-
                                 WILSummary(type.Description);
+
                                 if (type.Deprecated)
                                 {
                                     WIL("[Obsolete]");
@@ -94,8 +91,6 @@ namespace DumbPrograms.ChromeDevTools.Generator
                         {
                             foreach (var command in domain.Commands)
                             {
-                                WL();
-
                                 WILSummary(command.Description);
 
                                 if (command.Deprecated)
@@ -128,6 +123,25 @@ namespace DumbPrograms.ChromeDevTools.Generator
                             }
                         }
 
+                        if (domain.Events != null)
+                        {
+                            foreach (var @event in domain.Events)
+                            {
+                                WILSummary(@event.Description);
+
+                                if (@event.Deprecated)
+                                {
+                                    WIL("[Obsolete]");
+                                }
+
+                                using (WILBlock($"public class {GetCSharpIdentifier(@event.Name)}Event : ICommand"))
+                                {
+                                    WIL($"string ICommand.Name {{ get; }} = \"{domain.Name}.{@event.Name}\";");
+
+                                    WILProperties(@event.Parameters);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -184,6 +198,8 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
         void WILSummary(string description)
         {
+            WL();
+
             if (String.IsNullOrWhiteSpace(description))
             {
                 return;
@@ -218,7 +234,6 @@ namespace DumbPrograms.ChromeDevTools.Generator
                         throw new NotImplementedException();
                     }
 
-                    WL();
                     WILSummary(property.Description);
                     WIL($"[JsonProperty(\"{property.Name}\")]");
                     WIL($"public {csPropType} {GetCSharpIdentifier(property.Name)} {{ get; set; }}");

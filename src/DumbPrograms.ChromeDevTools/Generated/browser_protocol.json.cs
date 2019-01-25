@@ -777,6 +777,48 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("delay")]
             public double Delay { get; set; }
         }
+
+        /// <summary>
+        /// Event for when an animation has been cancelled.
+        /// </summary>
+        public class AnimationCanceledEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Animation.animationCanceled";
+
+            /// <summary>
+            /// Id of the animation that was cancelled.
+            /// </summary>
+            [JsonProperty("id")]
+            public string Id { get; set; }
+        }
+
+        /// <summary>
+        /// Event for each animation that has been created.
+        /// </summary>
+        public class AnimationCreatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Animation.animationCreated";
+
+            /// <summary>
+            /// Id of the animation that was created.
+            /// </summary>
+            [JsonProperty("id")]
+            public string Id { get; set; }
+        }
+
+        /// <summary>
+        /// Event for animation that has been started.
+        /// </summary>
+        public class AnimationStartedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Animation.animationStarted";
+
+            /// <summary>
+            /// Animation that was started.
+            /// </summary>
+            [JsonProperty("animation")]
+            public Animation Animation { get; set; }
+        }
     }
 
     namespace ApplicationCache
@@ -943,6 +985,37 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("manifestURL")]
             public string ManifestURL { get; set; }
+        }
+
+        public class ApplicationCacheStatusUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "ApplicationCache.applicationCacheStatusUpdated";
+
+            /// <summary>
+            /// Identifier of the frame containing document whose application cache updated status.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public Page.FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// Manifest URL.
+            /// </summary>
+            [JsonProperty("manifestURL")]
+            public string ManifestURL { get; set; }
+
+            /// <summary>
+            /// Updated application cache status.
+            /// </summary>
+            [JsonProperty("status")]
+            public int Status { get; set; }
+        }
+
+        public class NetworkStateUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "ApplicationCache.networkStateUpdated";
+
+            [JsonProperty("isNowOnline")]
+            public bool IsNowOnline { get; set; }
         }
     }
 
@@ -2648,6 +2721,69 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("coverage")]
             public RuleUsage[] Coverage { get; set; }
         }
+
+        /// <summary>
+        /// Fires whenever a web font is updated.  A non-empty font parameter indicates a successfully loaded
+        /// web font
+        /// </summary>
+        public class FontsUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "CSS.fontsUpdated";
+
+            /// <summary>
+            /// The web font that has loaded.
+            /// </summary>
+            [JsonProperty("font")]
+            public FontFace Font { get; set; }
+        }
+
+        /// <summary>
+        /// Fires whenever a MediaQuery result changes (for example, after a browser window has been
+        /// resized.) The current implementation considers only viewport-dependent media features.
+        /// </summary>
+        public class MediaQueryResultChangedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "CSS.mediaQueryResultChanged";
+        }
+
+        /// <summary>
+        /// Fired whenever an active document stylesheet is added.
+        /// </summary>
+        public class StyleSheetAddedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "CSS.styleSheetAdded";
+
+            /// <summary>
+            /// Added stylesheet metainfo.
+            /// </summary>
+            [JsonProperty("header")]
+            public CSSStyleSheetHeader Header { get; set; }
+        }
+
+        /// <summary>
+        /// Fired whenever a stylesheet is changed as a result of the client operation.
+        /// </summary>
+        public class StyleSheetChangedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "CSS.styleSheetChanged";
+
+            [JsonProperty("styleSheetId")]
+            public StyleSheetId StyleSheetId { get; set; }
+        }
+
+        /// <summary>
+        /// Fired whenever an active document stylesheet is removed.
+        /// </summary>
+        public class StyleSheetRemovedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "CSS.styleSheetRemoved";
+
+            /// <summary>
+            /// Identifier of the removed stylesheet.
+            /// </summary>
+            [JsonProperty("styleSheetId")]
+            public StyleSheetId StyleSheetId { get; set; }
+        }
     }
 
     namespace CacheStorage
@@ -2989,6 +3125,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
             [JsonProperty("sinkName")]
             public string SinkName { get; set; }
+        }
+
+        /// <summary>
+        /// This is fired whenever the list of available sinks changes. A sink is a
+        /// device or a software surface that you can cast to.
+        /// </summary>
+        public class SinksUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Cast.sinksUpdated";
+
+            [JsonProperty("sinkNames")]
+            public string[] SinkNames { get; set; }
+        }
+
+        /// <summary>
+        /// This is fired whenever the outstanding issue/error message changes.
+        /// |issueMessage| is empty if there is no issue.
+        /// </summary>
+        public class IssueUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Cast.issueUpdated";
+
+            [JsonProperty("issueMessage")]
+            public string IssueMessage { get; set; }
         }
     }
 
@@ -4476,6 +4636,281 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("nodeId")]
             public NodeId NodeId { get; set; }
         }
+
+        /// <summary>
+        /// Fired when `Element`'s attribute is modified.
+        /// </summary>
+        public class AttributeModifiedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.attributeModified";
+
+            /// <summary>
+            /// Id of the node that has changed.
+            /// </summary>
+            [JsonProperty("nodeId")]
+            public NodeId NodeId { get; set; }
+
+            /// <summary>
+            /// Attribute name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Attribute value.
+            /// </summary>
+            [JsonProperty("value")]
+            public string Value { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when `Element`'s attribute is removed.
+        /// </summary>
+        public class AttributeRemovedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.attributeRemoved";
+
+            /// <summary>
+            /// Id of the node that has changed.
+            /// </summary>
+            [JsonProperty("nodeId")]
+            public NodeId NodeId { get; set; }
+
+            /// <summary>
+            /// A ttribute name.
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+        }
+
+        /// <summary>
+        /// Mirrors `DOMCharacterDataModified` event.
+        /// </summary>
+        public class CharacterDataModifiedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.characterDataModified";
+
+            /// <summary>
+            /// Id of the node that has changed.
+            /// </summary>
+            [JsonProperty("nodeId")]
+            public NodeId NodeId { get; set; }
+
+            /// <summary>
+            /// New text value.
+            /// </summary>
+            [JsonProperty("characterData")]
+            public string CharacterData { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when `Container`'s child node count has changed.
+        /// </summary>
+        public class ChildNodeCountUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.childNodeCountUpdated";
+
+            /// <summary>
+            /// Id of the node that has changed.
+            /// </summary>
+            [JsonProperty("nodeId")]
+            public NodeId NodeId { get; set; }
+
+            /// <summary>
+            /// New node count.
+            /// </summary>
+            [JsonProperty("childNodeCount")]
+            public int ChildNodeCount { get; set; }
+        }
+
+        /// <summary>
+        /// Mirrors `DOMNodeInserted` event.
+        /// </summary>
+        public class ChildNodeInsertedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.childNodeInserted";
+
+            /// <summary>
+            /// Id of the node that has changed.
+            /// </summary>
+            [JsonProperty("parentNodeId")]
+            public NodeId ParentNodeId { get; set; }
+
+            /// <summary>
+            /// If of the previous siblint.
+            /// </summary>
+            [JsonProperty("previousNodeId")]
+            public NodeId PreviousNodeId { get; set; }
+
+            /// <summary>
+            /// Inserted node data.
+            /// </summary>
+            [JsonProperty("node")]
+            public Node Node { get; set; }
+        }
+
+        /// <summary>
+        /// Mirrors `DOMNodeRemoved` event.
+        /// </summary>
+        public class ChildNodeRemovedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.childNodeRemoved";
+
+            /// <summary>
+            /// Parent id.
+            /// </summary>
+            [JsonProperty("parentNodeId")]
+            public NodeId ParentNodeId { get; set; }
+
+            /// <summary>
+            /// Id of the node that has been removed.
+            /// </summary>
+            [JsonProperty("nodeId")]
+            public NodeId NodeId { get; set; }
+        }
+
+        /// <summary>
+        /// Called when distrubution is changed.
+        /// </summary>
+        public class DistributedNodesUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.distributedNodesUpdated";
+
+            /// <summary>
+            /// Insertion point where distrubuted nodes were updated.
+            /// </summary>
+            [JsonProperty("insertionPointId")]
+            public NodeId InsertionPointId { get; set; }
+
+            /// <summary>
+            /// Distributed nodes for given insertion point.
+            /// </summary>
+            [JsonProperty("distributedNodes")]
+            public BackendNode[] DistributedNodes { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when `Document` has been totally updated. Node ids are no longer valid.
+        /// </summary>
+        public class DocumentUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.documentUpdated";
+        }
+
+        /// <summary>
+        /// Fired when `Element`'s inline style is modified via a CSS property modification.
+        /// </summary>
+        public class InlineStyleInvalidatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.inlineStyleInvalidated";
+
+            /// <summary>
+            /// Ids of the nodes for which the inline styles have been invalidated.
+            /// </summary>
+            [JsonProperty("nodeIds")]
+            public NodeId[] NodeIds { get; set; }
+        }
+
+        /// <summary>
+        /// Called when a pseudo element is added to an element.
+        /// </summary>
+        public class PseudoElementAddedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.pseudoElementAdded";
+
+            /// <summary>
+            /// Pseudo element's parent element id.
+            /// </summary>
+            [JsonProperty("parentId")]
+            public NodeId ParentId { get; set; }
+
+            /// <summary>
+            /// The added pseudo element.
+            /// </summary>
+            [JsonProperty("pseudoElement")]
+            public Node PseudoElement { get; set; }
+        }
+
+        /// <summary>
+        /// Called when a pseudo element is removed from an element.
+        /// </summary>
+        public class PseudoElementRemovedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.pseudoElementRemoved";
+
+            /// <summary>
+            /// Pseudo element's parent element id.
+            /// </summary>
+            [JsonProperty("parentId")]
+            public NodeId ParentId { get; set; }
+
+            /// <summary>
+            /// The removed pseudo element id.
+            /// </summary>
+            [JsonProperty("pseudoElementId")]
+            public NodeId PseudoElementId { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when backend wants to provide client with the missing DOM structure. This happens upon
+        /// most of the calls requesting node ids.
+        /// </summary>
+        public class SetChildNodesEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.setChildNodes";
+
+            /// <summary>
+            /// Parent node id to populate with children.
+            /// </summary>
+            [JsonProperty("parentId")]
+            public NodeId ParentId { get; set; }
+
+            /// <summary>
+            /// Child nodes array.
+            /// </summary>
+            [JsonProperty("nodes")]
+            public Node[] Nodes { get; set; }
+        }
+
+        /// <summary>
+        /// Called when shadow root is popped from the element.
+        /// </summary>
+        public class ShadowRootPoppedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.shadowRootPopped";
+
+            /// <summary>
+            /// Host element id.
+            /// </summary>
+            [JsonProperty("hostId")]
+            public NodeId HostId { get; set; }
+
+            /// <summary>
+            /// Shadow root id.
+            /// </summary>
+            [JsonProperty("rootId")]
+            public NodeId RootId { get; set; }
+        }
+
+        /// <summary>
+        /// Called when shadow root is pushed into the element.
+        /// </summary>
+        public class ShadowRootPushedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOM.shadowRootPushed";
+
+            /// <summary>
+            /// Host element id.
+            /// </summary>
+            [JsonProperty("hostId")]
+            public NodeId HostId { get; set; }
+
+            /// <summary>
+            /// Shadow root.
+            /// </summary>
+            [JsonProperty("root")]
+            public Node Root { get; set; }
+        }
     }
 
     /// <summary>
@@ -5565,6 +6000,56 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("value")]
             public string Value { get; set; }
         }
+
+        public class DomStorageItemAddedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOMStorage.domStorageItemAdded";
+
+            [JsonProperty("storageId")]
+            public StorageId StorageId { get; set; }
+
+            [JsonProperty("key")]
+            public string Key { get; set; }
+
+            [JsonProperty("newValue")]
+            public string NewValue { get; set; }
+        }
+
+        public class DomStorageItemRemovedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOMStorage.domStorageItemRemoved";
+
+            [JsonProperty("storageId")]
+            public StorageId StorageId { get; set; }
+
+            [JsonProperty("key")]
+            public string Key { get; set; }
+        }
+
+        public class DomStorageItemUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOMStorage.domStorageItemUpdated";
+
+            [JsonProperty("storageId")]
+            public StorageId StorageId { get; set; }
+
+            [JsonProperty("key")]
+            public string Key { get; set; }
+
+            [JsonProperty("oldValue")]
+            public string OldValue { get; set; }
+
+            [JsonProperty("newValue")]
+            public string NewValue { get; set; }
+        }
+
+        public class DomStorageItemsClearedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "DOMStorage.domStorageItemsCleared";
+
+            [JsonProperty("storageId")]
+            public StorageId StorageId { get; set; }
+        }
     }
 
     namespace Database
@@ -5687,6 +6172,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
             [JsonProperty("tableNames")]
             public string[] TableNames { get; set; }
+        }
+
+        public class AddDatabaseEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Database.addDatabase";
+
+            [JsonProperty("database")]
+            public Database Database { get; set; }
         }
     }
 
@@ -6183,6 +6676,44 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("platform")]
             public string Platform { get; set; }
         }
+
+        /// <summary>
+        /// Notification sent after the virtual time has advanced.
+        /// </summary>
+        public class VirtualTimeAdvancedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Emulation.virtualTimeAdvanced";
+
+            /// <summary>
+            /// The amount of virtual time that has elapsed in milliseconds since virtual time was first
+            /// enabled.
+            /// </summary>
+            [JsonProperty("virtualTimeElapsed")]
+            public double VirtualTimeElapsed { get; set; }
+        }
+
+        /// <summary>
+        /// Notification sent after the virtual time budget for the current VirtualTimePolicy has run out.
+        /// </summary>
+        public class VirtualTimeBudgetExpiredEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Emulation.virtualTimeBudgetExpired";
+        }
+
+        /// <summary>
+        /// Notification sent after the virtual time has paused.
+        /// </summary>
+        public class VirtualTimePausedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Emulation.virtualTimePaused";
+
+            /// <summary>
+            /// The amount of virtual time that has elapsed in milliseconds since virtual time was first
+            /// enabled.
+            /// </summary>
+            [JsonProperty("virtualTimeElapsed")]
+            public double VirtualTimeElapsed { get; set; }
+        }
     }
 
     /// <summary>
@@ -6282,6 +6813,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class EnableCommand : ICommand
         {
             string ICommand.Name { get; } = "HeadlessExperimental.enable";
+        }
+
+        /// <summary>
+        /// Issued when the target starts or stops needing BeginFrames.
+        /// </summary>
+        public class NeedsBeginFramesChangedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "HeadlessExperimental.needsBeginFramesChanged";
+
+            /// <summary>
+            /// True if BeginFrames are needed, false otherwise.
+            /// </summary>
+            [JsonProperty("needsBeginFrames")]
+            public bool NeedsBeginFrames { get; set; }
         }
     }
 
@@ -7369,6 +7914,36 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Inspector.enable";
         }
+
+        /// <summary>
+        /// Fired when remote debugging connection is about to be terminated. Contains detach reason.
+        /// </summary>
+        public class DetachedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Inspector.detached";
+
+            /// <summary>
+            /// The reason why connection has been terminated.
+            /// </summary>
+            [JsonProperty("reason")]
+            public string Reason { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when debugging target has crashed
+        /// </summary>
+        public class TargetCrashedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Inspector.targetCrashed";
+        }
+
+        /// <summary>
+        /// Fired when debugging target has reloaded after crash
+        /// </summary>
+        public class TargetReloadedAfterCrashEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Inspector.targetReloadedAfterCrash";
+        }
     }
 
     namespace LayerTree
@@ -7801,6 +8376,34 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("commandLog")]
             public object[] CommandLog { get; set; }
         }
+
+        public class LayerPaintedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "LayerTree.layerPainted";
+
+            /// <summary>
+            /// The id of the painted layer.
+            /// </summary>
+            [JsonProperty("layerId")]
+            public LayerId LayerId { get; set; }
+
+            /// <summary>
+            /// Clip rectangle.
+            /// </summary>
+            [JsonProperty("clip")]
+            public DOM.Rect Clip { get; set; }
+        }
+
+        public class LayerTreeDidChangeEvent : ICommand
+        {
+            string ICommand.Name { get; } = "LayerTree.layerTreeDidChange";
+
+            /// <summary>
+            /// Layer tree, absent if not in the comspositing mode.
+            /// </summary>
+            [JsonProperty("layers")]
+            public Layer[] Layers { get; set; }
+        }
     }
 
     /// <summary>
@@ -7940,6 +8543,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class StopViolationsReportCommand : ICommand
         {
             string ICommand.Name { get; } = "Log.stopViolationsReport";
+        }
+
+        /// <summary>
+        /// Issued when new message was logged.
+        /// </summary>
+        public class EntryAddedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Log.entryAdded";
+
+            /// <summary>
+            /// The entry.
+            /// </summary>
+            [JsonProperty("entry")]
+            public LogEntry Entry { get; set; }
         }
     }
 
@@ -10057,6 +10674,592 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("platform")]
             public string Platform { get; set; }
         }
+
+        /// <summary>
+        /// Fired when data chunk was received over the network.
+        /// </summary>
+        public class DataReceivedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.dataReceived";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+
+            /// <summary>
+            /// Data chunk length.
+            /// </summary>
+            [JsonProperty("dataLength")]
+            public int DataLength { get; set; }
+
+            /// <summary>
+            /// Actual bytes received (might be less than dataLength for compressed encodings).
+            /// </summary>
+            [JsonProperty("encodedDataLength")]
+            public int EncodedDataLength { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when EventSource message is received.
+        /// </summary>
+        public class EventSourceMessageReceivedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.eventSourceMessageReceived";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+
+            /// <summary>
+            /// Message type.
+            /// </summary>
+            [JsonProperty("eventName")]
+            public string EventName { get; set; }
+
+            /// <summary>
+            /// Message identifier.
+            /// </summary>
+            [JsonProperty("eventId")]
+            public string EventId { get; set; }
+
+            /// <summary>
+            /// Message content.
+            /// </summary>
+            [JsonProperty("data")]
+            public string Data { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when HTTP request has failed to load.
+        /// </summary>
+        public class LoadingFailedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.loadingFailed";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+
+            /// <summary>
+            /// Resource type.
+            /// </summary>
+            [JsonProperty("type")]
+            public ResourceType Type { get; set; }
+
+            /// <summary>
+            /// User friendly error message.
+            /// </summary>
+            [JsonProperty("errorText")]
+            public string ErrorText { get; set; }
+
+            /// <summary>
+            /// True if loading was canceled.
+            /// </summary>
+            [JsonProperty("canceled")]
+            public bool Canceled { get; set; }
+
+            /// <summary>
+            /// The reason why loading was blocked, if any.
+            /// </summary>
+            [JsonProperty("blockedReason")]
+            public BlockedReason BlockedReason { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when HTTP request has finished loading.
+        /// </summary>
+        public class LoadingFinishedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.loadingFinished";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+
+            /// <summary>
+            /// Total number of bytes received for this request.
+            /// </summary>
+            [JsonProperty("encodedDataLength")]
+            public double EncodedDataLength { get; set; }
+
+            /// <summary>
+            /// Set when 1) response was blocked by Cross-Origin Read Blocking and also
+            /// 2) this needs to be reported to the DevTools console.
+            /// </summary>
+            [JsonProperty("shouldReportCorbBlocking")]
+            public bool ShouldReportCorbBlocking { get; set; }
+        }
+
+        /// <summary>
+        /// Details of an intercepted HTTP request, which must be either allowed, blocked, modified or
+        /// mocked.
+        /// </summary>
+        public class RequestInterceptedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.requestIntercepted";
+
+            /// <summary>
+            /// Each request the page makes will have a unique id, however if any redirects are encountered
+            /// while processing that fetch, they will be reported with the same id as the original fetch.
+            /// Likewise if HTTP authentication is needed then the same fetch id will be used.
+            /// </summary>
+            [JsonProperty("interceptionId")]
+            public InterceptionId InterceptionId { get; set; }
+
+            [JsonProperty("request")]
+            public Request Request { get; set; }
+
+            /// <summary>
+            /// The id of the frame that initiated the request.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public Page.FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// How the requested resource will be used.
+            /// </summary>
+            [JsonProperty("resourceType")]
+            public ResourceType ResourceType { get; set; }
+
+            /// <summary>
+            /// Whether this is a navigation request, which can abort the navigation completely.
+            /// </summary>
+            [JsonProperty("isNavigationRequest")]
+            public bool IsNavigationRequest { get; set; }
+
+            /// <summary>
+            /// Set if the request is a navigation that will result in a download.
+            /// Only present after response is received from the server (i.e. HeadersReceived stage).
+            /// </summary>
+            [JsonProperty("isDownload")]
+            public bool IsDownload { get; set; }
+
+            /// <summary>
+            /// Redirect location, only sent if a redirect was intercepted.
+            /// </summary>
+            [JsonProperty("redirectUrl")]
+            public string RedirectUrl { get; set; }
+
+            /// <summary>
+            /// Details of the Authorization Challenge encountered. If this is set then
+            /// continueInterceptedRequest must contain an authChallengeResponse.
+            /// </summary>
+            [JsonProperty("authChallenge")]
+            public AuthChallenge AuthChallenge { get; set; }
+
+            /// <summary>
+            /// Response error if intercepted at response stage or if redirect occurred while intercepting
+            /// request.
+            /// </summary>
+            [JsonProperty("responseErrorReason")]
+            public ErrorReason ResponseErrorReason { get; set; }
+
+            /// <summary>
+            /// Response code if intercepted at response stage or if redirect occurred while intercepting
+            /// request or auth retry occurred.
+            /// </summary>
+            [JsonProperty("responseStatusCode")]
+            public int ResponseStatusCode { get; set; }
+
+            /// <summary>
+            /// Response headers if intercepted at the response stage or if redirect occurred while
+            /// intercepting request or auth retry occurred.
+            /// </summary>
+            [JsonProperty("responseHeaders")]
+            public Headers ResponseHeaders { get; set; }
+        }
+
+        /// <summary>
+        /// Fired if request ended up loading from cache.
+        /// </summary>
+        public class RequestServedFromCacheEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.requestServedFromCache";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when page is about to send HTTP request.
+        /// </summary>
+        public class RequestWillBeSentEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.requestWillBeSent";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Loader identifier. Empty string if the request is fetched from worker.
+            /// </summary>
+            [JsonProperty("loaderId")]
+            public LoaderId LoaderId { get; set; }
+
+            /// <summary>
+            /// URL of the document this request is loaded for.
+            /// </summary>
+            [JsonProperty("documentURL")]
+            public string DocumentURL { get; set; }
+
+            /// <summary>
+            /// Request data.
+            /// </summary>
+            [JsonProperty("request")]
+            public Request Request { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("wallTime")]
+            public TimeSinceEpoch WallTime { get; set; }
+
+            /// <summary>
+            /// Request initiator.
+            /// </summary>
+            [JsonProperty("initiator")]
+            public Initiator Initiator { get; set; }
+
+            /// <summary>
+            /// Redirect response data.
+            /// </summary>
+            [JsonProperty("redirectResponse")]
+            public Response RedirectResponse { get; set; }
+
+            /// <summary>
+            /// Type of this resource.
+            /// </summary>
+            [JsonProperty("type")]
+            public ResourceType Type { get; set; }
+
+            /// <summary>
+            /// Frame identifier.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public Page.FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// Whether the request is initiated by a user gesture. Defaults to false.
+            /// </summary>
+            [JsonProperty("hasUserGesture")]
+            public bool HasUserGesture { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when resource loading priority is changed
+        /// </summary>
+        public class ResourceChangedPriorityEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.resourceChangedPriority";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// New priority
+            /// </summary>
+            [JsonProperty("newPriority")]
+            public ResourcePriority NewPriority { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when a signed exchange was received over the network
+        /// </summary>
+        public class SignedExchangeReceivedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.signedExchangeReceived";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Information about the signed exchange response.
+            /// </summary>
+            [JsonProperty("info")]
+            public SignedExchangeInfo Info { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when HTTP response is available.
+        /// </summary>
+        public class ResponseReceivedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.responseReceived";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Loader identifier. Empty string if the request is fetched from worker.
+            /// </summary>
+            [JsonProperty("loaderId")]
+            public LoaderId LoaderId { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+
+            /// <summary>
+            /// Resource type.
+            /// </summary>
+            [JsonProperty("type")]
+            public ResourceType Type { get; set; }
+
+            /// <summary>
+            /// Response data.
+            /// </summary>
+            [JsonProperty("response")]
+            public Response Response { get; set; }
+
+            /// <summary>
+            /// Frame identifier.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public Page.FrameId FrameId { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when WebSocket is closed.
+        /// </summary>
+        public class WebSocketClosedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.webSocketClosed";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+        }
+
+        /// <summary>
+        /// Fired upon WebSocket creation.
+        /// </summary>
+        public class WebSocketCreatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.webSocketCreated";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// WebSocket request URL.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Request initiator.
+            /// </summary>
+            [JsonProperty("initiator")]
+            public Initiator Initiator { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when WebSocket message error occurs.
+        /// </summary>
+        public class WebSocketFrameErrorEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.webSocketFrameError";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+
+            /// <summary>
+            /// WebSocket error message.
+            /// </summary>
+            [JsonProperty("errorMessage")]
+            public string ErrorMessage { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when WebSocket message is received.
+        /// </summary>
+        public class WebSocketFrameReceivedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.webSocketFrameReceived";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+
+            /// <summary>
+            /// WebSocket response data.
+            /// </summary>
+            [JsonProperty("response")]
+            public WebSocketFrame Response { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when WebSocket message is sent.
+        /// </summary>
+        public class WebSocketFrameSentEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.webSocketFrameSent";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+
+            /// <summary>
+            /// WebSocket response data.
+            /// </summary>
+            [JsonProperty("response")]
+            public WebSocketFrame Response { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when WebSocket handshake response becomes available.
+        /// </summary>
+        public class WebSocketHandshakeResponseReceivedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.webSocketHandshakeResponseReceived";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+
+            /// <summary>
+            /// WebSocket response data.
+            /// </summary>
+            [JsonProperty("response")]
+            public WebSocketResponse Response { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when WebSocket is about to initiate handshake.
+        /// </summary>
+        public class WebSocketWillSendHandshakeRequestEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Network.webSocketWillSendHandshakeRequest";
+
+            /// <summary>
+            /// Request identifier.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// Timestamp.
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public MonotonicTime Timestamp { get; set; }
+
+            /// <summary>
+            /// UTC Timestamp.
+            /// </summary>
+            [JsonProperty("wallTime")]
+            public TimeSinceEpoch WallTime { get; set; }
+
+            /// <summary>
+            /// WebSocket request data.
+            /// </summary>
+            [JsonProperty("request")]
+            public WebSocketRequest Request { get; set; }
+        }
     }
 
     /// <summary>
@@ -10467,6 +11670,46 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("suspended")]
             public bool Suspended { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when the node should be inspected. This happens after call to `setInspectMode` or when
+        /// user manually inspects an element.
+        /// </summary>
+        public class InspectNodeRequestedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Overlay.inspectNodeRequested";
+
+            /// <summary>
+            /// Id of the node to inspect.
+            /// </summary>
+            [JsonProperty("backendNodeId")]
+            public DOM.BackendNodeId BackendNodeId { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when the node should be highlighted. This happens after call to `setInspectMode`.
+        /// </summary>
+        public class NodeHighlightRequestedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Overlay.nodeHighlightRequested";
+
+            [JsonProperty("nodeId")]
+            public DOM.NodeId NodeId { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when user asks to capture screenshot of some area on the page.
+        /// </summary>
+        public class ScreenshotRequestedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Overlay.screenshotRequested";
+
+            /// <summary>
+            /// Viewport to capture, in device independent pixels (dip).
+            /// </summary>
+            [JsonProperty("viewport")]
+            public Page.Viewport Viewport { get; set; }
         }
     }
 
@@ -12145,6 +13388,371 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Page.waitForDebugger";
         }
+
+        public class DomContentEventFiredEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.domContentEventFired";
+
+            [JsonProperty("timestamp")]
+            public Network.MonotonicTime Timestamp { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when frame has been attached to its parent.
+        /// </summary>
+        public class FrameAttachedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.frameAttached";
+
+            /// <summary>
+            /// Id of the frame that has been attached.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// Parent frame identifier.
+            /// </summary>
+            [JsonProperty("parentFrameId")]
+            public FrameId ParentFrameId { get; set; }
+
+            /// <summary>
+            /// JavaScript stack trace of when frame was attached, only set if frame initiated from script.
+            /// </summary>
+            [JsonProperty("stack")]
+            public Runtime.StackTrace Stack { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when frame no longer has a scheduled navigation.
+        /// </summary>
+        public class FrameClearedScheduledNavigationEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.frameClearedScheduledNavigation";
+
+            /// <summary>
+            /// Id of the frame that has cleared its scheduled navigation.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public FrameId FrameId { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when frame has been detached from its parent.
+        /// </summary>
+        public class FrameDetachedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.frameDetached";
+
+            /// <summary>
+            /// Id of the frame that has been detached.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public FrameId FrameId { get; set; }
+        }
+
+        /// <summary>
+        /// Fired once navigation of the frame has completed. Frame is now associated with the new loader.
+        /// </summary>
+        public class FrameNavigatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.frameNavigated";
+
+            /// <summary>
+            /// Frame object.
+            /// </summary>
+            [JsonProperty("frame")]
+            public Frame Frame { get; set; }
+        }
+
+        public class FrameResizedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.frameResized";
+        }
+
+        /// <summary>
+        /// Fired when frame schedules a potential navigation.
+        /// </summary>
+        public class FrameScheduledNavigationEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.frameScheduledNavigation";
+
+            /// <summary>
+            /// Id of the frame that has scheduled a navigation.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// Delay (in seconds) until the navigation is scheduled to begin. The navigation is not
+            /// guaranteed to start.
+            /// </summary>
+            [JsonProperty("delay")]
+            public double Delay { get; set; }
+
+            /// <summary>
+            /// The reason for the navigation.
+            /// </summary>
+            [JsonProperty("reason")]
+            public string Reason { get; set; }
+
+            /// <summary>
+            /// The destination URL for the scheduled navigation.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when frame has started loading.
+        /// </summary>
+        public class FrameStartedLoadingEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.frameStartedLoading";
+
+            /// <summary>
+            /// Id of the frame that has started loading.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public FrameId FrameId { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when frame has stopped loading.
+        /// </summary>
+        public class FrameStoppedLoadingEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.frameStoppedLoading";
+
+            /// <summary>
+            /// Id of the frame that has stopped loading.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public FrameId FrameId { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when interstitial page was hidden
+        /// </summary>
+        public class InterstitialHiddenEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.interstitialHidden";
+        }
+
+        /// <summary>
+        /// Fired when interstitial page was shown
+        /// </summary>
+        public class InterstitialShownEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.interstitialShown";
+        }
+
+        /// <summary>
+        /// Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) has been
+        /// closed.
+        /// </summary>
+        public class JavascriptDialogClosedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.javascriptDialogClosed";
+
+            /// <summary>
+            /// Whether dialog was confirmed.
+            /// </summary>
+            [JsonProperty("result")]
+            public bool Result { get; set; }
+
+            /// <summary>
+            /// User input in case of prompt.
+            /// </summary>
+            [JsonProperty("userInput")]
+            public string UserInput { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) is about to
+        /// open.
+        /// </summary>
+        public class JavascriptDialogOpeningEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.javascriptDialogOpening";
+
+            /// <summary>
+            /// Frame url.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Message that will be displayed by the dialog.
+            /// </summary>
+            [JsonProperty("message")]
+            public string Message { get; set; }
+
+            /// <summary>
+            /// Dialog type.
+            /// </summary>
+            [JsonProperty("type")]
+            public DialogType Type { get; set; }
+
+            /// <summary>
+            /// True iff browser is capable showing or acting on the given dialog. When browser has no
+            /// dialog handler for given target, calling alert while Page domain is engaged will stall
+            /// the page execution. Execution can be resumed via calling Page.handleJavaScriptDialog.
+            /// </summary>
+            [JsonProperty("hasBrowserHandler")]
+            public bool HasBrowserHandler { get; set; }
+
+            /// <summary>
+            /// Default dialog prompt.
+            /// </summary>
+            [JsonProperty("defaultPrompt")]
+            public string DefaultPrompt { get; set; }
+        }
+
+        /// <summary>
+        /// Fired for top level page lifecycle events such as navigation, load, paint, etc.
+        /// </summary>
+        public class LifecycleEventEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.lifecycleEvent";
+
+            /// <summary>
+            /// Id of the frame.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// Loader identifier. Empty string if the request is fetched from worker.
+            /// </summary>
+            [JsonProperty("loaderId")]
+            public Network.LoaderId LoaderId { get; set; }
+
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("timestamp")]
+            public Network.MonotonicTime Timestamp { get; set; }
+        }
+
+        public class LoadEventFiredEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.loadEventFired";
+
+            [JsonProperty("timestamp")]
+            public Network.MonotonicTime Timestamp { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when same-document navigation happens, e.g. due to history API usage or anchor navigation.
+        /// </summary>
+        public class NavigatedWithinDocumentEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.navigatedWithinDocument";
+
+            /// <summary>
+            /// Id of the frame.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// Frame's new url.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+        }
+
+        /// <summary>
+        /// Compressed image data requested by the `startScreencast`.
+        /// </summary>
+        public class ScreencastFrameEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.screencastFrame";
+
+            /// <summary>
+            /// Base64-encoded compressed image.
+            /// </summary>
+            [JsonProperty("data")]
+            public string Data { get; set; }
+
+            /// <summary>
+            /// Screencast frame metadata.
+            /// </summary>
+            [JsonProperty("metadata")]
+            public ScreencastFrameMetadata Metadata { get; set; }
+
+            /// <summary>
+            /// Frame number.
+            /// </summary>
+            [JsonProperty("sessionId")]
+            public int SessionId { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when the page with currently enabled screencast was shown or hidden `.
+        /// </summary>
+        public class ScreencastVisibilityChangedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.screencastVisibilityChanged";
+
+            /// <summary>
+            /// True if the page is visible.
+            /// </summary>
+            [JsonProperty("visible")]
+            public bool Visible { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when a new window is going to be opened, via window.open(), link click, form submission,
+        /// etc.
+        /// </summary>
+        public class WindowOpenEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.windowOpen";
+
+            /// <summary>
+            /// The URL for the new window.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Window name.
+            /// </summary>
+            [JsonProperty("windowName")]
+            public string WindowName { get; set; }
+
+            /// <summary>
+            /// An array of enabled window features.
+            /// </summary>
+            [JsonProperty("windowFeatures")]
+            public string[] WindowFeatures { get; set; }
+
+            /// <summary>
+            /// Whether or not it was triggered by user gesture.
+            /// </summary>
+            [JsonProperty("userGesture")]
+            public bool UserGesture { get; set; }
+        }
+
+        /// <summary>
+        /// Issued for every compilation cache generated. Is only available
+        /// if Page.setGenerateCompilationCache is enabled.
+        /// </summary>
+        public class CompilationCacheProducedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Page.compilationCacheProduced";
+
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Base64-encoded data
+            /// </summary>
+            [JsonProperty("data")]
+            public string Data { get; set; }
+        }
     }
 
     namespace Performance
@@ -12217,6 +13825,26 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("metrics")]
             public Metric[] Metrics { get; set; }
+        }
+
+        /// <summary>
+        /// Current values of the metrics.
+        /// </summary>
+        public class MetricsEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Performance.metrics";
+
+            /// <summary>
+            /// Current values of the metrics.
+            /// </summary>
+            [JsonProperty("metrics")]
+            public Metric[] Metrics { get; set; }
+
+            /// <summary>
+            /// Timestamp title.
+            /// </summary>
+            [JsonProperty("title")]
+            public string Title { get; set; }
         }
     }
 
@@ -12460,6 +14088,75 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("override")]
             public bool Override { get; set; }
         }
+
+        /// <summary>
+        /// There is a certificate error. If overriding certificate errors is enabled, then it should be
+        /// handled with the `handleCertificateError` command. Note: this event does not fire if the
+        /// certificate error has been allowed internally. Only one client per target should override
+        /// certificate errors at the same time.
+        /// </summary>
+        [Obsolete]
+        public class CertificateErrorEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Security.certificateError";
+
+            /// <summary>
+            /// The ID of the event.
+            /// </summary>
+            [JsonProperty("eventId")]
+            public int EventId { get; set; }
+
+            /// <summary>
+            /// The type of the error.
+            /// </summary>
+            [JsonProperty("errorType")]
+            public string ErrorType { get; set; }
+
+            /// <summary>
+            /// The url that was requested.
+            /// </summary>
+            [JsonProperty("requestURL")]
+            public string RequestURL { get; set; }
+        }
+
+        /// <summary>
+        /// The security state of the page changed.
+        /// </summary>
+        public class SecurityStateChangedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Security.securityStateChanged";
+
+            /// <summary>
+            /// Security state.
+            /// </summary>
+            [JsonProperty("securityState")]
+            public SecurityState SecurityState { get; set; }
+
+            /// <summary>
+            /// True if the page was loaded over cryptographic transport such as HTTPS.
+            /// </summary>
+            [JsonProperty("schemeIsCryptographic")]
+            public bool SchemeIsCryptographic { get; set; }
+
+            /// <summary>
+            /// List of explanations for the security state. If the overall security state is `insecure` or
+            /// `warning`, at least one corresponding explanation should be included.
+            /// </summary>
+            [JsonProperty("explanations")]
+            public SecurityStateExplanation[] Explanations { get; set; }
+
+            /// <summary>
+            /// Information about insecure content on the page.
+            /// </summary>
+            [JsonProperty("insecureContentStatus")]
+            public InsecureContentStatus InsecureContentStatus { get; set; }
+
+            /// <summary>
+            /// Overrides user-visible description of the state.
+            /// </summary>
+            [JsonProperty("summary")]
+            public string Summary { get; set; }
+        }
     }
 
     namespace ServiceWorker
@@ -12680,6 +14377,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("scopeURL")]
             public string ScopeURL { get; set; }
         }
+
+        public class WorkerErrorReportedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "ServiceWorker.workerErrorReported";
+
+            [JsonProperty("errorMessage")]
+            public ServiceWorkerErrorMessage ErrorMessage { get; set; }
+        }
+
+        public class WorkerRegistrationUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "ServiceWorker.workerRegistrationUpdated";
+
+            [JsonProperty("registrations")]
+            public ServiceWorkerRegistration[] Registrations { get; set; }
+        }
+
+        public class WorkerVersionUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "ServiceWorker.workerVersionUpdated";
+
+            [JsonProperty("versions")]
+            public ServiceWorkerVersion[] Versions { get; set; }
+        }
     }
 
     namespace Storage
@@ -12836,6 +14557,80 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
             /// <summary>
             /// Security origin.
+            /// </summary>
+            [JsonProperty("origin")]
+            public string Origin { get; set; }
+        }
+
+        /// <summary>
+        /// A cache's contents have been modified.
+        /// </summary>
+        public class CacheStorageContentUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Storage.cacheStorageContentUpdated";
+
+            /// <summary>
+            /// Origin to update.
+            /// </summary>
+            [JsonProperty("origin")]
+            public string Origin { get; set; }
+
+            /// <summary>
+            /// Name of cache in origin.
+            /// </summary>
+            [JsonProperty("cacheName")]
+            public string CacheName { get; set; }
+        }
+
+        /// <summary>
+        /// A cache has been added/deleted.
+        /// </summary>
+        public class CacheStorageListUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Storage.cacheStorageListUpdated";
+
+            /// <summary>
+            /// Origin to update.
+            /// </summary>
+            [JsonProperty("origin")]
+            public string Origin { get; set; }
+        }
+
+        /// <summary>
+        /// The origin's IndexedDB object store has been modified.
+        /// </summary>
+        public class IndexedDBContentUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Storage.indexedDBContentUpdated";
+
+            /// <summary>
+            /// Origin to update.
+            /// </summary>
+            [JsonProperty("origin")]
+            public string Origin { get; set; }
+
+            /// <summary>
+            /// Database to update.
+            /// </summary>
+            [JsonProperty("databaseName")]
+            public string DatabaseName { get; set; }
+
+            /// <summary>
+            /// ObjectStore to update.
+            /// </summary>
+            [JsonProperty("objectStoreName")]
+            public string ObjectStoreName { get; set; }
+        }
+
+        /// <summary>
+        /// The origin's IndexedDB database list has been modified.
+        /// </summary>
+        public class IndexedDBListUpdatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Storage.indexedDBListUpdated";
+
+            /// <summary>
+            /// Origin to update.
             /// </summary>
             [JsonProperty("origin")]
             public string Origin { get; set; }
@@ -13410,6 +15205,128 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("locations")]
             public RemoteLocation[] Locations { get; set; }
         }
+
+        /// <summary>
+        /// Issued when attached to target because of auto-attach or `attachToTarget` command.
+        /// </summary>
+        public class AttachedToTargetEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Target.attachedToTarget";
+
+            /// <summary>
+            /// Identifier assigned to the session used to send/receive messages.
+            /// </summary>
+            [JsonProperty("sessionId")]
+            public SessionID SessionId { get; set; }
+
+            [JsonProperty("targetInfo")]
+            public TargetInfo TargetInfo { get; set; }
+
+            [JsonProperty("waitingForDebugger")]
+            public bool WaitingForDebugger { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when detached from target for any reason (including `detachFromTarget` command). Can be
+        /// issued multiple times per target if multiple sessions have been attached to it.
+        /// </summary>
+        public class DetachedFromTargetEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Target.detachedFromTarget";
+
+            /// <summary>
+            /// Detached session identifier.
+            /// </summary>
+            [JsonProperty("sessionId")]
+            public SessionID SessionId { get; set; }
+
+            /// <summary>
+            /// Deprecated.
+            /// </summary>
+            [JsonProperty("targetId")]
+            public TargetID TargetId { get; set; }
+        }
+
+        /// <summary>
+        /// Notifies about a new protocol message received from the session (as reported in
+        /// `attachedToTarget` event).
+        /// </summary>
+        public class ReceivedMessageFromTargetEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Target.receivedMessageFromTarget";
+
+            /// <summary>
+            /// Identifier of a session which sends a message.
+            /// </summary>
+            [JsonProperty("sessionId")]
+            public SessionID SessionId { get; set; }
+
+            [JsonProperty("message")]
+            public string Message { get; set; }
+
+            /// <summary>
+            /// Deprecated.
+            /// </summary>
+            [JsonProperty("targetId")]
+            public TargetID TargetId { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when a possible inspection target is created.
+        /// </summary>
+        public class TargetCreatedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Target.targetCreated";
+
+            [JsonProperty("targetInfo")]
+            public TargetInfo TargetInfo { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when a target is destroyed.
+        /// </summary>
+        public class TargetDestroyedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Target.targetDestroyed";
+
+            [JsonProperty("targetId")]
+            public TargetID TargetId { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when a target has crashed.
+        /// </summary>
+        public class TargetCrashedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Target.targetCrashed";
+
+            [JsonProperty("targetId")]
+            public TargetID TargetId { get; set; }
+
+            /// <summary>
+            /// Termination status type.
+            /// </summary>
+            [JsonProperty("status")]
+            public string Status { get; set; }
+
+            /// <summary>
+            /// Termination error code.
+            /// </summary>
+            [JsonProperty("errorCode")]
+            public int ErrorCode { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when some information about a target has changed. This only happens between
+        /// `targetCreated` and `targetDestroyed`.
+        /// </summary>
+        public class TargetInfoChangedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Target.targetInfoChanged";
+
+            [JsonProperty("targetInfo")]
+            public TargetInfo TargetInfo { get; set; }
+        }
     }
 
     /// <summary>
@@ -13444,6 +15361,26 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("port")]
             public int Port { get; set; }
+        }
+
+        /// <summary>
+        /// Informs that port was successfully bound and got a specified connection id.
+        /// </summary>
+        public class AcceptedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Tethering.accepted";
+
+            /// <summary>
+            /// Port number that was successfully bound.
+            /// </summary>
+            [JsonProperty("port")]
+            public int Port { get; set; }
+
+            /// <summary>
+            /// Connection id to be used.
+            /// </summary>
+            [JsonProperty("connectionId")]
+            public string ConnectionId { get; set; }
         }
     }
 
@@ -13630,6 +15567,64 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
             [JsonProperty("traceConfig")]
             public TraceConfig TraceConfig { get; set; }
+        }
+
+        public class BufferUsageEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Tracing.bufferUsage";
+
+            /// <summary>
+            /// A number in range [0..1] that indicates the used size of event buffer as a fraction of its
+            /// total size.
+            /// </summary>
+            [JsonProperty("percentFull")]
+            public double PercentFull { get; set; }
+
+            /// <summary>
+            /// An approximate number of events in the trace log.
+            /// </summary>
+            [JsonProperty("eventCount")]
+            public double EventCount { get; set; }
+
+            /// <summary>
+            /// A number in range [0..1] that indicates the used size of event buffer as a fraction of its
+            /// total size.
+            /// </summary>
+            [JsonProperty("value")]
+            public double Value { get; set; }
+        }
+
+        /// <summary>
+        /// Contains an bucket of collected trace events. When tracing is stopped collected events will be
+        /// send as a sequence of dataCollected events followed by tracingComplete event.
+        /// </summary>
+        public class DataCollectedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Tracing.dataCollected";
+
+            [JsonProperty("value")]
+            public object[] Value { get; set; }
+        }
+
+        /// <summary>
+        /// Signals that tracing is stopped and there is no trace buffers pending flush, all data were
+        /// delivered via dataCollected events.
+        /// </summary>
+        public class TracingCompleteEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Tracing.tracingComplete";
+
+            /// <summary>
+            /// A handle of the stream that holds resulting trace data.
+            /// </summary>
+            [JsonProperty("stream")]
+            public IO.StreamHandle Stream { get; set; }
+
+            /// <summary>
+            /// Compression format of returned stream.
+            /// </summary>
+            [JsonProperty("streamCompression")]
+            public StreamCompression StreamCompression { get; set; }
         }
     }
 
@@ -14004,6 +15999,102 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
             [JsonProperty("stream")]
             public IO.StreamHandle Stream { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when the domain is enabled and the request URL matches the
+        /// specified filter. The request is paused until the client responds
+        /// with one of continueRequest, failRequest or fulfillRequest.
+        /// The stage of the request can be determined by presence of responseErrorReason
+        /// and responseStatusCode -- the request is at the response stage if either
+        /// of these fields is present and in the request stage otherwise.
+        /// </summary>
+        public class RequestPausedEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Fetch.requestPaused";
+
+            /// <summary>
+            /// Each request the page makes will have a unique id.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// The details of the request.
+            /// </summary>
+            [JsonProperty("request")]
+            public Network.Request Request { get; set; }
+
+            /// <summary>
+            /// The id of the frame that initiated the request.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public Page.FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// How the requested resource will be used.
+            /// </summary>
+            [JsonProperty("resourceType")]
+            public Network.ResourceType ResourceType { get; set; }
+
+            /// <summary>
+            /// Response error if intercepted at response stage.
+            /// </summary>
+            [JsonProperty("responseErrorReason")]
+            public Network.ErrorReason ResponseErrorReason { get; set; }
+
+            /// <summary>
+            /// Response code if intercepted at response stage.
+            /// </summary>
+            [JsonProperty("responseStatusCode")]
+            public int ResponseStatusCode { get; set; }
+
+            /// <summary>
+            /// Response headers if intercepted at the response stage.
+            /// </summary>
+            [JsonProperty("responseHeaders")]
+            public HeaderEntry[] ResponseHeaders { get; set; }
+        }
+
+        /// <summary>
+        /// Issued when the domain is enabled with handleAuthRequests set to true.
+        /// The request is paused until client responds with continueWithAuth.
+        /// </summary>
+        public class AuthRequiredEvent : ICommand
+        {
+            string ICommand.Name { get; } = "Fetch.authRequired";
+
+            /// <summary>
+            /// Each request the page makes will have a unique id.
+            /// </summary>
+            [JsonProperty("requestId")]
+            public RequestId RequestId { get; set; }
+
+            /// <summary>
+            /// The details of the request.
+            /// </summary>
+            [JsonProperty("request")]
+            public Network.Request Request { get; set; }
+
+            /// <summary>
+            /// The id of the frame that initiated the request.
+            /// </summary>
+            [JsonProperty("frameId")]
+            public Page.FrameId FrameId { get; set; }
+
+            /// <summary>
+            /// How the requested resource will be used.
+            /// </summary>
+            [JsonProperty("resourceType")]
+            public Network.ResourceType ResourceType { get; set; }
+
+            /// <summary>
+            /// Details of the Authorization Challenge encountered.
+            /// If this is set, client should respond with continueRequest that
+            /// contains AuthChallengeResponse.
+            /// </summary>
+            [JsonProperty("authChallenge")]
+            public AuthChallenge AuthChallenge { get; set; }
         }
     }
 }
