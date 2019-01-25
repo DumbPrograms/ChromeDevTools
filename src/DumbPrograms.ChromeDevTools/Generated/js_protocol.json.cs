@@ -11,6 +11,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     namespace Console
     {
 
+        #region Types
+
         /// <summary>
         /// Console message.
         /// </summary>
@@ -54,6 +56,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int Column { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Does nothing.
         /// </summary>
@@ -79,6 +85,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Console.enable";
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Issued when new console message is added.
         /// </summary>
@@ -92,6 +102,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("message")]
             public ConsoleMessage Message { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -100,6 +112,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Debugger
     {
+
+        #region Types
 
         /// <summary>
         /// Breakpoint identifier.
@@ -301,6 +315,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("type")]
             public string Type { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Continues execution until specific location is reached.
@@ -992,6 +1010,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Debugger.stepOver";
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Fired when breakpoint is resolved to an actual script and location.
         /// </summary>
@@ -1261,10 +1283,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("stackTrace")]
             public Runtime.StackTrace StackTrace { get; set; }
         }
+
+        #endregion
     }
 
     namespace HeapProfiler
     {
+
+        #region Types
 
         /// <summary>
         /// Heap snapshot object id.
@@ -1349,6 +1375,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("samples")]
             public SamplingHeapProfileSample[] Samples { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Enables console to refer to the node with given id via $x (see Command Line API for more details
@@ -1498,6 +1528,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool ReportProgress { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         public class AddHeapSnapshotChunkEvent : ICommand
         {
             string ICommand.Name { get; } = "HeapProfiler.addHeapSnapshotChunk";
@@ -1556,10 +1590,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "HeapProfiler.resetProfiles";
         }
+
+        #endregion
     }
 
     namespace Profiler
     {
+
+        #region Types
 
         /// <summary>
         /// Profile node. Holds callsite information, execution statistics and child nodes.
@@ -1794,6 +1832,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public TypeProfileEntry[] Entries { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         public class DisableCommand : ICommand
         {
             string ICommand.Name { get; } = "Profiler.disable";
@@ -1941,6 +1983,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public ScriptTypeProfile[] Result { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         public class ConsoleProfileFinishedEvent : ICommand
         {
             string ICommand.Name { get; } = "Profiler.consoleProfileFinished";
@@ -1986,6 +2032,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("title")]
             public string Title { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -1997,6 +2045,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Runtime
     {
+
+        #region Types
 
         /// <summary>
         /// Unique script identifier.
@@ -2560,6 +2610,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("debuggerId")]
             public UniqueDebuggerId DebuggerId { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Add handler to promise with given promise object id.
@@ -3194,6 +3248,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Name { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Notification is issued every time when binding is called.
         /// </summary>
@@ -3347,6 +3405,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("hints")]
             public object Hints { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -3354,6 +3414,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Schema
     {
+
+        #region Types
 
         /// <summary>
         /// Description of the protocol domain.
@@ -3374,6 +3436,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Version { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Returns supported domains.
         /// </summary>
@@ -3391,5 +3457,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("domains")]
             public Domain[] Domains { get; set; }
         }
+
+        #endregion
     }
 }

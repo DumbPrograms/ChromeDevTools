@@ -8,6 +8,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     namespace Accessibility
     {
 
+        #region Types
+
         /// <summary>
         /// Unique accessibility node identifier.
         /// </summary>
@@ -350,6 +352,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public DOM.BackendNodeId BackendDOMNodeId { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Disables the accessibility domain.
         /// </summary>
@@ -424,10 +430,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("nodes")]
             public AXNode[] Nodes { get; set; }
         }
+
+        #endregion
     }
 
     namespace Animation
     {
+
+        #region Types
 
         /// <summary>
         /// Animation instance.
@@ -601,6 +611,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("easing")]
             public string Easing { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Disables animation domain notifications.
@@ -778,6 +792,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public double Delay { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Event for when an animation has been cancelled.
         /// </summary>
@@ -819,10 +837,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("animation")]
             public Animation Animation { get; set; }
         }
+
+        #endregion
     }
 
     namespace ApplicationCache
     {
+
+        #region Types
 
         /// <summary>
         /// Detailed application cache resource information.
@@ -911,6 +933,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int Status { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Enables application cache domain notifications.
         /// </summary>
@@ -987,6 +1013,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string ManifestURL { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         public class ApplicationCacheStatusUpdatedEvent : ICommand
         {
             string ICommand.Name { get; } = "ApplicationCache.applicationCacheStatusUpdated";
@@ -1017,6 +1047,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("isNowOnline")]
             public bool IsNowOnline { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -1024,6 +1056,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Audits
     {
+
+        #region Commands
 
         /// <summary>
         /// Returns the response body and size if it were re-encoded with the specified settings. Only
@@ -1079,6 +1113,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("encodedSize")]
             public int EncodedSize { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -1086,6 +1122,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Browser
     {
+
+        #region Types
 
         public struct WindowID : IAlias<int>
         {
@@ -1235,6 +1273,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("buckets")]
             public Bucket[] Buckets { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Grant specific permissions to the given origin and reject all others.
@@ -1502,6 +1544,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("image")]
             public string Image { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -1514,6 +1558,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace CSS
     {
+
+        #region Types
 
         public struct StyleSheetId : IAlias<string>
         {
@@ -2219,6 +2265,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Text { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Inserts a new rule with the given `ruleText` in a stylesheet with given `styleSheetId`, at the
         /// position specified by `location`.
@@ -2722,6 +2772,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public RuleUsage[] Coverage { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Fires whenever a web font is updated.  A non-empty font parameter indicates a successfully loaded
         /// web font
@@ -2784,10 +2838,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("styleSheetId")]
             public StyleSheetId StyleSheetId { get; set; }
         }
+
+        #endregion
     }
 
     namespace CacheStorage
     {
+
+        #region Types
 
         /// <summary>
         /// Unique identifier of the Cache object.
@@ -2926,6 +2984,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Body { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Deletes a cache.
         /// </summary>
@@ -3061,6 +3123,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("hasMore")]
             public bool HasMore { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -3069,6 +3133,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Cast
     {
+
+        #region Commands
 
         /// <summary>
         /// Starts observing for sinks that can be used for tab mirroring, and if set,
@@ -3127,6 +3193,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string SinkName { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// This is fired whenever the list of available sinks changes. A sink is a
         /// device or a software surface that you can cast to.
@@ -3150,6 +3220,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("issueMessage")]
             public string IssueMessage { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -3163,6 +3235,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace DOM
     {
+
+        #region Types
 
         /// <summary>
         /// Unique DOM node identifier.
@@ -3588,6 +3662,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("height")]
             public double Height { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Collects class names for the node with given id and all of it's child nodes.
@@ -4637,6 +4715,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public NodeId NodeId { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Fired when `Element`'s attribute is modified.
         /// </summary>
@@ -4911,6 +4993,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("root")]
             public Node Root { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -4919,6 +5003,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace DOMDebugger
     {
+
+        #region Types
 
         /// <summary>
         /// DOM breakpoint type.
@@ -5003,6 +5089,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("backendNodeId")]
             public DOM.BackendNodeId BackendNodeId { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Returns event listeners of the given object.
@@ -5178,6 +5268,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("url")]
             public string Url { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -5185,6 +5277,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace DOMSnapshot
     {
+
+        #region Types
 
         /// <summary>
         /// A Node in the DOM tree.
@@ -5790,6 +5884,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int[] Length { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Disables DOM snapshot agent for the given page.
         /// </summary>
@@ -5896,6 +5994,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("strings")]
             public string[] Strings { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -5903,6 +6003,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace DOMStorage
     {
+
+        #region Types
 
         /// <summary>
         /// DOM Storage identifier.
@@ -5936,6 +6038,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             }
 
         }
+
+        #endregion
+
+        #region Commands
 
         public class ClearCommand : ICommand
         {
@@ -6001,6 +6107,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Value { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         public class DomStorageItemAddedEvent : ICommand
         {
             string ICommand.Name { get; } = "DOMStorage.domStorageItemAdded";
@@ -6050,10 +6160,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
         }
+
+        #endregion
     }
 
     namespace Database
     {
+
+        #region Types
 
         /// <summary>
         /// Unique identifier of Database object.
@@ -6119,6 +6233,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int Code { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Disables database tracking, prevents database events from being sent to the client.
         /// </summary>
@@ -6174,6 +6292,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string[] TableNames { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         public class AddDatabaseEvent : ICommand
         {
             string ICommand.Name { get; } = "Database.addDatabase";
@@ -6181,10 +6303,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("database")]
             public Database Database { get; set; }
         }
+
+        #endregion
     }
 
     namespace DeviceOrientation
     {
+
+        #region Commands
 
         /// <summary>
         /// Clears the overridden Device Orientation.
@@ -6219,6 +6345,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("gamma")]
             public double Gamma { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -6226,6 +6354,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Emulation
     {
+
+        #region Types
 
         /// <summary>
         /// Screen orientation.
@@ -6265,6 +6395,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public static VirtualTimePolicy Pause => new VirtualTimePolicy("pause");
             public static VirtualTimePolicy PauseIfNetworkFetchesPending => new VirtualTimePolicy("pauseIfNetworkFetchesPending");
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Tells whether emulation is supported.
@@ -6677,6 +6811,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Platform { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Notification sent after the virtual time has advanced.
         /// </summary>
@@ -6714,6 +6852,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("virtualTimeElapsed")]
             public double VirtualTimeElapsed { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -6721,6 +6861,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace HeadlessExperimental
     {
+
+        #region Types
 
         /// <summary>
         /// Encoding options for a screenshot.
@@ -6740,6 +6882,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("quality")]
             public int Quality { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Sends a BeginFrame to the target and returns when the frame was completed. Optionally captures a
@@ -6815,6 +6961,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "HeadlessExperimental.enable";
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Issued when the target starts or stops needing BeginFrames.
         /// </summary>
@@ -6828,6 +6978,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("needsBeginFrames")]
             public bool NeedsBeginFrames { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -6835,6 +6987,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace IO
     {
+
+        #region Types
 
         /// <summary>
         /// This is either obtained from another method or specifed as `blob:&amp;lt;uuid&amp;gt;` where
@@ -6850,6 +7004,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             }
 
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Close the stream, discard any temporary backing storage.
@@ -6937,10 +7095,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("uuid")]
             public string Uuid { get; set; }
         }
+
+        #endregion
     }
 
     namespace IndexedDB
     {
+
+        #region Types
 
         /// <summary>
         /// Database with an array of object stores.
@@ -7148,6 +7310,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string[] Array { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Clears all entries from an object store.
         /// </summary>
@@ -7352,10 +7518,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("databaseNames")]
             public string[] DatabaseNames { get; set; }
         }
+
+        #endregion
     }
 
     namespace Input
     {
+
+        #region Types
 
         public class TouchPoint
         {
@@ -7431,6 +7601,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             }
 
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Dispatches a key event to the page.
@@ -7894,10 +8068,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("gestureSourceType")]
             public GestureSourceType GestureSourceType { get; set; }
         }
+
+        #endregion
     }
 
     namespace Inspector
     {
+
+        #region Commands
 
         /// <summary>
         /// Disables inspector domain notifications.
@@ -7914,6 +8092,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Inspector.enable";
         }
+
+        #endregion
+
+        #region Events
 
         /// <summary>
         /// Fired when remote debugging connection is about to be terminated. Contains detach reason.
@@ -7944,10 +8126,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Inspector.targetReloadedAfterCrash";
         }
+
+        #endregion
     }
 
     namespace LayerTree
     {
+
+        #region Types
 
         /// <summary>
         /// Unique Layer identifier.
@@ -8170,6 +8356,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Provides the reasons why the given layer was composited.
         /// </summary>
@@ -8377,6 +8567,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public object[] CommandLog { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         public class LayerPaintedEvent : ICommand
         {
             string ICommand.Name { get; } = "LayerTree.layerPainted";
@@ -8404,6 +8598,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("layers")]
             public Layer[] Layers { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -8411,6 +8607,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Log
     {
+
+        #region Types
 
         /// <summary>
         /// Log entry.
@@ -8498,6 +8696,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public double Threshold { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Clears the log.
         /// </summary>
@@ -8545,6 +8747,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Log.stopViolationsReport";
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Issued when new message was logged.
         /// </summary>
@@ -8558,10 +8764,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("entry")]
             public LogEntry Entry { get; set; }
         }
+
+        #endregion
     }
 
     namespace Memory
     {
+
+        #region Types
 
         /// <summary>
         /// Memory pressure level.
@@ -8648,6 +8858,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("size")]
             public double Size { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         public class GetDOMCountersCommand : ICommand<GetDOMCountersResponse>
         {
@@ -8775,6 +8989,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("profile")]
             public SamplingProfile Profile { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -8783,6 +8999,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Network
     {
+
+        #region Types
 
         /// <summary>
         /// Resource type as it was perceived by the rendering engine.
@@ -10003,6 +10221,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public SignedExchangeError[] Errors { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Tells whether clearing browser cache is supported.
         /// </summary>
@@ -10675,6 +10897,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Platform { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Fired when data chunk was received over the network.
         /// </summary>
@@ -11260,6 +11486,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("request")]
             public WebSocketRequest Request { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -11267,6 +11495,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Overlay
     {
+
+        #region Types
 
         /// <summary>
         /// Configuration data for the highlighting of page elements.
@@ -11366,6 +11596,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public static InspectMode SearchForUAShadowDOM => new InspectMode("searchForUAShadowDOM");
             public static InspectMode None => new InspectMode("none");
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Disables domain notifications.
@@ -11672,6 +11906,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool Suspended { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Fired when the node should be inspected. This happens after call to `setInspectMode` or when
         /// user manually inspects an element.
@@ -11711,6 +11949,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("viewport")]
             public Page.Viewport Viewport { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -11718,6 +11958,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Page
     {
+
+        #region Types
 
         /// <summary>
         /// Unique frame identifier.
@@ -12247,6 +12489,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("fixed")]
             public int Fixed { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Deprecated, please use addScriptToEvaluateOnNewDocument instead.
@@ -13389,6 +13635,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Page.waitForDebugger";
         }
 
+        #endregion
+
+        #region Events
+
         public class DomContentEventFiredEvent : ICommand
         {
             string ICommand.Name { get; } = "Page.domContentEventFired";
@@ -13753,10 +14003,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("data")]
             public string Data { get; set; }
         }
+
+        #endregion
     }
 
     namespace Performance
     {
+
+        #region Types
 
         /// <summary>
         /// Run-time execution metric.
@@ -13776,6 +14030,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("value")]
             public double Value { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Disable collecting and reporting metrics.
@@ -13827,6 +14085,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Metric[] Metrics { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Current values of the metrics.
         /// </summary>
@@ -13846,6 +14108,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("title")]
             public string Title { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -13853,6 +14117,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Security
     {
+
+        #region Types
 
         /// <summary>
         /// An internal certificate ID value.
@@ -14022,6 +14288,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public static CertificateErrorAction Cancel => new CertificateErrorAction("cancel");
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Disables tracking security state changes.
         /// </summary>
@@ -14088,6 +14358,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("override")]
             public bool Override { get; set; }
         }
+
+        #endregion
+
+        #region Events
 
         /// <summary>
         /// There is a certificate error. If overriding certificate errors is enabled, then it should be
@@ -14157,10 +14431,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("summary")]
             public string Summary { get; set; }
         }
+
+        #endregion
     }
 
     namespace ServiceWorker
     {
+
+        #region Types
 
         /// <summary>
         /// ServiceWorker registration.
@@ -14276,6 +14554,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int ColumnNumber { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         public class DeliverPushMessageCommand : ICommand
         {
             string ICommand.Name { get; } = "ServiceWorker.deliverPushMessage";
@@ -14378,6 +14660,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string ScopeURL { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         public class WorkerErrorReportedEvent : ICommand
         {
             string ICommand.Name { get; } = "ServiceWorker.workerErrorReported";
@@ -14401,10 +14687,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("versions")]
             public ServiceWorkerVersion[] Versions { get; set; }
         }
+
+        #endregion
     }
 
     namespace Storage
     {
+
+        #region Types
 
         /// <summary>
         /// Enum of possible storage types.
@@ -14449,6 +14739,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("usage")]
             public double Usage { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Clears storage for origin.
@@ -14562,6 +14856,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Origin { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// A cache's contents have been modified.
         /// </summary>
@@ -14635,6 +14933,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("origin")]
             public string Origin { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -14642,6 +14942,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace SystemInfo
     {
+
+        #region Types
 
         /// <summary>
         /// Describes a single graphics processor (GPU).
@@ -14731,6 +15033,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public double CpuTime { get; set; }
         }
 
+        #endregion
+
+        #region Commands
+
         /// <summary>
         /// Returns information about the system.
         /// </summary>
@@ -14787,6 +15093,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("processInfo")]
             public ProcessInfo[] ProcessInfo { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -14794,6 +15102,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Target
     {
+
+        #region Types
 
         public struct TargetID : IAlias<string>
         {
@@ -14871,6 +15181,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("port")]
             public int Port { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Activates (focuses) the target.
@@ -15206,6 +15520,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public RemoteLocation[] Locations { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Issued when attached to target because of auto-attach or `attachToTarget` command.
         /// </summary>
@@ -15327,6 +15645,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("targetInfo")]
             public TargetInfo TargetInfo { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -15334,6 +15654,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Tethering
     {
+
+        #region Commands
 
         /// <summary>
         /// Request browser port binding.
@@ -15363,6 +15685,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int Port { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Informs that port was successfully bound and got a specified connection id.
         /// </summary>
@@ -15382,10 +15708,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("connectionId")]
             public string ConnectionId { get; set; }
         }
+
+        #endregion
     }
 
     namespace Tracing
     {
+
+        #region Types
 
         /// <summary>
         /// Configuration for memory dump. Used only when "memory-infra" category is enabled.
@@ -15461,6 +15791,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public static StreamCompression None => new StreamCompression("none");
             public static StreamCompression Gzip => new StreamCompression("gzip");
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Stop trace events collection.
@@ -15569,6 +15903,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public TraceConfig TraceConfig { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         public class BufferUsageEvent : ICommand
         {
             string ICommand.Name { get; } = "Tracing.bufferUsage";
@@ -15626,6 +15964,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("streamCompression")]
             public StreamCompression StreamCompression { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -15634,6 +15974,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Testing
     {
+
+        #region Commands
 
         /// <summary>
         /// Generates a report for testing.
@@ -15654,6 +15996,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("group")]
             public string Group { get; set; }
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -15661,6 +16005,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
     /// </summary>
     namespace Fetch
     {
+
+        #region Types
 
         /// <summary>
         /// Unique request identifier.
@@ -15789,6 +16135,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("password")]
             public string Password { get; set; }
         }
+
+        #endregion
+
+        #region Commands
 
         /// <summary>
         /// Disables the fetch domain.
@@ -16001,6 +16351,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public IO.StreamHandle Stream { get; set; }
         }
 
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Issued when the domain is enabled and the request URL matches the
         /// specified filter. The request is paused until the client responds
@@ -16096,5 +16450,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("authChallenge")]
             public AuthChallenge AuthChallenge { get; set; }
         }
+
+        #endregion
     }
 }

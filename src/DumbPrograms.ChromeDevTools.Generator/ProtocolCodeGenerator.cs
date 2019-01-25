@@ -34,6 +34,9 @@ namespace DumbPrograms.ChromeDevTools.Generator
                     {
                         if (domain.Types != null)
                         {
+                            WL();
+                            WIL("#region Types");
+
                             foreach (var type in domain.Types)
                             {
                                 WILSummary(type.Description);
@@ -85,10 +88,16 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                         throw new UnreachableCodeReachedException();
                                 }
                             }
+
+                            WL();
+                            WIL("#endregion");
                         }
 
                         if (domain.Commands != null)
                         {
+                            WL();
+                            WIL("#region Commands");
+
                             foreach (var command in domain.Commands)
                             {
                                 WILSummary(command.Description);
@@ -121,10 +130,16 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     }
                                 }
                             }
+
+                            WL();
+                            WIL("#endregion");
                         }
 
                         if (domain.Events != null)
                         {
+                            WL();
+                            WIL("#region Events");
+
                             foreach (var @event in domain.Events)
                             {
                                 WILSummary(@event.Description);
@@ -141,6 +156,9 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     WILProperties(@event.Parameters);
                                 }
                             }
+
+                            WL();
+                            WIL("#endregion");
                         }
                     }
                 }
