@@ -15,7 +15,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
         public override string ToString()
         {
-            return $"{Name}{(Experimental ? "(experimental)" : "")}";
+            return $"{Name}{(Experimental ? " (experimental)" : "")}";
         }
     }
 }

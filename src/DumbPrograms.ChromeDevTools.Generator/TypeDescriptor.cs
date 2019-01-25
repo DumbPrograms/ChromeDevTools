@@ -15,5 +15,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
         [JsonProperty("items")]
         public PropertyDescriptor ArrayType { get; set; }
         public PropertyDescriptor[] Properties { get; set; }
+
+        public override string ToString() => $"{Name}{(Experimental ? " (experimental)" : "")}{(Deprecated ? " (deprecated)" : "")}";
     }
 }
