@@ -81,34 +81,11 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     case JsonTypes.Object:
                                         using (WILBlock($"public class {type.Name}{(type.Properties == null ? " : Dictionary<string, object>" : "")}"))
                                         {
-                                            if (type.Properties != null)
-                                            {
-                                                foreach (var property in type.Properties)
-                                                {
-                                                    string csPropType;
-                                                    if (property.Type != null)
-                                                    {
-                                                        csPropType = GetCSharpType(property.Type.Value, property.ArrayType);
-                                                    }
-                                                    else if (property.TypeReference != null)
-                                                    {
-                                                        csPropType = property.TypeReference;
-                                                    }
-                                                    else
-                                                    {
-                                                        throw new NotImplementedException();
-                                                    }
-
-                                                    WL();
-                                                    WILSummary(property.Description);
-                                                    WIL($"[JsonProperty(\"{property.Name}\")]");
-                                                    WIL($"public {csPropType} {GetCSharpIdentifier(property.Name)} {{ get; set; }}");
-                                                }
-                                            }
+                                            WILProperties(type.Properties);
                                         }
                                         break;
                                     default:
-                                        break;
+                                        throw new UnreachableCodeReachedException();
                                 }
                             }
                         }
@@ -127,30 +104,26 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                 }
 
                                 var commandClassName = GetCSharpIdentifier(command.Name);
-
-                                WI($"public class {commandClassName}Command : ICommand");
-
+                                var commandInterface = "ICommand";
                                 if (command.Returns != null)
                                 {
-                                    WL($"<{commandClassName}Response>");
+                                    commandInterface += $"<{commandClassName}Response>";
                                 }
-                                else
+
+                                using (WILBlock($"public class {commandClassName}Command : {commandInterface}"))
                                 {
-                                    WL();
+                                    WIL($"string ICommand.Name {{ get; }} = \"{domain.Name}.{command.Name}\";");
+
+                                    WILProperties(command.Parameters);
                                 }
-
-                                WILOpen();
-
-                                WIL($"string ICommand.Name {{ get; }} = \"{domain.Name}.{command.Name}\";");
-
-                                WILClose();
 
                                 if (command.Returns != null)
                                 {
                                     WL();
-                                    WIL($"public class {commandClassName}Response");
-                                    WILOpen();
-                                    WILClose();
+                                    using (WILBlock($"public class {commandClassName}Response"))
+                                    {
+                                        WILProperties(command.Returns);
+                                    }
                                 }
                             }
                         }
@@ -225,6 +198,34 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
         BlockStructureWriter WILBlock(string header) => new BlockStructureWriter(this, header);
 
+        void WILProperties(PropertyDescriptor[] properties)
+        {
+            if (properties != null)
+            {
+                foreach (var property in properties)
+                {
+                    string csPropType;
+                    if (property.Type != null)
+                    {
+                        csPropType = GetCSharpType(property.Type.Value, property.ArrayType);
+                    }
+                    else if (property.TypeReference != null)
+                    {
+                        csPropType = property.TypeReference;
+                    }
+                    else
+                    {
+                        throw new NotImplementedException();
+                    }
+
+                    WL();
+                    WILSummary(property.Description);
+                    WIL($"[JsonProperty(\"{property.Name}\")]");
+                    WIL($"public {csPropType} {GetCSharpIdentifier(property.Name)} {{ get; set; }}");
+                }
+            }
+        }
+
         string GetCSharpIdentifier(string name)
             => String.Join("", name.Split('_', '-', ' ').Select(n => Char.ToUpperInvariant(n[0]) + n.Substring(1, n.Length - 1)));
 
@@ -261,7 +262,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                         throw new NotImplementedException();
                     }
                 default:
-                    throw new NotImplementedException();
+                    throw new UnreachableCodeReachedException();
             }
         }
 

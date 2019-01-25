@@ -294,6 +294,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class ContinueToLocationCommand : ICommand
         {
             string ICommand.Name { get; } = "Debugger.continueToLocation";
+
+            /// <summary>
+            /// Location to continue to.
+            /// </summary>
+            [JsonProperty("location")]
+            public Location Location { get; set; }
+
+            [JsonProperty("targetCallFrames")]
+            public string TargetCallFrames { get; set; }
         }
 
         /// <summary>
@@ -315,6 +324,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class EnableResponse
         {
+
+            /// <summary>
+            /// Unique identifier of the debugger.
+            /// </summary>
+            [JsonProperty("debuggerId")]
+            public Runtime.UniqueDebuggerId DebuggerId { get; set; }
         }
 
         /// <summary>
@@ -323,10 +338,79 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class EvaluateOnCallFrameCommand : ICommand<EvaluateOnCallFrameResponse>
         {
             string ICommand.Name { get; } = "Debugger.evaluateOnCallFrame";
+
+            /// <summary>
+            /// Call frame identifier to evaluate on.
+            /// </summary>
+            [JsonProperty("callFrameId")]
+            public CallFrameId CallFrameId { get; set; }
+
+            /// <summary>
+            /// Expression to evaluate.
+            /// </summary>
+            [JsonProperty("expression")]
+            public string Expression { get; set; }
+
+            /// <summary>
+            /// String object group name to put result into (allows rapid releasing resulting object handles
+            /// using `releaseObjectGroup`).
+            /// </summary>
+            [JsonProperty("objectGroup")]
+            public string ObjectGroup { get; set; }
+
+            /// <summary>
+            /// Specifies whether command line API should be available to the evaluated expression, defaults
+            /// to false.
+            /// </summary>
+            [JsonProperty("includeCommandLineAPI")]
+            public bool IncludeCommandLineAPI { get; set; }
+
+            /// <summary>
+            /// In silent mode exceptions thrown during evaluation are not reported and do not pause
+            /// execution. Overrides `setPauseOnException` state.
+            /// </summary>
+            [JsonProperty("silent")]
+            public bool Silent { get; set; }
+
+            /// <summary>
+            /// Whether the result is expected to be a JSON object that should be sent by value.
+            /// </summary>
+            [JsonProperty("returnByValue")]
+            public bool ReturnByValue { get; set; }
+
+            /// <summary>
+            /// Whether preview should be generated for the result.
+            /// </summary>
+            [JsonProperty("generatePreview")]
+            public bool GeneratePreview { get; set; }
+
+            /// <summary>
+            /// Whether to throw an exception if side effect cannot be ruled out during evaluation.
+            /// </summary>
+            [JsonProperty("throwOnSideEffect")]
+            public bool ThrowOnSideEffect { get; set; }
+
+            /// <summary>
+            /// Terminate execution after timing out (number of milliseconds).
+            /// </summary>
+            [JsonProperty("timeout")]
+            public Runtime.TimeDelta Timeout { get; set; }
         }
 
         public class EvaluateOnCallFrameResponse
         {
+
+            /// <summary>
+            /// Object wrapper for the evaluation result.
+            /// </summary>
+            [JsonProperty("result")]
+            public Runtime.RemoteObject Result { get; set; }
+
+            /// <summary>
+            /// Exception details.
+            /// </summary>
+            [JsonProperty("exceptionDetails")]
+            public Runtime.ExceptionDetails ExceptionDetails { get; set; }
         }
 
         /// <summary>
@@ -336,10 +420,35 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class GetPossibleBreakpointsCommand : ICommand<GetPossibleBreakpointsResponse>
         {
             string ICommand.Name { get; } = "Debugger.getPossibleBreakpoints";
+
+            /// <summary>
+            /// Start of range to search possible breakpoint locations in.
+            /// </summary>
+            [JsonProperty("start")]
+            public Location Start { get; set; }
+
+            /// <summary>
+            /// End of range to search possible breakpoint locations in (excluding). When not specified, end
+            /// of scripts is used as end of range.
+            /// </summary>
+            [JsonProperty("end")]
+            public Location End { get; set; }
+
+            /// <summary>
+            /// Only consider locations which are in the same (non-nested) function as start.
+            /// </summary>
+            [JsonProperty("restrictToFunction")]
+            public bool RestrictToFunction { get; set; }
         }
 
         public class GetPossibleBreakpointsResponse
         {
+
+            /// <summary>
+            /// List of the possible breakpoint locations.
+            /// </summary>
+            [JsonProperty("locations")]
+            public BreakLocation[] Locations { get; set; }
         }
 
         /// <summary>
@@ -348,10 +457,22 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class GetScriptSourceCommand : ICommand<GetScriptSourceResponse>
         {
             string ICommand.Name { get; } = "Debugger.getScriptSource";
+
+            /// <summary>
+            /// Id of the script to get source for.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public Runtime.ScriptId ScriptId { get; set; }
         }
 
         public class GetScriptSourceResponse
         {
+
+            /// <summary>
+            /// Script source.
+            /// </summary>
+            [JsonProperty("scriptSource")]
+            public string ScriptSource { get; set; }
         }
 
         /// <summary>
@@ -360,10 +481,16 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class GetStackTraceCommand : ICommand<GetStackTraceResponse>
         {
             string ICommand.Name { get; } = "Debugger.getStackTrace";
+
+            [JsonProperty("stackTraceId")]
+            public Runtime.StackTraceId StackTraceId { get; set; }
         }
 
         public class GetStackTraceResponse
         {
+
+            [JsonProperty("stackTrace")]
+            public Runtime.StackTrace StackTrace { get; set; }
         }
 
         /// <summary>
@@ -377,6 +504,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class PauseOnAsyncCallCommand : ICommand
         {
             string ICommand.Name { get; } = "Debugger.pauseOnAsyncCall";
+
+            /// <summary>
+            /// Debugger will pause when async call with given stack trace is started.
+            /// </summary>
+            [JsonProperty("parentStackTraceId")]
+            public Runtime.StackTraceId ParentStackTraceId { get; set; }
         }
 
         /// <summary>
@@ -385,6 +518,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class RemoveBreakpointCommand : ICommand
         {
             string ICommand.Name { get; } = "Debugger.removeBreakpoint";
+
+            [JsonProperty("breakpointId")]
+            public BreakpointId BreakpointId { get; set; }
         }
 
         /// <summary>
@@ -393,10 +529,34 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class RestartFrameCommand : ICommand<RestartFrameResponse>
         {
             string ICommand.Name { get; } = "Debugger.restartFrame";
+
+            /// <summary>
+            /// Call frame identifier to evaluate on.
+            /// </summary>
+            [JsonProperty("callFrameId")]
+            public CallFrameId CallFrameId { get; set; }
         }
 
         public class RestartFrameResponse
         {
+
+            /// <summary>
+            /// New stack trace.
+            /// </summary>
+            [JsonProperty("callFrames")]
+            public CallFrame[] CallFrames { get; set; }
+
+            /// <summary>
+            /// Async stack trace, if any.
+            /// </summary>
+            [JsonProperty("asyncStackTrace")]
+            public Runtime.StackTrace AsyncStackTrace { get; set; }
+
+            /// <summary>
+            /// Async stack trace, if any.
+            /// </summary>
+            [JsonProperty("asyncStackTraceId")]
+            public Runtime.StackTraceId AsyncStackTraceId { get; set; }
         }
 
         /// <summary>
@@ -413,10 +573,40 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SearchInContentCommand : ICommand<SearchInContentResponse>
         {
             string ICommand.Name { get; } = "Debugger.searchInContent";
+
+            /// <summary>
+            /// Id of the script to search in.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public Runtime.ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// String to search for.
+            /// </summary>
+            [JsonProperty("query")]
+            public string Query { get; set; }
+
+            /// <summary>
+            /// If true, search is case sensitive.
+            /// </summary>
+            [JsonProperty("caseSensitive")]
+            public bool CaseSensitive { get; set; }
+
+            /// <summary>
+            /// If true, treats string parameter as regex.
+            /// </summary>
+            [JsonProperty("isRegex")]
+            public bool IsRegex { get; set; }
         }
 
         public class SearchInContentResponse
         {
+
+            /// <summary>
+            /// List of search matches.
+            /// </summary>
+            [JsonProperty("result")]
+            public SearchMatch[] Result { get; set; }
         }
 
         /// <summary>
@@ -425,6 +615,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetAsyncCallStackDepthCommand : ICommand
         {
             string ICommand.Name { get; } = "Debugger.setAsyncCallStackDepth";
+
+            /// <summary>
+            /// Maximum depth of async call stacks. Setting to `0` will effectively disable collecting async
+            /// call stacks (default).
+            /// </summary>
+            [JsonProperty("maxDepth")]
+            public int MaxDepth { get; set; }
         }
 
         /// <summary>
@@ -435,6 +632,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetBlackboxPatternsCommand : ICommand
         {
             string ICommand.Name { get; } = "Debugger.setBlackboxPatterns";
+
+            /// <summary>
+            /// Array of regexps that will be used to check script url for blackbox state.
+            /// </summary>
+            [JsonProperty("patterns")]
+            public string[] Patterns { get; set; }
         }
 
         /// <summary>
@@ -446,6 +649,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetBlackboxedRangesCommand : ICommand
         {
             string ICommand.Name { get; } = "Debugger.setBlackboxedRanges";
+
+            /// <summary>
+            /// Id of the script.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public Runtime.ScriptId ScriptId { get; set; }
+
+            [JsonProperty("positions")]
+            public ScriptPosition[] Positions { get; set; }
         }
 
         /// <summary>
@@ -454,10 +666,35 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetBreakpointCommand : ICommand<SetBreakpointResponse>
         {
             string ICommand.Name { get; } = "Debugger.setBreakpoint";
+
+            /// <summary>
+            /// Location to set breakpoint in.
+            /// </summary>
+            [JsonProperty("location")]
+            public Location Location { get; set; }
+
+            /// <summary>
+            /// Expression to use as a breakpoint condition. When specified, debugger will only stop on the
+            /// breakpoint if this expression evaluates to true.
+            /// </summary>
+            [JsonProperty("condition")]
+            public string Condition { get; set; }
         }
 
         public class SetBreakpointResponse
         {
+
+            /// <summary>
+            /// Id of the created breakpoint for further reference.
+            /// </summary>
+            [JsonProperty("breakpointId")]
+            public BreakpointId BreakpointId { get; set; }
+
+            /// <summary>
+            /// Location this breakpoint resolved into.
+            /// </summary>
+            [JsonProperty("actualLocation")]
+            public Location ActualLocation { get; set; }
         }
 
         /// <summary>
@@ -469,10 +706,60 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetBreakpointByUrlCommand : ICommand<SetBreakpointByUrlResponse>
         {
             string ICommand.Name { get; } = "Debugger.setBreakpointByUrl";
+
+            /// <summary>
+            /// Line number to set breakpoint at.
+            /// </summary>
+            [JsonProperty("lineNumber")]
+            public int LineNumber { get; set; }
+
+            /// <summary>
+            /// URL of the resources to set breakpoint on.
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Regex pattern for the URLs of the resources to set breakpoints on. Either `url` or
+            /// `urlRegex` must be specified.
+            /// </summary>
+            [JsonProperty("urlRegex")]
+            public string UrlRegex { get; set; }
+
+            /// <summary>
+            /// Script hash of the resources to set breakpoint on.
+            /// </summary>
+            [JsonProperty("scriptHash")]
+            public string ScriptHash { get; set; }
+
+            /// <summary>
+            /// Offset in the line to set breakpoint at.
+            /// </summary>
+            [JsonProperty("columnNumber")]
+            public int ColumnNumber { get; set; }
+
+            /// <summary>
+            /// Expression to use as a breakpoint condition. When specified, debugger will only stop on the
+            /// breakpoint if this expression evaluates to true.
+            /// </summary>
+            [JsonProperty("condition")]
+            public string Condition { get; set; }
         }
 
         public class SetBreakpointByUrlResponse
         {
+
+            /// <summary>
+            /// Id of the created breakpoint for further reference.
+            /// </summary>
+            [JsonProperty("breakpointId")]
+            public BreakpointId BreakpointId { get; set; }
+
+            /// <summary>
+            /// List of the locations this breakpoint resolved into upon addition.
+            /// </summary>
+            [JsonProperty("locations")]
+            public Location[] Locations { get; set; }
         }
 
         /// <summary>
@@ -483,10 +770,29 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetBreakpointOnFunctionCallCommand : ICommand<SetBreakpointOnFunctionCallResponse>
         {
             string ICommand.Name { get; } = "Debugger.setBreakpointOnFunctionCall";
+
+            /// <summary>
+            /// Function object id.
+            /// </summary>
+            [JsonProperty("objectId")]
+            public Runtime.RemoteObjectId ObjectId { get; set; }
+
+            /// <summary>
+            /// Expression to use as a breakpoint condition. When specified, debugger will
+            /// stop on the breakpoint if this expression evaluates to true.
+            /// </summary>
+            [JsonProperty("condition")]
+            public string Condition { get; set; }
         }
 
         public class SetBreakpointOnFunctionCallResponse
         {
+
+            /// <summary>
+            /// Id of the created breakpoint for further reference.
+            /// </summary>
+            [JsonProperty("breakpointId")]
+            public BreakpointId BreakpointId { get; set; }
         }
 
         /// <summary>
@@ -495,6 +801,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetBreakpointsActiveCommand : ICommand
         {
             string ICommand.Name { get; } = "Debugger.setBreakpointsActive";
+
+            /// <summary>
+            /// New value for breakpoints active state.
+            /// </summary>
+            [JsonProperty("active")]
+            public bool Active { get; set; }
         }
 
         /// <summary>
@@ -504,6 +816,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetPauseOnExceptionsCommand : ICommand
         {
             string ICommand.Name { get; } = "Debugger.setPauseOnExceptions";
+
+            /// <summary>
+            /// Pause on exceptions mode.
+            /// </summary>
+            [JsonProperty("state")]
+            public string State { get; set; }
         }
 
         /// <summary>
@@ -512,6 +830,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetReturnValueCommand : ICommand
         {
             string ICommand.Name { get; } = "Debugger.setReturnValue";
+
+            /// <summary>
+            /// New return value.
+            /// </summary>
+            [JsonProperty("newValue")]
+            public Runtime.CallArgument NewValue { get; set; }
         }
 
         /// <summary>
@@ -520,10 +844,59 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetScriptSourceCommand : ICommand<SetScriptSourceResponse>
         {
             string ICommand.Name { get; } = "Debugger.setScriptSource";
+
+            /// <summary>
+            /// Id of the script to edit.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public Runtime.ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// New content of the script.
+            /// </summary>
+            [JsonProperty("scriptSource")]
+            public string ScriptSource { get; set; }
+
+            /// <summary>
+            /// If true the change will not actually be applied. Dry run may be used to get result
+            /// description without actually modifying the code.
+            /// </summary>
+            [JsonProperty("dryRun")]
+            public bool DryRun { get; set; }
         }
 
         public class SetScriptSourceResponse
         {
+
+            /// <summary>
+            /// New stack trace in case editing has happened while VM was stopped.
+            /// </summary>
+            [JsonProperty("callFrames")]
+            public CallFrame[] CallFrames { get; set; }
+
+            /// <summary>
+            /// Whether current call stack  was modified after applying the changes.
+            /// </summary>
+            [JsonProperty("stackChanged")]
+            public bool StackChanged { get; set; }
+
+            /// <summary>
+            /// Async stack trace, if any.
+            /// </summary>
+            [JsonProperty("asyncStackTrace")]
+            public Runtime.StackTrace AsyncStackTrace { get; set; }
+
+            /// <summary>
+            /// Async stack trace, if any.
+            /// </summary>
+            [JsonProperty("asyncStackTraceId")]
+            public Runtime.StackTraceId AsyncStackTraceId { get; set; }
+
+            /// <summary>
+            /// Exception details if any.
+            /// </summary>
+            [JsonProperty("exceptionDetails")]
+            public Runtime.ExceptionDetails ExceptionDetails { get; set; }
         }
 
         /// <summary>
@@ -532,6 +905,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetSkipAllPausesCommand : ICommand
         {
             string ICommand.Name { get; } = "Debugger.setSkipAllPauses";
+
+            /// <summary>
+            /// New value for skip pauses state.
+            /// </summary>
+            [JsonProperty("skip")]
+            public bool Skip { get; set; }
         }
 
         /// <summary>
@@ -541,6 +920,31 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetVariableValueCommand : ICommand
         {
             string ICommand.Name { get; } = "Debugger.setVariableValue";
+
+            /// <summary>
+            /// 0-based number of scope as was listed in scope chain. Only 'local', 'closure' and 'catch'
+            /// scope types are allowed. Other scopes could be manipulated manually.
+            /// </summary>
+            [JsonProperty("scopeNumber")]
+            public int ScopeNumber { get; set; }
+
+            /// <summary>
+            /// Variable name.
+            /// </summary>
+            [JsonProperty("variableName")]
+            public string VariableName { get; set; }
+
+            /// <summary>
+            /// New variable value.
+            /// </summary>
+            [JsonProperty("newValue")]
+            public Runtime.CallArgument NewValue { get; set; }
+
+            /// <summary>
+            /// Id of callframe that holds variable.
+            /// </summary>
+            [JsonProperty("callFrameId")]
+            public CallFrameId CallFrameId { get; set; }
         }
 
         /// <summary>
@@ -549,6 +953,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class StepIntoCommand : ICommand
         {
             string ICommand.Name { get; } = "Debugger.stepInto";
+
+            /// <summary>
+            /// Debugger will issue additional Debugger.paused notification if any async task is scheduled
+            /// before next pause.
+            /// </summary>
+            [JsonProperty("breakOnAsyncCall")]
+            public bool BreakOnAsyncCall { get; set; }
         }
 
         /// <summary>
@@ -662,6 +1073,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class AddInspectedHeapObjectCommand : ICommand
         {
             string ICommand.Name { get; } = "HeapProfiler.addInspectedHeapObject";
+
+            /// <summary>
+            /// Heap snapshot object id to be accessible by means of $x command line API.
+            /// </summary>
+            [JsonProperty("heapObjectId")]
+            public HeapSnapshotObjectId HeapObjectId { get; set; }
         }
 
         public class CollectGarbageCommand : ICommand
@@ -682,19 +1099,46 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class GetHeapObjectIdCommand : ICommand<GetHeapObjectIdResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.getHeapObjectId";
+
+            /// <summary>
+            /// Identifier of the object to get heap object id for.
+            /// </summary>
+            [JsonProperty("objectId")]
+            public Runtime.RemoteObjectId ObjectId { get; set; }
         }
 
         public class GetHeapObjectIdResponse
         {
+
+            /// <summary>
+            /// Id of the heap snapshot object corresponding to the passed remote object id.
+            /// </summary>
+            [JsonProperty("heapSnapshotObjectId")]
+            public HeapSnapshotObjectId HeapSnapshotObjectId { get; set; }
         }
 
         public class GetObjectByHeapObjectIdCommand : ICommand<GetObjectByHeapObjectIdResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.getObjectByHeapObjectId";
+
+            [JsonProperty("objectId")]
+            public HeapSnapshotObjectId ObjectId { get; set; }
+
+            /// <summary>
+            /// Symbolic group name that can be used to release multiple objects.
+            /// </summary>
+            [JsonProperty("objectGroup")]
+            public string ObjectGroup { get; set; }
         }
 
         public class GetObjectByHeapObjectIdResponse
         {
+
+            /// <summary>
+            /// Evaluation result.
+            /// </summary>
+            [JsonProperty("result")]
+            public Runtime.RemoteObject Result { get; set; }
         }
 
         public class GetSamplingProfileCommand : ICommand<GetSamplingProfileResponse>
@@ -704,16 +1148,32 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class GetSamplingProfileResponse
         {
+
+            /// <summary>
+            /// Return the sampling profile being collected.
+            /// </summary>
+            [JsonProperty("profile")]
+            public SamplingHeapProfile Profile { get; set; }
         }
 
         public class StartSamplingCommand : ICommand
         {
             string ICommand.Name { get; } = "HeapProfiler.startSampling";
+
+            /// <summary>
+            /// Average sample interval in bytes. Poisson distribution is used for the intervals. The
+            /// default value is 32768 bytes.
+            /// </summary>
+            [JsonProperty("samplingInterval")]
+            public double SamplingInterval { get; set; }
         }
 
         public class StartTrackingHeapObjectsCommand : ICommand
         {
             string ICommand.Name { get; } = "HeapProfiler.startTrackingHeapObjects";
+
+            [JsonProperty("trackAllocations")]
+            public bool TrackAllocations { get; set; }
         }
 
         public class StopSamplingCommand : ICommand<StopSamplingResponse>
@@ -723,16 +1183,35 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class StopSamplingResponse
         {
+
+            /// <summary>
+            /// Recorded sampling heap profile.
+            /// </summary>
+            [JsonProperty("profile")]
+            public SamplingHeapProfile Profile { get; set; }
         }
 
         public class StopTrackingHeapObjectsCommand : ICommand
         {
             string ICommand.Name { get; } = "HeapProfiler.stopTrackingHeapObjects";
+
+            /// <summary>
+            /// If true 'reportHeapSnapshotProgress' events will be generated while snapshot is being taken
+            /// when the tracking is stopped.
+            /// </summary>
+            [JsonProperty("reportProgress")]
+            public bool ReportProgress { get; set; }
         }
 
         public class TakeHeapSnapshotCommand : ICommand
         {
             string ICommand.Name { get; } = "HeapProfiler.takeHeapSnapshot";
+
+            /// <summary>
+            /// If true 'reportHeapSnapshotProgress' events will be generated while snapshot is being taken.
+            /// </summary>
+            [JsonProperty("reportProgress")]
+            public bool ReportProgress { get; set; }
         }
     }
 
@@ -993,6 +1472,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class GetBestEffortCoverageResponse
         {
+
+            /// <summary>
+            /// Coverage data for the current isolate.
+            /// </summary>
+            [JsonProperty("result")]
+            public ScriptCoverage[] Result { get; set; }
         }
 
         /// <summary>
@@ -1001,6 +1486,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetSamplingIntervalCommand : ICommand
         {
             string ICommand.Name { get; } = "Profiler.setSamplingInterval";
+
+            /// <summary>
+            /// New sampling interval in microseconds.
+            /// </summary>
+            [JsonProperty("interval")]
+            public int Interval { get; set; }
         }
 
         public class StartCommand : ICommand
@@ -1016,6 +1507,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class StartPreciseCoverageCommand : ICommand
         {
             string ICommand.Name { get; } = "Profiler.startPreciseCoverage";
+
+            /// <summary>
+            /// Collect accurate call counts beyond simple 'covered' or 'not covered'.
+            /// </summary>
+            [JsonProperty("callCount")]
+            public bool CallCount { get; set; }
+
+            /// <summary>
+            /// Collect block-based coverage.
+            /// </summary>
+            [JsonProperty("detailed")]
+            public bool Detailed { get; set; }
         }
 
         /// <summary>
@@ -1033,6 +1536,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class StopResponse
         {
+
+            /// <summary>
+            /// Recorded profile.
+            /// </summary>
+            [JsonProperty("profile")]
+            public Profile Profile { get; set; }
         }
 
         /// <summary>
@@ -1063,6 +1572,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class TakePreciseCoverageResponse
         {
+
+            /// <summary>
+            /// Coverage data for the current isolate.
+            /// </summary>
+            [JsonProperty("result")]
+            public ScriptCoverage[] Result { get; set; }
         }
 
         /// <summary>
@@ -1075,6 +1590,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class TakeTypeProfileResponse
         {
+
+            /// <summary>
+            /// Type profile for all scripts since startTypeProfile() was turned on.
+            /// </summary>
+            [JsonProperty("result")]
+            public ScriptTypeProfile[] Result { get; set; }
         }
     }
 
@@ -1657,10 +2178,40 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class AwaitPromiseCommand : ICommand<AwaitPromiseResponse>
         {
             string ICommand.Name { get; } = "Runtime.awaitPromise";
+
+            /// <summary>
+            /// Identifier of the promise.
+            /// </summary>
+            [JsonProperty("promiseObjectId")]
+            public RemoteObjectId PromiseObjectId { get; set; }
+
+            /// <summary>
+            /// Whether the result is expected to be a JSON object that should be sent by value.
+            /// </summary>
+            [JsonProperty("returnByValue")]
+            public bool ReturnByValue { get; set; }
+
+            /// <summary>
+            /// Whether preview should be generated for the result.
+            /// </summary>
+            [JsonProperty("generatePreview")]
+            public bool GeneratePreview { get; set; }
         }
 
         public class AwaitPromiseResponse
         {
+
+            /// <summary>
+            /// Promise result. Will contain rejected value if promise was rejected.
+            /// </summary>
+            [JsonProperty("result")]
+            public RemoteObject Result { get; set; }
+
+            /// <summary>
+            /// Exception details if stack strace is available.
+            /// </summary>
+            [JsonProperty("exceptionDetails")]
+            public ExceptionDetails ExceptionDetails { get; set; }
         }
 
         /// <summary>
@@ -1670,10 +2221,88 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class CallFunctionOnCommand : ICommand<CallFunctionOnResponse>
         {
             string ICommand.Name { get; } = "Runtime.callFunctionOn";
+
+            /// <summary>
+            /// Declaration of the function to call.
+            /// </summary>
+            [JsonProperty("functionDeclaration")]
+            public string FunctionDeclaration { get; set; }
+
+            /// <summary>
+            /// Identifier of the object to call function on. Either objectId or executionContextId should
+            /// be specified.
+            /// </summary>
+            [JsonProperty("objectId")]
+            public RemoteObjectId ObjectId { get; set; }
+
+            /// <summary>
+            /// Call arguments. All call arguments must belong to the same JavaScript world as the target
+            /// object.
+            /// </summary>
+            [JsonProperty("arguments")]
+            public CallArgument[] Arguments { get; set; }
+
+            /// <summary>
+            /// In silent mode exceptions thrown during evaluation are not reported and do not pause
+            /// execution. Overrides `setPauseOnException` state.
+            /// </summary>
+            [JsonProperty("silent")]
+            public bool Silent { get; set; }
+
+            /// <summary>
+            /// Whether the result is expected to be a JSON object which should be sent by value.
+            /// </summary>
+            [JsonProperty("returnByValue")]
+            public bool ReturnByValue { get; set; }
+
+            /// <summary>
+            /// Whether preview should be generated for the result.
+            /// </summary>
+            [JsonProperty("generatePreview")]
+            public bool GeneratePreview { get; set; }
+
+            /// <summary>
+            /// Whether execution should be treated as initiated by user in the UI.
+            /// </summary>
+            [JsonProperty("userGesture")]
+            public bool UserGesture { get; set; }
+
+            /// <summary>
+            /// Whether execution should `await` for resulting value and return once awaited promise is
+            /// resolved.
+            /// </summary>
+            [JsonProperty("awaitPromise")]
+            public bool AwaitPromise { get; set; }
+
+            /// <summary>
+            /// Specifies execution context which global object will be used to call function on. Either
+            /// executionContextId or objectId should be specified.
+            /// </summary>
+            [JsonProperty("executionContextId")]
+            public ExecutionContextId ExecutionContextId { get; set; }
+
+            /// <summary>
+            /// Symbolic group name that can be used to release multiple objects. If objectGroup is not
+            /// specified and objectId is, objectGroup will be inherited from object.
+            /// </summary>
+            [JsonProperty("objectGroup")]
+            public string ObjectGroup { get; set; }
         }
 
         public class CallFunctionOnResponse
         {
+
+            /// <summary>
+            /// Call result.
+            /// </summary>
+            [JsonProperty("result")]
+            public RemoteObject Result { get; set; }
+
+            /// <summary>
+            /// Exception details.
+            /// </summary>
+            [JsonProperty("exceptionDetails")]
+            public ExceptionDetails ExceptionDetails { get; set; }
         }
 
         /// <summary>
@@ -1682,10 +2311,47 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class CompileScriptCommand : ICommand<CompileScriptResponse>
         {
             string ICommand.Name { get; } = "Runtime.compileScript";
+
+            /// <summary>
+            /// Expression to compile.
+            /// </summary>
+            [JsonProperty("expression")]
+            public string Expression { get; set; }
+
+            /// <summary>
+            /// Source url to be set for the script.
+            /// </summary>
+            [JsonProperty("sourceURL")]
+            public string SourceURL { get; set; }
+
+            /// <summary>
+            /// Specifies whether the compiled script should be persisted.
+            /// </summary>
+            [JsonProperty("persistScript")]
+            public bool PersistScript { get; set; }
+
+            /// <summary>
+            /// Specifies in which execution context to perform script run. If the parameter is omitted the
+            /// evaluation will be performed in the context of the inspected page.
+            /// </summary>
+            [JsonProperty("executionContextId")]
+            public ExecutionContextId ExecutionContextId { get; set; }
         }
 
         public class CompileScriptResponse
         {
+
+            /// <summary>
+            /// Id of the script.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// Exception details.
+            /// </summary>
+            [JsonProperty("exceptionDetails")]
+            public ExceptionDetails ExceptionDetails { get; set; }
         }
 
         /// <summary>
@@ -1720,10 +2386,91 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class EvaluateCommand : ICommand<EvaluateResponse>
         {
             string ICommand.Name { get; } = "Runtime.evaluate";
+
+            /// <summary>
+            /// Expression to evaluate.
+            /// </summary>
+            [JsonProperty("expression")]
+            public string Expression { get; set; }
+
+            /// <summary>
+            /// Symbolic group name that can be used to release multiple objects.
+            /// </summary>
+            [JsonProperty("objectGroup")]
+            public string ObjectGroup { get; set; }
+
+            /// <summary>
+            /// Determines whether Command Line API should be available during the evaluation.
+            /// </summary>
+            [JsonProperty("includeCommandLineAPI")]
+            public bool IncludeCommandLineAPI { get; set; }
+
+            /// <summary>
+            /// In silent mode exceptions thrown during evaluation are not reported and do not pause
+            /// execution. Overrides `setPauseOnException` state.
+            /// </summary>
+            [JsonProperty("silent")]
+            public bool Silent { get; set; }
+
+            /// <summary>
+            /// Specifies in which execution context to perform evaluation. If the parameter is omitted the
+            /// evaluation will be performed in the context of the inspected page.
+            /// </summary>
+            [JsonProperty("contextId")]
+            public ExecutionContextId ContextId { get; set; }
+
+            /// <summary>
+            /// Whether the result is expected to be a JSON object that should be sent by value.
+            /// </summary>
+            [JsonProperty("returnByValue")]
+            public bool ReturnByValue { get; set; }
+
+            /// <summary>
+            /// Whether preview should be generated for the result.
+            /// </summary>
+            [JsonProperty("generatePreview")]
+            public bool GeneratePreview { get; set; }
+
+            /// <summary>
+            /// Whether execution should be treated as initiated by user in the UI.
+            /// </summary>
+            [JsonProperty("userGesture")]
+            public bool UserGesture { get; set; }
+
+            /// <summary>
+            /// Whether execution should `await` for resulting value and return once awaited promise is
+            /// resolved.
+            /// </summary>
+            [JsonProperty("awaitPromise")]
+            public bool AwaitPromise { get; set; }
+
+            /// <summary>
+            /// Whether to throw an exception if side effect cannot be ruled out during evaluation.
+            /// </summary>
+            [JsonProperty("throwOnSideEffect")]
+            public bool ThrowOnSideEffect { get; set; }
+
+            /// <summary>
+            /// Terminate execution after timing out (number of milliseconds).
+            /// </summary>
+            [JsonProperty("timeout")]
+            public TimeDelta Timeout { get; set; }
         }
 
         public class EvaluateResponse
         {
+
+            /// <summary>
+            /// Evaluation result.
+            /// </summary>
+            [JsonProperty("result")]
+            public RemoteObject Result { get; set; }
+
+            /// <summary>
+            /// Exception details.
+            /// </summary>
+            [JsonProperty("exceptionDetails")]
+            public ExceptionDetails ExceptionDetails { get; set; }
         }
 
         /// <summary>
@@ -1736,6 +2483,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class GetIsolateIdResponse
         {
+
+            /// <summary>
+            /// The isolate id.
+            /// </summary>
+            [JsonProperty("id")]
+            public string Id { get; set; }
         }
 
         /// <summary>
@@ -1749,6 +2502,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class GetHeapUsageResponse
         {
+
+            /// <summary>
+            /// Used heap size in bytes.
+            /// </summary>
+            [JsonProperty("usedSize")]
+            public double UsedSize { get; set; }
+
+            /// <summary>
+            /// Allocated heap size in bytes.
+            /// </summary>
+            [JsonProperty("totalSize")]
+            public double TotalSize { get; set; }
         }
 
         /// <summary>
@@ -1758,10 +2523,54 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class GetPropertiesCommand : ICommand<GetPropertiesResponse>
         {
             string ICommand.Name { get; } = "Runtime.getProperties";
+
+            /// <summary>
+            /// Identifier of the object to return properties for.
+            /// </summary>
+            [JsonProperty("objectId")]
+            public RemoteObjectId ObjectId { get; set; }
+
+            /// <summary>
+            /// If true, returns properties belonging only to the element itself, not to its prototype
+            /// chain.
+            /// </summary>
+            [JsonProperty("ownProperties")]
+            public bool OwnProperties { get; set; }
+
+            /// <summary>
+            /// If true, returns accessor properties (with getter/setter) only; internal properties are not
+            /// returned either.
+            /// </summary>
+            [JsonProperty("accessorPropertiesOnly")]
+            public bool AccessorPropertiesOnly { get; set; }
+
+            /// <summary>
+            /// Whether preview should be generated for the results.
+            /// </summary>
+            [JsonProperty("generatePreview")]
+            public bool GeneratePreview { get; set; }
         }
 
         public class GetPropertiesResponse
         {
+
+            /// <summary>
+            /// Object properties.
+            /// </summary>
+            [JsonProperty("result")]
+            public PropertyDescriptor[] Result { get; set; }
+
+            /// <summary>
+            /// Internal object properties (only of the element itself).
+            /// </summary>
+            [JsonProperty("internalProperties")]
+            public InternalPropertyDescriptor[] InternalProperties { get; set; }
+
+            /// <summary>
+            /// Exception details.
+            /// </summary>
+            [JsonProperty("exceptionDetails")]
+            public ExceptionDetails ExceptionDetails { get; set; }
         }
 
         /// <summary>
@@ -1770,19 +2579,46 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class GlobalLexicalScopeNamesCommand : ICommand<GlobalLexicalScopeNamesResponse>
         {
             string ICommand.Name { get; } = "Runtime.globalLexicalScopeNames";
+
+            /// <summary>
+            /// Specifies in which execution context to lookup global scope variables.
+            /// </summary>
+            [JsonProperty("executionContextId")]
+            public ExecutionContextId ExecutionContextId { get; set; }
         }
 
         public class GlobalLexicalScopeNamesResponse
         {
+
+            [JsonProperty("names")]
+            public string[] Names { get; set; }
         }
 
         public class QueryObjectsCommand : ICommand<QueryObjectsResponse>
         {
             string ICommand.Name { get; } = "Runtime.queryObjects";
+
+            /// <summary>
+            /// Identifier of the prototype to return objects for.
+            /// </summary>
+            [JsonProperty("prototypeObjectId")]
+            public RemoteObjectId PrototypeObjectId { get; set; }
+
+            /// <summary>
+            /// Symbolic group name that can be used to release the results.
+            /// </summary>
+            [JsonProperty("objectGroup")]
+            public string ObjectGroup { get; set; }
         }
 
         public class QueryObjectsResponse
         {
+
+            /// <summary>
+            /// Array with objects.
+            /// </summary>
+            [JsonProperty("objects")]
+            public RemoteObject Objects { get; set; }
         }
 
         /// <summary>
@@ -1791,6 +2627,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class ReleaseObjectCommand : ICommand
         {
             string ICommand.Name { get; } = "Runtime.releaseObject";
+
+            /// <summary>
+            /// Identifier of the object to release.
+            /// </summary>
+            [JsonProperty("objectId")]
+            public RemoteObjectId ObjectId { get; set; }
         }
 
         /// <summary>
@@ -1799,6 +2641,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class ReleaseObjectGroupCommand : ICommand
         {
             string ICommand.Name { get; } = "Runtime.releaseObjectGroup";
+
+            /// <summary>
+            /// Symbolic object group name.
+            /// </summary>
+            [JsonProperty("objectGroup")]
+            public string ObjectGroup { get; set; }
         }
 
         /// <summary>
@@ -1815,10 +2663,73 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class RunScriptCommand : ICommand<RunScriptResponse>
         {
             string ICommand.Name { get; } = "Runtime.runScript";
+
+            /// <summary>
+            /// Id of the script to run.
+            /// </summary>
+            [JsonProperty("scriptId")]
+            public ScriptId ScriptId { get; set; }
+
+            /// <summary>
+            /// Specifies in which execution context to perform script run. If the parameter is omitted the
+            /// evaluation will be performed in the context of the inspected page.
+            /// </summary>
+            [JsonProperty("executionContextId")]
+            public ExecutionContextId ExecutionContextId { get; set; }
+
+            /// <summary>
+            /// Symbolic group name that can be used to release multiple objects.
+            /// </summary>
+            [JsonProperty("objectGroup")]
+            public string ObjectGroup { get; set; }
+
+            /// <summary>
+            /// In silent mode exceptions thrown during evaluation are not reported and do not pause
+            /// execution. Overrides `setPauseOnException` state.
+            /// </summary>
+            [JsonProperty("silent")]
+            public bool Silent { get; set; }
+
+            /// <summary>
+            /// Determines whether Command Line API should be available during the evaluation.
+            /// </summary>
+            [JsonProperty("includeCommandLineAPI")]
+            public bool IncludeCommandLineAPI { get; set; }
+
+            /// <summary>
+            /// Whether the result is expected to be a JSON object which should be sent by value.
+            /// </summary>
+            [JsonProperty("returnByValue")]
+            public bool ReturnByValue { get; set; }
+
+            /// <summary>
+            /// Whether preview should be generated for the result.
+            /// </summary>
+            [JsonProperty("generatePreview")]
+            public bool GeneratePreview { get; set; }
+
+            /// <summary>
+            /// Whether execution should `await` for resulting value and return once awaited promise is
+            /// resolved.
+            /// </summary>
+            [JsonProperty("awaitPromise")]
+            public bool AwaitPromise { get; set; }
         }
 
         public class RunScriptResponse
         {
+
+            /// <summary>
+            /// Run result.
+            /// </summary>
+            [JsonProperty("result")]
+            public RemoteObject Result { get; set; }
+
+            /// <summary>
+            /// Exception details.
+            /// </summary>
+            [JsonProperty("exceptionDetails")]
+            public ExceptionDetails ExceptionDetails { get; set; }
         }
 
         /// <summary>
@@ -1827,16 +2738,29 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SetAsyncCallStackDepthCommand : ICommand
         {
             string ICommand.Name { get; } = "Runtime.setAsyncCallStackDepth";
+
+            /// <summary>
+            /// Maximum depth of async call stacks. Setting to `0` will effectively disable collecting async
+            /// call stacks (default).
+            /// </summary>
+            [JsonProperty("maxDepth")]
+            public int MaxDepth { get; set; }
         }
 
         public class SetCustomObjectFormatterEnabledCommand : ICommand
         {
             string ICommand.Name { get; } = "Runtime.setCustomObjectFormatterEnabled";
+
+            [JsonProperty("enabled")]
+            public bool Enabled { get; set; }
         }
 
         public class SetMaxCallStackSizeToCaptureCommand : ICommand
         {
             string ICommand.Name { get; } = "Runtime.setMaxCallStackSizeToCapture";
+
+            [JsonProperty("size")]
+            public int Size { get; set; }
         }
 
         /// <summary>
@@ -1861,6 +2785,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class AddBindingCommand : ICommand
         {
             string ICommand.Name { get; } = "Runtime.addBinding";
+
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("executionContextId")]
+            public ExecutionContextId ExecutionContextId { get; set; }
         }
 
         /// <summary>
@@ -1870,6 +2800,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class RemoveBindingCommand : ICommand
         {
             string ICommand.Name { get; } = "Runtime.removeBinding";
+
+            [JsonProperty("name")]
+            public string Name { get; set; }
         }
     }
 
@@ -1908,6 +2841,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         public class GetDomainsResponse
         {
+
+            /// <summary>
+            /// List of supported domains.
+            /// </summary>
+            [JsonProperty("domains")]
+            public Domain[] Domains { get; set; }
         }
     }
 }
