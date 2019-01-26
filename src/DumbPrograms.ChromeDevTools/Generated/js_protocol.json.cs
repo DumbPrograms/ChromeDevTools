@@ -92,9 +92,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when new console message is added.
         /// </summary>
-        public class MessageAddedEvent : ICommand
+        [Event("Console.messageAdded")]
+        public class MessageAddedEvent
         {
-            string ICommand.Name { get; } = "Console.messageAdded";
 
             /// <summary>
             /// Console message that has been added.
@@ -1017,9 +1017,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when breakpoint is resolved to an actual script and location.
         /// </summary>
-        public class BreakpointResolvedEvent : ICommand
+        [Event("Debugger.breakpointResolved")]
+        public class BreakpointResolvedEvent
         {
-            string ICommand.Name { get; } = "Debugger.breakpointResolved";
 
             /// <summary>
             /// Breakpoint unique identifier.
@@ -1037,9 +1037,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.
         /// </summary>
-        public class PausedEvent : ICommand
+        [Event("Debugger.paused")]
+        public class PausedEvent
         {
-            string ICommand.Name { get; } = "Debugger.paused";
 
             /// <summary>
             /// Call stack the virtual machine stopped on.
@@ -1088,17 +1088,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when the virtual machine resumed execution.
         /// </summary>
-        public class ResumedEvent : ICommand
+        [Event("Debugger.resumed")]
+        public class ResumedEvent
         {
-            string ICommand.Name { get; } = "Debugger.resumed";
         }
 
         /// <summary>
         /// Fired when virtual machine fails to parse the script.
         /// </summary>
-        public class ScriptFailedToParseEvent : ICommand
+        [Event("Debugger.scriptFailedToParse")]
+        public class ScriptFailedToParseEvent
         {
-            string ICommand.Name { get; } = "Debugger.scriptFailedToParse";
 
             /// <summary>
             /// Identifier of the script parsed.
@@ -1189,9 +1189,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Fired when virtual machine parses script. This event is also fired for all known and uncollected
         /// scripts upon enabling debugger.
         /// </summary>
-        public class ScriptParsedEvent : ICommand
+        [Event("Debugger.scriptParsed")]
+        public class ScriptParsedEvent
         {
-            string ICommand.Name { get; } = "Debugger.scriptParsed";
 
             /// <summary>
             /// Identifier of the script parsed.
@@ -1532,9 +1532,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
-        public class AddHeapSnapshotChunkEvent : ICommand
+        [Event("HeapProfiler.addHeapSnapshotChunk")]
+        public class AddHeapSnapshotChunkEvent
         {
-            string ICommand.Name { get; } = "HeapProfiler.addHeapSnapshotChunk";
 
             [JsonProperty("chunk")]
             public string Chunk { get; set; }
@@ -1543,9 +1543,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// If heap objects tracking has been started then backend may send update for one or more fragments
         /// </summary>
-        public class HeapStatsUpdateEvent : ICommand
+        [Event("HeapProfiler.heapStatsUpdate")]
+        public class HeapStatsUpdateEvent
         {
-            string ICommand.Name { get; } = "HeapProfiler.heapStatsUpdate";
 
             /// <summary>
             /// An array of triplets. Each triplet describes a fragment. The first integer is the fragment
@@ -1561,9 +1561,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// seen object id and corresponding timestamp. If the were changes in the heap since last event
         /// then one or more heapStatsUpdate events will be sent before a new lastSeenObjectId event.
         /// </summary>
-        public class LastSeenObjectIdEvent : ICommand
+        [Event("HeapProfiler.lastSeenObjectId")]
+        public class LastSeenObjectIdEvent
         {
-            string ICommand.Name { get; } = "HeapProfiler.lastSeenObjectId";
 
             [JsonProperty("lastSeenObjectId")]
             public int LastSeenObjectId { get; set; }
@@ -1572,9 +1572,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public double Timestamp { get; set; }
         }
 
-        public class ReportHeapSnapshotProgressEvent : ICommand
+        [Event("HeapProfiler.reportHeapSnapshotProgress")]
+        public class ReportHeapSnapshotProgressEvent
         {
-            string ICommand.Name { get; } = "HeapProfiler.reportHeapSnapshotProgress";
 
             [JsonProperty("done")]
             public int Done { get; set; }
@@ -1586,9 +1586,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? Finished { get; set; }
         }
 
-        public class ResetProfilesEvent : ICommand
+        [Event("HeapProfiler.resetProfiles")]
+        public class ResetProfilesEvent
         {
-            string ICommand.Name { get; } = "HeapProfiler.resetProfiles";
         }
 
         #endregion
@@ -1987,9 +1987,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
-        public class ConsoleProfileFinishedEvent : ICommand
+        [Event("Profiler.consoleProfileFinished")]
+        public class ConsoleProfileFinishedEvent
         {
-            string ICommand.Name { get; } = "Profiler.consoleProfileFinished";
 
             [JsonProperty("id")]
             public string Id { get; set; }
@@ -2013,9 +2013,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sent when new profile recording is started using console.profile() call.
         /// </summary>
-        public class ConsoleProfileStartedEvent : ICommand
+        [Event("Profiler.consoleProfileStarted")]
+        public class ConsoleProfileStartedEvent
         {
-            string ICommand.Name { get; } = "Profiler.consoleProfileStarted";
 
             [JsonProperty("id")]
             public string Id { get; set; }
@@ -3255,9 +3255,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Notification is issued every time when binding is called.
         /// </summary>
-        public class BindingCalledEvent : ICommand
+        [Event("Runtime.bindingCalled")]
+        public class BindingCalledEvent
         {
-            string ICommand.Name { get; } = "Runtime.bindingCalled";
 
             [JsonProperty("name")]
             public string Name { get; set; }
@@ -3275,9 +3275,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when console API was called.
         /// </summary>
-        public class ConsoleAPICalledEvent : ICommand
+        [Event("Runtime.consoleAPICalled")]
+        public class ConsoleAPICalledEvent
         {
-            string ICommand.Name { get; } = "Runtime.consoleAPICalled";
 
             /// <summary>
             /// Type of the call.
@@ -3321,9 +3321,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when unhandled exception was revoked.
         /// </summary>
-        public class ExceptionRevokedEvent : ICommand
+        [Event("Runtime.exceptionRevoked")]
+        public class ExceptionRevokedEvent
         {
-            string ICommand.Name { get; } = "Runtime.exceptionRevoked";
 
             /// <summary>
             /// Reason describing why exception was revoked.
@@ -3341,9 +3341,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when exception was thrown and unhandled.
         /// </summary>
-        public class ExceptionThrownEvent : ICommand
+        [Event("Runtime.exceptionThrown")]
+        public class ExceptionThrownEvent
         {
-            string ICommand.Name { get; } = "Runtime.exceptionThrown";
 
             /// <summary>
             /// Timestamp of the exception.
@@ -3358,9 +3358,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when new execution context is created.
         /// </summary>
-        public class ExecutionContextCreatedEvent : ICommand
+        [Event("Runtime.executionContextCreated")]
+        public class ExecutionContextCreatedEvent
         {
-            string ICommand.Name { get; } = "Runtime.executionContextCreated";
 
             /// <summary>
             /// A newly created execution context.
@@ -3372,9 +3372,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when execution context is destroyed.
         /// </summary>
-        public class ExecutionContextDestroyedEvent : ICommand
+        [Event("Runtime.executionContextDestroyed")]
+        public class ExecutionContextDestroyedEvent
         {
-            string ICommand.Name { get; } = "Runtime.executionContextDestroyed";
 
             /// <summary>
             /// Id of the destroyed context
@@ -3386,18 +3386,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when all executionContexts were cleared in browser
         /// </summary>
-        public class ExecutionContextsClearedEvent : ICommand
+        [Event("Runtime.executionContextsCleared")]
+        public class ExecutionContextsClearedEvent
         {
-            string ICommand.Name { get; } = "Runtime.executionContextsCleared";
         }
 
         /// <summary>
         /// Issued when object should be inspected (for example, as a result of inspect() command line API
         /// call).
         /// </summary>
-        public class InspectRequestedEvent : ICommand
+        [Event("Runtime.inspectRequested")]
+        public class InspectRequestedEvent
         {
-            string ICommand.Name { get; } = "Runtime.inspectRequested";
 
             [JsonProperty("object")]
             public RemoteObject Object { get; set; }

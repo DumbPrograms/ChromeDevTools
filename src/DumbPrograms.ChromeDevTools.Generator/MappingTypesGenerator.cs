@@ -154,10 +154,10 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     WIL("[Obsolete]");
                                 }
 
-                                using (WILBlock($"public class {GetCSharpIdentifier(@event.Name)}Event : ICommand"))
-                                {
-                                    WIL($"string ICommand.Name {{ get; }} = \"{domain.Name}.{@event.Name}\";");
+                                WIL($"[Event(\"{domain.Name}.{@event.Name}\")]");
 
+                                using (WILBlock($"public class {GetCSharpIdentifier(@event.Name)}Event"))
+                                {
                                     WILProperties(domain.Name, @event.Parameters);
                                 }
                             }

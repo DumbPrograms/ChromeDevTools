@@ -799,9 +799,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Event for when an animation has been cancelled.
         /// </summary>
-        public class AnimationCanceledEvent : ICommand
+        [Event("Animation.animationCanceled")]
+        public class AnimationCanceledEvent
         {
-            string ICommand.Name { get; } = "Animation.animationCanceled";
 
             /// <summary>
             /// Id of the animation that was cancelled.
@@ -813,9 +813,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Event for each animation that has been created.
         /// </summary>
-        public class AnimationCreatedEvent : ICommand
+        [Event("Animation.animationCreated")]
+        public class AnimationCreatedEvent
         {
-            string ICommand.Name { get; } = "Animation.animationCreated";
 
             /// <summary>
             /// Id of the animation that was created.
@@ -827,9 +827,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Event for animation that has been started.
         /// </summary>
-        public class AnimationStartedEvent : ICommand
+        [Event("Animation.animationStarted")]
+        public class AnimationStartedEvent
         {
-            string ICommand.Name { get; } = "Animation.animationStarted";
 
             /// <summary>
             /// Animation that was started.
@@ -1017,9 +1017,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
-        public class ApplicationCacheStatusUpdatedEvent : ICommand
+        [Event("ApplicationCache.applicationCacheStatusUpdated")]
+        public class ApplicationCacheStatusUpdatedEvent
         {
-            string ICommand.Name { get; } = "ApplicationCache.applicationCacheStatusUpdated";
 
             /// <summary>
             /// Identifier of the frame containing document whose application cache updated status.
@@ -1040,9 +1040,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int Status { get; set; }
         }
 
-        public class NetworkStateUpdatedEvent : ICommand
+        [Event("ApplicationCache.networkStateUpdated")]
+        public class NetworkStateUpdatedEvent
         {
-            string ICommand.Name { get; } = "ApplicationCache.networkStateUpdated";
 
             [JsonProperty("isNowOnline")]
             public bool IsNowOnline { get; set; }
@@ -2780,9 +2780,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Fires whenever a web font is updated.  A non-empty font parameter indicates a successfully loaded
         /// web font
         /// </summary>
-        public class FontsUpdatedEvent : ICommand
+        [Event("CSS.fontsUpdated")]
+        public class FontsUpdatedEvent
         {
-            string ICommand.Name { get; } = "CSS.fontsUpdated";
 
             /// <summary>
             /// The web font that has loaded.
@@ -2795,17 +2795,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Fires whenever a MediaQuery result changes (for example, after a browser window has been
         /// resized.) The current implementation considers only viewport-dependent media features.
         /// </summary>
-        public class MediaQueryResultChangedEvent : ICommand
+        [Event("CSS.mediaQueryResultChanged")]
+        public class MediaQueryResultChangedEvent
         {
-            string ICommand.Name { get; } = "CSS.mediaQueryResultChanged";
         }
 
         /// <summary>
         /// Fired whenever an active document stylesheet is added.
         /// </summary>
-        public class StyleSheetAddedEvent : ICommand
+        [Event("CSS.styleSheetAdded")]
+        public class StyleSheetAddedEvent
         {
-            string ICommand.Name { get; } = "CSS.styleSheetAdded";
 
             /// <summary>
             /// Added stylesheet metainfo.
@@ -2817,9 +2817,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired whenever a stylesheet is changed as a result of the client operation.
         /// </summary>
-        public class StyleSheetChangedEvent : ICommand
+        [Event("CSS.styleSheetChanged")]
+        public class StyleSheetChangedEvent
         {
-            string ICommand.Name { get; } = "CSS.styleSheetChanged";
 
             [JsonProperty("styleSheetId")]
             public StyleSheetId StyleSheetId { get; set; }
@@ -2828,9 +2828,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired whenever an active document stylesheet is removed.
         /// </summary>
-        public class StyleSheetRemovedEvent : ICommand
+        [Event("CSS.styleSheetRemoved")]
+        public class StyleSheetRemovedEvent
         {
-            string ICommand.Name { get; } = "CSS.styleSheetRemoved";
 
             /// <summary>
             /// Identifier of the removed stylesheet.
@@ -3201,9 +3201,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// This is fired whenever the list of available sinks changes. A sink is a
         /// device or a software surface that you can cast to.
         /// </summary>
-        public class SinksUpdatedEvent : ICommand
+        [Event("Cast.sinksUpdated")]
+        public class SinksUpdatedEvent
         {
-            string ICommand.Name { get; } = "Cast.sinksUpdated";
 
             [JsonProperty("sinkNames")]
             public string[] SinkNames { get; set; }
@@ -3213,9 +3213,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// This is fired whenever the outstanding issue/error message changes.
         /// |issueMessage| is empty if there is no issue.
         /// </summary>
-        public class IssueUpdatedEvent : ICommand
+        [Event("Cast.issueUpdated")]
+        public class IssueUpdatedEvent
         {
-            string ICommand.Name { get; } = "Cast.issueUpdated";
 
             [JsonProperty("issueMessage")]
             public string IssueMessage { get; set; }
@@ -4722,9 +4722,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when `Element`'s attribute is modified.
         /// </summary>
-        public class AttributeModifiedEvent : ICommand
+        [Event("DOM.attributeModified")]
+        public class AttributeModifiedEvent
         {
-            string ICommand.Name { get; } = "DOM.attributeModified";
 
             /// <summary>
             /// Id of the node that has changed.
@@ -4748,9 +4748,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when `Element`'s attribute is removed.
         /// </summary>
-        public class AttributeRemovedEvent : ICommand
+        [Event("DOM.attributeRemoved")]
+        public class AttributeRemovedEvent
         {
-            string ICommand.Name { get; } = "DOM.attributeRemoved";
 
             /// <summary>
             /// Id of the node that has changed.
@@ -4768,9 +4768,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Mirrors `DOMCharacterDataModified` event.
         /// </summary>
-        public class CharacterDataModifiedEvent : ICommand
+        [Event("DOM.characterDataModified")]
+        public class CharacterDataModifiedEvent
         {
-            string ICommand.Name { get; } = "DOM.characterDataModified";
 
             /// <summary>
             /// Id of the node that has changed.
@@ -4788,9 +4788,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when `Container`'s child node count has changed.
         /// </summary>
-        public class ChildNodeCountUpdatedEvent : ICommand
+        [Event("DOM.childNodeCountUpdated")]
+        public class ChildNodeCountUpdatedEvent
         {
-            string ICommand.Name { get; } = "DOM.childNodeCountUpdated";
 
             /// <summary>
             /// Id of the node that has changed.
@@ -4808,9 +4808,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Mirrors `DOMNodeInserted` event.
         /// </summary>
-        public class ChildNodeInsertedEvent : ICommand
+        [Event("DOM.childNodeInserted")]
+        public class ChildNodeInsertedEvent
         {
-            string ICommand.Name { get; } = "DOM.childNodeInserted";
 
             /// <summary>
             /// Id of the node that has changed.
@@ -4834,9 +4834,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Mirrors `DOMNodeRemoved` event.
         /// </summary>
-        public class ChildNodeRemovedEvent : ICommand
+        [Event("DOM.childNodeRemoved")]
+        public class ChildNodeRemovedEvent
         {
-            string ICommand.Name { get; } = "DOM.childNodeRemoved";
 
             /// <summary>
             /// Parent id.
@@ -4854,9 +4854,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Called when distrubution is changed.
         /// </summary>
-        public class DistributedNodesUpdatedEvent : ICommand
+        [Event("DOM.distributedNodesUpdated")]
+        public class DistributedNodesUpdatedEvent
         {
-            string ICommand.Name { get; } = "DOM.distributedNodesUpdated";
 
             /// <summary>
             /// Insertion point where distrubuted nodes were updated.
@@ -4874,17 +4874,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when `Document` has been totally updated. Node ids are no longer valid.
         /// </summary>
-        public class DocumentUpdatedEvent : ICommand
+        [Event("DOM.documentUpdated")]
+        public class DocumentUpdatedEvent
         {
-            string ICommand.Name { get; } = "DOM.documentUpdated";
         }
 
         /// <summary>
         /// Fired when `Element`'s inline style is modified via a CSS property modification.
         /// </summary>
-        public class InlineStyleInvalidatedEvent : ICommand
+        [Event("DOM.inlineStyleInvalidated")]
+        public class InlineStyleInvalidatedEvent
         {
-            string ICommand.Name { get; } = "DOM.inlineStyleInvalidated";
 
             /// <summary>
             /// Ids of the nodes for which the inline styles have been invalidated.
@@ -4896,9 +4896,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Called when a pseudo element is added to an element.
         /// </summary>
-        public class PseudoElementAddedEvent : ICommand
+        [Event("DOM.pseudoElementAdded")]
+        public class PseudoElementAddedEvent
         {
-            string ICommand.Name { get; } = "DOM.pseudoElementAdded";
 
             /// <summary>
             /// Pseudo element's parent element id.
@@ -4916,9 +4916,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Called when a pseudo element is removed from an element.
         /// </summary>
-        public class PseudoElementRemovedEvent : ICommand
+        [Event("DOM.pseudoElementRemoved")]
+        public class PseudoElementRemovedEvent
         {
-            string ICommand.Name { get; } = "DOM.pseudoElementRemoved";
 
             /// <summary>
             /// Pseudo element's parent element id.
@@ -4937,9 +4937,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Fired when backend wants to provide client with the missing DOM structure. This happens upon
         /// most of the calls requesting node ids.
         /// </summary>
-        public class SetChildNodesEvent : ICommand
+        [Event("DOM.setChildNodes")]
+        public class SetChildNodesEvent
         {
-            string ICommand.Name { get; } = "DOM.setChildNodes";
 
             /// <summary>
             /// Parent node id to populate with children.
@@ -4957,9 +4957,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Called when shadow root is popped from the element.
         /// </summary>
-        public class ShadowRootPoppedEvent : ICommand
+        [Event("DOM.shadowRootPopped")]
+        public class ShadowRootPoppedEvent
         {
-            string ICommand.Name { get; } = "DOM.shadowRootPopped";
 
             /// <summary>
             /// Host element id.
@@ -4977,9 +4977,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Called when shadow root is pushed into the element.
         /// </summary>
-        public class ShadowRootPushedEvent : ICommand
+        [Event("DOM.shadowRootPushed")]
+        public class ShadowRootPushedEvent
         {
-            string ICommand.Name { get; } = "DOM.shadowRootPushed";
 
             /// <summary>
             /// Host element id.
@@ -6111,9 +6111,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
-        public class DomStorageItemAddedEvent : ICommand
+        [Event("DOMStorage.domStorageItemAdded")]
+        public class DomStorageItemAddedEvent
         {
-            string ICommand.Name { get; } = "DOMStorage.domStorageItemAdded";
 
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
@@ -6125,9 +6125,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string NewValue { get; set; }
         }
 
-        public class DomStorageItemRemovedEvent : ICommand
+        [Event("DOMStorage.domStorageItemRemoved")]
+        public class DomStorageItemRemovedEvent
         {
-            string ICommand.Name { get; } = "DOMStorage.domStorageItemRemoved";
 
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
@@ -6136,9 +6136,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Key { get; set; }
         }
 
-        public class DomStorageItemUpdatedEvent : ICommand
+        [Event("DOMStorage.domStorageItemUpdated")]
+        public class DomStorageItemUpdatedEvent
         {
-            string ICommand.Name { get; } = "DOMStorage.domStorageItemUpdated";
 
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
@@ -6153,9 +6153,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string NewValue { get; set; }
         }
 
-        public class DomStorageItemsClearedEvent : ICommand
+        [Event("DOMStorage.domStorageItemsCleared")]
+        public class DomStorageItemsClearedEvent
         {
-            string ICommand.Name { get; } = "DOMStorage.domStorageItemsCleared";
 
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
@@ -6296,9 +6296,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
-        public class AddDatabaseEvent : ICommand
+        [Event("Database.addDatabase")]
+        public class AddDatabaseEvent
         {
-            string ICommand.Name { get; } = "Database.addDatabase";
 
             [JsonProperty("database")]
             public Database Database { get; set; }
@@ -6818,9 +6818,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Notification sent after the virtual time has advanced.
         /// </summary>
-        public class VirtualTimeAdvancedEvent : ICommand
+        [Event("Emulation.virtualTimeAdvanced")]
+        public class VirtualTimeAdvancedEvent
         {
-            string ICommand.Name { get; } = "Emulation.virtualTimeAdvanced";
 
             /// <summary>
             /// The amount of virtual time that has elapsed in milliseconds since virtual time was first
@@ -6833,17 +6833,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Notification sent after the virtual time budget for the current VirtualTimePolicy has run out.
         /// </summary>
-        public class VirtualTimeBudgetExpiredEvent : ICommand
+        [Event("Emulation.virtualTimeBudgetExpired")]
+        public class VirtualTimeBudgetExpiredEvent
         {
-            string ICommand.Name { get; } = "Emulation.virtualTimeBudgetExpired";
         }
 
         /// <summary>
         /// Notification sent after the virtual time has paused.
         /// </summary>
-        public class VirtualTimePausedEvent : ICommand
+        [Event("Emulation.virtualTimePaused")]
+        public class VirtualTimePausedEvent
         {
-            string ICommand.Name { get; } = "Emulation.virtualTimePaused";
 
             /// <summary>
             /// The amount of virtual time that has elapsed in milliseconds since virtual time was first
@@ -6968,9 +6968,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when the target starts or stops needing BeginFrames.
         /// </summary>
-        public class NeedsBeginFramesChangedEvent : ICommand
+        [Event("HeadlessExperimental.needsBeginFramesChanged")]
+        public class NeedsBeginFramesChangedEvent
         {
-            string ICommand.Name { get; } = "HeadlessExperimental.needsBeginFramesChanged";
 
             /// <summary>
             /// True if BeginFrames are needed, false otherwise.
@@ -8100,9 +8100,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when remote debugging connection is about to be terminated. Contains detach reason.
         /// </summary>
-        public class DetachedEvent : ICommand
+        [Event("Inspector.detached")]
+        public class DetachedEvent
         {
-            string ICommand.Name { get; } = "Inspector.detached";
 
             /// <summary>
             /// The reason why connection has been terminated.
@@ -8114,17 +8114,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when debugging target has crashed
         /// </summary>
-        public class TargetCrashedEvent : ICommand
+        [Event("Inspector.targetCrashed")]
+        public class TargetCrashedEvent
         {
-            string ICommand.Name { get; } = "Inspector.targetCrashed";
         }
 
         /// <summary>
         /// Fired when debugging target has reloaded after crash
         /// </summary>
-        public class TargetReloadedAfterCrashEvent : ICommand
+        [Event("Inspector.targetReloadedAfterCrash")]
+        public class TargetReloadedAfterCrashEvent
         {
-            string ICommand.Name { get; } = "Inspector.targetReloadedAfterCrash";
         }
 
         #endregion
@@ -8571,9 +8571,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
-        public class LayerPaintedEvent : ICommand
+        [Event("LayerTree.layerPainted")]
+        public class LayerPaintedEvent
         {
-            string ICommand.Name { get; } = "LayerTree.layerPainted";
 
             /// <summary>
             /// The id of the painted layer.
@@ -8588,9 +8588,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public DOM.Rect Clip { get; set; }
         }
 
-        public class LayerTreeDidChangeEvent : ICommand
+        [Event("LayerTree.layerTreeDidChange")]
+        public class LayerTreeDidChangeEvent
         {
-            string ICommand.Name { get; } = "LayerTree.layerTreeDidChange";
 
             /// <summary>
             /// Layer tree, absent if not in the comspositing mode.
@@ -8754,9 +8754,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when new message was logged.
         /// </summary>
-        public class EntryAddedEvent : ICommand
+        [Event("Log.entryAdded")]
+        public class EntryAddedEvent
         {
-            string ICommand.Name { get; } = "Log.entryAdded";
 
             /// <summary>
             /// The entry.
@@ -10904,9 +10904,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when data chunk was received over the network.
         /// </summary>
-        public class DataReceivedEvent : ICommand
+        [Event("Network.dataReceived")]
+        public class DataReceivedEvent
         {
-            string ICommand.Name { get; } = "Network.dataReceived";
 
             /// <summary>
             /// Request identifier.
@@ -10936,9 +10936,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when EventSource message is received.
         /// </summary>
-        public class EventSourceMessageReceivedEvent : ICommand
+        [Event("Network.eventSourceMessageReceived")]
+        public class EventSourceMessageReceivedEvent
         {
-            string ICommand.Name { get; } = "Network.eventSourceMessageReceived";
 
             /// <summary>
             /// Request identifier.
@@ -10974,9 +10974,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when HTTP request has failed to load.
         /// </summary>
-        public class LoadingFailedEvent : ICommand
+        [Event("Network.loadingFailed")]
+        public class LoadingFailedEvent
         {
-            string ICommand.Name { get; } = "Network.loadingFailed";
 
             /// <summary>
             /// Request identifier.
@@ -11018,9 +11018,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when HTTP request has finished loading.
         /// </summary>
-        public class LoadingFinishedEvent : ICommand
+        [Event("Network.loadingFinished")]
+        public class LoadingFinishedEvent
         {
-            string ICommand.Name { get; } = "Network.loadingFinished";
 
             /// <summary>
             /// Request identifier.
@@ -11052,9 +11052,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Details of an intercepted HTTP request, which must be either allowed, blocked, modified or
         /// mocked.
         /// </summary>
-        public class RequestInterceptedEvent : ICommand
+        [Event("Network.requestIntercepted")]
+        public class RequestInterceptedEvent
         {
-            string ICommand.Name { get; } = "Network.requestIntercepted";
 
             /// <summary>
             /// Each request the page makes will have a unique id, however if any redirects are encountered
@@ -11130,9 +11130,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired if request ended up loading from cache.
         /// </summary>
-        public class RequestServedFromCacheEvent : ICommand
+        [Event("Network.requestServedFromCache")]
+        public class RequestServedFromCacheEvent
         {
-            string ICommand.Name { get; } = "Network.requestServedFromCache";
 
             /// <summary>
             /// Request identifier.
@@ -11144,9 +11144,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when page is about to send HTTP request.
         /// </summary>
-        public class RequestWillBeSentEvent : ICommand
+        [Event("Network.requestWillBeSent")]
+        public class RequestWillBeSentEvent
         {
-            string ICommand.Name { get; } = "Network.requestWillBeSent";
 
             /// <summary>
             /// Request identifier.
@@ -11218,9 +11218,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when resource loading priority is changed
         /// </summary>
-        public class ResourceChangedPriorityEvent : ICommand
+        [Event("Network.resourceChangedPriority")]
+        public class ResourceChangedPriorityEvent
         {
-            string ICommand.Name { get; } = "Network.resourceChangedPriority";
 
             /// <summary>
             /// Request identifier.
@@ -11244,9 +11244,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when a signed exchange was received over the network
         /// </summary>
-        public class SignedExchangeReceivedEvent : ICommand
+        [Event("Network.signedExchangeReceived")]
+        public class SignedExchangeReceivedEvent
         {
-            string ICommand.Name { get; } = "Network.signedExchangeReceived";
 
             /// <summary>
             /// Request identifier.
@@ -11264,9 +11264,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when HTTP response is available.
         /// </summary>
-        public class ResponseReceivedEvent : ICommand
+        [Event("Network.responseReceived")]
+        public class ResponseReceivedEvent
         {
-            string ICommand.Name { get; } = "Network.responseReceived";
 
             /// <summary>
             /// Request identifier.
@@ -11308,9 +11308,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when WebSocket is closed.
         /// </summary>
-        public class WebSocketClosedEvent : ICommand
+        [Event("Network.webSocketClosed")]
+        public class WebSocketClosedEvent
         {
-            string ICommand.Name { get; } = "Network.webSocketClosed";
 
             /// <summary>
             /// Request identifier.
@@ -11328,9 +11328,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired upon WebSocket creation.
         /// </summary>
-        public class WebSocketCreatedEvent : ICommand
+        [Event("Network.webSocketCreated")]
+        public class WebSocketCreatedEvent
         {
-            string ICommand.Name { get; } = "Network.webSocketCreated";
 
             /// <summary>
             /// Request identifier.
@@ -11354,9 +11354,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when WebSocket message error occurs.
         /// </summary>
-        public class WebSocketFrameErrorEvent : ICommand
+        [Event("Network.webSocketFrameError")]
+        public class WebSocketFrameErrorEvent
         {
-            string ICommand.Name { get; } = "Network.webSocketFrameError";
 
             /// <summary>
             /// Request identifier.
@@ -11380,9 +11380,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when WebSocket message is received.
         /// </summary>
-        public class WebSocketFrameReceivedEvent : ICommand
+        [Event("Network.webSocketFrameReceived")]
+        public class WebSocketFrameReceivedEvent
         {
-            string ICommand.Name { get; } = "Network.webSocketFrameReceived";
 
             /// <summary>
             /// Request identifier.
@@ -11406,9 +11406,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when WebSocket message is sent.
         /// </summary>
-        public class WebSocketFrameSentEvent : ICommand
+        [Event("Network.webSocketFrameSent")]
+        public class WebSocketFrameSentEvent
         {
-            string ICommand.Name { get; } = "Network.webSocketFrameSent";
 
             /// <summary>
             /// Request identifier.
@@ -11432,9 +11432,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when WebSocket handshake response becomes available.
         /// </summary>
-        public class WebSocketHandshakeResponseReceivedEvent : ICommand
+        [Event("Network.webSocketHandshakeResponseReceived")]
+        public class WebSocketHandshakeResponseReceivedEvent
         {
-            string ICommand.Name { get; } = "Network.webSocketHandshakeResponseReceived";
 
             /// <summary>
             /// Request identifier.
@@ -11458,9 +11458,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when WebSocket is about to initiate handshake.
         /// </summary>
-        public class WebSocketWillSendHandshakeRequestEvent : ICommand
+        [Event("Network.webSocketWillSendHandshakeRequest")]
+        public class WebSocketWillSendHandshakeRequestEvent
         {
-            string ICommand.Name { get; } = "Network.webSocketWillSendHandshakeRequest";
 
             /// <summary>
             /// Request identifier.
@@ -11914,9 +11914,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Fired when the node should be inspected. This happens after call to `setInspectMode` or when
         /// user manually inspects an element.
         /// </summary>
-        public class InspectNodeRequestedEvent : ICommand
+        [Event("Overlay.inspectNodeRequested")]
+        public class InspectNodeRequestedEvent
         {
-            string ICommand.Name { get; } = "Overlay.inspectNodeRequested";
 
             /// <summary>
             /// Id of the node to inspect.
@@ -11928,9 +11928,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when the node should be highlighted. This happens after call to `setInspectMode`.
         /// </summary>
-        public class NodeHighlightRequestedEvent : ICommand
+        [Event("Overlay.nodeHighlightRequested")]
+        public class NodeHighlightRequestedEvent
         {
-            string ICommand.Name { get; } = "Overlay.nodeHighlightRequested";
 
             [JsonProperty("nodeId")]
             public DOM.NodeId NodeId { get; set; }
@@ -11939,9 +11939,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when user asks to capture screenshot of some area on the page.
         /// </summary>
-        public class ScreenshotRequestedEvent : ICommand
+        [Event("Overlay.screenshotRequested")]
+        public class ScreenshotRequestedEvent
         {
-            string ICommand.Name { get; } = "Overlay.screenshotRequested";
 
             /// <summary>
             /// Viewport to capture, in device independent pixels (dip).
@@ -13639,9 +13639,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
-        public class DomContentEventFiredEvent : ICommand
+        [Event("Page.domContentEventFired")]
+        public class DomContentEventFiredEvent
         {
-            string ICommand.Name { get; } = "Page.domContentEventFired";
 
             [JsonProperty("timestamp")]
             public Network.MonotonicTime Timestamp { get; set; }
@@ -13650,9 +13650,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when frame has been attached to its parent.
         /// </summary>
-        public class FrameAttachedEvent : ICommand
+        [Event("Page.frameAttached")]
+        public class FrameAttachedEvent
         {
-            string ICommand.Name { get; } = "Page.frameAttached";
 
             /// <summary>
             /// Id of the frame that has been attached.
@@ -13676,9 +13676,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when frame no longer has a scheduled navigation.
         /// </summary>
-        public class FrameClearedScheduledNavigationEvent : ICommand
+        [Event("Page.frameClearedScheduledNavigation")]
+        public class FrameClearedScheduledNavigationEvent
         {
-            string ICommand.Name { get; } = "Page.frameClearedScheduledNavigation";
 
             /// <summary>
             /// Id of the frame that has cleared its scheduled navigation.
@@ -13690,9 +13690,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when frame has been detached from its parent.
         /// </summary>
-        public class FrameDetachedEvent : ICommand
+        [Event("Page.frameDetached")]
+        public class FrameDetachedEvent
         {
-            string ICommand.Name { get; } = "Page.frameDetached";
 
             /// <summary>
             /// Id of the frame that has been detached.
@@ -13704,9 +13704,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired once navigation of the frame has completed. Frame is now associated with the new loader.
         /// </summary>
-        public class FrameNavigatedEvent : ICommand
+        [Event("Page.frameNavigated")]
+        public class FrameNavigatedEvent
         {
-            string ICommand.Name { get; } = "Page.frameNavigated";
 
             /// <summary>
             /// Frame object.
@@ -13715,17 +13715,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Frame Frame { get; set; }
         }
 
-        public class FrameResizedEvent : ICommand
+        [Event("Page.frameResized")]
+        public class FrameResizedEvent
         {
-            string ICommand.Name { get; } = "Page.frameResized";
         }
 
         /// <summary>
         /// Fired when frame schedules a potential navigation.
         /// </summary>
-        public class FrameScheduledNavigationEvent : ICommand
+        [Event("Page.frameScheduledNavigation")]
+        public class FrameScheduledNavigationEvent
         {
-            string ICommand.Name { get; } = "Page.frameScheduledNavigation";
 
             /// <summary>
             /// Id of the frame that has scheduled a navigation.
@@ -13756,9 +13756,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when frame has started loading.
         /// </summary>
-        public class FrameStartedLoadingEvent : ICommand
+        [Event("Page.frameStartedLoading")]
+        public class FrameStartedLoadingEvent
         {
-            string ICommand.Name { get; } = "Page.frameStartedLoading";
 
             /// <summary>
             /// Id of the frame that has started loading.
@@ -13770,9 +13770,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when frame has stopped loading.
         /// </summary>
-        public class FrameStoppedLoadingEvent : ICommand
+        [Event("Page.frameStoppedLoading")]
+        public class FrameStoppedLoadingEvent
         {
-            string ICommand.Name { get; } = "Page.frameStoppedLoading";
 
             /// <summary>
             /// Id of the frame that has stopped loading.
@@ -13784,26 +13784,26 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when interstitial page was hidden
         /// </summary>
-        public class InterstitialHiddenEvent : ICommand
+        [Event("Page.interstitialHidden")]
+        public class InterstitialHiddenEvent
         {
-            string ICommand.Name { get; } = "Page.interstitialHidden";
         }
 
         /// <summary>
         /// Fired when interstitial page was shown
         /// </summary>
-        public class InterstitialShownEvent : ICommand
+        [Event("Page.interstitialShown")]
+        public class InterstitialShownEvent
         {
-            string ICommand.Name { get; } = "Page.interstitialShown";
         }
 
         /// <summary>
         /// Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) has been
         /// closed.
         /// </summary>
-        public class JavascriptDialogClosedEvent : ICommand
+        [Event("Page.javascriptDialogClosed")]
+        public class JavascriptDialogClosedEvent
         {
-            string ICommand.Name { get; } = "Page.javascriptDialogClosed";
 
             /// <summary>
             /// Whether dialog was confirmed.
@@ -13822,9 +13822,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) is about to
         /// open.
         /// </summary>
-        public class JavascriptDialogOpeningEvent : ICommand
+        [Event("Page.javascriptDialogOpening")]
+        public class JavascriptDialogOpeningEvent
         {
-            string ICommand.Name { get; } = "Page.javascriptDialogOpening";
 
             /// <summary>
             /// Frame url.
@@ -13862,9 +13862,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired for top level page lifecycle events such as navigation, load, paint, etc.
         /// </summary>
-        public class LifecycleEventEvent : ICommand
+        [Event("Page.lifecycleEvent")]
+        public class LifecycleEventEvent
         {
-            string ICommand.Name { get; } = "Page.lifecycleEvent";
 
             /// <summary>
             /// Id of the frame.
@@ -13885,9 +13885,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Network.MonotonicTime Timestamp { get; set; }
         }
 
-        public class LoadEventFiredEvent : ICommand
+        [Event("Page.loadEventFired")]
+        public class LoadEventFiredEvent
         {
-            string ICommand.Name { get; } = "Page.loadEventFired";
 
             [JsonProperty("timestamp")]
             public Network.MonotonicTime Timestamp { get; set; }
@@ -13896,9 +13896,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when same-document navigation happens, e.g. due to history API usage or anchor navigation.
         /// </summary>
-        public class NavigatedWithinDocumentEvent : ICommand
+        [Event("Page.navigatedWithinDocument")]
+        public class NavigatedWithinDocumentEvent
         {
-            string ICommand.Name { get; } = "Page.navigatedWithinDocument";
 
             /// <summary>
             /// Id of the frame.
@@ -13916,9 +13916,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Compressed image data requested by the `startScreencast`.
         /// </summary>
-        public class ScreencastFrameEvent : ICommand
+        [Event("Page.screencastFrame")]
+        public class ScreencastFrameEvent
         {
-            string ICommand.Name { get; } = "Page.screencastFrame";
 
             /// <summary>
             /// Base64-encoded compressed image.
@@ -13942,9 +13942,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Fired when the page with currently enabled screencast was shown or hidden `.
         /// </summary>
-        public class ScreencastVisibilityChangedEvent : ICommand
+        [Event("Page.screencastVisibilityChanged")]
+        public class ScreencastVisibilityChangedEvent
         {
-            string ICommand.Name { get; } = "Page.screencastVisibilityChanged";
 
             /// <summary>
             /// True if the page is visible.
@@ -13957,9 +13957,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Fired when a new window is going to be opened, via window.open(), link click, form submission,
         /// etc.
         /// </summary>
-        public class WindowOpenEvent : ICommand
+        [Event("Page.windowOpen")]
+        public class WindowOpenEvent
         {
-            string ICommand.Name { get; } = "Page.windowOpen";
 
             /// <summary>
             /// The URL for the new window.
@@ -13990,9 +13990,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Issued for every compilation cache generated. Is only available
         /// if Page.setGenerateCompilationCache is enabled.
         /// </summary>
-        public class CompilationCacheProducedEvent : ICommand
+        [Event("Page.compilationCacheProduced")]
+        public class CompilationCacheProducedEvent
         {
-            string ICommand.Name { get; } = "Page.compilationCacheProduced";
 
             [JsonProperty("url")]
             public string Url { get; set; }
@@ -14092,9 +14092,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Current values of the metrics.
         /// </summary>
-        public class MetricsEvent : ICommand
+        [Event("Performance.metrics")]
+        public class MetricsEvent
         {
-            string ICommand.Name { get; } = "Performance.metrics";
 
             /// <summary>
             /// Current values of the metrics.
@@ -14370,9 +14370,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// certificate errors at the same time.
         /// </summary>
         [Obsolete]
-        public class CertificateErrorEvent : ICommand
+        [Event("Security.certificateError")]
+        public class CertificateErrorEvent
         {
-            string ICommand.Name { get; } = "Security.certificateError";
 
             /// <summary>
             /// The ID of the event.
@@ -14396,9 +14396,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// The security state of the page changed.
         /// </summary>
-        public class SecurityStateChangedEvent : ICommand
+        [Event("Security.securityStateChanged")]
+        public class SecurityStateChangedEvent
         {
-            string ICommand.Name { get; } = "Security.securityStateChanged";
 
             /// <summary>
             /// Security state.
@@ -14664,25 +14664,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
-        public class WorkerErrorReportedEvent : ICommand
+        [Event("ServiceWorker.workerErrorReported")]
+        public class WorkerErrorReportedEvent
         {
-            string ICommand.Name { get; } = "ServiceWorker.workerErrorReported";
 
             [JsonProperty("errorMessage")]
             public ServiceWorkerErrorMessage ErrorMessage { get; set; }
         }
 
-        public class WorkerRegistrationUpdatedEvent : ICommand
+        [Event("ServiceWorker.workerRegistrationUpdated")]
+        public class WorkerRegistrationUpdatedEvent
         {
-            string ICommand.Name { get; } = "ServiceWorker.workerRegistrationUpdated";
 
             [JsonProperty("registrations")]
             public ServiceWorkerRegistration[] Registrations { get; set; }
         }
 
-        public class WorkerVersionUpdatedEvent : ICommand
+        [Event("ServiceWorker.workerVersionUpdated")]
+        public class WorkerVersionUpdatedEvent
         {
-            string ICommand.Name { get; } = "ServiceWorker.workerVersionUpdated";
 
             [JsonProperty("versions")]
             public ServiceWorkerVersion[] Versions { get; set; }
@@ -14863,9 +14863,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// A cache's contents have been modified.
         /// </summary>
-        public class CacheStorageContentUpdatedEvent : ICommand
+        [Event("Storage.cacheStorageContentUpdated")]
+        public class CacheStorageContentUpdatedEvent
         {
-            string ICommand.Name { get; } = "Storage.cacheStorageContentUpdated";
 
             /// <summary>
             /// Origin to update.
@@ -14883,9 +14883,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// A cache has been added/deleted.
         /// </summary>
-        public class CacheStorageListUpdatedEvent : ICommand
+        [Event("Storage.cacheStorageListUpdated")]
+        public class CacheStorageListUpdatedEvent
         {
-            string ICommand.Name { get; } = "Storage.cacheStorageListUpdated";
 
             /// <summary>
             /// Origin to update.
@@ -14897,9 +14897,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// The origin's IndexedDB object store has been modified.
         /// </summary>
-        public class IndexedDBContentUpdatedEvent : ICommand
+        [Event("Storage.indexedDBContentUpdated")]
+        public class IndexedDBContentUpdatedEvent
         {
-            string ICommand.Name { get; } = "Storage.indexedDBContentUpdated";
 
             /// <summary>
             /// Origin to update.
@@ -14923,9 +14923,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// The origin's IndexedDB database list has been modified.
         /// </summary>
-        public class IndexedDBListUpdatedEvent : ICommand
+        [Event("Storage.indexedDBListUpdated")]
+        public class IndexedDBListUpdatedEvent
         {
-            string ICommand.Name { get; } = "Storage.indexedDBListUpdated";
 
             /// <summary>
             /// Origin to update.
@@ -15527,9 +15527,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when attached to target because of auto-attach or `attachToTarget` command.
         /// </summary>
-        public class AttachedToTargetEvent : ICommand
+        [Event("Target.attachedToTarget")]
+        public class AttachedToTargetEvent
         {
-            string ICommand.Name { get; } = "Target.attachedToTarget";
 
             /// <summary>
             /// Identifier assigned to the session used to send/receive messages.
@@ -15548,9 +15548,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Issued when detached from target for any reason (including `detachFromTarget` command). Can be
         /// issued multiple times per target if multiple sessions have been attached to it.
         /// </summary>
-        public class DetachedFromTargetEvent : ICommand
+        [Event("Target.detachedFromTarget")]
+        public class DetachedFromTargetEvent
         {
-            string ICommand.Name { get; } = "Target.detachedFromTarget";
 
             /// <summary>
             /// Detached session identifier.
@@ -15569,9 +15569,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Notifies about a new protocol message received from the session (as reported in
         /// `attachedToTarget` event).
         /// </summary>
-        public class ReceivedMessageFromTargetEvent : ICommand
+        [Event("Target.receivedMessageFromTarget")]
+        public class ReceivedMessageFromTargetEvent
         {
-            string ICommand.Name { get; } = "Target.receivedMessageFromTarget";
 
             /// <summary>
             /// Identifier of a session which sends a message.
@@ -15592,9 +15592,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when a possible inspection target is created.
         /// </summary>
-        public class TargetCreatedEvent : ICommand
+        [Event("Target.targetCreated")]
+        public class TargetCreatedEvent
         {
-            string ICommand.Name { get; } = "Target.targetCreated";
 
             [JsonProperty("targetInfo")]
             public TargetInfo TargetInfo { get; set; }
@@ -15603,9 +15603,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when a target is destroyed.
         /// </summary>
-        public class TargetDestroyedEvent : ICommand
+        [Event("Target.targetDestroyed")]
+        public class TargetDestroyedEvent
         {
-            string ICommand.Name { get; } = "Target.targetDestroyed";
 
             [JsonProperty("targetId")]
             public TargetID TargetId { get; set; }
@@ -15614,9 +15614,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Issued when a target has crashed.
         /// </summary>
-        public class TargetCrashedEvent : ICommand
+        [Event("Target.targetCrashed")]
+        public class TargetCrashedEvent
         {
-            string ICommand.Name { get; } = "Target.targetCrashed";
 
             [JsonProperty("targetId")]
             public TargetID TargetId { get; set; }
@@ -15638,9 +15638,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Issued when some information about a target has changed. This only happens between
         /// `targetCreated` and `targetDestroyed`.
         /// </summary>
-        public class TargetInfoChangedEvent : ICommand
+        [Event("Target.targetInfoChanged")]
+        public class TargetInfoChangedEvent
         {
-            string ICommand.Name { get; } = "Target.targetInfoChanged";
 
             [JsonProperty("targetInfo")]
             public TargetInfo TargetInfo { get; set; }
@@ -15692,9 +15692,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Informs that port was successfully bound and got a specified connection id.
         /// </summary>
-        public class AcceptedEvent : ICommand
+        [Event("Tethering.accepted")]
+        public class AcceptedEvent
         {
-            string ICommand.Name { get; } = "Tethering.accepted";
 
             /// <summary>
             /// Port number that was successfully bound.
@@ -15907,9 +15907,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
-        public class BufferUsageEvent : ICommand
+        [Event("Tracing.bufferUsage")]
+        public class BufferUsageEvent
         {
-            string ICommand.Name { get; } = "Tracing.bufferUsage";
 
             /// <summary>
             /// A number in range [0..1] that indicates the used size of event buffer as a fraction of its
@@ -15936,9 +15936,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Contains an bucket of collected trace events. When tracing is stopped collected events will be
         /// send as a sequence of dataCollected events followed by tracingComplete event.
         /// </summary>
-        public class DataCollectedEvent : ICommand
+        [Event("Tracing.dataCollected")]
+        public class DataCollectedEvent
         {
-            string ICommand.Name { get; } = "Tracing.dataCollected";
 
             [JsonProperty("value")]
             public object[] Value { get; set; }
@@ -15948,9 +15948,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Signals that tracing is stopped and there is no trace buffers pending flush, all data were
         /// delivered via dataCollected events.
         /// </summary>
-        public class TracingCompleteEvent : ICommand
+        [Event("Tracing.tracingComplete")]
+        public class TracingCompleteEvent
         {
-            string ICommand.Name { get; } = "Tracing.tracingComplete";
 
             /// <summary>
             /// A handle of the stream that holds resulting trace data.
@@ -16363,9 +16363,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// and responseStatusCode -- the request is at the response stage if either
         /// of these fields is present and in the request stage otherwise.
         /// </summary>
-        public class RequestPausedEvent : ICommand
+        [Event("Fetch.requestPaused")]
+        public class RequestPausedEvent
         {
-            string ICommand.Name { get; } = "Fetch.requestPaused";
 
             /// <summary>
             /// Each request the page makes will have a unique id.
@@ -16414,9 +16414,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Issued when the domain is enabled with handleAuthRequests set to true.
         /// The request is paused until client responds with continueWithAuth.
         /// </summary>
-        public class AuthRequiredEvent : ICommand
+        [Event("Fetch.authRequired")]
+        public class AuthRequiredEvent
         {
-            string ICommand.Name { get; } = "Fetch.authRequired";
 
             /// <summary>
             /// Each request the page makes will have a unique id.
