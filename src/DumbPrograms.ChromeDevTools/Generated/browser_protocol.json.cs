@@ -131,13 +131,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Whether this source is superseded by a higher priority source.
             /// </summary>
             [JsonProperty("superseded")]
-            public bool Superseded { get; set; }
+            public bool? Superseded { get; set; }
 
             /// <summary>
             /// The native markup source for this value, e.g. a &lt;label&gt; element.
             /// </summary>
             [JsonProperty("nativeSource")]
-            public AXValueNativeSourceType NativeSource { get; set; }
+            public AXValueNativeSourceType? NativeSource { get; set; }
 
             /// <summary>
             /// The value, such as a node or node list, of the native source.
@@ -149,7 +149,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Whether the value for this property is invalid.
             /// </summary>
             [JsonProperty("invalid")]
-            public bool Invalid { get; set; }
+            public bool? Invalid { get; set; }
 
             /// <summary>
             /// Reason for the value being invalid, if it is.
@@ -349,7 +349,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The backend ID for the associated DOM node, if any.
             /// </summary>
             [JsonProperty("backendDOMNodeId")]
-            public DOM.BackendNodeId BackendDOMNodeId { get; set; }
+            public DOM.BackendNodeId? BackendDOMNodeId { get; set; }
         }
 
         #endregion
@@ -384,25 +384,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Identifier of the node to get the partial accessibility tree for.
             /// </summary>
             [JsonProperty("nodeId")]
-            public DOM.NodeId NodeId { get; set; }
+            public DOM.NodeId? NodeId { get; set; }
 
             /// <summary>
             /// Identifier of the backend node to get the partial accessibility tree for.
             /// </summary>
             [JsonProperty("backendNodeId")]
-            public DOM.BackendNodeId BackendNodeId { get; set; }
+            public DOM.BackendNodeId? BackendNodeId { get; set; }
 
             /// <summary>
             /// JavaScript object id of the node wrapper to get the partial accessibility tree for.
             /// </summary>
             [JsonProperty("objectId")]
-            public Runtime.RemoteObjectId ObjectId { get; set; }
+            public Runtime.RemoteObjectId? ObjectId { get; set; }
 
             /// <summary>
             /// Whether to fetch this nodes ancestors, siblings and children. Defaults to true.
             /// </summary>
             [JsonProperty("fetchRelatives")]
-            public bool FetchRelatives { get; set; }
+            public bool? FetchRelatives { get; set; }
         }
 
         public class GetPartialAXTreeResponse
@@ -559,7 +559,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// `AnimationEffect`'s target node.
             /// </summary>
             [JsonProperty("backendNodeId")]
-            public DOM.BackendNodeId BackendNodeId { get; set; }
+            public DOM.BackendNodeId? BackendNodeId { get; set; }
 
             /// <summary>
             /// `AnimationEffect`'s keyframes.
@@ -1083,13 +1083,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The quality of the encoding (0-1). (defaults to 1)
             /// </summary>
             [JsonProperty("quality")]
-            public double Quality { get; set; }
+            public double? Quality { get; set; }
 
             /// <summary>
             /// Whether to only return the size information (defaults to false).
             /// </summary>
             [JsonProperty("sizeOnly")]
-            public bool SizeOnly { get; set; }
+            public bool? SizeOnly { get; set; }
         }
 
         public class GetEncodedResponseResponse
@@ -1164,31 +1164,31 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The offset from the left edge of the screen to the window in pixels.
             /// </summary>
             [JsonProperty("left")]
-            public int Left { get; set; }
+            public int? Left { get; set; }
 
             /// <summary>
             /// The offset from the top edge of the screen to the window in pixels.
             /// </summary>
             [JsonProperty("top")]
-            public int Top { get; set; }
+            public int? Top { get; set; }
 
             /// <summary>
             /// The window width in pixels.
             /// </summary>
             [JsonProperty("width")]
-            public int Width { get; set; }
+            public int? Width { get; set; }
 
             /// <summary>
             /// The window height in pixels.
             /// </summary>
             [JsonProperty("height")]
-            public int Height { get; set; }
+            public int? Height { get; set; }
 
             /// <summary>
             /// The window state. Default to normal.
             /// </summary>
             [JsonProperty("windowState")]
-            public WindowState WindowState { get; set; }
+            public WindowState? WindowState { get; set; }
         }
 
         public struct PermissionType : IEnum
@@ -1295,7 +1295,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// BrowserContext to override permissions. When omitted, default browser context is used.
             /// </summary>
             [JsonProperty("browserContextId")]
-            public Target.BrowserContextID BrowserContextId { get; set; }
+            public Target.BrowserContextID? BrowserContextId { get; set; }
         }
 
         /// <summary>
@@ -1309,7 +1309,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// BrowserContext to reset permissions. When omitted, default browser context is used.
             /// </summary>
             [JsonProperty("browserContextId")]
-            public Target.BrowserContextID BrowserContextId { get; set; }
+            public Target.BrowserContextID? BrowserContextId { get; set; }
         }
 
         /// <summary>
@@ -1408,7 +1408,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// If true, retrieve delta since last call.
             /// </summary>
             [JsonProperty("delta")]
-            public bool Delta { get; set; }
+            public bool? Delta { get; set; }
         }
 
         public class GetHistogramsResponse
@@ -1438,7 +1438,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// If true, retrieve delta since last call.
             /// </summary>
             [JsonProperty("delta")]
-            public bool Delta { get; set; }
+            public bool? Delta { get; set; }
         }
 
         public class GetHistogramResponse
@@ -1487,7 +1487,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Devtools agent host id. If called as a part of the session, associated targetId is used.
             /// </summary>
             [JsonProperty("targetId")]
-            public Target.TargetID TargetId { get; set; }
+            public Target.TargetID? TargetId { get; set; }
         }
 
         public class GetWindowForTargetResponse
@@ -1733,7 +1733,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The backend id for the owner node of the stylesheet.
             /// </summary>
             [JsonProperty("ownerNode")]
-            public DOM.BackendNodeId OwnerNode { get; set; }
+            public DOM.BackendNodeId? OwnerNode { get; set; }
 
             /// <summary>
             /// Denotes whether the stylesheet is disabled.
@@ -1745,7 +1745,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Whether the sourceURL field value comes from the sourceURL comment.
             /// </summary>
             [JsonProperty("hasSourceURL")]
-            public bool HasSourceURL { get; set; }
+            public bool? HasSourceURL { get; set; }
 
             /// <summary>
             /// Whether this stylesheet is created for STYLE tag by parser. This flag is not set for
@@ -1784,7 +1784,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// stylesheet rules) this rule came from.
             /// </summary>
             [JsonProperty("styleSheetId")]
-            public StyleSheetId StyleSheetId { get; set; }
+            public StyleSheetId? StyleSheetId { get; set; }
 
             /// <summary>
             /// Rule selector data.
@@ -1894,7 +1894,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Whether the property has "!important" annotation (implies `false` if absent).
             /// </summary>
             [JsonProperty("important")]
-            public bool Important { get; set; }
+            public bool? Important { get; set; }
         }
 
         public class CSSComputedStyleProperty
@@ -1924,7 +1924,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// stylesheet rules) this rule came from.
             /// </summary>
             [JsonProperty("styleSheetId")]
-            public StyleSheetId StyleSheetId { get; set; }
+            public StyleSheetId? StyleSheetId { get; set; }
 
             /// <summary>
             /// CSS properties in the style.
@@ -1973,13 +1973,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Whether the property has "!important" annotation (implies `false` if absent).
             /// </summary>
             [JsonProperty("important")]
-            public bool Important { get; set; }
+            public bool? Important { get; set; }
 
             /// <summary>
             /// Whether the property is implicit (implies `false` if absent).
             /// </summary>
             [JsonProperty("implicit")]
-            public bool Implicit { get; set; }
+            public bool? Implicit { get; set; }
 
             /// <summary>
             /// The full property text as specified in the style.
@@ -1991,13 +1991,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Whether the property is understood by the browser (implies `true` if absent).
             /// </summary>
             [JsonProperty("parsedOk")]
-            public bool ParsedOk { get; set; }
+            public bool? ParsedOk { get; set; }
 
             /// <summary>
             /// Whether the property is disabled by the user (present for source-based properties only).
             /// </summary>
             [JsonProperty("disabled")]
-            public bool Disabled { get; set; }
+            public bool? Disabled { get; set; }
 
             /// <summary>
             /// The entire property range in the enclosing style declaration (if available).
@@ -2044,7 +2044,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Identifier of the stylesheet containing this object (if exists).
             /// </summary>
             [JsonProperty("styleSheetId")]
-            public StyleSheetId StyleSheetId { get; set; }
+            public StyleSheetId? StyleSheetId { get; set; }
 
             /// <summary>
             /// Array of media queries.
@@ -2106,7 +2106,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Computed length of media query expression (if applicable).
             /// </summary>
             [JsonProperty("computedLength")]
-            public double ComputedLength { get; set; }
+            public double? ComputedLength { get; set; }
         }
 
         /// <summary>
@@ -2219,7 +2219,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// stylesheet rules) this rule came from.
             /// </summary>
             [JsonProperty("styleSheetId")]
-            public StyleSheetId StyleSheetId { get; set; }
+            public StyleSheetId? StyleSheetId { get; set; }
 
             /// <summary>
             /// Parent stylesheet's origin.
@@ -3354,7 +3354,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The id of the parent node if any.
             /// </summary>
             [JsonProperty("parentId")]
-            public NodeId ParentId { get; set; }
+            public NodeId? ParentId { get; set; }
 
             /// <summary>
             /// The BackendNodeId for this node.
@@ -3390,7 +3390,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Child count for `Container` nodes.
             /// </summary>
             [JsonProperty("childNodeCount")]
-            public int ChildNodeCount { get; set; }
+            public int? ChildNodeCount { get; set; }
 
             /// <summary>
             /// Child nodes of this node when requested with children.
@@ -3456,19 +3456,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Pseudo element type for this node.
             /// </summary>
             [JsonProperty("pseudoType")]
-            public PseudoType PseudoType { get; set; }
+            public PseudoType? PseudoType { get; set; }
 
             /// <summary>
             /// Shadow root type.
             /// </summary>
             [JsonProperty("shadowRootType")]
-            public ShadowRootType ShadowRootType { get; set; }
+            public ShadowRootType? ShadowRootType { get; set; }
 
             /// <summary>
             /// Frame ID for frame owner elements.
             /// </summary>
             [JsonProperty("frameId")]
-            public Page.FrameId FrameId { get; set; }
+            public Page.FrameId? FrameId { get; set; }
 
             /// <summary>
             /// Content document for frame owner elements.
@@ -3510,7 +3510,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Whether the node is SVG.
             /// </summary>
             [JsonProperty("isSVG")]
-            public bool IsSVG { get; set; }
+            public bool? IsSVG { get; set; }
         }
 
         /// <summary>
@@ -3541,7 +3541,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The alpha component, in the [0-1] range (default: 1).
             /// </summary>
             [JsonProperty("a")]
-            public double A { get; set; }
+            public double? A { get; set; }
         }
 
         /// <summary>
@@ -3716,7 +3716,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// `targetNodeId`).
             /// </summary>
             [JsonProperty("insertBeforeNodeId")]
-            public NodeId InsertBeforeNodeId { get; set; }
+            public NodeId? InsertBeforeNodeId { get; set; }
         }
 
         public class CopyToResponse
@@ -3741,33 +3741,33 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Identifier of the node.
             /// </summary>
             [JsonProperty("nodeId")]
-            public NodeId NodeId { get; set; }
+            public NodeId? NodeId { get; set; }
 
             /// <summary>
             /// Identifier of the backend node.
             /// </summary>
             [JsonProperty("backendNodeId")]
-            public BackendNodeId BackendNodeId { get; set; }
+            public BackendNodeId? BackendNodeId { get; set; }
 
             /// <summary>
             /// JavaScript object id of the node wrapper.
             /// </summary>
             [JsonProperty("objectId")]
-            public Runtime.RemoteObjectId ObjectId { get; set; }
+            public Runtime.RemoteObjectId? ObjectId { get; set; }
 
             /// <summary>
             /// The maximum depth at which children should be retrieved, defaults to 1. Use -1 for the
             /// entire subtree or provide an integer larger than 0.
             /// </summary>
             [JsonProperty("depth")]
-            public int Depth { get; set; }
+            public int? Depth { get; set; }
 
             /// <summary>
             /// Whether or not iframes and shadow roots should be traversed when returning the subtree
             /// (default is false).
             /// </summary>
             [JsonProperty("pierce")]
-            public bool Pierce { get; set; }
+            public bool? Pierce { get; set; }
         }
 
         public class DescribeNodeResponse
@@ -3822,19 +3822,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Identifier of the node.
             /// </summary>
             [JsonProperty("nodeId")]
-            public NodeId NodeId { get; set; }
+            public NodeId? NodeId { get; set; }
 
             /// <summary>
             /// Identifier of the backend node.
             /// </summary>
             [JsonProperty("backendNodeId")]
-            public BackendNodeId BackendNodeId { get; set; }
+            public BackendNodeId? BackendNodeId { get; set; }
 
             /// <summary>
             /// JavaScript object id of the node wrapper.
             /// </summary>
             [JsonProperty("objectId")]
-            public Runtime.RemoteObjectId ObjectId { get; set; }
+            public Runtime.RemoteObjectId? ObjectId { get; set; }
         }
 
         /// <summary>
@@ -3872,19 +3872,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Identifier of the node.
             /// </summary>
             [JsonProperty("nodeId")]
-            public NodeId NodeId { get; set; }
+            public NodeId? NodeId { get; set; }
 
             /// <summary>
             /// Identifier of the backend node.
             /// </summary>
             [JsonProperty("backendNodeId")]
-            public BackendNodeId BackendNodeId { get; set; }
+            public BackendNodeId? BackendNodeId { get; set; }
 
             /// <summary>
             /// JavaScript object id of the node wrapper.
             /// </summary>
             [JsonProperty("objectId")]
-            public Runtime.RemoteObjectId ObjectId { get; set; }
+            public Runtime.RemoteObjectId? ObjectId { get; set; }
         }
 
         public class GetBoxModelResponse
@@ -3909,19 +3909,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Identifier of the node.
             /// </summary>
             [JsonProperty("nodeId")]
-            public NodeId NodeId { get; set; }
+            public NodeId? NodeId { get; set; }
 
             /// <summary>
             /// Identifier of the backend node.
             /// </summary>
             [JsonProperty("backendNodeId")]
-            public BackendNodeId BackendNodeId { get; set; }
+            public BackendNodeId? BackendNodeId { get; set; }
 
             /// <summary>
             /// JavaScript object id of the node wrapper.
             /// </summary>
             [JsonProperty("objectId")]
-            public Runtime.RemoteObjectId ObjectId { get; set; }
+            public Runtime.RemoteObjectId? ObjectId { get; set; }
         }
 
         public class GetContentQuadsResponse
@@ -3946,14 +3946,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// entire subtree or provide an integer larger than 0.
             /// </summary>
             [JsonProperty("depth")]
-            public int Depth { get; set; }
+            public int? Depth { get; set; }
 
             /// <summary>
             /// Whether or not iframes and shadow roots should be traversed when returning the subtree
             /// (default is false).
             /// </summary>
             [JsonProperty("pierce")]
-            public bool Pierce { get; set; }
+            public bool? Pierce { get; set; }
         }
 
         public class GetDocumentResponse
@@ -3978,14 +3978,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// entire subtree or provide an integer larger than 0.
             /// </summary>
             [JsonProperty("depth")]
-            public int Depth { get; set; }
+            public int? Depth { get; set; }
 
             /// <summary>
             /// Whether or not iframes and shadow roots should be traversed when returning the subtree
             /// (default is false).
             /// </summary>
             [JsonProperty("pierce")]
-            public bool Pierce { get; set; }
+            public bool? Pierce { get; set; }
         }
 
         public class GetFlattenedDocumentResponse
@@ -4022,7 +4022,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// False to skip to the nearest non-UA shadow root ancestor (default: false).
             /// </summary>
             [JsonProperty("includeUserAgentShadowDOM")]
-            public bool IncludeUserAgentShadowDOM { get; set; }
+            public bool? IncludeUserAgentShadowDOM { get; set; }
         }
 
         public class GetNodeForLocationResponse
@@ -4038,7 +4038,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Id of the node at given coordinates, only when enabled.
             /// </summary>
             [JsonProperty("nodeId")]
-            public NodeId NodeId { get; set; }
+            public NodeId? NodeId { get; set; }
         }
 
         /// <summary>
@@ -4052,19 +4052,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Identifier of the node.
             /// </summary>
             [JsonProperty("nodeId")]
-            public NodeId NodeId { get; set; }
+            public NodeId? NodeId { get; set; }
 
             /// <summary>
             /// Identifier of the backend node.
             /// </summary>
             [JsonProperty("backendNodeId")]
-            public BackendNodeId BackendNodeId { get; set; }
+            public BackendNodeId? BackendNodeId { get; set; }
 
             /// <summary>
             /// JavaScript object id of the node wrapper.
             /// </summary>
             [JsonProperty("objectId")]
-            public Runtime.RemoteObjectId ObjectId { get; set; }
+            public Runtime.RemoteObjectId? ObjectId { get; set; }
         }
 
         public class GetOuterHTMLResponse
@@ -4194,7 +4194,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// `targetNodeId`).
             /// </summary>
             [JsonProperty("insertBeforeNodeId")]
-            public NodeId InsertBeforeNodeId { get; set; }
+            public NodeId? InsertBeforeNodeId { get; set; }
         }
 
         public class MoveToResponse
@@ -4225,7 +4225,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// True to search in user agent shadow DOM.
             /// </summary>
             [JsonProperty("includeUserAgentShadowDOM")]
-            public bool IncludeUserAgentShadowDOM { get; set; }
+            public bool? IncludeUserAgentShadowDOM { get; set; }
         }
 
         public class PerformSearchResponse
@@ -4415,14 +4415,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// entire subtree or provide an integer larger than 0.
             /// </summary>
             [JsonProperty("depth")]
-            public int Depth { get; set; }
+            public int? Depth { get; set; }
 
             /// <summary>
             /// Whether or not iframes and shadow roots should be traversed when returning the sub-tree
             /// (default is false).
             /// </summary>
             [JsonProperty("pierce")]
-            public bool Pierce { get; set; }
+            public bool? Pierce { get; set; }
         }
 
         /// <summary>
@@ -4462,13 +4462,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Id of the node to resolve.
             /// </summary>
             [JsonProperty("nodeId")]
-            public NodeId NodeId { get; set; }
+            public NodeId? NodeId { get; set; }
 
             /// <summary>
             /// Backend identifier of the node to resolve.
             /// </summary>
             [JsonProperty("backendNodeId")]
-            public DOM.BackendNodeId BackendNodeId { get; set; }
+            public DOM.BackendNodeId? BackendNodeId { get; set; }
 
             /// <summary>
             /// Symbolic group name that can be used to release multiple objects.
@@ -4558,19 +4558,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Identifier of the node.
             /// </summary>
             [JsonProperty("nodeId")]
-            public NodeId NodeId { get; set; }
+            public NodeId? NodeId { get; set; }
 
             /// <summary>
             /// Identifier of the backend node.
             /// </summary>
             [JsonProperty("backendNodeId")]
-            public BackendNodeId BackendNodeId { get; set; }
+            public BackendNodeId? BackendNodeId { get; set; }
 
             /// <summary>
             /// JavaScript object id of the node wrapper.
             /// </summary>
             [JsonProperty("objectId")]
-            public Runtime.RemoteObjectId ObjectId { get; set; }
+            public Runtime.RemoteObjectId? ObjectId { get; set; }
         }
 
         /// <summary>
@@ -4712,7 +4712,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Id of the node at given coordinates, only when enabled.
             /// </summary>
             [JsonProperty("nodeId")]
-            public NodeId NodeId { get; set; }
+            public NodeId? NodeId { get; set; }
         }
 
         #endregion
@@ -5087,7 +5087,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Node the listener is added to (if any).
             /// </summary>
             [JsonProperty("backendNodeId")]
-            public DOM.BackendNodeId BackendNodeId { get; set; }
+            public DOM.BackendNodeId? BackendNodeId { get; set; }
         }
 
         #endregion
@@ -5112,14 +5112,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// entire subtree or provide an integer larger than 0.
             /// </summary>
             [JsonProperty("depth")]
-            public int Depth { get; set; }
+            public int? Depth { get; set; }
 
             /// <summary>
             /// Whether or not iframes and shadow roots should be traversed when returning the subtree
             /// (default is false). Reports listeners for all contexts if pierce is enabled.
             /// </summary>
             [JsonProperty("pierce")]
-            public bool Pierce { get; set; }
+            public bool? Pierce { get; set; }
         }
 
         public class GetEventListenersResponse
@@ -5320,13 +5320,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Only set for radio and checkbox input elements, indicates if the element has been checked
             /// </summary>
             [JsonProperty("inputChecked")]
-            public bool InputChecked { get; set; }
+            public bool? InputChecked { get; set; }
 
             /// <summary>
             /// Only set for option elements, indicates if the element has been selected
             /// </summary>
             [JsonProperty("optionSelected")]
-            public bool OptionSelected { get; set; }
+            public bool? OptionSelected { get; set; }
 
             /// <summary>
             /// `Node`'s id, corresponds to DOM.Node.backendNodeId.
@@ -5359,7 +5359,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// `getSnapshot`, if any.
             /// </summary>
             [JsonProperty("layoutNodeIndex")]
-            public int LayoutNodeIndex { get; set; }
+            public int? LayoutNodeIndex { get; set; }
 
             /// <summary>
             /// Document URL that `Document` or `FrameOwner` node points to.
@@ -5401,26 +5401,26 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Frame ID for frame owner elements and also for the document node.
             /// </summary>
             [JsonProperty("frameId")]
-            public Page.FrameId FrameId { get; set; }
+            public Page.FrameId? FrameId { get; set; }
 
             /// <summary>
             /// The index of a frame owner element's content document in the `domNodes` array returned by
             /// `getSnapshot`, if any.
             /// </summary>
             [JsonProperty("contentDocumentIndex")]
-            public int ContentDocumentIndex { get; set; }
+            public int? ContentDocumentIndex { get; set; }
 
             /// <summary>
             /// Type of a pseudo element node.
             /// </summary>
             [JsonProperty("pseudoType")]
-            public DOM.PseudoType PseudoType { get; set; }
+            public DOM.PseudoType? PseudoType { get; set; }
 
             /// <summary>
             /// Shadow root type.
             /// </summary>
             [JsonProperty("shadowRootType")]
-            public DOM.ShadowRootType ShadowRootType { get; set; }
+            public DOM.ShadowRootType? ShadowRootType { get; set; }
 
             /// <summary>
             /// Whether this DOM node responds to mouse clicks. This includes nodes that have had click
@@ -5428,7 +5428,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// clicked.
             /// </summary>
             [JsonProperty("isClickable")]
-            public bool IsClickable { get; set; }
+            public bool? IsClickable { get; set; }
 
             /// <summary>
             /// Details of the node's event listeners, if any.
@@ -5452,10 +5452,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Scroll offsets, set when this node is a Document.
             /// </summary>
             [JsonProperty("scrollOffsetX")]
-            public double ScrollOffsetX { get; set; }
+            public double? ScrollOffsetX { get; set; }
 
             [JsonProperty("scrollOffsetY")]
-            public double ScrollOffsetY { get; set; }
+            public double? ScrollOffsetY { get; set; }
         }
 
         /// <summary>
@@ -5520,7 +5520,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Index into the `computedStyles` array returned by `getSnapshot`.
             /// </summary>
             [JsonProperty("styleIndex")]
-            public int StyleIndex { get; set; }
+            public int? StyleIndex { get; set; }
 
             /// <summary>
             /// Global paint order index, which is determined by the stacking order of the nodes. Nodes
@@ -5528,13 +5528,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// getSnapshot was true.
             /// </summary>
             [JsonProperty("paintOrder")]
-            public int PaintOrder { get; set; }
+            public int? PaintOrder { get; set; }
 
             /// <summary>
             /// Set to true to indicate the element begins a new stacking context.
             /// </summary>
             [JsonProperty("isStackingContext")]
-            public bool IsStackingContext { get; set; }
+            public bool? IsStackingContext { get; set; }
         }
 
         /// <summary>
@@ -5708,10 +5708,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Scroll offsets.
             /// </summary>
             [JsonProperty("scrollOffsetX")]
-            public double ScrollOffsetX { get; set; }
+            public double? ScrollOffsetX { get; set; }
 
             [JsonProperty("scrollOffsetY")]
-            public double ScrollOffsetY { get; set; }
+            public double? ScrollOffsetY { get; set; }
         }
 
         /// <summary>
@@ -5925,19 +5925,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Whether or not to retrieve details of DOM listeners (default false).
             /// </summary>
             [JsonProperty("includeEventListeners")]
-            public bool IncludeEventListeners { get; set; }
+            public bool? IncludeEventListeners { get; set; }
 
             /// <summary>
             /// Whether to determine and include the paint order index of LayoutTreeNodes (default false).
             /// </summary>
             [JsonProperty("includePaintOrder")]
-            public bool IncludePaintOrder { get; set; }
+            public bool? IncludePaintOrder { get; set; }
 
             /// <summary>
             /// Whether to include UA shadow tree in the snapshot (default false).
             /// </summary>
             [JsonProperty("includeUserAgentShadowTree")]
-            public bool IncludeUserAgentShadowTree { get; set; }
+            public bool? IncludeUserAgentShadowTree { get; set; }
         }
 
         public class GetSnapshotResponse
@@ -6524,37 +6524,37 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Scale to apply to resulting view image.
             /// </summary>
             [JsonProperty("scale")]
-            public double Scale { get; set; }
+            public double? Scale { get; set; }
 
             /// <summary>
             /// Overriding screen width value in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("screenWidth")]
-            public int ScreenWidth { get; set; }
+            public int? ScreenWidth { get; set; }
 
             /// <summary>
             /// Overriding screen height value in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("screenHeight")]
-            public int ScreenHeight { get; set; }
+            public int? ScreenHeight { get; set; }
 
             /// <summary>
             /// Overriding view X position on screen in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("positionX")]
-            public int PositionX { get; set; }
+            public int? PositionX { get; set; }
 
             /// <summary>
             /// Overriding view Y position on screen in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("positionY")]
-            public int PositionY { get; set; }
+            public int? PositionY { get; set; }
 
             /// <summary>
             /// Do not set visible view size, rely upon explicit setVisibleSize call.
             /// </summary>
             [JsonProperty("dontSetVisibleSize")]
-            public bool DontSetVisibleSize { get; set; }
+            public bool? DontSetVisibleSize { get; set; }
 
             /// <summary>
             /// Screen orientation override.
@@ -6635,19 +6635,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Mock latitude
             /// </summary>
             [JsonProperty("latitude")]
-            public double Latitude { get; set; }
+            public double? Latitude { get; set; }
 
             /// <summary>
             /// Mock longitude
             /// </summary>
             [JsonProperty("longitude")]
-            public double Longitude { get; set; }
+            public double? Longitude { get; set; }
 
             /// <summary>
             /// Mock accuracy
             /// </summary>
             [JsonProperty("accuracy")]
-            public double Accuracy { get; set; }
+            public double? Accuracy { get; set; }
         }
 
         /// <summary>
@@ -6710,7 +6710,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Maximum touch points supported. Defaults to one.
             /// </summary>
             [JsonProperty("maxTouchPoints")]
-            public int MaxTouchPoints { get; set; }
+            public int? MaxTouchPoints { get; set; }
         }
 
         /// <summary>
@@ -6729,27 +6729,27 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// virtualTimeBudgetExpired event is sent.
             /// </summary>
             [JsonProperty("budget")]
-            public double Budget { get; set; }
+            public double? Budget { get; set; }
 
             /// <summary>
             /// If set this specifies the maximum number of tasks that can be run before virtual is forced
             /// forwards to prevent deadlock.
             /// </summary>
             [JsonProperty("maxVirtualTimeTaskStarvationCount")]
-            public int MaxVirtualTimeTaskStarvationCount { get; set; }
+            public int? MaxVirtualTimeTaskStarvationCount { get; set; }
 
             /// <summary>
             /// If set the virtual time policy change should be deferred until any frame starts navigating.
             /// Note any previous deferred policy change is superseded.
             /// </summary>
             [JsonProperty("waitForNavigation")]
-            public bool WaitForNavigation { get; set; }
+            public bool? WaitForNavigation { get; set; }
 
             /// <summary>
             /// If set, base::Time::Now will be overriden to initially return this value.
             /// </summary>
             [JsonProperty("initialVirtualTime")]
-            public Network.TimeSinceEpoch InitialVirtualTime { get; set; }
+            public Network.TimeSinceEpoch? InitialVirtualTime { get; set; }
         }
 
         public class SetVirtualTimePolicyResponse
@@ -6880,7 +6880,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Compression quality from range [0..100] (jpeg only).
             /// </summary>
             [JsonProperty("quality")]
-            public int Quality { get; set; }
+            public int? Quality { get; set; }
         }
 
         #endregion
@@ -6902,14 +6902,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// the current time will be used.
             /// </summary>
             [JsonProperty("frameTimeTicks")]
-            public double FrameTimeTicks { get; set; }
+            public double? FrameTimeTicks { get; set; }
 
             /// <summary>
             /// The interval between BeginFrames that is reported to the compositor, in milliseconds.
             /// Defaults to a 60 frames/second interval, i.e. about 16.666 milliseconds.
             /// </summary>
             [JsonProperty("interval")]
-            public double Interval { get; set; }
+            public double? Interval { get; set; }
 
             /// <summary>
             /// Whether updates should not be committed and drawn onto the display. False by default. If
@@ -6917,7 +6917,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// any visual updates may not be visible on the display or in screenshots.
             /// </summary>
             [JsonProperty("noDisplayUpdates")]
-            public bool NoDisplayUpdates { get; set; }
+            public bool? NoDisplayUpdates { get; set; }
 
             /// <summary>
             /// If set, a screenshot of the frame will be captured and returned in the response. Otherwise,
@@ -7041,13 +7041,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// following the last read). Some types of streams may only support sequential reads.
             /// </summary>
             [JsonProperty("offset")]
-            public int Offset { get; set; }
+            public int? Offset { get; set; }
 
             /// <summary>
             /// Maximum number of bytes to read (left upon the agent discretion if not specified).
             /// </summary>
             [JsonProperty("size")]
-            public int Size { get; set; }
+            public int? Size { get; set; }
         }
 
         public class ReadResponse
@@ -7057,7 +7057,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Set if the data is base64-encoded
             /// </summary>
             [JsonProperty("base64Encoded")]
-            public bool Base64Encoded { get; set; }
+            public bool? Base64Encoded { get; set; }
 
             /// <summary>
             /// Data that were read.
@@ -7208,7 +7208,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Number value.
             /// </summary>
             [JsonProperty("number")]
-            public double Number { get; set; }
+            public double? Number { get; set; }
 
             /// <summary>
             /// String value.
@@ -7220,7 +7220,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Date value.
             /// </summary>
             [JsonProperty("date")]
-            public double Date { get; set; }
+            public double? Date { get; set; }
 
             /// <summary>
             /// Array value.
@@ -7547,31 +7547,31 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// X radius of the touch area (default: 1.0).
             /// </summary>
             [JsonProperty("radiusX")]
-            public double RadiusX { get; set; }
+            public double? RadiusX { get; set; }
 
             /// <summary>
             /// Y radius of the touch area (default: 1.0).
             /// </summary>
             [JsonProperty("radiusY")]
-            public double RadiusY { get; set; }
+            public double? RadiusY { get; set; }
 
             /// <summary>
             /// Rotation angle (default: 0.0).
             /// </summary>
             [JsonProperty("rotationAngle")]
-            public double RotationAngle { get; set; }
+            public double? RotationAngle { get; set; }
 
             /// <summary>
             /// Force (default: 1.0).
             /// </summary>
             [JsonProperty("force")]
-            public double Force { get; set; }
+            public double? Force { get; set; }
 
             /// <summary>
             /// Identifier used to track touch sources between events, must be unique within an event.
             /// </summary>
             [JsonProperty("id")]
-            public double Id { get; set; }
+            public double? Id { get; set; }
         }
 
         public struct GestureSourceType : IEnum
@@ -7624,13 +7624,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// (default: 0).
             /// </summary>
             [JsonProperty("modifiers")]
-            public int Modifiers { get; set; }
+            public int? Modifiers { get; set; }
 
             /// <summary>
             /// Time at which the event occurred.
             /// </summary>
             [JsonProperty("timestamp")]
-            public TimeSinceEpoch Timestamp { get; set; }
+            public TimeSinceEpoch? Timestamp { get; set; }
 
             /// <summary>
             /// Text as generated by processing a virtual key code with a keyboard layout. Not needed for
@@ -7669,38 +7669,38 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Windows virtual key code (default: 0).
             /// </summary>
             [JsonProperty("windowsVirtualKeyCode")]
-            public int WindowsVirtualKeyCode { get; set; }
+            public int? WindowsVirtualKeyCode { get; set; }
 
             /// <summary>
             /// Native virtual key code (default: 0).
             /// </summary>
             [JsonProperty("nativeVirtualKeyCode")]
-            public int NativeVirtualKeyCode { get; set; }
+            public int? NativeVirtualKeyCode { get; set; }
 
             /// <summary>
             /// Whether the event was generated from auto repeat (default: false).
             /// </summary>
             [JsonProperty("autoRepeat")]
-            public bool AutoRepeat { get; set; }
+            public bool? AutoRepeat { get; set; }
 
             /// <summary>
             /// Whether the event was generated from the keypad (default: false).
             /// </summary>
             [JsonProperty("isKeypad")]
-            public bool IsKeypad { get; set; }
+            public bool? IsKeypad { get; set; }
 
             /// <summary>
             /// Whether the event was a system key event (default: false).
             /// </summary>
             [JsonProperty("isSystemKey")]
-            public bool IsSystemKey { get; set; }
+            public bool? IsSystemKey { get; set; }
 
             /// <summary>
             /// Whether the event was from the left or right side of the keyboard. 1=Left, 2=Right (default:
             /// 0).
             /// </summary>
             [JsonProperty("location")]
-            public int Location { get; set; }
+            public int? Location { get; set; }
         }
 
         /// <summary>
@@ -7749,13 +7749,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// (default: 0).
             /// </summary>
             [JsonProperty("modifiers")]
-            public int Modifiers { get; set; }
+            public int? Modifiers { get; set; }
 
             /// <summary>
             /// Time at which the event occurred.
             /// </summary>
             [JsonProperty("timestamp")]
-            public TimeSinceEpoch Timestamp { get; set; }
+            public TimeSinceEpoch? Timestamp { get; set; }
 
             /// <summary>
             /// Mouse button (default: "none").
@@ -7768,25 +7768,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Left=1, Right=2, Middle=4, Back=8, Forward=16, None=0.
             /// </summary>
             [JsonProperty("buttons")]
-            public int Buttons { get; set; }
+            public int? Buttons { get; set; }
 
             /// <summary>
             /// Number of times the mouse button was clicked (default: 0).
             /// </summary>
             [JsonProperty("clickCount")]
-            public int ClickCount { get; set; }
+            public int? ClickCount { get; set; }
 
             /// <summary>
             /// X delta in CSS pixels for mouse wheel event (default: 0).
             /// </summary>
             [JsonProperty("deltaX")]
-            public double DeltaX { get; set; }
+            public double? DeltaX { get; set; }
 
             /// <summary>
             /// Y delta in CSS pixels for mouse wheel event (default: 0).
             /// </summary>
             [JsonProperty("deltaY")]
-            public double DeltaY { get; set; }
+            public double? DeltaY { get; set; }
 
             /// <summary>
             /// Pointer type (default: "mouse").
@@ -7822,13 +7822,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// (default: 0).
             /// </summary>
             [JsonProperty("modifiers")]
-            public int Modifiers { get; set; }
+            public int? Modifiers { get; set; }
 
             /// <summary>
             /// Time at which the event occurred.
             /// </summary>
             [JsonProperty("timestamp")]
-            public TimeSinceEpoch Timestamp { get; set; }
+            public TimeSinceEpoch? Timestamp { get; set; }
         }
 
         /// <summary>
@@ -7866,32 +7866,32 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Time at which the event occurred (default: current time).
             /// </summary>
             [JsonProperty("timestamp")]
-            public TimeSinceEpoch Timestamp { get; set; }
+            public TimeSinceEpoch? Timestamp { get; set; }
 
             /// <summary>
             /// X delta in DIP for mouse wheel event (default: 0).
             /// </summary>
             [JsonProperty("deltaX")]
-            public double DeltaX { get; set; }
+            public double? DeltaX { get; set; }
 
             /// <summary>
             /// Y delta in DIP for mouse wheel event (default: 0).
             /// </summary>
             [JsonProperty("deltaY")]
-            public double DeltaY { get; set; }
+            public double? DeltaY { get; set; }
 
             /// <summary>
             /// Bit field representing pressed modifier keys. Alt=1, Ctrl=2, Meta/Command=4, Shift=8
             /// (default: 0).
             /// </summary>
             [JsonProperty("modifiers")]
-            public int Modifiers { get; set; }
+            public int? Modifiers { get; set; }
 
             /// <summary>
             /// Number of times the mouse button was clicked (default: 0).
             /// </summary>
             [JsonProperty("clickCount")]
-            public int ClickCount { get; set; }
+            public int? ClickCount { get; set; }
         }
 
         /// <summary>
@@ -7937,14 +7937,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Relative pointer speed in pixels per second (default: 800).
             /// </summary>
             [JsonProperty("relativeSpeed")]
-            public int RelativeSpeed { get; set; }
+            public int? RelativeSpeed { get; set; }
 
             /// <summary>
             /// Which type of input events to be generated (default: 'default', which queries the platform
             /// for the preferred input type).
             /// </summary>
             [JsonProperty("gestureSourceType")]
-            public GestureSourceType GestureSourceType { get; set; }
+            public GestureSourceType? GestureSourceType { get; set; }
         }
 
         /// <summary>
@@ -7970,58 +7970,58 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The distance to scroll along the X axis (positive to scroll left).
             /// </summary>
             [JsonProperty("xDistance")]
-            public double XDistance { get; set; }
+            public double? XDistance { get; set; }
 
             /// <summary>
             /// The distance to scroll along the Y axis (positive to scroll up).
             /// </summary>
             [JsonProperty("yDistance")]
-            public double YDistance { get; set; }
+            public double? YDistance { get; set; }
 
             /// <summary>
             /// The number of additional pixels to scroll back along the X axis, in addition to the given
             /// distance.
             /// </summary>
             [JsonProperty("xOverscroll")]
-            public double XOverscroll { get; set; }
+            public double? XOverscroll { get; set; }
 
             /// <summary>
             /// The number of additional pixels to scroll back along the Y axis, in addition to the given
             /// distance.
             /// </summary>
             [JsonProperty("yOverscroll")]
-            public double YOverscroll { get; set; }
+            public double? YOverscroll { get; set; }
 
             /// <summary>
             /// Prevent fling (default: true).
             /// </summary>
             [JsonProperty("preventFling")]
-            public bool PreventFling { get; set; }
+            public bool? PreventFling { get; set; }
 
             /// <summary>
             /// Swipe speed in pixels per second (default: 800).
             /// </summary>
             [JsonProperty("speed")]
-            public int Speed { get; set; }
+            public int? Speed { get; set; }
 
             /// <summary>
             /// Which type of input events to be generated (default: 'default', which queries the platform
             /// for the preferred input type).
             /// </summary>
             [JsonProperty("gestureSourceType")]
-            public GestureSourceType GestureSourceType { get; set; }
+            public GestureSourceType? GestureSourceType { get; set; }
 
             /// <summary>
             /// The number of times to repeat the gesture (default: 0).
             /// </summary>
             [JsonProperty("repeatCount")]
-            public int RepeatCount { get; set; }
+            public int? RepeatCount { get; set; }
 
             /// <summary>
             /// The number of milliseconds delay between each repeat. (default: 250).
             /// </summary>
             [JsonProperty("repeatDelayMs")]
-            public int RepeatDelayMs { get; set; }
+            public int? RepeatDelayMs { get; set; }
 
             /// <summary>
             /// The name of the interaction markers to generate, if not empty (default: "").
@@ -8053,20 +8053,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Duration between touchdown and touchup events in ms (default: 50).
             /// </summary>
             [JsonProperty("duration")]
-            public int Duration { get; set; }
+            public int? Duration { get; set; }
 
             /// <summary>
             /// Number of times to perform the tap (e.g. 2 for double tap, default: 1).
             /// </summary>
             [JsonProperty("tapCount")]
-            public int TapCount { get; set; }
+            public int? TapCount { get; set; }
 
             /// <summary>
             /// Which type of input events to be generated (default: 'default', which queries the platform
             /// for the preferred input type).
             /// </summary>
             [JsonProperty("gestureSourceType")]
-            public GestureSourceType GestureSourceType { get; set; }
+            public GestureSourceType? GestureSourceType { get; set; }
         }
 
         #endregion
@@ -8204,13 +8204,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The nearest sticky layer that shifts the sticky box
             /// </summary>
             [JsonProperty("nearestLayerShiftingStickyBox")]
-            public LayerId NearestLayerShiftingStickyBox { get; set; }
+            public LayerId? NearestLayerShiftingStickyBox { get; set; }
 
             /// <summary>
             /// The nearest sticky layer that shifts the containing block
             /// </summary>
             [JsonProperty("nearestLayerShiftingContainingBlock")]
-            public LayerId NearestLayerShiftingContainingBlock { get; set; }
+            public LayerId? NearestLayerShiftingContainingBlock { get; set; }
         }
 
         /// <summary>
@@ -8254,13 +8254,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The id of parent (not present for root).
             /// </summary>
             [JsonProperty("parentLayerId")]
-            public LayerId ParentLayerId { get; set; }
+            public LayerId? ParentLayerId { get; set; }
 
             /// <summary>
             /// The backend id for the node associated with this layer.
             /// </summary>
             [JsonProperty("backendNodeId")]
-            public DOM.BackendNodeId BackendNodeId { get; set; }
+            public DOM.BackendNodeId? BackendNodeId { get; set; }
 
             /// <summary>
             /// Offset from parent layer, X coordinate.
@@ -8296,19 +8296,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Transform anchor point X, absent if no transform specified
             /// </summary>
             [JsonProperty("anchorX")]
-            public double AnchorX { get; set; }
+            public double? AnchorX { get; set; }
 
             /// <summary>
             /// Transform anchor point Y, absent if no transform specified
             /// </summary>
             [JsonProperty("anchorY")]
-            public double AnchorY { get; set; }
+            public double? AnchorY { get; set; }
 
             /// <summary>
             /// Transform anchor point Z, absent if no transform specified
             /// </summary>
             [JsonProperty("anchorZ")]
-            public double AnchorZ { get; set; }
+            public double? AnchorZ { get; set; }
 
             /// <summary>
             /// Indicates how many time this layer has painted.
@@ -8327,7 +8327,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Set if layer is not visible.
             /// </summary>
             [JsonProperty("invisible")]
-            public bool Invisible { get; set; }
+            public bool? Invisible { get; set; }
 
             /// <summary>
             /// Rectangles scrolling on main thread only.
@@ -8462,13 +8462,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The maximum number of times to replay the snapshot (1, if not specified).
             /// </summary>
             [JsonProperty("minRepeatCount")]
-            public int MinRepeatCount { get; set; }
+            public int? MinRepeatCount { get; set; }
 
             /// <summary>
             /// The minimum duration (in seconds) to replay the snapshot.
             /// </summary>
             [JsonProperty("minDuration")]
-            public double MinDuration { get; set; }
+            public double? MinDuration { get; set; }
 
             /// <summary>
             /// The clip rectangle to apply when replaying the snapshot.
@@ -8518,19 +8518,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The first step to replay from (replay from the very start if not specified).
             /// </summary>
             [JsonProperty("fromStep")]
-            public int FromStep { get; set; }
+            public int? FromStep { get; set; }
 
             /// <summary>
             /// The last step to replay to (replay till the end if not specified).
             /// </summary>
             [JsonProperty("toStep")]
-            public int ToStep { get; set; }
+            public int? ToStep { get; set; }
 
             /// <summary>
             /// The scale to apply while replaying (defaults to 1).
             /// </summary>
             [JsonProperty("scale")]
-            public double Scale { get; set; }
+            public double? Scale { get; set; }
         }
 
         public class ReplaySnapshotResponse
@@ -8650,7 +8650,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Line number in the resource.
             /// </summary>
             [JsonProperty("lineNumber")]
-            public int LineNumber { get; set; }
+            public int? LineNumber { get; set; }
 
             /// <summary>
             /// JavaScript stack trace.
@@ -8662,7 +8662,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Identifier of the network request associated with this entry.
             /// </summary>
             [JsonProperty("networkRequestId")]
-            public Network.RequestId NetworkRequestId { get; set; }
+            public Network.RequestId? NetworkRequestId { get; set; }
 
             /// <summary>
             /// Identifier of the worker associated with this entry.
@@ -8925,13 +8925,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Average number of bytes between samples.
             /// </summary>
             [JsonProperty("samplingInterval")]
-            public int SamplingInterval { get; set; }
+            public int? SamplingInterval { get; set; }
 
             /// <summary>
             /// Do not randomize intervals between samples.
             /// </summary>
             [JsonProperty("suppressRandomness")]
-            public bool SuppressRandomness { get; set; }
+            public bool? SuppressRandomness { get; set; }
         }
 
         /// <summary>
@@ -9340,13 +9340,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// True when the request has POST data. Note that postData might still be omitted when this flag is true when the data is too long.
             /// </summary>
             [JsonProperty("hasPostData")]
-            public bool HasPostData { get; set; }
+            public bool? HasPostData { get; set; }
 
             /// <summary>
             /// The mixed content type of the request.
             /// </summary>
             [JsonProperty("mixedContentType")]
-            public Security.MixedContentType MixedContentType { get; set; }
+            public Security.MixedContentType? MixedContentType { get; set; }
 
             /// <summary>
             /// Priority of the resource request at the time request is sent.
@@ -9364,7 +9364,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Whether is loaded via link preload.
             /// </summary>
             [JsonProperty("isLinkPreload")]
-            public bool IsLinkPreload { get; set; }
+            public bool? IsLinkPreload { get; set; }
         }
 
         /// <summary>
@@ -9622,19 +9622,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Remote port.
             /// </summary>
             [JsonProperty("remotePort")]
-            public int RemotePort { get; set; }
+            public int? RemotePort { get; set; }
 
             /// <summary>
             /// Specifies that the request was served from the disk cache.
             /// </summary>
             [JsonProperty("fromDiskCache")]
-            public bool FromDiskCache { get; set; }
+            public bool? FromDiskCache { get; set; }
 
             /// <summary>
             /// Specifies that the request was served from the ServiceWorker.
             /// </summary>
             [JsonProperty("fromServiceWorker")]
-            public bool FromServiceWorker { get; set; }
+            public bool? FromServiceWorker { get; set; }
 
             /// <summary>
             /// Total number of bytes received for this request so far.
@@ -9810,7 +9810,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// module) (0-based).
             /// </summary>
             [JsonProperty("lineNumber")]
-            public double LineNumber { get; set; }
+            public double? LineNumber { get; set; }
         }
 
         /// <summary>
@@ -9877,7 +9877,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Cookie SameSite type.
             /// </summary>
             [JsonProperty("sameSite")]
-            public CookieSameSite SameSite { get; set; }
+            public CookieSameSite? SameSite { get; set; }
         }
 
         /// <summary>
@@ -9921,25 +9921,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// True if cookie is secure.
             /// </summary>
             [JsonProperty("secure")]
-            public bool Secure { get; set; }
+            public bool? Secure { get; set; }
 
             /// <summary>
             /// True if cookie is http-only.
             /// </summary>
             [JsonProperty("httpOnly")]
-            public bool HttpOnly { get; set; }
+            public bool? HttpOnly { get; set; }
 
             /// <summary>
             /// Cookie SameSite type.
             /// </summary>
             [JsonProperty("sameSite")]
-            public CookieSameSite SameSite { get; set; }
+            public CookieSameSite? SameSite { get; set; }
 
             /// <summary>
             /// Cookie expiration date, session cookie if not set
             /// </summary>
             [JsonProperty("expires")]
-            public TimeSinceEpoch Expires { get; set; }
+            public TimeSinceEpoch? Expires { get; set; }
         }
 
         /// <summary>
@@ -10036,13 +10036,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// If set, only requests for matching resource types will be intercepted.
             /// </summary>
             [JsonProperty("resourceType")]
-            public ResourceType ResourceType { get; set; }
+            public ResourceType? ResourceType { get; set; }
 
             /// <summary>
             /// Stage at wich to begin intercepting requests. Default is Request.
             /// </summary>
             [JsonProperty("interceptionStage")]
-            public InterceptionStage InterceptionStage { get; set; }
+            public InterceptionStage? InterceptionStage { get; set; }
         }
 
         /// <summary>
@@ -10181,13 +10181,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The index of the signature which caused the error.
             /// </summary>
             [JsonProperty("signatureIndex")]
-            public int SignatureIndex { get; set; }
+            public int? SignatureIndex { get; set; }
 
             /// <summary>
             /// The field which caused the error.
             /// </summary>
             [JsonProperty("errorField")]
-            public SignedExchangeErrorField ErrorField { get; set; }
+            public SignedExchangeErrorField? ErrorField { get; set; }
         }
 
         /// <summary>
@@ -10317,7 +10317,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// to an authChallenge.
             /// </summary>
             [JsonProperty("errorReason")]
-            public ErrorReason ErrorReason { get; set; }
+            public ErrorReason? ErrorReason { get; set; }
 
             /// <summary>
             /// If set the requests completes using with the provided base64 encoded raw response, including
@@ -10436,7 +10436,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Connection type if known.
             /// </summary>
             [JsonProperty("connectionType")]
-            public ConnectionType ConnectionType { get; set; }
+            public ConnectionType? ConnectionType { get; set; }
         }
 
         /// <summary>
@@ -10450,19 +10450,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Buffer size in bytes to use when preserving network payloads (XHRs, etc).
             /// </summary>
             [JsonProperty("maxTotalBufferSize")]
-            public int MaxTotalBufferSize { get; set; }
+            public int? MaxTotalBufferSize { get; set; }
 
             /// <summary>
             /// Per-resource buffer size in bytes to use when preserving network payloads (XHRs, etc).
             /// </summary>
             [JsonProperty("maxResourceBufferSize")]
-            public int MaxResourceBufferSize { get; set; }
+            public int? MaxResourceBufferSize { get; set; }
 
             /// <summary>
             /// Longest post body size (in bytes) that would be included in requestWillBeSent notification
             /// </summary>
             [JsonProperty("maxPostDataSize")]
-            public int MaxPostDataSize { get; set; }
+            public int? MaxPostDataSize { get; set; }
         }
 
         /// <summary>
@@ -10674,13 +10674,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// If true, search is case sensitive.
             /// </summary>
             [JsonProperty("caseSensitive")]
-            public bool CaseSensitive { get; set; }
+            public bool? CaseSensitive { get; set; }
 
             /// <summary>
             /// If true, treats string parameter as regex.
             /// </summary>
             [JsonProperty("isRegex")]
-            public bool IsRegex { get; set; }
+            public bool? IsRegex { get; set; }
         }
 
         public class SearchInResponseBodyResponse
@@ -10777,25 +10777,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// True if cookie is secure.
             /// </summary>
             [JsonProperty("secure")]
-            public bool Secure { get; set; }
+            public bool? Secure { get; set; }
 
             /// <summary>
             /// True if cookie is http-only.
             /// </summary>
             [JsonProperty("httpOnly")]
-            public bool HttpOnly { get; set; }
+            public bool? HttpOnly { get; set; }
 
             /// <summary>
             /// Cookie SameSite type.
             /// </summary>
             [JsonProperty("sameSite")]
-            public CookieSameSite SameSite { get; set; }
+            public CookieSameSite? SameSite { get; set; }
 
             /// <summary>
             /// Cookie expiration date, session cookie if not set
             /// </summary>
             [JsonProperty("expires")]
-            public TimeSinceEpoch Expires { get; set; }
+            public TimeSinceEpoch? Expires { get; set; }
         }
 
         public class SetCookieResponse
@@ -11006,13 +11006,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// True if loading was canceled.
             /// </summary>
             [JsonProperty("canceled")]
-            public bool Canceled { get; set; }
+            public bool? Canceled { get; set; }
 
             /// <summary>
             /// The reason why loading was blocked, if any.
             /// </summary>
             [JsonProperty("blockedReason")]
-            public BlockedReason BlockedReason { get; set; }
+            public BlockedReason? BlockedReason { get; set; }
         }
 
         /// <summary>
@@ -11045,7 +11045,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// 2) this needs to be reported to the DevTools console.
             /// </summary>
             [JsonProperty("shouldReportCorbBlocking")]
-            public bool ShouldReportCorbBlocking { get; set; }
+            public bool? ShouldReportCorbBlocking { get; set; }
         }
 
         /// <summary>
@@ -11090,7 +11090,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Only present after response is received from the server (i.e. HeadersReceived stage).
             /// </summary>
             [JsonProperty("isDownload")]
-            public bool IsDownload { get; set; }
+            public bool? IsDownload { get; set; }
 
             /// <summary>
             /// Redirect location, only sent if a redirect was intercepted.
@@ -11110,14 +11110,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// request.
             /// </summary>
             [JsonProperty("responseErrorReason")]
-            public ErrorReason ResponseErrorReason { get; set; }
+            public ErrorReason? ResponseErrorReason { get; set; }
 
             /// <summary>
             /// Response code if intercepted at response stage or if redirect occurred while intercepting
             /// request or auth retry occurred.
             /// </summary>
             [JsonProperty("responseStatusCode")]
-            public int ResponseStatusCode { get; set; }
+            public int? ResponseStatusCode { get; set; }
 
             /// <summary>
             /// Response headers if intercepted at the response stage or if redirect occurred while
@@ -11200,19 +11200,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Type of this resource.
             /// </summary>
             [JsonProperty("type")]
-            public ResourceType Type { get; set; }
+            public ResourceType? Type { get; set; }
 
             /// <summary>
             /// Frame identifier.
             /// </summary>
             [JsonProperty("frameId")]
-            public Page.FrameId FrameId { get; set; }
+            public Page.FrameId? FrameId { get; set; }
 
             /// <summary>
             /// Whether the request is initiated by a user gesture. Defaults to false.
             /// </summary>
             [JsonProperty("hasUserGesture")]
-            public bool HasUserGesture { get; set; }
+            public bool? HasUserGesture { get; set; }
         }
 
         /// <summary>
@@ -11302,7 +11302,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Frame identifier.
             /// </summary>
             [JsonProperty("frameId")]
-            public Page.FrameId FrameId { get; set; }
+            public Page.FrameId? FrameId { get; set; }
         }
 
         /// <summary>
@@ -11508,25 +11508,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Whether the node info tooltip should be shown (default: false).
             /// </summary>
             [JsonProperty("showInfo")]
-            public bool ShowInfo { get; set; }
+            public bool? ShowInfo { get; set; }
 
             /// <summary>
             /// Whether the node styles in the tooltip (default: false).
             /// </summary>
             [JsonProperty("showStyles")]
-            public bool ShowStyles { get; set; }
+            public bool? ShowStyles { get; set; }
 
             /// <summary>
             /// Whether the rulers should be shown (default: false).
             /// </summary>
             [JsonProperty("showRulers")]
-            public bool ShowRulers { get; set; }
+            public bool? ShowRulers { get; set; }
 
             /// <summary>
             /// Whether the extension lines from node to the rulers should be shown (default: false).
             /// </summary>
             [JsonProperty("showExtensionLines")]
-            public bool ShowExtensionLines { get; set; }
+            public bool? ShowExtensionLines { get; set; }
 
             /// <summary>
             /// The content box highlight fill color (default: transparent).
@@ -11693,19 +11693,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Identifier of the node to highlight.
             /// </summary>
             [JsonProperty("nodeId")]
-            public DOM.NodeId NodeId { get; set; }
+            public DOM.NodeId? NodeId { get; set; }
 
             /// <summary>
             /// Identifier of the backend node to highlight.
             /// </summary>
             [JsonProperty("backendNodeId")]
-            public DOM.BackendNodeId BackendNodeId { get; set; }
+            public DOM.BackendNodeId? BackendNodeId { get; set; }
 
             /// <summary>
             /// JavaScript object id of the node to be highlighted.
             /// </summary>
             [JsonProperty("objectId")]
-            public Runtime.RemoteObjectId ObjectId { get; set; }
+            public Runtime.RemoteObjectId? ObjectId { get; set; }
         }
 
         /// <summary>
@@ -12058,25 +12058,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// last-modified timestamp as reported by server.
             /// </summary>
             [JsonProperty("lastModified")]
-            public Network.TimeSinceEpoch LastModified { get; set; }
+            public Network.TimeSinceEpoch? LastModified { get; set; }
 
             /// <summary>
             /// Resource content size.
             /// </summary>
             [JsonProperty("contentSize")]
-            public double ContentSize { get; set; }
+            public double? ContentSize { get; set; }
 
             /// <summary>
             /// True if the resource failed to load.
             /// </summary>
             [JsonProperty("failed")]
-            public bool Failed { get; set; }
+            public bool? Failed { get; set; }
 
             /// <summary>
             /// True if the resource was canceled during loading.
             /// </summary>
             [JsonProperty("canceled")]
-            public bool Canceled { get; set; }
+            public bool? Canceled { get; set; }
         }
 
         /// <summary>
@@ -12247,7 +12247,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Frame swap timestamp.
             /// </summary>
             [JsonProperty("timestamp")]
-            public Network.TimeSinceEpoch Timestamp { get; set; }
+            public Network.TimeSinceEpoch? Timestamp { get; set; }
         }
 
         /// <summary>
@@ -12382,7 +12382,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Page zoom factor (CSS to device independent pixels ratio).
             /// </summary>
             [JsonProperty("zoom")]
-            public double Zoom { get; set; }
+            public double? Zoom { get; set; }
         }
 
         /// <summary>
@@ -12481,13 +12481,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Default standard font size.
             /// </summary>
             [JsonProperty("standard")]
-            public int Standard { get; set; }
+            public int? Standard { get; set; }
 
             /// <summary>
             /// Default fixed font size.
             /// </summary>
             [JsonProperty("fixed")]
-            public int Fixed { get; set; }
+            public int? Fixed { get; set; }
         }
 
         #endregion
@@ -12570,7 +12570,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Compression quality from range [0..100] (jpeg only).
             /// </summary>
             [JsonProperty("quality")]
-            public int Quality { get; set; }
+            public int? Quality { get; set; }
 
             /// <summary>
             /// Capture the screenshot of a given region only.
@@ -12582,7 +12582,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Capture the screenshot from the surface, rather than the view. Defaults to true.
             /// </summary>
             [JsonProperty("fromSurface")]
-            public bool FromSurface { get; set; }
+            public bool? FromSurface { get; set; }
         }
 
         public class CaptureScreenshotResponse
@@ -12671,7 +12671,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// option, use with caution.
             /// </summary>
             [JsonProperty("grantUniveralAccess")]
-            public bool GrantUniveralAccess { get; set; }
+            public bool? GrantUniveralAccess { get; set; }
         }
 
         public class CreateIsolatedWorldResponse
@@ -12943,13 +12943,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Intended transition type.
             /// </summary>
             [JsonProperty("transitionType")]
-            public TransitionType TransitionType { get; set; }
+            public TransitionType? TransitionType { get; set; }
 
             /// <summary>
             /// Frame id to navigate, if not specified navigates the top frame.
             /// </summary>
             [JsonProperty("frameId")]
-            public FrameId FrameId { get; set; }
+            public FrameId? FrameId { get; set; }
         }
 
         public class NavigateResponse
@@ -12965,7 +12965,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Loader identifier.
             /// </summary>
             [JsonProperty("loaderId")]
-            public Network.LoaderId LoaderId { get; set; }
+            public Network.LoaderId? LoaderId { get; set; }
 
             /// <summary>
             /// User friendly error message, present if and only if navigation has failed.
@@ -12999,61 +12999,61 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Paper orientation. Defaults to false.
             /// </summary>
             [JsonProperty("landscape")]
-            public bool Landscape { get; set; }
+            public bool? Landscape { get; set; }
 
             /// <summary>
             /// Display header and footer. Defaults to false.
             /// </summary>
             [JsonProperty("displayHeaderFooter")]
-            public bool DisplayHeaderFooter { get; set; }
+            public bool? DisplayHeaderFooter { get; set; }
 
             /// <summary>
             /// Print background graphics. Defaults to false.
             /// </summary>
             [JsonProperty("printBackground")]
-            public bool PrintBackground { get; set; }
+            public bool? PrintBackground { get; set; }
 
             /// <summary>
             /// Scale of the webpage rendering. Defaults to 1.
             /// </summary>
             [JsonProperty("scale")]
-            public double Scale { get; set; }
+            public double? Scale { get; set; }
 
             /// <summary>
             /// Paper width in inches. Defaults to 8.5 inches.
             /// </summary>
             [JsonProperty("paperWidth")]
-            public double PaperWidth { get; set; }
+            public double? PaperWidth { get; set; }
 
             /// <summary>
             /// Paper height in inches. Defaults to 11 inches.
             /// </summary>
             [JsonProperty("paperHeight")]
-            public double PaperHeight { get; set; }
+            public double? PaperHeight { get; set; }
 
             /// <summary>
             /// Top margin in inches. Defaults to 1cm (~0.4 inches).
             /// </summary>
             [JsonProperty("marginTop")]
-            public double MarginTop { get; set; }
+            public double? MarginTop { get; set; }
 
             /// <summary>
             /// Bottom margin in inches. Defaults to 1cm (~0.4 inches).
             /// </summary>
             [JsonProperty("marginBottom")]
-            public double MarginBottom { get; set; }
+            public double? MarginBottom { get; set; }
 
             /// <summary>
             /// Left margin in inches. Defaults to 1cm (~0.4 inches).
             /// </summary>
             [JsonProperty("marginLeft")]
-            public double MarginLeft { get; set; }
+            public double? MarginLeft { get; set; }
 
             /// <summary>
             /// Right margin in inches. Defaults to 1cm (~0.4 inches).
             /// </summary>
             [JsonProperty("marginRight")]
-            public double MarginRight { get; set; }
+            public double? MarginRight { get; set; }
 
             /// <summary>
             /// Paper ranges to print, e.g., '1-5, 8, 11-13'. Defaults to the empty string, which means
@@ -13067,7 +13067,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Defaults to false.
             /// </summary>
             [JsonProperty("ignoreInvalidPageRanges")]
-            public bool IgnoreInvalidPageRanges { get; set; }
+            public bool? IgnoreInvalidPageRanges { get; set; }
 
             /// <summary>
             /// HTML template for the print header. Should be valid HTML markup with following
@@ -13094,7 +13094,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// in which case the content will be scaled to fit the paper size.
             /// </summary>
             [JsonProperty("preferCSSPageSize")]
-            public bool PreferCSSPageSize { get; set; }
+            public bool? PreferCSSPageSize { get; set; }
         }
 
         public class PrintToPDFResponse
@@ -13118,7 +13118,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// If true, browser cache is ignored (as if the user pressed Shift+refresh).
             /// </summary>
             [JsonProperty("ignoreCache")]
-            public bool IgnoreCache { get; set; }
+            public bool? IgnoreCache { get; set; }
 
             /// <summary>
             /// If set, the script will be injected into all frames of the inspected page after reload.
@@ -13194,13 +13194,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// If true, search is case sensitive.
             /// </summary>
             [JsonProperty("caseSensitive")]
-            public bool CaseSensitive { get; set; }
+            public bool? CaseSensitive { get; set; }
 
             /// <summary>
             /// If true, treats string parameter as regex.
             /// </summary>
             [JsonProperty("isRegex")]
-            public bool IsRegex { get; set; }
+            public bool? IsRegex { get; set; }
         }
 
         public class SearchInResourceResponse
@@ -13280,37 +13280,37 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Scale to apply to resulting view image.
             /// </summary>
             [JsonProperty("scale")]
-            public double Scale { get; set; }
+            public double? Scale { get; set; }
 
             /// <summary>
             /// Overriding screen width value in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("screenWidth")]
-            public int ScreenWidth { get; set; }
+            public int? ScreenWidth { get; set; }
 
             /// <summary>
             /// Overriding screen height value in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("screenHeight")]
-            public int ScreenHeight { get; set; }
+            public int? ScreenHeight { get; set; }
 
             /// <summary>
             /// Overriding view X position on screen in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("positionX")]
-            public int PositionX { get; set; }
+            public int? PositionX { get; set; }
 
             /// <summary>
             /// Overriding view Y position on screen in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("positionY")]
-            public int PositionY { get; set; }
+            public int? PositionY { get; set; }
 
             /// <summary>
             /// Do not set visible view size, rely upon explicit setVisibleSize call.
             /// </summary>
             [JsonProperty("dontSetVisibleSize")]
-            public bool DontSetVisibleSize { get; set; }
+            public bool? DontSetVisibleSize { get; set; }
 
             /// <summary>
             /// Screen orientation override.
@@ -13434,19 +13434,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Mock latitude
             /// </summary>
             [JsonProperty("latitude")]
-            public double Latitude { get; set; }
+            public double? Latitude { get; set; }
 
             /// <summary>
             /// Mock longitude
             /// </summary>
             [JsonProperty("longitude")]
-            public double Longitude { get; set; }
+            public double? Longitude { get; set; }
 
             /// <summary>
             /// Mock accuracy
             /// </summary>
             [JsonProperty("accuracy")]
-            public double Accuracy { get; set; }
+            public double? Accuracy { get; set; }
         }
 
         /// <summary>
@@ -13501,25 +13501,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Compression quality from range [0..100].
             /// </summary>
             [JsonProperty("quality")]
-            public int Quality { get; set; }
+            public int? Quality { get; set; }
 
             /// <summary>
             /// Maximum screenshot width.
             /// </summary>
             [JsonProperty("maxWidth")]
-            public int MaxWidth { get; set; }
+            public int? MaxWidth { get; set; }
 
             /// <summary>
             /// Maximum screenshot height.
             /// </summary>
             [JsonProperty("maxHeight")]
-            public int MaxHeight { get; set; }
+            public int? MaxHeight { get; set; }
 
             /// <summary>
             /// Send every n-th frame.
             /// </summary>
             [JsonProperty("everyNthFrame")]
-            public int EveryNthFrame { get; set; }
+            public int? EveryNthFrame { get; set; }
         }
 
         /// <summary>
@@ -14513,20 +14513,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The Last-Modified header value of the main script.
             /// </summary>
             [JsonProperty("scriptLastModified")]
-            public double ScriptLastModified { get; set; }
+            public double? ScriptLastModified { get; set; }
 
             /// <summary>
             /// The time at which the response headers of the main script were received from the server.
             /// For cached script it is the last time the cache entry was validated.
             /// </summary>
             [JsonProperty("scriptResponseTime")]
-            public double ScriptResponseTime { get; set; }
+            public double? ScriptResponseTime { get; set; }
 
             [JsonProperty("controlledClients")]
             public Target.TargetID[] ControlledClients { get; set; }
 
             [JsonProperty("targetId")]
-            public Target.TargetID TargetId { get; set; }
+            public Target.TargetID? TargetId { get; set; }
         }
 
         /// <summary>
@@ -15166,10 +15166,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Opener target Id
             /// </summary>
             [JsonProperty("openerId")]
-            public TargetID OpenerId { get; set; }
+            public TargetID? OpenerId { get; set; }
 
             [JsonProperty("browserContextId")]
-            public BrowserContextID BrowserContextId { get; set; }
+            public BrowserContextID? BrowserContextId { get; set; }
         }
 
         public class RemoteLocation
@@ -15211,7 +15211,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Enables "flat" access to the session via specifying sessionId attribute in the commands.
             /// </summary>
             [JsonProperty("flatten")]
-            public bool Flatten { get; set; }
+            public bool? Flatten { get; set; }
         }
 
         public class AttachToTargetResponse
@@ -15338,26 +15338,26 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Frame width in DIP (headless chrome only).
             /// </summary>
             [JsonProperty("width")]
-            public int Width { get; set; }
+            public int? Width { get; set; }
 
             /// <summary>
             /// Frame height in DIP (headless chrome only).
             /// </summary>
             [JsonProperty("height")]
-            public int Height { get; set; }
+            public int? Height { get; set; }
 
             /// <summary>
             /// The browser context to create the page in.
             /// </summary>
             [JsonProperty("browserContextId")]
-            public BrowserContextID BrowserContextId { get; set; }
+            public BrowserContextID? BrowserContextId { get; set; }
 
             /// <summary>
             /// Whether BeginFrames for this target will be controlled via DevTools (headless chrome only,
             /// not supported on MacOS yet, false by default).
             /// </summary>
             [JsonProperty("enableBeginFrameControl")]
-            public bool EnableBeginFrameControl { get; set; }
+            public bool? EnableBeginFrameControl { get; set; }
         }
 
         public class CreateTargetResponse
@@ -15381,13 +15381,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Session to detach.
             /// </summary>
             [JsonProperty("sessionId")]
-            public SessionID SessionId { get; set; }
+            public SessionID? SessionId { get; set; }
 
             /// <summary>
             /// Deprecated.
             /// </summary>
             [JsonProperty("targetId")]
-            public TargetID TargetId { get; set; }
+            public TargetID? TargetId { get; set; }
         }
 
         /// <summary>
@@ -15410,7 +15410,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Target.getTargetInfo";
 
             [JsonProperty("targetId")]
-            public TargetID TargetId { get; set; }
+            public TargetID? TargetId { get; set; }
         }
 
         public class GetTargetInfoResponse
@@ -15452,13 +15452,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Identifier of the session.
             /// </summary>
             [JsonProperty("sessionId")]
-            public SessionID SessionId { get; set; }
+            public SessionID? SessionId { get; set; }
 
             /// <summary>
             /// Deprecated.
             /// </summary>
             [JsonProperty("targetId")]
-            public TargetID TargetId { get; set; }
+            public TargetID? TargetId { get; set; }
         }
 
         /// <summary>
@@ -15487,7 +15487,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Enables "flat" access to the session via specifying sessionId attribute in the commands.
             /// </summary>
             [JsonProperty("flatten")]
-            public bool Flatten { get; set; }
+            public bool? Flatten { get; set; }
         }
 
         /// <summary>
@@ -15562,7 +15562,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Deprecated.
             /// </summary>
             [JsonProperty("targetId")]
-            public TargetID TargetId { get; set; }
+            public TargetID? TargetId { get; set; }
         }
 
         /// <summary>
@@ -15586,7 +15586,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Deprecated.
             /// </summary>
             [JsonProperty("targetId")]
-            public TargetID TargetId { get; set; }
+            public TargetID? TargetId { get; set; }
         }
 
         /// <summary>
@@ -15737,19 +15737,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Turns on JavaScript stack sampling.
             /// </summary>
             [JsonProperty("enableSampling")]
-            public bool EnableSampling { get; set; }
+            public bool? EnableSampling { get; set; }
 
             /// <summary>
             /// Turns on system tracing.
             /// </summary>
             [JsonProperty("enableSystrace")]
-            public bool EnableSystrace { get; set; }
+            public bool? EnableSystrace { get; set; }
 
             /// <summary>
             /// Turns on argument filter.
             /// </summary>
             [JsonProperty("enableArgumentFilter")]
-            public bool EnableArgumentFilter { get; set; }
+            public bool? EnableArgumentFilter { get; set; }
 
             /// <summary>
             /// Included category filters.
@@ -15883,7 +15883,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// If set, the agent will issue bufferUsage events at this interval, specified in milliseconds
             /// </summary>
             [JsonProperty("bufferUsageReportingInterval")]
-            public double BufferUsageReportingInterval { get; set; }
+            public double? BufferUsageReportingInterval { get; set; }
 
             /// <summary>
             /// Whether to report trace events as series of dataCollected events or to save trace to a
@@ -15897,7 +15897,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// transfer mode (defaults to `none`)
             /// </summary>
             [JsonProperty("streamCompression")]
-            public StreamCompression StreamCompression { get; set; }
+            public StreamCompression? StreamCompression { get; set; }
 
             [JsonProperty("traceConfig")]
             public TraceConfig TraceConfig { get; set; }
@@ -15916,20 +15916,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// total size.
             /// </summary>
             [JsonProperty("percentFull")]
-            public double PercentFull { get; set; }
+            public double? PercentFull { get; set; }
 
             /// <summary>
             /// An approximate number of events in the trace log.
             /// </summary>
             [JsonProperty("eventCount")]
-            public double EventCount { get; set; }
+            public double? EventCount { get; set; }
 
             /// <summary>
             /// A number in range [0..1] that indicates the used size of event buffer as a fraction of its
             /// total size.
             /// </summary>
             [JsonProperty("value")]
-            public double Value { get; set; }
+            public double? Value { get; set; }
         }
 
         /// <summary>
@@ -15956,13 +15956,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// A handle of the stream that holds resulting trace data.
             /// </summary>
             [JsonProperty("stream")]
-            public IO.StreamHandle Stream { get; set; }
+            public IO.StreamHandle? Stream { get; set; }
 
             /// <summary>
             /// Compression format of returned stream.
             /// </summary>
             [JsonProperty("streamCompression")]
-            public StreamCompression StreamCompression { get; set; }
+            public StreamCompression? StreamCompression { get; set; }
         }
 
         #endregion
@@ -16054,13 +16054,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// If set, only requests for matching resource types will be intercepted.
             /// </summary>
             [JsonProperty("resourceType")]
-            public Network.ResourceType ResourceType { get; set; }
+            public Network.ResourceType? ResourceType { get; set; }
 
             /// <summary>
             /// Stage at wich to begin intercepting requests. Default is Request.
             /// </summary>
             [JsonProperty("requestStage")]
-            public RequestStage RequestStage { get; set; }
+            public RequestStage? RequestStage { get; set; }
         }
 
         /// <summary>
@@ -16169,7 +16169,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// expecting a call to continueWithAuth.
             /// </summary>
             [JsonProperty("handleAuthRequests")]
-            public bool HandleAuthRequests { get; set; }
+            public bool? HandleAuthRequests { get; set; }
         }
 
         /// <summary>
@@ -16395,13 +16395,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Response error if intercepted at response stage.
             /// </summary>
             [JsonProperty("responseErrorReason")]
-            public Network.ErrorReason ResponseErrorReason { get; set; }
+            public Network.ErrorReason? ResponseErrorReason { get; set; }
 
             /// <summary>
             /// Response code if intercepted at response stage.
             /// </summary>
             [JsonProperty("responseStatusCode")]
-            public int ResponseStatusCode { get; set; }
+            public int? ResponseStatusCode { get; set; }
 
             /// <summary>
             /// Response headers if intercepted at the response stage.

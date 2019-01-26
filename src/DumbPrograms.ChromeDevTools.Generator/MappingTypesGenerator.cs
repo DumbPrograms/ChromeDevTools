@@ -1,16 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
 namespace DumbPrograms.ChromeDevTools.Generator
 {
-    class ProtocolCodeGenerator
+    class MappingTypesGenerator
     {
-        int Indent;
-        readonly TextWriter Writer;
+        readonly HashSet<string> AliasTypes;
 
-        public ProtocolCodeGenerator(TextWriter writer)
+        public MappingTypesGenerator(HashSet<string> aliasTypes)
+        {
+            AliasTypes = aliasTypes;
+        }
+
+        int Indent;
+        TextWriter Writer;
+
+        public void WriteProtocolCode(TextWriter writer, ProtocolDescriptor protocol)
         {
             Indent = 0;
             Writer = writer;
@@ -18,10 +26,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
             WIL("using System;");
             WIL("using System.Collections.Generic;");
             WIL("using Newtonsoft.Json;");
-        }
 
-        public void WriteProtocolCode(ProtocolDescriptor protocol)
-        {
             WL();
 
             using (WILBlock("namespace DumbPrograms.ChromeDevTools.Protocol"))
@@ -54,15 +59,15 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     case JsonTypes.Number:
                                     case JsonTypes.Array:
                                     case JsonTypes.String:
-                                        var csTypeName = GetCSharpType(type.Type, type.ArrayType);
-                                        using (WILBlock($"public struct {type.Name} : I{(type.EnumValues != null ? "Enum" : $"Alias<{csTypeName}>")}"))
+                                        var aliasType = GetCSharpType(type.Type, optional: false, type.ArrayType);
+                                        using (WILBlock($"public struct {type.Name} : I{(type.EnumValues != null ? "Enum" : $"Alias<{aliasType}>")}"))
                                         {
 
-                                            WIL($"public {csTypeName} Value {{ get; private set; }}");
+                                            WIL($"public {aliasType} Value {{ get; private set; }}");
 
                                             WL();
 
-                                            using (WILBlock($"public {type.Name}({csTypeName} value)"))
+                                            using (WILBlock($"public {type.Name}({aliasType} value)"))
                                             {
                                                 WIL("Value = value;");
                                             }
@@ -81,7 +86,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     case JsonTypes.Object:
                                         using (WILBlock($"public class {type.Name}{(type.Properties == null ? " : Dictionary<string, object>" : "")}"))
                                         {
-                                            WILProperties(type.Properties);
+                                            WILProperties(domain.Name, type.Properties);
                                         }
                                         break;
                                     default:
@@ -118,7 +123,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                 {
                                     WIL($"string ICommand.Name {{ get; }} = \"{domain.Name}.{command.Name}\";");
 
-                                    WILProperties(command.Parameters);
+                                    WILProperties(domain.Name, command.Parameters);
                                 }
 
                                 if (command.Returns != null)
@@ -126,7 +131,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     WL();
                                     using (WILBlock($"public class {commandClassName}Response"))
                                     {
-                                        WILProperties(command.Returns);
+                                        WILProperties(domain.Name, command.Returns);
                                     }
                                 }
                             }
@@ -153,7 +158,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                 {
                                     WIL($"string ICommand.Name {{ get; }} = \"{domain.Name}.{@event.Name}\";");
 
-                                    WILProperties(@event.Parameters);
+                                    WILProperties(domain.Name, @event.Parameters);
                                 }
                             }
 
@@ -232,7 +237,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
         BlockStructureWriter WILBlock(string header) => new BlockStructureWriter(this, header);
 
-        void WILProperties(PropertyDescriptor[] properties)
+        void WILProperties(string domain, PropertyDescriptor[] properties)
         {
             if (properties != null)
             {
@@ -241,11 +246,22 @@ namespace DumbPrograms.ChromeDevTools.Generator
                     string csPropType;
                     if (property.Type != null)
                     {
-                        csPropType = GetCSharpType(property.Type.Value, property.ArrayType);
+                        csPropType = GetCSharpType(property.Type.Value, property.Optional, property.ArrayType);
                     }
                     else if (property.TypeReference != null)
                     {
                         csPropType = property.TypeReference;
+
+                        var lookupCsPropType = csPropType;
+                        if (!csPropType.Contains("."))
+                        {
+                            lookupCsPropType = $"{domain}.{csPropType}";
+                        }
+
+                        if (property.Optional && AliasTypes.Contains(lookupCsPropType))
+                        {
+                            csPropType += "?";
+                        }
                     }
                     else
                     {
@@ -262,7 +278,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
         string GetCSharpIdentifier(string name)
             => String.Join("", name.Split('_', '-', ' ').Select(n => Char.ToUpperInvariant(n[0]) + n.Substring(1, n.Length - 1)));
 
-        string GetCSharpType(JsonTypes jsonType, PropertyDescriptor arrayType)
+        string GetCSharpType(JsonTypes jsonType, bool optional, PropertyDescriptor arrayType)
         {
             switch (jsonType)
             {
@@ -270,11 +286,11 @@ namespace DumbPrograms.ChromeDevTools.Generator
                 case JsonTypes.Object:
                     return "object";
                 case JsonTypes.Boolean:
-                    return "bool";
+                    return optional ? "bool?" : "bool";
                 case JsonTypes.Integer:
-                    return "int";
+                    return optional ? "int?" : "int";
                 case JsonTypes.Number:
-                    return "double";
+                    return optional ? "double?" : "double";
                 case JsonTypes.String:
                     return "string";
                 case JsonTypes.Array:
@@ -288,7 +304,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                     }
                     else if (arrayType.Type != null)
                     {
-                        return GetCSharpType(arrayType.Type.Value, arrayType.ArrayType) + "[]";
+                        return GetCSharpType(arrayType.Type.Value, arrayType.Optional, arrayType.ArrayType) + "[]";
                     }
                     else
                     {
@@ -301,9 +317,9 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
         class BlockStructureWriter : IDisposable
         {
-            private readonly ProtocolCodeGenerator Generator;
+            private readonly MappingTypesGenerator Generator;
 
-            public BlockStructureWriter(ProtocolCodeGenerator generator, string header)
+            public BlockStructureWriter(MappingTypesGenerator generator, string header)
             {
                 Generator = generator;
 
