@@ -38,19 +38,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Text { get; set; }
 
             /// <summary>
-            /// URL of the message origin.
+            /// Optional. URL of the message origin.
             /// </summary>
             [JsonProperty("url")]
             public string Url { get; set; }
 
             /// <summary>
-            /// Line number in the resource that generated this message (1-based).
+            /// Optional. Line number in the resource that generated this message (1-based).
             /// </summary>
             [JsonProperty("line")]
             public int? Line { get; set; }
 
             /// <summary>
-            /// Column number in the resource that generated this message (1-based).
+            /// Optional. Column number in the resource that generated this message (1-based).
             /// </summary>
             [JsonProperty("column")]
             public int? Column { get; set; }
@@ -118,29 +118,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Breakpoint identifier.
         /// </summary>
-        public struct BreakpointId : IAlias<string>
+        [JsonConverter(typeof(JSAliasConverter<BreakpointId, string>))]
+        public class BreakpointId : JSAlias<string>
         {
-            public string Value { get; private set; }
-
-            public BreakpointId(string value)
-            {
-                Value = value;
-            }
-
         }
 
         /// <summary>
         /// Call frame identifier.
         /// </summary>
-        public struct CallFrameId : IAlias<string>
+        [JsonConverter(typeof(JSAliasConverter<CallFrameId, string>))]
+        public class CallFrameId : JSAlias<string>
         {
-            public string Value { get; private set; }
-
-            public CallFrameId(string value)
-            {
-                Value = value;
-            }
-
         }
 
         /// <summary>
@@ -162,7 +150,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int LineNumber { get; set; }
 
             /// <summary>
-            /// Column number in the script (0-based).
+            /// Optional. Column number in the script (0-based).
             /// </summary>
             [JsonProperty("columnNumber")]
             public int? ColumnNumber { get; set; }
@@ -200,7 +188,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string FunctionName { get; set; }
 
             /// <summary>
-            /// Location in the source code.
+            /// Optional. Location in the source code.
             /// </summary>
             [JsonProperty("functionLocation")]
             public Location FunctionLocation { get; set; }
@@ -230,7 +218,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.RemoteObject This { get; set; }
 
             /// <summary>
-            /// The value being returned, if the function is at return point.
+            /// Optional. The value being returned, if the function is at return point.
             /// </summary>
             [JsonProperty("returnValue")]
             public Runtime.RemoteObject ReturnValue { get; set; }
@@ -256,17 +244,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("object")]
             public Runtime.RemoteObject Object { get; set; }
 
+            /// <summary>
+            /// Optional. 
+            /// </summary>
             [JsonProperty("name")]
             public string Name { get; set; }
 
             /// <summary>
-            /// Location in the source code where scope starts
+            /// Optional. Location in the source code where scope starts
             /// </summary>
             [JsonProperty("startLocation")]
             public Location StartLocation { get; set; }
 
             /// <summary>
-            /// Location in the source code where scope ends
+            /// Optional. Location in the source code where scope ends
             /// </summary>
             [JsonProperty("endLocation")]
             public Location EndLocation { get; set; }
@@ -307,11 +298,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int LineNumber { get; set; }
 
             /// <summary>
-            /// Column number in the script (0-based).
+            /// Optional. Column number in the script (0-based).
             /// </summary>
             [JsonProperty("columnNumber")]
             public int? ColumnNumber { get; set; }
 
+            /// <summary>
+            /// Optional. 
+            /// </summary>
             [JsonProperty("type")]
             public string Type { get; set; }
         }
@@ -333,6 +327,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("location")]
             public Location Location { get; set; }
 
+            /// <summary>
+            /// Optional. 
+            /// </summary>
             [JsonProperty("targetCallFrames")]
             public string TargetCallFrames { get; set; }
         }
@@ -384,49 +381,49 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Expression { get; set; }
 
             /// <summary>
-            /// String object group name to put result into (allows rapid releasing resulting object handles
+            /// Optional. String object group name to put result into (allows rapid releasing resulting object handles
             /// using `releaseObjectGroup`).
             /// </summary>
             [JsonProperty("objectGroup")]
             public string ObjectGroup { get; set; }
 
             /// <summary>
-            /// Specifies whether command line API should be available to the evaluated expression, defaults
+            /// Optional. Specifies whether command line API should be available to the evaluated expression, defaults
             /// to false.
             /// </summary>
             [JsonProperty("includeCommandLineAPI")]
             public bool? IncludeCommandLineAPI { get; set; }
 
             /// <summary>
-            /// In silent mode exceptions thrown during evaluation are not reported and do not pause
+            /// Optional. In silent mode exceptions thrown during evaluation are not reported and do not pause
             /// execution. Overrides `setPauseOnException` state.
             /// </summary>
             [JsonProperty("silent")]
             public bool? Silent { get; set; }
 
             /// <summary>
-            /// Whether the result is expected to be a JSON object that should be sent by value.
+            /// Optional. Whether the result is expected to be a JSON object that should be sent by value.
             /// </summary>
             [JsonProperty("returnByValue")]
             public bool? ReturnByValue { get; set; }
 
             /// <summary>
-            /// Whether preview should be generated for the result.
+            /// Optional. Whether preview should be generated for the result.
             /// </summary>
             [JsonProperty("generatePreview")]
             public bool? GeneratePreview { get; set; }
 
             /// <summary>
-            /// Whether to throw an exception if side effect cannot be ruled out during evaluation.
+            /// Optional. Whether to throw an exception if side effect cannot be ruled out during evaluation.
             /// </summary>
             [JsonProperty("throwOnSideEffect")]
             public bool? ThrowOnSideEffect { get; set; }
 
             /// <summary>
-            /// Terminate execution after timing out (number of milliseconds).
+            /// Optional. Terminate execution after timing out (number of milliseconds).
             /// </summary>
             [JsonProperty("timeout")]
-            public Runtime.TimeDelta? Timeout { get; set; }
+            public Runtime.TimeDelta Timeout { get; set; }
         }
 
         public class EvaluateOnCallFrameResponse
@@ -439,7 +436,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.RemoteObject Result { get; set; }
 
             /// <summary>
-            /// Exception details.
+            /// Optional. Exception details.
             /// </summary>
             [JsonProperty("exceptionDetails")]
             public Runtime.ExceptionDetails ExceptionDetails { get; set; }
@@ -460,14 +457,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Location Start { get; set; }
 
             /// <summary>
-            /// End of range to search possible breakpoint locations in (excluding). When not specified, end
+            /// Optional. End of range to search possible breakpoint locations in (excluding). When not specified, end
             /// of scripts is used as end of range.
             /// </summary>
             [JsonProperty("end")]
             public Location End { get; set; }
 
             /// <summary>
-            /// Only consider locations which are in the same (non-nested) function as start.
+            /// Optional. Only consider locations which are in the same (non-nested) function as start.
             /// </summary>
             [JsonProperty("restrictToFunction")]
             public bool? RestrictToFunction { get; set; }
@@ -579,13 +576,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public CallFrame[] CallFrames { get; set; }
 
             /// <summary>
-            /// Async stack trace, if any.
+            /// Optional. Async stack trace, if any.
             /// </summary>
             [JsonProperty("asyncStackTrace")]
             public Runtime.StackTrace AsyncStackTrace { get; set; }
 
             /// <summary>
-            /// Async stack trace, if any.
+            /// Optional. Async stack trace, if any.
             /// </summary>
             [JsonProperty("asyncStackTraceId")]
             public Runtime.StackTraceId AsyncStackTraceId { get; set; }
@@ -619,13 +616,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Query { get; set; }
 
             /// <summary>
-            /// If true, search is case sensitive.
+            /// Optional. If true, search is case sensitive.
             /// </summary>
             [JsonProperty("caseSensitive")]
             public bool? CaseSensitive { get; set; }
 
             /// <summary>
-            /// If true, treats string parameter as regex.
+            /// Optional. If true, treats string parameter as regex.
             /// </summary>
             [JsonProperty("isRegex")]
             public bool? IsRegex { get; set; }
@@ -706,7 +703,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Location Location { get; set; }
 
             /// <summary>
-            /// Expression to use as a breakpoint condition. When specified, debugger will only stop on the
+            /// Optional. Expression to use as a breakpoint condition. When specified, debugger will only stop on the
             /// breakpoint if this expression evaluates to true.
             /// </summary>
             [JsonProperty("condition")]
@@ -746,32 +743,32 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int LineNumber { get; set; }
 
             /// <summary>
-            /// URL of the resources to set breakpoint on.
+            /// Optional. URL of the resources to set breakpoint on.
             /// </summary>
             [JsonProperty("url")]
             public string Url { get; set; }
 
             /// <summary>
-            /// Regex pattern for the URLs of the resources to set breakpoints on. Either `url` or
+            /// Optional. Regex pattern for the URLs of the resources to set breakpoints on. Either `url` or
             /// `urlRegex` must be specified.
             /// </summary>
             [JsonProperty("urlRegex")]
             public string UrlRegex { get; set; }
 
             /// <summary>
-            /// Script hash of the resources to set breakpoint on.
+            /// Optional. Script hash of the resources to set breakpoint on.
             /// </summary>
             [JsonProperty("scriptHash")]
             public string ScriptHash { get; set; }
 
             /// <summary>
-            /// Offset in the line to set breakpoint at.
+            /// Optional. Offset in the line to set breakpoint at.
             /// </summary>
             [JsonProperty("columnNumber")]
             public int? ColumnNumber { get; set; }
 
             /// <summary>
-            /// Expression to use as a breakpoint condition. When specified, debugger will only stop on the
+            /// Optional. Expression to use as a breakpoint condition. When specified, debugger will only stop on the
             /// breakpoint if this expression evaluates to true.
             /// </summary>
             [JsonProperty("condition")]
@@ -810,7 +807,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.RemoteObjectId ObjectId { get; set; }
 
             /// <summary>
-            /// Expression to use as a breakpoint condition. When specified, debugger will
+            /// Optional. Expression to use as a breakpoint condition. When specified, debugger will
             /// stop on the breakpoint if this expression evaluates to true.
             /// </summary>
             [JsonProperty("condition")]
@@ -890,7 +887,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string ScriptSource { get; set; }
 
             /// <summary>
-            /// If true the change will not actually be applied. Dry run may be used to get result
+            /// Optional. If true the change will not actually be applied. Dry run may be used to get result
             /// description without actually modifying the code.
             /// </summary>
             [JsonProperty("dryRun")]
@@ -901,31 +898,31 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
 
             /// <summary>
-            /// New stack trace in case editing has happened while VM was stopped.
+            /// Optional. New stack trace in case editing has happened while VM was stopped.
             /// </summary>
             [JsonProperty("callFrames")]
             public CallFrame[] CallFrames { get; set; }
 
             /// <summary>
-            /// Whether current call stack  was modified after applying the changes.
+            /// Optional. Whether current call stack  was modified after applying the changes.
             /// </summary>
             [JsonProperty("stackChanged")]
             public bool? StackChanged { get; set; }
 
             /// <summary>
-            /// Async stack trace, if any.
+            /// Optional. Async stack trace, if any.
             /// </summary>
             [JsonProperty("asyncStackTrace")]
             public Runtime.StackTrace AsyncStackTrace { get; set; }
 
             /// <summary>
-            /// Async stack trace, if any.
+            /// Optional. Async stack trace, if any.
             /// </summary>
             [JsonProperty("asyncStackTraceId")]
             public Runtime.StackTraceId AsyncStackTraceId { get; set; }
 
             /// <summary>
-            /// Exception details if any.
+            /// Optional. Exception details if any.
             /// </summary>
             [JsonProperty("exceptionDetails")]
             public Runtime.ExceptionDetails ExceptionDetails { get; set; }
@@ -987,7 +984,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Debugger.stepInto";
 
             /// <summary>
-            /// Debugger will issue additional Debugger.paused notification if any async task is scheduled
+            /// Optional. Debugger will issue additional Debugger.paused notification if any async task is scheduled
             /// before next pause.
             /// </summary>
             [JsonProperty("breakOnAsyncCall")]
@@ -1054,31 +1051,31 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Reason { get; set; }
 
             /// <summary>
-            /// Object containing break-specific auxiliary properties.
+            /// Optional. Object containing break-specific auxiliary properties.
             /// </summary>
             [JsonProperty("data")]
             public object Data { get; set; }
 
             /// <summary>
-            /// Hit breakpoints IDs
+            /// Optional. Hit breakpoints IDs
             /// </summary>
             [JsonProperty("hitBreakpoints")]
             public string[] HitBreakpoints { get; set; }
 
             /// <summary>
-            /// Async stack trace, if any.
+            /// Optional. Async stack trace, if any.
             /// </summary>
             [JsonProperty("asyncStackTrace")]
             public Runtime.StackTrace AsyncStackTrace { get; set; }
 
             /// <summary>
-            /// Async stack trace, if any.
+            /// Optional. Async stack trace, if any.
             /// </summary>
             [JsonProperty("asyncStackTraceId")]
             public Runtime.StackTraceId AsyncStackTraceId { get; set; }
 
             /// <summary>
-            /// Just scheduled async call will have this stack trace as parent stack during async execution.
+            /// Optional. Just scheduled async call will have this stack trace as parent stack during async execution.
             /// This field is available only after `Debugger.stepInto` call with `breakOnAsynCall` flag.
             /// </summary>
             [JsonProperty("asyncCallStackTraceId")]
@@ -1149,37 +1146,37 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Hash { get; set; }
 
             /// <summary>
-            /// Embedder-specific auxiliary data.
+            /// Optional. Embedder-specific auxiliary data.
             /// </summary>
             [JsonProperty("executionContextAuxData")]
             public object ExecutionContextAuxData { get; set; }
 
             /// <summary>
-            /// URL of source map associated with script (if any).
+            /// Optional. URL of source map associated with script (if any).
             /// </summary>
             [JsonProperty("sourceMapURL")]
             public string SourceMapURL { get; set; }
 
             /// <summary>
-            /// True, if this script has sourceURL.
+            /// Optional. True, if this script has sourceURL.
             /// </summary>
             [JsonProperty("hasSourceURL")]
             public bool? HasSourceURL { get; set; }
 
             /// <summary>
-            /// True, if this script is ES6 module.
+            /// Optional. True, if this script is ES6 module.
             /// </summary>
             [JsonProperty("isModule")]
             public bool? IsModule { get; set; }
 
             /// <summary>
-            /// This script length.
+            /// Optional. This script length.
             /// </summary>
             [JsonProperty("length")]
             public int? Length { get; set; }
 
             /// <summary>
-            /// JavaScript top stack frame of where the script parsed event was triggered if available.
+            /// Optional. JavaScript top stack frame of where the script parsed event was triggered if available.
             /// </summary>
             [JsonProperty("stackTrace")]
             public Runtime.StackTrace StackTrace { get; set; }
@@ -1242,43 +1239,43 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Hash { get; set; }
 
             /// <summary>
-            /// Embedder-specific auxiliary data.
+            /// Optional. Embedder-specific auxiliary data.
             /// </summary>
             [JsonProperty("executionContextAuxData")]
             public object ExecutionContextAuxData { get; set; }
 
             /// <summary>
-            /// True, if this script is generated as a result of the live edit operation.
+            /// Optional. True, if this script is generated as a result of the live edit operation.
             /// </summary>
             [JsonProperty("isLiveEdit")]
             public bool? IsLiveEdit { get; set; }
 
             /// <summary>
-            /// URL of source map associated with script (if any).
+            /// Optional. URL of source map associated with script (if any).
             /// </summary>
             [JsonProperty("sourceMapURL")]
             public string SourceMapURL { get; set; }
 
             /// <summary>
-            /// True, if this script has sourceURL.
+            /// Optional. True, if this script has sourceURL.
             /// </summary>
             [JsonProperty("hasSourceURL")]
             public bool? HasSourceURL { get; set; }
 
             /// <summary>
-            /// True, if this script is ES6 module.
+            /// Optional. True, if this script is ES6 module.
             /// </summary>
             [JsonProperty("isModule")]
             public bool? IsModule { get; set; }
 
             /// <summary>
-            /// This script length.
+            /// Optional. This script length.
             /// </summary>
             [JsonProperty("length")]
             public int? Length { get; set; }
 
             /// <summary>
-            /// JavaScript top stack frame of where the script parsed event was triggered if available.
+            /// Optional. JavaScript top stack frame of where the script parsed event was triggered if available.
             /// </summary>
             [JsonProperty("stackTrace")]
             public Runtime.StackTrace StackTrace { get; set; }
@@ -1295,15 +1292,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Heap snapshot object id.
         /// </summary>
-        public struct HeapSnapshotObjectId : IAlias<string>
+        [JsonConverter(typeof(JSAliasConverter<HeapSnapshotObjectId, string>))]
+        public class HeapSnapshotObjectId : JSAlias<string>
         {
-            public string Value { get; private set; }
-
-            public HeapSnapshotObjectId(string value)
-            {
-                Value = value;
-            }
-
         }
 
         /// <summary>
@@ -1439,7 +1430,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public HeapSnapshotObjectId ObjectId { get; set; }
 
             /// <summary>
-            /// Symbolic group name that can be used to release multiple objects.
+            /// Optional. Symbolic group name that can be used to release multiple objects.
             /// </summary>
             [JsonProperty("objectGroup")]
             public string ObjectGroup { get; set; }
@@ -1475,7 +1466,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "HeapProfiler.startSampling";
 
             /// <summary>
-            /// Average sample interval in bytes. Poisson distribution is used for the intervals. The
+            /// Optional. Average sample interval in bytes. Poisson distribution is used for the intervals. The
             /// default value is 32768 bytes.
             /// </summary>
             [JsonProperty("samplingInterval")]
@@ -1486,6 +1477,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "HeapProfiler.startTrackingHeapObjects";
 
+            /// <summary>
+            /// Optional. 
+            /// </summary>
             [JsonProperty("trackAllocations")]
             public bool? TrackAllocations { get; set; }
         }
@@ -1510,7 +1504,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "HeapProfiler.stopTrackingHeapObjects";
 
             /// <summary>
-            /// If true 'reportHeapSnapshotProgress' events will be generated while snapshot is being taken
+            /// Optional. If true 'reportHeapSnapshotProgress' events will be generated while snapshot is being taken
             /// when the tracking is stopped.
             /// </summary>
             [JsonProperty("reportProgress")]
@@ -1522,7 +1516,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "HeapProfiler.takeHeapSnapshot";
 
             /// <summary>
-            /// If true 'reportHeapSnapshotProgress' events will be generated while snapshot is being taken.
+            /// Optional. If true 'reportHeapSnapshotProgress' events will be generated while snapshot is being taken.
             /// </summary>
             [JsonProperty("reportProgress")]
             public bool? ReportProgress { get; set; }
@@ -1582,6 +1576,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("total")]
             public int Total { get; set; }
 
+            /// <summary>
+            /// Optional. 
+            /// </summary>
             [JsonProperty("finished")]
             public bool? Finished { get; set; }
         }
@@ -1618,26 +1615,26 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.CallFrame CallFrame { get; set; }
 
             /// <summary>
-            /// Number of samples where this node was on top of the call stack.
+            /// Optional. Number of samples where this node was on top of the call stack.
             /// </summary>
             [JsonProperty("hitCount")]
             public int? HitCount { get; set; }
 
             /// <summary>
-            /// Child node ids.
+            /// Optional. Child node ids.
             /// </summary>
             [JsonProperty("children")]
             public int[] Children { get; set; }
 
             /// <summary>
-            /// The reason of being not optimized. The function may be deoptimized or marked as don't
+            /// Optional. The reason of being not optimized. The function may be deoptimized or marked as don't
             /// optimize.
             /// </summary>
             [JsonProperty("deoptReason")]
             public string DeoptReason { get; set; }
 
             /// <summary>
-            /// An array of source position ticks.
+            /// Optional. An array of source position ticks.
             /// </summary>
             [JsonProperty("positionTicks")]
             public PositionTickInfo[] PositionTicks { get; set; }
@@ -1668,13 +1665,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public double EndTime { get; set; }
 
             /// <summary>
-            /// Ids of samples top nodes.
+            /// Optional. Ids of samples top nodes.
             /// </summary>
             [JsonProperty("samples")]
             public int[] Samples { get; set; }
 
             /// <summary>
-            /// Time intervals between adjacent samples in microseconds. The first delta is relative to the
+            /// Optional. Time intervals between adjacent samples in microseconds. The first delta is relative to the
             /// profile startTime.
             /// </summary>
             [JsonProperty("timeDeltas")]
@@ -1894,13 +1891,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Profiler.startPreciseCoverage";
 
             /// <summary>
-            /// Collect accurate call counts beyond simple 'covered' or 'not covered'.
+            /// Optional. Collect accurate call counts beyond simple 'covered' or 'not covered'.
             /// </summary>
             [JsonProperty("callCount")]
             public bool? CallCount { get; set; }
 
             /// <summary>
-            /// Collect block-based coverage.
+            /// Optional. Collect block-based coverage.
             /// </summary>
             [JsonProperty("detailed")]
             public bool? Detailed { get; set; }
@@ -2004,7 +2001,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Profile Profile { get; set; }
 
             /// <summary>
-            /// Profile title passed as an argument to console.profile().
+            /// Optional. Profile title passed as an argument to console.profile().
             /// </summary>
             [JsonProperty("title")]
             public string Title { get; set; }
@@ -2027,7 +2024,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Debugger.Location Location { get; set; }
 
             /// <summary>
-            /// Profile title passed as an argument to console.profile().
+            /// Optional. Profile title passed as an argument to console.profile().
             /// </summary>
             [JsonProperty("title")]
             public string Title { get; set; }
@@ -2051,44 +2048,26 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique script identifier.
         /// </summary>
-        public struct ScriptId : IAlias<string>
+        [JsonConverter(typeof(JSAliasConverter<ScriptId, string>))]
+        public class ScriptId : JSAlias<string>
         {
-            public string Value { get; private set; }
-
-            public ScriptId(string value)
-            {
-                Value = value;
-            }
-
         }
 
         /// <summary>
         /// Unique object identifier.
         /// </summary>
-        public struct RemoteObjectId : IAlias<string>
+        [JsonConverter(typeof(JSAliasConverter<RemoteObjectId, string>))]
+        public class RemoteObjectId : JSAlias<string>
         {
-            public string Value { get; private set; }
-
-            public RemoteObjectId(string value)
-            {
-                Value = value;
-            }
-
         }
 
         /// <summary>
         /// Primitive value which cannot be JSON-stringified. Includes values `-0`, `NaN`, `Infinity`,
         /// `-Infinity`, and bigint literals.
         /// </summary>
-        public struct UnserializableValue : IAlias<string>
+        [JsonConverter(typeof(JSAliasConverter<UnserializableValue, string>))]
+        public class UnserializableValue : JSAlias<string>
         {
-            public string Value { get; private set; }
-
-            public UnserializableValue(string value)
-            {
-                Value = value;
-            }
-
         }
 
         /// <summary>
@@ -2104,48 +2083,51 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Type { get; set; }
 
             /// <summary>
-            /// Object subtype hint. Specified for `object` type values only.
+            /// Optional. Object subtype hint. Specified for `object` type values only.
             /// </summary>
             [JsonProperty("subtype")]
             public string Subtype { get; set; }
 
             /// <summary>
-            /// Object class (constructor) name. Specified for `object` type values only.
+            /// Optional. Object class (constructor) name. Specified for `object` type values only.
             /// </summary>
             [JsonProperty("className")]
             public string ClassName { get; set; }
 
             /// <summary>
-            /// Remote object value in case of primitive values or JSON values (if it was requested).
+            /// Optional. Remote object value in case of primitive values or JSON values (if it was requested).
             /// </summary>
             [JsonProperty("value")]
             public object Value { get; set; }
 
             /// <summary>
-            /// Primitive value which can not be JSON-stringified does not have `value`, but gets this
+            /// Optional. Primitive value which can not be JSON-stringified does not have `value`, but gets this
             /// property.
             /// </summary>
             [JsonProperty("unserializableValue")]
-            public UnserializableValue? UnserializableValue { get; set; }
+            public UnserializableValue UnserializableValue { get; set; }
 
             /// <summary>
-            /// String representation of the object.
+            /// Optional. String representation of the object.
             /// </summary>
             [JsonProperty("description")]
             public string Description { get; set; }
 
             /// <summary>
-            /// Unique object identifier (for non-primitive values).
+            /// Optional. Unique object identifier (for non-primitive values).
             /// </summary>
             [JsonProperty("objectId")]
-            public RemoteObjectId? ObjectId { get; set; }
+            public RemoteObjectId ObjectId { get; set; }
 
             /// <summary>
-            /// Preview containing abbreviated property values. Specified for `object` type values only.
+            /// Optional. Preview containing abbreviated property values. Specified for `object` type values only.
             /// </summary>
             [JsonProperty("preview")]
             public ObjectPreview Preview { get; set; }
 
+            /// <summary>
+            /// Optional. 
+            /// </summary>
             [JsonProperty("customPreview")]
             public CustomPreview CustomPreview { get; set; }
         }
@@ -2161,12 +2143,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Header { get; set; }
 
             /// <summary>
-            /// If formatter returns true as a result of formatter.hasBody call then bodyGetterId will
+            /// Optional. If formatter returns true as a result of formatter.hasBody call then bodyGetterId will
             /// contain RemoteObjectId for the function that returns result of formatter.body(object, config) call.
             /// The result value is json ML array.
             /// </summary>
             [JsonProperty("bodyGetterId")]
-            public RemoteObjectId? BodyGetterId { get; set; }
+            public RemoteObjectId BodyGetterId { get; set; }
         }
 
         /// <summary>
@@ -2182,13 +2164,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Type { get; set; }
 
             /// <summary>
-            /// Object subtype hint. Specified for `object` type values only.
+            /// Optional. Object subtype hint. Specified for `object` type values only.
             /// </summary>
             [JsonProperty("subtype")]
             public string Subtype { get; set; }
 
             /// <summary>
-            /// String representation of the object.
+            /// Optional. String representation of the object.
             /// </summary>
             [JsonProperty("description")]
             public string Description { get; set; }
@@ -2206,7 +2188,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public PropertyPreview[] Properties { get; set; }
 
             /// <summary>
-            /// List of the entries. Specified for `map` and `set` subtype values only.
+            /// Optional. List of the entries. Specified for `map` and `set` subtype values only.
             /// </summary>
             [JsonProperty("entries")]
             public EntryPreview[] Entries { get; set; }
@@ -2228,19 +2210,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Type { get; set; }
 
             /// <summary>
-            /// User-friendly property value string.
+            /// Optional. User-friendly property value string.
             /// </summary>
             [JsonProperty("value")]
             public string Value { get; set; }
 
             /// <summary>
-            /// Nested value preview.
+            /// Optional. Nested value preview.
             /// </summary>
             [JsonProperty("valuePreview")]
             public ObjectPreview ValuePreview { get; set; }
 
             /// <summary>
-            /// Object subtype hint. Specified for `object` type values only.
+            /// Optional. Object subtype hint. Specified for `object` type values only.
             /// </summary>
             [JsonProperty("subtype")]
             public string Subtype { get; set; }
@@ -2250,7 +2232,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
 
             /// <summary>
-            /// Preview of the key. Specified for map-like collection entries.
+            /// Optional. Preview of the key. Specified for map-like collection entries.
             /// </summary>
             [JsonProperty("key")]
             public ObjectPreview Key { get; set; }
@@ -2275,26 +2257,26 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Name { get; set; }
 
             /// <summary>
-            /// The value associated with the property.
+            /// Optional. The value associated with the property.
             /// </summary>
             [JsonProperty("value")]
             public RemoteObject Value { get; set; }
 
             /// <summary>
-            /// True if the value associated with the property may be changed (data descriptors only).
+            /// Optional. True if the value associated with the property may be changed (data descriptors only).
             /// </summary>
             [JsonProperty("writable")]
             public bool? Writable { get; set; }
 
             /// <summary>
-            /// A function which serves as a getter for the property, or `undefined` if there is no getter
+            /// Optional. A function which serves as a getter for the property, or `undefined` if there is no getter
             /// (accessor descriptors only).
             /// </summary>
             [JsonProperty("get")]
             public RemoteObject Get { get; set; }
 
             /// <summary>
-            /// A function which serves as a setter for the property, or `undefined` if there is no setter
+            /// Optional. A function which serves as a setter for the property, or `undefined` if there is no setter
             /// (accessor descriptors only).
             /// </summary>
             [JsonProperty("set")]
@@ -2315,19 +2297,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool Enumerable { get; set; }
 
             /// <summary>
-            /// True if the result was thrown during the evaluation.
+            /// Optional. True if the result was thrown during the evaluation.
             /// </summary>
             [JsonProperty("wasThrown")]
             public bool? WasThrown { get; set; }
 
             /// <summary>
-            /// True if the property is owned for the object.
+            /// Optional. True if the property is owned for the object.
             /// </summary>
             [JsonProperty("isOwn")]
             public bool? IsOwn { get; set; }
 
             /// <summary>
-            /// Property symbol object, if the property is of the `symbol` type.
+            /// Optional. Property symbol object, if the property is of the `symbol` type.
             /// </summary>
             [JsonProperty("symbol")]
             public RemoteObject Symbol { get; set; }
@@ -2346,7 +2328,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Name { get; set; }
 
             /// <summary>
-            /// The value associated with the property.
+            /// Optional. The value associated with the property.
             /// </summary>
             [JsonProperty("value")]
             public RemoteObject Value { get; set; }
@@ -2360,36 +2342,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
 
             /// <summary>
-            /// Primitive value or serializable javascript object.
+            /// Optional. Primitive value or serializable javascript object.
             /// </summary>
             [JsonProperty("value")]
             public object Value { get; set; }
 
             /// <summary>
-            /// Primitive value which can not be JSON-stringified.
+            /// Optional. Primitive value which can not be JSON-stringified.
             /// </summary>
             [JsonProperty("unserializableValue")]
-            public UnserializableValue? UnserializableValue { get; set; }
+            public UnserializableValue UnserializableValue { get; set; }
 
             /// <summary>
-            /// Remote object handle.
+            /// Optional. Remote object handle.
             /// </summary>
             [JsonProperty("objectId")]
-            public RemoteObjectId? ObjectId { get; set; }
+            public RemoteObjectId ObjectId { get; set; }
         }
 
         /// <summary>
         /// Id of an execution context.
         /// </summary>
-        public struct ExecutionContextId : IAlias<int>
+        [JsonConverter(typeof(JSAliasConverter<ExecutionContextId, int>))]
+        public class ExecutionContextId : JSAlias<int>
         {
-            public int Value { get; private set; }
-
-            public ExecutionContextId(int value)
-            {
-                Value = value;
-            }
-
         }
 
         /// <summary>
@@ -2418,7 +2394,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Name { get; set; }
 
             /// <summary>
-            /// Embedder-specific auxiliary data.
+            /// Optional. Embedder-specific auxiliary data.
             /// </summary>
             [JsonProperty("auxData")]
             public object AuxData { get; set; }
@@ -2456,62 +2432,50 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int ColumnNumber { get; set; }
 
             /// <summary>
-            /// Script ID of the exception location.
+            /// Optional. Script ID of the exception location.
             /// </summary>
             [JsonProperty("scriptId")]
-            public ScriptId? ScriptId { get; set; }
+            public ScriptId ScriptId { get; set; }
 
             /// <summary>
-            /// URL of the exception location, to be used when the script was not reported.
+            /// Optional. URL of the exception location, to be used when the script was not reported.
             /// </summary>
             [JsonProperty("url")]
             public string Url { get; set; }
 
             /// <summary>
-            /// JavaScript stack trace if available.
+            /// Optional. JavaScript stack trace if available.
             /// </summary>
             [JsonProperty("stackTrace")]
             public StackTrace StackTrace { get; set; }
 
             /// <summary>
-            /// Exception object if available.
+            /// Optional. Exception object if available.
             /// </summary>
             [JsonProperty("exception")]
             public RemoteObject Exception { get; set; }
 
             /// <summary>
-            /// Identifier of the context where exception happened.
+            /// Optional. Identifier of the context where exception happened.
             /// </summary>
             [JsonProperty("executionContextId")]
-            public ExecutionContextId? ExecutionContextId { get; set; }
+            public ExecutionContextId ExecutionContextId { get; set; }
         }
 
         /// <summary>
         /// Number of milliseconds since epoch.
         /// </summary>
-        public struct Timestamp : IAlias<double>
+        [JsonConverter(typeof(JSAliasConverter<Timestamp, double>))]
+        public class Timestamp : JSAlias<double>
         {
-            public double Value { get; private set; }
-
-            public Timestamp(double value)
-            {
-                Value = value;
-            }
-
         }
 
         /// <summary>
         /// Number of milliseconds.
         /// </summary>
-        public struct TimeDelta : IAlias<double>
+        [JsonConverter(typeof(JSAliasConverter<TimeDelta, double>))]
+        public class TimeDelta : JSAlias<double>
         {
-            public double Value { get; private set; }
-
-            public TimeDelta(double value)
-            {
-                Value = value;
-            }
-
         }
 
         /// <summary>
@@ -2558,7 +2522,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
 
             /// <summary>
-            /// String label of this stack trace. For async traces this may be a name of the function that
+            /// Optional. String label of this stack trace. For async traces this may be a name of the function that
             /// initiated the async call.
             /// </summary>
             [JsonProperty("description")]
@@ -2571,13 +2535,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public CallFrame[] CallFrames { get; set; }
 
             /// <summary>
-            /// Asynchronous JavaScript stack trace that preceded this stack, if available.
+            /// Optional. Asynchronous JavaScript stack trace that preceded this stack, if available.
             /// </summary>
             [JsonProperty("parent")]
             public StackTrace Parent { get; set; }
 
             /// <summary>
-            /// Asynchronous JavaScript stack trace that preceded this stack, if available.
+            /// Optional. Asynchronous JavaScript stack trace that preceded this stack, if available.
             /// </summary>
             [JsonProperty("parentId")]
             public StackTraceId ParentId { get; set; }
@@ -2586,15 +2550,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique identifier of current debugger.
         /// </summary>
-        public struct UniqueDebuggerId : IAlias<string>
+        [JsonConverter(typeof(JSAliasConverter<UniqueDebuggerId, string>))]
+        public class UniqueDebuggerId : JSAlias<string>
         {
-            public string Value { get; private set; }
-
-            public UniqueDebuggerId(string value)
-            {
-                Value = value;
-            }
-
         }
 
         /// <summary>
@@ -2607,8 +2565,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("id")]
             public string Id { get; set; }
 
+            /// <summary>
+            /// Optional. 
+            /// </summary>
             [JsonProperty("debuggerId")]
-            public UniqueDebuggerId? DebuggerId { get; set; }
+            public UniqueDebuggerId DebuggerId { get; set; }
         }
 
         #endregion
@@ -2629,13 +2590,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public RemoteObjectId PromiseObjectId { get; set; }
 
             /// <summary>
-            /// Whether the result is expected to be a JSON object that should be sent by value.
+            /// Optional. Whether the result is expected to be a JSON object that should be sent by value.
             /// </summary>
             [JsonProperty("returnByValue")]
             public bool? ReturnByValue { get; set; }
 
             /// <summary>
-            /// Whether preview should be generated for the result.
+            /// Optional. Whether preview should be generated for the result.
             /// </summary>
             [JsonProperty("generatePreview")]
             public bool? GeneratePreview { get; set; }
@@ -2651,7 +2612,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public RemoteObject Result { get; set; }
 
             /// <summary>
-            /// Exception details if stack strace is available.
+            /// Optional. Exception details if stack strace is available.
             /// </summary>
             [JsonProperty("exceptionDetails")]
             public ExceptionDetails ExceptionDetails { get; set; }
@@ -2672,60 +2633,60 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string FunctionDeclaration { get; set; }
 
             /// <summary>
-            /// Identifier of the object to call function on. Either objectId or executionContextId should
+            /// Optional. Identifier of the object to call function on. Either objectId or executionContextId should
             /// be specified.
             /// </summary>
             [JsonProperty("objectId")]
-            public RemoteObjectId? ObjectId { get; set; }
+            public RemoteObjectId ObjectId { get; set; }
 
             /// <summary>
-            /// Call arguments. All call arguments must belong to the same JavaScript world as the target
+            /// Optional. Call arguments. All call arguments must belong to the same JavaScript world as the target
             /// object.
             /// </summary>
             [JsonProperty("arguments")]
             public CallArgument[] Arguments { get; set; }
 
             /// <summary>
-            /// In silent mode exceptions thrown during evaluation are not reported and do not pause
+            /// Optional. In silent mode exceptions thrown during evaluation are not reported and do not pause
             /// execution. Overrides `setPauseOnException` state.
             /// </summary>
             [JsonProperty("silent")]
             public bool? Silent { get; set; }
 
             /// <summary>
-            /// Whether the result is expected to be a JSON object which should be sent by value.
+            /// Optional. Whether the result is expected to be a JSON object which should be sent by value.
             /// </summary>
             [JsonProperty("returnByValue")]
             public bool? ReturnByValue { get; set; }
 
             /// <summary>
-            /// Whether preview should be generated for the result.
+            /// Optional. Whether preview should be generated for the result.
             /// </summary>
             [JsonProperty("generatePreview")]
             public bool? GeneratePreview { get; set; }
 
             /// <summary>
-            /// Whether execution should be treated as initiated by user in the UI.
+            /// Optional. Whether execution should be treated as initiated by user in the UI.
             /// </summary>
             [JsonProperty("userGesture")]
             public bool? UserGesture { get; set; }
 
             /// <summary>
-            /// Whether execution should `await` for resulting value and return once awaited promise is
+            /// Optional. Whether execution should `await` for resulting value and return once awaited promise is
             /// resolved.
             /// </summary>
             [JsonProperty("awaitPromise")]
             public bool? AwaitPromise { get; set; }
 
             /// <summary>
-            /// Specifies execution context which global object will be used to call function on. Either
+            /// Optional. Specifies execution context which global object will be used to call function on. Either
             /// executionContextId or objectId should be specified.
             /// </summary>
             [JsonProperty("executionContextId")]
-            public ExecutionContextId? ExecutionContextId { get; set; }
+            public ExecutionContextId ExecutionContextId { get; set; }
 
             /// <summary>
-            /// Symbolic group name that can be used to release multiple objects. If objectGroup is not
+            /// Optional. Symbolic group name that can be used to release multiple objects. If objectGroup is not
             /// specified and objectId is, objectGroup will be inherited from object.
             /// </summary>
             [JsonProperty("objectGroup")]
@@ -2742,7 +2703,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public RemoteObject Result { get; set; }
 
             /// <summary>
-            /// Exception details.
+            /// Optional. Exception details.
             /// </summary>
             [JsonProperty("exceptionDetails")]
             public ExceptionDetails ExceptionDetails { get; set; }
@@ -2774,24 +2735,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool PersistScript { get; set; }
 
             /// <summary>
-            /// Specifies in which execution context to perform script run. If the parameter is omitted the
+            /// Optional. Specifies in which execution context to perform script run. If the parameter is omitted the
             /// evaluation will be performed in the context of the inspected page.
             /// </summary>
             [JsonProperty("executionContextId")]
-            public ExecutionContextId? ExecutionContextId { get; set; }
+            public ExecutionContextId ExecutionContextId { get; set; }
         }
 
         public class CompileScriptResponse
         {
 
             /// <summary>
-            /// Id of the script.
+            /// Optional. Id of the script.
             /// </summary>
             [JsonProperty("scriptId")]
-            public ScriptId? ScriptId { get; set; }
+            public ScriptId ScriptId { get; set; }
 
             /// <summary>
-            /// Exception details.
+            /// Optional. Exception details.
             /// </summary>
             [JsonProperty("exceptionDetails")]
             public ExceptionDetails ExceptionDetails { get; set; }
@@ -2837,67 +2798,67 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Expression { get; set; }
 
             /// <summary>
-            /// Symbolic group name that can be used to release multiple objects.
+            /// Optional. Symbolic group name that can be used to release multiple objects.
             /// </summary>
             [JsonProperty("objectGroup")]
             public string ObjectGroup { get; set; }
 
             /// <summary>
-            /// Determines whether Command Line API should be available during the evaluation.
+            /// Optional. Determines whether Command Line API should be available during the evaluation.
             /// </summary>
             [JsonProperty("includeCommandLineAPI")]
             public bool? IncludeCommandLineAPI { get; set; }
 
             /// <summary>
-            /// In silent mode exceptions thrown during evaluation are not reported and do not pause
+            /// Optional. In silent mode exceptions thrown during evaluation are not reported and do not pause
             /// execution. Overrides `setPauseOnException` state.
             /// </summary>
             [JsonProperty("silent")]
             public bool? Silent { get; set; }
 
             /// <summary>
-            /// Specifies in which execution context to perform evaluation. If the parameter is omitted the
+            /// Optional. Specifies in which execution context to perform evaluation. If the parameter is omitted the
             /// evaluation will be performed in the context of the inspected page.
             /// </summary>
             [JsonProperty("contextId")]
-            public ExecutionContextId? ContextId { get; set; }
+            public ExecutionContextId ContextId { get; set; }
 
             /// <summary>
-            /// Whether the result is expected to be a JSON object that should be sent by value.
+            /// Optional. Whether the result is expected to be a JSON object that should be sent by value.
             /// </summary>
             [JsonProperty("returnByValue")]
             public bool? ReturnByValue { get; set; }
 
             /// <summary>
-            /// Whether preview should be generated for the result.
+            /// Optional. Whether preview should be generated for the result.
             /// </summary>
             [JsonProperty("generatePreview")]
             public bool? GeneratePreview { get; set; }
 
             /// <summary>
-            /// Whether execution should be treated as initiated by user in the UI.
+            /// Optional. Whether execution should be treated as initiated by user in the UI.
             /// </summary>
             [JsonProperty("userGesture")]
             public bool? UserGesture { get; set; }
 
             /// <summary>
-            /// Whether execution should `await` for resulting value and return once awaited promise is
+            /// Optional. Whether execution should `await` for resulting value and return once awaited promise is
             /// resolved.
             /// </summary>
             [JsonProperty("awaitPromise")]
             public bool? AwaitPromise { get; set; }
 
             /// <summary>
-            /// Whether to throw an exception if side effect cannot be ruled out during evaluation.
+            /// Optional. Whether to throw an exception if side effect cannot be ruled out during evaluation.
             /// </summary>
             [JsonProperty("throwOnSideEffect")]
             public bool? ThrowOnSideEffect { get; set; }
 
             /// <summary>
-            /// Terminate execution after timing out (number of milliseconds).
+            /// Optional. Terminate execution after timing out (number of milliseconds).
             /// </summary>
             [JsonProperty("timeout")]
-            public TimeDelta? Timeout { get; set; }
+            public TimeDelta Timeout { get; set; }
         }
 
         public class EvaluateResponse
@@ -2910,7 +2871,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public RemoteObject Result { get; set; }
 
             /// <summary>
-            /// Exception details.
+            /// Optional. Exception details.
             /// </summary>
             [JsonProperty("exceptionDetails")]
             public ExceptionDetails ExceptionDetails { get; set; }
@@ -2974,21 +2935,21 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public RemoteObjectId ObjectId { get; set; }
 
             /// <summary>
-            /// If true, returns properties belonging only to the element itself, not to its prototype
+            /// Optional. If true, returns properties belonging only to the element itself, not to its prototype
             /// chain.
             /// </summary>
             [JsonProperty("ownProperties")]
             public bool? OwnProperties { get; set; }
 
             /// <summary>
-            /// If true, returns accessor properties (with getter/setter) only; internal properties are not
+            /// Optional. If true, returns accessor properties (with getter/setter) only; internal properties are not
             /// returned either.
             /// </summary>
             [JsonProperty("accessorPropertiesOnly")]
             public bool? AccessorPropertiesOnly { get; set; }
 
             /// <summary>
-            /// Whether preview should be generated for the results.
+            /// Optional. Whether preview should be generated for the results.
             /// </summary>
             [JsonProperty("generatePreview")]
             public bool? GeneratePreview { get; set; }
@@ -3004,13 +2965,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public PropertyDescriptor[] Result { get; set; }
 
             /// <summary>
-            /// Internal object properties (only of the element itself).
+            /// Optional. Internal object properties (only of the element itself).
             /// </summary>
             [JsonProperty("internalProperties")]
             public InternalPropertyDescriptor[] InternalProperties { get; set; }
 
             /// <summary>
-            /// Exception details.
+            /// Optional. Exception details.
             /// </summary>
             [JsonProperty("exceptionDetails")]
             public ExceptionDetails ExceptionDetails { get; set; }
@@ -3024,10 +2985,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Runtime.globalLexicalScopeNames";
 
             /// <summary>
-            /// Specifies in which execution context to lookup global scope variables.
+            /// Optional. Specifies in which execution context to lookup global scope variables.
             /// </summary>
             [JsonProperty("executionContextId")]
-            public ExecutionContextId? ExecutionContextId { get; set; }
+            public ExecutionContextId ExecutionContextId { get; set; }
         }
 
         public class GlobalLexicalScopeNamesResponse
@@ -3048,7 +3009,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public RemoteObjectId PrototypeObjectId { get; set; }
 
             /// <summary>
-            /// Symbolic group name that can be used to release the results.
+            /// Optional. Symbolic group name that can be used to release the results.
             /// </summary>
             [JsonProperty("objectGroup")]
             public string ObjectGroup { get; set; }
@@ -3114,45 +3075,45 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public ScriptId ScriptId { get; set; }
 
             /// <summary>
-            /// Specifies in which execution context to perform script run. If the parameter is omitted the
+            /// Optional. Specifies in which execution context to perform script run. If the parameter is omitted the
             /// evaluation will be performed in the context of the inspected page.
             /// </summary>
             [JsonProperty("executionContextId")]
-            public ExecutionContextId? ExecutionContextId { get; set; }
+            public ExecutionContextId ExecutionContextId { get; set; }
 
             /// <summary>
-            /// Symbolic group name that can be used to release multiple objects.
+            /// Optional. Symbolic group name that can be used to release multiple objects.
             /// </summary>
             [JsonProperty("objectGroup")]
             public string ObjectGroup { get; set; }
 
             /// <summary>
-            /// In silent mode exceptions thrown during evaluation are not reported and do not pause
+            /// Optional. In silent mode exceptions thrown during evaluation are not reported and do not pause
             /// execution. Overrides `setPauseOnException` state.
             /// </summary>
             [JsonProperty("silent")]
             public bool? Silent { get; set; }
 
             /// <summary>
-            /// Determines whether Command Line API should be available during the evaluation.
+            /// Optional. Determines whether Command Line API should be available during the evaluation.
             /// </summary>
             [JsonProperty("includeCommandLineAPI")]
             public bool? IncludeCommandLineAPI { get; set; }
 
             /// <summary>
-            /// Whether the result is expected to be a JSON object which should be sent by value.
+            /// Optional. Whether the result is expected to be a JSON object which should be sent by value.
             /// </summary>
             [JsonProperty("returnByValue")]
             public bool? ReturnByValue { get; set; }
 
             /// <summary>
-            /// Whether preview should be generated for the result.
+            /// Optional. Whether preview should be generated for the result.
             /// </summary>
             [JsonProperty("generatePreview")]
             public bool? GeneratePreview { get; set; }
 
             /// <summary>
-            /// Whether execution should `await` for resulting value and return once awaited promise is
+            /// Optional. Whether execution should `await` for resulting value and return once awaited promise is
             /// resolved.
             /// </summary>
             [JsonProperty("awaitPromise")]
@@ -3169,7 +3130,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public RemoteObject Result { get; set; }
 
             /// <summary>
-            /// Exception details.
+            /// Optional. Exception details.
             /// </summary>
             [JsonProperty("exceptionDetails")]
             public ExceptionDetails ExceptionDetails { get; set; }
@@ -3232,8 +3193,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("name")]
             public string Name { get; set; }
 
+            /// <summary>
+            /// Optional. 
+            /// </summary>
             [JsonProperty("executionContextId")]
-            public ExecutionContextId? ExecutionContextId { get; set; }
+            public ExecutionContextId ExecutionContextId { get; set; }
         }
 
         /// <summary>
@@ -3304,13 +3268,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Timestamp Timestamp { get; set; }
 
             /// <summary>
-            /// Stack trace captured when the call was made.
+            /// Optional. Stack trace captured when the call was made.
             /// </summary>
             [JsonProperty("stackTrace")]
             public StackTrace StackTrace { get; set; }
 
             /// <summary>
-            /// Console context descriptor for calls on non-default console context (not console.*):
+            /// Optional. Console context descriptor for calls on non-default console context (not console.*):
             /// 'anonymous#unique-logger-id' for call on unnamed context, 'name#unique-logger-id' for call
             /// on named context.
             /// </summary>

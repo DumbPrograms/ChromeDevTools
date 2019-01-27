@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -8,13 +9,6 @@ namespace DumbPrograms.ChromeDevTools.Generator
 {
     class MappingTypesGenerator
     {
-        readonly HashSet<string> AliasTypes;
-
-        public MappingTypesGenerator(HashSet<string> aliasTypes)
-        {
-            AliasTypes = aliasTypes;
-        }
-
         int Indent;
         TextWriter Writer;
 
@@ -59,26 +53,17 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     case JsonTypes.Number:
                                     case JsonTypes.Array:
                                     case JsonTypes.String:
-                                        var aliasType = GetCSharpType(type.Type, optional: false, type.ArrayType);
-                                        using (WILBlock($"public struct {type.Name} : I{(type.EnumValues != null ? "Enum" : $"Alias<{aliasType}>")}"))
+                                        var nativeType = GetCSharpType(type.Type, optional: false, type.ArrayType);
+                                        WIL($"[JsonConverter(typeof(JSAliasConverter<{type.Name}, {nativeType}>))]");
+                                        using (WILBlock($"public class {type.Name} : JS{(type.EnumValues != null ? "Enum" : $"Alias<{nativeType}>")}"))
                                         {
-
-                                            WIL($"public {aliasType} Value {{ get; private set; }}");
-
-                                            WL();
-
-                                            using (WILBlock($"public {type.Name}({aliasType} value)"))
-                                            {
-                                                WIL("Value = value;");
-                                            }
-
-                                            WL();
-
                                             if (type.EnumValues != null)
                                             {
+                                                Debug.Assert(nativeType == "string");
+
                                                 foreach (var value in type.EnumValues)
                                                 {
-                                                    WIL($"public static {type.Name} {GetCSharpIdentifier(value)} => new {type.Name}(\"{value}\");");
+                                                    WIL($"public static {type.Name} {GetCSharpIdentifier(value)} => New<{type.Name}>(\"{value}\");");
                                                 }
                                             }
                                         }
@@ -86,7 +71,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     case JsonTypes.Object:
                                         using (WILBlock($"public class {type.Name}{(type.Properties == null ? " : Dictionary<string, object>" : "")}"))
                                         {
-                                            WILProperties(domain.Name, type.Properties);
+                                            WILProperties(type.Properties);
                                         }
                                         break;
                                     default:
@@ -123,7 +108,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                 {
                                     WIL($"string ICommand.Name {{ get; }} = \"{domain.Name}.{command.Name}\";");
 
-                                    WILProperties(domain.Name, command.Parameters);
+                                    WILProperties(command.Parameters);
                                 }
 
                                 if (command.Returns != null)
@@ -131,7 +116,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     WL();
                                     using (WILBlock($"public class {commandClassName}Response"))
                                     {
-                                        WILProperties(domain.Name, command.Returns);
+                                        WILProperties(command.Returns);
                                     }
                                 }
                             }
@@ -158,7 +143,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
                                 using (WILBlock($"public class {GetCSharpIdentifier(@event.Name)}Event"))
                                 {
-                                    WILProperties(domain.Name, @event.Parameters);
+                                    WILProperties(@event.Parameters);
                                 }
                             }
 
@@ -237,7 +222,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
         BlockStructureWriter WILBlock(string header) => new BlockStructureWriter(this, header);
 
-        void WILProperties(string domain, PropertyDescriptor[] properties)
+        void WILProperties(PropertyDescriptor[] properties)
         {
             if (properties != null)
             {
@@ -251,24 +236,13 @@ namespace DumbPrograms.ChromeDevTools.Generator
                     else if (property.TypeReference != null)
                     {
                         csPropType = property.TypeReference;
-
-                        var lookupCsPropType = csPropType;
-                        if (!csPropType.Contains("."))
-                        {
-                            lookupCsPropType = $"{domain}.{csPropType}";
-                        }
-
-                        if (property.Optional && AliasTypes.Contains(lookupCsPropType))
-                        {
-                            csPropType += "?";
-                        }
                     }
                     else
                     {
                         throw new NotImplementedException();
                     }
 
-                    WILSummary(property.Description);
+                    WILSummary($"{(property.Optional ? "Optional. " : "")}{property.Description}");
                     WIL($"[JsonProperty(\"{property.Name}\")]");
                     WIL($"public {csPropType} {GetCSharpIdentifier(property.Name)} {{ get; set; }}");
                 }

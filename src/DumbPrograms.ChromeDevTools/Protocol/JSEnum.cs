@@ -1,7 +1,6 @@
 ﻿namespace DumbPrograms.ChromeDevTools.Protocol
 {
-    public interface IAlias<T>
+    public class JSEnum : JSAlias<string>
     {
-        T Value { get; }
     }
 }

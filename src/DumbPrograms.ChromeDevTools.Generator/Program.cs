@@ -17,7 +17,6 @@ namespace DumbPrograms.ChromeDevTools.Generator
             }
 
             var descriptors = new List<(string filename, ProtocolDescriptor protocol)>();
-            var aliasTypes = new HashSet<string>();
 
             Console.WriteLine($"Parsing json files..");
 
@@ -34,24 +33,13 @@ namespace DumbPrograms.ChromeDevTools.Generator
                 descriptors.Add((filename, protocol));
             }
 
-            Console.WriteLine("Collecting alias types..");
-
-            foreach (var descriptor in descriptors)
-            {
-                aliasTypes.UnionWith(from domain in descriptor.protocol.Domains
-                                     where domain.Types != null
-                                     from type in domain.Types
-                                     where type.Type != JsonTypes.Object
-                                     select $"{domain.Name}.{type.Name}");
-            }
-
             Console.WriteLine("Generating mapping types..");
 
             foreach (var (filename, protocol) in descriptors)
             {
                 using (var writer = File.CreateText(Path.Combine(workingDir, filename + ".cs")))
                 {
-                    new MappingTypesGenerator(aliasTypes).WriteProtocolCode(writer, protocol);
+                    new MappingTypesGenerator().WriteProtocolCode(writer, protocol);
                 }
             }
 
