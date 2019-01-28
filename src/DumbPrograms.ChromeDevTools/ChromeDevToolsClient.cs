@@ -30,5 +30,14 @@ namespace DumbPrograms.ChromeDevTools
         public Task<string> CloseTab(string id) => HttpClient.GetStringAsync($"/json/close/{Uri.EscapeUriString(id)}");
 
         private async Task<T> Get<T>(string url) => JsonConvert.DeserializeObject<T>(await HttpClient.GetStringAsync(url));
+
+        public async Task<InspectionClient> StartInspectionSession(InspectionTarget target)
+        {
+            var client = new InspectionClient(target);
+
+            await client.Start();
+
+            return client;
+        }
     }
 }

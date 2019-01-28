@@ -1,6 +1,6 @@
 ﻿namespace DumbPrograms.ChromeDevTools.Protocol
 {
-    public class WebSocketFrame
+    public class InspectionMessage
     {
         public int? Id { get; set; }
         public string Method { get; set; }
