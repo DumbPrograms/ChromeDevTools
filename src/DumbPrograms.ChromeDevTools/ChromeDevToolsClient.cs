@@ -19,15 +19,15 @@ namespace DumbPrograms.ChromeDevTools
             };
         }
 
-        public async Task<BrowserVersion> GetBrowserVersion() => await Get<BrowserVersion>("/json/version");
+        public Task<BrowserVersion> GetBrowserVersion() => Get<BrowserVersion>("/json/version");
 
-        public async Task<InspectionTarget[]> GetInspectableTargets() => await Get<InspectionTarget[]>("/json");
+        public Task<InspectionTarget[]> GetInspectableTargets() => Get<InspectionTarget[]>("/json");
 
-        public async Task<InspectionTarget> NewTab(string url) => await Get<InspectionTarget>($"/json/new?url={Uri.EscapeDataString(url)}");
+        public Task<InspectionTarget> NewTab(string url) => Get<InspectionTarget>($"/json/new?url={Uri.EscapeDataString(url)}");
 
-        public async Task<string> ActivateTab(string id) => await HttpClient.GetStringAsync($"/json/activate/{Uri.EscapeUriString(id)}");
+        public Task<string> ActivateTab(string id) => HttpClient.GetStringAsync($"/json/activate/{Uri.EscapeUriString(id)}");
 
-        public async Task<string> CloseTab(string id) => await HttpClient.GetStringAsync($"/json/close/{Uri.EscapeUriString(id)}");
+        public Task<string> CloseTab(string id) => HttpClient.GetStringAsync($"/json/close/{Uri.EscapeUriString(id)}");
 
         private async Task<T> Get<T>(string url) => JsonConvert.DeserializeObject<T>(await HttpClient.GetStringAsync(url));
     }
