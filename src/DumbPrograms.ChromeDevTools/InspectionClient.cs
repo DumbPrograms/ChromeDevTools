@@ -16,22 +16,22 @@ namespace DumbPrograms.ChromeDevTools
         private event EventHandler<InspectionMessage> MessageReceived;
 
         private readonly ClientWebSocket WebSocket;
-        private readonly InspectionTarget Target;
+        private readonly InspectionTarget InspectionTarget;
 
         private CancellationTokenSource ReceivingLoopCanceller;
         private Task ReceivingLoop;
 
         private int CommandId = 0;
 
-        public InspectionClient(InspectionTarget target)
+        public InspectionClient(InspectionTarget inspectionTarget)
         {
             WebSocket = new ClientWebSocket();
-            Target = target;
+            InspectionTarget = inspectionTarget;
         }
 
         public async Task Start(CancellationToken cancellation = default)
         {
-            await WebSocket.ConnectAsync(new Uri(Target.WebSocketDebuggerUrl), cancellation);
+            await WebSocket.ConnectAsync(new Uri(InspectionTarget.WebSocketDebuggerUrl), cancellation);
 
             ReceivingLoopCanceller = new CancellationTokenSource();
             ReceivingLoop = StartReceivingLoop(ReceivingLoopCanceller.Token);
@@ -97,11 +97,11 @@ namespace DumbPrograms.ChromeDevTools
             var frameText = JsonConvert.SerializeObject(frame);
             var bytes = Encoding.UTF8.GetBytes(frameText);
 
-            var resultTask = RegisterCommandResponseHandler<TResponse>(id);
+            var response = RegisterCommandResponseHandler<TResponse>(id);
 
             await WebSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, false, cancellation);
 
-            return await resultTask;
+            return await response;
         }
 
         private Task<TResponse> RegisterCommandResponseHandler<TResponse>(int id)

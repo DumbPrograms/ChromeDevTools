@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Xml.Linq;
 
 namespace DumbPrograms.ChromeDevTools.Generator
 {
-    class MappingTypesGenerator
+    class MappingTypesGenerator : CodeGenerator
     {
-        int Indent;
-        TextWriter Writer;
-
-        public void WriteProtocolCode(TextWriter writer, ProtocolDescriptor protocol)
+        public void GenerateCode(TextWriter writer, ProtocolDescriptor protocol)
         {
-            Indent = 0;
-            Writer = writer;
+            StartTextWriter(writer);
 
             WIL("using System;");
             WIL("using System.Collections.Generic;");
@@ -157,71 +150,6 @@ namespace DumbPrograms.ChromeDevTools.Generator
             Writer.Flush();
         }
 
-        void W(string content)
-        {
-            Writer.Write(content);
-        }
-
-        void WL()
-        {
-            Writer.WriteLine();
-        }
-
-        void WL(string line)
-        {
-            Writer.WriteLine(line);
-        }
-
-        void WI()
-        {
-            for (int i = 0; i < Indent; i++)
-            {
-                W("    ");
-            }
-        }
-
-        void WI(string content)
-        {
-            WI();
-            W(content);
-        }
-
-        void WIL(string line)
-        {
-            WI();
-            Writer.WriteLine(line);
-        }
-
-        void WILOpen()
-        {
-            WIL("{");
-            Indent++;
-        }
-
-        void WILClose()
-        {
-            Indent--;
-            WIL("}");
-        }
-
-        void WILSummary(string description)
-        {
-            WL();
-
-            if (String.IsNullOrWhiteSpace(description))
-            {
-                return;
-            }
-
-            var xml = new XElement("summary", Environment.NewLine + description + Environment.NewLine).ToString();
-            foreach (var line in xml.Split(Environment.NewLine))
-            {
-                WIL("/// " + line);
-            }
-        }
-
-        BlockStructureWriter WILBlock(string header) => new BlockStructureWriter(this, header);
-
         void WILProperties(PropertyDescriptor[] properties)
         {
             if (properties != null)
@@ -246,64 +174,6 @@ namespace DumbPrograms.ChromeDevTools.Generator
                     WIL($"[JsonProperty(\"{property.Name}\")]");
                     WIL($"public {csPropType} {GetCSharpIdentifier(property.Name)} {{ get; set; }}");
                 }
-            }
-        }
-
-        string GetCSharpIdentifier(string name)
-            => String.Join("", name.Split('_', '-', ' ').Select(n => Char.ToUpperInvariant(n[0]) + n.Substring(1, n.Length - 1)));
-
-        string GetCSharpType(JsonTypes jsonType, bool optional, PropertyDescriptor arrayType)
-        {
-            switch (jsonType)
-            {
-                case JsonTypes.Any:
-                case JsonTypes.Object:
-                    return "object";
-                case JsonTypes.Boolean:
-                    return optional ? "bool?" : "bool";
-                case JsonTypes.Integer:
-                    return optional ? "int?" : "int";
-                case JsonTypes.Number:
-                    return optional ? "double?" : "double";
-                case JsonTypes.String:
-                    return "string";
-                case JsonTypes.Array:
-                    if (arrayType == null)
-                    {
-                        return "Array";
-                    }
-                    else if (arrayType.TypeReference != null)
-                    {
-                        return arrayType.TypeReference + "[]";
-                    }
-                    else if (arrayType.Type != null)
-                    {
-                        return GetCSharpType(arrayType.Type.Value, arrayType.Optional, arrayType.ArrayType) + "[]";
-                    }
-                    else
-                    {
-                        throw new NotImplementedException();
-                    }
-                default:
-                    throw new UnreachableCodeReachedException();
-            }
-        }
-
-        class BlockStructureWriter : IDisposable
-        {
-            private readonly MappingTypesGenerator Generator;
-
-            public BlockStructureWriter(MappingTypesGenerator generator, string header)
-            {
-                Generator = generator;
-
-                generator.WIL(header);
-                generator.WILOpen();
-            }
-
-            public void Dispose()
-            {
-                Generator.WILClose();
             }
         }
     }

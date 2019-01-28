@@ -22,7 +22,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
             foreach (var path in Directory.EnumerateFiles(workingDir, "*.json"))
             {
-                var filename = Path.GetFileName(path);
+                var filename = Path.GetFileNameWithoutExtension(path);
                 var jsonText = File.ReadAllText(path);
                 var settings = new JsonSerializerSettings
                 {
@@ -37,12 +37,21 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
             foreach (var (filename, protocol) in descriptors)
             {
-                using (var writer = File.CreateText(Path.Combine(workingDir, filename + ".cs")))
+                using (var writer = File.CreateText(Path.Combine(workingDir, filename + ".json.cs")))
                 {
-                    new MappingTypesGenerator().WriteProtocolCode(writer, protocol);
+                    new MappingTypesGenerator().GenerateCode(writer, protocol);
                 }
             }
 
+            Console.WriteLine("Generating client APIs..");
+
+            foreach (var (filename, protocol) in descriptors)
+            {
+                using (var writer = File.CreateText(Path.Combine(workingDir, filename + ".api.cs")))
+                {
+                    new InspectionClientApiGenerator().GenerateCode(writer, protocol);
+                }
+            }
         }
     }
 }
