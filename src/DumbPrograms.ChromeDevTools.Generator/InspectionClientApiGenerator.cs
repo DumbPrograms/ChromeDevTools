@@ -22,8 +22,11 @@ namespace DumbPrograms.ChromeDevTools.Generator
                     foreach (var domain in protocol.Domains)
                     {
                         WILSummary(domain.Description);
-                        WIL($"public {domain.Name}{InspectionClient} {domain.Name} => __{domain.Name} ?? (__{domain.Name} = new {domain.Name}{InspectionClient}(this));");
-                        WIL($"private {domain.Name}{InspectionClient} __{domain.Name};");
+
+                        var fieldName = $"__{domain.Name}__";
+
+                        WIL($"public {domain.Name}{InspectionClient} {domain.Name} => {fieldName} ?? ({fieldName} = new {domain.Name}{InspectionClient}(this));");
+                        WIL($"private {domain.Name}{InspectionClient} {fieldName};");
                     }
 
                     foreach (var domain in protocol.Domains)

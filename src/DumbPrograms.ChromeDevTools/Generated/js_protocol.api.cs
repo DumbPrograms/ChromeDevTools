@@ -9,21 +9,21 @@ namespace DumbPrograms.ChromeDevTools
         /// <summary>
         /// This domain is deprecated - use Runtime or Log instead.
         /// </summary>
-        public ConsoleInspectionClient Console => __Console ?? (__Console = new ConsoleInspectionClient(this));
-        private ConsoleInspectionClient __Console;
+        public ConsoleInspectionClient Console => __Console__ ?? (__Console__ = new ConsoleInspectionClient(this));
+        private ConsoleInspectionClient __Console__;
 
         /// <summary>
         /// Debugger domain exposes JavaScript debugging capabilities. It allows setting and removing
         /// breakpoints, stepping through execution, exploring stack traces, etc.
         /// </summary>
-        public DebuggerInspectionClient Debugger => __Debugger ?? (__Debugger = new DebuggerInspectionClient(this));
-        private DebuggerInspectionClient __Debugger;
+        public DebuggerInspectionClient Debugger => __Debugger__ ?? (__Debugger__ = new DebuggerInspectionClient(this));
+        private DebuggerInspectionClient __Debugger__;
 
-        public HeapProfilerInspectionClient HeapProfiler => __HeapProfiler ?? (__HeapProfiler = new HeapProfilerInspectionClient(this));
-        private HeapProfilerInspectionClient __HeapProfiler;
+        public HeapProfilerInspectionClient HeapProfiler => __HeapProfiler__ ?? (__HeapProfiler__ = new HeapProfilerInspectionClient(this));
+        private HeapProfilerInspectionClient __HeapProfiler__;
 
-        public ProfilerInspectionClient Profiler => __Profiler ?? (__Profiler = new ProfilerInspectionClient(this));
-        private ProfilerInspectionClient __Profiler;
+        public ProfilerInspectionClient Profiler => __Profiler__ ?? (__Profiler__ = new ProfilerInspectionClient(this));
+        private ProfilerInspectionClient __Profiler__;
 
         /// <summary>
         /// Runtime domain exposes JavaScript runtime by means of remote evaluation and mirror objects.
@@ -32,14 +32,14 @@ namespace DumbPrograms.ChromeDevTools
         /// maintained in memory unless they are either explicitly released or are released along with the
         /// other objects in their object group.
         /// </summary>
-        public RuntimeInspectionClient Runtime => __Runtime ?? (__Runtime = new RuntimeInspectionClient(this));
-        private RuntimeInspectionClient __Runtime;
+        public RuntimeInspectionClient Runtime => __Runtime__ ?? (__Runtime__ = new RuntimeInspectionClient(this));
+        private RuntimeInspectionClient __Runtime__;
 
         /// <summary>
         /// This domain is deprecated.
         /// </summary>
-        public SchemaInspectionClient Schema => __Schema ?? (__Schema = new SchemaInspectionClient(this));
-        private SchemaInspectionClient __Schema;
+        public SchemaInspectionClient Schema => __Schema__ ?? (__Schema__ = new SchemaInspectionClient(this));
+        private SchemaInspectionClient __Schema__;
 
         public class ConsoleInspectionClient
         {

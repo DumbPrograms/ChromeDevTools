@@ -6,26 +6,26 @@ namespace DumbPrograms.ChromeDevTools
     partial class InspectionClient
     {
 
-        public AccessibilityInspectionClient Accessibility => __Accessibility ?? (__Accessibility = new AccessibilityInspectionClient(this));
-        private AccessibilityInspectionClient __Accessibility;
+        public AccessibilityInspectionClient Accessibility => __Accessibility__ ?? (__Accessibility__ = new AccessibilityInspectionClient(this));
+        private AccessibilityInspectionClient __Accessibility__;
 
-        public AnimationInspectionClient Animation => __Animation ?? (__Animation = new AnimationInspectionClient(this));
-        private AnimationInspectionClient __Animation;
+        public AnimationInspectionClient Animation => __Animation__ ?? (__Animation__ = new AnimationInspectionClient(this));
+        private AnimationInspectionClient __Animation__;
 
-        public ApplicationCacheInspectionClient ApplicationCache => __ApplicationCache ?? (__ApplicationCache = new ApplicationCacheInspectionClient(this));
-        private ApplicationCacheInspectionClient __ApplicationCache;
+        public ApplicationCacheInspectionClient ApplicationCache => __ApplicationCache__ ?? (__ApplicationCache__ = new ApplicationCacheInspectionClient(this));
+        private ApplicationCacheInspectionClient __ApplicationCache__;
 
         /// <summary>
         /// Audits domain allows investigation of page violations and possible improvements.
         /// </summary>
-        public AuditsInspectionClient Audits => __Audits ?? (__Audits = new AuditsInspectionClient(this));
-        private AuditsInspectionClient __Audits;
+        public AuditsInspectionClient Audits => __Audits__ ?? (__Audits__ = new AuditsInspectionClient(this));
+        private AuditsInspectionClient __Audits__;
 
         /// <summary>
         /// The Browser domain defines methods and events for browser managing.
         /// </summary>
-        public BrowserInspectionClient Browser => __Browser ?? (__Browser = new BrowserInspectionClient(this));
-        private BrowserInspectionClient __Browser;
+        public BrowserInspectionClient Browser => __Browser__ ?? (__Browser__ = new BrowserInspectionClient(this));
+        private BrowserInspectionClient __Browser__;
 
         /// <summary>
         /// This domain exposes CSS read/write operations. All CSS objects (stylesheets, rules, and styles)
@@ -35,18 +35,18 @@ namespace DumbPrograms.ChromeDevTools
         /// can also keep track of stylesheets via the `styleSheetAdded`/`styleSheetRemoved` events and
         /// subsequently load the required stylesheet contents using the `getStyleSheet[Text]()` methods.
         /// </summary>
-        public CSSInspectionClient CSS => __CSS ?? (__CSS = new CSSInspectionClient(this));
-        private CSSInspectionClient __CSS;
+        public CSSInspectionClient CSS => __CSS__ ?? (__CSS__ = new CSSInspectionClient(this));
+        private CSSInspectionClient __CSS__;
 
-        public CacheStorageInspectionClient CacheStorage => __CacheStorage ?? (__CacheStorage = new CacheStorageInspectionClient(this));
-        private CacheStorageInspectionClient __CacheStorage;
+        public CacheStorageInspectionClient CacheStorage => __CacheStorage__ ?? (__CacheStorage__ = new CacheStorageInspectionClient(this));
+        private CacheStorageInspectionClient __CacheStorage__;
 
         /// <summary>
         /// A domain for interacting with Cast, Presentation API, and Remote Playback API
         /// functionalities.
         /// </summary>
-        public CastInspectionClient Cast => __Cast ?? (__Cast = new CastInspectionClient(this));
-        private CastInspectionClient __Cast;
+        public CastInspectionClient Cast => __Cast__ ?? (__Cast__ = new CastInspectionClient(this));
+        private CastInspectionClient __Cast__;
 
         /// <summary>
         /// This domain exposes DOM read/write operations. Each DOM Node is represented with its mirror object
@@ -57,140 +57,140 @@ namespace DumbPrograms.ChromeDevTools
         /// the nodes that were sent to the client.&lt;p&gt;Note that `iframe` owner elements will return
         /// corresponding document elements as their child nodes.&lt;/p&gt;
         /// </summary>
-        public DOMInspectionClient DOM => __DOM ?? (__DOM = new DOMInspectionClient(this));
-        private DOMInspectionClient __DOM;
+        public DOMInspectionClient DOM => __DOM__ ?? (__DOM__ = new DOMInspectionClient(this));
+        private DOMInspectionClient __DOM__;
 
         /// <summary>
         /// DOM debugging allows setting breakpoints on particular DOM operations and events. JavaScript
         /// execution will stop on these operations as if there was a regular breakpoint set.
         /// </summary>
-        public DOMDebuggerInspectionClient DOMDebugger => __DOMDebugger ?? (__DOMDebugger = new DOMDebuggerInspectionClient(this));
-        private DOMDebuggerInspectionClient __DOMDebugger;
+        public DOMDebuggerInspectionClient DOMDebugger => __DOMDebugger__ ?? (__DOMDebugger__ = new DOMDebuggerInspectionClient(this));
+        private DOMDebuggerInspectionClient __DOMDebugger__;
 
         /// <summary>
         /// This domain facilitates obtaining document snapshots with DOM, layout, and style information.
         /// </summary>
-        public DOMSnapshotInspectionClient DOMSnapshot => __DOMSnapshot ?? (__DOMSnapshot = new DOMSnapshotInspectionClient(this));
-        private DOMSnapshotInspectionClient __DOMSnapshot;
+        public DOMSnapshotInspectionClient DOMSnapshot => __DOMSnapshot__ ?? (__DOMSnapshot__ = new DOMSnapshotInspectionClient(this));
+        private DOMSnapshotInspectionClient __DOMSnapshot__;
 
         /// <summary>
         /// Query and modify DOM storage.
         /// </summary>
-        public DOMStorageInspectionClient DOMStorage => __DOMStorage ?? (__DOMStorage = new DOMStorageInspectionClient(this));
-        private DOMStorageInspectionClient __DOMStorage;
+        public DOMStorageInspectionClient DOMStorage => __DOMStorage__ ?? (__DOMStorage__ = new DOMStorageInspectionClient(this));
+        private DOMStorageInspectionClient __DOMStorage__;
 
-        public DatabaseInspectionClient Database => __Database ?? (__Database = new DatabaseInspectionClient(this));
-        private DatabaseInspectionClient __Database;
+        public DatabaseInspectionClient Database => __Database__ ?? (__Database__ = new DatabaseInspectionClient(this));
+        private DatabaseInspectionClient __Database__;
 
-        public DeviceOrientationInspectionClient DeviceOrientation => __DeviceOrientation ?? (__DeviceOrientation = new DeviceOrientationInspectionClient(this));
-        private DeviceOrientationInspectionClient __DeviceOrientation;
+        public DeviceOrientationInspectionClient DeviceOrientation => __DeviceOrientation__ ?? (__DeviceOrientation__ = new DeviceOrientationInspectionClient(this));
+        private DeviceOrientationInspectionClient __DeviceOrientation__;
 
         /// <summary>
         /// This domain emulates different environments for the page.
         /// </summary>
-        public EmulationInspectionClient Emulation => __Emulation ?? (__Emulation = new EmulationInspectionClient(this));
-        private EmulationInspectionClient __Emulation;
+        public EmulationInspectionClient Emulation => __Emulation__ ?? (__Emulation__ = new EmulationInspectionClient(this));
+        private EmulationInspectionClient __Emulation__;
 
         /// <summary>
         /// This domain provides experimental commands only supported in headless mode.
         /// </summary>
-        public HeadlessExperimentalInspectionClient HeadlessExperimental => __HeadlessExperimental ?? (__HeadlessExperimental = new HeadlessExperimentalInspectionClient(this));
-        private HeadlessExperimentalInspectionClient __HeadlessExperimental;
+        public HeadlessExperimentalInspectionClient HeadlessExperimental => __HeadlessExperimental__ ?? (__HeadlessExperimental__ = new HeadlessExperimentalInspectionClient(this));
+        private HeadlessExperimentalInspectionClient __HeadlessExperimental__;
 
         /// <summary>
         /// Input/Output operations for streams produced by DevTools.
         /// </summary>
-        public IOInspectionClient IO => __IO ?? (__IO = new IOInspectionClient(this));
-        private IOInspectionClient __IO;
+        public IOInspectionClient IO => __IO__ ?? (__IO__ = new IOInspectionClient(this));
+        private IOInspectionClient __IO__;
 
-        public IndexedDBInspectionClient IndexedDB => __IndexedDB ?? (__IndexedDB = new IndexedDBInspectionClient(this));
-        private IndexedDBInspectionClient __IndexedDB;
+        public IndexedDBInspectionClient IndexedDB => __IndexedDB__ ?? (__IndexedDB__ = new IndexedDBInspectionClient(this));
+        private IndexedDBInspectionClient __IndexedDB__;
 
-        public InputInspectionClient Input => __Input ?? (__Input = new InputInspectionClient(this));
-        private InputInspectionClient __Input;
+        public InputInspectionClient Input => __Input__ ?? (__Input__ = new InputInspectionClient(this));
+        private InputInspectionClient __Input__;
 
-        public InspectorInspectionClient Inspector => __Inspector ?? (__Inspector = new InspectorInspectionClient(this));
-        private InspectorInspectionClient __Inspector;
+        public InspectorInspectionClient Inspector => __Inspector__ ?? (__Inspector__ = new InspectorInspectionClient(this));
+        private InspectorInspectionClient __Inspector__;
 
-        public LayerTreeInspectionClient LayerTree => __LayerTree ?? (__LayerTree = new LayerTreeInspectionClient(this));
-        private LayerTreeInspectionClient __LayerTree;
+        public LayerTreeInspectionClient LayerTree => __LayerTree__ ?? (__LayerTree__ = new LayerTreeInspectionClient(this));
+        private LayerTreeInspectionClient __LayerTree__;
 
         /// <summary>
         /// Provides access to log entries.
         /// </summary>
-        public LogInspectionClient Log => __Log ?? (__Log = new LogInspectionClient(this));
-        private LogInspectionClient __Log;
+        public LogInspectionClient Log => __Log__ ?? (__Log__ = new LogInspectionClient(this));
+        private LogInspectionClient __Log__;
 
-        public MemoryInspectionClient Memory => __Memory ?? (__Memory = new MemoryInspectionClient(this));
-        private MemoryInspectionClient __Memory;
+        public MemoryInspectionClient Memory => __Memory__ ?? (__Memory__ = new MemoryInspectionClient(this));
+        private MemoryInspectionClient __Memory__;
 
         /// <summary>
         /// Network domain allows tracking network activities of the page. It exposes information about http,
         /// file, data and other requests and responses, their headers, bodies, timing, etc.
         /// </summary>
-        public NetworkInspectionClient Network => __Network ?? (__Network = new NetworkInspectionClient(this));
-        private NetworkInspectionClient __Network;
+        public NetworkInspectionClient Network => __Network__ ?? (__Network__ = new NetworkInspectionClient(this));
+        private NetworkInspectionClient __Network__;
 
         /// <summary>
         /// This domain provides various functionality related to drawing atop the inspected page.
         /// </summary>
-        public OverlayInspectionClient Overlay => __Overlay ?? (__Overlay = new OverlayInspectionClient(this));
-        private OverlayInspectionClient __Overlay;
+        public OverlayInspectionClient Overlay => __Overlay__ ?? (__Overlay__ = new OverlayInspectionClient(this));
+        private OverlayInspectionClient __Overlay__;
 
         /// <summary>
         /// Actions and events related to the inspected page belong to the page domain.
         /// </summary>
-        public PageInspectionClient Page => __Page ?? (__Page = new PageInspectionClient(this));
-        private PageInspectionClient __Page;
+        public PageInspectionClient Page => __Page__ ?? (__Page__ = new PageInspectionClient(this));
+        private PageInspectionClient __Page__;
 
-        public PerformanceInspectionClient Performance => __Performance ?? (__Performance = new PerformanceInspectionClient(this));
-        private PerformanceInspectionClient __Performance;
+        public PerformanceInspectionClient Performance => __Performance__ ?? (__Performance__ = new PerformanceInspectionClient(this));
+        private PerformanceInspectionClient __Performance__;
 
         /// <summary>
         /// Security
         /// </summary>
-        public SecurityInspectionClient Security => __Security ?? (__Security = new SecurityInspectionClient(this));
-        private SecurityInspectionClient __Security;
+        public SecurityInspectionClient Security => __Security__ ?? (__Security__ = new SecurityInspectionClient(this));
+        private SecurityInspectionClient __Security__;
 
-        public ServiceWorkerInspectionClient ServiceWorker => __ServiceWorker ?? (__ServiceWorker = new ServiceWorkerInspectionClient(this));
-        private ServiceWorkerInspectionClient __ServiceWorker;
+        public ServiceWorkerInspectionClient ServiceWorker => __ServiceWorker__ ?? (__ServiceWorker__ = new ServiceWorkerInspectionClient(this));
+        private ServiceWorkerInspectionClient __ServiceWorker__;
 
-        public StorageInspectionClient Storage => __Storage ?? (__Storage = new StorageInspectionClient(this));
-        private StorageInspectionClient __Storage;
+        public StorageInspectionClient Storage => __Storage__ ?? (__Storage__ = new StorageInspectionClient(this));
+        private StorageInspectionClient __Storage__;
 
         /// <summary>
         /// The SystemInfo domain defines methods and events for querying low-level system information.
         /// </summary>
-        public SystemInfoInspectionClient SystemInfo => __SystemInfo ?? (__SystemInfo = new SystemInfoInspectionClient(this));
-        private SystemInfoInspectionClient __SystemInfo;
+        public SystemInfoInspectionClient SystemInfo => __SystemInfo__ ?? (__SystemInfo__ = new SystemInfoInspectionClient(this));
+        private SystemInfoInspectionClient __SystemInfo__;
 
         /// <summary>
         /// Supports additional targets discovery and allows to attach to them.
         /// </summary>
-        public TargetInspectionClient Target => __Target ?? (__Target = new TargetInspectionClient(this));
-        private TargetInspectionClient __Target;
+        public TargetInspectionClient Target => __Target__ ?? (__Target__ = new TargetInspectionClient(this));
+        private TargetInspectionClient __Target__;
 
         /// <summary>
         /// The Tethering domain defines methods and events for browser port binding.
         /// </summary>
-        public TetheringInspectionClient Tethering => __Tethering ?? (__Tethering = new TetheringInspectionClient(this));
-        private TetheringInspectionClient __Tethering;
+        public TetheringInspectionClient Tethering => __Tethering__ ?? (__Tethering__ = new TetheringInspectionClient(this));
+        private TetheringInspectionClient __Tethering__;
 
-        public TracingInspectionClient Tracing => __Tracing ?? (__Tracing = new TracingInspectionClient(this));
-        private TracingInspectionClient __Tracing;
+        public TracingInspectionClient Tracing => __Tracing__ ?? (__Tracing__ = new TracingInspectionClient(this));
+        private TracingInspectionClient __Tracing__;
 
         /// <summary>
         /// Testing domain is a dumping ground for the capabilities requires for browser or app testing that do not fit other
         /// domains.
         /// </summary>
-        public TestingInspectionClient Testing => __Testing ?? (__Testing = new TestingInspectionClient(this));
-        private TestingInspectionClient __Testing;
+        public TestingInspectionClient Testing => __Testing__ ?? (__Testing__ = new TestingInspectionClient(this));
+        private TestingInspectionClient __Testing__;
 
         /// <summary>
         /// A domain for letting clients substitute browser's network layer with client code.
         /// </summary>
-        public FetchInspectionClient Fetch => __Fetch ?? (__Fetch = new FetchInspectionClient(this));
-        private FetchInspectionClient __Fetch;
+        public FetchInspectionClient Fetch => __Fetch__ ?? (__Fetch__ = new FetchInspectionClient(this));
+        private FetchInspectionClient __Fetch__;
 
         public class AccessibilityInspectionClient
         {
