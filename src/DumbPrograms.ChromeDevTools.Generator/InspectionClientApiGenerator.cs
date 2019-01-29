@@ -50,6 +50,11 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                 {
                                     WILSummary(command.Description);
 
+                                    if (command.Deprecated)
+                                    {
+                                        WIL("[Obsolete]");
+                                    }
+
                                     var commandName = GetCSharpIdentifier(command.Name);
                                     var commandType = $"Protocol.{domain.Name}.{commandName}Command";
                                     var commandResponseType = $"Protocol.{domain.Name}.{commandName}Response";
@@ -57,8 +62,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
                                     using (WILBlock($"public {returnType} {commandName}()"))
                                     {
-                                        WIL("throw new NotImplementedException();");
-                                        // WIL($"return {InspectionClient}.InvokeCommand<{commandType}, {commandResponseType}>(new {commandType} {{ }});");
+                                        WIL($"return {InspectionClient}.InvokeCommand(new {commandType} {{ }});");
                                     }
                                 }
                             }

@@ -55,7 +55,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task ClearMessages()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Console.ClearMessagesCommand { });
             }
 
             /// <summary>
@@ -63,7 +63,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task Disable()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Console.DisableCommand { });
             }
 
             /// <summary>
@@ -72,7 +72,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task Enable()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Console.EnableCommand { });
             }
         }
 
@@ -90,7 +90,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task ContinueToLocation()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.ContinueToLocationCommand { });
             }
 
             /// <summary>
@@ -98,7 +98,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task Disable()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.DisableCommand { });
             }
 
             /// <summary>
@@ -107,7 +107,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Debugger.EnableResponse> Enable()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.EnableCommand { });
             }
 
             /// <summary>
@@ -115,7 +115,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Debugger.EvaluateOnCallFrameResponse> EvaluateOnCallFrame()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.EvaluateOnCallFrameCommand { });
             }
 
             /// <summary>
@@ -124,7 +124,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Debugger.GetPossibleBreakpointsResponse> GetPossibleBreakpoints()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.GetPossibleBreakpointsCommand { });
             }
 
             /// <summary>
@@ -132,7 +132,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Debugger.GetScriptSourceResponse> GetScriptSource()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.GetScriptSourceCommand { });
             }
 
             /// <summary>
@@ -140,7 +140,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Debugger.GetStackTraceResponse> GetStackTrace()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.GetStackTraceCommand { });
             }
 
             /// <summary>
@@ -148,12 +148,12 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task Pause()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.PauseCommand { });
             }
 
             public Task PauseOnAsyncCall()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.PauseOnAsyncCallCommand { });
             }
 
             /// <summary>
@@ -161,7 +161,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task RemoveBreakpoint()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.RemoveBreakpointCommand { });
             }
 
             /// <summary>
@@ -169,7 +169,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Debugger.RestartFrameResponse> RestartFrame()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.RestartFrameCommand { });
             }
 
             /// <summary>
@@ -177,7 +177,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task Resume()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.ResumeCommand { });
             }
 
             /// <summary>
@@ -185,7 +185,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Debugger.SearchInContentResponse> SearchInContent()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SearchInContentCommand { });
             }
 
             /// <summary>
@@ -193,7 +193,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task SetAsyncCallStackDepth()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SetAsyncCallStackDepthCommand { });
             }
 
             /// <summary>
@@ -203,7 +203,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task SetBlackboxPatterns()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SetBlackboxPatternsCommand { });
             }
 
             /// <summary>
@@ -214,7 +214,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task SetBlackboxedRanges()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SetBlackboxedRangesCommand { });
             }
 
             /// <summary>
@@ -222,7 +222,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Debugger.SetBreakpointResponse> SetBreakpoint()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SetBreakpointCommand { });
             }
 
             /// <summary>
@@ -233,7 +233,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Debugger.SetBreakpointByUrlResponse> SetBreakpointByUrl()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SetBreakpointByUrlCommand { });
             }
 
             /// <summary>
@@ -243,7 +243,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Debugger.SetBreakpointOnFunctionCallResponse> SetBreakpointOnFunctionCall()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SetBreakpointOnFunctionCallCommand { });
             }
 
             /// <summary>
@@ -251,7 +251,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task SetBreakpointsActive()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SetBreakpointsActiveCommand { });
             }
 
             /// <summary>
@@ -260,7 +260,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task SetPauseOnExceptions()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SetPauseOnExceptionsCommand { });
             }
 
             /// <summary>
@@ -268,7 +268,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task SetReturnValue()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SetReturnValueCommand { });
             }
 
             /// <summary>
@@ -276,7 +276,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Debugger.SetScriptSourceResponse> SetScriptSource()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SetScriptSourceCommand { });
             }
 
             /// <summary>
@@ -284,7 +284,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task SetSkipAllPauses()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SetSkipAllPausesCommand { });
             }
 
             /// <summary>
@@ -293,7 +293,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task SetVariableValue()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.SetVariableValueCommand { });
             }
 
             /// <summary>
@@ -301,7 +301,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task StepInto()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.StepIntoCommand { });
             }
 
             /// <summary>
@@ -309,7 +309,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task StepOut()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.StepOutCommand { });
             }
 
             /// <summary>
@@ -317,7 +317,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task StepOver()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Debugger.StepOverCommand { });
             }
         }
 
@@ -336,62 +336,62 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task AddInspectedHeapObject()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.HeapProfiler.AddInspectedHeapObjectCommand { });
             }
 
             public Task CollectGarbage()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.HeapProfiler.CollectGarbageCommand { });
             }
 
             public Task Disable()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.HeapProfiler.DisableCommand { });
             }
 
             public Task Enable()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.HeapProfiler.EnableCommand { });
             }
 
             public Task<Protocol.HeapProfiler.GetHeapObjectIdResponse> GetHeapObjectId()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.HeapProfiler.GetHeapObjectIdCommand { });
             }
 
             public Task<Protocol.HeapProfiler.GetObjectByHeapObjectIdResponse> GetObjectByHeapObjectId()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.HeapProfiler.GetObjectByHeapObjectIdCommand { });
             }
 
             public Task<Protocol.HeapProfiler.GetSamplingProfileResponse> GetSamplingProfile()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.HeapProfiler.GetSamplingProfileCommand { });
             }
 
             public Task StartSampling()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.HeapProfiler.StartSamplingCommand { });
             }
 
             public Task StartTrackingHeapObjects()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.HeapProfiler.StartTrackingHeapObjectsCommand { });
             }
 
             public Task<Protocol.HeapProfiler.StopSamplingResponse> StopSampling()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.HeapProfiler.StopSamplingCommand { });
             }
 
             public Task StopTrackingHeapObjects()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.HeapProfiler.StopTrackingHeapObjectsCommand { });
             }
 
             public Task TakeHeapSnapshot()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.HeapProfiler.TakeHeapSnapshotCommand { });
             }
         }
 
@@ -406,12 +406,12 @@ namespace DumbPrograms.ChromeDevTools
 
             public Task Disable()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Profiler.DisableCommand { });
             }
 
             public Task Enable()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Profiler.EnableCommand { });
             }
 
             /// <summary>
@@ -420,7 +420,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Profiler.GetBestEffortCoverageResponse> GetBestEffortCoverage()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Profiler.GetBestEffortCoverageCommand { });
             }
 
             /// <summary>
@@ -428,12 +428,12 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task SetSamplingInterval()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Profiler.SetSamplingIntervalCommand { });
             }
 
             public Task Start()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Profiler.StartCommand { });
             }
 
             /// <summary>
@@ -443,7 +443,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task StartPreciseCoverage()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Profiler.StartPreciseCoverageCommand { });
             }
 
             /// <summary>
@@ -451,12 +451,12 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task StartTypeProfile()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Profiler.StartTypeProfileCommand { });
             }
 
             public Task<Protocol.Profiler.StopResponse> Stop()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Profiler.StopCommand { });
             }
 
             /// <summary>
@@ -465,7 +465,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task StopPreciseCoverage()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Profiler.StopPreciseCoverageCommand { });
             }
 
             /// <summary>
@@ -473,7 +473,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task StopTypeProfile()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Profiler.StopTypeProfileCommand { });
             }
 
             /// <summary>
@@ -482,7 +482,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Profiler.TakePreciseCoverageResponse> TakePreciseCoverage()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Profiler.TakePreciseCoverageCommand { });
             }
 
             /// <summary>
@@ -490,7 +490,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Profiler.TakeTypeProfileResponse> TakeTypeProfile()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Profiler.TakeTypeProfileCommand { });
             }
         }
 
@@ -508,7 +508,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Runtime.AwaitPromiseResponse> AwaitPromise()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.AwaitPromiseCommand { });
             }
 
             /// <summary>
@@ -517,7 +517,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Runtime.CallFunctionOnResponse> CallFunctionOn()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.CallFunctionOnCommand { });
             }
 
             /// <summary>
@@ -525,7 +525,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Runtime.CompileScriptResponse> CompileScript()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.CompileScriptCommand { });
             }
 
             /// <summary>
@@ -533,7 +533,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task Disable()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.DisableCommand { });
             }
 
             /// <summary>
@@ -541,7 +541,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task DiscardConsoleEntries()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.DiscardConsoleEntriesCommand { });
             }
 
             /// <summary>
@@ -551,7 +551,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task Enable()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.EnableCommand { });
             }
 
             /// <summary>
@@ -559,7 +559,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Runtime.EvaluateResponse> Evaluate()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.EvaluateCommand { });
             }
 
             /// <summary>
@@ -567,7 +567,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Runtime.GetIsolateIdResponse> GetIsolateId()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.GetIsolateIdCommand { });
             }
 
             /// <summary>
@@ -576,7 +576,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Runtime.GetHeapUsageResponse> GetHeapUsage()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.GetHeapUsageCommand { });
             }
 
             /// <summary>
@@ -585,7 +585,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Runtime.GetPropertiesResponse> GetProperties()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.GetPropertiesCommand { });
             }
 
             /// <summary>
@@ -593,12 +593,12 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Runtime.GlobalLexicalScopeNamesResponse> GlobalLexicalScopeNames()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.GlobalLexicalScopeNamesCommand { });
             }
 
             public Task<Protocol.Runtime.QueryObjectsResponse> QueryObjects()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.QueryObjectsCommand { });
             }
 
             /// <summary>
@@ -606,7 +606,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task ReleaseObject()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.ReleaseObjectCommand { });
             }
 
             /// <summary>
@@ -614,7 +614,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task ReleaseObjectGroup()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.ReleaseObjectGroupCommand { });
             }
 
             /// <summary>
@@ -622,7 +622,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task RunIfWaitingForDebugger()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.RunIfWaitingForDebuggerCommand { });
             }
 
             /// <summary>
@@ -630,7 +630,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Runtime.RunScriptResponse> RunScript()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.RunScriptCommand { });
             }
 
             /// <summary>
@@ -638,17 +638,17 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task SetAsyncCallStackDepth()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.SetAsyncCallStackDepthCommand { });
             }
 
             public Task SetCustomObjectFormatterEnabled()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.SetCustomObjectFormatterEnabledCommand { });
             }
 
             public Task SetMaxCallStackSizeToCapture()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.SetMaxCallStackSizeToCaptureCommand { });
             }
 
             /// <summary>
@@ -657,7 +657,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task TerminateExecution()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.TerminateExecutionCommand { });
             }
 
             /// <summary>
@@ -672,7 +672,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task AddBinding()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.AddBindingCommand { });
             }
 
             /// <summary>
@@ -681,7 +681,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task RemoveBinding()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Runtime.RemoveBindingCommand { });
             }
         }
 
@@ -699,7 +699,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public Task<Protocol.Schema.GetDomainsResponse> GetDomains()
             {
-                throw new NotImplementedException();
+                return InspectionClient.InvokeCommand(new Protocol.Schema.GetDomainsCommand { });
             }
         }
     }

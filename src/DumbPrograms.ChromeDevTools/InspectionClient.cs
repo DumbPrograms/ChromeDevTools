@@ -83,10 +83,8 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
-        public async Task<TResponse> InvokeCommand<TCommand, TResponse>(TCommand command, CancellationToken cancellation = default)
-            where TCommand : ICommand<TResponse>
+        private Task InvokeCommand(int id, ICommand command, CancellationToken cancellation)
         {
-            var id = Interlocked.Increment(ref CommandId);
             var frame = new InspectionMessage
             {
                 Id = id,
@@ -97,14 +95,27 @@ namespace DumbPrograms.ChromeDevTools
             var frameText = JsonConvert.SerializeObject(frame);
             var bytes = Encoding.UTF8.GetBytes(frameText);
 
-            var response = RegisterCommandResponseHandler<TResponse>(id);
+            return WebSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, false, cancellation);
+        }
 
-            await WebSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, false, cancellation);
+        public Task InvokeCommand(ICommand command, CancellationToken cancellation = default)
+        {
+            var id = Interlocked.Increment(ref CommandId);
+
+            return InvokeCommand(id, command, cancellation);
+        }
+
+        public async Task<TResponse> InvokeCommand<TResponse>(ICommand<TResponse> command, CancellationToken cancellation = default)
+        {
+            var id = Interlocked.Increment(ref CommandId);
+            var response = RegisterCommandResponseHandler<TResponse>(id, cancellation);
+
+            await InvokeCommand(id, command, cancellation);
 
             return await response;
         }
 
-        private Task<TResponse> RegisterCommandResponseHandler<TResponse>(int id)
+        private Task<TResponse> RegisterCommandResponseHandler<TResponse>(int id, CancellationToken cancellation)
         {
             var tcs = new TaskCompletionSource<TResponse>();
             var handler = GetCommandResponseMessageReceivedHandler(tcs, id);
