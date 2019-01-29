@@ -9,6 +9,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
         public string Description { get; set; }
         public string[] Dependencies { get; set; }
         public bool Experimental { get; set; }
+        public bool Deprecated { get; set; }
         public TypeDescriptor[] Types { get; set; }
         public CommandDescriptor[] Commands { get; set; }
         public CommandDescriptor[] Events { get; set; }

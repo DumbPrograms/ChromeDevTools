@@ -117,6 +117,14 @@ namespace DumbPrograms.ChromeDevTools.Generator
             }
         }
 
+        protected void WILObsolete(bool deprecated)
+        {
+            if (deprecated)
+            {
+                WIL("[Obsolete]");
+            }
+        }
+
         protected string GetCSharpIdentifier(string name)
             => String.Join("", name.Split('_', '-', ' ').Select(n => Char.ToUpperInvariant(n[0]) + n.Substring(1, n.Length - 1)));
 

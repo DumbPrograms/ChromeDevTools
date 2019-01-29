@@ -10,7 +10,9 @@ namespace DumbPrograms.ChromeDevTools
         /// <summary>
         /// This domain is deprecated - use Runtime or Log instead.
         /// </summary>
+        [Obsolete]
         public ConsoleInspectionClient Console => __Console__ ?? (__Console__ = new ConsoleInspectionClient(this));
+        [Obsolete]
         private ConsoleInspectionClient __Console__;
 
         /// <summary>
@@ -39,9 +41,12 @@ namespace DumbPrograms.ChromeDevTools
         /// <summary>
         /// This domain is deprecated.
         /// </summary>
+        [Obsolete]
         public SchemaInspectionClient Schema => __Schema__ ?? (__Schema__ = new SchemaInspectionClient(this));
+        [Obsolete]
         private SchemaInspectionClient __Schema__;
 
+        [Obsolete]
         public class ConsoleInspectionClient
         {
             private readonly InspectionClient InspectionClient;
@@ -2019,6 +2024,7 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        [Obsolete]
         public class SchemaInspectionClient
         {
             private readonly InspectionClient InspectionClient;

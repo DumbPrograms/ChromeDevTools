@@ -25,17 +25,22 @@ namespace DumbPrograms.ChromeDevTools.Generator
                 {
                     foreach (var domain in protocol.Domains)
                     {
-                        WILSummary(domain.Description);
-
                         var fieldName = $"__{domain.Name}__";
 
+                        WILSummary(domain.Description);
+
+                        WILObsolete(domain.Deprecated);
                         WIL($"public {domain.Name}{InspectionClient} {domain.Name} => {fieldName} ?? ({fieldName} = new {domain.Name}{InspectionClient}(this));");
+
+                        WILObsolete(domain.Deprecated);
                         WIL($"private {domain.Name}{InspectionClient} {fieldName};");
                     }
 
                     foreach (var domain in protocol.Domains)
                     {
                         WL();
+
+                        WILObsolete(domain.Deprecated);
 
                         using (WILBlock($"public class {domain.Name}{InspectionClient}"))
                         {
@@ -62,10 +67,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                         }
                                     }
 
-                                    if (command.Deprecated)
-                                    {
-                                        WIL("[Obsolete]");
-                                    }
+                                    WILObsolete(command.Deprecated);
 
                                     var commandName = GetCSharpIdentifier(command.Name);
                                     var commandType = $"Protocol.{domain.Name}.{commandName}Command";
@@ -92,7 +94,6 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                                 }
 
                                             }
-
                                             WIL(", cancellation");
                                         }
                                         WIL($";");

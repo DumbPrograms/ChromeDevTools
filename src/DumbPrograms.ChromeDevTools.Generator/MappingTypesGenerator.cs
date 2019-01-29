@@ -32,11 +32,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                             foreach (var type in domain.Types)
                             {
                                 WILSummary(type.Description);
-
-                                if (type.Deprecated)
-                                {
-                                    WIL("[Obsolete]");
-                                }
+                                WILObsolete(type.Deprecated);
 
                                 switch (type.Type)
                                 {
@@ -84,11 +80,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                             foreach (var command in domain.Commands)
                             {
                                 WILSummary(command.Description);
-
-                                if (command.Deprecated)
-                                {
-                                    WIL("[Obsolete]");
-                                }
+                                WILObsolete(command.Deprecated);
 
                                 var commandClassName = GetCSharpIdentifier(command.Name);
                                 var commandInterface = "ICommand";
@@ -126,11 +118,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                             foreach (var @event in domain.Events)
                             {
                                 WILSummary(@event.Description);
-
-                                if (@event.Deprecated)
-                                {
-                                    WIL("[Obsolete]");
-                                }
+                                WILObsolete(@event.Deprecated);
 
                                 WIL($"[Event(\"{domain.Name}.{@event.Name}\")]");
 
