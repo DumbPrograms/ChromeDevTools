@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace DumbPrograms.ChromeDevTools.Generator
 {
-    abstract class CodeGenerator
+    abstract partial class CodeGenerator
     {
         protected int Indent { get; set; }
         protected TextWriter Writer { get; set; }
@@ -51,16 +51,44 @@ namespace DumbPrograms.ChromeDevTools.Generator
             WL(line);
         }
 
-        protected void WILOpen()
+        protected void WILOpen(BlockType blockType = BlockType.Bracket)
         {
-            WIL("{");
+            switch (blockType)
+            {
+                case BlockType.Bracket:
+                    WIL("{");
+                    break;
+                case BlockType.Brace:
+                    WIL("(");
+                    break;
+                case BlockType.SquareBracket:
+                    WIL("[");
+                    break;
+                default:
+                    break;
+            }
+
             Indent++;
         }
 
-        protected void WILClose()
+        protected void WILClose(BlockType blockType = BlockType.Bracket)
         {
             Indent--;
-            WIL("}");
+
+            switch (blockType)
+            {
+                case BlockType.Bracket:
+                    WIL("}");
+                    break;
+                case BlockType.Brace:
+                    WIL(")");
+                    break;
+                case BlockType.SquareBracket:
+                    WIL("]");
+                    break;
+                default:
+                    break;
+            }
         }
 
         protected void WILSummary(string description)
@@ -72,7 +100,17 @@ namespace DumbPrograms.ChromeDevTools.Generator
                 return;
             }
 
-            var xml = new XElement("summary", Environment.NewLine + description + Environment.NewLine).ToString();
+            WILXmlDocElement(new XElement("summary", description));
+        }
+
+        protected void WILXmlDocElement(XElement element)
+        {
+            if (!String.IsNullOrWhiteSpace(element.Value))
+            {
+                element.Value = $"{Environment.NewLine}{element.Value}{Environment.NewLine}";
+            }
+
+            var xml = element.ToString();
             foreach (var line in xml.Split(Environment.NewLine))
             {
                 WIL("/// " + line);
@@ -119,24 +157,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
             }
         }
 
-        protected BlockStructureWriter WILBlock(string header) => new BlockStructureWriter(this, header);
-
-        internal class BlockStructureWriter : IDisposable
-        {
-            private readonly CodeGenerator Generator;
-
-            public BlockStructureWriter(CodeGenerator generator, string header)
-            {
-                Generator = generator;
-
-                generator.WIL(header);
-                generator.WILOpen();
-            }
-
-            public void Dispose()
-            {
-                Generator.WILClose();
-            }
-        }
+        protected BlockStructureWriter WILBlock(string header = null, BlockType blockType = BlockType.Bracket)
+            => new BlockStructureWriter(this, header, blockType);
     }
 }

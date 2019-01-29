@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Text;
+using System.Xml.Linq;
 
 namespace DumbPrograms.ChromeDevTools.Generator
 {
@@ -9,6 +12,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
             StartTextWriter(writer);
 
             WIL("using System;");
+            WIL("using System.Threading;");
             WIL("using System.Threading.Tasks;");
 
             WL();
@@ -50,6 +54,14 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                 {
                                     WILSummary(command.Description);
 
+                                    if (command.Parameters != null)
+                                    {
+                                        foreach (var parameter in command.Parameters)
+                                        {
+                                            WILXmlDocElement(new XElement("param", new XAttribute("name", parameter.Name), parameter.Description));
+                                        }
+                                    }
+
                                     if (command.Deprecated)
                                     {
                                         WIL("[Obsolete]");
@@ -60,9 +72,30 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     var commandResponseType = $"Protocol.{domain.Name}.{commandName}Response";
                                     var returnType = command.Returns == null ? "Task" : $"Task<{commandResponseType}>";
 
-                                    using (WILBlock($"public {returnType} {commandName}()"))
+                                    WIL($"public {returnType} {commandName}");
+                                    using (WILBlock(blockType: BlockType.Brace))
                                     {
-                                        WIL($"return {InspectionClient}.InvokeCommand(new {commandType} {{ }});");
+                                        WILParameters(domain.Name, command.Parameters);
+                                    }
+                                    using (WILBlock())
+                                    {
+                                        using (WILBlock($"return {InspectionClient}.InvokeCommand", BlockType.Brace))
+                                        {
+                                            using (WILBlock($"new {commandType}"))
+                                            {
+                                                if (command.Parameters != null)
+                                                {
+                                                    foreach (var parameter in command.Parameters)
+                                                    {
+                                                        WIL($"{GetCSharpIdentifier(parameter.Name)} = @{parameter.Name},");
+                                                    }
+                                                }
+
+                                            }
+
+                                            WIL(", cancellation");
+                                        }
+                                        WIL($";");
                                     }
                                 }
                             }
@@ -70,6 +103,40 @@ namespace DumbPrograms.ChromeDevTools.Generator
                     }
                 }
             }
+        }
+
+        private void WILParameters(string domain, PropertyDescriptor[] parameters)
+        {
+            if (parameters != null)
+            {
+                foreach (var parameter in parameters)
+                {
+                    string csType;
+                    if (parameter.Type != null)
+                    {
+                        csType = GetCSharpType(parameter.Type.Value, parameter.Optional, parameter.ArrayType);
+
+                        var typeRef = parameter.ArrayType?.TypeReference;
+                        if (parameter.Type == JsonTypes.Array && typeRef != null)
+                        {
+                            csType = $"Protocol.{(typeRef.Contains(".") ? "" : $"{domain}.")}{csType}";
+                        }
+                    }
+                    else if (parameter.TypeReference != null)
+                    {
+                        var typeRef = parameter.TypeReference;
+                        csType = $"Protocol.{(typeRef.Contains(".") ? "" : $"{domain}.")}{typeRef}";
+                    }
+                    else
+                    {
+                        throw new NotImplementedException();
+                    }
+
+                    WIL($"{csType} @{parameter.Name}{(parameter.Optional ? " = default" : "" )}, ");
+                }
+            }
+
+            WIL("CancellationToken cancellation = default");
         }
     }
 }

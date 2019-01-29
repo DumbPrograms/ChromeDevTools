@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DumbPrograms.ChromeDevTools
@@ -204,34 +205,94 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables the accessibility domain.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Accessibility.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Accessibility.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables the accessibility domain which causes `AXNodeId`s to remain consistent between method calls.
             /// This turns on accessibility for the page, which can impact performance until accessibility is disabled.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Accessibility.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Accessibility.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Fetches the accessibility node and partial accessibility tree for this DOM node, if it exists.
             /// </summary>
-            public Task<Protocol.Accessibility.GetPartialAXTreeResponse> GetPartialAXTree()
+            /// <param name="nodeId">
+            /// Identifier of the node to get the partial accessibility tree for.
+            /// </param>
+            /// <param name="backendNodeId">
+            /// Identifier of the backend node to get the partial accessibility tree for.
+            /// </param>
+            /// <param name="objectId">
+            /// JavaScript object id of the node wrapper to get the partial accessibility tree for.
+            /// </param>
+            /// <param name="fetchRelatives">
+            /// Whether to fetch this nodes ancestors, siblings and children. Defaults to true.
+            /// </param>
+            public Task<Protocol.Accessibility.GetPartialAXTreeResponse> GetPartialAXTree
+            (
+                Protocol.DOM.NodeId @nodeId = default, 
+                Protocol.DOM.BackendNodeId @backendNodeId = default, 
+                Protocol.Runtime.RemoteObjectId @objectId = default, 
+                bool? @fetchRelatives = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Accessibility.GetPartialAXTreeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Accessibility.GetPartialAXTreeCommand
+                    {
+                        NodeId = @nodeId,
+                        BackendNodeId = @backendNodeId,
+                        ObjectId = @objectId,
+                        FetchRelatives = @fetchRelatives,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Fetches the entire accessibility tree
             /// </summary>
-            public Task<Protocol.Accessibility.GetFullAXTreeResponse> GetFullAXTree()
+            public Task<Protocol.Accessibility.GetFullAXTreeResponse> GetFullAXTree
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Accessibility.GetFullAXTreeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Accessibility.GetFullAXTreeCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -247,81 +308,236 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables animation domain notifications.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Animation.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Animation.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables animation domain notifications.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Animation.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Animation.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns the current time of the an animation.
             /// </summary>
-            public Task<Protocol.Animation.GetCurrentTimeResponse> GetCurrentTime()
+            /// <param name="id">
+            /// Id of animation.
+            /// </param>
+            public Task<Protocol.Animation.GetCurrentTimeResponse> GetCurrentTime
+            (
+                string @id, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Animation.GetCurrentTimeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Animation.GetCurrentTimeCommand
+                    {
+                        Id = @id,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Gets the playback rate of the document timeline.
             /// </summary>
-            public Task<Protocol.Animation.GetPlaybackRateResponse> GetPlaybackRate()
+            public Task<Protocol.Animation.GetPlaybackRateResponse> GetPlaybackRate
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Animation.GetPlaybackRateCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Animation.GetPlaybackRateCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Releases a set of animations to no longer be manipulated.
             /// </summary>
-            public Task ReleaseAnimations()
+            /// <param name="animations">
+            /// List of animation ids to seek.
+            /// </param>
+            public Task ReleaseAnimations
+            (
+                string[] @animations, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Animation.ReleaseAnimationsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Animation.ReleaseAnimationsCommand
+                    {
+                        Animations = @animations,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Gets the remote object of the Animation.
             /// </summary>
-            public Task<Protocol.Animation.ResolveAnimationResponse> ResolveAnimation()
+            /// <param name="animationId">
+            /// Animation id.
+            /// </param>
+            public Task<Protocol.Animation.ResolveAnimationResponse> ResolveAnimation
+            (
+                string @animationId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Animation.ResolveAnimationCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Animation.ResolveAnimationCommand
+                    {
+                        AnimationId = @animationId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Seek a set of animations to a particular time within each animation.
             /// </summary>
-            public Task SeekAnimations()
+            /// <param name="animations">
+            /// List of animation ids to seek.
+            /// </param>
+            /// <param name="currentTime">
+            /// Set the current time of each animation.
+            /// </param>
+            public Task SeekAnimations
+            (
+                string[] @animations, 
+                double @currentTime, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Animation.SeekAnimationsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Animation.SeekAnimationsCommand
+                    {
+                        Animations = @animations,
+                        CurrentTime = @currentTime,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets the paused state of a set of animations.
             /// </summary>
-            public Task SetPaused()
+            /// <param name="animations">
+            /// Animations to set the pause state of.
+            /// </param>
+            /// <param name="paused">
+            /// Paused state to set to.
+            /// </param>
+            public Task SetPaused
+            (
+                string[] @animations, 
+                bool @paused, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Animation.SetPausedCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Animation.SetPausedCommand
+                    {
+                        Animations = @animations,
+                        Paused = @paused,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets the playback rate of the document timeline.
             /// </summary>
-            public Task SetPlaybackRate()
+            /// <param name="playbackRate">
+            /// Playback rate for animations on page
+            /// </param>
+            public Task SetPlaybackRate
+            (
+                double @playbackRate, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Animation.SetPlaybackRateCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Animation.SetPlaybackRateCommand
+                    {
+                        PlaybackRate = @playbackRate,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets the timing of an animation node.
             /// </summary>
-            public Task SetTiming()
+            /// <param name="animationId">
+            /// Animation id.
+            /// </param>
+            /// <param name="duration">
+            /// Duration of the animation.
+            /// </param>
+            /// <param name="delay">
+            /// Delay of the animation.
+            /// </param>
+            public Task SetTiming
+            (
+                string @animationId, 
+                double @duration, 
+                double @delay, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Animation.SetTimingCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Animation.SetTimingCommand
+                    {
+                        AnimationId = @animationId,
+                        Duration = @duration,
+                        Delay = @delay,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -337,34 +553,84 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables application cache domain notifications.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ApplicationCache.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ApplicationCache.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns relevant application cache data for the document in given frame.
             /// </summary>
-            public Task<Protocol.ApplicationCache.GetApplicationCacheForFrameResponse> GetApplicationCacheForFrame()
+            /// <param name="frameId">
+            /// Identifier of the frame containing document whose application cache is retrieved.
+            /// </param>
+            public Task<Protocol.ApplicationCache.GetApplicationCacheForFrameResponse> GetApplicationCacheForFrame
+            (
+                Protocol.Page.FrameId @frameId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ApplicationCache.GetApplicationCacheForFrameCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ApplicationCache.GetApplicationCacheForFrameCommand
+                    {
+                        FrameId = @frameId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns array of frame identifiers with manifest urls for each frame containing a document
             /// associated with some application cache.
             /// </summary>
-            public Task<Protocol.ApplicationCache.GetFramesWithManifestsResponse> GetFramesWithManifests()
+            public Task<Protocol.ApplicationCache.GetFramesWithManifestsResponse> GetFramesWithManifests
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ApplicationCache.GetFramesWithManifestsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ApplicationCache.GetFramesWithManifestsCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns manifest URL for document in the given frame.
             /// </summary>
-            public Task<Protocol.ApplicationCache.GetManifestForFrameResponse> GetManifestForFrame()
+            /// <param name="frameId">
+            /// Identifier of the frame containing document whose manifest is retrieved.
+            /// </param>
+            public Task<Protocol.ApplicationCache.GetManifestForFrameResponse> GetManifestForFrame
+            (
+                Protocol.Page.FrameId @frameId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ApplicationCache.GetManifestForFrameCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ApplicationCache.GetManifestForFrameCommand
+                    {
+                        FrameId = @frameId,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -381,9 +647,39 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns the response body and size if it were re-encoded with the specified settings. Only
             /// applies to images.
             /// </summary>
-            public Task<Protocol.Audits.GetEncodedResponseResponse> GetEncodedResponse()
+            /// <param name="requestId">
+            /// Identifier of the network request to get content for.
+            /// </param>
+            /// <param name="encoding">
+            /// The encoding to use.
+            /// </param>
+            /// <param name="quality">
+            /// The quality of the encoding (0-1). (defaults to 1)
+            /// </param>
+            /// <param name="sizeOnly">
+            /// Whether to only return the size information (defaults to false).
+            /// </param>
+            public Task<Protocol.Audits.GetEncodedResponseResponse> GetEncodedResponse
+            (
+                Protocol.Network.RequestId @requestId, 
+                string @encoding, 
+                double? @quality = default, 
+                bool? @sizeOnly = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Audits.GetEncodedResponseCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Audits.GetEncodedResponseCommand
+                    {
+                        RequestId = @requestId,
+                        Encoding = @encoding,
+                        Quality = @quality,
+                        SizeOnly = @sizeOnly,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -399,98 +695,285 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Grant specific permissions to the given origin and reject all others.
             /// </summary>
-            public Task GrantPermissions()
+            /// <param name="origin" />
+            /// <param name="permissions" />
+            /// <param name="browserContextId">
+            /// BrowserContext to override permissions. When omitted, default browser context is used.
+            /// </param>
+            public Task GrantPermissions
+            (
+                string @origin, 
+                Protocol.Browser.PermissionType[] @permissions, 
+                Protocol.Target.BrowserContextID @browserContextId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Browser.GrantPermissionsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Browser.GrantPermissionsCommand
+                    {
+                        Origin = @origin,
+                        Permissions = @permissions,
+                        BrowserContextId = @browserContextId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Reset all permission management for all origins.
             /// </summary>
-            public Task ResetPermissions()
+            /// <param name="browserContextId">
+            /// BrowserContext to reset permissions. When omitted, default browser context is used.
+            /// </param>
+            public Task ResetPermissions
+            (
+                Protocol.Target.BrowserContextID @browserContextId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Browser.ResetPermissionsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Browser.ResetPermissionsCommand
+                    {
+                        BrowserContextId = @browserContextId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Close browser gracefully.
             /// </summary>
-            public Task Close()
+            public Task Close
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Browser.CloseCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Browser.CloseCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Crashes browser on the main thread.
             /// </summary>
-            public Task Crash()
+            public Task Crash
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Browser.CrashCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Browser.CrashCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns version information.
             /// </summary>
-            public Task<Protocol.Browser.GetVersionResponse> GetVersion()
+            public Task<Protocol.Browser.GetVersionResponse> GetVersion
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Browser.GetVersionCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Browser.GetVersionCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns the command line switches for the browser process if, and only if
             /// --enable-automation is on the commandline.
             /// </summary>
-            public Task<Protocol.Browser.GetBrowserCommandLineResponse> GetBrowserCommandLine()
+            public Task<Protocol.Browser.GetBrowserCommandLineResponse> GetBrowserCommandLine
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Browser.GetBrowserCommandLineCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Browser.GetBrowserCommandLineCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Get Chrome histograms.
             /// </summary>
-            public Task<Protocol.Browser.GetHistogramsResponse> GetHistograms()
+            /// <param name="query">
+            /// Requested substring in name. Only histograms which have query as a
+            /// substring in their name are extracted. An empty or absent query returns
+            /// all histograms.
+            /// </param>
+            /// <param name="delta">
+            /// If true, retrieve delta since last call.
+            /// </param>
+            public Task<Protocol.Browser.GetHistogramsResponse> GetHistograms
+            (
+                string @query = default, 
+                bool? @delta = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Browser.GetHistogramsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Browser.GetHistogramsCommand
+                    {
+                        Query = @query,
+                        Delta = @delta,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Get a Chrome histogram by name.
             /// </summary>
-            public Task<Protocol.Browser.GetHistogramResponse> GetHistogram()
+            /// <param name="name">
+            /// Requested histogram name.
+            /// </param>
+            /// <param name="delta">
+            /// If true, retrieve delta since last call.
+            /// </param>
+            public Task<Protocol.Browser.GetHistogramResponse> GetHistogram
+            (
+                string @name, 
+                bool? @delta = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Browser.GetHistogramCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Browser.GetHistogramCommand
+                    {
+                        Name = @name,
+                        Delta = @delta,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Get position and size of the browser window.
             /// </summary>
-            public Task<Protocol.Browser.GetWindowBoundsResponse> GetWindowBounds()
+            /// <param name="windowId">
+            /// Browser window id.
+            /// </param>
+            public Task<Protocol.Browser.GetWindowBoundsResponse> GetWindowBounds
+            (
+                Protocol.Browser.WindowID @windowId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Browser.GetWindowBoundsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Browser.GetWindowBoundsCommand
+                    {
+                        WindowId = @windowId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Get the browser window that contains the devtools target.
             /// </summary>
-            public Task<Protocol.Browser.GetWindowForTargetResponse> GetWindowForTarget()
+            /// <param name="targetId">
+            /// Devtools agent host id. If called as a part of the session, associated targetId is used.
+            /// </param>
+            public Task<Protocol.Browser.GetWindowForTargetResponse> GetWindowForTarget
+            (
+                Protocol.Target.TargetID @targetId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Browser.GetWindowForTargetCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Browser.GetWindowForTargetCommand
+                    {
+                        TargetId = @targetId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Set position and/or size of the browser window.
             /// </summary>
-            public Task SetWindowBounds()
+            /// <param name="windowId">
+            /// Browser window id.
+            /// </param>
+            /// <param name="bounds">
+            /// New window bounds. The 'minimized', 'maximized' and 'fullscreen' states cannot be combined
+            /// with 'left', 'top', 'width' or 'height'. Leaves unspecified fields unchanged.
+            /// </param>
+            public Task SetWindowBounds
+            (
+                Protocol.Browser.WindowID @windowId, 
+                Protocol.Browser.Bounds @bounds, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Browser.SetWindowBoundsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Browser.SetWindowBoundsCommand
+                    {
+                        WindowId = @windowId,
+                        Bounds = @bounds,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Set dock tile details, platform-specific.
             /// </summary>
-            public Task SetDockTile()
+            /// <param name="badgeLabel" />
+            /// <param name="image">
+            /// Png encoded image.
+            /// </param>
+            public Task SetDockTile
+            (
+                string @badgeLabel = default, 
+                string @image = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Browser.SetDockTileCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Browser.SetDockTileCommand
+                    {
+                        BadgeLabel = @badgeLabel,
+                        Image = @image,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -507,181 +990,501 @@ namespace DumbPrograms.ChromeDevTools
             /// Inserts a new rule with the given `ruleText` in a stylesheet with given `styleSheetId`, at the
             /// position specified by `location`.
             /// </summary>
-            public Task<Protocol.CSS.AddRuleResponse> AddRule()
+            /// <param name="styleSheetId">
+            /// The css style sheet identifier where a new rule should be inserted.
+            /// </param>
+            /// <param name="ruleText">
+            /// The text of a new rule.
+            /// </param>
+            /// <param name="location">
+            /// Text position of a new rule in the target style sheet.
+            /// </param>
+            public Task<Protocol.CSS.AddRuleResponse> AddRule
+            (
+                Protocol.CSS.StyleSheetId @styleSheetId, 
+                string @ruleText, 
+                Protocol.CSS.SourceRange @location, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.AddRuleCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.AddRuleCommand
+                    {
+                        StyleSheetId = @styleSheetId,
+                        RuleText = @ruleText,
+                        Location = @location,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns all class names from specified stylesheet.
             /// </summary>
-            public Task<Protocol.CSS.CollectClassNamesResponse> CollectClassNames()
+            /// <param name="styleSheetId" />
+            public Task<Protocol.CSS.CollectClassNamesResponse> CollectClassNames
+            (
+                Protocol.CSS.StyleSheetId @styleSheetId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.CollectClassNamesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.CollectClassNamesCommand
+                    {
+                        StyleSheetId = @styleSheetId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Creates a new special "via-inspector" stylesheet in the frame with given `frameId`.
             /// </summary>
-            public Task<Protocol.CSS.CreateStyleSheetResponse> CreateStyleSheet()
+            /// <param name="frameId">
+            /// Identifier of the frame where "via-inspector" stylesheet should be created.
+            /// </param>
+            public Task<Protocol.CSS.CreateStyleSheetResponse> CreateStyleSheet
+            (
+                Protocol.Page.FrameId @frameId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.CreateStyleSheetCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.CreateStyleSheetCommand
+                    {
+                        FrameId = @frameId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Disables the CSS agent for the given page.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables the CSS agent for the given page. Clients should not assume that the CSS agent has been
             /// enabled until the result of this command is received.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Ensures that the given node will have specified pseudo-classes whenever its style is computed by
             /// the browser.
             /// </summary>
-            public Task ForcePseudoState()
+            /// <param name="nodeId">
+            /// The element id for which to force the pseudo state.
+            /// </param>
+            /// <param name="forcedPseudoClasses">
+            /// Element pseudo classes to force when computing the element's style.
+            /// </param>
+            public Task ForcePseudoState
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                string[] @forcedPseudoClasses, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.ForcePseudoStateCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.ForcePseudoStateCommand
+                    {
+                        NodeId = @nodeId,
+                        ForcedPseudoClasses = @forcedPseudoClasses,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task<Protocol.CSS.GetBackgroundColorsResponse> GetBackgroundColors()
+            /// <param name="nodeId">
+            /// Id of the node to get background colors for.
+            /// </param>
+            public Task<Protocol.CSS.GetBackgroundColorsResponse> GetBackgroundColors
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.GetBackgroundColorsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.GetBackgroundColorsCommand
+                    {
+                        NodeId = @nodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns the computed style for a DOM node identified by `nodeId`.
             /// </summary>
-            public Task<Protocol.CSS.GetComputedStyleForNodeResponse> GetComputedStyleForNode()
+            /// <param name="nodeId" />
+            public Task<Protocol.CSS.GetComputedStyleForNodeResponse> GetComputedStyleForNode
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.GetComputedStyleForNodeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.GetComputedStyleForNodeCommand
+                    {
+                        NodeId = @nodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns the styles defined inline (explicitly in the "style" attribute and implicitly, using DOM
             /// attributes) for a DOM node identified by `nodeId`.
             /// </summary>
-            public Task<Protocol.CSS.GetInlineStylesForNodeResponse> GetInlineStylesForNode()
+            /// <param name="nodeId" />
+            public Task<Protocol.CSS.GetInlineStylesForNodeResponse> GetInlineStylesForNode
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.GetInlineStylesForNodeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.GetInlineStylesForNodeCommand
+                    {
+                        NodeId = @nodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns requested styles for a DOM node identified by `nodeId`.
             /// </summary>
-            public Task<Protocol.CSS.GetMatchedStylesForNodeResponse> GetMatchedStylesForNode()
+            /// <param name="nodeId" />
+            public Task<Protocol.CSS.GetMatchedStylesForNodeResponse> GetMatchedStylesForNode
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.GetMatchedStylesForNodeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.GetMatchedStylesForNodeCommand
+                    {
+                        NodeId = @nodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns all media queries parsed by the rendering engine.
             /// </summary>
-            public Task<Protocol.CSS.GetMediaQueriesResponse> GetMediaQueries()
+            public Task<Protocol.CSS.GetMediaQueriesResponse> GetMediaQueries
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.GetMediaQueriesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.GetMediaQueriesCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests information about platform fonts which we used to render child TextNodes in the given
             /// node.
             /// </summary>
-            public Task<Protocol.CSS.GetPlatformFontsForNodeResponse> GetPlatformFontsForNode()
+            /// <param name="nodeId" />
+            public Task<Protocol.CSS.GetPlatformFontsForNodeResponse> GetPlatformFontsForNode
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.GetPlatformFontsForNodeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.GetPlatformFontsForNodeCommand
+                    {
+                        NodeId = @nodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns the current textual content for a stylesheet.
             /// </summary>
-            public Task<Protocol.CSS.GetStyleSheetTextResponse> GetStyleSheetText()
+            /// <param name="styleSheetId" />
+            public Task<Protocol.CSS.GetStyleSheetTextResponse> GetStyleSheetText
+            (
+                Protocol.CSS.StyleSheetId @styleSheetId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.GetStyleSheetTextCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.GetStyleSheetTextCommand
+                    {
+                        StyleSheetId = @styleSheetId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Find a rule with the given active property for the given node and set the new value for this
             /// property
             /// </summary>
-            public Task SetEffectivePropertyValueForNode()
+            /// <param name="nodeId">
+            /// The element id for which to set property.
+            /// </param>
+            /// <param name="propertyName" />
+            /// <param name="value" />
+            public Task SetEffectivePropertyValueForNode
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                string @propertyName, 
+                string @value, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.SetEffectivePropertyValueForNodeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.SetEffectivePropertyValueForNodeCommand
+                    {
+                        NodeId = @nodeId,
+                        PropertyName = @propertyName,
+                        Value = @value,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Modifies the keyframe rule key text.
             /// </summary>
-            public Task<Protocol.CSS.SetKeyframeKeyResponse> SetKeyframeKey()
+            /// <param name="styleSheetId" />
+            /// <param name="range" />
+            /// <param name="keyText" />
+            public Task<Protocol.CSS.SetKeyframeKeyResponse> SetKeyframeKey
+            (
+                Protocol.CSS.StyleSheetId @styleSheetId, 
+                Protocol.CSS.SourceRange @range, 
+                string @keyText, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.SetKeyframeKeyCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.SetKeyframeKeyCommand
+                    {
+                        StyleSheetId = @styleSheetId,
+                        Range = @range,
+                        KeyText = @keyText,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Modifies the rule selector.
             /// </summary>
-            public Task<Protocol.CSS.SetMediaTextResponse> SetMediaText()
+            /// <param name="styleSheetId" />
+            /// <param name="range" />
+            /// <param name="text" />
+            public Task<Protocol.CSS.SetMediaTextResponse> SetMediaText
+            (
+                Protocol.CSS.StyleSheetId @styleSheetId, 
+                Protocol.CSS.SourceRange @range, 
+                string @text, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.SetMediaTextCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.SetMediaTextCommand
+                    {
+                        StyleSheetId = @styleSheetId,
+                        Range = @range,
+                        Text = @text,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Modifies the rule selector.
             /// </summary>
-            public Task<Protocol.CSS.SetRuleSelectorResponse> SetRuleSelector()
+            /// <param name="styleSheetId" />
+            /// <param name="range" />
+            /// <param name="selector" />
+            public Task<Protocol.CSS.SetRuleSelectorResponse> SetRuleSelector
+            (
+                Protocol.CSS.StyleSheetId @styleSheetId, 
+                Protocol.CSS.SourceRange @range, 
+                string @selector, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.SetRuleSelectorCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.SetRuleSelectorCommand
+                    {
+                        StyleSheetId = @styleSheetId,
+                        Range = @range,
+                        Selector = @selector,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets the new stylesheet text.
             /// </summary>
-            public Task<Protocol.CSS.SetStyleSheetTextResponse> SetStyleSheetText()
+            /// <param name="styleSheetId" />
+            /// <param name="text" />
+            public Task<Protocol.CSS.SetStyleSheetTextResponse> SetStyleSheetText
+            (
+                Protocol.CSS.StyleSheetId @styleSheetId, 
+                string @text, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.SetStyleSheetTextCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.SetStyleSheetTextCommand
+                    {
+                        StyleSheetId = @styleSheetId,
+                        Text = @text,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Applies specified style edits one after another in the given order.
             /// </summary>
-            public Task<Protocol.CSS.SetStyleTextsResponse> SetStyleTexts()
+            /// <param name="edits" />
+            public Task<Protocol.CSS.SetStyleTextsResponse> SetStyleTexts
+            (
+                Protocol.CSS.StyleDeclarationEdit[] @edits, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.SetStyleTextsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.SetStyleTextsCommand
+                    {
+                        Edits = @edits,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables the selector recording.
             /// </summary>
-            public Task StartRuleUsageTracking()
+            public Task StartRuleUsageTracking
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.StartRuleUsageTrackingCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.StartRuleUsageTrackingCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Stop tracking rule usage and return the list of rules that were used since last call to
             /// `takeCoverageDelta` (or since start of coverage instrumentation)
             /// </summary>
-            public Task<Protocol.CSS.StopRuleUsageTrackingResponse> StopRuleUsageTracking()
+            public Task<Protocol.CSS.StopRuleUsageTrackingResponse> StopRuleUsageTracking
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.StopRuleUsageTrackingCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.StopRuleUsageTrackingCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Obtain list of rules that became used since last call to this method (or since start of coverage
             /// instrumentation)
             /// </summary>
-            public Task<Protocol.CSS.TakeCoverageDeltaResponse> TakeCoverageDelta()
+            public Task<Protocol.CSS.TakeCoverageDeltaResponse> TakeCoverageDelta
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CSS.TakeCoverageDeltaCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CSS.TakeCoverageDeltaCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -697,41 +1500,141 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Deletes a cache.
             /// </summary>
-            public Task DeleteCache()
+            /// <param name="cacheId">
+            /// Id of cache for deletion.
+            /// </param>
+            public Task DeleteCache
+            (
+                Protocol.CacheStorage.CacheId @cacheId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CacheStorage.DeleteCacheCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CacheStorage.DeleteCacheCommand
+                    {
+                        CacheId = @cacheId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Deletes a cache entry.
             /// </summary>
-            public Task DeleteEntry()
+            /// <param name="cacheId">
+            /// Id of cache where the entry will be deleted.
+            /// </param>
+            /// <param name="request">
+            /// URL spec of the request.
+            /// </param>
+            public Task DeleteEntry
+            (
+                Protocol.CacheStorage.CacheId @cacheId, 
+                string @request, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CacheStorage.DeleteEntryCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CacheStorage.DeleteEntryCommand
+                    {
+                        CacheId = @cacheId,
+                        Request = @request,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests cache names.
             /// </summary>
-            public Task<Protocol.CacheStorage.RequestCacheNamesResponse> RequestCacheNames()
+            /// <param name="securityOrigin">
+            /// Security origin.
+            /// </param>
+            public Task<Protocol.CacheStorage.RequestCacheNamesResponse> RequestCacheNames
+            (
+                string @securityOrigin, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CacheStorage.RequestCacheNamesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CacheStorage.RequestCacheNamesCommand
+                    {
+                        SecurityOrigin = @securityOrigin,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Fetches cache entry.
             /// </summary>
-            public Task<Protocol.CacheStorage.RequestCachedResponseResponse> RequestCachedResponse()
+            /// <param name="cacheId">
+            /// Id of cache that contains the entry.
+            /// </param>
+            /// <param name="requestURL">
+            /// URL spec of the request.
+            /// </param>
+            public Task<Protocol.CacheStorage.RequestCachedResponseResponse> RequestCachedResponse
+            (
+                Protocol.CacheStorage.CacheId @cacheId, 
+                string @requestURL, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CacheStorage.RequestCachedResponseCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CacheStorage.RequestCachedResponseCommand
+                    {
+                        CacheId = @cacheId,
+                        RequestURL = @requestURL,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests data from cache.
             /// </summary>
-            public Task<Protocol.CacheStorage.RequestEntriesResponse> RequestEntries()
+            /// <param name="cacheId">
+            /// ID of cache to get entries from.
+            /// </param>
+            /// <param name="skipCount">
+            /// Number of records to skip.
+            /// </param>
+            /// <param name="pageSize">
+            /// Number of records to fetch.
+            /// </param>
+            /// <param name="pathFilter">
+            /// If present, only return the entries containing this substring in the path
+            /// </param>
+            public Task<Protocol.CacheStorage.RequestEntriesResponse> RequestEntries
+            (
+                Protocol.CacheStorage.CacheId @cacheId, 
+                int @skipCount, 
+                int @pageSize, 
+                string @pathFilter = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.CacheStorage.RequestEntriesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.CacheStorage.RequestEntriesCommand
+                    {
+                        CacheId = @cacheId,
+                        SkipCount = @skipCount,
+                        PageSize = @pageSize,
+                        PathFilter = @pathFilter,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -751,42 +1654,104 @@ namespace DumbPrograms.ChromeDevTools
             /// Also starts observing for issue messages. When an issue is added or removed,
             /// an |issueUpdated| event is fired.
             /// </summary>
-            public Task Enable()
+            /// <param name="presentationUrl" />
+            public Task Enable
+            (
+                string @presentationUrl = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Cast.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Cast.EnableCommand
+                    {
+                        PresentationUrl = @presentationUrl,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Stops observing for sinks and issues.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Cast.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Cast.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets a sink to be used when the web page requests the browser to choose a
             /// sink via Presentation API, Remote Playback API, or Cast SDK.
             /// </summary>
-            public Task SetSinkToUse()
+            /// <param name="sinkName" />
+            public Task SetSinkToUse
+            (
+                string @sinkName, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Cast.SetSinkToUseCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Cast.SetSinkToUseCommand
+                    {
+                        SinkName = @sinkName,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Starts mirroring the tab to the sink.
             /// </summary>
-            public Task StartTabMirroring()
+            /// <param name="sinkName" />
+            public Task StartTabMirroring
+            (
+                string @sinkName, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Cast.StartTabMirroringCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Cast.StartTabMirroringCommand
+                    {
+                        SinkName = @sinkName,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Stops the active Cast session on the sink.
             /// </summary>
-            public Task StopCasting()
+            /// <param name="sinkName" />
+            public Task StopCasting
+            (
+                string @sinkName, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Cast.StopCastingCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Cast.StopCastingCommand
+                    {
+                        SinkName = @sinkName,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -802,240 +1767,778 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Collects class names for the node with given id and all of it's child nodes.
             /// </summary>
-            public Task<Protocol.DOM.CollectClassNamesFromSubtreeResponse> CollectClassNamesFromSubtree()
+            /// <param name="nodeId">
+            /// Id of the node to collect class names.
+            /// </param>
+            public Task<Protocol.DOM.CollectClassNamesFromSubtreeResponse> CollectClassNamesFromSubtree
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.CollectClassNamesFromSubtreeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.CollectClassNamesFromSubtreeCommand
+                    {
+                        NodeId = @nodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Creates a deep copy of the specified node and places it into the target container before the
             /// given anchor.
             /// </summary>
-            public Task<Protocol.DOM.CopyToResponse> CopyTo()
+            /// <param name="nodeId">
+            /// Id of the node to copy.
+            /// </param>
+            /// <param name="targetNodeId">
+            /// Id of the element to drop the copy into.
+            /// </param>
+            /// <param name="insertBeforeNodeId">
+            /// Drop the copy before this node (if absent, the copy becomes the last child of
+            /// `targetNodeId`).
+            /// </param>
+            public Task<Protocol.DOM.CopyToResponse> CopyTo
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                Protocol.DOM.NodeId @targetNodeId, 
+                Protocol.DOM.NodeId @insertBeforeNodeId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.CopyToCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.CopyToCommand
+                    {
+                        NodeId = @nodeId,
+                        TargetNodeId = @targetNodeId,
+                        InsertBeforeNodeId = @insertBeforeNodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Describes node given its id, does not require domain to be enabled. Does not start tracking any
             /// objects, can be used for automation.
             /// </summary>
-            public Task<Protocol.DOM.DescribeNodeResponse> DescribeNode()
+            /// <param name="nodeId">
+            /// Identifier of the node.
+            /// </param>
+            /// <param name="backendNodeId">
+            /// Identifier of the backend node.
+            /// </param>
+            /// <param name="objectId">
+            /// JavaScript object id of the node wrapper.
+            /// </param>
+            /// <param name="depth">
+            /// The maximum depth at which children should be retrieved, defaults to 1. Use -1 for the
+            /// entire subtree or provide an integer larger than 0.
+            /// </param>
+            /// <param name="pierce">
+            /// Whether or not iframes and shadow roots should be traversed when returning the subtree
+            /// (default is false).
+            /// </param>
+            public Task<Protocol.DOM.DescribeNodeResponse> DescribeNode
+            (
+                Protocol.DOM.NodeId @nodeId = default, 
+                Protocol.DOM.BackendNodeId @backendNodeId = default, 
+                Protocol.Runtime.RemoteObjectId @objectId = default, 
+                int? @depth = default, 
+                bool? @pierce = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.DescribeNodeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.DescribeNodeCommand
+                    {
+                        NodeId = @nodeId,
+                        BackendNodeId = @backendNodeId,
+                        ObjectId = @objectId,
+                        Depth = @depth,
+                        Pierce = @pierce,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Disables DOM agent for the given page.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Discards search results from the session with the given id. `getSearchResults` should no longer
             /// be called for that search.
             /// </summary>
-            public Task DiscardSearchResults()
+            /// <param name="searchId">
+            /// Unique search session identifier.
+            /// </param>
+            public Task DiscardSearchResults
+            (
+                string @searchId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.DiscardSearchResultsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.DiscardSearchResultsCommand
+                    {
+                        SearchId = @searchId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables DOM agent for the given page.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Focuses the given element.
             /// </summary>
-            public Task Focus()
+            /// <param name="nodeId">
+            /// Identifier of the node.
+            /// </param>
+            /// <param name="backendNodeId">
+            /// Identifier of the backend node.
+            /// </param>
+            /// <param name="objectId">
+            /// JavaScript object id of the node wrapper.
+            /// </param>
+            public Task Focus
+            (
+                Protocol.DOM.NodeId @nodeId = default, 
+                Protocol.DOM.BackendNodeId @backendNodeId = default, 
+                Protocol.Runtime.RemoteObjectId @objectId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.FocusCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.FocusCommand
+                    {
+                        NodeId = @nodeId,
+                        BackendNodeId = @backendNodeId,
+                        ObjectId = @objectId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns attributes for the specified node.
             /// </summary>
-            public Task<Protocol.DOM.GetAttributesResponse> GetAttributes()
+            /// <param name="nodeId">
+            /// Id of the node to retrieve attibutes for.
+            /// </param>
+            public Task<Protocol.DOM.GetAttributesResponse> GetAttributes
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.GetAttributesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.GetAttributesCommand
+                    {
+                        NodeId = @nodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns boxes for the given node.
             /// </summary>
-            public Task<Protocol.DOM.GetBoxModelResponse> GetBoxModel()
+            /// <param name="nodeId">
+            /// Identifier of the node.
+            /// </param>
+            /// <param name="backendNodeId">
+            /// Identifier of the backend node.
+            /// </param>
+            /// <param name="objectId">
+            /// JavaScript object id of the node wrapper.
+            /// </param>
+            public Task<Protocol.DOM.GetBoxModelResponse> GetBoxModel
+            (
+                Protocol.DOM.NodeId @nodeId = default, 
+                Protocol.DOM.BackendNodeId @backendNodeId = default, 
+                Protocol.Runtime.RemoteObjectId @objectId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.GetBoxModelCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.GetBoxModelCommand
+                    {
+                        NodeId = @nodeId,
+                        BackendNodeId = @backendNodeId,
+                        ObjectId = @objectId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns quads that describe node position on the page. This method
             /// might return multiple quads for inline nodes.
             /// </summary>
-            public Task<Protocol.DOM.GetContentQuadsResponse> GetContentQuads()
+            /// <param name="nodeId">
+            /// Identifier of the node.
+            /// </param>
+            /// <param name="backendNodeId">
+            /// Identifier of the backend node.
+            /// </param>
+            /// <param name="objectId">
+            /// JavaScript object id of the node wrapper.
+            /// </param>
+            public Task<Protocol.DOM.GetContentQuadsResponse> GetContentQuads
+            (
+                Protocol.DOM.NodeId @nodeId = default, 
+                Protocol.DOM.BackendNodeId @backendNodeId = default, 
+                Protocol.Runtime.RemoteObjectId @objectId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.GetContentQuadsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.GetContentQuadsCommand
+                    {
+                        NodeId = @nodeId,
+                        BackendNodeId = @backendNodeId,
+                        ObjectId = @objectId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns the root DOM node (and optionally the subtree) to the caller.
             /// </summary>
-            public Task<Protocol.DOM.GetDocumentResponse> GetDocument()
+            /// <param name="depth">
+            /// The maximum depth at which children should be retrieved, defaults to 1. Use -1 for the
+            /// entire subtree or provide an integer larger than 0.
+            /// </param>
+            /// <param name="pierce">
+            /// Whether or not iframes and shadow roots should be traversed when returning the subtree
+            /// (default is false).
+            /// </param>
+            public Task<Protocol.DOM.GetDocumentResponse> GetDocument
+            (
+                int? @depth = default, 
+                bool? @pierce = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.GetDocumentCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.GetDocumentCommand
+                    {
+                        Depth = @depth,
+                        Pierce = @pierce,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns the root DOM node (and optionally the subtree) to the caller.
             /// </summary>
-            public Task<Protocol.DOM.GetFlattenedDocumentResponse> GetFlattenedDocument()
+            /// <param name="depth">
+            /// The maximum depth at which children should be retrieved, defaults to 1. Use -1 for the
+            /// entire subtree or provide an integer larger than 0.
+            /// </param>
+            /// <param name="pierce">
+            /// Whether or not iframes and shadow roots should be traversed when returning the subtree
+            /// (default is false).
+            /// </param>
+            public Task<Protocol.DOM.GetFlattenedDocumentResponse> GetFlattenedDocument
+            (
+                int? @depth = default, 
+                bool? @pierce = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.GetFlattenedDocumentCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.GetFlattenedDocumentCommand
+                    {
+                        Depth = @depth,
+                        Pierce = @pierce,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns node id at given location. Depending on whether DOM domain is enabled, nodeId is
             /// either returned or not.
             /// </summary>
-            public Task<Protocol.DOM.GetNodeForLocationResponse> GetNodeForLocation()
+            /// <param name="x">
+            /// X coordinate.
+            /// </param>
+            /// <param name="y">
+            /// Y coordinate.
+            /// </param>
+            /// <param name="includeUserAgentShadowDOM">
+            /// False to skip to the nearest non-UA shadow root ancestor (default: false).
+            /// </param>
+            public Task<Protocol.DOM.GetNodeForLocationResponse> GetNodeForLocation
+            (
+                int @x, 
+                int @y, 
+                bool? @includeUserAgentShadowDOM = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.GetNodeForLocationCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.GetNodeForLocationCommand
+                    {
+                        X = @x,
+                        Y = @y,
+                        IncludeUserAgentShadowDOM = @includeUserAgentShadowDOM,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns node's HTML markup.
             /// </summary>
-            public Task<Protocol.DOM.GetOuterHTMLResponse> GetOuterHTML()
+            /// <param name="nodeId">
+            /// Identifier of the node.
+            /// </param>
+            /// <param name="backendNodeId">
+            /// Identifier of the backend node.
+            /// </param>
+            /// <param name="objectId">
+            /// JavaScript object id of the node wrapper.
+            /// </param>
+            public Task<Protocol.DOM.GetOuterHTMLResponse> GetOuterHTML
+            (
+                Protocol.DOM.NodeId @nodeId = default, 
+                Protocol.DOM.BackendNodeId @backendNodeId = default, 
+                Protocol.Runtime.RemoteObjectId @objectId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.GetOuterHTMLCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.GetOuterHTMLCommand
+                    {
+                        NodeId = @nodeId,
+                        BackendNodeId = @backendNodeId,
+                        ObjectId = @objectId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns the id of the nearest ancestor that is a relayout boundary.
             /// </summary>
-            public Task<Protocol.DOM.GetRelayoutBoundaryResponse> GetRelayoutBoundary()
+            /// <param name="nodeId">
+            /// Id of the node.
+            /// </param>
+            public Task<Protocol.DOM.GetRelayoutBoundaryResponse> GetRelayoutBoundary
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.GetRelayoutBoundaryCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.GetRelayoutBoundaryCommand
+                    {
+                        NodeId = @nodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns search results from given `fromIndex` to given `toIndex` from the search with the given
             /// identifier.
             /// </summary>
-            public Task<Protocol.DOM.GetSearchResultsResponse> GetSearchResults()
+            /// <param name="searchId">
+            /// Unique search session identifier.
+            /// </param>
+            /// <param name="fromIndex">
+            /// Start index of the search result to be returned.
+            /// </param>
+            /// <param name="toIndex">
+            /// End index of the search result to be returned.
+            /// </param>
+            public Task<Protocol.DOM.GetSearchResultsResponse> GetSearchResults
+            (
+                string @searchId, 
+                int @fromIndex, 
+                int @toIndex, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.GetSearchResultsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.GetSearchResultsCommand
+                    {
+                        SearchId = @searchId,
+                        FromIndex = @fromIndex,
+                        ToIndex = @toIndex,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Hides any highlight.
             /// </summary>
-            public Task HideHighlight()
+            public Task HideHighlight
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.HideHighlightCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.HideHighlightCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Highlights DOM node.
             /// </summary>
-            public Task HighlightNode()
+            public Task HighlightNode
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.HighlightNodeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.HighlightNodeCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Highlights given rectangle.
             /// </summary>
-            public Task HighlightRect()
+            public Task HighlightRect
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.HighlightRectCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.HighlightRectCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Marks last undoable state.
             /// </summary>
-            public Task MarkUndoableState()
+            public Task MarkUndoableState
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.MarkUndoableStateCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.MarkUndoableStateCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Moves node into the new container, places it before the given anchor.
             /// </summary>
-            public Task<Protocol.DOM.MoveToResponse> MoveTo()
+            /// <param name="nodeId">
+            /// Id of the node to move.
+            /// </param>
+            /// <param name="targetNodeId">
+            /// Id of the element to drop the moved node into.
+            /// </param>
+            /// <param name="insertBeforeNodeId">
+            /// Drop node before this one (if absent, the moved node becomes the last child of
+            /// `targetNodeId`).
+            /// </param>
+            public Task<Protocol.DOM.MoveToResponse> MoveTo
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                Protocol.DOM.NodeId @targetNodeId, 
+                Protocol.DOM.NodeId @insertBeforeNodeId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.MoveToCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.MoveToCommand
+                    {
+                        NodeId = @nodeId,
+                        TargetNodeId = @targetNodeId,
+                        InsertBeforeNodeId = @insertBeforeNodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Searches for a given string in the DOM tree. Use `getSearchResults` to access search results or
             /// `cancelSearch` to end this search session.
             /// </summary>
-            public Task<Protocol.DOM.PerformSearchResponse> PerformSearch()
+            /// <param name="query">
+            /// Plain text or query selector or XPath search query.
+            /// </param>
+            /// <param name="includeUserAgentShadowDOM">
+            /// True to search in user agent shadow DOM.
+            /// </param>
+            public Task<Protocol.DOM.PerformSearchResponse> PerformSearch
+            (
+                string @query, 
+                bool? @includeUserAgentShadowDOM = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.PerformSearchCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.PerformSearchCommand
+                    {
+                        Query = @query,
+                        IncludeUserAgentShadowDOM = @includeUserAgentShadowDOM,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests that the node is sent to the caller given its path. // FIXME, use XPath
             /// </summary>
-            public Task<Protocol.DOM.PushNodeByPathToFrontendResponse> PushNodeByPathToFrontend()
+            /// <param name="path">
+            /// Path to node in the proprietary format.
+            /// </param>
+            public Task<Protocol.DOM.PushNodeByPathToFrontendResponse> PushNodeByPathToFrontend
+            (
+                string @path, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.PushNodeByPathToFrontendCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.PushNodeByPathToFrontendCommand
+                    {
+                        Path = @path,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests that a batch of nodes is sent to the caller given their backend node ids.
             /// </summary>
-            public Task<Protocol.DOM.PushNodesByBackendIdsToFrontendResponse> PushNodesByBackendIdsToFrontend()
+            /// <param name="backendNodeIds">
+            /// The array of backend node ids.
+            /// </param>
+            public Task<Protocol.DOM.PushNodesByBackendIdsToFrontendResponse> PushNodesByBackendIdsToFrontend
+            (
+                Protocol.DOM.BackendNodeId[] @backendNodeIds, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.PushNodesByBackendIdsToFrontendCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.PushNodesByBackendIdsToFrontendCommand
+                    {
+                        BackendNodeIds = @backendNodeIds,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Executes `querySelector` on a given node.
             /// </summary>
-            public Task<Protocol.DOM.QuerySelectorResponse> QuerySelector()
+            /// <param name="nodeId">
+            /// Id of the node to query upon.
+            /// </param>
+            /// <param name="selector">
+            /// Selector string.
+            /// </param>
+            public Task<Protocol.DOM.QuerySelectorResponse> QuerySelector
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                string @selector, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.QuerySelectorCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.QuerySelectorCommand
+                    {
+                        NodeId = @nodeId,
+                        Selector = @selector,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Executes `querySelectorAll` on a given node.
             /// </summary>
-            public Task<Protocol.DOM.QuerySelectorAllResponse> QuerySelectorAll()
+            /// <param name="nodeId">
+            /// Id of the node to query upon.
+            /// </param>
+            /// <param name="selector">
+            /// Selector string.
+            /// </param>
+            public Task<Protocol.DOM.QuerySelectorAllResponse> QuerySelectorAll
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                string @selector, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.QuerySelectorAllCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.QuerySelectorAllCommand
+                    {
+                        NodeId = @nodeId,
+                        Selector = @selector,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Re-does the last undone action.
             /// </summary>
-            public Task Redo()
+            public Task Redo
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.RedoCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.RedoCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Removes attribute with given name from an element with given id.
             /// </summary>
-            public Task RemoveAttribute()
+            /// <param name="nodeId">
+            /// Id of the element to remove attribute from.
+            /// </param>
+            /// <param name="name">
+            /// Name of the attribute to remove.
+            /// </param>
+            public Task RemoveAttribute
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                string @name, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.RemoveAttributeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.RemoveAttributeCommand
+                    {
+                        NodeId = @nodeId,
+                        Name = @name,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Removes node with given id.
             /// </summary>
-            public Task RemoveNode()
+            /// <param name="nodeId">
+            /// Id of the node to remove.
+            /// </param>
+            public Task RemoveNode
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.RemoveNodeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.RemoveNodeCommand
+                    {
+                        NodeId = @nodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -1043,9 +2546,36 @@ namespace DumbPrograms.ChromeDevTools
             /// `setChildNodes` events where not only immediate children are retrieved, but all children down to
             /// the specified depth.
             /// </summary>
-            public Task RequestChildNodes()
+            /// <param name="nodeId">
+            /// Id of the node to get children for.
+            /// </param>
+            /// <param name="depth">
+            /// The maximum depth at which children should be retrieved, defaults to 1. Use -1 for the
+            /// entire subtree or provide an integer larger than 0.
+            /// </param>
+            /// <param name="pierce">
+            /// Whether or not iframes and shadow roots should be traversed when returning the sub-tree
+            /// (default is false).
+            /// </param>
+            public Task RequestChildNodes
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                int? @depth = default, 
+                bool? @pierce = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.RequestChildNodesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.RequestChildNodesCommand
+                    {
+                        NodeId = @nodeId,
+                        Depth = @depth,
+                        Pierce = @pierce,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -1053,100 +2583,334 @@ namespace DumbPrograms.ChromeDevTools
             /// nodes that form the path from the node to the root are also sent to the client as a series of
             /// `setChildNodes` notifications.
             /// </summary>
-            public Task<Protocol.DOM.RequestNodeResponse> RequestNode()
+            /// <param name="objectId">
+            /// JavaScript object id to convert into node.
+            /// </param>
+            public Task<Protocol.DOM.RequestNodeResponse> RequestNode
+            (
+                Protocol.Runtime.RemoteObjectId @objectId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.RequestNodeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.RequestNodeCommand
+                    {
+                        ObjectId = @objectId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Resolves the JavaScript node object for a given NodeId or BackendNodeId.
             /// </summary>
-            public Task<Protocol.DOM.ResolveNodeResponse> ResolveNode()
+            /// <param name="nodeId">
+            /// Id of the node to resolve.
+            /// </param>
+            /// <param name="backendNodeId">
+            /// Backend identifier of the node to resolve.
+            /// </param>
+            /// <param name="objectGroup">
+            /// Symbolic group name that can be used to release multiple objects.
+            /// </param>
+            public Task<Protocol.DOM.ResolveNodeResponse> ResolveNode
+            (
+                Protocol.DOM.NodeId @nodeId = default, 
+                Protocol.DOM.BackendNodeId @backendNodeId = default, 
+                string @objectGroup = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.ResolveNodeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.ResolveNodeCommand
+                    {
+                        NodeId = @nodeId,
+                        BackendNodeId = @backendNodeId,
+                        ObjectGroup = @objectGroup,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets attribute for an element with given id.
             /// </summary>
-            public Task SetAttributeValue()
+            /// <param name="nodeId">
+            /// Id of the element to set attribute for.
+            /// </param>
+            /// <param name="name">
+            /// Attribute name.
+            /// </param>
+            /// <param name="value">
+            /// Attribute value.
+            /// </param>
+            public Task SetAttributeValue
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                string @name, 
+                string @value, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.SetAttributeValueCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.SetAttributeValueCommand
+                    {
+                        NodeId = @nodeId,
+                        Name = @name,
+                        Value = @value,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets attributes on element with given id. This method is useful when user edits some existing
             /// attribute value and types in several attribute name/value pairs.
             /// </summary>
-            public Task SetAttributesAsText()
+            /// <param name="nodeId">
+            /// Id of the element to set attributes for.
+            /// </param>
+            /// <param name="text">
+            /// Text with a number of attributes. Will parse this text using HTML parser.
+            /// </param>
+            /// <param name="name">
+            /// Attribute name to replace with new attributes derived from text in case text parsed
+            /// successfully.
+            /// </param>
+            public Task SetAttributesAsText
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                string @text, 
+                string @name = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.SetAttributesAsTextCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.SetAttributesAsTextCommand
+                    {
+                        NodeId = @nodeId,
+                        Text = @text,
+                        Name = @name,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets files for the given file input element.
             /// </summary>
-            public Task SetFileInputFiles()
+            /// <param name="files">
+            /// Array of file paths to set.
+            /// </param>
+            /// <param name="nodeId">
+            /// Identifier of the node.
+            /// </param>
+            /// <param name="backendNodeId">
+            /// Identifier of the backend node.
+            /// </param>
+            /// <param name="objectId">
+            /// JavaScript object id of the node wrapper.
+            /// </param>
+            public Task SetFileInputFiles
+            (
+                string[] @files, 
+                Protocol.DOM.NodeId @nodeId = default, 
+                Protocol.DOM.BackendNodeId @backendNodeId = default, 
+                Protocol.Runtime.RemoteObjectId @objectId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.SetFileInputFilesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.SetFileInputFilesCommand
+                    {
+                        Files = @files,
+                        NodeId = @nodeId,
+                        BackendNodeId = @backendNodeId,
+                        ObjectId = @objectId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns file information for the given
             /// File wrapper.
             /// </summary>
-            public Task<Protocol.DOM.GetFileInfoResponse> GetFileInfo()
+            /// <param name="objectId">
+            /// JavaScript object id of the node wrapper.
+            /// </param>
+            public Task<Protocol.DOM.GetFileInfoResponse> GetFileInfo
+            (
+                Protocol.Runtime.RemoteObjectId @objectId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.GetFileInfoCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.GetFileInfoCommand
+                    {
+                        ObjectId = @objectId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables console to refer to the node with given id via $x (see Command Line API for more details
             /// $x functions).
             /// </summary>
-            public Task SetInspectedNode()
+            /// <param name="nodeId">
+            /// DOM node id to be accessible by means of $x command line API.
+            /// </param>
+            public Task SetInspectedNode
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.SetInspectedNodeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.SetInspectedNodeCommand
+                    {
+                        NodeId = @nodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets node name for a node with given id.
             /// </summary>
-            public Task<Protocol.DOM.SetNodeNameResponse> SetNodeName()
+            /// <param name="nodeId">
+            /// Id of the node to set name for.
+            /// </param>
+            /// <param name="name">
+            /// New node's name.
+            /// </param>
+            public Task<Protocol.DOM.SetNodeNameResponse> SetNodeName
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                string @name, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.SetNodeNameCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.SetNodeNameCommand
+                    {
+                        NodeId = @nodeId,
+                        Name = @name,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets node value for a node with given id.
             /// </summary>
-            public Task SetNodeValue()
+            /// <param name="nodeId">
+            /// Id of the node to set value for.
+            /// </param>
+            /// <param name="value">
+            /// New node's value.
+            /// </param>
+            public Task SetNodeValue
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                string @value, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.SetNodeValueCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.SetNodeValueCommand
+                    {
+                        NodeId = @nodeId,
+                        Value = @value,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets node HTML markup, returns new node id.
             /// </summary>
-            public Task SetOuterHTML()
+            /// <param name="nodeId">
+            /// Id of the node to set markup for.
+            /// </param>
+            /// <param name="outerHTML">
+            /// Outer HTML markup to set.
+            /// </param>
+            public Task SetOuterHTML
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                string @outerHTML, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.SetOuterHTMLCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.SetOuterHTMLCommand
+                    {
+                        NodeId = @nodeId,
+                        OuterHTML = @outerHTML,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Undoes the last performed action.
             /// </summary>
-            public Task Undo()
+            public Task Undo
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.UndoCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.UndoCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns iframe node that owns iframe with the given domain.
             /// </summary>
-            public Task<Protocol.DOM.GetFrameOwnerResponse> GetFrameOwner()
+            /// <param name="frameId" />
+            public Task<Protocol.DOM.GetFrameOwnerResponse> GetFrameOwner
+            (
+                Protocol.Page.FrameId @frameId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOM.GetFrameOwnerCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOM.GetFrameOwnerCommand
+                    {
+                        FrameId = @frameId,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1162,73 +2926,241 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns event listeners of the given object.
             /// </summary>
-            public Task<Protocol.DOMDebugger.GetEventListenersResponse> GetEventListeners()
+            /// <param name="objectId">
+            /// Identifier of the object to return listeners for.
+            /// </param>
+            /// <param name="depth">
+            /// The maximum depth at which Node children should be retrieved, defaults to 1. Use -1 for the
+            /// entire subtree or provide an integer larger than 0.
+            /// </param>
+            /// <param name="pierce">
+            /// Whether or not iframes and shadow roots should be traversed when returning the subtree
+            /// (default is false). Reports listeners for all contexts if pierce is enabled.
+            /// </param>
+            public Task<Protocol.DOMDebugger.GetEventListenersResponse> GetEventListeners
+            (
+                Protocol.Runtime.RemoteObjectId @objectId, 
+                int? @depth = default, 
+                bool? @pierce = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMDebugger.GetEventListenersCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMDebugger.GetEventListenersCommand
+                    {
+                        ObjectId = @objectId,
+                        Depth = @depth,
+                        Pierce = @pierce,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Removes DOM breakpoint that was set using `setDOMBreakpoint`.
             /// </summary>
-            public Task RemoveDOMBreakpoint()
+            /// <param name="nodeId">
+            /// Identifier of the node to remove breakpoint from.
+            /// </param>
+            /// <param name="type">
+            /// Type of the breakpoint to remove.
+            /// </param>
+            public Task RemoveDOMBreakpoint
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                Protocol.DOMDebugger.DOMBreakpointType @type, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMDebugger.RemoveDOMBreakpointCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMDebugger.RemoveDOMBreakpointCommand
+                    {
+                        NodeId = @nodeId,
+                        Type = @type,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Removes breakpoint on particular DOM event.
             /// </summary>
-            public Task RemoveEventListenerBreakpoint()
+            /// <param name="eventName">
+            /// Event name.
+            /// </param>
+            /// <param name="targetName">
+            /// EventTarget interface name.
+            /// </param>
+            public Task RemoveEventListenerBreakpoint
+            (
+                string @eventName, 
+                string @targetName = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMDebugger.RemoveEventListenerBreakpointCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMDebugger.RemoveEventListenerBreakpointCommand
+                    {
+                        EventName = @eventName,
+                        TargetName = @targetName,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Removes breakpoint on particular native event.
             /// </summary>
-            public Task RemoveInstrumentationBreakpoint()
+            /// <param name="eventName">
+            /// Instrumentation name to stop on.
+            /// </param>
+            public Task RemoveInstrumentationBreakpoint
+            (
+                string @eventName, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMDebugger.RemoveInstrumentationBreakpointCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMDebugger.RemoveInstrumentationBreakpointCommand
+                    {
+                        EventName = @eventName,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Removes breakpoint from XMLHttpRequest.
             /// </summary>
-            public Task RemoveXHRBreakpoint()
+            /// <param name="url">
+            /// Resource URL substring.
+            /// </param>
+            public Task RemoveXHRBreakpoint
+            (
+                string @url, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMDebugger.RemoveXHRBreakpointCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMDebugger.RemoveXHRBreakpointCommand
+                    {
+                        Url = @url,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets breakpoint on particular operation with DOM.
             /// </summary>
-            public Task SetDOMBreakpoint()
+            /// <param name="nodeId">
+            /// Identifier of the node to set breakpoint on.
+            /// </param>
+            /// <param name="type">
+            /// Type of the operation to stop upon.
+            /// </param>
+            public Task SetDOMBreakpoint
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                Protocol.DOMDebugger.DOMBreakpointType @type, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMDebugger.SetDOMBreakpointCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMDebugger.SetDOMBreakpointCommand
+                    {
+                        NodeId = @nodeId,
+                        Type = @type,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets breakpoint on particular DOM event.
             /// </summary>
-            public Task SetEventListenerBreakpoint()
+            /// <param name="eventName">
+            /// DOM Event name to stop on (any DOM event will do).
+            /// </param>
+            /// <param name="targetName">
+            /// EventTarget interface name to stop on. If equal to `"*"` or not provided, will stop on any
+            /// EventTarget.
+            /// </param>
+            public Task SetEventListenerBreakpoint
+            (
+                string @eventName, 
+                string @targetName = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMDebugger.SetEventListenerBreakpointCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMDebugger.SetEventListenerBreakpointCommand
+                    {
+                        EventName = @eventName,
+                        TargetName = @targetName,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets breakpoint on particular native event.
             /// </summary>
-            public Task SetInstrumentationBreakpoint()
+            /// <param name="eventName">
+            /// Instrumentation name to stop on.
+            /// </param>
+            public Task SetInstrumentationBreakpoint
+            (
+                string @eventName, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMDebugger.SetInstrumentationBreakpointCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMDebugger.SetInstrumentationBreakpointCommand
+                    {
+                        EventName = @eventName,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets breakpoint on XMLHttpRequest.
             /// </summary>
-            public Task SetXHRBreakpoint()
+            /// <param name="url">
+            /// Resource URL substring. All XHRs having this substring in the URL will get stopped upon.
+            /// </param>
+            public Task SetXHRBreakpoint
+            (
+                string @url, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMDebugger.SetXHRBreakpointCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMDebugger.SetXHRBreakpointCommand
+                    {
+                        Url = @url,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1244,17 +3176,37 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables DOM snapshot agent for the given page.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMSnapshot.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMSnapshot.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables DOM snapshot agent for the given page.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMSnapshot.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMSnapshot.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -1263,10 +3215,40 @@ namespace DumbPrograms.ChromeDevTools
             /// white-listed computed style information for the nodes. Shadow DOM in the returned DOM tree is
             /// flattened.
             /// </summary>
+            /// <param name="computedStyleWhitelist">
+            /// Whitelist of computed styles to return.
+            /// </param>
+            /// <param name="includeEventListeners">
+            /// Whether or not to retrieve details of DOM listeners (default false).
+            /// </param>
+            /// <param name="includePaintOrder">
+            /// Whether to determine and include the paint order index of LayoutTreeNodes (default false).
+            /// </param>
+            /// <param name="includeUserAgentShadowTree">
+            /// Whether to include UA shadow tree in the snapshot (default false).
+            /// </param>
             [Obsolete]
-            public Task<Protocol.DOMSnapshot.GetSnapshotResponse> GetSnapshot()
+            public Task<Protocol.DOMSnapshot.GetSnapshotResponse> GetSnapshot
+            (
+                string[] @computedStyleWhitelist, 
+                bool? @includeEventListeners = default, 
+                bool? @includePaintOrder = default, 
+                bool? @includeUserAgentShadowTree = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMSnapshot.GetSnapshotCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMSnapshot.GetSnapshotCommand
+                    {
+                        ComputedStyleWhitelist = @computedStyleWhitelist,
+                        IncludeEventListeners = @includeEventListeners,
+                        IncludePaintOrder = @includePaintOrder,
+                        IncludeUserAgentShadowTree = @includeUserAgentShadowTree,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -1275,9 +3257,24 @@ namespace DumbPrograms.ChromeDevTools
             /// white-listed computed style information for the nodes. Shadow DOM in the returned DOM tree is
             /// flattened.
             /// </summary>
-            public Task<Protocol.DOMSnapshot.CaptureSnapshotResponse> CaptureSnapshot()
+            /// <param name="computedStyles">
+            /// Whitelist of computed styles to return.
+            /// </param>
+            public Task<Protocol.DOMSnapshot.CaptureSnapshotResponse> CaptureSnapshot
+            (
+                string[] @computedStyles, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMSnapshot.CaptureSnapshotCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMSnapshot.CaptureSnapshotCommand
+                    {
+                        ComputedStyles = @computedStyles,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1290,40 +3287,121 @@ namespace DumbPrograms.ChromeDevTools
                 InspectionClient = inspectionClient;
             }
 
-            public Task Clear()
+            /// <param name="storageId" />
+            public Task Clear
+            (
+                Protocol.DOMStorage.StorageId @storageId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMStorage.ClearCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMStorage.ClearCommand
+                    {
+                        StorageId = @storageId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Disables storage tracking, prevents storage events from being sent to the client.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMStorage.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMStorage.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables storage tracking, storage events will now be delivered to the client.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMStorage.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMStorage.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task<Protocol.DOMStorage.GetDOMStorageItemsResponse> GetDOMStorageItems()
+            /// <param name="storageId" />
+            public Task<Protocol.DOMStorage.GetDOMStorageItemsResponse> GetDOMStorageItems
+            (
+                Protocol.DOMStorage.StorageId @storageId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMStorage.GetDOMStorageItemsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMStorage.GetDOMStorageItemsCommand
+                    {
+                        StorageId = @storageId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task RemoveDOMStorageItem()
+            /// <param name="storageId" />
+            /// <param name="key" />
+            public Task RemoveDOMStorageItem
+            (
+                Protocol.DOMStorage.StorageId @storageId, 
+                string @key, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMStorage.RemoveDOMStorageItemCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMStorage.RemoveDOMStorageItemCommand
+                    {
+                        StorageId = @storageId,
+                        Key = @key,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task SetDOMStorageItem()
+            /// <param name="storageId" />
+            /// <param name="key" />
+            /// <param name="value" />
+            public Task SetDOMStorageItem
+            (
+                Protocol.DOMStorage.StorageId @storageId, 
+                string @key, 
+                string @value, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DOMStorage.SetDOMStorageItemCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DOMStorage.SetDOMStorageItemCommand
+                    {
+                        StorageId = @storageId,
+                        Key = @key,
+                        Value = @value,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1339,27 +3417,76 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables database tracking, prevents database events from being sent to the client.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Database.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Database.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables database tracking, database events will now be delivered to the client.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Database.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Database.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task<Protocol.Database.ExecuteSQLResponse> ExecuteSQL()
+            /// <param name="databaseId" />
+            /// <param name="query" />
+            public Task<Protocol.Database.ExecuteSQLResponse> ExecuteSQL
+            (
+                Protocol.Database.DatabaseId @databaseId, 
+                string @query, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Database.ExecuteSQLCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Database.ExecuteSQLCommand
+                    {
+                        DatabaseId = @databaseId,
+                        Query = @query,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task<Protocol.Database.GetDatabaseTableNamesResponse> GetDatabaseTableNames()
+            /// <param name="databaseId" />
+            public Task<Protocol.Database.GetDatabaseTableNamesResponse> GetDatabaseTableNames
+            (
+                Protocol.Database.DatabaseId @databaseId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Database.GetDatabaseTableNamesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Database.GetDatabaseTableNamesCommand
+                    {
+                        DatabaseId = @databaseId,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1375,17 +3502,52 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears the overridden Device Orientation.
             /// </summary>
-            public Task ClearDeviceOrientationOverride()
+            public Task ClearDeviceOrientationOverride
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DeviceOrientation.ClearDeviceOrientationOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DeviceOrientation.ClearDeviceOrientationOverrideCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Overrides the Device Orientation.
             /// </summary>
-            public Task SetDeviceOrientationOverride()
+            /// <param name="alpha">
+            /// Mock alpha
+            /// </param>
+            /// <param name="beta">
+            /// Mock beta
+            /// </param>
+            /// <param name="gamma">
+            /// Mock gamma
+            /// </param>
+            public Task SetDeviceOrientationOverride
+            (
+                double @alpha, 
+                double @beta, 
+                double @gamma, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.DeviceOrientation.SetDeviceOrientationOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.DeviceOrientation.SetDeviceOrientationOverrideCommand
+                    {
+                        Alpha = @alpha,
+                        Beta = @beta,
+                        Gamma = @gamma,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1401,58 +3563,144 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Tells whether emulation is supported.
             /// </summary>
-            public Task<Protocol.Emulation.CanEmulateResponse> CanEmulate()
+            public Task<Protocol.Emulation.CanEmulateResponse> CanEmulate
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.CanEmulateCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.CanEmulateCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Clears the overriden device metrics.
             /// </summary>
-            public Task ClearDeviceMetricsOverride()
+            public Task ClearDeviceMetricsOverride
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.ClearDeviceMetricsOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.ClearDeviceMetricsOverrideCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Clears the overriden Geolocation Position and Error.
             /// </summary>
-            public Task ClearGeolocationOverride()
+            public Task ClearGeolocationOverride
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.ClearGeolocationOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.ClearGeolocationOverrideCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests that page scale factor is reset to initial values.
             /// </summary>
-            public Task ResetPageScaleFactor()
+            public Task ResetPageScaleFactor
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.ResetPageScaleFactorCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.ResetPageScaleFactorCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables or disables simulating a focused and active page.
             /// </summary>
-            public Task SetFocusEmulationEnabled()
+            /// <param name="enabled">
+            /// Whether to enable to disable focus emulation.
+            /// </param>
+            public Task SetFocusEmulationEnabled
+            (
+                bool @enabled, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetFocusEmulationEnabledCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetFocusEmulationEnabledCommand
+                    {
+                        Enabled = @enabled,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables CPU throttling to emulate slow CPUs.
             /// </summary>
-            public Task SetCPUThrottlingRate()
+            /// <param name="rate">
+            /// Throttling rate as a slowdown factor (1 is no throttle, 2 is 2x slowdown, etc).
+            /// </param>
+            public Task SetCPUThrottlingRate
+            (
+                double @rate, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetCPUThrottlingRateCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetCPUThrottlingRateCommand
+                    {
+                        Rate = @rate,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets or clears an override of the default background color of the frame. This override is used
             /// if the content does not specify one.
             /// </summary>
-            public Task SetDefaultBackgroundColorOverride()
+            /// <param name="color">
+            /// RGBA of the default background color. If not specified, any existing override will be
+            /// cleared.
+            /// </param>
+            public Task SetDefaultBackgroundColorOverride
+            (
+                Protocol.DOM.RGBA @color = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetDefaultBackgroundColorOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetDefaultBackgroundColorOverrideCommand
+                    {
+                        Color = @color,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -1460,83 +3708,346 @@ namespace DumbPrograms.ChromeDevTools
             /// window.innerWidth, window.innerHeight, and "device-width"/"device-height"-related CSS media
             /// query results).
             /// </summary>
-            public Task SetDeviceMetricsOverride()
+            /// <param name="width">
+            /// Overriding width value in pixels (minimum 0, maximum 10000000). 0 disables the override.
+            /// </param>
+            /// <param name="height">
+            /// Overriding height value in pixels (minimum 0, maximum 10000000). 0 disables the override.
+            /// </param>
+            /// <param name="deviceScaleFactor">
+            /// Overriding device scale factor value. 0 disables the override.
+            /// </param>
+            /// <param name="mobile">
+            /// Whether to emulate mobile device. This includes viewport meta tag, overlay scrollbars, text
+            /// autosizing and more.
+            /// </param>
+            /// <param name="scale">
+            /// Scale to apply to resulting view image.
+            /// </param>
+            /// <param name="screenWidth">
+            /// Overriding screen width value in pixels (minimum 0, maximum 10000000).
+            /// </param>
+            /// <param name="screenHeight">
+            /// Overriding screen height value in pixels (minimum 0, maximum 10000000).
+            /// </param>
+            /// <param name="positionX">
+            /// Overriding view X position on screen in pixels (minimum 0, maximum 10000000).
+            /// </param>
+            /// <param name="positionY">
+            /// Overriding view Y position on screen in pixels (minimum 0, maximum 10000000).
+            /// </param>
+            /// <param name="dontSetVisibleSize">
+            /// Do not set visible view size, rely upon explicit setVisibleSize call.
+            /// </param>
+            /// <param name="screenOrientation">
+            /// Screen orientation override.
+            /// </param>
+            /// <param name="viewport">
+            /// If set, the visible area of the page will be overridden to this viewport. This viewport
+            /// change is not observed by the page, e.g. viewport-relative elements do not change positions.
+            /// </param>
+            public Task SetDeviceMetricsOverride
+            (
+                int @width, 
+                int @height, 
+                double @deviceScaleFactor, 
+                bool @mobile, 
+                double? @scale = default, 
+                int? @screenWidth = default, 
+                int? @screenHeight = default, 
+                int? @positionX = default, 
+                int? @positionY = default, 
+                bool? @dontSetVisibleSize = default, 
+                Protocol.Emulation.ScreenOrientation @screenOrientation = default, 
+                Protocol.Page.Viewport @viewport = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetDeviceMetricsOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetDeviceMetricsOverrideCommand
+                    {
+                        Width = @width,
+                        Height = @height,
+                        DeviceScaleFactor = @deviceScaleFactor,
+                        Mobile = @mobile,
+                        Scale = @scale,
+                        ScreenWidth = @screenWidth,
+                        ScreenHeight = @screenHeight,
+                        PositionX = @positionX,
+                        PositionY = @positionY,
+                        DontSetVisibleSize = @dontSetVisibleSize,
+                        ScreenOrientation = @screenOrientation,
+                        Viewport = @viewport,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task SetScrollbarsHidden()
+            /// <param name="hidden">
+            /// Whether scrollbars should be always hidden.
+            /// </param>
+            public Task SetScrollbarsHidden
+            (
+                bool @hidden, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetScrollbarsHiddenCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetScrollbarsHiddenCommand
+                    {
+                        Hidden = @hidden,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task SetDocumentCookieDisabled()
+            /// <param name="disabled">
+            /// Whether document.coookie API should be disabled.
+            /// </param>
+            public Task SetDocumentCookieDisabled
+            (
+                bool @disabled, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetDocumentCookieDisabledCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetDocumentCookieDisabledCommand
+                    {
+                        Disabled = @disabled,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task SetEmitTouchEventsForMouse()
+            /// <param name="enabled">
+            /// Whether touch emulation based on mouse input should be enabled.
+            /// </param>
+            /// <param name="configuration">
+            /// Touch/gesture events configuration. Default: current platform.
+            /// </param>
+            public Task SetEmitTouchEventsForMouse
+            (
+                bool @enabled, 
+                string @configuration = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetEmitTouchEventsForMouseCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetEmitTouchEventsForMouseCommand
+                    {
+                        Enabled = @enabled,
+                        Configuration = @configuration,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Emulates the given media for CSS media queries.
             /// </summary>
-            public Task SetEmulatedMedia()
+            /// <param name="media">
+            /// Media type to emulate. Empty string disables the override.
+            /// </param>
+            public Task SetEmulatedMedia
+            (
+                string @media, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetEmulatedMediaCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetEmulatedMediaCommand
+                    {
+                        Media = @media,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Overrides the Geolocation Position or Error. Omitting any of the parameters emulates position
             /// unavailable.
             /// </summary>
-            public Task SetGeolocationOverride()
+            /// <param name="latitude">
+            /// Mock latitude
+            /// </param>
+            /// <param name="longitude">
+            /// Mock longitude
+            /// </param>
+            /// <param name="accuracy">
+            /// Mock accuracy
+            /// </param>
+            public Task SetGeolocationOverride
+            (
+                double? @latitude = default, 
+                double? @longitude = default, 
+                double? @accuracy = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetGeolocationOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetGeolocationOverrideCommand
+                    {
+                        Latitude = @latitude,
+                        Longitude = @longitude,
+                        Accuracy = @accuracy,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Overrides value returned by the javascript navigator object.
             /// </summary>
+            /// <param name="platform">
+            /// The platform navigator.platform should return.
+            /// </param>
             [Obsolete]
-            public Task SetNavigatorOverrides()
+            public Task SetNavigatorOverrides
+            (
+                string @platform, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetNavigatorOverridesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetNavigatorOverridesCommand
+                    {
+                        Platform = @platform,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets a specified page scale factor.
             /// </summary>
-            public Task SetPageScaleFactor()
+            /// <param name="pageScaleFactor">
+            /// Page scale factor.
+            /// </param>
+            public Task SetPageScaleFactor
+            (
+                double @pageScaleFactor, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetPageScaleFactorCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetPageScaleFactorCommand
+                    {
+                        PageScaleFactor = @pageScaleFactor,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Switches script execution in the page.
             /// </summary>
-            public Task SetScriptExecutionDisabled()
+            /// <param name="value">
+            /// Whether script execution should be disabled in the page.
+            /// </param>
+            public Task SetScriptExecutionDisabled
+            (
+                bool @value, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetScriptExecutionDisabledCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetScriptExecutionDisabledCommand
+                    {
+                        Value = @value,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables touch on platforms which do not support them.
             /// </summary>
-            public Task SetTouchEmulationEnabled()
+            /// <param name="enabled">
+            /// Whether the touch event emulation should be enabled.
+            /// </param>
+            /// <param name="maxTouchPoints">
+            /// Maximum touch points supported. Defaults to one.
+            /// </param>
+            public Task SetTouchEmulationEnabled
+            (
+                bool @enabled, 
+                int? @maxTouchPoints = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetTouchEmulationEnabledCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetTouchEmulationEnabledCommand
+                    {
+                        Enabled = @enabled,
+                        MaxTouchPoints = @maxTouchPoints,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Turns on virtual time for all frames (replacing real-time with a synthetic time source) and sets
             /// the current virtual time policy.  Note this supersedes any previous time budget.
             /// </summary>
-            public Task<Protocol.Emulation.SetVirtualTimePolicyResponse> SetVirtualTimePolicy()
+            /// <param name="policy" />
+            /// <param name="budget">
+            /// If set, after this many virtual milliseconds have elapsed virtual time will be paused and a
+            /// virtualTimeBudgetExpired event is sent.
+            /// </param>
+            /// <param name="maxVirtualTimeTaskStarvationCount">
+            /// If set this specifies the maximum number of tasks that can be run before virtual is forced
+            /// forwards to prevent deadlock.
+            /// </param>
+            /// <param name="waitForNavigation">
+            /// If set the virtual time policy change should be deferred until any frame starts navigating.
+            /// Note any previous deferred policy change is superseded.
+            /// </param>
+            /// <param name="initialVirtualTime">
+            /// If set, base::Time::Now will be overriden to initially return this value.
+            /// </param>
+            public Task<Protocol.Emulation.SetVirtualTimePolicyResponse> SetVirtualTimePolicy
+            (
+                Protocol.Emulation.VirtualTimePolicy @policy, 
+                double? @budget = default, 
+                int? @maxVirtualTimeTaskStarvationCount = default, 
+                bool? @waitForNavigation = default, 
+                Protocol.Network.TimeSinceEpoch @initialVirtualTime = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetVirtualTimePolicyCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetVirtualTimePolicyCommand
+                    {
+                        Policy = @policy,
+                        Budget = @budget,
+                        MaxVirtualTimeTaskStarvationCount = @maxVirtualTimeTaskStarvationCount,
+                        WaitForNavigation = @waitForNavigation,
+                        InitialVirtualTime = @initialVirtualTime,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -1544,18 +4055,63 @@ namespace DumbPrograms.ChromeDevTools
             /// (e.g. browser window). Can be used to produce screenshots of the specified size. Not supported
             /// on Android.
             /// </summary>
+            /// <param name="width">
+            /// Frame width (DIP).
+            /// </param>
+            /// <param name="height">
+            /// Frame height (DIP).
+            /// </param>
             [Obsolete]
-            public Task SetVisibleSize()
+            public Task SetVisibleSize
+            (
+                int @width, 
+                int @height, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetVisibleSizeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetVisibleSizeCommand
+                    {
+                        Width = @width,
+                        Height = @height,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Allows overriding user agent with the given string.
             /// </summary>
-            public Task SetUserAgentOverride()
+            /// <param name="userAgent">
+            /// User agent to use.
+            /// </param>
+            /// <param name="acceptLanguage">
+            /// Browser langugage to emulate.
+            /// </param>
+            /// <param name="platform">
+            /// The platform navigator.platform should return.
+            /// </param>
+            public Task SetUserAgentOverride
+            (
+                string @userAgent, 
+                string @acceptLanguage = default, 
+                string @platform = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Emulation.SetUserAgentOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Emulation.SetUserAgentOverrideCommand
+                    {
+                        UserAgent = @userAgent,
+                        AcceptLanguage = @acceptLanguage,
+                        Platform = @platform,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1574,25 +4130,81 @@ namespace DumbPrograms.ChromeDevTools
             /// BeginFrameControl. Designed for use with --run-all-compositor-stages-before-draw, see also
             /// https://goo.gl/3zHXhB for more background.
             /// </summary>
-            public Task<Protocol.HeadlessExperimental.BeginFrameResponse> BeginFrame()
+            /// <param name="frameTimeTicks">
+            /// Timestamp of this BeginFrame in Renderer TimeTicks (milliseconds of uptime). If not set,
+            /// the current time will be used.
+            /// </param>
+            /// <param name="interval">
+            /// The interval between BeginFrames that is reported to the compositor, in milliseconds.
+            /// Defaults to a 60 frames/second interval, i.e. about 16.666 milliseconds.
+            /// </param>
+            /// <param name="noDisplayUpdates">
+            /// Whether updates should not be committed and drawn onto the display. False by default. If
+            /// true, only side effects of the BeginFrame will be run, such as layout and animations, but
+            /// any visual updates may not be visible on the display or in screenshots.
+            /// </param>
+            /// <param name="screenshot">
+            /// If set, a screenshot of the frame will be captured and returned in the response. Otherwise,
+            /// no screenshot will be captured. Note that capturing a screenshot can fail, for example,
+            /// during renderer initialization. In such a case, no screenshot data will be returned.
+            /// </param>
+            public Task<Protocol.HeadlessExperimental.BeginFrameResponse> BeginFrame
+            (
+                double? @frameTimeTicks = default, 
+                double? @interval = default, 
+                bool? @noDisplayUpdates = default, 
+                Protocol.HeadlessExperimental.ScreenshotParams @screenshot = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.HeadlessExperimental.BeginFrameCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.HeadlessExperimental.BeginFrameCommand
+                    {
+                        FrameTimeTicks = @frameTimeTicks,
+                        Interval = @interval,
+                        NoDisplayUpdates = @noDisplayUpdates,
+                        Screenshot = @screenshot,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Disables headless events for the target.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.HeadlessExperimental.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.HeadlessExperimental.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables headless events for the target.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.HeadlessExperimental.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.HeadlessExperimental.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1608,25 +4220,81 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Close the stream, discard any temporary backing storage.
             /// </summary>
-            public Task Close()
+            /// <param name="handle">
+            /// Handle of the stream to close.
+            /// </param>
+            public Task Close
+            (
+                Protocol.IO.StreamHandle @handle, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.IO.CloseCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.IO.CloseCommand
+                    {
+                        Handle = @handle,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Read a chunk of the stream
             /// </summary>
-            public Task<Protocol.IO.ReadResponse> Read()
+            /// <param name="handle">
+            /// Handle of the stream to read.
+            /// </param>
+            /// <param name="offset">
+            /// Seek to the specified offset before reading (if not specificed, proceed with offset
+            /// following the last read). Some types of streams may only support sequential reads.
+            /// </param>
+            /// <param name="size">
+            /// Maximum number of bytes to read (left upon the agent discretion if not specified).
+            /// </param>
+            public Task<Protocol.IO.ReadResponse> Read
+            (
+                Protocol.IO.StreamHandle @handle, 
+                int? @offset = default, 
+                int? @size = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.IO.ReadCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.IO.ReadCommand
+                    {
+                        Handle = @handle,
+                        Offset = @offset,
+                        Size = @size,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Return UUID of Blob object specified by a remote object id.
             /// </summary>
-            public Task<Protocol.IO.ResolveBlobResponse> ResolveBlob()
+            /// <param name="objectId">
+            /// Object id of a Blob object wrapper.
+            /// </param>
+            public Task<Protocol.IO.ResolveBlobResponse> ResolveBlob
+            (
+                Protocol.Runtime.RemoteObjectId @objectId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.IO.ResolveBlobCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.IO.ResolveBlobCommand
+                    {
+                        ObjectId = @objectId,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1642,65 +4310,234 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears all entries from an object store.
             /// </summary>
-            public Task ClearObjectStore()
+            /// <param name="securityOrigin">
+            /// Security origin.
+            /// </param>
+            /// <param name="databaseName">
+            /// Database name.
+            /// </param>
+            /// <param name="objectStoreName">
+            /// Object store name.
+            /// </param>
+            public Task ClearObjectStore
+            (
+                string @securityOrigin, 
+                string @databaseName, 
+                string @objectStoreName, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.IndexedDB.ClearObjectStoreCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.IndexedDB.ClearObjectStoreCommand
+                    {
+                        SecurityOrigin = @securityOrigin,
+                        DatabaseName = @databaseName,
+                        ObjectStoreName = @objectStoreName,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Deletes a database.
             /// </summary>
-            public Task DeleteDatabase()
+            /// <param name="securityOrigin">
+            /// Security origin.
+            /// </param>
+            /// <param name="databaseName">
+            /// Database name.
+            /// </param>
+            public Task DeleteDatabase
+            (
+                string @securityOrigin, 
+                string @databaseName, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.IndexedDB.DeleteDatabaseCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.IndexedDB.DeleteDatabaseCommand
+                    {
+                        SecurityOrigin = @securityOrigin,
+                        DatabaseName = @databaseName,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Delete a range of entries from an object store
             /// </summary>
-            public Task DeleteObjectStoreEntries()
+            /// <param name="securityOrigin" />
+            /// <param name="databaseName" />
+            /// <param name="objectStoreName" />
+            /// <param name="keyRange">
+            /// Range of entry keys to delete
+            /// </param>
+            public Task DeleteObjectStoreEntries
+            (
+                string @securityOrigin, 
+                string @databaseName, 
+                string @objectStoreName, 
+                Protocol.IndexedDB.KeyRange @keyRange, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.IndexedDB.DeleteObjectStoreEntriesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.IndexedDB.DeleteObjectStoreEntriesCommand
+                    {
+                        SecurityOrigin = @securityOrigin,
+                        DatabaseName = @databaseName,
+                        ObjectStoreName = @objectStoreName,
+                        KeyRange = @keyRange,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Disables events from backend.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.IndexedDB.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.IndexedDB.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables events from backend.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.IndexedDB.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.IndexedDB.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests data from object store or index.
             /// </summary>
-            public Task<Protocol.IndexedDB.RequestDataResponse> RequestData()
+            /// <param name="securityOrigin">
+            /// Security origin.
+            /// </param>
+            /// <param name="databaseName">
+            /// Database name.
+            /// </param>
+            /// <param name="objectStoreName">
+            /// Object store name.
+            /// </param>
+            /// <param name="indexName">
+            /// Index name, empty string for object store data requests.
+            /// </param>
+            /// <param name="skipCount">
+            /// Number of records to skip.
+            /// </param>
+            /// <param name="pageSize">
+            /// Number of records to fetch.
+            /// </param>
+            /// <param name="keyRange">
+            /// Key range.
+            /// </param>
+            public Task<Protocol.IndexedDB.RequestDataResponse> RequestData
+            (
+                string @securityOrigin, 
+                string @databaseName, 
+                string @objectStoreName, 
+                string @indexName, 
+                int @skipCount, 
+                int @pageSize, 
+                Protocol.IndexedDB.KeyRange @keyRange = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.IndexedDB.RequestDataCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.IndexedDB.RequestDataCommand
+                    {
+                        SecurityOrigin = @securityOrigin,
+                        DatabaseName = @databaseName,
+                        ObjectStoreName = @objectStoreName,
+                        IndexName = @indexName,
+                        SkipCount = @skipCount,
+                        PageSize = @pageSize,
+                        KeyRange = @keyRange,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests database with given name in given frame.
             /// </summary>
-            public Task<Protocol.IndexedDB.RequestDatabaseResponse> RequestDatabase()
+            /// <param name="securityOrigin">
+            /// Security origin.
+            /// </param>
+            /// <param name="databaseName">
+            /// Database name.
+            /// </param>
+            public Task<Protocol.IndexedDB.RequestDatabaseResponse> RequestDatabase
+            (
+                string @securityOrigin, 
+                string @databaseName, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.IndexedDB.RequestDatabaseCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.IndexedDB.RequestDatabaseCommand
+                    {
+                        SecurityOrigin = @securityOrigin,
+                        DatabaseName = @databaseName,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests database names for given security origin.
             /// </summary>
-            public Task<Protocol.IndexedDB.RequestDatabaseNamesResponse> RequestDatabaseNames()
+            /// <param name="securityOrigin">
+            /// Security origin.
+            /// </param>
+            public Task<Protocol.IndexedDB.RequestDatabaseNamesResponse> RequestDatabaseNames
+            (
+                string @securityOrigin, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.IndexedDB.RequestDatabaseNamesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.IndexedDB.RequestDatabaseNamesCommand
+                    {
+                        SecurityOrigin = @securityOrigin,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1716,74 +4553,492 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Dispatches a key event to the page.
             /// </summary>
-            public Task DispatchKeyEvent()
+            /// <param name="type">
+            /// Type of the key event.
+            /// </param>
+            /// <param name="modifiers">
+            /// Bit field representing pressed modifier keys. Alt=1, Ctrl=2, Meta/Command=4, Shift=8
+            /// (default: 0).
+            /// </param>
+            /// <param name="timestamp">
+            /// Time at which the event occurred.
+            /// </param>
+            /// <param name="text">
+            /// Text as generated by processing a virtual key code with a keyboard layout. Not needed for
+            /// for `keyUp` and `rawKeyDown` events (default: "")
+            /// </param>
+            /// <param name="unmodifiedText">
+            /// Text that would have been generated by the keyboard if no modifiers were pressed (except for
+            /// shift). Useful for shortcut (accelerator) key handling (default: "").
+            /// </param>
+            /// <param name="keyIdentifier">
+            /// Unique key identifier (e.g., 'U+0041') (default: "").
+            /// </param>
+            /// <param name="code">
+            /// Unique DOM defined string value for each physical key (e.g., 'KeyA') (default: "").
+            /// </param>
+            /// <param name="key">
+            /// Unique DOM defined string value describing the meaning of the key in the context of active
+            /// modifiers, keyboard layout, etc (e.g., 'AltGr') (default: "").
+            /// </param>
+            /// <param name="windowsVirtualKeyCode">
+            /// Windows virtual key code (default: 0).
+            /// </param>
+            /// <param name="nativeVirtualKeyCode">
+            /// Native virtual key code (default: 0).
+            /// </param>
+            /// <param name="autoRepeat">
+            /// Whether the event was generated from auto repeat (default: false).
+            /// </param>
+            /// <param name="isKeypad">
+            /// Whether the event was generated from the keypad (default: false).
+            /// </param>
+            /// <param name="isSystemKey">
+            /// Whether the event was a system key event (default: false).
+            /// </param>
+            /// <param name="location">
+            /// Whether the event was from the left or right side of the keyboard. 1=Left, 2=Right (default:
+            /// 0).
+            /// </param>
+            public Task DispatchKeyEvent
+            (
+                string @type, 
+                int? @modifiers = default, 
+                Protocol.Input.TimeSinceEpoch @timestamp = default, 
+                string @text = default, 
+                string @unmodifiedText = default, 
+                string @keyIdentifier = default, 
+                string @code = default, 
+                string @key = default, 
+                int? @windowsVirtualKeyCode = default, 
+                int? @nativeVirtualKeyCode = default, 
+                bool? @autoRepeat = default, 
+                bool? @isKeypad = default, 
+                bool? @isSystemKey = default, 
+                int? @location = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Input.DispatchKeyEventCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Input.DispatchKeyEventCommand
+                    {
+                        Type = @type,
+                        Modifiers = @modifiers,
+                        Timestamp = @timestamp,
+                        Text = @text,
+                        UnmodifiedText = @unmodifiedText,
+                        KeyIdentifier = @keyIdentifier,
+                        Code = @code,
+                        Key = @key,
+                        WindowsVirtualKeyCode = @windowsVirtualKeyCode,
+                        NativeVirtualKeyCode = @nativeVirtualKeyCode,
+                        AutoRepeat = @autoRepeat,
+                        IsKeypad = @isKeypad,
+                        IsSystemKey = @isSystemKey,
+                        Location = @location,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// This method emulates inserting text that doesn't come from a key press,
             /// for example an emoji keyboard or an IME.
             /// </summary>
-            public Task InsertText()
+            /// <param name="text">
+            /// The text to insert.
+            /// </param>
+            public Task InsertText
+            (
+                string @text, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Input.InsertTextCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Input.InsertTextCommand
+                    {
+                        Text = @text,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Dispatches a mouse event to the page.
             /// </summary>
-            public Task DispatchMouseEvent()
+            /// <param name="type">
+            /// Type of the mouse event.
+            /// </param>
+            /// <param name="x">
+            /// X coordinate of the event relative to the main frame's viewport in CSS pixels.
+            /// </param>
+            /// <param name="y">
+            /// Y coordinate of the event relative to the main frame's viewport in CSS pixels. 0 refers to
+            /// the top of the viewport and Y increases as it proceeds towards the bottom of the viewport.
+            /// </param>
+            /// <param name="modifiers">
+            /// Bit field representing pressed modifier keys. Alt=1, Ctrl=2, Meta/Command=4, Shift=8
+            /// (default: 0).
+            /// </param>
+            /// <param name="timestamp">
+            /// Time at which the event occurred.
+            /// </param>
+            /// <param name="button">
+            /// Mouse button (default: "none").
+            /// </param>
+            /// <param name="buttons">
+            /// A number indicating which buttons are pressed on the mouse when a mouse event is triggered.
+            /// Left=1, Right=2, Middle=4, Back=8, Forward=16, None=0.
+            /// </param>
+            /// <param name="clickCount">
+            /// Number of times the mouse button was clicked (default: 0).
+            /// </param>
+            /// <param name="deltaX">
+            /// X delta in CSS pixels for mouse wheel event (default: 0).
+            /// </param>
+            /// <param name="deltaY">
+            /// Y delta in CSS pixels for mouse wheel event (default: 0).
+            /// </param>
+            /// <param name="pointerType">
+            /// Pointer type (default: "mouse").
+            /// </param>
+            public Task DispatchMouseEvent
+            (
+                string @type, 
+                double @x, 
+                double @y, 
+                int? @modifiers = default, 
+                Protocol.Input.TimeSinceEpoch @timestamp = default, 
+                string @button = default, 
+                int? @buttons = default, 
+                int? @clickCount = default, 
+                double? @deltaX = default, 
+                double? @deltaY = default, 
+                string @pointerType = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Input.DispatchMouseEventCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Input.DispatchMouseEventCommand
+                    {
+                        Type = @type,
+                        X = @x,
+                        Y = @y,
+                        Modifiers = @modifiers,
+                        Timestamp = @timestamp,
+                        Button = @button,
+                        Buttons = @buttons,
+                        ClickCount = @clickCount,
+                        DeltaX = @deltaX,
+                        DeltaY = @deltaY,
+                        PointerType = @pointerType,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Dispatches a touch event to the page.
             /// </summary>
-            public Task DispatchTouchEvent()
+            /// <param name="type">
+            /// Type of the touch event. TouchEnd and TouchCancel must not contain any touch points, while
+            /// TouchStart and TouchMove must contains at least one.
+            /// </param>
+            /// <param name="touchPoints">
+            /// Active touch points on the touch device. One event per any changed point (compared to
+            /// previous touch event in a sequence) is generated, emulating pressing/moving/releasing points
+            /// one by one.
+            /// </param>
+            /// <param name="modifiers">
+            /// Bit field representing pressed modifier keys. Alt=1, Ctrl=2, Meta/Command=4, Shift=8
+            /// (default: 0).
+            /// </param>
+            /// <param name="timestamp">
+            /// Time at which the event occurred.
+            /// </param>
+            public Task DispatchTouchEvent
+            (
+                string @type, 
+                Protocol.Input.TouchPoint[] @touchPoints, 
+                int? @modifiers = default, 
+                Protocol.Input.TimeSinceEpoch @timestamp = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Input.DispatchTouchEventCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Input.DispatchTouchEventCommand
+                    {
+                        Type = @type,
+                        TouchPoints = @touchPoints,
+                        Modifiers = @modifiers,
+                        Timestamp = @timestamp,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Emulates touch event from the mouse event parameters.
             /// </summary>
-            public Task EmulateTouchFromMouseEvent()
+            /// <param name="type">
+            /// Type of the mouse event.
+            /// </param>
+            /// <param name="x">
+            /// X coordinate of the mouse pointer in DIP.
+            /// </param>
+            /// <param name="y">
+            /// Y coordinate of the mouse pointer in DIP.
+            /// </param>
+            /// <param name="button">
+            /// Mouse button.
+            /// </param>
+            /// <param name="timestamp">
+            /// Time at which the event occurred (default: current time).
+            /// </param>
+            /// <param name="deltaX">
+            /// X delta in DIP for mouse wheel event (default: 0).
+            /// </param>
+            /// <param name="deltaY">
+            /// Y delta in DIP for mouse wheel event (default: 0).
+            /// </param>
+            /// <param name="modifiers">
+            /// Bit field representing pressed modifier keys. Alt=1, Ctrl=2, Meta/Command=4, Shift=8
+            /// (default: 0).
+            /// </param>
+            /// <param name="clickCount">
+            /// Number of times the mouse button was clicked (default: 0).
+            /// </param>
+            public Task EmulateTouchFromMouseEvent
+            (
+                string @type, 
+                int @x, 
+                int @y, 
+                string @button, 
+                Protocol.Input.TimeSinceEpoch @timestamp = default, 
+                double? @deltaX = default, 
+                double? @deltaY = default, 
+                int? @modifiers = default, 
+                int? @clickCount = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Input.EmulateTouchFromMouseEventCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Input.EmulateTouchFromMouseEventCommand
+                    {
+                        Type = @type,
+                        X = @x,
+                        Y = @y,
+                        Button = @button,
+                        Timestamp = @timestamp,
+                        DeltaX = @deltaX,
+                        DeltaY = @deltaY,
+                        Modifiers = @modifiers,
+                        ClickCount = @clickCount,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Ignores input events (useful while auditing page).
             /// </summary>
-            public Task SetIgnoreInputEvents()
+            /// <param name="ignore">
+            /// Ignores input events processing when set to true.
+            /// </param>
+            public Task SetIgnoreInputEvents
+            (
+                bool @ignore, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Input.SetIgnoreInputEventsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Input.SetIgnoreInputEventsCommand
+                    {
+                        Ignore = @ignore,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Synthesizes a pinch gesture over a time period by issuing appropriate touch events.
             /// </summary>
-            public Task SynthesizePinchGesture()
+            /// <param name="x">
+            /// X coordinate of the start of the gesture in CSS pixels.
+            /// </param>
+            /// <param name="y">
+            /// Y coordinate of the start of the gesture in CSS pixels.
+            /// </param>
+            /// <param name="scaleFactor">
+            /// Relative scale factor after zooming (&gt;1.0 zooms in, &lt;1.0 zooms out).
+            /// </param>
+            /// <param name="relativeSpeed">
+            /// Relative pointer speed in pixels per second (default: 800).
+            /// </param>
+            /// <param name="gestureSourceType">
+            /// Which type of input events to be generated (default: 'default', which queries the platform
+            /// for the preferred input type).
+            /// </param>
+            public Task SynthesizePinchGesture
+            (
+                double @x, 
+                double @y, 
+                double @scaleFactor, 
+                int? @relativeSpeed = default, 
+                Protocol.Input.GestureSourceType @gestureSourceType = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Input.SynthesizePinchGestureCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Input.SynthesizePinchGestureCommand
+                    {
+                        X = @x,
+                        Y = @y,
+                        ScaleFactor = @scaleFactor,
+                        RelativeSpeed = @relativeSpeed,
+                        GestureSourceType = @gestureSourceType,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Synthesizes a scroll gesture over a time period by issuing appropriate touch events.
             /// </summary>
-            public Task SynthesizeScrollGesture()
+            /// <param name="x">
+            /// X coordinate of the start of the gesture in CSS pixels.
+            /// </param>
+            /// <param name="y">
+            /// Y coordinate of the start of the gesture in CSS pixels.
+            /// </param>
+            /// <param name="xDistance">
+            /// The distance to scroll along the X axis (positive to scroll left).
+            /// </param>
+            /// <param name="yDistance">
+            /// The distance to scroll along the Y axis (positive to scroll up).
+            /// </param>
+            /// <param name="xOverscroll">
+            /// The number of additional pixels to scroll back along the X axis, in addition to the given
+            /// distance.
+            /// </param>
+            /// <param name="yOverscroll">
+            /// The number of additional pixels to scroll back along the Y axis, in addition to the given
+            /// distance.
+            /// </param>
+            /// <param name="preventFling">
+            /// Prevent fling (default: true).
+            /// </param>
+            /// <param name="speed">
+            /// Swipe speed in pixels per second (default: 800).
+            /// </param>
+            /// <param name="gestureSourceType">
+            /// Which type of input events to be generated (default: 'default', which queries the platform
+            /// for the preferred input type).
+            /// </param>
+            /// <param name="repeatCount">
+            /// The number of times to repeat the gesture (default: 0).
+            /// </param>
+            /// <param name="repeatDelayMs">
+            /// The number of milliseconds delay between each repeat. (default: 250).
+            /// </param>
+            /// <param name="interactionMarkerName">
+            /// The name of the interaction markers to generate, if not empty (default: "").
+            /// </param>
+            public Task SynthesizeScrollGesture
+            (
+                double @x, 
+                double @y, 
+                double? @xDistance = default, 
+                double? @yDistance = default, 
+                double? @xOverscroll = default, 
+                double? @yOverscroll = default, 
+                bool? @preventFling = default, 
+                int? @speed = default, 
+                Protocol.Input.GestureSourceType @gestureSourceType = default, 
+                int? @repeatCount = default, 
+                int? @repeatDelayMs = default, 
+                string @interactionMarkerName = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Input.SynthesizeScrollGestureCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Input.SynthesizeScrollGestureCommand
+                    {
+                        X = @x,
+                        Y = @y,
+                        XDistance = @xDistance,
+                        YDistance = @yDistance,
+                        XOverscroll = @xOverscroll,
+                        YOverscroll = @yOverscroll,
+                        PreventFling = @preventFling,
+                        Speed = @speed,
+                        GestureSourceType = @gestureSourceType,
+                        RepeatCount = @repeatCount,
+                        RepeatDelayMs = @repeatDelayMs,
+                        InteractionMarkerName = @interactionMarkerName,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Synthesizes a tap gesture over a time period by issuing appropriate touch events.
             /// </summary>
-            public Task SynthesizeTapGesture()
+            /// <param name="x">
+            /// X coordinate of the start of the gesture in CSS pixels.
+            /// </param>
+            /// <param name="y">
+            /// Y coordinate of the start of the gesture in CSS pixels.
+            /// </param>
+            /// <param name="duration">
+            /// Duration between touchdown and touchup events in ms (default: 50).
+            /// </param>
+            /// <param name="tapCount">
+            /// Number of times to perform the tap (e.g. 2 for double tap, default: 1).
+            /// </param>
+            /// <param name="gestureSourceType">
+            /// Which type of input events to be generated (default: 'default', which queries the platform
+            /// for the preferred input type).
+            /// </param>
+            public Task SynthesizeTapGesture
+            (
+                double @x, 
+                double @y, 
+                int? @duration = default, 
+                int? @tapCount = default, 
+                Protocol.Input.GestureSourceType @gestureSourceType = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Input.SynthesizeTapGestureCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Input.SynthesizeTapGestureCommand
+                    {
+                        X = @x,
+                        Y = @y,
+                        Duration = @duration,
+                        TapCount = @tapCount,
+                        GestureSourceType = @gestureSourceType,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1799,17 +5054,37 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables inspector domain notifications.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Inspector.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Inspector.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables inspector domain notifications.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Inspector.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Inspector.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1825,70 +5100,225 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Provides the reasons why the given layer was composited.
             /// </summary>
-            public Task<Protocol.LayerTree.CompositingReasonsResponse> CompositingReasons()
+            /// <param name="layerId">
+            /// The id of the layer for which we want to get the reasons it was composited.
+            /// </param>
+            public Task<Protocol.LayerTree.CompositingReasonsResponse> CompositingReasons
+            (
+                Protocol.LayerTree.LayerId @layerId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.LayerTree.CompositingReasonsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.LayerTree.CompositingReasonsCommand
+                    {
+                        LayerId = @layerId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Disables compositing tree inspection.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.LayerTree.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.LayerTree.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables compositing tree inspection.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.LayerTree.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.LayerTree.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns the snapshot identifier.
             /// </summary>
-            public Task<Protocol.LayerTree.LoadSnapshotResponse> LoadSnapshot()
+            /// <param name="tiles">
+            /// An array of tiles composing the snapshot.
+            /// </param>
+            public Task<Protocol.LayerTree.LoadSnapshotResponse> LoadSnapshot
+            (
+                Protocol.LayerTree.PictureTile[] @tiles, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.LayerTree.LoadSnapshotCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.LayerTree.LoadSnapshotCommand
+                    {
+                        Tiles = @tiles,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns the layer snapshot identifier.
             /// </summary>
-            public Task<Protocol.LayerTree.MakeSnapshotResponse> MakeSnapshot()
+            /// <param name="layerId">
+            /// The id of the layer.
+            /// </param>
+            public Task<Protocol.LayerTree.MakeSnapshotResponse> MakeSnapshot
+            (
+                Protocol.LayerTree.LayerId @layerId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.LayerTree.MakeSnapshotCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.LayerTree.MakeSnapshotCommand
+                    {
+                        LayerId = @layerId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task<Protocol.LayerTree.ProfileSnapshotResponse> ProfileSnapshot()
+            /// <param name="snapshotId">
+            /// The id of the layer snapshot.
+            /// </param>
+            /// <param name="minRepeatCount">
+            /// The maximum number of times to replay the snapshot (1, if not specified).
+            /// </param>
+            /// <param name="minDuration">
+            /// The minimum duration (in seconds) to replay the snapshot.
+            /// </param>
+            /// <param name="clipRect">
+            /// The clip rectangle to apply when replaying the snapshot.
+            /// </param>
+            public Task<Protocol.LayerTree.ProfileSnapshotResponse> ProfileSnapshot
+            (
+                Protocol.LayerTree.SnapshotId @snapshotId, 
+                int? @minRepeatCount = default, 
+                double? @minDuration = default, 
+                Protocol.DOM.Rect @clipRect = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.LayerTree.ProfileSnapshotCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.LayerTree.ProfileSnapshotCommand
+                    {
+                        SnapshotId = @snapshotId,
+                        MinRepeatCount = @minRepeatCount,
+                        MinDuration = @minDuration,
+                        ClipRect = @clipRect,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Releases layer snapshot captured by the back-end.
             /// </summary>
-            public Task ReleaseSnapshot()
+            /// <param name="snapshotId">
+            /// The id of the layer snapshot.
+            /// </param>
+            public Task ReleaseSnapshot
+            (
+                Protocol.LayerTree.SnapshotId @snapshotId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.LayerTree.ReleaseSnapshotCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.LayerTree.ReleaseSnapshotCommand
+                    {
+                        SnapshotId = @snapshotId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Replays the layer snapshot and returns the resulting bitmap.
             /// </summary>
-            public Task<Protocol.LayerTree.ReplaySnapshotResponse> ReplaySnapshot()
+            /// <param name="snapshotId">
+            /// The id of the layer snapshot.
+            /// </param>
+            /// <param name="fromStep">
+            /// The first step to replay from (replay from the very start if not specified).
+            /// </param>
+            /// <param name="toStep">
+            /// The last step to replay to (replay till the end if not specified).
+            /// </param>
+            /// <param name="scale">
+            /// The scale to apply while replaying (defaults to 1).
+            /// </param>
+            public Task<Protocol.LayerTree.ReplaySnapshotResponse> ReplaySnapshot
+            (
+                Protocol.LayerTree.SnapshotId @snapshotId, 
+                int? @fromStep = default, 
+                int? @toStep = default, 
+                double? @scale = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.LayerTree.ReplaySnapshotCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.LayerTree.ReplaySnapshotCommand
+                    {
+                        SnapshotId = @snapshotId,
+                        FromStep = @fromStep,
+                        ToStep = @toStep,
+                        Scale = @scale,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Replays the layer snapshot and returns canvas log.
             /// </summary>
-            public Task<Protocol.LayerTree.SnapshotCommandLogResponse> SnapshotCommandLog()
+            /// <param name="snapshotId">
+            /// The id of the layer snapshot.
+            /// </param>
+            public Task<Protocol.LayerTree.SnapshotCommandLogResponse> SnapshotCommandLog
+            (
+                Protocol.LayerTree.SnapshotId @snapshotId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.LayerTree.SnapshotCommandLogCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.LayerTree.SnapshotCommandLogCommand
+                    {
+                        SnapshotId = @snapshotId,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1904,42 +5334,97 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears the log.
             /// </summary>
-            public Task Clear()
+            public Task Clear
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Log.ClearCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Log.ClearCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Disables log domain, prevents further log entries from being reported to the client.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Log.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Log.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables log domain, sends the entries collected so far to the client by means of the
             /// `entryAdded` notification.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Log.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Log.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// start violation reporting.
             /// </summary>
-            public Task StartViolationsReport()
+            /// <param name="config">
+            /// Configuration for violations.
+            /// </param>
+            public Task StartViolationsReport
+            (
+                Protocol.Log.ViolationSetting[] @config, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Log.StartViolationsReportCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Log.StartViolationsReportCommand
+                    {
+                        Config = @config,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Stop violation reporting.
             /// </summary>
-            public Task StopViolationsReport()
+            public Task StopViolationsReport
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Log.StopViolationsReportCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Log.StopViolationsReportCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -1952,73 +5437,183 @@ namespace DumbPrograms.ChromeDevTools
                 InspectionClient = inspectionClient;
             }
 
-            public Task<Protocol.Memory.GetDOMCountersResponse> GetDOMCounters()
+            public Task<Protocol.Memory.GetDOMCountersResponse> GetDOMCounters
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Memory.GetDOMCountersCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Memory.GetDOMCountersCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task PrepareForLeakDetection()
+            public Task PrepareForLeakDetection
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Memory.PrepareForLeakDetectionCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Memory.PrepareForLeakDetectionCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enable/disable suppressing memory pressure notifications in all processes.
             /// </summary>
-            public Task SetPressureNotificationsSuppressed()
+            /// <param name="suppressed">
+            /// If true, memory pressure notifications will be suppressed.
+            /// </param>
+            public Task SetPressureNotificationsSuppressed
+            (
+                bool @suppressed, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Memory.SetPressureNotificationsSuppressedCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Memory.SetPressureNotificationsSuppressedCommand
+                    {
+                        Suppressed = @suppressed,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Simulate a memory pressure notification in all processes.
             /// </summary>
-            public Task SimulatePressureNotification()
+            /// <param name="level">
+            /// Memory pressure level of the notification.
+            /// </param>
+            public Task SimulatePressureNotification
+            (
+                Protocol.Memory.PressureLevel @level, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Memory.SimulatePressureNotificationCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Memory.SimulatePressureNotificationCommand
+                    {
+                        Level = @level,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Start collecting native memory profile.
             /// </summary>
-            public Task StartSampling()
+            /// <param name="samplingInterval">
+            /// Average number of bytes between samples.
+            /// </param>
+            /// <param name="suppressRandomness">
+            /// Do not randomize intervals between samples.
+            /// </param>
+            public Task StartSampling
+            (
+                int? @samplingInterval = default, 
+                bool? @suppressRandomness = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Memory.StartSamplingCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Memory.StartSamplingCommand
+                    {
+                        SamplingInterval = @samplingInterval,
+                        SuppressRandomness = @suppressRandomness,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Stop collecting native memory profile.
             /// </summary>
-            public Task StopSampling()
+            public Task StopSampling
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Memory.StopSamplingCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Memory.StopSamplingCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Retrieve native memory allocations profile
             /// collected since renderer process startup.
             /// </summary>
-            public Task<Protocol.Memory.GetAllTimeSamplingProfileResponse> GetAllTimeSamplingProfile()
+            public Task<Protocol.Memory.GetAllTimeSamplingProfileResponse> GetAllTimeSamplingProfile
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Memory.GetAllTimeSamplingProfileCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Memory.GetAllTimeSamplingProfileCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Retrieve native memory allocations profile
             /// collected since browser process startup.
             /// </summary>
-            public Task<Protocol.Memory.GetBrowserSamplingProfileResponse> GetBrowserSamplingProfile()
+            public Task<Protocol.Memory.GetBrowserSamplingProfileResponse> GetBrowserSamplingProfile
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Memory.GetBrowserSamplingProfileCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Memory.GetBrowserSamplingProfileCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Retrieve native memory allocations profile collected since last
             /// `startSampling` call.
             /// </summary>
-            public Task<Protocol.Memory.GetSamplingProfileResponse> GetSamplingProfile()
+            public Task<Protocol.Memory.GetSamplingProfileResponse> GetSamplingProfile
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Memory.GetSamplingProfileCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Memory.GetSamplingProfileCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -2035,43 +5630,93 @@ namespace DumbPrograms.ChromeDevTools
             /// Tells whether clearing browser cache is supported.
             /// </summary>
             [Obsolete]
-            public Task<Protocol.Network.CanClearBrowserCacheResponse> CanClearBrowserCache()
+            public Task<Protocol.Network.CanClearBrowserCacheResponse> CanClearBrowserCache
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.CanClearBrowserCacheCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.CanClearBrowserCacheCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Tells whether clearing browser cookies is supported.
             /// </summary>
             [Obsolete]
-            public Task<Protocol.Network.CanClearBrowserCookiesResponse> CanClearBrowserCookies()
+            public Task<Protocol.Network.CanClearBrowserCookiesResponse> CanClearBrowserCookies
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.CanClearBrowserCookiesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.CanClearBrowserCookiesCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Tells whether emulation of network conditions is supported.
             /// </summary>
             [Obsolete]
-            public Task<Protocol.Network.CanEmulateNetworkConditionsResponse> CanEmulateNetworkConditions()
+            public Task<Protocol.Network.CanEmulateNetworkConditionsResponse> CanEmulateNetworkConditions
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.CanEmulateNetworkConditionsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.CanEmulateNetworkConditionsCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Clears browser cache.
             /// </summary>
-            public Task ClearBrowserCache()
+            public Task ClearBrowserCache
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.ClearBrowserCacheCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.ClearBrowserCacheCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Clears browser cookies.
             /// </summary>
-            public Task ClearBrowserCookies()
+            public Task ClearBrowserCookies
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.ClearBrowserCookiesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.ClearBrowserCookiesCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -2080,91 +5725,331 @@ namespace DumbPrograms.ChromeDevTools
             /// fetch occurs as a result which encounters a redirect an additional Network.requestIntercepted
             /// event will be sent with the same InterceptionId.
             /// </summary>
-            public Task ContinueInterceptedRequest()
+            /// <param name="interceptionId" />
+            /// <param name="errorReason">
+            /// If set this causes the request to fail with the given reason. Passing `Aborted` for requests
+            /// marked with `isNavigationRequest` also cancels the navigation. Must not be set in response
+            /// to an authChallenge.
+            /// </param>
+            /// <param name="rawResponse">
+            /// If set the requests completes using with the provided base64 encoded raw response, including
+            /// HTTP status line and headers etc... Must not be set in response to an authChallenge.
+            /// </param>
+            /// <param name="url">
+            /// If set the request url will be modified in a way that's not observable by page. Must not be
+            /// set in response to an authChallenge.
+            /// </param>
+            /// <param name="method">
+            /// If set this allows the request method to be overridden. Must not be set in response to an
+            /// authChallenge.
+            /// </param>
+            /// <param name="postData">
+            /// If set this allows postData to be set. Must not be set in response to an authChallenge.
+            /// </param>
+            /// <param name="headers">
+            /// If set this allows the request headers to be changed. Must not be set in response to an
+            /// authChallenge.
+            /// </param>
+            /// <param name="authChallengeResponse">
+            /// Response to a requestIntercepted with an authChallenge. Must not be set otherwise.
+            /// </param>
+            public Task ContinueInterceptedRequest
+            (
+                Protocol.Network.InterceptionId @interceptionId, 
+                Protocol.Network.ErrorReason @errorReason = default, 
+                string @rawResponse = default, 
+                string @url = default, 
+                string @method = default, 
+                string @postData = default, 
+                Protocol.Network.Headers @headers = default, 
+                Protocol.Network.AuthChallengeResponse @authChallengeResponse = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.ContinueInterceptedRequestCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.ContinueInterceptedRequestCommand
+                    {
+                        InterceptionId = @interceptionId,
+                        ErrorReason = @errorReason,
+                        RawResponse = @rawResponse,
+                        Url = @url,
+                        Method = @method,
+                        PostData = @postData,
+                        Headers = @headers,
+                        AuthChallengeResponse = @authChallengeResponse,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Deletes browser cookies with matching name and url or domain/path pair.
             /// </summary>
-            public Task DeleteCookies()
+            /// <param name="name">
+            /// Name of the cookies to remove.
+            /// </param>
+            /// <param name="url">
+            /// If specified, deletes all the cookies with the given name where domain and path match
+            /// provided URL.
+            /// </param>
+            /// <param name="domain">
+            /// If specified, deletes only cookies with the exact domain.
+            /// </param>
+            /// <param name="path">
+            /// If specified, deletes only cookies with the exact path.
+            /// </param>
+            public Task DeleteCookies
+            (
+                string @name, 
+                string @url = default, 
+                string @domain = default, 
+                string @path = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.DeleteCookiesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.DeleteCookiesCommand
+                    {
+                        Name = @name,
+                        Url = @url,
+                        Domain = @domain,
+                        Path = @path,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Disables network tracking, prevents network events from being sent to the client.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Activates emulation of network conditions.
             /// </summary>
-            public Task EmulateNetworkConditions()
+            /// <param name="offline">
+            /// True to emulate internet disconnection.
+            /// </param>
+            /// <param name="latency">
+            /// Minimum latency from request sent to response headers received (ms).
+            /// </param>
+            /// <param name="downloadThroughput">
+            /// Maximal aggregated download throughput (bytes/sec). -1 disables download throttling.
+            /// </param>
+            /// <param name="uploadThroughput">
+            /// Maximal aggregated upload throughput (bytes/sec).  -1 disables upload throttling.
+            /// </param>
+            /// <param name="connectionType">
+            /// Connection type if known.
+            /// </param>
+            public Task EmulateNetworkConditions
+            (
+                bool @offline, 
+                double @latency, 
+                double @downloadThroughput, 
+                double @uploadThroughput, 
+                Protocol.Network.ConnectionType @connectionType = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.EmulateNetworkConditionsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.EmulateNetworkConditionsCommand
+                    {
+                        Offline = @offline,
+                        Latency = @latency,
+                        DownloadThroughput = @downloadThroughput,
+                        UploadThroughput = @uploadThroughput,
+                        ConnectionType = @connectionType,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables network tracking, network events will now be delivered to the client.
             /// </summary>
-            public Task Enable()
+            /// <param name="maxTotalBufferSize">
+            /// Buffer size in bytes to use when preserving network payloads (XHRs, etc).
+            /// </param>
+            /// <param name="maxResourceBufferSize">
+            /// Per-resource buffer size in bytes to use when preserving network payloads (XHRs, etc).
+            /// </param>
+            /// <param name="maxPostDataSize">
+            /// Longest post body size (in bytes) that would be included in requestWillBeSent notification
+            /// </param>
+            public Task Enable
+            (
+                int? @maxTotalBufferSize = default, 
+                int? @maxResourceBufferSize = default, 
+                int? @maxPostDataSize = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.EnableCommand
+                    {
+                        MaxTotalBufferSize = @maxTotalBufferSize,
+                        MaxResourceBufferSize = @maxResourceBufferSize,
+                        MaxPostDataSize = @maxPostDataSize,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns all browser cookies. Depending on the backend support, will return detailed cookie
             /// information in the `cookies` field.
             /// </summary>
-            public Task<Protocol.Network.GetAllCookiesResponse> GetAllCookies()
+            public Task<Protocol.Network.GetAllCookiesResponse> GetAllCookies
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.GetAllCookiesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.GetAllCookiesCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns the DER-encoded certificate.
             /// </summary>
-            public Task<Protocol.Network.GetCertificateResponse> GetCertificate()
+            /// <param name="origin">
+            /// Origin to get certificate for.
+            /// </param>
+            public Task<Protocol.Network.GetCertificateResponse> GetCertificate
+            (
+                string @origin, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.GetCertificateCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.GetCertificateCommand
+                    {
+                        Origin = @origin,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns all browser cookies for the current URL. Depending on the backend support, will return
             /// detailed cookie information in the `cookies` field.
             /// </summary>
-            public Task<Protocol.Network.GetCookiesResponse> GetCookies()
+            /// <param name="urls">
+            /// The list of URLs for which applicable cookies will be fetched
+            /// </param>
+            public Task<Protocol.Network.GetCookiesResponse> GetCookies
+            (
+                string[] @urls = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.GetCookiesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.GetCookiesCommand
+                    {
+                        Urls = @urls,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns content served for the given request.
             /// </summary>
-            public Task<Protocol.Network.GetResponseBodyResponse> GetResponseBody()
+            /// <param name="requestId">
+            /// Identifier of the network request to get content for.
+            /// </param>
+            public Task<Protocol.Network.GetResponseBodyResponse> GetResponseBody
+            (
+                Protocol.Network.RequestId @requestId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.GetResponseBodyCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.GetResponseBodyCommand
+                    {
+                        RequestId = @requestId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns post data sent with the request. Returns an error when no data was sent with the request.
             /// </summary>
-            public Task<Protocol.Network.GetRequestPostDataResponse> GetRequestPostData()
+            /// <param name="requestId">
+            /// Identifier of the network request to get content for.
+            /// </param>
+            public Task<Protocol.Network.GetRequestPostDataResponse> GetRequestPostData
+            (
+                Protocol.Network.RequestId @requestId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.GetRequestPostDataCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.GetRequestPostDataCommand
+                    {
+                        RequestId = @requestId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns content served for the given currently intercepted request.
             /// </summary>
-            public Task<Protocol.Network.GetResponseBodyForInterceptionResponse> GetResponseBodyForInterception()
+            /// <param name="interceptionId">
+            /// Identifier for the intercepted request to get body for.
+            /// </param>
+            public Task<Protocol.Network.GetResponseBodyForInterceptionResponse> GetResponseBodyForInterception
+            (
+                Protocol.Network.InterceptionId @interceptionId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.GetResponseBodyForInterceptionCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.GetResponseBodyForInterceptionCommand
+                    {
+                        InterceptionId = @interceptionId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -2173,9 +6058,22 @@ namespace DumbPrograms.ChromeDevTools
             /// the response body. The stream only supports sequential read, IO.read will fail if the position
             /// is specified.
             /// </summary>
-            public Task<Protocol.Network.TakeResponseBodyForInterceptionAsStreamResponse> TakeResponseBodyForInterceptionAsStream()
+            /// <param name="interceptionId" />
+            public Task<Protocol.Network.TakeResponseBodyForInterceptionAsStreamResponse> TakeResponseBodyForInterceptionAsStream
+            (
+                Protocol.Network.InterceptionId @interceptionId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.TakeResponseBodyForInterceptionAsStreamCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.TakeResponseBodyForInterceptionAsStreamCommand
+                    {
+                        InterceptionId = @interceptionId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -2183,89 +6081,326 @@ namespace DumbPrograms.ChromeDevTools
             /// parameters should be identical: method, url, async, request body, extra headers, withCredentials
             /// attribute, user, password.
             /// </summary>
-            public Task ReplayXHR()
+            /// <param name="requestId">
+            /// Identifier of XHR to replay.
+            /// </param>
+            public Task ReplayXHR
+            (
+                Protocol.Network.RequestId @requestId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.ReplayXHRCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.ReplayXHRCommand
+                    {
+                        RequestId = @requestId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Searches for given string in response content.
             /// </summary>
-            public Task<Protocol.Network.SearchInResponseBodyResponse> SearchInResponseBody()
+            /// <param name="requestId">
+            /// Identifier of the network response to search.
+            /// </param>
+            /// <param name="query">
+            /// String to search for.
+            /// </param>
+            /// <param name="caseSensitive">
+            /// If true, search is case sensitive.
+            /// </param>
+            /// <param name="isRegex">
+            /// If true, treats string parameter as regex.
+            /// </param>
+            public Task<Protocol.Network.SearchInResponseBodyResponse> SearchInResponseBody
+            (
+                Protocol.Network.RequestId @requestId, 
+                string @query, 
+                bool? @caseSensitive = default, 
+                bool? @isRegex = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.SearchInResponseBodyCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.SearchInResponseBodyCommand
+                    {
+                        RequestId = @requestId,
+                        Query = @query,
+                        CaseSensitive = @caseSensitive,
+                        IsRegex = @isRegex,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Blocks URLs from loading.
             /// </summary>
-            public Task SetBlockedURLs()
+            /// <param name="urls">
+            /// URL patterns to block. Wildcards ('*') are allowed.
+            /// </param>
+            public Task SetBlockedURLs
+            (
+                string[] @urls, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.SetBlockedURLsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.SetBlockedURLsCommand
+                    {
+                        Urls = @urls,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Toggles ignoring of service worker for each request.
             /// </summary>
-            public Task SetBypassServiceWorker()
+            /// <param name="bypass">
+            /// Bypass service worker and load from network.
+            /// </param>
+            public Task SetBypassServiceWorker
+            (
+                bool @bypass, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.SetBypassServiceWorkerCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.SetBypassServiceWorkerCommand
+                    {
+                        Bypass = @bypass,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Toggles ignoring cache for each request. If `true`, cache will not be used.
             /// </summary>
-            public Task SetCacheDisabled()
+            /// <param name="cacheDisabled">
+            /// Cache disabled state.
+            /// </param>
+            public Task SetCacheDisabled
+            (
+                bool @cacheDisabled, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.SetCacheDisabledCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.SetCacheDisabledCommand
+                    {
+                        CacheDisabled = @cacheDisabled,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets a cookie with the given cookie data; may overwrite equivalent cookies if they exist.
             /// </summary>
-            public Task<Protocol.Network.SetCookieResponse> SetCookie()
+            /// <param name="name">
+            /// Cookie name.
+            /// </param>
+            /// <param name="value">
+            /// Cookie value.
+            /// </param>
+            /// <param name="url">
+            /// The request-URI to associate with the setting of the cookie. This value can affect the
+            /// default domain and path values of the created cookie.
+            /// </param>
+            /// <param name="domain">
+            /// Cookie domain.
+            /// </param>
+            /// <param name="path">
+            /// Cookie path.
+            /// </param>
+            /// <param name="secure">
+            /// True if cookie is secure.
+            /// </param>
+            /// <param name="httpOnly">
+            /// True if cookie is http-only.
+            /// </param>
+            /// <param name="sameSite">
+            /// Cookie SameSite type.
+            /// </param>
+            /// <param name="expires">
+            /// Cookie expiration date, session cookie if not set
+            /// </param>
+            public Task<Protocol.Network.SetCookieResponse> SetCookie
+            (
+                string @name, 
+                string @value, 
+                string @url = default, 
+                string @domain = default, 
+                string @path = default, 
+                bool? @secure = default, 
+                bool? @httpOnly = default, 
+                Protocol.Network.CookieSameSite @sameSite = default, 
+                Protocol.Network.TimeSinceEpoch @expires = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.SetCookieCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.SetCookieCommand
+                    {
+                        Name = @name,
+                        Value = @value,
+                        Url = @url,
+                        Domain = @domain,
+                        Path = @path,
+                        Secure = @secure,
+                        HttpOnly = @httpOnly,
+                        SameSite = @sameSite,
+                        Expires = @expires,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets given cookies.
             /// </summary>
-            public Task SetCookies()
+            /// <param name="cookies">
+            /// Cookies to be set.
+            /// </param>
+            public Task SetCookies
+            (
+                Protocol.Network.CookieParam[] @cookies, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.SetCookiesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.SetCookiesCommand
+                    {
+                        Cookies = @cookies,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// For testing.
             /// </summary>
-            public Task SetDataSizeLimitsForTest()
+            /// <param name="maxTotalSize">
+            /// Maximum total buffer size.
+            /// </param>
+            /// <param name="maxResourceSize">
+            /// Maximum per-resource size.
+            /// </param>
+            public Task SetDataSizeLimitsForTest
+            (
+                int @maxTotalSize, 
+                int @maxResourceSize, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.SetDataSizeLimitsForTestCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.SetDataSizeLimitsForTestCommand
+                    {
+                        MaxTotalSize = @maxTotalSize,
+                        MaxResourceSize = @maxResourceSize,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Specifies whether to always send extra HTTP headers with the requests from this page.
             /// </summary>
-            public Task SetExtraHTTPHeaders()
+            /// <param name="headers">
+            /// Map with extra HTTP headers.
+            /// </param>
+            public Task SetExtraHTTPHeaders
+            (
+                Protocol.Network.Headers @headers, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.SetExtraHTTPHeadersCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.SetExtraHTTPHeadersCommand
+                    {
+                        Headers = @headers,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets the requests to intercept that match a the provided patterns and optionally resource types.
             /// </summary>
-            public Task SetRequestInterception()
+            /// <param name="patterns">
+            /// Requests matching any of these patterns will be forwarded and wait for the corresponding
+            /// continueInterceptedRequest call.
+            /// </param>
+            public Task SetRequestInterception
+            (
+                Protocol.Network.RequestPattern[] @patterns, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.SetRequestInterceptionCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.SetRequestInterceptionCommand
+                    {
+                        Patterns = @patterns,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Allows overriding user agent with the given string.
             /// </summary>
-            public Task SetUserAgentOverride()
+            /// <param name="userAgent">
+            /// User agent to use.
+            /// </param>
+            /// <param name="acceptLanguage">
+            /// Browser langugage to emulate.
+            /// </param>
+            /// <param name="platform">
+            /// The platform navigator.platform should return.
+            /// </param>
+            public Task SetUserAgentOverride
+            (
+                string @userAgent, 
+                string @acceptLanguage = default, 
+                string @platform = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Network.SetUserAgentOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Network.SetUserAgentOverrideCommand
+                    {
+                        UserAgent = @userAgent,
+                        AcceptLanguage = @acceptLanguage,
+                        Platform = @platform,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -2281,133 +6416,439 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables domain notifications.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables domain notifications.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// For testing.
             /// </summary>
-            public Task<Protocol.Overlay.GetHighlightObjectForTestResponse> GetHighlightObjectForTest()
+            /// <param name="nodeId">
+            /// Id of the node to get highlight object for.
+            /// </param>
+            public Task<Protocol.Overlay.GetHighlightObjectForTestResponse> GetHighlightObjectForTest
+            (
+                Protocol.DOM.NodeId @nodeId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.GetHighlightObjectForTestCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.GetHighlightObjectForTestCommand
+                    {
+                        NodeId = @nodeId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Hides any highlight.
             /// </summary>
-            public Task HideHighlight()
+            public Task HideHighlight
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.HideHighlightCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.HideHighlightCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Highlights owner element of the frame with given id.
             /// </summary>
-            public Task HighlightFrame()
+            /// <param name="frameId">
+            /// Identifier of the frame to highlight.
+            /// </param>
+            /// <param name="contentColor">
+            /// The content box highlight fill color (default: transparent).
+            /// </param>
+            /// <param name="contentOutlineColor">
+            /// The content box highlight outline color (default: transparent).
+            /// </param>
+            public Task HighlightFrame
+            (
+                Protocol.Page.FrameId @frameId, 
+                Protocol.DOM.RGBA @contentColor = default, 
+                Protocol.DOM.RGBA @contentOutlineColor = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.HighlightFrameCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.HighlightFrameCommand
+                    {
+                        FrameId = @frameId,
+                        ContentColor = @contentColor,
+                        ContentOutlineColor = @contentOutlineColor,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Highlights DOM node with given id or with the given JavaScript object wrapper. Either nodeId or
             /// objectId must be specified.
             /// </summary>
-            public Task HighlightNode()
+            /// <param name="highlightConfig">
+            /// A descriptor for the highlight appearance.
+            /// </param>
+            /// <param name="nodeId">
+            /// Identifier of the node to highlight.
+            /// </param>
+            /// <param name="backendNodeId">
+            /// Identifier of the backend node to highlight.
+            /// </param>
+            /// <param name="objectId">
+            /// JavaScript object id of the node to be highlighted.
+            /// </param>
+            public Task HighlightNode
+            (
+                Protocol.Overlay.HighlightConfig @highlightConfig, 
+                Protocol.DOM.NodeId @nodeId = default, 
+                Protocol.DOM.BackendNodeId @backendNodeId = default, 
+                Protocol.Runtime.RemoteObjectId @objectId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.HighlightNodeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.HighlightNodeCommand
+                    {
+                        HighlightConfig = @highlightConfig,
+                        NodeId = @nodeId,
+                        BackendNodeId = @backendNodeId,
+                        ObjectId = @objectId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Highlights given quad. Coordinates are absolute with respect to the main frame viewport.
             /// </summary>
-            public Task HighlightQuad()
+            /// <param name="quad">
+            /// Quad to highlight
+            /// </param>
+            /// <param name="color">
+            /// The highlight fill color (default: transparent).
+            /// </param>
+            /// <param name="outlineColor">
+            /// The highlight outline color (default: transparent).
+            /// </param>
+            public Task HighlightQuad
+            (
+                Protocol.DOM.Quad @quad, 
+                Protocol.DOM.RGBA @color = default, 
+                Protocol.DOM.RGBA @outlineColor = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.HighlightQuadCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.HighlightQuadCommand
+                    {
+                        Quad = @quad,
+                        Color = @color,
+                        OutlineColor = @outlineColor,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Highlights given rectangle. Coordinates are absolute with respect to the main frame viewport.
             /// </summary>
-            public Task HighlightRect()
+            /// <param name="x">
+            /// X coordinate
+            /// </param>
+            /// <param name="y">
+            /// Y coordinate
+            /// </param>
+            /// <param name="width">
+            /// Rectangle width
+            /// </param>
+            /// <param name="height">
+            /// Rectangle height
+            /// </param>
+            /// <param name="color">
+            /// The highlight fill color (default: transparent).
+            /// </param>
+            /// <param name="outlineColor">
+            /// The highlight outline color (default: transparent).
+            /// </param>
+            public Task HighlightRect
+            (
+                int @x, 
+                int @y, 
+                int @width, 
+                int @height, 
+                Protocol.DOM.RGBA @color = default, 
+                Protocol.DOM.RGBA @outlineColor = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.HighlightRectCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.HighlightRectCommand
+                    {
+                        X = @x,
+                        Y = @y,
+                        Width = @width,
+                        Height = @height,
+                        Color = @color,
+                        OutlineColor = @outlineColor,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enters the 'inspect' mode. In this mode, elements that user is hovering over are highlighted.
             /// Backend then generates 'inspectNodeRequested' event upon element selection.
             /// </summary>
-            public Task SetInspectMode()
+            /// <param name="mode">
+            /// Set an inspection mode.
+            /// </param>
+            /// <param name="highlightConfig">
+            /// A descriptor for the highlight appearance of hovered-over nodes. May be omitted if `enabled
+            /// == false`.
+            /// </param>
+            public Task SetInspectMode
+            (
+                Protocol.Overlay.InspectMode @mode, 
+                Protocol.Overlay.HighlightConfig @highlightConfig = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.SetInspectModeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.SetInspectModeCommand
+                    {
+                        Mode = @mode,
+                        HighlightConfig = @highlightConfig,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task SetPausedInDebuggerMessage()
+            /// <param name="message">
+            /// The message to display, also triggers resume and step over controls.
+            /// </param>
+            public Task SetPausedInDebuggerMessage
+            (
+                string @message = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.SetPausedInDebuggerMessageCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.SetPausedInDebuggerMessageCommand
+                    {
+                        Message = @message,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests that backend shows debug borders on layers
             /// </summary>
-            public Task SetShowDebugBorders()
+            /// <param name="show">
+            /// True for showing debug borders
+            /// </param>
+            public Task SetShowDebugBorders
+            (
+                bool @show, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.SetShowDebugBordersCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.SetShowDebugBordersCommand
+                    {
+                        Show = @show,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests that backend shows the FPS counter
             /// </summary>
-            public Task SetShowFPSCounter()
+            /// <param name="show">
+            /// True for showing the FPS counter
+            /// </param>
+            public Task SetShowFPSCounter
+            (
+                bool @show, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.SetShowFPSCounterCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.SetShowFPSCounterCommand
+                    {
+                        Show = @show,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests that backend shows paint rectangles
             /// </summary>
-            public Task SetShowPaintRects()
+            /// <param name="result">
+            /// True for showing paint rectangles
+            /// </param>
+            public Task SetShowPaintRects
+            (
+                bool @result, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.SetShowPaintRectsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.SetShowPaintRectsCommand
+                    {
+                        Result = @result,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests that backend shows scroll bottleneck rects
             /// </summary>
-            public Task SetShowScrollBottleneckRects()
+            /// <param name="show">
+            /// True for showing scroll bottleneck rects
+            /// </param>
+            public Task SetShowScrollBottleneckRects
+            (
+                bool @show, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.SetShowScrollBottleneckRectsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.SetShowScrollBottleneckRectsCommand
+                    {
+                        Show = @show,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Requests that backend shows hit-test borders on layers
             /// </summary>
-            public Task SetShowHitTestBorders()
+            /// <param name="show">
+            /// True for showing hit-test borders
+            /// </param>
+            public Task SetShowHitTestBorders
+            (
+                bool @show, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.SetShowHitTestBordersCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.SetShowHitTestBordersCommand
+                    {
+                        Show = @show,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Paints viewport size upon main frame resize.
             /// </summary>
-            public Task SetShowViewportSizeOnResize()
+            /// <param name="show">
+            /// Whether to paint size or not.
+            /// </param>
+            public Task SetShowViewportSizeOnResize
+            (
+                bool @show, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.SetShowViewportSizeOnResizeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.SetShowViewportSizeOnResizeCommand
+                    {
+                        Show = @show,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task SetSuspended()
+            /// <param name="suspended">
+            /// Whether overlay should be suspended and not consume any resources until resumed.
+            /// </param>
+            public Task SetSuspended
+            (
+                bool @suspended, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Overlay.SetSuspendedCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Overlay.SetSuspendedCommand
+                    {
+                        Suspended = @suspended,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -2423,108 +6864,302 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Deprecated, please use addScriptToEvaluateOnNewDocument instead.
             /// </summary>
+            /// <param name="scriptSource" />
             [Obsolete]
-            public Task<Protocol.Page.AddScriptToEvaluateOnLoadResponse> AddScriptToEvaluateOnLoad()
+            public Task<Protocol.Page.AddScriptToEvaluateOnLoadResponse> AddScriptToEvaluateOnLoad
+            (
+                string @scriptSource, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.AddScriptToEvaluateOnLoadCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.AddScriptToEvaluateOnLoadCommand
+                    {
+                        ScriptSource = @scriptSource,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Evaluates given script in every frame upon creation (before loading frame's scripts).
             /// </summary>
-            public Task<Protocol.Page.AddScriptToEvaluateOnNewDocumentResponse> AddScriptToEvaluateOnNewDocument()
+            /// <param name="source" />
+            /// <param name="worldName">
+            /// If specified, creates an isolated world with the given name and evaluates given script in it.
+            /// This world name will be used as the ExecutionContextDescription::name when the corresponding
+            /// event is emitted.
+            /// </param>
+            public Task<Protocol.Page.AddScriptToEvaluateOnNewDocumentResponse> AddScriptToEvaluateOnNewDocument
+            (
+                string @source, 
+                string @worldName = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.AddScriptToEvaluateOnNewDocumentCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.AddScriptToEvaluateOnNewDocumentCommand
+                    {
+                        Source = @source,
+                        WorldName = @worldName,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Brings page to front (activates tab).
             /// </summary>
-            public Task BringToFront()
+            public Task BringToFront
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.BringToFrontCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.BringToFrontCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Capture page screenshot.
             /// </summary>
-            public Task<Protocol.Page.CaptureScreenshotResponse> CaptureScreenshot()
+            /// <param name="format">
+            /// Image compression format (defaults to png).
+            /// </param>
+            /// <param name="quality">
+            /// Compression quality from range [0..100] (jpeg only).
+            /// </param>
+            /// <param name="clip">
+            /// Capture the screenshot of a given region only.
+            /// </param>
+            /// <param name="fromSurface">
+            /// Capture the screenshot from the surface, rather than the view. Defaults to true.
+            /// </param>
+            public Task<Protocol.Page.CaptureScreenshotResponse> CaptureScreenshot
+            (
+                string @format = default, 
+                int? @quality = default, 
+                Protocol.Page.Viewport @clip = default, 
+                bool? @fromSurface = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.CaptureScreenshotCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.CaptureScreenshotCommand
+                    {
+                        Format = @format,
+                        Quality = @quality,
+                        Clip = @clip,
+                        FromSurface = @fromSurface,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns a snapshot of the page as a string. For MHTML format, the serialization includes
             /// iframes, shadow DOM, external resources, and element-inline styles.
             /// </summary>
-            public Task<Protocol.Page.CaptureSnapshotResponse> CaptureSnapshot()
+            /// <param name="format">
+            /// Format (defaults to mhtml).
+            /// </param>
+            public Task<Protocol.Page.CaptureSnapshotResponse> CaptureSnapshot
+            (
+                string @format = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.CaptureSnapshotCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.CaptureSnapshotCommand
+                    {
+                        Format = @format,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Clears the overriden device metrics.
             /// </summary>
             [Obsolete]
-            public Task ClearDeviceMetricsOverride()
+            public Task ClearDeviceMetricsOverride
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.ClearDeviceMetricsOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.ClearDeviceMetricsOverrideCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Clears the overridden Device Orientation.
             /// </summary>
             [Obsolete]
-            public Task ClearDeviceOrientationOverride()
+            public Task ClearDeviceOrientationOverride
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.ClearDeviceOrientationOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.ClearDeviceOrientationOverrideCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Clears the overriden Geolocation Position and Error.
             /// </summary>
             [Obsolete]
-            public Task ClearGeolocationOverride()
+            public Task ClearGeolocationOverride
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.ClearGeolocationOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.ClearGeolocationOverrideCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Creates an isolated world for the given frame.
             /// </summary>
-            public Task<Protocol.Page.CreateIsolatedWorldResponse> CreateIsolatedWorld()
+            /// <param name="frameId">
+            /// Id of the frame in which the isolated world should be created.
+            /// </param>
+            /// <param name="worldName">
+            /// An optional name which is reported in the Execution Context.
+            /// </param>
+            /// <param name="grantUniveralAccess">
+            /// Whether or not universal access should be granted to the isolated world. This is a powerful
+            /// option, use with caution.
+            /// </param>
+            public Task<Protocol.Page.CreateIsolatedWorldResponse> CreateIsolatedWorld
+            (
+                Protocol.Page.FrameId @frameId, 
+                string @worldName = default, 
+                bool? @grantUniveralAccess = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.CreateIsolatedWorldCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.CreateIsolatedWorldCommand
+                    {
+                        FrameId = @frameId,
+                        WorldName = @worldName,
+                        GrantUniveralAccess = @grantUniveralAccess,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Deletes browser cookie with given name, domain and path.
             /// </summary>
+            /// <param name="cookieName">
+            /// Name of the cookie to remove.
+            /// </param>
+            /// <param name="url">
+            /// URL to match cooke domain and path.
+            /// </param>
             [Obsolete]
-            public Task DeleteCookie()
+            public Task DeleteCookie
+            (
+                string @cookieName, 
+                string @url, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.DeleteCookieCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.DeleteCookieCommand
+                    {
+                        CookieName = @cookieName,
+                        Url = @url,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Disables page domain notifications.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables page domain notifications.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task<Protocol.Page.GetAppManifestResponse> GetAppManifest()
+            public Task<Protocol.Page.GetAppManifestResponse> GetAppManifest
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.GetAppManifestCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.GetAppManifestCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -2532,146 +7167,515 @@ namespace DumbPrograms.ChromeDevTools
             /// information in the `cookies` field.
             /// </summary>
             [Obsolete]
-            public Task<Protocol.Page.GetCookiesResponse> GetCookies()
+            public Task<Protocol.Page.GetCookiesResponse> GetCookies
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.GetCookiesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.GetCookiesCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns present frame tree structure.
             /// </summary>
-            public Task<Protocol.Page.GetFrameTreeResponse> GetFrameTree()
+            public Task<Protocol.Page.GetFrameTreeResponse> GetFrameTree
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.GetFrameTreeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.GetFrameTreeCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns metrics relating to the layouting of the page, such as viewport bounds/scale.
             /// </summary>
-            public Task<Protocol.Page.GetLayoutMetricsResponse> GetLayoutMetrics()
+            public Task<Protocol.Page.GetLayoutMetricsResponse> GetLayoutMetrics
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.GetLayoutMetricsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.GetLayoutMetricsCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns navigation history for the current page.
             /// </summary>
-            public Task<Protocol.Page.GetNavigationHistoryResponse> GetNavigationHistory()
+            public Task<Protocol.Page.GetNavigationHistoryResponse> GetNavigationHistory
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.GetNavigationHistoryCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.GetNavigationHistoryCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Resets navigation history for the current page.
             /// </summary>
-            public Task ResetNavigationHistory()
+            public Task ResetNavigationHistory
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.ResetNavigationHistoryCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.ResetNavigationHistoryCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns content of the given resource.
             /// </summary>
-            public Task<Protocol.Page.GetResourceContentResponse> GetResourceContent()
+            /// <param name="frameId">
+            /// Frame id to get resource for.
+            /// </param>
+            /// <param name="url">
+            /// URL of the resource to get content for.
+            /// </param>
+            public Task<Protocol.Page.GetResourceContentResponse> GetResourceContent
+            (
+                Protocol.Page.FrameId @frameId, 
+                string @url, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.GetResourceContentCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.GetResourceContentCommand
+                    {
+                        FrameId = @frameId,
+                        Url = @url,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns present frame / resource tree structure.
             /// </summary>
-            public Task<Protocol.Page.GetResourceTreeResponse> GetResourceTree()
+            public Task<Protocol.Page.GetResourceTreeResponse> GetResourceTree
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.GetResourceTreeCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.GetResourceTreeCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Accepts or dismisses a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload).
             /// </summary>
-            public Task HandleJavaScriptDialog()
+            /// <param name="accept">
+            /// Whether to accept or dismiss the dialog.
+            /// </param>
+            /// <param name="promptText">
+            /// The text to enter into the dialog prompt before accepting. Used only if this is a prompt
+            /// dialog.
+            /// </param>
+            public Task HandleJavaScriptDialog
+            (
+                bool @accept, 
+                string @promptText = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.HandleJavaScriptDialogCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.HandleJavaScriptDialogCommand
+                    {
+                        Accept = @accept,
+                        PromptText = @promptText,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Navigates current page to the given URL.
             /// </summary>
-            public Task<Protocol.Page.NavigateResponse> Navigate()
+            /// <param name="url">
+            /// URL to navigate the page to.
+            /// </param>
+            /// <param name="referrer">
+            /// Referrer URL.
+            /// </param>
+            /// <param name="transitionType">
+            /// Intended transition type.
+            /// </param>
+            /// <param name="frameId">
+            /// Frame id to navigate, if not specified navigates the top frame.
+            /// </param>
+            public Task<Protocol.Page.NavigateResponse> Navigate
+            (
+                string @url, 
+                string @referrer = default, 
+                Protocol.Page.TransitionType @transitionType = default, 
+                Protocol.Page.FrameId @frameId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.NavigateCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.NavigateCommand
+                    {
+                        Url = @url,
+                        Referrer = @referrer,
+                        TransitionType = @transitionType,
+                        FrameId = @frameId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Navigates current page to the given history entry.
             /// </summary>
-            public Task NavigateToHistoryEntry()
+            /// <param name="entryId">
+            /// Unique id of the entry to navigate to.
+            /// </param>
+            public Task NavigateToHistoryEntry
+            (
+                int @entryId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.NavigateToHistoryEntryCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.NavigateToHistoryEntryCommand
+                    {
+                        EntryId = @entryId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Print page as PDF.
             /// </summary>
-            public Task<Protocol.Page.PrintToPDFResponse> PrintToPDF()
+            /// <param name="landscape">
+            /// Paper orientation. Defaults to false.
+            /// </param>
+            /// <param name="displayHeaderFooter">
+            /// Display header and footer. Defaults to false.
+            /// </param>
+            /// <param name="printBackground">
+            /// Print background graphics. Defaults to false.
+            /// </param>
+            /// <param name="scale">
+            /// Scale of the webpage rendering. Defaults to 1.
+            /// </param>
+            /// <param name="paperWidth">
+            /// Paper width in inches. Defaults to 8.5 inches.
+            /// </param>
+            /// <param name="paperHeight">
+            /// Paper height in inches. Defaults to 11 inches.
+            /// </param>
+            /// <param name="marginTop">
+            /// Top margin in inches. Defaults to 1cm (~0.4 inches).
+            /// </param>
+            /// <param name="marginBottom">
+            /// Bottom margin in inches. Defaults to 1cm (~0.4 inches).
+            /// </param>
+            /// <param name="marginLeft">
+            /// Left margin in inches. Defaults to 1cm (~0.4 inches).
+            /// </param>
+            /// <param name="marginRight">
+            /// Right margin in inches. Defaults to 1cm (~0.4 inches).
+            /// </param>
+            /// <param name="pageRanges">
+            /// Paper ranges to print, e.g., '1-5, 8, 11-13'. Defaults to the empty string, which means
+            /// print all pages.
+            /// </param>
+            /// <param name="ignoreInvalidPageRanges">
+            /// Whether to silently ignore invalid but successfully parsed page ranges, such as '3-2'.
+            /// Defaults to false.
+            /// </param>
+            /// <param name="headerTemplate">
+            /// HTML template for the print header. Should be valid HTML markup with following
+            /// classes used to inject printing values into them:
+            /// - `date`: formatted print date
+            /// - `title`: document title
+            /// - `url`: document location
+            /// - `pageNumber`: current page number
+            /// - `totalPages`: total pages in the document
+            /// 
+            /// For example, `&lt;span class=title&gt;&lt;/span&gt;` would generate span containing the title.
+            /// </param>
+            /// <param name="footerTemplate">
+            /// HTML template for the print footer. Should use the same format as the `headerTemplate`.
+            /// </param>
+            /// <param name="preferCSSPageSize">
+            /// Whether or not to prefer page size as defined by css. Defaults to false,
+            /// in which case the content will be scaled to fit the paper size.
+            /// </param>
+            public Task<Protocol.Page.PrintToPDFResponse> PrintToPDF
+            (
+                bool? @landscape = default, 
+                bool? @displayHeaderFooter = default, 
+                bool? @printBackground = default, 
+                double? @scale = default, 
+                double? @paperWidth = default, 
+                double? @paperHeight = default, 
+                double? @marginTop = default, 
+                double? @marginBottom = default, 
+                double? @marginLeft = default, 
+                double? @marginRight = default, 
+                string @pageRanges = default, 
+                bool? @ignoreInvalidPageRanges = default, 
+                string @headerTemplate = default, 
+                string @footerTemplate = default, 
+                bool? @preferCSSPageSize = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.PrintToPDFCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.PrintToPDFCommand
+                    {
+                        Landscape = @landscape,
+                        DisplayHeaderFooter = @displayHeaderFooter,
+                        PrintBackground = @printBackground,
+                        Scale = @scale,
+                        PaperWidth = @paperWidth,
+                        PaperHeight = @paperHeight,
+                        MarginTop = @marginTop,
+                        MarginBottom = @marginBottom,
+                        MarginLeft = @marginLeft,
+                        MarginRight = @marginRight,
+                        PageRanges = @pageRanges,
+                        IgnoreInvalidPageRanges = @ignoreInvalidPageRanges,
+                        HeaderTemplate = @headerTemplate,
+                        FooterTemplate = @footerTemplate,
+                        PreferCSSPageSize = @preferCSSPageSize,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Reloads given page optionally ignoring the cache.
             /// </summary>
-            public Task Reload()
+            /// <param name="ignoreCache">
+            /// If true, browser cache is ignored (as if the user pressed Shift+refresh).
+            /// </param>
+            /// <param name="scriptToEvaluateOnLoad">
+            /// If set, the script will be injected into all frames of the inspected page after reload.
+            /// Argument will be ignored if reloading dataURL origin.
+            /// </param>
+            public Task Reload
+            (
+                bool? @ignoreCache = default, 
+                string @scriptToEvaluateOnLoad = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.ReloadCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.ReloadCommand
+                    {
+                        IgnoreCache = @ignoreCache,
+                        ScriptToEvaluateOnLoad = @scriptToEvaluateOnLoad,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Deprecated, please use removeScriptToEvaluateOnNewDocument instead.
             /// </summary>
+            /// <param name="identifier" />
             [Obsolete]
-            public Task RemoveScriptToEvaluateOnLoad()
+            public Task RemoveScriptToEvaluateOnLoad
+            (
+                Protocol.Page.ScriptIdentifier @identifier, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.RemoveScriptToEvaluateOnLoadCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.RemoveScriptToEvaluateOnLoadCommand
+                    {
+                        Identifier = @identifier,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Removes given script from the list.
             /// </summary>
-            public Task RemoveScriptToEvaluateOnNewDocument()
+            /// <param name="identifier" />
+            public Task RemoveScriptToEvaluateOnNewDocument
+            (
+                Protocol.Page.ScriptIdentifier @identifier, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.RemoveScriptToEvaluateOnNewDocumentCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.RemoveScriptToEvaluateOnNewDocumentCommand
+                    {
+                        Identifier = @identifier,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Acknowledges that a screencast frame has been received by the frontend.
             /// </summary>
-            public Task ScreencastFrameAck()
+            /// <param name="sessionId">
+            /// Frame number.
+            /// </param>
+            public Task ScreencastFrameAck
+            (
+                int @sessionId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.ScreencastFrameAckCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.ScreencastFrameAckCommand
+                    {
+                        SessionId = @sessionId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Searches for given string in resource content.
             /// </summary>
-            public Task<Protocol.Page.SearchInResourceResponse> SearchInResource()
+            /// <param name="frameId">
+            /// Frame id for resource to search in.
+            /// </param>
+            /// <param name="url">
+            /// URL of the resource to search in.
+            /// </param>
+            /// <param name="query">
+            /// String to search for.
+            /// </param>
+            /// <param name="caseSensitive">
+            /// If true, search is case sensitive.
+            /// </param>
+            /// <param name="isRegex">
+            /// If true, treats string parameter as regex.
+            /// </param>
+            public Task<Protocol.Page.SearchInResourceResponse> SearchInResource
+            (
+                Protocol.Page.FrameId @frameId, 
+                string @url, 
+                string @query, 
+                bool? @caseSensitive = default, 
+                bool? @isRegex = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SearchInResourceCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SearchInResourceCommand
+                    {
+                        FrameId = @frameId,
+                        Url = @url,
+                        Query = @query,
+                        CaseSensitive = @caseSensitive,
+                        IsRegex = @isRegex,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enable Chrome's experimental ad filter on all sites.
             /// </summary>
-            public Task SetAdBlockingEnabled()
+            /// <param name="enabled">
+            /// Whether to block ads.
+            /// </param>
+            public Task SetAdBlockingEnabled
+            (
+                bool @enabled, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetAdBlockingEnabledCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetAdBlockingEnabledCommand
+                    {
+                        Enabled = @enabled,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enable page Content Security Policy by-passing.
             /// </summary>
-            public Task SetBypassCSP()
+            /// <param name="enabled">
+            /// Whether to bypass page CSP.
+            /// </param>
+            public Task SetBypassCSP
+            (
+                bool @enabled, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetBypassCSPCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetBypassCSPCommand
+                    {
+                        Enabled = @enabled,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -2679,110 +7683,402 @@ namespace DumbPrograms.ChromeDevTools
             /// window.innerWidth, window.innerHeight, and "device-width"/"device-height"-related CSS media
             /// query results).
             /// </summary>
+            /// <param name="width">
+            /// Overriding width value in pixels (minimum 0, maximum 10000000). 0 disables the override.
+            /// </param>
+            /// <param name="height">
+            /// Overriding height value in pixels (minimum 0, maximum 10000000). 0 disables the override.
+            /// </param>
+            /// <param name="deviceScaleFactor">
+            /// Overriding device scale factor value. 0 disables the override.
+            /// </param>
+            /// <param name="mobile">
+            /// Whether to emulate mobile device. This includes viewport meta tag, overlay scrollbars, text
+            /// autosizing and more.
+            /// </param>
+            /// <param name="scale">
+            /// Scale to apply to resulting view image.
+            /// </param>
+            /// <param name="screenWidth">
+            /// Overriding screen width value in pixels (minimum 0, maximum 10000000).
+            /// </param>
+            /// <param name="screenHeight">
+            /// Overriding screen height value in pixels (minimum 0, maximum 10000000).
+            /// </param>
+            /// <param name="positionX">
+            /// Overriding view X position on screen in pixels (minimum 0, maximum 10000000).
+            /// </param>
+            /// <param name="positionY">
+            /// Overriding view Y position on screen in pixels (minimum 0, maximum 10000000).
+            /// </param>
+            /// <param name="dontSetVisibleSize">
+            /// Do not set visible view size, rely upon explicit setVisibleSize call.
+            /// </param>
+            /// <param name="screenOrientation">
+            /// Screen orientation override.
+            /// </param>
+            /// <param name="viewport">
+            /// The viewport dimensions and scale. If not set, the override is cleared.
+            /// </param>
             [Obsolete]
-            public Task SetDeviceMetricsOverride()
+            public Task SetDeviceMetricsOverride
+            (
+                int @width, 
+                int @height, 
+                double @deviceScaleFactor, 
+                bool @mobile, 
+                double? @scale = default, 
+                int? @screenWidth = default, 
+                int? @screenHeight = default, 
+                int? @positionX = default, 
+                int? @positionY = default, 
+                bool? @dontSetVisibleSize = default, 
+                Protocol.Emulation.ScreenOrientation @screenOrientation = default, 
+                Protocol.Page.Viewport @viewport = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetDeviceMetricsOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetDeviceMetricsOverrideCommand
+                    {
+                        Width = @width,
+                        Height = @height,
+                        DeviceScaleFactor = @deviceScaleFactor,
+                        Mobile = @mobile,
+                        Scale = @scale,
+                        ScreenWidth = @screenWidth,
+                        ScreenHeight = @screenHeight,
+                        PositionX = @positionX,
+                        PositionY = @positionY,
+                        DontSetVisibleSize = @dontSetVisibleSize,
+                        ScreenOrientation = @screenOrientation,
+                        Viewport = @viewport,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Overrides the Device Orientation.
             /// </summary>
+            /// <param name="alpha">
+            /// Mock alpha
+            /// </param>
+            /// <param name="beta">
+            /// Mock beta
+            /// </param>
+            /// <param name="gamma">
+            /// Mock gamma
+            /// </param>
             [Obsolete]
-            public Task SetDeviceOrientationOverride()
+            public Task SetDeviceOrientationOverride
+            (
+                double @alpha, 
+                double @beta, 
+                double @gamma, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetDeviceOrientationOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetDeviceOrientationOverrideCommand
+                    {
+                        Alpha = @alpha,
+                        Beta = @beta,
+                        Gamma = @gamma,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Set generic font families.
             /// </summary>
-            public Task SetFontFamilies()
+            /// <param name="fontFamilies">
+            /// Specifies font families to set. If a font family is not specified, it won't be changed.
+            /// </param>
+            public Task SetFontFamilies
+            (
+                Protocol.Page.FontFamilies @fontFamilies, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetFontFamiliesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetFontFamiliesCommand
+                    {
+                        FontFamilies = @fontFamilies,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Set default font sizes.
             /// </summary>
-            public Task SetFontSizes()
+            /// <param name="fontSizes">
+            /// Specifies font sizes to set. If a font size is not specified, it won't be changed.
+            /// </param>
+            public Task SetFontSizes
+            (
+                Protocol.Page.FontSizes @fontSizes, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetFontSizesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetFontSizesCommand
+                    {
+                        FontSizes = @fontSizes,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sets given markup as the document's HTML.
             /// </summary>
-            public Task SetDocumentContent()
+            /// <param name="frameId">
+            /// Frame id to set HTML for.
+            /// </param>
+            /// <param name="html">
+            /// HTML content to set.
+            /// </param>
+            public Task SetDocumentContent
+            (
+                Protocol.Page.FrameId @frameId, 
+                string @html, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetDocumentContentCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetDocumentContentCommand
+                    {
+                        FrameId = @frameId,
+                        Html = @html,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Set the behavior when downloading a file.
             /// </summary>
-            public Task SetDownloadBehavior()
+            /// <param name="behavior">
+            /// Whether to allow all or deny all download requests, or use default Chrome behavior if
+            /// available (otherwise deny).
+            /// </param>
+            /// <param name="downloadPath">
+            /// The default path to save downloaded files to. This is requred if behavior is set to 'allow'
+            /// </param>
+            public Task SetDownloadBehavior
+            (
+                string @behavior, 
+                string @downloadPath = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetDownloadBehaviorCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetDownloadBehaviorCommand
+                    {
+                        Behavior = @behavior,
+                        DownloadPath = @downloadPath,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Overrides the Geolocation Position or Error. Omitting any of the parameters emulates position
             /// unavailable.
             /// </summary>
+            /// <param name="latitude">
+            /// Mock latitude
+            /// </param>
+            /// <param name="longitude">
+            /// Mock longitude
+            /// </param>
+            /// <param name="accuracy">
+            /// Mock accuracy
+            /// </param>
             [Obsolete]
-            public Task SetGeolocationOverride()
+            public Task SetGeolocationOverride
+            (
+                double? @latitude = default, 
+                double? @longitude = default, 
+                double? @accuracy = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetGeolocationOverrideCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetGeolocationOverrideCommand
+                    {
+                        Latitude = @latitude,
+                        Longitude = @longitude,
+                        Accuracy = @accuracy,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Controls whether page will emit lifecycle events.
             /// </summary>
-            public Task SetLifecycleEventsEnabled()
+            /// <param name="enabled">
+            /// If true, starts emitting lifecycle events.
+            /// </param>
+            public Task SetLifecycleEventsEnabled
+            (
+                bool @enabled, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetLifecycleEventsEnabledCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetLifecycleEventsEnabledCommand
+                    {
+                        Enabled = @enabled,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Toggles mouse event-based touch event emulation.
             /// </summary>
+            /// <param name="enabled">
+            /// Whether the touch event emulation should be enabled.
+            /// </param>
+            /// <param name="configuration">
+            /// Touch/gesture events configuration. Default: current platform.
+            /// </param>
             [Obsolete]
-            public Task SetTouchEmulationEnabled()
+            public Task SetTouchEmulationEnabled
+            (
+                bool @enabled, 
+                string @configuration = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetTouchEmulationEnabledCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetTouchEmulationEnabledCommand
+                    {
+                        Enabled = @enabled,
+                        Configuration = @configuration,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Starts sending each frame using the `screencastFrame` event.
             /// </summary>
-            public Task StartScreencast()
+            /// <param name="format">
+            /// Image compression format.
+            /// </param>
+            /// <param name="quality">
+            /// Compression quality from range [0..100].
+            /// </param>
+            /// <param name="maxWidth">
+            /// Maximum screenshot width.
+            /// </param>
+            /// <param name="maxHeight">
+            /// Maximum screenshot height.
+            /// </param>
+            /// <param name="everyNthFrame">
+            /// Send every n-th frame.
+            /// </param>
+            public Task StartScreencast
+            (
+                string @format = default, 
+                int? @quality = default, 
+                int? @maxWidth = default, 
+                int? @maxHeight = default, 
+                int? @everyNthFrame = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.StartScreencastCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.StartScreencastCommand
+                    {
+                        Format = @format,
+                        Quality = @quality,
+                        MaxWidth = @maxWidth,
+                        MaxHeight = @maxHeight,
+                        EveryNthFrame = @everyNthFrame,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Force the page stop all navigations and pending resource fetches.
             /// </summary>
-            public Task StopLoading()
+            public Task StopLoading
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.StopLoadingCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.StopLoadingCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Crashes renderer on the IO thread, generates minidumps.
             /// </summary>
-            public Task Crash()
+            public Task Crash
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.CrashCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.CrashCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Tries to close page, running its beforeunload hooks, if any.
             /// </summary>
-            public Task Close()
+            public Task Close
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.CloseCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.CloseCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -2790,58 +8086,154 @@ namespace DumbPrograms.ChromeDevTools
             /// It will transition the page to the given state according to:
             /// https://github.com/WICG/web-lifecycle/
             /// </summary>
-            public Task SetWebLifecycleState()
+            /// <param name="state">
+            /// Target lifecycle state
+            /// </param>
+            public Task SetWebLifecycleState
+            (
+                string @state, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetWebLifecycleStateCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetWebLifecycleStateCommand
+                    {
+                        State = @state,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Stops sending each frame in the `screencastFrame`.
             /// </summary>
-            public Task StopScreencast()
+            public Task StopScreencast
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.StopScreencastCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.StopScreencastCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Forces compilation cache to be generated for every subresource script.
             /// </summary>
-            public Task SetProduceCompilationCache()
+            /// <param name="enabled" />
+            public Task SetProduceCompilationCache
+            (
+                bool @enabled, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.SetProduceCompilationCacheCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.SetProduceCompilationCacheCommand
+                    {
+                        Enabled = @enabled,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Seeds compilation cache for given url. Compilation cache does not survive
             /// cross-process navigation.
             /// </summary>
-            public Task AddCompilationCache()
+            /// <param name="url" />
+            /// <param name="data">
+            /// Base64-encoded data
+            /// </param>
+            public Task AddCompilationCache
+            (
+                string @url, 
+                string @data, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.AddCompilationCacheCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.AddCompilationCacheCommand
+                    {
+                        Url = @url,
+                        Data = @data,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Clears seeded compilation cache.
             /// </summary>
-            public Task ClearCompilationCache()
+            public Task ClearCompilationCache
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.ClearCompilationCacheCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.ClearCompilationCacheCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Generates a report for testing.
             /// </summary>
-            public Task GenerateTestReport()
+            /// <param name="message">
+            /// Message to be displayed in the report.
+            /// </param>
+            /// <param name="group">
+            /// Specifies the endpoint group to deliver the report to.
+            /// </param>
+            public Task GenerateTestReport
+            (
+                string @message, 
+                string @group = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.GenerateTestReportCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.GenerateTestReportCommand
+                    {
+                        Message = @message,
+                        Group = @group,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Pauses page execution. Can be resumed using generic Runtime.runIfWaitingForDebugger.
             /// </summary>
-            public Task WaitForDebugger()
+            public Task WaitForDebugger
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Page.WaitForDebuggerCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Page.WaitForDebuggerCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -2857,17 +8249,37 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disable collecting and reporting metrics.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Performance.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Performance.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enable collecting and reporting metrics.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Performance.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Performance.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -2875,17 +8287,42 @@ namespace DumbPrograms.ChromeDevTools
             /// Note that this must be called before enabling metrics collection. Calling
             /// this method while metrics collection is enabled returns an error.
             /// </summary>
-            public Task SetTimeDomain()
+            /// <param name="timeDomain">
+            /// Time domain
+            /// </param>
+            public Task SetTimeDomain
+            (
+                string @timeDomain, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Performance.SetTimeDomainCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Performance.SetTimeDomainCommand
+                    {
+                        TimeDomain = @timeDomain,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Retrieve current values of run-time metrics.
             /// </summary>
-            public Task<Protocol.Performance.GetMetricsResponse> GetMetrics()
+            public Task<Protocol.Performance.GetMetricsResponse> GetMetrics
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Performance.GetMetricsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Performance.GetMetricsCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -2901,44 +8338,114 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables tracking security state changes.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Security.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Security.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables tracking security state changes.
             /// </summary>
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Security.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Security.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enable/disable whether all certificate errors should be ignored.
             /// </summary>
-            public Task SetIgnoreCertificateErrors()
+            /// <param name="ignore">
+            /// If true, all certificate errors will be ignored.
+            /// </param>
+            public Task SetIgnoreCertificateErrors
+            (
+                bool @ignore, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Security.SetIgnoreCertificateErrorsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Security.SetIgnoreCertificateErrorsCommand
+                    {
+                        Ignore = @ignore,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Handles a certificate error that fired a certificateError event.
             /// </summary>
+            /// <param name="eventId">
+            /// The ID of the event.
+            /// </param>
+            /// <param name="action">
+            /// The action to take on the certificate error.
+            /// </param>
             [Obsolete]
-            public Task HandleCertificateError()
+            public Task HandleCertificateError
+            (
+                int @eventId, 
+                Protocol.Security.CertificateErrorAction @action, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Security.HandleCertificateErrorCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Security.HandleCertificateErrorCommand
+                    {
+                        EventId = @eventId,
+                        Action = @action,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enable/disable overriding certificate errors. If enabled, all certificate error events need to
             /// be handled by the DevTools client and should be answered with `handleCertificateError` commands.
             /// </summary>
+            /// <param name="override">
+            /// If true, certificate errors will be overridden.
+            /// </param>
             [Obsolete]
-            public Task SetOverrideCertificateErrors()
+            public Task SetOverrideCertificateErrors
+            (
+                bool @override, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Security.SetOverrideCertificateErrorsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Security.SetOverrideCertificateErrorsCommand
+                    {
+                        Override = @override,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -2951,64 +8458,226 @@ namespace DumbPrograms.ChromeDevTools
                 InspectionClient = inspectionClient;
             }
 
-            public Task DeliverPushMessage()
+            /// <param name="origin" />
+            /// <param name="registrationId" />
+            /// <param name="data" />
+            public Task DeliverPushMessage
+            (
+                string @origin, 
+                string @registrationId, 
+                string @data, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ServiceWorker.DeliverPushMessageCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ServiceWorker.DeliverPushMessageCommand
+                    {
+                        Origin = @origin,
+                        RegistrationId = @registrationId,
+                        Data = @data,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ServiceWorker.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ServiceWorker.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task DispatchSyncEvent()
+            /// <param name="origin" />
+            /// <param name="registrationId" />
+            /// <param name="tag" />
+            /// <param name="lastChance" />
+            public Task DispatchSyncEvent
+            (
+                string @origin, 
+                string @registrationId, 
+                string @tag, 
+                bool @lastChance, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ServiceWorker.DispatchSyncEventCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ServiceWorker.DispatchSyncEventCommand
+                    {
+                        Origin = @origin,
+                        RegistrationId = @registrationId,
+                        Tag = @tag,
+                        LastChance = @lastChance,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task Enable()
+            public Task Enable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ServiceWorker.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ServiceWorker.EnableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task InspectWorker()
+            /// <param name="versionId" />
+            public Task InspectWorker
+            (
+                string @versionId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ServiceWorker.InspectWorkerCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ServiceWorker.InspectWorkerCommand
+                    {
+                        VersionId = @versionId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task SetForceUpdateOnPageLoad()
+            /// <param name="forceUpdateOnPageLoad" />
+            public Task SetForceUpdateOnPageLoad
+            (
+                bool @forceUpdateOnPageLoad, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ServiceWorker.SetForceUpdateOnPageLoadCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ServiceWorker.SetForceUpdateOnPageLoadCommand
+                    {
+                        ForceUpdateOnPageLoad = @forceUpdateOnPageLoad,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task SkipWaiting()
+            /// <param name="scopeURL" />
+            public Task SkipWaiting
+            (
+                string @scopeURL, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ServiceWorker.SkipWaitingCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ServiceWorker.SkipWaitingCommand
+                    {
+                        ScopeURL = @scopeURL,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task StartWorker()
+            /// <param name="scopeURL" />
+            public Task StartWorker
+            (
+                string @scopeURL, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ServiceWorker.StartWorkerCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ServiceWorker.StartWorkerCommand
+                    {
+                        ScopeURL = @scopeURL,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task StopAllWorkers()
+            public Task StopAllWorkers
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ServiceWorker.StopAllWorkersCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ServiceWorker.StopAllWorkersCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task StopWorker()
+            /// <param name="versionId" />
+            public Task StopWorker
+            (
+                string @versionId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ServiceWorker.StopWorkerCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ServiceWorker.StopWorkerCommand
+                    {
+                        VersionId = @versionId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task Unregister()
+            /// <param name="scopeURL" />
+            public Task Unregister
+            (
+                string @scopeURL, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ServiceWorker.UnregisterCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ServiceWorker.UnregisterCommand
+                    {
+                        ScopeURL = @scopeURL,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
-            public Task UpdateRegistration()
+            /// <param name="scopeURL" />
+            public Task UpdateRegistration
+            (
+                string @scopeURL, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.ServiceWorker.UpdateRegistrationCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.ServiceWorker.UpdateRegistrationCommand
+                    {
+                        ScopeURL = @scopeURL,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -3024,49 +8693,144 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears storage for origin.
             /// </summary>
-            public Task ClearDataForOrigin()
+            /// <param name="origin">
+            /// Security origin.
+            /// </param>
+            /// <param name="storageTypes">
+            /// Comma separated list of StorageType to clear.
+            /// </param>
+            public Task ClearDataForOrigin
+            (
+                string @origin, 
+                string @storageTypes, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Storage.ClearDataForOriginCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Storage.ClearDataForOriginCommand
+                    {
+                        Origin = @origin,
+                        StorageTypes = @storageTypes,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns usage and quota in bytes.
             /// </summary>
-            public Task<Protocol.Storage.GetUsageAndQuotaResponse> GetUsageAndQuota()
+            /// <param name="origin">
+            /// Security origin.
+            /// </param>
+            public Task<Protocol.Storage.GetUsageAndQuotaResponse> GetUsageAndQuota
+            (
+                string @origin, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Storage.GetUsageAndQuotaCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Storage.GetUsageAndQuotaCommand
+                    {
+                        Origin = @origin,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Registers origin to be notified when an update occurs to its cache storage list.
             /// </summary>
-            public Task TrackCacheStorageForOrigin()
+            /// <param name="origin">
+            /// Security origin.
+            /// </param>
+            public Task TrackCacheStorageForOrigin
+            (
+                string @origin, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Storage.TrackCacheStorageForOriginCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Storage.TrackCacheStorageForOriginCommand
+                    {
+                        Origin = @origin,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Registers origin to be notified when an update occurs to its IndexedDB.
             /// </summary>
-            public Task TrackIndexedDBForOrigin()
+            /// <param name="origin">
+            /// Security origin.
+            /// </param>
+            public Task TrackIndexedDBForOrigin
+            (
+                string @origin, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Storage.TrackIndexedDBForOriginCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Storage.TrackIndexedDBForOriginCommand
+                    {
+                        Origin = @origin,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Unregisters origin from receiving notifications for cache storage.
             /// </summary>
-            public Task UntrackCacheStorageForOrigin()
+            /// <param name="origin">
+            /// Security origin.
+            /// </param>
+            public Task UntrackCacheStorageForOrigin
+            (
+                string @origin, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Storage.UntrackCacheStorageForOriginCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Storage.UntrackCacheStorageForOriginCommand
+                    {
+                        Origin = @origin,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Unregisters origin from receiving notifications for IndexedDB.
             /// </summary>
-            public Task UntrackIndexedDBForOrigin()
+            /// <param name="origin">
+            /// Security origin.
+            /// </param>
+            public Task UntrackIndexedDBForOrigin
+            (
+                string @origin, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Storage.UntrackIndexedDBForOriginCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Storage.UntrackIndexedDBForOriginCommand
+                    {
+                        Origin = @origin,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -3082,17 +8846,37 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns information about the system.
             /// </summary>
-            public Task<Protocol.SystemInfo.GetInfoResponse> GetInfo()
+            public Task<Protocol.SystemInfo.GetInfoResponse> GetInfo
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.SystemInfo.GetInfoCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.SystemInfo.GetInfoCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns information about all running processes.
             /// </summary>
-            public Task<Protocol.SystemInfo.GetProcessInfoResponse> GetProcessInfo()
+            public Task<Protocol.SystemInfo.GetProcessInfoResponse> GetProcessInfo
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.SystemInfo.GetProcessInfoCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.SystemInfo.GetProcessInfoCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -3108,33 +8892,87 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Activates (focuses) the target.
             /// </summary>
-            public Task ActivateTarget()
+            /// <param name="targetId" />
+            public Task ActivateTarget
+            (
+                Protocol.Target.TargetID @targetId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.ActivateTargetCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.ActivateTargetCommand
+                    {
+                        TargetId = @targetId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Attaches to the target with given id.
             /// </summary>
-            public Task<Protocol.Target.AttachToTargetResponse> AttachToTarget()
+            /// <param name="targetId" />
+            /// <param name="flatten">
+            /// Enables "flat" access to the session via specifying sessionId attribute in the commands.
+            /// </param>
+            public Task<Protocol.Target.AttachToTargetResponse> AttachToTarget
+            (
+                Protocol.Target.TargetID @targetId, 
+                bool? @flatten = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.AttachToTargetCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.AttachToTargetCommand
+                    {
+                        TargetId = @targetId,
+                        Flatten = @flatten,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Attaches to the browser target, only uses flat sessionId mode.
             /// </summary>
-            public Task<Protocol.Target.AttachToBrowserTargetResponse> AttachToBrowserTarget()
+            public Task<Protocol.Target.AttachToBrowserTargetResponse> AttachToBrowserTarget
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.AttachToBrowserTargetCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.AttachToBrowserTargetCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Closes the target. If the target is a page that gets closed too.
             /// </summary>
-            public Task<Protocol.Target.CloseTargetResponse> CloseTarget()
+            /// <param name="targetId" />
+            public Task<Protocol.Target.CloseTargetResponse> CloseTarget
+            (
+                Protocol.Target.TargetID @targetId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.CloseTargetCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.CloseTargetCommand
+                    {
+                        TargetId = @targetId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -3147,75 +8985,228 @@ namespace DumbPrograms.ChromeDevTools
             /// - `binding.send(json)` - a method to send messages over the remote debugging protocol
             /// - `binding.onmessage = json =&gt; handleMessage(json)` - a callback that will be called for the protocol notifications and command responses.
             /// </summary>
-            public Task ExposeDevToolsProtocol()
+            /// <param name="targetId" />
+            /// <param name="bindingName">
+            /// Binding name, 'cdp' if not specified.
+            /// </param>
+            public Task ExposeDevToolsProtocol
+            (
+                Protocol.Target.TargetID @targetId, 
+                string @bindingName = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.ExposeDevToolsProtocolCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.ExposeDevToolsProtocolCommand
+                    {
+                        TargetId = @targetId,
+                        BindingName = @bindingName,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Creates a new empty BrowserContext. Similar to an incognito profile but you can have more than
             /// one.
             /// </summary>
-            public Task<Protocol.Target.CreateBrowserContextResponse> CreateBrowserContext()
+            public Task<Protocol.Target.CreateBrowserContextResponse> CreateBrowserContext
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.CreateBrowserContextCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.CreateBrowserContextCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns all browser contexts created with `Target.createBrowserContext` method.
             /// </summary>
-            public Task<Protocol.Target.GetBrowserContextsResponse> GetBrowserContexts()
+            public Task<Protocol.Target.GetBrowserContextsResponse> GetBrowserContexts
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.GetBrowserContextsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.GetBrowserContextsCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Creates a new page.
             /// </summary>
-            public Task<Protocol.Target.CreateTargetResponse> CreateTarget()
+            /// <param name="url">
+            /// The initial URL the page will be navigated to.
+            /// </param>
+            /// <param name="width">
+            /// Frame width in DIP (headless chrome only).
+            /// </param>
+            /// <param name="height">
+            /// Frame height in DIP (headless chrome only).
+            /// </param>
+            /// <param name="browserContextId">
+            /// The browser context to create the page in.
+            /// </param>
+            /// <param name="enableBeginFrameControl">
+            /// Whether BeginFrames for this target will be controlled via DevTools (headless chrome only,
+            /// not supported on MacOS yet, false by default).
+            /// </param>
+            public Task<Protocol.Target.CreateTargetResponse> CreateTarget
+            (
+                string @url, 
+                int? @width = default, 
+                int? @height = default, 
+                Protocol.Target.BrowserContextID @browserContextId = default, 
+                bool? @enableBeginFrameControl = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.CreateTargetCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.CreateTargetCommand
+                    {
+                        Url = @url,
+                        Width = @width,
+                        Height = @height,
+                        BrowserContextId = @browserContextId,
+                        EnableBeginFrameControl = @enableBeginFrameControl,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Detaches session with given id.
             /// </summary>
-            public Task DetachFromTarget()
+            /// <param name="sessionId">
+            /// Session to detach.
+            /// </param>
+            /// <param name="targetId">
+            /// Deprecated.
+            /// </param>
+            public Task DetachFromTarget
+            (
+                Protocol.Target.SessionID @sessionId = default, 
+                Protocol.Target.TargetID @targetId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.DetachFromTargetCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.DetachFromTargetCommand
+                    {
+                        SessionId = @sessionId,
+                        TargetId = @targetId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Deletes a BrowserContext. All the belonging pages will be closed without calling their
             /// beforeunload hooks.
             /// </summary>
-            public Task DisposeBrowserContext()
+            /// <param name="browserContextId" />
+            public Task DisposeBrowserContext
+            (
+                Protocol.Target.BrowserContextID @browserContextId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.DisposeBrowserContextCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.DisposeBrowserContextCommand
+                    {
+                        BrowserContextId = @browserContextId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Returns information about a target.
             /// </summary>
-            public Task<Protocol.Target.GetTargetInfoResponse> GetTargetInfo()
+            /// <param name="targetId" />
+            public Task<Protocol.Target.GetTargetInfoResponse> GetTargetInfo
+            (
+                Protocol.Target.TargetID @targetId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.GetTargetInfoCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.GetTargetInfoCommand
+                    {
+                        TargetId = @targetId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Retrieves a list of available targets.
             /// </summary>
-            public Task<Protocol.Target.GetTargetsResponse> GetTargets()
+            public Task<Protocol.Target.GetTargetsResponse> GetTargets
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.GetTargetsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.GetTargetsCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Sends protocol message over session with given id.
             /// </summary>
-            public Task SendMessageToTarget()
+            /// <param name="message" />
+            /// <param name="sessionId">
+            /// Identifier of the session.
+            /// </param>
+            /// <param name="targetId">
+            /// Deprecated.
+            /// </param>
+            public Task SendMessageToTarget
+            (
+                string @message, 
+                Protocol.Target.SessionID @sessionId = default, 
+                Protocol.Target.TargetID @targetId = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.SendMessageToTargetCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.SendMessageToTargetCommand
+                    {
+                        Message = @message,
+                        SessionId = @sessionId,
+                        TargetId = @targetId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -3223,27 +9214,83 @@ namespace DumbPrograms.ChromeDevTools
             /// this one. When turned on, attaches to all existing related targets as well. When turned off,
             /// automatically detaches from all currently attached targets.
             /// </summary>
-            public Task SetAutoAttach()
+            /// <param name="autoAttach">
+            /// Whether to auto-attach to related targets.
+            /// </param>
+            /// <param name="waitForDebuggerOnStart">
+            /// Whether to pause new targets when attaching to them. Use `Runtime.runIfWaitingForDebugger`
+            /// to run paused targets.
+            /// </param>
+            /// <param name="flatten">
+            /// Enables "flat" access to the session via specifying sessionId attribute in the commands.
+            /// </param>
+            public Task SetAutoAttach
+            (
+                bool @autoAttach, 
+                bool @waitForDebuggerOnStart, 
+                bool? @flatten = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.SetAutoAttachCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.SetAutoAttachCommand
+                    {
+                        AutoAttach = @autoAttach,
+                        WaitForDebuggerOnStart = @waitForDebuggerOnStart,
+                        Flatten = @flatten,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Controls whether to discover available targets and notify via
             /// `targetCreated/targetInfoChanged/targetDestroyed` events.
             /// </summary>
-            public Task SetDiscoverTargets()
+            /// <param name="discover">
+            /// Whether to discover available targets.
+            /// </param>
+            public Task SetDiscoverTargets
+            (
+                bool @discover, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.SetDiscoverTargetsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.SetDiscoverTargetsCommand
+                    {
+                        Discover = @discover,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables target discovery for the specified locations, when `setDiscoverTargets` was set to
             /// `true`.
             /// </summary>
-            public Task SetRemoteLocations()
+            /// <param name="locations">
+            /// List of remote locations.
+            /// </param>
+            public Task SetRemoteLocations
+            (
+                Protocol.Target.RemoteLocation[] @locations, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Target.SetRemoteLocationsCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Target.SetRemoteLocationsCommand
+                    {
+                        Locations = @locations,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -3259,17 +9306,47 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Request browser port binding.
             /// </summary>
-            public Task Bind()
+            /// <param name="port">
+            /// Port number to bind.
+            /// </param>
+            public Task Bind
+            (
+                int @port, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Tethering.BindCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Tethering.BindCommand
+                    {
+                        Port = @port,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Request browser port unbinding.
             /// </summary>
-            public Task Unbind()
+            /// <param name="port">
+            /// Port number to unbind.
+            /// </param>
+            public Task Unbind
+            (
+                int @port, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Tethering.UnbindCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Tethering.UnbindCommand
+                    {
+                        Port = @port,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -3285,41 +9362,126 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Stop trace events collection.
             /// </summary>
-            public Task End()
+            public Task End
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Tracing.EndCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Tracing.EndCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Gets supported tracing categories.
             /// </summary>
-            public Task<Protocol.Tracing.GetCategoriesResponse> GetCategories()
+            public Task<Protocol.Tracing.GetCategoriesResponse> GetCategories
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Tracing.GetCategoriesCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Tracing.GetCategoriesCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Record a clock sync marker in the trace.
             /// </summary>
-            public Task RecordClockSyncMarker()
+            /// <param name="syncId">
+            /// The ID of this clock sync marker
+            /// </param>
+            public Task RecordClockSyncMarker
+            (
+                string @syncId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Tracing.RecordClockSyncMarkerCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Tracing.RecordClockSyncMarkerCommand
+                    {
+                        SyncId = @syncId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Request a global memory dump.
             /// </summary>
-            public Task<Protocol.Tracing.RequestMemoryDumpResponse> RequestMemoryDump()
+            public Task<Protocol.Tracing.RequestMemoryDumpResponse> RequestMemoryDump
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Tracing.RequestMemoryDumpCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Tracing.RequestMemoryDumpCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Start trace events collection.
             /// </summary>
-            public Task Start()
+            /// <param name="categories">
+            /// Category/tag filter
+            /// </param>
+            /// <param name="options">
+            /// Tracing options
+            /// </param>
+            /// <param name="bufferUsageReportingInterval">
+            /// If set, the agent will issue bufferUsage events at this interval, specified in milliseconds
+            /// </param>
+            /// <param name="transferMode">
+            /// Whether to report trace events as series of dataCollected events or to save trace to a
+            /// stream (defaults to `ReportEvents`).
+            /// </param>
+            /// <param name="streamCompression">
+            /// Compression format to use. This only applies when using `ReturnAsStream`
+            /// transfer mode (defaults to `none`)
+            /// </param>
+            /// <param name="traceConfig" />
+            public Task Start
+            (
+                string @categories = default, 
+                string @options = default, 
+                double? @bufferUsageReportingInterval = default, 
+                string @transferMode = default, 
+                Protocol.Tracing.StreamCompression @streamCompression = default, 
+                Protocol.Tracing.TraceConfig @traceConfig = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Tracing.StartCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Tracing.StartCommand
+                    {
+                        Categories = @categories,
+                        Options = @options,
+                        BufferUsageReportingInterval = @bufferUsageReportingInterval,
+                        TransferMode = @transferMode,
+                        StreamCompression = @streamCompression,
+                        TraceConfig = @traceConfig,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -3335,9 +9497,29 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Generates a report for testing.
             /// </summary>
-            public Task GenerateTestReport()
+            /// <param name="message">
+            /// Message to be displayed in the report.
+            /// </param>
+            /// <param name="group">
+            /// Specifies the endpoint group to deliver the report to.
+            /// </param>
+            public Task GenerateTestReport
+            (
+                string @message, 
+                string @group = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Testing.GenerateTestReportCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Testing.GenerateTestReportCommand
+                    {
+                        Message = @message,
+                        Group = @group,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
 
@@ -3353,50 +9535,194 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables the fetch domain.
             /// </summary>
-            public Task Disable()
+            public Task Disable
+            (
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Fetch.DisableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Fetch.DisableCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Enables issuing of requestPaused events. A request will be paused until client
             /// calls one of failRequest, fulfillRequest or continueRequest/continueWithAuth.
             /// </summary>
-            public Task Enable()
+            /// <param name="patterns">
+            /// If specified, only requests matching any of these patterns will produce
+            /// fetchRequested event and will be paused until clients response. If not set,
+            /// all requests will be affected.
+            /// </param>
+            /// <param name="handleAuthRequests">
+            /// If true, authRequired events will be issued and requests will be paused
+            /// expecting a call to continueWithAuth.
+            /// </param>
+            public Task Enable
+            (
+                Protocol.Fetch.RequestPattern[] @patterns = default, 
+                bool? @handleAuthRequests = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Fetch.EnableCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Fetch.EnableCommand
+                    {
+                        Patterns = @patterns,
+                        HandleAuthRequests = @handleAuthRequests,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Causes the request to fail with specified reason.
             /// </summary>
-            public Task FailRequest()
+            /// <param name="requestId">
+            /// An id the client received in requestPaused event.
+            /// </param>
+            /// <param name="errorReason">
+            /// Causes the request to fail with the given reason.
+            /// </param>
+            public Task FailRequest
+            (
+                Protocol.Fetch.RequestId @requestId, 
+                Protocol.Network.ErrorReason @errorReason, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Fetch.FailRequestCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Fetch.FailRequestCommand
+                    {
+                        RequestId = @requestId,
+                        ErrorReason = @errorReason,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Provides response to the request.
             /// </summary>
-            public Task FulfillRequest()
+            /// <param name="requestId">
+            /// An id the client received in requestPaused event.
+            /// </param>
+            /// <param name="responseCode">
+            /// An HTTP response code.
+            /// </param>
+            /// <param name="responseHeaders">
+            /// Response headers.
+            /// </param>
+            /// <param name="body">
+            /// A response body.
+            /// </param>
+            /// <param name="responsePhrase">
+            /// A textual representation of responseCode.
+            /// If absent, a standard phrase mathcing responseCode is used.
+            /// </param>
+            public Task FulfillRequest
+            (
+                Protocol.Fetch.RequestId @requestId, 
+                int @responseCode, 
+                Protocol.Fetch.HeaderEntry[] @responseHeaders, 
+                string @body = default, 
+                string @responsePhrase = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Fetch.FulfillRequestCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Fetch.FulfillRequestCommand
+                    {
+                        RequestId = @requestId,
+                        ResponseCode = @responseCode,
+                        ResponseHeaders = @responseHeaders,
+                        Body = @body,
+                        ResponsePhrase = @responsePhrase,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Continues the request, optionally modifying some of its parameters.
             /// </summary>
-            public Task ContinueRequest()
+            /// <param name="requestId">
+            /// An id the client received in requestPaused event.
+            /// </param>
+            /// <param name="url">
+            /// If set, the request url will be modified in a way that's not observable by page.
+            /// </param>
+            /// <param name="method">
+            /// If set, the request method is overridden.
+            /// </param>
+            /// <param name="postData">
+            /// If set, overrides the post data in the request.
+            /// </param>
+            /// <param name="headers">
+            /// If set, overrides the request headrts.
+            /// </param>
+            public Task ContinueRequest
+            (
+                Protocol.Fetch.RequestId @requestId, 
+                string @url = default, 
+                string @method = default, 
+                string @postData = default, 
+                Protocol.Fetch.HeaderEntry[] @headers = default, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Fetch.ContinueRequestCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Fetch.ContinueRequestCommand
+                    {
+                        RequestId = @requestId,
+                        Url = @url,
+                        Method = @method,
+                        PostData = @postData,
+                        Headers = @headers,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
             /// Continues a request supplying authChallengeResponse following authRequired event.
             /// </summary>
-            public Task ContinueWithAuth()
+            /// <param name="requestId">
+            /// An id the client received in authRequired event.
+            /// </param>
+            /// <param name="authChallengeResponse">
+            /// Response to  with an authChallenge.
+            /// </param>
+            public Task ContinueWithAuth
+            (
+                Protocol.Fetch.RequestId @requestId, 
+                Protocol.Fetch.AuthChallengeResponse @authChallengeResponse, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Fetch.ContinueWithAuthCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Fetch.ContinueWithAuthCommand
+                    {
+                        RequestId = @requestId,
+                        AuthChallengeResponse = @authChallengeResponse,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -3407,9 +9733,24 @@ namespace DumbPrograms.ChromeDevTools
             /// affect the request or disabling fetch domain before body is received
             /// results in an undefined behavior.
             /// </summary>
-            public Task<Protocol.Fetch.GetResponseBodyResponse> GetResponseBody()
+            /// <param name="requestId">
+            /// Identifier for the intercepted request to get body for.
+            /// </param>
+            public Task<Protocol.Fetch.GetResponseBodyResponse> GetResponseBody
+            (
+                Protocol.Fetch.RequestId @requestId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Fetch.GetResponseBodyCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Fetch.GetResponseBodyCommand
+                    {
+                        RequestId = @requestId,
+                    }
+                    , cancellation
+                )
+                ;
             }
 
             /// <summary>
@@ -3424,9 +9765,22 @@ namespace DumbPrograms.ChromeDevTools
             /// Calling other methods that affect the request or disabling fetch
             /// domain before body is received results in an undefined behavior.
             /// </summary>
-            public Task<Protocol.Fetch.TakeResponseBodyAsStreamResponse> TakeResponseBodyAsStream()
+            /// <param name="requestId" />
+            public Task<Protocol.Fetch.TakeResponseBodyAsStreamResponse> TakeResponseBodyAsStream
+            (
+                Protocol.Fetch.RequestId @requestId, 
+                CancellationToken cancellation = default
+            )
             {
-                return InspectionClient.InvokeCommand(new Protocol.Fetch.TakeResponseBodyAsStreamCommand { });
+                return InspectionClient.InvokeCommand
+                (
+                    new Protocol.Fetch.TakeResponseBodyAsStreamCommand
+                    {
+                        RequestId = @requestId,
+                    }
+                    , cancellation
+                )
+                ;
             }
         }
     }
