@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net.WebSockets;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -113,6 +115,22 @@ namespace DumbPrograms.ChromeDevTools
             await InvokeCommand(id, command, cancellation);
 
             return await response;
+        }
+
+        private IDisposable SubscribeEvent<TEvent>(string name, Func<TEvent, Task> handler)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDisposable SubscribeEvent<TEvent>(Func<TEvent, Task> handler)
+        {
+            var attribute = typeof(TEvent).GetCustomAttribute<EventAttribute>();
+            if (attribute != null)
+            {
+                return SubscribeEvent(attribute.Name, handler);
+            }
+
+            throw new ArgumentException($"{typeof(TEvent).Name} is not a valid protocol event type.", nameof(TEvent));
         }
 
         private Task<TResponse> RegisterCommandResponseHandler<TResponse>(int id, CancellationToken cancellation)
