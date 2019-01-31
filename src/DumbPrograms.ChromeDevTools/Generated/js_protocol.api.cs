@@ -110,6 +110,15 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            /// <summary>
+            /// Issued when new console message is added.
+            /// </summary>
+            public event Func<Protocol.Console.MessageAddedEvent, Task> MessageAdded
+            {
+                add => InspectionClient.AddEventHandler("Console.messageAdded", value);
+                remove => InspectionClient.RemoveEventHandler("Console.messageAdded", value);
+            }
         }
 
         public class DebuggerInspectionClient
@@ -884,6 +893,52 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            /// <summary>
+            /// Fired when breakpoint is resolved to an actual script and location.
+            /// </summary>
+            public event Func<Protocol.Debugger.BreakpointResolvedEvent, Task> BreakpointResolved
+            {
+                add => InspectionClient.AddEventHandler("Debugger.breakpointResolved", value);
+                remove => InspectionClient.RemoveEventHandler("Debugger.breakpointResolved", value);
+            }
+
+            /// <summary>
+            /// Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.
+            /// </summary>
+            public event Func<Protocol.Debugger.PausedEvent, Task> Paused
+            {
+                add => InspectionClient.AddEventHandler("Debugger.paused", value);
+                remove => InspectionClient.RemoveEventHandler("Debugger.paused", value);
+            }
+
+            /// <summary>
+            /// Fired when the virtual machine resumed execution.
+            /// </summary>
+            public event Func<Protocol.Debugger.ResumedEvent, Task> Resumed
+            {
+                add => InspectionClient.AddEventHandler("Debugger.resumed", value);
+                remove => InspectionClient.RemoveEventHandler("Debugger.resumed", value);
+            }
+
+            /// <summary>
+            /// Fired when virtual machine fails to parse the script.
+            /// </summary>
+            public event Func<Protocol.Debugger.ScriptFailedToParseEvent, Task> ScriptFailedToParse
+            {
+                add => InspectionClient.AddEventHandler("Debugger.scriptFailedToParse", value);
+                remove => InspectionClient.RemoveEventHandler("Debugger.scriptFailedToParse", value);
+            }
+
+            /// <summary>
+            /// Fired when virtual machine parses script. This event is also fired for all known and uncollected
+            /// scripts upon enabling debugger.
+            /// </summary>
+            public event Func<Protocol.Debugger.ScriptParsedEvent, Task> ScriptParsed
+            {
+                add => InspectionClient.AddEventHandler("Debugger.scriptParsed", value);
+                remove => InspectionClient.RemoveEventHandler("Debugger.scriptParsed", value);
+            }
         }
 
         public class HeapProfilerInspectionClient
@@ -1115,6 +1170,44 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            public event Func<Protocol.HeapProfiler.AddHeapSnapshotChunkEvent, Task> AddHeapSnapshotChunk
+            {
+                add => InspectionClient.AddEventHandler("HeapProfiler.addHeapSnapshotChunk", value);
+                remove => InspectionClient.RemoveEventHandler("HeapProfiler.addHeapSnapshotChunk", value);
+            }
+
+            /// <summary>
+            /// If heap objects tracking has been started then backend may send update for one or more fragments
+            /// </summary>
+            public event Func<Protocol.HeapProfiler.HeapStatsUpdateEvent, Task> HeapStatsUpdate
+            {
+                add => InspectionClient.AddEventHandler("HeapProfiler.heapStatsUpdate", value);
+                remove => InspectionClient.RemoveEventHandler("HeapProfiler.heapStatsUpdate", value);
+            }
+
+            /// <summary>
+            /// If heap objects tracking has been started then backend regularly sends a current value for last
+            /// seen object id and corresponding timestamp. If the were changes in the heap since last event
+            /// then one or more heapStatsUpdate events will be sent before a new lastSeenObjectId event.
+            /// </summary>
+            public event Func<Protocol.HeapProfiler.LastSeenObjectIdEvent, Task> LastSeenObjectId
+            {
+                add => InspectionClient.AddEventHandler("HeapProfiler.lastSeenObjectId", value);
+                remove => InspectionClient.RemoveEventHandler("HeapProfiler.lastSeenObjectId", value);
+            }
+
+            public event Func<Protocol.HeapProfiler.ReportHeapSnapshotProgressEvent, Task> ReportHeapSnapshotProgress
+            {
+                add => InspectionClient.AddEventHandler("HeapProfiler.reportHeapSnapshotProgress", value);
+                remove => InspectionClient.RemoveEventHandler("HeapProfiler.reportHeapSnapshotProgress", value);
+            }
+
+            public event Func<Protocol.HeapProfiler.ResetProfilesEvent, Task> ResetProfiles
+            {
+                add => InspectionClient.AddEventHandler("HeapProfiler.resetProfiles", value);
+                remove => InspectionClient.RemoveEventHandler("HeapProfiler.resetProfiles", value);
             }
         }
 
@@ -1349,6 +1442,21 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            public event Func<Protocol.Profiler.ConsoleProfileFinishedEvent, Task> ConsoleProfileFinished
+            {
+                add => InspectionClient.AddEventHandler("Profiler.consoleProfileFinished", value);
+                remove => InspectionClient.RemoveEventHandler("Profiler.consoleProfileFinished", value);
+            }
+
+            /// <summary>
+            /// Sent when new profile recording is started using console.profile() call.
+            /// </summary>
+            public event Func<Protocol.Profiler.ConsoleProfileStartedEvent, Task> ConsoleProfileStarted
+            {
+                add => InspectionClient.AddEventHandler("Profiler.consoleProfileStarted", value);
+                remove => InspectionClient.RemoveEventHandler("Profiler.consoleProfileStarted", value);
             }
         }
 
@@ -2021,6 +2129,79 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            /// <summary>
+            /// Notification is issued every time when binding is called.
+            /// </summary>
+            public event Func<Protocol.Runtime.BindingCalledEvent, Task> BindingCalled
+            {
+                add => InspectionClient.AddEventHandler("Runtime.bindingCalled", value);
+                remove => InspectionClient.RemoveEventHandler("Runtime.bindingCalled", value);
+            }
+
+            /// <summary>
+            /// Issued when console API was called.
+            /// </summary>
+            public event Func<Protocol.Runtime.ConsoleAPICalledEvent, Task> ConsoleAPICalled
+            {
+                add => InspectionClient.AddEventHandler("Runtime.consoleAPICalled", value);
+                remove => InspectionClient.RemoveEventHandler("Runtime.consoleAPICalled", value);
+            }
+
+            /// <summary>
+            /// Issued when unhandled exception was revoked.
+            /// </summary>
+            public event Func<Protocol.Runtime.ExceptionRevokedEvent, Task> ExceptionRevoked
+            {
+                add => InspectionClient.AddEventHandler("Runtime.exceptionRevoked", value);
+                remove => InspectionClient.RemoveEventHandler("Runtime.exceptionRevoked", value);
+            }
+
+            /// <summary>
+            /// Issued when exception was thrown and unhandled.
+            /// </summary>
+            public event Func<Protocol.Runtime.ExceptionThrownEvent, Task> ExceptionThrown
+            {
+                add => InspectionClient.AddEventHandler("Runtime.exceptionThrown", value);
+                remove => InspectionClient.RemoveEventHandler("Runtime.exceptionThrown", value);
+            }
+
+            /// <summary>
+            /// Issued when new execution context is created.
+            /// </summary>
+            public event Func<Protocol.Runtime.ExecutionContextCreatedEvent, Task> ExecutionContextCreated
+            {
+                add => InspectionClient.AddEventHandler("Runtime.executionContextCreated", value);
+                remove => InspectionClient.RemoveEventHandler("Runtime.executionContextCreated", value);
+            }
+
+            /// <summary>
+            /// Issued when execution context is destroyed.
+            /// </summary>
+            public event Func<Protocol.Runtime.ExecutionContextDestroyedEvent, Task> ExecutionContextDestroyed
+            {
+                add => InspectionClient.AddEventHandler("Runtime.executionContextDestroyed", value);
+                remove => InspectionClient.RemoveEventHandler("Runtime.executionContextDestroyed", value);
+            }
+
+            /// <summary>
+            /// Issued when all executionContexts were cleared in browser
+            /// </summary>
+            public event Func<Protocol.Runtime.ExecutionContextsClearedEvent, Task> ExecutionContextsCleared
+            {
+                add => InspectionClient.AddEventHandler("Runtime.executionContextsCleared", value);
+                remove => InspectionClient.RemoveEventHandler("Runtime.executionContextsCleared", value);
+            }
+
+            /// <summary>
+            /// Issued when object should be inspected (for example, as a result of inspect() command line API
+            /// call).
+            /// </summary>
+            public event Func<Protocol.Runtime.InspectRequestedEvent, Task> InspectRequested
+            {
+                add => InspectionClient.AddEventHandler("Runtime.inspectRequested", value);
+                remove => InspectionClient.RemoveEventHandler("Runtime.inspectRequested", value);
             }
         }
 

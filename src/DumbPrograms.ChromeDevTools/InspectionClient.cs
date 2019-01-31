@@ -20,7 +20,7 @@ namespace DumbPrograms.ChromeDevTools
 
         private int Started;
         private event EventHandler<InspectionMessage> MessageReceived;
-        private ConcurrentDictionary<string, EventDispatcher> EventSubscriptions;
+        private ConcurrentDictionary<string, EventDispatcher> EventDispatchers;
         private CancellationTokenSource ReceivingLoopCanceller;
         private Task ReceivingLoop;
 
@@ -38,7 +38,7 @@ namespace DumbPrograms.ChromeDevTools
             {
                 await WebSocket.ConnectAsync(new Uri(InspectionTarget.WebSocketDebuggerUrl), cancellation);
 
-                EventSubscriptions = new ConcurrentDictionary<string, EventDispatcher>();
+                EventDispatchers = new ConcurrentDictionary<string, EventDispatcher>();
                 MessageReceived += DispatchSubscribedEvents;
 
                 ReceivingLoopCanceller = new CancellationTokenSource();
@@ -126,31 +126,41 @@ namespace DumbPrograms.ChromeDevTools
 
         private void DispatchSubscribedEvents(object sender, InspectionMessage message)
         {
-            if (message.Method != null && EventSubscriptions.TryGetValue(message.Method, out var dispatcher))
+            if (message.Method != null && EventDispatchers.TryGetValue(message.Method, out var dispatcher))
             {
                 dispatcher.Dispatch(message.Params);
             }
         }
 
-        private IDisposable SubscribeEvent<TEvent>(string name, Func<TEvent, Task> handler)
+        private void AddEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
         {
-            var dispatcher = (EventDispatcher<TEvent>)EventSubscriptions.GetOrAdd(name, n => new EventDispatcher<TEvent>());
-
+            var dispatcher = GetEventDispatcher<TEvent>(name);
             dispatcher.Handlers += handler;
+        }
 
-            return new EventUnsubscriber<TEvent>(dispatcher, handler);
+        private void RemoveEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
+        {
+            var dispatcher = GetEventDispatcher<TEvent>(name);
+            dispatcher.Handlers -= handler;
         }
 
         public IDisposable SubscribeEvent<TEvent>(Func<TEvent, Task> handler)
         {
-            var attribute = typeof(TEvent).GetCustomAttribute<EventAttribute>();
-            if (attribute != null)
+            var @event = typeof(TEvent).GetCustomAttribute<EventAttribute>();
+            if (@event != null)
             {
-                return SubscribeEvent(attribute.Name, handler);
+                var dispatcher = GetEventDispatcher<TEvent>(@event.Name);
+
+                dispatcher.Handlers += handler;
+
+                return new EventUnsubscriber<TEvent>(dispatcher, handler);
             }
 
             throw new ArgumentException($"{typeof(TEvent).Name} is not a valid protocol event type.", nameof(TEvent));
         }
+
+        private EventDispatcher<TEvent> GetEventDispatcher<TEvent>(string name)
+            => (EventDispatcher<TEvent>)EventDispatchers.GetOrAdd(name, n => new EventDispatcher<TEvent>());
 
         private Task<TResponse> RegisterCommandResponseHandler<TResponse>(int id, CancellationToken cancellation)
         {

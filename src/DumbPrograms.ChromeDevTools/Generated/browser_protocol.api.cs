@@ -539,6 +539,33 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            /// <summary>
+            /// Event for when an animation has been cancelled.
+            /// </summary>
+            public event Func<Protocol.Animation.AnimationCanceledEvent, Task> AnimationCanceled
+            {
+                add => InspectionClient.AddEventHandler("Animation.animationCanceled", value);
+                remove => InspectionClient.RemoveEventHandler("Animation.animationCanceled", value);
+            }
+
+            /// <summary>
+            /// Event for each animation that has been created.
+            /// </summary>
+            public event Func<Protocol.Animation.AnimationCreatedEvent, Task> AnimationCreated
+            {
+                add => InspectionClient.AddEventHandler("Animation.animationCreated", value);
+                remove => InspectionClient.RemoveEventHandler("Animation.animationCreated", value);
+            }
+
+            /// <summary>
+            /// Event for animation that has been started.
+            /// </summary>
+            public event Func<Protocol.Animation.AnimationStartedEvent, Task> AnimationStarted
+            {
+                add => InspectionClient.AddEventHandler("Animation.animationStarted", value);
+                remove => InspectionClient.RemoveEventHandler("Animation.animationStarted", value);
+            }
         }
 
         public class ApplicationCacheInspectionClient
@@ -631,6 +658,18 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            public event Func<Protocol.ApplicationCache.ApplicationCacheStatusUpdatedEvent, Task> ApplicationCacheStatusUpdated
+            {
+                add => InspectionClient.AddEventHandler("ApplicationCache.applicationCacheStatusUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("ApplicationCache.applicationCacheStatusUpdated", value);
+            }
+
+            public event Func<Protocol.ApplicationCache.NetworkStateUpdatedEvent, Task> NetworkStateUpdated
+            {
+                add => InspectionClient.AddEventHandler("ApplicationCache.networkStateUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("ApplicationCache.networkStateUpdated", value);
             }
         }
 
@@ -1486,6 +1525,53 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            /// <summary>
+            /// Fires whenever a web font is updated.  A non-empty font parameter indicates a successfully loaded
+            /// web font
+            /// </summary>
+            public event Func<Protocol.CSS.FontsUpdatedEvent, Task> FontsUpdated
+            {
+                add => InspectionClient.AddEventHandler("CSS.fontsUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("CSS.fontsUpdated", value);
+            }
+
+            /// <summary>
+            /// Fires whenever a MediaQuery result changes (for example, after a browser window has been
+            /// resized.) The current implementation considers only viewport-dependent media features.
+            /// </summary>
+            public event Func<Protocol.CSS.MediaQueryResultChangedEvent, Task> MediaQueryResultChanged
+            {
+                add => InspectionClient.AddEventHandler("CSS.mediaQueryResultChanged", value);
+                remove => InspectionClient.RemoveEventHandler("CSS.mediaQueryResultChanged", value);
+            }
+
+            /// <summary>
+            /// Fired whenever an active document stylesheet is added.
+            /// </summary>
+            public event Func<Protocol.CSS.StyleSheetAddedEvent, Task> StyleSheetAdded
+            {
+                add => InspectionClient.AddEventHandler("CSS.styleSheetAdded", value);
+                remove => InspectionClient.RemoveEventHandler("CSS.styleSheetAdded", value);
+            }
+
+            /// <summary>
+            /// Fired whenever a stylesheet is changed as a result of the client operation.
+            /// </summary>
+            public event Func<Protocol.CSS.StyleSheetChangedEvent, Task> StyleSheetChanged
+            {
+                add => InspectionClient.AddEventHandler("CSS.styleSheetChanged", value);
+                remove => InspectionClient.RemoveEventHandler("CSS.styleSheetChanged", value);
+            }
+
+            /// <summary>
+            /// Fired whenever an active document stylesheet is removed.
+            /// </summary>
+            public event Func<Protocol.CSS.StyleSheetRemovedEvent, Task> StyleSheetRemoved
+            {
+                add => InspectionClient.AddEventHandler("CSS.styleSheetRemoved", value);
+                remove => InspectionClient.RemoveEventHandler("CSS.styleSheetRemoved", value);
+            }
         }
 
         public class CacheStorageInspectionClient
@@ -1752,6 +1838,26 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            /// <summary>
+            /// This is fired whenever the list of available sinks changes. A sink is a
+            /// device or a software surface that you can cast to.
+            /// </summary>
+            public event Func<Protocol.Cast.SinksUpdatedEvent, Task> SinksUpdated
+            {
+                add => InspectionClient.AddEventHandler("Cast.sinksUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("Cast.sinksUpdated", value);
+            }
+
+            /// <summary>
+            /// This is fired whenever the outstanding issue/error message changes.
+            /// |issueMessage| is empty if there is no issue.
+            /// </summary>
+            public event Func<Protocol.Cast.IssueUpdatedEvent, Task> IssueUpdated
+            {
+                add => InspectionClient.AddEventHandler("Cast.issueUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("Cast.issueUpdated", value);
             }
         }
 
@@ -2912,6 +3018,133 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            /// <summary>
+            /// Fired when `Element`'s attribute is modified.
+            /// </summary>
+            public event Func<Protocol.DOM.AttributeModifiedEvent, Task> AttributeModified
+            {
+                add => InspectionClient.AddEventHandler("DOM.attributeModified", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.attributeModified", value);
+            }
+
+            /// <summary>
+            /// Fired when `Element`'s attribute is removed.
+            /// </summary>
+            public event Func<Protocol.DOM.AttributeRemovedEvent, Task> AttributeRemoved
+            {
+                add => InspectionClient.AddEventHandler("DOM.attributeRemoved", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.attributeRemoved", value);
+            }
+
+            /// <summary>
+            /// Mirrors `DOMCharacterDataModified` event.
+            /// </summary>
+            public event Func<Protocol.DOM.CharacterDataModifiedEvent, Task> CharacterDataModified
+            {
+                add => InspectionClient.AddEventHandler("DOM.characterDataModified", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.characterDataModified", value);
+            }
+
+            /// <summary>
+            /// Fired when `Container`'s child node count has changed.
+            /// </summary>
+            public event Func<Protocol.DOM.ChildNodeCountUpdatedEvent, Task> ChildNodeCountUpdated
+            {
+                add => InspectionClient.AddEventHandler("DOM.childNodeCountUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.childNodeCountUpdated", value);
+            }
+
+            /// <summary>
+            /// Mirrors `DOMNodeInserted` event.
+            /// </summary>
+            public event Func<Protocol.DOM.ChildNodeInsertedEvent, Task> ChildNodeInserted
+            {
+                add => InspectionClient.AddEventHandler("DOM.childNodeInserted", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.childNodeInserted", value);
+            }
+
+            /// <summary>
+            /// Mirrors `DOMNodeRemoved` event.
+            /// </summary>
+            public event Func<Protocol.DOM.ChildNodeRemovedEvent, Task> ChildNodeRemoved
+            {
+                add => InspectionClient.AddEventHandler("DOM.childNodeRemoved", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.childNodeRemoved", value);
+            }
+
+            /// <summary>
+            /// Called when distrubution is changed.
+            /// </summary>
+            public event Func<Protocol.DOM.DistributedNodesUpdatedEvent, Task> DistributedNodesUpdated
+            {
+                add => InspectionClient.AddEventHandler("DOM.distributedNodesUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.distributedNodesUpdated", value);
+            }
+
+            /// <summary>
+            /// Fired when `Document` has been totally updated. Node ids are no longer valid.
+            /// </summary>
+            public event Func<Protocol.DOM.DocumentUpdatedEvent, Task> DocumentUpdated
+            {
+                add => InspectionClient.AddEventHandler("DOM.documentUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.documentUpdated", value);
+            }
+
+            /// <summary>
+            /// Fired when `Element`'s inline style is modified via a CSS property modification.
+            /// </summary>
+            public event Func<Protocol.DOM.InlineStyleInvalidatedEvent, Task> InlineStyleInvalidated
+            {
+                add => InspectionClient.AddEventHandler("DOM.inlineStyleInvalidated", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.inlineStyleInvalidated", value);
+            }
+
+            /// <summary>
+            /// Called when a pseudo element is added to an element.
+            /// </summary>
+            public event Func<Protocol.DOM.PseudoElementAddedEvent, Task> PseudoElementAdded
+            {
+                add => InspectionClient.AddEventHandler("DOM.pseudoElementAdded", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.pseudoElementAdded", value);
+            }
+
+            /// <summary>
+            /// Called when a pseudo element is removed from an element.
+            /// </summary>
+            public event Func<Protocol.DOM.PseudoElementRemovedEvent, Task> PseudoElementRemoved
+            {
+                add => InspectionClient.AddEventHandler("DOM.pseudoElementRemoved", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.pseudoElementRemoved", value);
+            }
+
+            /// <summary>
+            /// Fired when backend wants to provide client with the missing DOM structure. This happens upon
+            /// most of the calls requesting node ids.
+            /// </summary>
+            public event Func<Protocol.DOM.SetChildNodesEvent, Task> SetChildNodes
+            {
+                add => InspectionClient.AddEventHandler("DOM.setChildNodes", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.setChildNodes", value);
+            }
+
+            /// <summary>
+            /// Called when shadow root is popped from the element.
+            /// </summary>
+            public event Func<Protocol.DOM.ShadowRootPoppedEvent, Task> ShadowRootPopped
+            {
+                add => InspectionClient.AddEventHandler("DOM.shadowRootPopped", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.shadowRootPopped", value);
+            }
+
+            /// <summary>
+            /// Called when shadow root is pushed into the element.
+            /// </summary>
+            public event Func<Protocol.DOM.ShadowRootPushedEvent, Task> ShadowRootPushed
+            {
+                add => InspectionClient.AddEventHandler("DOM.shadowRootPushed", value);
+                remove => InspectionClient.RemoveEventHandler("DOM.shadowRootPushed", value);
+            }
         }
 
         public class DOMDebuggerInspectionClient
@@ -3403,6 +3636,30 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            public event Func<Protocol.DOMStorage.DomStorageItemAddedEvent, Task> DomStorageItemAdded
+            {
+                add => InspectionClient.AddEventHandler("DOMStorage.domStorageItemAdded", value);
+                remove => InspectionClient.RemoveEventHandler("DOMStorage.domStorageItemAdded", value);
+            }
+
+            public event Func<Protocol.DOMStorage.DomStorageItemRemovedEvent, Task> DomStorageItemRemoved
+            {
+                add => InspectionClient.AddEventHandler("DOMStorage.domStorageItemRemoved", value);
+                remove => InspectionClient.RemoveEventHandler("DOMStorage.domStorageItemRemoved", value);
+            }
+
+            public event Func<Protocol.DOMStorage.DomStorageItemUpdatedEvent, Task> DomStorageItemUpdated
+            {
+                add => InspectionClient.AddEventHandler("DOMStorage.domStorageItemUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("DOMStorage.domStorageItemUpdated", value);
+            }
+
+            public event Func<Protocol.DOMStorage.DomStorageItemsClearedEvent, Task> DomStorageItemsCleared
+            {
+                add => InspectionClient.AddEventHandler("DOMStorage.domStorageItemsCleared", value);
+                remove => InspectionClient.RemoveEventHandler("DOMStorage.domStorageItemsCleared", value);
+            }
         }
 
         public class DatabaseInspectionClient
@@ -3487,6 +3744,12 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            public event Func<Protocol.Database.AddDatabaseEvent, Task> AddDatabase
+            {
+                add => InspectionClient.AddEventHandler("Database.addDatabase", value);
+                remove => InspectionClient.RemoveEventHandler("Database.addDatabase", value);
             }
         }
 
@@ -4113,6 +4376,33 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            /// <summary>
+            /// Notification sent after the virtual time has advanced.
+            /// </summary>
+            public event Func<Protocol.Emulation.VirtualTimeAdvancedEvent, Task> VirtualTimeAdvanced
+            {
+                add => InspectionClient.AddEventHandler("Emulation.virtualTimeAdvanced", value);
+                remove => InspectionClient.RemoveEventHandler("Emulation.virtualTimeAdvanced", value);
+            }
+
+            /// <summary>
+            /// Notification sent after the virtual time budget for the current VirtualTimePolicy has run out.
+            /// </summary>
+            public event Func<Protocol.Emulation.VirtualTimeBudgetExpiredEvent, Task> VirtualTimeBudgetExpired
+            {
+                add => InspectionClient.AddEventHandler("Emulation.virtualTimeBudgetExpired", value);
+                remove => InspectionClient.RemoveEventHandler("Emulation.virtualTimeBudgetExpired", value);
+            }
+
+            /// <summary>
+            /// Notification sent after the virtual time has paused.
+            /// </summary>
+            public event Func<Protocol.Emulation.VirtualTimePausedEvent, Task> VirtualTimePaused
+            {
+                add => InspectionClient.AddEventHandler("Emulation.virtualTimePaused", value);
+                remove => InspectionClient.RemoveEventHandler("Emulation.virtualTimePaused", value);
+            }
         }
 
         public class HeadlessExperimentalInspectionClient
@@ -4205,6 +4495,15 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            /// <summary>
+            /// Issued when the target starts or stops needing BeginFrames.
+            /// </summary>
+            public event Func<Protocol.HeadlessExperimental.NeedsBeginFramesChangedEvent, Task> NeedsBeginFramesChanged
+            {
+                add => InspectionClient.AddEventHandler("HeadlessExperimental.needsBeginFramesChanged", value);
+                remove => InspectionClient.RemoveEventHandler("HeadlessExperimental.needsBeginFramesChanged", value);
             }
         }
 
@@ -5086,6 +5385,33 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            /// <summary>
+            /// Fired when remote debugging connection is about to be terminated. Contains detach reason.
+            /// </summary>
+            public event Func<Protocol.Inspector.DetachedEvent, Task> Detached
+            {
+                add => InspectionClient.AddEventHandler("Inspector.detached", value);
+                remove => InspectionClient.RemoveEventHandler("Inspector.detached", value);
+            }
+
+            /// <summary>
+            /// Fired when debugging target has crashed
+            /// </summary>
+            public event Func<Protocol.Inspector.TargetCrashedEvent, Task> TargetCrashed
+            {
+                add => InspectionClient.AddEventHandler("Inspector.targetCrashed", value);
+                remove => InspectionClient.RemoveEventHandler("Inspector.targetCrashed", value);
+            }
+
+            /// <summary>
+            /// Fired when debugging target has reloaded after crash
+            /// </summary>
+            public event Func<Protocol.Inspector.TargetReloadedAfterCrashEvent, Task> TargetReloadedAfterCrash
+            {
+                add => InspectionClient.AddEventHandler("Inspector.targetReloadedAfterCrash", value);
+                remove => InspectionClient.RemoveEventHandler("Inspector.targetReloadedAfterCrash", value);
+            }
         }
 
         public class LayerTreeInspectionClient
@@ -5320,6 +5646,18 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            public event Func<Protocol.LayerTree.LayerPaintedEvent, Task> LayerPainted
+            {
+                add => InspectionClient.AddEventHandler("LayerTree.layerPainted", value);
+                remove => InspectionClient.RemoveEventHandler("LayerTree.layerPainted", value);
+            }
+
+            public event Func<Protocol.LayerTree.LayerTreeDidChangeEvent, Task> LayerTreeDidChange
+            {
+                add => InspectionClient.AddEventHandler("LayerTree.layerTreeDidChange", value);
+                remove => InspectionClient.RemoveEventHandler("LayerTree.layerTreeDidChange", value);
+            }
         }
 
         public class LogInspectionClient
@@ -5425,6 +5763,15 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            /// <summary>
+            /// Issued when new message was logged.
+            /// </summary>
+            public event Func<Protocol.Log.EntryAddedEvent, Task> EntryAdded
+            {
+                add => InspectionClient.AddEventHandler("Log.entryAdded", value);
+                remove => InspectionClient.RemoveEventHandler("Log.entryAdded", value);
             }
         }
 
@@ -6402,6 +6749,160 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            /// <summary>
+            /// Fired when data chunk was received over the network.
+            /// </summary>
+            public event Func<Protocol.Network.DataReceivedEvent, Task> DataReceived
+            {
+                add => InspectionClient.AddEventHandler("Network.dataReceived", value);
+                remove => InspectionClient.RemoveEventHandler("Network.dataReceived", value);
+            }
+
+            /// <summary>
+            /// Fired when EventSource message is received.
+            /// </summary>
+            public event Func<Protocol.Network.EventSourceMessageReceivedEvent, Task> EventSourceMessageReceived
+            {
+                add => InspectionClient.AddEventHandler("Network.eventSourceMessageReceived", value);
+                remove => InspectionClient.RemoveEventHandler("Network.eventSourceMessageReceived", value);
+            }
+
+            /// <summary>
+            /// Fired when HTTP request has failed to load.
+            /// </summary>
+            public event Func<Protocol.Network.LoadingFailedEvent, Task> LoadingFailed
+            {
+                add => InspectionClient.AddEventHandler("Network.loadingFailed", value);
+                remove => InspectionClient.RemoveEventHandler("Network.loadingFailed", value);
+            }
+
+            /// <summary>
+            /// Fired when HTTP request has finished loading.
+            /// </summary>
+            public event Func<Protocol.Network.LoadingFinishedEvent, Task> LoadingFinished
+            {
+                add => InspectionClient.AddEventHandler("Network.loadingFinished", value);
+                remove => InspectionClient.RemoveEventHandler("Network.loadingFinished", value);
+            }
+
+            /// <summary>
+            /// Details of an intercepted HTTP request, which must be either allowed, blocked, modified or
+            /// mocked.
+            /// </summary>
+            public event Func<Protocol.Network.RequestInterceptedEvent, Task> RequestIntercepted
+            {
+                add => InspectionClient.AddEventHandler("Network.requestIntercepted", value);
+                remove => InspectionClient.RemoveEventHandler("Network.requestIntercepted", value);
+            }
+
+            /// <summary>
+            /// Fired if request ended up loading from cache.
+            /// </summary>
+            public event Func<Protocol.Network.RequestServedFromCacheEvent, Task> RequestServedFromCache
+            {
+                add => InspectionClient.AddEventHandler("Network.requestServedFromCache", value);
+                remove => InspectionClient.RemoveEventHandler("Network.requestServedFromCache", value);
+            }
+
+            /// <summary>
+            /// Fired when page is about to send HTTP request.
+            /// </summary>
+            public event Func<Protocol.Network.RequestWillBeSentEvent, Task> RequestWillBeSent
+            {
+                add => InspectionClient.AddEventHandler("Network.requestWillBeSent", value);
+                remove => InspectionClient.RemoveEventHandler("Network.requestWillBeSent", value);
+            }
+
+            /// <summary>
+            /// Fired when resource loading priority is changed
+            /// </summary>
+            public event Func<Protocol.Network.ResourceChangedPriorityEvent, Task> ResourceChangedPriority
+            {
+                add => InspectionClient.AddEventHandler("Network.resourceChangedPriority", value);
+                remove => InspectionClient.RemoveEventHandler("Network.resourceChangedPriority", value);
+            }
+
+            /// <summary>
+            /// Fired when a signed exchange was received over the network
+            /// </summary>
+            public event Func<Protocol.Network.SignedExchangeReceivedEvent, Task> SignedExchangeReceived
+            {
+                add => InspectionClient.AddEventHandler("Network.signedExchangeReceived", value);
+                remove => InspectionClient.RemoveEventHandler("Network.signedExchangeReceived", value);
+            }
+
+            /// <summary>
+            /// Fired when HTTP response is available.
+            /// </summary>
+            public event Func<Protocol.Network.ResponseReceivedEvent, Task> ResponseReceived
+            {
+                add => InspectionClient.AddEventHandler("Network.responseReceived", value);
+                remove => InspectionClient.RemoveEventHandler("Network.responseReceived", value);
+            }
+
+            /// <summary>
+            /// Fired when WebSocket is closed.
+            /// </summary>
+            public event Func<Protocol.Network.WebSocketClosedEvent, Task> WebSocketClosed
+            {
+                add => InspectionClient.AddEventHandler("Network.webSocketClosed", value);
+                remove => InspectionClient.RemoveEventHandler("Network.webSocketClosed", value);
+            }
+
+            /// <summary>
+            /// Fired upon WebSocket creation.
+            /// </summary>
+            public event Func<Protocol.Network.WebSocketCreatedEvent, Task> WebSocketCreated
+            {
+                add => InspectionClient.AddEventHandler("Network.webSocketCreated", value);
+                remove => InspectionClient.RemoveEventHandler("Network.webSocketCreated", value);
+            }
+
+            /// <summary>
+            /// Fired when WebSocket message error occurs.
+            /// </summary>
+            public event Func<Protocol.Network.WebSocketFrameErrorEvent, Task> WebSocketFrameError
+            {
+                add => InspectionClient.AddEventHandler("Network.webSocketFrameError", value);
+                remove => InspectionClient.RemoveEventHandler("Network.webSocketFrameError", value);
+            }
+
+            /// <summary>
+            /// Fired when WebSocket message is received.
+            /// </summary>
+            public event Func<Protocol.Network.WebSocketFrameReceivedEvent, Task> WebSocketFrameReceived
+            {
+                add => InspectionClient.AddEventHandler("Network.webSocketFrameReceived", value);
+                remove => InspectionClient.RemoveEventHandler("Network.webSocketFrameReceived", value);
+            }
+
+            /// <summary>
+            /// Fired when WebSocket message is sent.
+            /// </summary>
+            public event Func<Protocol.Network.WebSocketFrameSentEvent, Task> WebSocketFrameSent
+            {
+                add => InspectionClient.AddEventHandler("Network.webSocketFrameSent", value);
+                remove => InspectionClient.RemoveEventHandler("Network.webSocketFrameSent", value);
+            }
+
+            /// <summary>
+            /// Fired when WebSocket handshake response becomes available.
+            /// </summary>
+            public event Func<Protocol.Network.WebSocketHandshakeResponseReceivedEvent, Task> WebSocketHandshakeResponseReceived
+            {
+                add => InspectionClient.AddEventHandler("Network.webSocketHandshakeResponseReceived", value);
+                remove => InspectionClient.RemoveEventHandler("Network.webSocketHandshakeResponseReceived", value);
+            }
+
+            /// <summary>
+            /// Fired when WebSocket is about to initiate handshake.
+            /// </summary>
+            public event Func<Protocol.Network.WebSocketWillSendHandshakeRequestEvent, Task> WebSocketWillSendHandshakeRequest
+            {
+                add => InspectionClient.AddEventHandler("Network.webSocketWillSendHandshakeRequest", value);
+                remove => InspectionClient.RemoveEventHandler("Network.webSocketWillSendHandshakeRequest", value);
+            }
         }
 
         public class OverlayInspectionClient
@@ -6849,6 +7350,34 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            /// <summary>
+            /// Fired when the node should be inspected. This happens after call to `setInspectMode` or when
+            /// user manually inspects an element.
+            /// </summary>
+            public event Func<Protocol.Overlay.InspectNodeRequestedEvent, Task> InspectNodeRequested
+            {
+                add => InspectionClient.AddEventHandler("Overlay.inspectNodeRequested", value);
+                remove => InspectionClient.RemoveEventHandler("Overlay.inspectNodeRequested", value);
+            }
+
+            /// <summary>
+            /// Fired when the node should be highlighted. This happens after call to `setInspectMode`.
+            /// </summary>
+            public event Func<Protocol.Overlay.NodeHighlightRequestedEvent, Task> NodeHighlightRequested
+            {
+                add => InspectionClient.AddEventHandler("Overlay.nodeHighlightRequested", value);
+                remove => InspectionClient.RemoveEventHandler("Overlay.nodeHighlightRequested", value);
+            }
+
+            /// <summary>
+            /// Fired when user asks to capture screenshot of some area on the page.
+            /// </summary>
+            public event Func<Protocol.Overlay.ScreenshotRequestedEvent, Task> ScreenshotRequested
+            {
+                add => InspectionClient.AddEventHandler("Overlay.screenshotRequested", value);
+                remove => InspectionClient.RemoveEventHandler("Overlay.screenshotRequested", value);
             }
         }
 
@@ -8235,6 +8764,181 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            public event Func<Protocol.Page.DomContentEventFiredEvent, Task> DomContentEventFired
+            {
+                add => InspectionClient.AddEventHandler("Page.domContentEventFired", value);
+                remove => InspectionClient.RemoveEventHandler("Page.domContentEventFired", value);
+            }
+
+            /// <summary>
+            /// Fired when frame has been attached to its parent.
+            /// </summary>
+            public event Func<Protocol.Page.FrameAttachedEvent, Task> FrameAttached
+            {
+                add => InspectionClient.AddEventHandler("Page.frameAttached", value);
+                remove => InspectionClient.RemoveEventHandler("Page.frameAttached", value);
+            }
+
+            /// <summary>
+            /// Fired when frame no longer has a scheduled navigation.
+            /// </summary>
+            public event Func<Protocol.Page.FrameClearedScheduledNavigationEvent, Task> FrameClearedScheduledNavigation
+            {
+                add => InspectionClient.AddEventHandler("Page.frameClearedScheduledNavigation", value);
+                remove => InspectionClient.RemoveEventHandler("Page.frameClearedScheduledNavigation", value);
+            }
+
+            /// <summary>
+            /// Fired when frame has been detached from its parent.
+            /// </summary>
+            public event Func<Protocol.Page.FrameDetachedEvent, Task> FrameDetached
+            {
+                add => InspectionClient.AddEventHandler("Page.frameDetached", value);
+                remove => InspectionClient.RemoveEventHandler("Page.frameDetached", value);
+            }
+
+            /// <summary>
+            /// Fired once navigation of the frame has completed. Frame is now associated with the new loader.
+            /// </summary>
+            public event Func<Protocol.Page.FrameNavigatedEvent, Task> FrameNavigated
+            {
+                add => InspectionClient.AddEventHandler("Page.frameNavigated", value);
+                remove => InspectionClient.RemoveEventHandler("Page.frameNavigated", value);
+            }
+
+            public event Func<Protocol.Page.FrameResizedEvent, Task> FrameResized
+            {
+                add => InspectionClient.AddEventHandler("Page.frameResized", value);
+                remove => InspectionClient.RemoveEventHandler("Page.frameResized", value);
+            }
+
+            /// <summary>
+            /// Fired when frame schedules a potential navigation.
+            /// </summary>
+            public event Func<Protocol.Page.FrameScheduledNavigationEvent, Task> FrameScheduledNavigation
+            {
+                add => InspectionClient.AddEventHandler("Page.frameScheduledNavigation", value);
+                remove => InspectionClient.RemoveEventHandler("Page.frameScheduledNavigation", value);
+            }
+
+            /// <summary>
+            /// Fired when frame has started loading.
+            /// </summary>
+            public event Func<Protocol.Page.FrameStartedLoadingEvent, Task> FrameStartedLoading
+            {
+                add => InspectionClient.AddEventHandler("Page.frameStartedLoading", value);
+                remove => InspectionClient.RemoveEventHandler("Page.frameStartedLoading", value);
+            }
+
+            /// <summary>
+            /// Fired when frame has stopped loading.
+            /// </summary>
+            public event Func<Protocol.Page.FrameStoppedLoadingEvent, Task> FrameStoppedLoading
+            {
+                add => InspectionClient.AddEventHandler("Page.frameStoppedLoading", value);
+                remove => InspectionClient.RemoveEventHandler("Page.frameStoppedLoading", value);
+            }
+
+            /// <summary>
+            /// Fired when interstitial page was hidden
+            /// </summary>
+            public event Func<Protocol.Page.InterstitialHiddenEvent, Task> InterstitialHidden
+            {
+                add => InspectionClient.AddEventHandler("Page.interstitialHidden", value);
+                remove => InspectionClient.RemoveEventHandler("Page.interstitialHidden", value);
+            }
+
+            /// <summary>
+            /// Fired when interstitial page was shown
+            /// </summary>
+            public event Func<Protocol.Page.InterstitialShownEvent, Task> InterstitialShown
+            {
+                add => InspectionClient.AddEventHandler("Page.interstitialShown", value);
+                remove => InspectionClient.RemoveEventHandler("Page.interstitialShown", value);
+            }
+
+            /// <summary>
+            /// Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) has been
+            /// closed.
+            /// </summary>
+            public event Func<Protocol.Page.JavascriptDialogClosedEvent, Task> JavascriptDialogClosed
+            {
+                add => InspectionClient.AddEventHandler("Page.javascriptDialogClosed", value);
+                remove => InspectionClient.RemoveEventHandler("Page.javascriptDialogClosed", value);
+            }
+
+            /// <summary>
+            /// Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) is about to
+            /// open.
+            /// </summary>
+            public event Func<Protocol.Page.JavascriptDialogOpeningEvent, Task> JavascriptDialogOpening
+            {
+                add => InspectionClient.AddEventHandler("Page.javascriptDialogOpening", value);
+                remove => InspectionClient.RemoveEventHandler("Page.javascriptDialogOpening", value);
+            }
+
+            /// <summary>
+            /// Fired for top level page lifecycle events such as navigation, load, paint, etc.
+            /// </summary>
+            public event Func<Protocol.Page.LifecycleEventEvent, Task> LifecycleEvent
+            {
+                add => InspectionClient.AddEventHandler("Page.lifecycleEvent", value);
+                remove => InspectionClient.RemoveEventHandler("Page.lifecycleEvent", value);
+            }
+
+            public event Func<Protocol.Page.LoadEventFiredEvent, Task> LoadEventFired
+            {
+                add => InspectionClient.AddEventHandler("Page.loadEventFired", value);
+                remove => InspectionClient.RemoveEventHandler("Page.loadEventFired", value);
+            }
+
+            /// <summary>
+            /// Fired when same-document navigation happens, e.g. due to history API usage or anchor navigation.
+            /// </summary>
+            public event Func<Protocol.Page.NavigatedWithinDocumentEvent, Task> NavigatedWithinDocument
+            {
+                add => InspectionClient.AddEventHandler("Page.navigatedWithinDocument", value);
+                remove => InspectionClient.RemoveEventHandler("Page.navigatedWithinDocument", value);
+            }
+
+            /// <summary>
+            /// Compressed image data requested by the `startScreencast`.
+            /// </summary>
+            public event Func<Protocol.Page.ScreencastFrameEvent, Task> ScreencastFrame
+            {
+                add => InspectionClient.AddEventHandler("Page.screencastFrame", value);
+                remove => InspectionClient.RemoveEventHandler("Page.screencastFrame", value);
+            }
+
+            /// <summary>
+            /// Fired when the page with currently enabled screencast was shown or hidden `.
+            /// </summary>
+            public event Func<Protocol.Page.ScreencastVisibilityChangedEvent, Task> ScreencastVisibilityChanged
+            {
+                add => InspectionClient.AddEventHandler("Page.screencastVisibilityChanged", value);
+                remove => InspectionClient.RemoveEventHandler("Page.screencastVisibilityChanged", value);
+            }
+
+            /// <summary>
+            /// Fired when a new window is going to be opened, via window.open(), link click, form submission,
+            /// etc.
+            /// </summary>
+            public event Func<Protocol.Page.WindowOpenEvent, Task> WindowOpen
+            {
+                add => InspectionClient.AddEventHandler("Page.windowOpen", value);
+                remove => InspectionClient.RemoveEventHandler("Page.windowOpen", value);
+            }
+
+            /// <summary>
+            /// Issued for every compilation cache generated. Is only available
+            /// if Page.setGenerateCompilationCache is enabled.
+            /// </summary>
+            public event Func<Protocol.Page.CompilationCacheProducedEvent, Task> CompilationCacheProduced
+            {
+                add => InspectionClient.AddEventHandler("Page.compilationCacheProduced", value);
+                remove => InspectionClient.RemoveEventHandler("Page.compilationCacheProduced", value);
+            }
         }
 
         public class PerformanceInspectionClient
@@ -8323,6 +9027,15 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            /// <summary>
+            /// Current values of the metrics.
+            /// </summary>
+            public event Func<Protocol.Performance.MetricsEvent, Task> Metrics
+            {
+                add => InspectionClient.AddEventHandler("Performance.metrics", value);
+                remove => InspectionClient.RemoveEventHandler("Performance.metrics", value);
             }
         }
 
@@ -8446,6 +9159,28 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            /// <summary>
+            /// There is a certificate error. If overriding certificate errors is enabled, then it should be
+            /// handled with the `handleCertificateError` command. Note: this event does not fire if the
+            /// certificate error has been allowed internally. Only one client per target should override
+            /// certificate errors at the same time.
+            /// </summary>
+            [Obsolete]
+            public event Func<Protocol.Security.CertificateErrorEvent, Task> CertificateError
+            {
+                add => InspectionClient.AddEventHandler("Security.certificateError", value);
+                remove => InspectionClient.RemoveEventHandler("Security.certificateError", value);
+            }
+
+            /// <summary>
+            /// The security state of the page changed.
+            /// </summary>
+            public event Func<Protocol.Security.SecurityStateChangedEvent, Task> SecurityStateChanged
+            {
+                add => InspectionClient.AddEventHandler("Security.securityStateChanged", value);
+                remove => InspectionClient.RemoveEventHandler("Security.securityStateChanged", value);
             }
         }
 
@@ -8679,6 +9414,24 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            public event Func<Protocol.ServiceWorker.WorkerErrorReportedEvent, Task> WorkerErrorReported
+            {
+                add => InspectionClient.AddEventHandler("ServiceWorker.workerErrorReported", value);
+                remove => InspectionClient.RemoveEventHandler("ServiceWorker.workerErrorReported", value);
+            }
+
+            public event Func<Protocol.ServiceWorker.WorkerRegistrationUpdatedEvent, Task> WorkerRegistrationUpdated
+            {
+                add => InspectionClient.AddEventHandler("ServiceWorker.workerRegistrationUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("ServiceWorker.workerRegistrationUpdated", value);
+            }
+
+            public event Func<Protocol.ServiceWorker.WorkerVersionUpdatedEvent, Task> WorkerVersionUpdated
+            {
+                add => InspectionClient.AddEventHandler("ServiceWorker.workerVersionUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("ServiceWorker.workerVersionUpdated", value);
+            }
         }
 
         public class StorageInspectionClient
@@ -8831,6 +9584,42 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            /// <summary>
+            /// A cache's contents have been modified.
+            /// </summary>
+            public event Func<Protocol.Storage.CacheStorageContentUpdatedEvent, Task> CacheStorageContentUpdated
+            {
+                add => InspectionClient.AddEventHandler("Storage.cacheStorageContentUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("Storage.cacheStorageContentUpdated", value);
+            }
+
+            /// <summary>
+            /// A cache has been added/deleted.
+            /// </summary>
+            public event Func<Protocol.Storage.CacheStorageListUpdatedEvent, Task> CacheStorageListUpdated
+            {
+                add => InspectionClient.AddEventHandler("Storage.cacheStorageListUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("Storage.cacheStorageListUpdated", value);
+            }
+
+            /// <summary>
+            /// The origin's IndexedDB object store has been modified.
+            /// </summary>
+            public event Func<Protocol.Storage.IndexedDBContentUpdatedEvent, Task> IndexedDBContentUpdated
+            {
+                add => InspectionClient.AddEventHandler("Storage.indexedDBContentUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("Storage.indexedDBContentUpdated", value);
+            }
+
+            /// <summary>
+            /// The origin's IndexedDB database list has been modified.
+            /// </summary>
+            public event Func<Protocol.Storage.IndexedDBListUpdatedEvent, Task> IndexedDBListUpdated
+            {
+                add => InspectionClient.AddEventHandler("Storage.indexedDBListUpdated", value);
+                remove => InspectionClient.RemoveEventHandler("Storage.indexedDBListUpdated", value);
             }
         }
 
@@ -9292,6 +10081,72 @@ namespace DumbPrograms.ChromeDevTools
                 )
                 ;
             }
+
+            /// <summary>
+            /// Issued when attached to target because of auto-attach or `attachToTarget` command.
+            /// </summary>
+            public event Func<Protocol.Target.AttachedToTargetEvent, Task> AttachedToTarget
+            {
+                add => InspectionClient.AddEventHandler("Target.attachedToTarget", value);
+                remove => InspectionClient.RemoveEventHandler("Target.attachedToTarget", value);
+            }
+
+            /// <summary>
+            /// Issued when detached from target for any reason (including `detachFromTarget` command). Can be
+            /// issued multiple times per target if multiple sessions have been attached to it.
+            /// </summary>
+            public event Func<Protocol.Target.DetachedFromTargetEvent, Task> DetachedFromTarget
+            {
+                add => InspectionClient.AddEventHandler("Target.detachedFromTarget", value);
+                remove => InspectionClient.RemoveEventHandler("Target.detachedFromTarget", value);
+            }
+
+            /// <summary>
+            /// Notifies about a new protocol message received from the session (as reported in
+            /// `attachedToTarget` event).
+            /// </summary>
+            public event Func<Protocol.Target.ReceivedMessageFromTargetEvent, Task> ReceivedMessageFromTarget
+            {
+                add => InspectionClient.AddEventHandler("Target.receivedMessageFromTarget", value);
+                remove => InspectionClient.RemoveEventHandler("Target.receivedMessageFromTarget", value);
+            }
+
+            /// <summary>
+            /// Issued when a possible inspection target is created.
+            /// </summary>
+            public event Func<Protocol.Target.TargetCreatedEvent, Task> TargetCreated
+            {
+                add => InspectionClient.AddEventHandler("Target.targetCreated", value);
+                remove => InspectionClient.RemoveEventHandler("Target.targetCreated", value);
+            }
+
+            /// <summary>
+            /// Issued when a target is destroyed.
+            /// </summary>
+            public event Func<Protocol.Target.TargetDestroyedEvent, Task> TargetDestroyed
+            {
+                add => InspectionClient.AddEventHandler("Target.targetDestroyed", value);
+                remove => InspectionClient.RemoveEventHandler("Target.targetDestroyed", value);
+            }
+
+            /// <summary>
+            /// Issued when a target has crashed.
+            /// </summary>
+            public event Func<Protocol.Target.TargetCrashedEvent, Task> TargetCrashed
+            {
+                add => InspectionClient.AddEventHandler("Target.targetCrashed", value);
+                remove => InspectionClient.RemoveEventHandler("Target.targetCrashed", value);
+            }
+
+            /// <summary>
+            /// Issued when some information about a target has changed. This only happens between
+            /// `targetCreated` and `targetDestroyed`.
+            /// </summary>
+            public event Func<Protocol.Target.TargetInfoChangedEvent, Task> TargetInfoChanged
+            {
+                add => InspectionClient.AddEventHandler("Target.targetInfoChanged", value);
+                remove => InspectionClient.RemoveEventHandler("Target.targetInfoChanged", value);
+            }
         }
 
         public class TetheringInspectionClient
@@ -9347,6 +10202,15 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            /// <summary>
+            /// Informs that port was successfully bound and got a specified connection id.
+            /// </summary>
+            public event Func<Protocol.Tethering.AcceptedEvent, Task> Accepted
+            {
+                add => InspectionClient.AddEventHandler("Tethering.accepted", value);
+                remove => InspectionClient.RemoveEventHandler("Tethering.accepted", value);
             }
         }
 
@@ -9482,6 +10346,32 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            public event Func<Protocol.Tracing.BufferUsageEvent, Task> BufferUsage
+            {
+                add => InspectionClient.AddEventHandler("Tracing.bufferUsage", value);
+                remove => InspectionClient.RemoveEventHandler("Tracing.bufferUsage", value);
+            }
+
+            /// <summary>
+            /// Contains an bucket of collected trace events. When tracing is stopped collected events will be
+            /// send as a sequence of dataCollected events followed by tracingComplete event.
+            /// </summary>
+            public event Func<Protocol.Tracing.DataCollectedEvent, Task> DataCollected
+            {
+                add => InspectionClient.AddEventHandler("Tracing.dataCollected", value);
+                remove => InspectionClient.RemoveEventHandler("Tracing.dataCollected", value);
+            }
+
+            /// <summary>
+            /// Signals that tracing is stopped and there is no trace buffers pending flush, all data were
+            /// delivered via dataCollected events.
+            /// </summary>
+            public event Func<Protocol.Tracing.TracingCompleteEvent, Task> TracingComplete
+            {
+                add => InspectionClient.AddEventHandler("Tracing.tracingComplete", value);
+                remove => InspectionClient.RemoveEventHandler("Tracing.tracingComplete", value);
             }
         }
 
@@ -9781,6 +10671,30 @@ namespace DumbPrograms.ChromeDevTools
                     , cancellation
                 )
                 ;
+            }
+
+            /// <summary>
+            /// Issued when the domain is enabled and the request URL matches the
+            /// specified filter. The request is paused until the client responds
+            /// with one of continueRequest, failRequest or fulfillRequest.
+            /// The stage of the request can be determined by presence of responseErrorReason
+            /// and responseStatusCode -- the request is at the response stage if either
+            /// of these fields is present and in the request stage otherwise.
+            /// </summary>
+            public event Func<Protocol.Fetch.RequestPausedEvent, Task> RequestPaused
+            {
+                add => InspectionClient.AddEventHandler("Fetch.requestPaused", value);
+                remove => InspectionClient.RemoveEventHandler("Fetch.requestPaused", value);
+            }
+
+            /// <summary>
+            /// Issued when the domain is enabled with handleAuthRequests set to true.
+            /// The request is paused until client responds with continueWithAuth.
+            /// </summary>
+            public event Func<Protocol.Fetch.AuthRequiredEvent, Task> AuthRequired
+            {
+                add => InspectionClient.AddEventHandler("Fetch.authRequired", value);
+                remove => InspectionClient.RemoveEventHandler("Fetch.authRequired", value);
             }
         }
     }

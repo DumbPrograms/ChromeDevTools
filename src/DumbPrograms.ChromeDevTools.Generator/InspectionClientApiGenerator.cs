@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 using System.Xml.Linq;
 
 namespace DumbPrograms.ChromeDevTools.Generator
@@ -100,6 +99,23 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     }
                                 }
                             }
+
+                            if (domain.Events != null)
+                            {
+                                foreach (var @event in domain.Events)
+                                {
+                                    var csEventName = GetCSharpIdentifier(@event.Name);
+
+                                    WILSummary(@event.Description);
+                                    WILObsolete(@event.Deprecated);
+
+                                    using (WILBlock($"public event Func<Protocol.{domain.Name}.{csEventName}Event, Task> {csEventName}"))
+                                    {
+                                        WIL($"add => {InspectionClient}.AddEventHandler(\"{domain.Name}.{@event.Name}\", value);");
+                                        WIL($"remove => {InspectionClient}.RemoveEventHandler(\"{domain.Name}.{@event.Name}\", value);");
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -133,7 +149,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                         throw new NotImplementedException();
                     }
 
-                    WIL($"{csType} @{parameter.Name}{(parameter.Optional ? " = default" : "" )}, ");
+                    WIL($"{csType} @{parameter.Name}{(parameter.Optional ? " = default" : "")}, ");
                 }
             }
 
