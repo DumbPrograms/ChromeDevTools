@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.IO;
 using System.Net.WebSockets;
@@ -15,11 +15,12 @@ namespace DumbPrograms.ChromeDevTools
 {
     public partial class InspectionClient
     {
-        private event EventHandler<InspectionMessage> MessageReceived;
-
         private readonly ClientWebSocket WebSocket;
         private readonly InspectionTarget InspectionTarget;
 
+        private int Started;
+        private event EventHandler<InspectionMessage> MessageReceived;
+        private ConcurrentDictionary<string, EventDispatcher> EventSubscriptions;
         private CancellationTokenSource ReceivingLoopCanceller;
         private Task ReceivingLoop;
 
@@ -33,10 +34,16 @@ namespace DumbPrograms.ChromeDevTools
 
         public async Task Start(CancellationToken cancellation = default)
         {
-            await WebSocket.ConnectAsync(new Uri(InspectionTarget.WebSocketDebuggerUrl), cancellation);
+            if (Interlocked.CompareExchange(ref Started, 1, 0) == 0)
+            {
+                await WebSocket.ConnectAsync(new Uri(InspectionTarget.WebSocketDebuggerUrl), cancellation);
 
-            ReceivingLoopCanceller = new CancellationTokenSource();
-            ReceivingLoop = StartReceivingLoop(ReceivingLoopCanceller.Token);
+                EventSubscriptions = new ConcurrentDictionary<string, EventDispatcher>();
+                MessageReceived += DispatchSubscribedEvents;
+
+                ReceivingLoopCanceller = new CancellationTokenSource();
+                ReceivingLoop = StartReceivingLoop(ReceivingLoopCanceller.Token);
+            }
         }
 
         private async Task StartReceivingLoop(CancellationToken cancellation)
@@ -91,7 +98,7 @@ namespace DumbPrograms.ChromeDevTools
             {
                 Id = id,
                 Method = command.Name,
-                Params = command
+                Params = JObject.FromObject(command)
             };
 
             var frameText = JsonConvert.SerializeObject(frame);
@@ -117,9 +124,21 @@ namespace DumbPrograms.ChromeDevTools
             return await response;
         }
 
+        private void DispatchSubscribedEvents(object sender, InspectionMessage message)
+        {
+            if (message.Method != null && EventSubscriptions.TryGetValue(message.Method, out var dispatcher))
+            {
+                dispatcher.Dispatch(message.Params);
+            }
+        }
+
         private IDisposable SubscribeEvent<TEvent>(string name, Func<TEvent, Task> handler)
         {
-            throw new NotImplementedException();
+            var dispatcher = (EventDispatcher<TEvent>)EventSubscriptions.GetOrAdd(name, n => new EventDispatcher<TEvent>());
+
+            dispatcher.Handlers += handler;
+
+            return new EventUnsubscriber<TEvent>(dispatcher, handler);
         }
 
         public IDisposable SubscribeEvent<TEvent>(Func<TEvent, Task> handler)
