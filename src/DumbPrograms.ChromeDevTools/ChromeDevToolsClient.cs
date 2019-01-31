@@ -31,7 +31,7 @@ namespace DumbPrograms.ChromeDevTools
 
         private async Task<T> Get<T>(string url) => JsonConvert.DeserializeObject<T>(await HttpClient.GetStringAsync(url));
 
-        public async Task<InspectionClient> StartInspectionSession(InspectionTarget target)
+        public async Task<InspectionClient> Inspect(InspectionTarget target)
         {
             var client = new InspectionClient(target);
 
