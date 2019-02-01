@@ -63,7 +63,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Does nothing.
         /// </summary>
-        public class ClearMessagesCommand : ICommand
+        public class ClearMessagesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Console.clearMessages";
         }
@@ -71,7 +71,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables console domain, prevents further console messages from being reported to the client.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Console.disable";
         }
@@ -80,7 +80,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Enables console domain, sends the messages collected so far to the client by means of the
         /// `messageAdded` notification.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Console.enable";
         }
@@ -317,7 +317,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Continues execution until specific location is reached.
         /// </summary>
-        public class ContinueToLocationCommand : ICommand
+        public class ContinueToLocationCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.continueToLocation";
 
@@ -337,7 +337,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables debugger for given page.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.disable";
         }
@@ -525,12 +525,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Stops on the next JavaScript statement.
         /// </summary>
-        public class PauseCommand : ICommand
+        public class PauseCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.pause";
         }
 
-        public class PauseOnAsyncCallCommand : ICommand
+        public class PauseOnAsyncCallCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.pauseOnAsyncCall";
 
@@ -544,7 +544,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Removes JavaScript breakpoint.
         /// </summary>
-        public class RemoveBreakpointCommand : ICommand
+        public class RemoveBreakpointCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.removeBreakpoint";
 
@@ -591,7 +591,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Resumes JavaScript execution.
         /// </summary>
-        public class ResumeCommand : ICommand
+        public class ResumeCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.resume";
         }
@@ -641,7 +641,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables or disables async call stacks tracking.
         /// </summary>
-        public class SetAsyncCallStackDepthCommand : ICommand
+        public class SetAsyncCallStackDepthCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.setAsyncCallStackDepth";
 
@@ -658,7 +658,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// scripts with url matching one of the patterns. VM will try to leave blackboxed script by
         /// performing 'step in' several times, finally resorting to 'step out' if unsuccessful.
         /// </summary>
-        public class SetBlackboxPatternsCommand : ICommand
+        public class SetBlackboxPatternsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.setBlackboxPatterns";
 
@@ -675,7 +675,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Positions array contains positions where blackbox state is changed. First interval isn't
         /// blackboxed. Array should be sorted.
         /// </summary>
-        public class SetBlackboxedRangesCommand : ICommand
+        public class SetBlackboxedRangesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.setBlackboxedRanges";
 
@@ -827,7 +827,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Activates / deactivates all breakpoints on the page.
         /// </summary>
-        public class SetBreakpointsActiveCommand : ICommand
+        public class SetBreakpointsActiveCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.setBreakpointsActive";
 
@@ -842,7 +842,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Defines pause on exceptions state. Can be set to stop on all exceptions, uncaught exceptions or
         /// no exceptions. Initial pause on exceptions state is `none`.
         /// </summary>
-        public class SetPauseOnExceptionsCommand : ICommand
+        public class SetPauseOnExceptionsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.setPauseOnExceptions";
 
@@ -856,7 +856,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Changes return value in top frame. Available only at return break position.
         /// </summary>
-        public class SetReturnValueCommand : ICommand
+        public class SetReturnValueCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.setReturnValue";
 
@@ -931,7 +931,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Makes page not interrupt on any pauses (breakpoint, exception, dom exception etc).
         /// </summary>
-        public class SetSkipAllPausesCommand : ICommand
+        public class SetSkipAllPausesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.setSkipAllPauses";
 
@@ -946,7 +946,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Changes value of variable in a callframe. Object-based scopes are not supported and must be
         /// mutated manually.
         /// </summary>
-        public class SetVariableValueCommand : ICommand
+        public class SetVariableValueCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.setVariableValue";
 
@@ -979,7 +979,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Steps into the function call.
         /// </summary>
-        public class StepIntoCommand : ICommand
+        public class StepIntoCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.stepInto";
 
@@ -994,7 +994,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Steps out of the function call.
         /// </summary>
-        public class StepOutCommand : ICommand
+        public class StepOutCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.stepOut";
         }
@@ -1002,7 +1002,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Steps over the statement.
         /// </summary>
-        public class StepOverCommand : ICommand
+        public class StepOverCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.stepOver";
         }
@@ -1375,7 +1375,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Enables console to refer to the node with given id via $x (see Command Line API for more details
         /// $x functions).
         /// </summary>
-        public class AddInspectedHeapObjectCommand : ICommand
+        public class AddInspectedHeapObjectCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.addInspectedHeapObject";
 
@@ -1386,17 +1386,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public HeapSnapshotObjectId HeapObjectId { get; set; }
         }
 
-        public class CollectGarbageCommand : ICommand
+        public class CollectGarbageCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.collectGarbage";
         }
 
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.disable";
         }
 
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.enable";
         }
@@ -1461,7 +1461,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public SamplingHeapProfile Profile { get; set; }
         }
 
-        public class StartSamplingCommand : ICommand
+        public class StartSamplingCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.startSampling";
 
@@ -1473,7 +1473,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public double? SamplingInterval { get; set; }
         }
 
-        public class StartTrackingHeapObjectsCommand : ICommand
+        public class StartTrackingHeapObjectsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.startTrackingHeapObjects";
 
@@ -1499,7 +1499,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public SamplingHeapProfile Profile { get; set; }
         }
 
-        public class StopTrackingHeapObjectsCommand : ICommand
+        public class StopTrackingHeapObjectsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.stopTrackingHeapObjects";
 
@@ -1511,7 +1511,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? ReportProgress { get; set; }
         }
 
-        public class TakeHeapSnapshotCommand : ICommand
+        public class TakeHeapSnapshotCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.takeHeapSnapshot";
 
@@ -1833,12 +1833,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Commands
 
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Profiler.disable";
         }
 
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Profiler.enable";
         }
@@ -1865,7 +1865,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Changes CPU profiler sampling interval. Must be called before CPU profiles recording started.
         /// </summary>
-        public class SetSamplingIntervalCommand : ICommand
+        public class SetSamplingIntervalCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Profiler.setSamplingInterval";
 
@@ -1876,7 +1876,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int Interval { get; set; }
         }
 
-        public class StartCommand : ICommand
+        public class StartCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Profiler.start";
         }
@@ -1886,7 +1886,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// coverage may be incomplete. Enabling prevents running optimized code and resets execution
         /// counters.
         /// </summary>
-        public class StartPreciseCoverageCommand : ICommand
+        public class StartPreciseCoverageCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Profiler.startPreciseCoverage";
 
@@ -1906,7 +1906,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enable type profile.
         /// </summary>
-        public class StartTypeProfileCommand : ICommand
+        public class StartTypeProfileCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Profiler.startTypeProfile";
         }
@@ -1930,7 +1930,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Disable precise code coverage. Disabling releases unnecessary execution count records and allows
         /// executing optimized code.
         /// </summary>
-        public class StopPreciseCoverageCommand : ICommand
+        public class StopPreciseCoverageCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Profiler.stopPreciseCoverage";
         }
@@ -1938,7 +1938,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disable type profile. Disabling releases type profile data collected so far.
         /// </summary>
-        public class StopTypeProfileCommand : ICommand
+        public class StopTypeProfileCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Profiler.stopTypeProfile";
         }
@@ -2761,7 +2761,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables reporting of execution contexts creation.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.disable";
         }
@@ -2769,7 +2769,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Discards collected exceptions and console API calls.
         /// </summary>
-        public class DiscardConsoleEntriesCommand : ICommand
+        public class DiscardConsoleEntriesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.discardConsoleEntries";
         }
@@ -2779,7 +2779,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// When the reporting gets enabled the event will be sent immediately for each existing execution
         /// context.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.enable";
         }
@@ -3028,7 +3028,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Releases remote object with given id.
         /// </summary>
-        public class ReleaseObjectCommand : ICommand
+        public class ReleaseObjectCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.releaseObject";
 
@@ -3042,7 +3042,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Releases all remote objects that belong to a given group.
         /// </summary>
-        public class ReleaseObjectGroupCommand : ICommand
+        public class ReleaseObjectGroupCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.releaseObjectGroup";
 
@@ -3056,7 +3056,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Tells inspected instance to run if it was waiting for debugger to attach.
         /// </summary>
-        public class RunIfWaitingForDebuggerCommand : ICommand
+        public class RunIfWaitingForDebuggerCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.runIfWaitingForDebugger";
         }
@@ -3139,7 +3139,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables or disables async call stacks tracking.
         /// </summary>
-        public class SetAsyncCallStackDepthCommand : ICommand
+        public class SetAsyncCallStackDepthCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.setAsyncCallStackDepth";
 
@@ -3151,7 +3151,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int MaxDepth { get; set; }
         }
 
-        public class SetCustomObjectFormatterEnabledCommand : ICommand
+        public class SetCustomObjectFormatterEnabledCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.setCustomObjectFormatterEnabled";
 
@@ -3159,7 +3159,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool Enabled { get; set; }
         }
 
-        public class SetMaxCallStackSizeToCaptureCommand : ICommand
+        public class SetMaxCallStackSizeToCaptureCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.setMaxCallStackSizeToCapture";
 
@@ -3171,7 +3171,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Terminate current or next JavaScript execution.
         /// Will cancel the termination when the outer-most script execution ends.
         /// </summary>
-        public class TerminateExecutionCommand : ICommand
+        public class TerminateExecutionCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.terminateExecution";
         }
@@ -3186,7 +3186,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// in case of any other input, function throws an exception.
         /// Each binding function call produces Runtime.bindingCalled notification.
         /// </summary>
-        public class AddBindingCommand : ICommand
+        public class AddBindingCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.addBinding";
 
@@ -3204,7 +3204,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// This method does not remove binding function from global object but
         /// unsubscribes current runtime agent from Runtime.bindingCalled notifications.
         /// </summary>
-        public class RemoveBindingCommand : ICommand
+        public class RemoveBindingCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.removeBinding";
 

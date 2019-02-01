@@ -83,11 +83,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                 WILObsolete(command.Deprecated);
 
                                 var commandClassName = GetCSharpIdentifier(command.Name);
-                                var commandInterface = "ICommand";
-                                if (command.Returns != null)
-                                {
-                                    commandInterface += $"<{commandClassName}Response>";
-                                }
+                                var commandInterface = $"ICommand<{(command.Returns != null ? $"{commandClassName}Response" : "VoidResponse")}>";
 
                                 using (WILBlock($"public class {commandClassName}Command : {commandInterface}"))
                                 {

@@ -71,13 +71,13 @@ namespace DumbPrograms.ChromeDevTools
 
                 while (true)
                 {
-                    var receive = await WebSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellation);
+                    var receive = await WebSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellation).ConfigureAwait(false);
 
                     stream.Write(buffer, 0, receive.Count);
 
                     if (receive.MessageType == WebSocketMessageType.Close)
                     {
-                        await WebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "", cancellationToken: default);
+                        await WebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "", cancellationToken: default).ConfigureAwait(false);
 
                         ReceivingLoopCanceller.Cancel();
 
@@ -99,7 +99,7 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
-        private Task InvokeCommand(int id, ICommand command, CancellationToken cancellation)
+        private Task SendCommand(int id, ICommand command, CancellationToken cancellation)
         {
             var frame = new InspectionMessage
             {
@@ -114,21 +114,14 @@ namespace DumbPrograms.ChromeDevTools
             return WebSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, false, cancellation);
         }
 
-        public Task InvokeCommand(ICommand command, CancellationToken cancellation = default)
-        {
-            var id = Interlocked.Increment(ref CommandId);
-
-            return InvokeCommand(id, command, cancellation);
-        }
-
         public async Task<TResponse> InvokeCommand<TResponse>(ICommand<TResponse> command, CancellationToken cancellation = default)
         {
             var id = Interlocked.Increment(ref CommandId);
             var response = RegisterCommandResponseHandler<TResponse>(id, cancellation);
 
-            await InvokeCommand(id, command, cancellation);
+            await SendCommand(id, command, cancellation).ConfigureAwait(false);
 
-            return await response;
+            return await response.ConfigureAwait(false);
         }
 
         private void DispatchSubscribedEvents(object sender, InspectionMessage message)

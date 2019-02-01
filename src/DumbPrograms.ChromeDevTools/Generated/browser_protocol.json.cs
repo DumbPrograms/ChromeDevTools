@@ -329,7 +329,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables the accessibility domain.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Accessibility.disable";
         }
@@ -338,7 +338,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Enables the accessibility domain which causes `AXNodeId`s to remain consistent between method calls.
         /// This turns on accessibility for the page, which can impact performance until accessibility is disabled.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Accessibility.enable";
         }
@@ -589,7 +589,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables animation domain notifications.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Animation.disable";
         }
@@ -597,7 +597,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables animation domain notifications.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Animation.enable";
         }
@@ -647,7 +647,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Releases a set of animations to no longer be manipulated.
         /// </summary>
-        public class ReleaseAnimationsCommand : ICommand
+        public class ReleaseAnimationsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Animation.releaseAnimations";
 
@@ -685,7 +685,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Seek a set of animations to a particular time within each animation.
         /// </summary>
-        public class SeekAnimationsCommand : ICommand
+        public class SeekAnimationsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Animation.seekAnimations";
 
@@ -705,7 +705,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets the paused state of a set of animations.
         /// </summary>
-        public class SetPausedCommand : ICommand
+        public class SetPausedCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Animation.setPaused";
 
@@ -725,7 +725,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets the playback rate of the document timeline.
         /// </summary>
-        public class SetPlaybackRateCommand : ICommand
+        public class SetPlaybackRateCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Animation.setPlaybackRate";
 
@@ -739,7 +739,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets the timing of an animation node.
         /// </summary>
-        public class SetTimingCommand : ICommand
+        public class SetTimingCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Animation.setTiming";
 
@@ -910,7 +910,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables application cache domain notifications.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ApplicationCache.enable";
         }
@@ -1233,7 +1233,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Grant specific permissions to the given origin and reject all others.
         /// </summary>
-        public class GrantPermissionsCommand : ICommand
+        public class GrantPermissionsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Browser.grantPermissions";
 
@@ -1253,7 +1253,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Reset all permission management for all origins.
         /// </summary>
-        public class ResetPermissionsCommand : ICommand
+        public class ResetPermissionsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Browser.resetPermissions";
 
@@ -1267,7 +1267,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Close browser gracefully.
         /// </summary>
-        public class CloseCommand : ICommand
+        public class CloseCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Browser.close";
         }
@@ -1275,7 +1275,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Crashes browser on the main thread.
         /// </summary>
-        public class CrashCommand : ICommand
+        public class CrashCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Browser.crash";
         }
@@ -1462,7 +1462,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Set position and/or size of the browser window.
         /// </summary>
-        public class SetWindowBoundsCommand : ICommand
+        public class SetWindowBoundsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Browser.setWindowBounds";
 
@@ -1483,7 +1483,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Set dock tile details, platform-specific.
         /// </summary>
-        public class SetDockTileCommand : ICommand
+        public class SetDockTileCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Browser.setDockTile";
 
@@ -2297,7 +2297,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables the CSS agent for the given page.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "CSS.disable";
         }
@@ -2306,7 +2306,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Enables the CSS agent for the given page. Clients should not assume that the CSS agent has been
         /// enabled until the result of this command is received.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "CSS.enable";
         }
@@ -2315,7 +2315,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Ensures that the given node will have specified pseudo-classes whenever its style is computed by
         /// the browser.
         /// </summary>
-        public class ForcePseudoStateCommand : ICommand
+        public class ForcePseudoStateCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "CSS.forcePseudoState";
 
@@ -2532,7 +2532,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Find a rule with the given active property for the given node and set the new value for this
         /// property
         /// </summary>
-        public class SetEffectivePropertyValueForNodeCommand : ICommand
+        public class SetEffectivePropertyValueForNodeCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "CSS.setEffectivePropertyValueForNode";
 
@@ -2678,7 +2678,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables the selector recording.
         /// </summary>
-        public class StartRuleUsageTrackingCommand : ICommand
+        public class StartRuleUsageTrackingCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "CSS.startRuleUsageTracking";
         }
@@ -2922,7 +2922,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Deletes a cache.
         /// </summary>
-        public class DeleteCacheCommand : ICommand
+        public class DeleteCacheCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "CacheStorage.deleteCache";
 
@@ -2936,7 +2936,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Deletes a cache entry.
         /// </summary>
-        public class DeleteEntryCommand : ICommand
+        public class DeleteEntryCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "CacheStorage.deleteEntry";
 
@@ -3074,7 +3074,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Also starts observing for issue messages. When an issue is added or removed,
         /// an |issueUpdated| event is fired.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Cast.enable";
 
@@ -3088,7 +3088,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Stops observing for sinks and issues.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Cast.disable";
         }
@@ -3097,7 +3097,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Sets a sink to be used when the web page requests the browser to choose a
         /// sink via Presentation API, Remote Playback API, or Cast SDK.
         /// </summary>
-        public class SetSinkToUseCommand : ICommand
+        public class SetSinkToUseCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Cast.setSinkToUse";
 
@@ -3108,7 +3108,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Starts mirroring the tab to the sink.
         /// </summary>
-        public class StartTabMirroringCommand : ICommand
+        public class StartTabMirroringCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Cast.startTabMirroring";
 
@@ -3119,7 +3119,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Stops the active Cast session on the sink.
         /// </summary>
-        public class StopCastingCommand : ICommand
+        public class StopCastingCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Cast.stopCasting";
 
@@ -3687,7 +3687,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables DOM agent for the given page.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.disable";
         }
@@ -3696,7 +3696,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Discards search results from the session with the given id. `getSearchResults` should no longer
         /// be called for that search.
         /// </summary>
-        public class DiscardSearchResultsCommand : ICommand
+        public class DiscardSearchResultsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.discardSearchResults";
 
@@ -3710,7 +3710,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables DOM agent for the given page.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.enable";
         }
@@ -3718,7 +3718,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Focuses the given element.
         /// </summary>
-        public class FocusCommand : ICommand
+        public class FocusCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.focus";
 
@@ -4045,7 +4045,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Hides any highlight.
         /// </summary>
-        public class HideHighlightCommand : ICommand
+        public class HideHighlightCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.hideHighlight";
         }
@@ -4053,7 +4053,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Highlights DOM node.
         /// </summary>
-        public class HighlightNodeCommand : ICommand
+        public class HighlightNodeCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.highlightNode";
         }
@@ -4061,7 +4061,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Highlights given rectangle.
         /// </summary>
-        public class HighlightRectCommand : ICommand
+        public class HighlightRectCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.highlightRect";
         }
@@ -4069,7 +4069,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Marks last undoable state.
         /// </summary>
-        public class MarkUndoableStateCommand : ICommand
+        public class MarkUndoableStateCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.markUndoableState";
         }
@@ -4260,7 +4260,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Re-does the last undone action.
         /// </summary>
-        public class RedoCommand : ICommand
+        public class RedoCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.redo";
         }
@@ -4268,7 +4268,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Removes attribute with given name from an element with given id.
         /// </summary>
-        public class RemoveAttributeCommand : ICommand
+        public class RemoveAttributeCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.removeAttribute";
 
@@ -4288,7 +4288,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Removes node with given id.
         /// </summary>
-        public class RemoveNodeCommand : ICommand
+        public class RemoveNodeCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.removeNode";
 
@@ -4304,7 +4304,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// `setChildNodes` events where not only immediate children are retrieved, but all children down to
         /// the specified depth.
         /// </summary>
-        public class RequestChildNodesCommand : ICommand
+        public class RequestChildNodesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.requestChildNodes";
 
@@ -4394,7 +4394,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets attribute for an element with given id.
         /// </summary>
-        public class SetAttributeValueCommand : ICommand
+        public class SetAttributeValueCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.setAttributeValue";
 
@@ -4421,7 +4421,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Sets attributes on element with given id. This method is useful when user edits some existing
         /// attribute value and types in several attribute name/value pairs.
         /// </summary>
-        public class SetAttributesAsTextCommand : ICommand
+        public class SetAttributesAsTextCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.setAttributesAsText";
 
@@ -4448,7 +4448,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets files for the given file input element.
         /// </summary>
-        public class SetFileInputFilesCommand : ICommand
+        public class SetFileInputFilesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.setFileInputFiles";
 
@@ -4503,7 +4503,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Enables console to refer to the node with given id via $x (see Command Line API for more details
         /// $x functions).
         /// </summary>
-        public class SetInspectedNodeCommand : ICommand
+        public class SetInspectedNodeCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.setInspectedNode";
 
@@ -4547,7 +4547,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets node value for a node with given id.
         /// </summary>
-        public class SetNodeValueCommand : ICommand
+        public class SetNodeValueCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.setNodeValue";
 
@@ -4567,7 +4567,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets node HTML markup, returns new node id.
         /// </summary>
-        public class SetOuterHTMLCommand : ICommand
+        public class SetOuterHTMLCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.setOuterHTML";
 
@@ -4587,7 +4587,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Undoes the last performed action.
         /// </summary>
-        public class UndoCommand : ICommand
+        public class UndoCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOM.undo";
         }
@@ -5033,7 +5033,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Removes DOM breakpoint that was set using `setDOMBreakpoint`.
         /// </summary>
-        public class RemoveDOMBreakpointCommand : ICommand
+        public class RemoveDOMBreakpointCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMDebugger.removeDOMBreakpoint";
 
@@ -5053,7 +5053,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Removes breakpoint on particular DOM event.
         /// </summary>
-        public class RemoveEventListenerBreakpointCommand : ICommand
+        public class RemoveEventListenerBreakpointCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMDebugger.removeEventListenerBreakpoint";
 
@@ -5073,7 +5073,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Removes breakpoint on particular native event.
         /// </summary>
-        public class RemoveInstrumentationBreakpointCommand : ICommand
+        public class RemoveInstrumentationBreakpointCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMDebugger.removeInstrumentationBreakpoint";
 
@@ -5087,7 +5087,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Removes breakpoint from XMLHttpRequest.
         /// </summary>
-        public class RemoveXHRBreakpointCommand : ICommand
+        public class RemoveXHRBreakpointCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMDebugger.removeXHRBreakpoint";
 
@@ -5101,7 +5101,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets breakpoint on particular operation with DOM.
         /// </summary>
-        public class SetDOMBreakpointCommand : ICommand
+        public class SetDOMBreakpointCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMDebugger.setDOMBreakpoint";
 
@@ -5121,7 +5121,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets breakpoint on particular DOM event.
         /// </summary>
-        public class SetEventListenerBreakpointCommand : ICommand
+        public class SetEventListenerBreakpointCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMDebugger.setEventListenerBreakpoint";
 
@@ -5142,7 +5142,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets breakpoint on particular native event.
         /// </summary>
-        public class SetInstrumentationBreakpointCommand : ICommand
+        public class SetInstrumentationBreakpointCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMDebugger.setInstrumentationBreakpoint";
 
@@ -5156,7 +5156,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets breakpoint on XMLHttpRequest.
         /// </summary>
-        public class SetXHRBreakpointCommand : ICommand
+        public class SetXHRBreakpointCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMDebugger.setXHRBreakpoint";
 
@@ -5777,7 +5777,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables DOM snapshot agent for the given page.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMSnapshot.disable";
         }
@@ -5785,7 +5785,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables DOM snapshot agent for the given page.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMSnapshot.enable";
         }
@@ -5923,7 +5923,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Commands
 
-        public class ClearCommand : ICommand
+        public class ClearCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMStorage.clear";
 
@@ -5934,7 +5934,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables storage tracking, prevents storage events from being sent to the client.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMStorage.disable";
         }
@@ -5942,7 +5942,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables storage tracking, storage events will now be delivered to the client.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMStorage.enable";
         }
@@ -5962,7 +5962,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Item[] Entries { get; set; }
         }
 
-        public class RemoveDOMStorageItemCommand : ICommand
+        public class RemoveDOMStorageItemCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMStorage.removeDOMStorageItem";
 
@@ -5973,7 +5973,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Key { get; set; }
         }
 
-        public class SetDOMStorageItemCommand : ICommand
+        public class SetDOMStorageItemCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMStorage.setDOMStorageItem";
 
@@ -6114,7 +6114,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables database tracking, prevents database events from being sent to the client.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Database.disable";
         }
@@ -6122,7 +6122,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables database tracking, database events will now be delivered to the client.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Database.enable";
         }
@@ -6198,7 +6198,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Clears the overridden Device Orientation.
         /// </summary>
-        public class ClearDeviceOrientationOverrideCommand : ICommand
+        public class ClearDeviceOrientationOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DeviceOrientation.clearDeviceOrientationOverride";
         }
@@ -6206,7 +6206,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Overrides the Device Orientation.
         /// </summary>
-        public class SetDeviceOrientationOverrideCommand : ICommand
+        public class SetDeviceOrientationOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DeviceOrientation.setDeviceOrientationOverride";
 
@@ -6298,7 +6298,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Clears the overriden device metrics.
         /// </summary>
-        public class ClearDeviceMetricsOverrideCommand : ICommand
+        public class ClearDeviceMetricsOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.clearDeviceMetricsOverride";
         }
@@ -6306,7 +6306,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Clears the overriden Geolocation Position and Error.
         /// </summary>
-        public class ClearGeolocationOverrideCommand : ICommand
+        public class ClearGeolocationOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.clearGeolocationOverride";
         }
@@ -6314,7 +6314,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Requests that page scale factor is reset to initial values.
         /// </summary>
-        public class ResetPageScaleFactorCommand : ICommand
+        public class ResetPageScaleFactorCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.resetPageScaleFactor";
         }
@@ -6322,7 +6322,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables or disables simulating a focused and active page.
         /// </summary>
-        public class SetFocusEmulationEnabledCommand : ICommand
+        public class SetFocusEmulationEnabledCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setFocusEmulationEnabled";
 
@@ -6336,7 +6336,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables CPU throttling to emulate slow CPUs.
         /// </summary>
-        public class SetCPUThrottlingRateCommand : ICommand
+        public class SetCPUThrottlingRateCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setCPUThrottlingRate";
 
@@ -6351,7 +6351,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Sets or clears an override of the default background color of the frame. This override is used
         /// if the content does not specify one.
         /// </summary>
-        public class SetDefaultBackgroundColorOverrideCommand : ICommand
+        public class SetDefaultBackgroundColorOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setDefaultBackgroundColorOverride";
 
@@ -6368,7 +6368,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// window.innerWidth, window.innerHeight, and "device-width"/"device-height"-related CSS media
         /// query results).
         /// </summary>
-        public class SetDeviceMetricsOverrideCommand : ICommand
+        public class SetDeviceMetricsOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setDeviceMetricsOverride";
 
@@ -6447,7 +6447,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Page.Viewport Viewport { get; set; }
         }
 
-        public class SetScrollbarsHiddenCommand : ICommand
+        public class SetScrollbarsHiddenCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setScrollbarsHidden";
 
@@ -6458,7 +6458,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool Hidden { get; set; }
         }
 
-        public class SetDocumentCookieDisabledCommand : ICommand
+        public class SetDocumentCookieDisabledCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setDocumentCookieDisabled";
 
@@ -6469,7 +6469,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool Disabled { get; set; }
         }
 
-        public class SetEmitTouchEventsForMouseCommand : ICommand
+        public class SetEmitTouchEventsForMouseCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setEmitTouchEventsForMouse";
 
@@ -6489,7 +6489,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Emulates the given media for CSS media queries.
         /// </summary>
-        public class SetEmulatedMediaCommand : ICommand
+        public class SetEmulatedMediaCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setEmulatedMedia";
 
@@ -6504,7 +6504,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Overrides the Geolocation Position or Error. Omitting any of the parameters emulates position
         /// unavailable.
         /// </summary>
-        public class SetGeolocationOverrideCommand : ICommand
+        public class SetGeolocationOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setGeolocationOverride";
 
@@ -6531,7 +6531,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Overrides value returned by the javascript navigator object.
         /// </summary>
         [Obsolete]
-        public class SetNavigatorOverridesCommand : ICommand
+        public class SetNavigatorOverridesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setNavigatorOverrides";
 
@@ -6545,7 +6545,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets a specified page scale factor.
         /// </summary>
-        public class SetPageScaleFactorCommand : ICommand
+        public class SetPageScaleFactorCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setPageScaleFactor";
 
@@ -6559,7 +6559,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Switches script execution in the page.
         /// </summary>
-        public class SetScriptExecutionDisabledCommand : ICommand
+        public class SetScriptExecutionDisabledCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setScriptExecutionDisabled";
 
@@ -6573,7 +6573,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables touch on platforms which do not support them.
         /// </summary>
-        public class SetTouchEmulationEnabledCommand : ICommand
+        public class SetTouchEmulationEnabledCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setTouchEmulationEnabled";
 
@@ -6645,7 +6645,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// on Android.
         /// </summary>
         [Obsolete]
-        public class SetVisibleSizeCommand : ICommand
+        public class SetVisibleSizeCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setVisibleSize";
 
@@ -6665,7 +6665,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Allows overriding user agent with the given string.
         /// </summary>
-        public class SetUserAgentOverrideCommand : ICommand
+        public class SetUserAgentOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setUserAgentOverride";
 
@@ -6825,7 +6825,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables headless events for the target.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeadlessExperimental.disable";
         }
@@ -6833,7 +6833,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables headless events for the target.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeadlessExperimental.enable";
         }
@@ -6883,7 +6883,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Close the stream, discard any temporary backing storage.
         /// </summary>
-        public class CloseCommand : ICommand
+        public class CloseCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "IO.close";
 
@@ -7188,7 +7188,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Clears all entries from an object store.
         /// </summary>
-        public class ClearObjectStoreCommand : ICommand
+        public class ClearObjectStoreCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "IndexedDB.clearObjectStore";
 
@@ -7214,7 +7214,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Deletes a database.
         /// </summary>
-        public class DeleteDatabaseCommand : ICommand
+        public class DeleteDatabaseCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "IndexedDB.deleteDatabase";
 
@@ -7234,7 +7234,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Delete a range of entries from an object store
         /// </summary>
-        public class DeleteObjectStoreEntriesCommand : ICommand
+        public class DeleteObjectStoreEntriesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "IndexedDB.deleteObjectStoreEntries";
 
@@ -7257,7 +7257,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables events from backend.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "IndexedDB.disable";
         }
@@ -7265,7 +7265,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables events from backend.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "IndexedDB.enable";
         }
@@ -7468,7 +7468,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Dispatches a key event to the page.
         /// </summary>
-        public class DispatchKeyEventCommand : ICommand
+        public class DispatchKeyEventCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Input.dispatchKeyEvent";
 
@@ -7566,7 +7566,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// This method emulates inserting text that doesn't come from a key press,
         /// for example an emoji keyboard or an IME.
         /// </summary>
-        public class InsertTextCommand : ICommand
+        public class InsertTextCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Input.insertText";
 
@@ -7580,7 +7580,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Dispatches a mouse event to the page.
         /// </summary>
-        public class DispatchMouseEventCommand : ICommand
+        public class DispatchMouseEventCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Input.dispatchMouseEvent";
 
@@ -7657,7 +7657,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Dispatches a touch event to the page.
         /// </summary>
-        public class DispatchTouchEventCommand : ICommand
+        public class DispatchTouchEventCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Input.dispatchTouchEvent";
 
@@ -7693,7 +7693,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Emulates touch event from the mouse event parameters.
         /// </summary>
-        public class EmulateTouchFromMouseEventCommand : ICommand
+        public class EmulateTouchFromMouseEventCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Input.emulateTouchFromMouseEvent";
 
@@ -7756,7 +7756,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Ignores input events (useful while auditing page).
         /// </summary>
-        public class SetIgnoreInputEventsCommand : ICommand
+        public class SetIgnoreInputEventsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Input.setIgnoreInputEvents";
 
@@ -7770,7 +7770,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Synthesizes a pinch gesture over a time period by issuing appropriate touch events.
         /// </summary>
-        public class SynthesizePinchGestureCommand : ICommand
+        public class SynthesizePinchGestureCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Input.synthesizePinchGesture";
 
@@ -7809,7 +7809,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Synthesizes a scroll gesture over a time period by issuing appropriate touch events.
         /// </summary>
-        public class SynthesizeScrollGestureCommand : ICommand
+        public class SynthesizeScrollGestureCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Input.synthesizeScrollGesture";
 
@@ -7892,7 +7892,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Synthesizes a tap gesture over a time period by issuing appropriate touch events.
         /// </summary>
-        public class SynthesizeTapGestureCommand : ICommand
+        public class SynthesizeTapGestureCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Input.synthesizeTapGesture";
 
@@ -7939,7 +7939,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables inspector domain notifications.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Inspector.disable";
         }
@@ -7947,7 +7947,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables inspector domain notifications.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Inspector.enable";
         }
@@ -8228,7 +8228,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables compositing tree inspection.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "LayerTree.disable";
         }
@@ -8236,7 +8236,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables compositing tree inspection.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "LayerTree.enable";
         }
@@ -8331,7 +8331,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Releases layer snapshot captured by the back-end.
         /// </summary>
-        public class ReleaseSnapshotCommand : ICommand
+        public class ReleaseSnapshotCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "LayerTree.releaseSnapshot";
 
@@ -8544,7 +8544,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Clears the log.
         /// </summary>
-        public class ClearCommand : ICommand
+        public class ClearCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Log.clear";
         }
@@ -8552,7 +8552,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables log domain, prevents further log entries from being reported to the client.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Log.disable";
         }
@@ -8561,7 +8561,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Enables log domain, sends the entries collected so far to the client by means of the
         /// `entryAdded` notification.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Log.enable";
         }
@@ -8569,7 +8569,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// start violation reporting.
         /// </summary>
-        public class StartViolationsReportCommand : ICommand
+        public class StartViolationsReportCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Log.startViolationsReport";
 
@@ -8583,7 +8583,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Stop violation reporting.
         /// </summary>
-        public class StopViolationsReportCommand : ICommand
+        public class StopViolationsReportCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Log.stopViolationsReport";
         }
@@ -8716,7 +8716,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public int JsEventListeners { get; set; }
         }
 
-        public class PrepareForLeakDetectionCommand : ICommand
+        public class PrepareForLeakDetectionCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Memory.prepareForLeakDetection";
         }
@@ -8724,7 +8724,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enable/disable suppressing memory pressure notifications in all processes.
         /// </summary>
-        public class SetPressureNotificationsSuppressedCommand : ICommand
+        public class SetPressureNotificationsSuppressedCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Memory.setPressureNotificationsSuppressed";
 
@@ -8738,7 +8738,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Simulate a memory pressure notification in all processes.
         /// </summary>
-        public class SimulatePressureNotificationCommand : ICommand
+        public class SimulatePressureNotificationCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Memory.simulatePressureNotification";
 
@@ -8752,7 +8752,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Start collecting native memory profile.
         /// </summary>
-        public class StartSamplingCommand : ICommand
+        public class StartSamplingCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Memory.startSampling";
 
@@ -8772,7 +8772,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Stop collecting native memory profile.
         /// </summary>
-        public class StopSamplingCommand : ICommand
+        public class StopSamplingCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Memory.stopSampling";
         }
@@ -10036,7 +10036,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Clears browser cache.
         /// </summary>
-        public class ClearBrowserCacheCommand : ICommand
+        public class ClearBrowserCacheCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.clearBrowserCache";
         }
@@ -10044,7 +10044,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Clears browser cookies.
         /// </summary>
-        public class ClearBrowserCookiesCommand : ICommand
+        public class ClearBrowserCookiesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.clearBrowserCookies";
         }
@@ -10055,7 +10055,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// fetch occurs as a result which encounters a redirect an additional Network.requestIntercepted
         /// event will be sent with the same InterceptionId.
         /// </summary>
-        public class ContinueInterceptedRequestCommand : ICommand
+        public class ContinueInterceptedRequestCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.continueInterceptedRequest";
 
@@ -10114,7 +10114,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Deletes browser cookies with matching name and url or domain/path pair.
         /// </summary>
-        public class DeleteCookiesCommand : ICommand
+        public class DeleteCookiesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.deleteCookies";
 
@@ -10147,7 +10147,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables network tracking, prevents network events from being sent to the client.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.disable";
         }
@@ -10155,7 +10155,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Activates emulation of network conditions.
         /// </summary>
-        public class EmulateNetworkConditionsCommand : ICommand
+        public class EmulateNetworkConditionsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.emulateNetworkConditions";
 
@@ -10193,7 +10193,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables network tracking, network events will now be delivered to the client.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.enable";
 
@@ -10391,7 +10391,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// parameters should be identical: method, url, async, request body, extra headers, withCredentials
         /// attribute, user, password.
         /// </summary>
-        public class ReplayXHRCommand : ICommand
+        public class ReplayXHRCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.replayXHR";
 
@@ -10447,7 +10447,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Blocks URLs from loading.
         /// </summary>
-        public class SetBlockedURLsCommand : ICommand
+        public class SetBlockedURLsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.setBlockedURLs";
 
@@ -10461,7 +10461,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Toggles ignoring of service worker for each request.
         /// </summary>
-        public class SetBypassServiceWorkerCommand : ICommand
+        public class SetBypassServiceWorkerCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.setBypassServiceWorker";
 
@@ -10475,7 +10475,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Toggles ignoring cache for each request. If `true`, cache will not be used.
         /// </summary>
-        public class SetCacheDisabledCommand : ICommand
+        public class SetCacheDisabledCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.setCacheDisabled";
 
@@ -10562,7 +10562,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets given cookies.
         /// </summary>
-        public class SetCookiesCommand : ICommand
+        public class SetCookiesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.setCookies";
 
@@ -10576,7 +10576,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// For testing.
         /// </summary>
-        public class SetDataSizeLimitsForTestCommand : ICommand
+        public class SetDataSizeLimitsForTestCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.setDataSizeLimitsForTest";
 
@@ -10596,7 +10596,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Specifies whether to always send extra HTTP headers with the requests from this page.
         /// </summary>
-        public class SetExtraHTTPHeadersCommand : ICommand
+        public class SetExtraHTTPHeadersCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.setExtraHTTPHeaders";
 
@@ -10610,7 +10610,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets the requests to intercept that match a the provided patterns and optionally resource types.
         /// </summary>
-        public class SetRequestInterceptionCommand : ICommand
+        public class SetRequestInterceptionCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.setRequestInterception";
 
@@ -10625,7 +10625,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Allows overriding user agent with the given string.
         /// </summary>
-        public class SetUserAgentOverrideCommand : ICommand
+        public class SetUserAgentOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Network.setUserAgentOverride";
 
@@ -11349,7 +11349,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables domain notifications.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.disable";
         }
@@ -11357,7 +11357,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables domain notifications.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.enable";
         }
@@ -11389,7 +11389,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Hides any highlight.
         /// </summary>
-        public class HideHighlightCommand : ICommand
+        public class HideHighlightCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.hideHighlight";
         }
@@ -11397,7 +11397,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Highlights owner element of the frame with given id.
         /// </summary>
-        public class HighlightFrameCommand : ICommand
+        public class HighlightFrameCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.highlightFrame";
 
@@ -11424,7 +11424,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Highlights DOM node with given id or with the given JavaScript object wrapper. Either nodeId or
         /// objectId must be specified.
         /// </summary>
-        public class HighlightNodeCommand : ICommand
+        public class HighlightNodeCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.highlightNode";
 
@@ -11456,7 +11456,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Highlights given quad. Coordinates are absolute with respect to the main frame viewport.
         /// </summary>
-        public class HighlightQuadCommand : ICommand
+        public class HighlightQuadCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.highlightQuad";
 
@@ -11482,7 +11482,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Highlights given rectangle. Coordinates are absolute with respect to the main frame viewport.
         /// </summary>
-        public class HighlightRectCommand : ICommand
+        public class HighlightRectCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.highlightRect";
 
@@ -11527,7 +11527,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Enters the 'inspect' mode. In this mode, elements that user is hovering over are highlighted.
         /// Backend then generates 'inspectNodeRequested' event upon element selection.
         /// </summary>
-        public class SetInspectModeCommand : ICommand
+        public class SetInspectModeCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.setInspectMode";
 
@@ -11545,7 +11545,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public HighlightConfig HighlightConfig { get; set; }
         }
 
-        public class SetPausedInDebuggerMessageCommand : ICommand
+        public class SetPausedInDebuggerMessageCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.setPausedInDebuggerMessage";
 
@@ -11559,7 +11559,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Requests that backend shows debug borders on layers
         /// </summary>
-        public class SetShowDebugBordersCommand : ICommand
+        public class SetShowDebugBordersCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.setShowDebugBorders";
 
@@ -11573,7 +11573,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Requests that backend shows the FPS counter
         /// </summary>
-        public class SetShowFPSCounterCommand : ICommand
+        public class SetShowFPSCounterCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.setShowFPSCounter";
 
@@ -11587,7 +11587,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Requests that backend shows paint rectangles
         /// </summary>
-        public class SetShowPaintRectsCommand : ICommand
+        public class SetShowPaintRectsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.setShowPaintRects";
 
@@ -11601,7 +11601,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Requests that backend shows scroll bottleneck rects
         /// </summary>
-        public class SetShowScrollBottleneckRectsCommand : ICommand
+        public class SetShowScrollBottleneckRectsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.setShowScrollBottleneckRects";
 
@@ -11615,7 +11615,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Requests that backend shows hit-test borders on layers
         /// </summary>
-        public class SetShowHitTestBordersCommand : ICommand
+        public class SetShowHitTestBordersCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.setShowHitTestBorders";
 
@@ -11629,7 +11629,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Paints viewport size upon main frame resize.
         /// </summary>
-        public class SetShowViewportSizeOnResizeCommand : ICommand
+        public class SetShowViewportSizeOnResizeCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.setShowViewportSizeOnResize";
 
@@ -11640,7 +11640,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool Show { get; set; }
         }
 
-        public class SetSuspendedCommand : ICommand
+        public class SetSuspendedCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.setSuspended";
 
@@ -12269,7 +12269,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Brings page to front (activates tab).
         /// </summary>
-        public class BringToFrontCommand : ICommand
+        public class BringToFrontCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.bringToFront";
         }
@@ -12345,7 +12345,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Clears the overriden device metrics.
         /// </summary>
         [Obsolete]
-        public class ClearDeviceMetricsOverrideCommand : ICommand
+        public class ClearDeviceMetricsOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.clearDeviceMetricsOverride";
         }
@@ -12354,7 +12354,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Clears the overridden Device Orientation.
         /// </summary>
         [Obsolete]
-        public class ClearDeviceOrientationOverrideCommand : ICommand
+        public class ClearDeviceOrientationOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.clearDeviceOrientationOverride";
         }
@@ -12363,7 +12363,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Clears the overriden Geolocation Position and Error.
         /// </summary>
         [Obsolete]
-        public class ClearGeolocationOverrideCommand : ICommand
+        public class ClearGeolocationOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.clearGeolocationOverride";
         }
@@ -12409,7 +12409,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Deletes browser cookie with given name, domain and path.
         /// </summary>
         [Obsolete]
-        public class DeleteCookieCommand : ICommand
+        public class DeleteCookieCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.deleteCookie";
 
@@ -12429,7 +12429,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables page domain notifications.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.disable";
         }
@@ -12437,7 +12437,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables page domain notifications.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.enable";
         }
@@ -12561,7 +12561,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Resets navigation history for the current page.
         /// </summary>
-        public class ResetNavigationHistoryCommand : ICommand
+        public class ResetNavigationHistoryCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.resetNavigationHistory";
         }
@@ -12623,7 +12623,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Accepts or dismisses a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload).
         /// </summary>
-        public class HandleJavaScriptDialogCommand : ICommand
+        public class HandleJavaScriptDialogCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.handleJavaScriptDialog";
 
@@ -12698,7 +12698,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Navigates current page to the given history entry.
         /// </summary>
-        public class NavigateToHistoryEntryCommand : ICommand
+        public class NavigateToHistoryEntryCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.navigateToHistoryEntry";
 
@@ -12831,7 +12831,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Reloads given page optionally ignoring the cache.
         /// </summary>
-        public class ReloadCommand : ICommand
+        public class ReloadCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.reload";
 
@@ -12853,7 +12853,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Deprecated, please use removeScriptToEvaluateOnNewDocument instead.
         /// </summary>
         [Obsolete]
-        public class RemoveScriptToEvaluateOnLoadCommand : ICommand
+        public class RemoveScriptToEvaluateOnLoadCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.removeScriptToEvaluateOnLoad";
 
@@ -12864,7 +12864,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Removes given script from the list.
         /// </summary>
-        public class RemoveScriptToEvaluateOnNewDocumentCommand : ICommand
+        public class RemoveScriptToEvaluateOnNewDocumentCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.removeScriptToEvaluateOnNewDocument";
 
@@ -12875,7 +12875,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Acknowledges that a screencast frame has been received by the frontend.
         /// </summary>
-        public class ScreencastFrameAckCommand : ICommand
+        public class ScreencastFrameAckCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.screencastFrameAck";
 
@@ -12937,7 +12937,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enable Chrome's experimental ad filter on all sites.
         /// </summary>
-        public class SetAdBlockingEnabledCommand : ICommand
+        public class SetAdBlockingEnabledCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setAdBlockingEnabled";
 
@@ -12951,7 +12951,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enable page Content Security Policy by-passing.
         /// </summary>
-        public class SetBypassCSPCommand : ICommand
+        public class SetBypassCSPCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setBypassCSP";
 
@@ -12968,7 +12968,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// query results).
         /// </summary>
         [Obsolete]
-        public class SetDeviceMetricsOverrideCommand : ICommand
+        public class SetDeviceMetricsOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setDeviceMetricsOverride";
 
@@ -13050,7 +13050,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Overrides the Device Orientation.
         /// </summary>
         [Obsolete]
-        public class SetDeviceOrientationOverrideCommand : ICommand
+        public class SetDeviceOrientationOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setDeviceOrientationOverride";
 
@@ -13076,7 +13076,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Set generic font families.
         /// </summary>
-        public class SetFontFamiliesCommand : ICommand
+        public class SetFontFamiliesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setFontFamilies";
 
@@ -13090,7 +13090,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Set default font sizes.
         /// </summary>
-        public class SetFontSizesCommand : ICommand
+        public class SetFontSizesCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setFontSizes";
 
@@ -13104,7 +13104,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sets given markup as the document's HTML.
         /// </summary>
-        public class SetDocumentContentCommand : ICommand
+        public class SetDocumentContentCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setDocumentContent";
 
@@ -13124,7 +13124,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Set the behavior when downloading a file.
         /// </summary>
-        public class SetDownloadBehaviorCommand : ICommand
+        public class SetDownloadBehaviorCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setDownloadBehavior";
 
@@ -13147,7 +13147,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// unavailable.
         /// </summary>
         [Obsolete]
-        public class SetGeolocationOverrideCommand : ICommand
+        public class SetGeolocationOverrideCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setGeolocationOverride";
 
@@ -13173,7 +13173,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Controls whether page will emit lifecycle events.
         /// </summary>
-        public class SetLifecycleEventsEnabledCommand : ICommand
+        public class SetLifecycleEventsEnabledCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setLifecycleEventsEnabled";
 
@@ -13188,7 +13188,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Toggles mouse event-based touch event emulation.
         /// </summary>
         [Obsolete]
-        public class SetTouchEmulationEnabledCommand : ICommand
+        public class SetTouchEmulationEnabledCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setTouchEmulationEnabled";
 
@@ -13208,7 +13208,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Starts sending each frame using the `screencastFrame` event.
         /// </summary>
-        public class StartScreencastCommand : ICommand
+        public class StartScreencastCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.startScreencast";
 
@@ -13246,7 +13246,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Force the page stop all navigations and pending resource fetches.
         /// </summary>
-        public class StopLoadingCommand : ICommand
+        public class StopLoadingCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.stopLoading";
         }
@@ -13254,7 +13254,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Crashes renderer on the IO thread, generates minidumps.
         /// </summary>
-        public class CrashCommand : ICommand
+        public class CrashCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.crash";
         }
@@ -13262,7 +13262,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Tries to close page, running its beforeunload hooks, if any.
         /// </summary>
-        public class CloseCommand : ICommand
+        public class CloseCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.close";
         }
@@ -13272,7 +13272,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// It will transition the page to the given state according to:
         /// https://github.com/WICG/web-lifecycle/
         /// </summary>
-        public class SetWebLifecycleStateCommand : ICommand
+        public class SetWebLifecycleStateCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setWebLifecycleState";
 
@@ -13286,7 +13286,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Stops sending each frame in the `screencastFrame`.
         /// </summary>
-        public class StopScreencastCommand : ICommand
+        public class StopScreencastCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.stopScreencast";
         }
@@ -13294,7 +13294,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Forces compilation cache to be generated for every subresource script.
         /// </summary>
-        public class SetProduceCompilationCacheCommand : ICommand
+        public class SetProduceCompilationCacheCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.setProduceCompilationCache";
 
@@ -13306,7 +13306,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Seeds compilation cache for given url. Compilation cache does not survive
         /// cross-process navigation.
         /// </summary>
-        public class AddCompilationCacheCommand : ICommand
+        public class AddCompilationCacheCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.addCompilationCache";
 
@@ -13323,7 +13323,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Clears seeded compilation cache.
         /// </summary>
-        public class ClearCompilationCacheCommand : ICommand
+        public class ClearCompilationCacheCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.clearCompilationCache";
         }
@@ -13331,7 +13331,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Generates a report for testing.
         /// </summary>
-        public class GenerateTestReportCommand : ICommand
+        public class GenerateTestReportCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.generateTestReport";
 
@@ -13351,7 +13351,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Pauses page execution. Can be resumed using generic Runtime.runIfWaitingForDebugger.
         /// </summary>
-        public class WaitForDebuggerCommand : ICommand
+        public class WaitForDebuggerCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Page.waitForDebugger";
         }
@@ -13759,7 +13759,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disable collecting and reporting metrics.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Performance.disable";
         }
@@ -13767,7 +13767,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enable collecting and reporting metrics.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Performance.enable";
         }
@@ -13777,7 +13777,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Note that this must be called before enabling metrics collection. Calling
         /// this method while metrics collection is enabled returns an error.
         /// </summary>
-        public class SetTimeDomainCommand : ICommand
+        public class SetTimeDomainCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Performance.setTimeDomain";
 
@@ -13992,7 +13992,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables tracking security state changes.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Security.disable";
         }
@@ -14000,7 +14000,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enables tracking security state changes.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Security.enable";
         }
@@ -14008,7 +14008,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Enable/disable whether all certificate errors should be ignored.
         /// </summary>
-        public class SetIgnoreCertificateErrorsCommand : ICommand
+        public class SetIgnoreCertificateErrorsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Security.setIgnoreCertificateErrors";
 
@@ -14023,7 +14023,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Handles a certificate error that fired a certificateError event.
         /// </summary>
         [Obsolete]
-        public class HandleCertificateErrorCommand : ICommand
+        public class HandleCertificateErrorCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Security.handleCertificateError";
 
@@ -14045,7 +14045,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// be handled by the DevTools client and should be answered with `handleCertificateError` commands.
         /// </summary>
         [Obsolete]
-        public class SetOverrideCertificateErrorsCommand : ICommand
+        public class SetOverrideCertificateErrorsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Security.setOverrideCertificateErrors";
 
@@ -14249,7 +14249,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Commands
 
-        public class DeliverPushMessageCommand : ICommand
+        public class DeliverPushMessageCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.deliverPushMessage";
 
@@ -14263,12 +14263,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Data { get; set; }
         }
 
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.disable";
         }
 
-        public class DispatchSyncEventCommand : ICommand
+        public class DispatchSyncEventCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.dispatchSyncEvent";
 
@@ -14285,12 +14285,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool LastChance { get; set; }
         }
 
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.enable";
         }
 
-        public class InspectWorkerCommand : ICommand
+        public class InspectWorkerCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.inspectWorker";
 
@@ -14298,7 +14298,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string VersionId { get; set; }
         }
 
-        public class SetForceUpdateOnPageLoadCommand : ICommand
+        public class SetForceUpdateOnPageLoadCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.setForceUpdateOnPageLoad";
 
@@ -14306,7 +14306,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool ForceUpdateOnPageLoad { get; set; }
         }
 
-        public class SkipWaitingCommand : ICommand
+        public class SkipWaitingCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.skipWaiting";
 
@@ -14314,7 +14314,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string ScopeURL { get; set; }
         }
 
-        public class StartWorkerCommand : ICommand
+        public class StartWorkerCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.startWorker";
 
@@ -14322,12 +14322,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string ScopeURL { get; set; }
         }
 
-        public class StopAllWorkersCommand : ICommand
+        public class StopAllWorkersCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.stopAllWorkers";
         }
 
-        public class StopWorkerCommand : ICommand
+        public class StopWorkerCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.stopWorker";
 
@@ -14335,7 +14335,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string VersionId { get; set; }
         }
 
-        public class UnregisterCommand : ICommand
+        public class UnregisterCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.unregister";
 
@@ -14343,7 +14343,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string ScopeURL { get; set; }
         }
 
-        public class UpdateRegistrationCommand : ICommand
+        public class UpdateRegistrationCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.updateRegistration";
 
@@ -14432,7 +14432,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Clears storage for origin.
         /// </summary>
-        public class ClearDataForOriginCommand : ICommand
+        public class ClearDataForOriginCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Storage.clearDataForOrigin";
 
@@ -14488,7 +14488,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Registers origin to be notified when an update occurs to its cache storage list.
         /// </summary>
-        public class TrackCacheStorageForOriginCommand : ICommand
+        public class TrackCacheStorageForOriginCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Storage.trackCacheStorageForOrigin";
 
@@ -14502,7 +14502,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Registers origin to be notified when an update occurs to its IndexedDB.
         /// </summary>
-        public class TrackIndexedDBForOriginCommand : ICommand
+        public class TrackIndexedDBForOriginCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Storage.trackIndexedDBForOrigin";
 
@@ -14516,7 +14516,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unregisters origin from receiving notifications for cache storage.
         /// </summary>
-        public class UntrackCacheStorageForOriginCommand : ICommand
+        public class UntrackCacheStorageForOriginCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Storage.untrackCacheStorageForOrigin";
 
@@ -14530,7 +14530,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unregisters origin from receiving notifications for IndexedDB.
         /// </summary>
-        public class UntrackIndexedDBForOriginCommand : ICommand
+        public class UntrackIndexedDBForOriginCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Storage.untrackIndexedDBForOrigin";
 
@@ -14859,7 +14859,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Activates (focuses) the target.
         /// </summary>
-        public class ActivateTargetCommand : ICommand
+        public class ActivateTargetCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Target.activateTarget";
 
@@ -14940,7 +14940,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// - `binding.send(json)` - a method to send messages over the remote debugging protocol
         /// - `binding.onmessage = json =&gt; handleMessage(json)` - a callback that will be called for the protocol notifications and command responses.
         /// </summary>
-        public class ExposeDevToolsProtocolCommand : ICommand
+        public class ExposeDevToolsProtocolCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Target.exposeDevToolsProtocol";
 
@@ -15043,7 +15043,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Detaches session with given id.
         /// </summary>
-        public class DetachFromTargetCommand : ICommand
+        public class DetachFromTargetCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Target.detachFromTarget";
 
@@ -15064,7 +15064,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Deletes a BrowserContext. All the belonging pages will be closed without calling their
         /// beforeunload hooks.
         /// </summary>
-        public class DisposeBrowserContextCommand : ICommand
+        public class DisposeBrowserContextCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Target.disposeBrowserContext";
 
@@ -15114,7 +15114,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Sends protocol message over session with given id.
         /// </summary>
-        public class SendMessageToTargetCommand : ICommand
+        public class SendMessageToTargetCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Target.sendMessageToTarget";
 
@@ -15139,7 +15139,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// this one. When turned on, attaches to all existing related targets as well. When turned off,
         /// automatically detaches from all currently attached targets.
         /// </summary>
-        public class SetAutoAttachCommand : ICommand
+        public class SetAutoAttachCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Target.setAutoAttach";
 
@@ -15167,7 +15167,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Controls whether to discover available targets and notify via
         /// `targetCreated/targetInfoChanged/targetDestroyed` events.
         /// </summary>
-        public class SetDiscoverTargetsCommand : ICommand
+        public class SetDiscoverTargetsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Target.setDiscoverTargets";
 
@@ -15182,7 +15182,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Enables target discovery for the specified locations, when `setDiscoverTargets` was set to
         /// `true`.
         /// </summary>
-        public class SetRemoteLocationsCommand : ICommand
+        public class SetRemoteLocationsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Target.setRemoteLocations";
 
@@ -15333,7 +15333,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Request browser port binding.
         /// </summary>
-        public class BindCommand : ICommand
+        public class BindCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Tethering.bind";
 
@@ -15347,7 +15347,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Request browser port unbinding.
         /// </summary>
-        public class UnbindCommand : ICommand
+        public class UnbindCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Tethering.unbind";
 
@@ -15466,7 +15466,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Stop trace events collection.
         /// </summary>
-        public class EndCommand : ICommand
+        public class EndCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Tracing.end";
         }
@@ -15492,7 +15492,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Record a clock sync marker in the trace.
         /// </summary>
-        public class RecordClockSyncMarkerCommand : ICommand
+        public class RecordClockSyncMarkerCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Tracing.recordClockSyncMarker";
 
@@ -15530,7 +15530,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Start trace events collection.
         /// </summary>
-        public class StartCommand : ICommand
+        public class StartCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Tracing.start";
 
@@ -15650,7 +15650,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Generates a report for testing.
         /// </summary>
-        public class GenerateTestReportCommand : ICommand
+        public class GenerateTestReportCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Testing.generateTestReport";
 
@@ -15801,7 +15801,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Disables the fetch domain.
         /// </summary>
-        public class DisableCommand : ICommand
+        public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Fetch.disable";
         }
@@ -15810,7 +15810,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Enables issuing of requestPaused events. A request will be paused until client
         /// calls one of failRequest, fulfillRequest or continueRequest/continueWithAuth.
         /// </summary>
-        public class EnableCommand : ICommand
+        public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Fetch.enable";
 
@@ -15833,7 +15833,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Causes the request to fail with specified reason.
         /// </summary>
-        public class FailRequestCommand : ICommand
+        public class FailRequestCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Fetch.failRequest";
 
@@ -15853,7 +15853,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Provides response to the request.
         /// </summary>
-        public class FulfillRequestCommand : ICommand
+        public class FulfillRequestCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Fetch.fulfillRequest";
 
@@ -15892,7 +15892,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Continues the request, optionally modifying some of its parameters.
         /// </summary>
-        public class ContinueRequestCommand : ICommand
+        public class ContinueRequestCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Fetch.continueRequest";
 
@@ -15930,7 +15930,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Continues a request supplying authChallengeResponse following authRequired event.
         /// </summary>
-        public class ContinueWithAuthCommand : ICommand
+        public class ContinueWithAuthCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Fetch.continueWithAuth";
 
