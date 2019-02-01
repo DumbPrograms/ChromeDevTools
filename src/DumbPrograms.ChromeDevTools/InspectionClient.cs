@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using DumbPrograms.ChromeDevTools.Protocol;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace DumbPrograms.ChromeDevTools
 {
@@ -17,6 +18,7 @@ namespace DumbPrograms.ChromeDevTools
     {
         private readonly ClientWebSocket WebSocket;
         private readonly InspectionTarget InspectionTarget;
+        private readonly JsonSerializerSettings JsonSerializerSettings;
 
         private int Started;
         private event EventHandler<InspectionMessage> MessageReceived;
@@ -30,6 +32,11 @@ namespace DumbPrograms.ChromeDevTools
         {
             WebSocket = new ClientWebSocket();
             InspectionTarget = inspectionTarget;
+            JsonSerializerSettings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
         }
 
         public async Task Start(CancellationToken cancellation = default)
@@ -98,10 +105,10 @@ namespace DumbPrograms.ChromeDevTools
             {
                 Id = id,
                 Method = command.Name,
-                Params = JObject.FromObject(command)
+                Params = JObject.Parse(JsonConvert.SerializeObject(command, JsonSerializerSettings))
             };
 
-            var frameText = JsonConvert.SerializeObject(frame);
+            var frameText = JsonConvert.SerializeObject(frame, JsonSerializerSettings);
             var bytes = Encoding.UTF8.GetBytes(frameText);
 
             return WebSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, false, cancellation);
