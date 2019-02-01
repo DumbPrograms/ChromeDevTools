@@ -48,8 +48,8 @@ namespace DumbPrograms.ChromeDevTools
                 EventDispatchers = new ConcurrentDictionary<string, EventDispatcher>();
                 MessageReceived += DispatchSubscribedEvents;
 
-                ReceivingLoopCanceller = new CancellationTokenSource();
-                ReceivingLoop = StartReceivingLoop(ReceivingLoopCanceller.Token);
+                //ReceivingLoopCanceller = new CancellationTokenSource();
+                //ReceivingLoop = StartReceivingLoop(ReceivingLoopCanceller.Token);
             }
         }
 
@@ -121,7 +121,40 @@ namespace DumbPrograms.ChromeDevTools
 
             await SendCommand(id, command, cancellation).ConfigureAwait(false);
 
-            return await response.ConfigureAwait(false);
+            return default;// await response.ConfigureAwait(false);
+        }
+
+        private Task<TResponse> RegisterCommandResponseHandler<TResponse>(int id, CancellationToken cancellation)
+        {
+            var tcs = new TaskCompletionSource<TResponse>();
+            var handler = GetCommandResponseMessageReceivedHandler(tcs, id);
+
+            MessageReceived += handler;
+
+            return tcs.Task;
+        }
+
+        private EventHandler<InspectionMessage> GetCommandResponseMessageReceivedHandler<T>(TaskCompletionSource<T> tcs, int id)
+        {
+            EventHandler<InspectionMessage> handler = null;
+            handler = new EventHandler<InspectionMessage>((o, message) =>
+            {
+                if (message.Id != id)
+                    return;
+
+                if (message.Result is JObject result)
+                {
+                    tcs.SetResult(result.ToObject<T>());
+                }
+                else
+                {
+                    tcs.SetException(new Exception($"Code: {message.Error.Code}; Message: {message.Error.Message}"));
+                }
+
+                MessageReceived -= handler;
+            });
+
+            return handler;
         }
 
         private void DispatchSubscribedEvents(object sender, InspectionMessage message)
@@ -161,38 +194,5 @@ namespace DumbPrograms.ChromeDevTools
 
         private EventDispatcher<TEvent> GetEventDispatcher<TEvent>(string name)
             => (EventDispatcher<TEvent>)EventDispatchers.GetOrAdd(name, n => new EventDispatcher<TEvent>());
-
-        private Task<TResponse> RegisterCommandResponseHandler<TResponse>(int id, CancellationToken cancellation)
-        {
-            var tcs = new TaskCompletionSource<TResponse>();
-            var handler = GetCommandResponseMessageReceivedHandler(tcs, id);
-
-            MessageReceived += handler;
-
-            return tcs.Task;
-        }
-
-        private EventHandler<InspectionMessage> GetCommandResponseMessageReceivedHandler<T>(TaskCompletionSource<T> tcs, int id)
-        {
-            EventHandler<InspectionMessage> handler = null;
-            handler = new EventHandler<InspectionMessage>((o, message) =>
-            {
-                if (message.Id != id)
-                    return;
-
-                if (message.Result is JObject result)
-                {
-                    tcs.SetResult(result.ToObject<T>());
-                }
-                else
-                {
-                    tcs.SetException(new Exception($"Code: {message.Error.Code}; Message: {message.Error.Message}"));
-                }
-
-                MessageReceived -= handler;
-            });
-
-            return handler;
-        }
     }
 }
