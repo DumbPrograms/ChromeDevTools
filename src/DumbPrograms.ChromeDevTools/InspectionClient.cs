@@ -21,7 +21,7 @@ namespace DumbPrograms.ChromeDevTools
         private readonly JsonSerializerSettings JsonSerializerSettings;
 
         private int Started;
-        private event EventHandler<InspectionMessage> MessageReceived;
+        private event Action<InspectionMessage> MessageReceived;
         private ConcurrentDictionary<string, EventDispatcher> EventDispatchers;
         private CancellationTokenSource ReceivingLoopCanceller;
         private Task ReceivingLoop;
@@ -43,13 +43,14 @@ namespace DumbPrograms.ChromeDevTools
         {
             if (Interlocked.CompareExchange(ref Started, 1, 0) == 0)
             {
-                await WebSocket.ConnectAsync(new Uri(InspectionTarget.WebSocketDebuggerUrl), cancellation);
+                await WebSocket.ConnectAsync(new Uri(InspectionTarget.WebSocketDebuggerUrl), cancellation)
+                               .ConfigureAwait(false);
 
                 EventDispatchers = new ConcurrentDictionary<string, EventDispatcher>();
                 MessageReceived += DispatchSubscribedEvents;
 
-                //ReceivingLoopCanceller = new CancellationTokenSource();
-                //ReceivingLoop = StartReceivingLoop(ReceivingLoopCanceller.Token);
+                ReceivingLoopCanceller = new CancellationTokenSource();
+                ReceivingLoop = StartReceivingLoop(ReceivingLoopCanceller.Token);
             }
         }
 
@@ -88,10 +89,12 @@ namespace DumbPrograms.ChromeDevTools
                     {
                         Debug.Assert(receive.MessageType == WebSocketMessageType.Text);
 
+                        stream.Position = 0;
+
                         var reader = new StreamReader(stream, Encoding.UTF8);
                         var message = JsonConvert.DeserializeObject<InspectionMessage>(reader.ReadToEnd());
 
-                        MessageReceived?.Invoke(this, message);
+                        MessageReceived?.Invoke(message);
 
                         break;
                     }
@@ -99,8 +102,11 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
-        private Task SendCommand(int id, ICommand command, CancellationToken cancellation)
+        public async Task<TResponse> InvokeCommand<TResponse>(ICommand<TResponse> command, CancellationToken cancellation = default)
         {
+            var id = Interlocked.Increment(ref CommandId);
+            var response = RegisterCommandResponseHandler<TResponse>(id, command, cancellation);
+
             var frame = new InspectionMessage
             {
                 Id = id,
@@ -111,53 +117,39 @@ namespace DumbPrograms.ChromeDevTools
             var frameText = JsonConvert.SerializeObject(frame, JsonSerializerSettings);
             var bytes = Encoding.UTF8.GetBytes(frameText);
 
-            return WebSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, false, cancellation);
+            await WebSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, endOfMessage: true, cancellation)
+                           .ConfigureAwait(false);
+
+            return await response.ConfigureAwait(false);
         }
 
-        public async Task<TResponse> InvokeCommand<TResponse>(ICommand<TResponse> command, CancellationToken cancellation = default)
-        {
-            var id = Interlocked.Increment(ref CommandId);
-            var response = RegisterCommandResponseHandler<TResponse>(id, cancellation);
-
-            await SendCommand(id, command, cancellation).ConfigureAwait(false);
-
-            return default;// await response.ConfigureAwait(false);
-        }
-
-        private Task<TResponse> RegisterCommandResponseHandler<TResponse>(int id, CancellationToken cancellation)
+        private Task<TResponse> RegisterCommandResponseHandler<TResponse>(int id, ICommand command, CancellationToken cancellation)
         {
             var tcs = new TaskCompletionSource<TResponse>();
-            var handler = GetCommandResponseMessageReceivedHandler(tcs, id);
 
-            MessageReceived += handler;
+            MessageReceived += Handler;
 
             return tcs.Task;
-        }
 
-        private EventHandler<InspectionMessage> GetCommandResponseMessageReceivedHandler<T>(TaskCompletionSource<T> tcs, int id)
-        {
-            EventHandler<InspectionMessage> handler = null;
-            handler = new EventHandler<InspectionMessage>((o, message) =>
+            void Handler(InspectionMessage message)
             {
                 if (message.Id != id)
                     return;
 
                 if (message.Result is JObject result)
                 {
-                    tcs.SetResult(result.ToObject<T>());
+                    tcs.SetResult(result.ToObject<TResponse>());
                 }
                 else
                 {
-                    tcs.SetException(new Exception($"Code: {message.Error.Code}; Message: {message.Error.Message}"));
+                    tcs.SetException(new CommandFailedException(command, message.Error.Code, message.Error.Message));
                 }
 
-                MessageReceived -= handler;
-            });
-
-            return handler;
+                MessageReceived -= Handler;
+            }
         }
 
-        private void DispatchSubscribedEvents(object sender, InspectionMessage message)
+        private void DispatchSubscribedEvents(InspectionMessage message)
         {
             if (message.Method != null && EventDispatchers.TryGetValue(message.Method, out var dispatcher))
             {

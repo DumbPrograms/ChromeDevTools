@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DumbPrograms.ChromeDevTools.Sample
@@ -20,8 +21,18 @@ namespace DumbPrograms.ChromeDevTools.Sample
 
             var inspector = await client.Inspect(targets.First());
 
-            //await inspector.Page.Enable();
+            await inspector.Page.Enable();
+
+            var ev = new AutoResetEvent(false);
+
+            inspector.Page.LoadEventFired += async e =>
+            {
+                Console.WriteLine($"Page loaded at {e.Timestamp}");
+                ev.Set();
+            };
+
             var p = await inspector.Page.Navigate("https://www.baidu.com");
+            ev.WaitOne();
         }
     }
 }
