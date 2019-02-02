@@ -7,11 +7,11 @@ using Newtonsoft.Json;
 
 namespace DumbPrograms.ChromeDevTools
 {
-    public class ChromeDevToolsClient
+    public class BrowserClient
     {
         readonly HttpClient HttpClient;
 
-        public ChromeDevToolsClient(int port)
+        public BrowserClient(int port)
         {
             HttpClient = new HttpClient
             {

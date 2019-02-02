@@ -14,19 +14,31 @@ namespace DumbPrograms.ChromeDevTools
         public bool Headless { get; }
         public bool DisableGpu { get; }
 
-        public ChromeProcessHelper(int debuggingPort = 9222, bool headless = false, bool disableGpu = false)
+        public static ChromeProcessHelper StartNew(int debuggingPort = 9222, bool headless = false, bool disableGpu = false)
+        {
+            var helper = new ChromeProcessHelper(debuggingPort, headless, disableGpu);
+
+            helper.Start();
+
+            return helper;
+        }
+
+        private ChromeProcessHelper(int debuggingPort = 9222, bool headless = false, bool disableGpu = false)
         {
             DebuggingPort = debuggingPort;
             Headless = headless;
             DisableGpu = disableGpu;
         }
 
-        public async Task<ChromeDevToolsClient> StartDevToolsClient(string url = null)
+        private void Start()
         {
             var psi = new ProcessStartInfo(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe", "--remote-debugging-port=9222");
             Chrome = Process.Start(psi);
+        }
 
-            var client = new ChromeDevToolsClient(DebuggingPort);
+        public async Task<BrowserClient> GetBrowserClient(string url = null)
+        {
+            var client = new BrowserClient(DebuggingPort);
 
             if (!String.IsNullOrWhiteSpace(url))
             {

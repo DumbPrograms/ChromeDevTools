@@ -9,9 +9,9 @@ namespace DumbPrograms.ChromeDevTools.Sample
     {
         static async Task Main(string[] args)
         {
-            using (var chrome = new ChromeProcessHelper())
+            using (var chrome = ChromeProcessHelper.StartNew())
             {
-                var client = await chrome.StartDevToolsClient();
+                var client = await chrome.GetBrowserClient();
 
                 var targets = from t in await client.GetInspectableTargets()
                                 where t.Title == "New Tab"
