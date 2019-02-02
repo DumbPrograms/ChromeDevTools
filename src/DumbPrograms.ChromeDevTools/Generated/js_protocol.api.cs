@@ -4,29 +4,29 @@ using System.Threading.Tasks;
 
 namespace DumbPrograms.ChromeDevTools
 {
-    partial class InspectionClient
+    partial class InspectorClient
     {
 
         /// <summary>
         /// This domain is deprecated - use Runtime or Log instead.
         /// </summary>
         [Obsolete]
-        public ConsoleInspectionClient Console => __Console__ ?? (__Console__ = new ConsoleInspectionClient(this));
+        public ConsoleInspectorClient Console => __Console__ ?? (__Console__ = new ConsoleInspectorClient(this));
         [Obsolete]
-        private ConsoleInspectionClient __Console__;
+        private ConsoleInspectorClient __Console__;
 
         /// <summary>
         /// Debugger domain exposes JavaScript debugging capabilities. It allows setting and removing
         /// breakpoints, stepping through execution, exploring stack traces, etc.
         /// </summary>
-        public DebuggerInspectionClient Debugger => __Debugger__ ?? (__Debugger__ = new DebuggerInspectionClient(this));
-        private DebuggerInspectionClient __Debugger__;
+        public DebuggerInspectorClient Debugger => __Debugger__ ?? (__Debugger__ = new DebuggerInspectorClient(this));
+        private DebuggerInspectorClient __Debugger__;
 
-        public HeapProfilerInspectionClient HeapProfiler => __HeapProfiler__ ?? (__HeapProfiler__ = new HeapProfilerInspectionClient(this));
-        private HeapProfilerInspectionClient __HeapProfiler__;
+        public HeapProfilerInspectorClient HeapProfiler => __HeapProfiler__ ?? (__HeapProfiler__ = new HeapProfilerInspectorClient(this));
+        private HeapProfilerInspectorClient __HeapProfiler__;
 
-        public ProfilerInspectionClient Profiler => __Profiler__ ?? (__Profiler__ = new ProfilerInspectionClient(this));
-        private ProfilerInspectionClient __Profiler__;
+        public ProfilerInspectorClient Profiler => __Profiler__ ?? (__Profiler__ = new ProfilerInspectorClient(this));
+        private ProfilerInspectorClient __Profiler__;
 
         /// <summary>
         /// Runtime domain exposes JavaScript runtime by means of remote evaluation and mirror objects.
@@ -35,25 +35,25 @@ namespace DumbPrograms.ChromeDevTools
         /// maintained in memory unless they are either explicitly released or are released along with the
         /// other objects in their object group.
         /// </summary>
-        public RuntimeInspectionClient Runtime => __Runtime__ ?? (__Runtime__ = new RuntimeInspectionClient(this));
-        private RuntimeInspectionClient __Runtime__;
+        public RuntimeInspectorClient Runtime => __Runtime__ ?? (__Runtime__ = new RuntimeInspectorClient(this));
+        private RuntimeInspectorClient __Runtime__;
 
         /// <summary>
         /// This domain is deprecated.
         /// </summary>
         [Obsolete]
-        public SchemaInspectionClient Schema => __Schema__ ?? (__Schema__ = new SchemaInspectionClient(this));
+        public SchemaInspectorClient Schema => __Schema__ ?? (__Schema__ = new SchemaInspectorClient(this));
         [Obsolete]
-        private SchemaInspectionClient __Schema__;
+        private SchemaInspectorClient __Schema__;
 
         [Obsolete]
-        public class ConsoleInspectionClient
+        public class ConsoleInspectorClient
         {
-            private readonly InspectionClient InspectionClient;
+            private readonly InspectorClient InspectorClient;
 
-            public ConsoleInspectionClient(InspectionClient inspectionClient)
+            public ConsoleInspectorClient(InspectorClient inspectionClient)
             {
-                InspectionClient = inspectionClient;
+                InspectorClient = inspectionClient;
             }
 
             /// <summary>
@@ -64,7 +64,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Console.ClearMessagesCommand
                     {
@@ -82,7 +82,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Console.DisableCommand
                     {
@@ -101,7 +101,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Console.EnableCommand
                     {
@@ -116,18 +116,18 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Console.MessageAddedEvent, Task> MessageAdded
             {
-                add => InspectionClient.AddEventHandler("Console.messageAdded", value);
-                remove => InspectionClient.RemoveEventHandler("Console.messageAdded", value);
+                add => InspectorClient.AddEventHandler("Console.messageAdded", value);
+                remove => InspectorClient.RemoveEventHandler("Console.messageAdded", value);
             }
         }
 
-        public class DebuggerInspectionClient
+        public class DebuggerInspectorClient
         {
-            private readonly InspectionClient InspectionClient;
+            private readonly InspectorClient InspectorClient;
 
-            public DebuggerInspectionClient(InspectionClient inspectionClient)
+            public DebuggerInspectorClient(InspectorClient inspectionClient)
             {
-                InspectionClient = inspectionClient;
+                InspectorClient = inspectionClient;
             }
 
             /// <summary>
@@ -144,7 +144,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.ContinueToLocationCommand
                     {
@@ -164,7 +164,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.DisableCommand
                     {
@@ -183,7 +183,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.EnableCommand
                     {
@@ -240,7 +240,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.EvaluateOnCallFrameCommand
                     {
@@ -281,7 +281,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.GetPossibleBreakpointsCommand
                     {
@@ -306,7 +306,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.GetScriptSourceCommand
                     {
@@ -327,7 +327,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.GetStackTraceCommand
                     {
@@ -346,7 +346,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.PauseCommand
                     {
@@ -365,7 +365,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.PauseOnAsyncCallCommand
                     {
@@ -386,7 +386,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.RemoveBreakpointCommand
                     {
@@ -409,7 +409,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.RestartFrameCommand
                     {
@@ -428,7 +428,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.ResumeCommand
                     {
@@ -462,7 +462,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SearchInContentCommand
                     {
@@ -489,7 +489,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SetAsyncCallStackDepthCommand
                     {
@@ -514,7 +514,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SetBlackboxPatternsCommand
                     {
@@ -542,7 +542,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SetBlackboxedRangesCommand
                     {
@@ -571,7 +571,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SetBreakpointCommand
                     {
@@ -620,7 +620,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SetBreakpointByUrlCommand
                     {
@@ -655,7 +655,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SetBreakpointOnFunctionCallCommand
                     {
@@ -679,7 +679,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SetBreakpointsActiveCommand
                     {
@@ -703,7 +703,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SetPauseOnExceptionsCommand
                     {
@@ -726,7 +726,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SetReturnValueCommand
                     {
@@ -758,7 +758,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SetScriptSourceCommand
                     {
@@ -783,7 +783,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SetSkipAllPausesCommand
                     {
@@ -820,7 +820,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.SetVariableValueCommand
                     {
@@ -847,7 +847,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.StepIntoCommand
                     {
@@ -866,7 +866,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.StepOutCommand
                     {
@@ -884,7 +884,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Debugger.StepOverCommand
                     {
@@ -899,8 +899,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Debugger.BreakpointResolvedEvent, Task> BreakpointResolved
             {
-                add => InspectionClient.AddEventHandler("Debugger.breakpointResolved", value);
-                remove => InspectionClient.RemoveEventHandler("Debugger.breakpointResolved", value);
+                add => InspectorClient.AddEventHandler("Debugger.breakpointResolved", value);
+                remove => InspectorClient.RemoveEventHandler("Debugger.breakpointResolved", value);
             }
 
             /// <summary>
@@ -908,8 +908,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Debugger.PausedEvent, Task> Paused
             {
-                add => InspectionClient.AddEventHandler("Debugger.paused", value);
-                remove => InspectionClient.RemoveEventHandler("Debugger.paused", value);
+                add => InspectorClient.AddEventHandler("Debugger.paused", value);
+                remove => InspectorClient.RemoveEventHandler("Debugger.paused", value);
             }
 
             /// <summary>
@@ -917,8 +917,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Debugger.ResumedEvent, Task> Resumed
             {
-                add => InspectionClient.AddEventHandler("Debugger.resumed", value);
-                remove => InspectionClient.RemoveEventHandler("Debugger.resumed", value);
+                add => InspectorClient.AddEventHandler("Debugger.resumed", value);
+                remove => InspectorClient.RemoveEventHandler("Debugger.resumed", value);
             }
 
             /// <summary>
@@ -926,8 +926,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Debugger.ScriptFailedToParseEvent, Task> ScriptFailedToParse
             {
-                add => InspectionClient.AddEventHandler("Debugger.scriptFailedToParse", value);
-                remove => InspectionClient.RemoveEventHandler("Debugger.scriptFailedToParse", value);
+                add => InspectorClient.AddEventHandler("Debugger.scriptFailedToParse", value);
+                remove => InspectorClient.RemoveEventHandler("Debugger.scriptFailedToParse", value);
             }
 
             /// <summary>
@@ -936,18 +936,18 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Debugger.ScriptParsedEvent, Task> ScriptParsed
             {
-                add => InspectionClient.AddEventHandler("Debugger.scriptParsed", value);
-                remove => InspectionClient.RemoveEventHandler("Debugger.scriptParsed", value);
+                add => InspectorClient.AddEventHandler("Debugger.scriptParsed", value);
+                remove => InspectorClient.RemoveEventHandler("Debugger.scriptParsed", value);
             }
         }
 
-        public class HeapProfilerInspectionClient
+        public class HeapProfilerInspectorClient
         {
-            private readonly InspectionClient InspectionClient;
+            private readonly InspectorClient InspectorClient;
 
-            public HeapProfilerInspectionClient(InspectionClient inspectionClient)
+            public HeapProfilerInspectorClient(InspectorClient inspectionClient)
             {
-                InspectionClient = inspectionClient;
+                InspectorClient = inspectionClient;
             }
 
             /// <summary>
@@ -963,7 +963,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.HeapProfiler.AddInspectedHeapObjectCommand
                     {
@@ -979,7 +979,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.HeapProfiler.CollectGarbageCommand
                     {
@@ -994,7 +994,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.HeapProfiler.DisableCommand
                     {
@@ -1009,7 +1009,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.HeapProfiler.EnableCommand
                     {
@@ -1028,7 +1028,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.HeapProfiler.GetHeapObjectIdCommand
                     {
@@ -1050,7 +1050,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.HeapProfiler.GetObjectByHeapObjectIdCommand
                     {
@@ -1067,7 +1067,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.HeapProfiler.GetSamplingProfileCommand
                     {
@@ -1087,7 +1087,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.HeapProfiler.StartSamplingCommand
                     {
@@ -1105,7 +1105,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.HeapProfiler.StartTrackingHeapObjectsCommand
                     {
@@ -1121,7 +1121,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.HeapProfiler.StopSamplingCommand
                     {
@@ -1141,7 +1141,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.HeapProfiler.StopTrackingHeapObjectsCommand
                     {
@@ -1161,7 +1161,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.HeapProfiler.TakeHeapSnapshotCommand
                     {
@@ -1174,8 +1174,8 @@ namespace DumbPrograms.ChromeDevTools
 
             public event Func<Protocol.HeapProfiler.AddHeapSnapshotChunkEvent, Task> AddHeapSnapshotChunk
             {
-                add => InspectionClient.AddEventHandler("HeapProfiler.addHeapSnapshotChunk", value);
-                remove => InspectionClient.RemoveEventHandler("HeapProfiler.addHeapSnapshotChunk", value);
+                add => InspectorClient.AddEventHandler("HeapProfiler.addHeapSnapshotChunk", value);
+                remove => InspectorClient.RemoveEventHandler("HeapProfiler.addHeapSnapshotChunk", value);
             }
 
             /// <summary>
@@ -1183,8 +1183,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.HeapProfiler.HeapStatsUpdateEvent, Task> HeapStatsUpdate
             {
-                add => InspectionClient.AddEventHandler("HeapProfiler.heapStatsUpdate", value);
-                remove => InspectionClient.RemoveEventHandler("HeapProfiler.heapStatsUpdate", value);
+                add => InspectorClient.AddEventHandler("HeapProfiler.heapStatsUpdate", value);
+                remove => InspectorClient.RemoveEventHandler("HeapProfiler.heapStatsUpdate", value);
             }
 
             /// <summary>
@@ -1194,30 +1194,30 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.HeapProfiler.LastSeenObjectIdEvent, Task> LastSeenObjectId
             {
-                add => InspectionClient.AddEventHandler("HeapProfiler.lastSeenObjectId", value);
-                remove => InspectionClient.RemoveEventHandler("HeapProfiler.lastSeenObjectId", value);
+                add => InspectorClient.AddEventHandler("HeapProfiler.lastSeenObjectId", value);
+                remove => InspectorClient.RemoveEventHandler("HeapProfiler.lastSeenObjectId", value);
             }
 
             public event Func<Protocol.HeapProfiler.ReportHeapSnapshotProgressEvent, Task> ReportHeapSnapshotProgress
             {
-                add => InspectionClient.AddEventHandler("HeapProfiler.reportHeapSnapshotProgress", value);
-                remove => InspectionClient.RemoveEventHandler("HeapProfiler.reportHeapSnapshotProgress", value);
+                add => InspectorClient.AddEventHandler("HeapProfiler.reportHeapSnapshotProgress", value);
+                remove => InspectorClient.RemoveEventHandler("HeapProfiler.reportHeapSnapshotProgress", value);
             }
 
             public event Func<Protocol.HeapProfiler.ResetProfilesEvent, Task> ResetProfiles
             {
-                add => InspectionClient.AddEventHandler("HeapProfiler.resetProfiles", value);
-                remove => InspectionClient.RemoveEventHandler("HeapProfiler.resetProfiles", value);
+                add => InspectorClient.AddEventHandler("HeapProfiler.resetProfiles", value);
+                remove => InspectorClient.RemoveEventHandler("HeapProfiler.resetProfiles", value);
             }
         }
 
-        public class ProfilerInspectionClient
+        public class ProfilerInspectorClient
         {
-            private readonly InspectionClient InspectionClient;
+            private readonly InspectorClient InspectorClient;
 
-            public ProfilerInspectionClient(InspectionClient inspectionClient)
+            public ProfilerInspectorClient(InspectorClient inspectionClient)
             {
-                InspectionClient = inspectionClient;
+                InspectorClient = inspectionClient;
             }
 
             public Task Disable
@@ -1225,7 +1225,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Profiler.DisableCommand
                     {
@@ -1240,7 +1240,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Profiler.EnableCommand
                     {
@@ -1259,7 +1259,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Profiler.GetBestEffortCoverageCommand
                     {
@@ -1281,7 +1281,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Profiler.SetSamplingIntervalCommand
                     {
@@ -1297,7 +1297,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Profiler.StartCommand
                     {
@@ -1325,7 +1325,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Profiler.StartPreciseCoverageCommand
                     {
@@ -1345,7 +1345,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Profiler.StartTypeProfileCommand
                     {
@@ -1360,7 +1360,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Profiler.StopCommand
                     {
@@ -1379,7 +1379,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Profiler.StopPreciseCoverageCommand
                     {
@@ -1397,7 +1397,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Profiler.StopTypeProfileCommand
                     {
@@ -1416,7 +1416,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Profiler.TakePreciseCoverageCommand
                     {
@@ -1434,7 +1434,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Profiler.TakeTypeProfileCommand
                     {
@@ -1446,8 +1446,8 @@ namespace DumbPrograms.ChromeDevTools
 
             public event Func<Protocol.Profiler.ConsoleProfileFinishedEvent, Task> ConsoleProfileFinished
             {
-                add => InspectionClient.AddEventHandler("Profiler.consoleProfileFinished", value);
-                remove => InspectionClient.RemoveEventHandler("Profiler.consoleProfileFinished", value);
+                add => InspectorClient.AddEventHandler("Profiler.consoleProfileFinished", value);
+                remove => InspectorClient.RemoveEventHandler("Profiler.consoleProfileFinished", value);
             }
 
             /// <summary>
@@ -1455,18 +1455,18 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Profiler.ConsoleProfileStartedEvent, Task> ConsoleProfileStarted
             {
-                add => InspectionClient.AddEventHandler("Profiler.consoleProfileStarted", value);
-                remove => InspectionClient.RemoveEventHandler("Profiler.consoleProfileStarted", value);
+                add => InspectorClient.AddEventHandler("Profiler.consoleProfileStarted", value);
+                remove => InspectorClient.RemoveEventHandler("Profiler.consoleProfileStarted", value);
             }
         }
 
-        public class RuntimeInspectionClient
+        public class RuntimeInspectorClient
         {
-            private readonly InspectionClient InspectionClient;
+            private readonly InspectorClient InspectorClient;
 
-            public RuntimeInspectionClient(InspectionClient inspectionClient)
+            public RuntimeInspectorClient(InspectorClient inspectionClient)
             {
-                InspectionClient = inspectionClient;
+                InspectorClient = inspectionClient;
             }
 
             /// <summary>
@@ -1489,7 +1489,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.AwaitPromiseCommand
                     {
@@ -1557,7 +1557,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.CallFunctionOnCommand
                     {
@@ -1602,7 +1602,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.CompileScriptCommand
                     {
@@ -1624,7 +1624,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.DisableCommand
                     {
@@ -1642,7 +1642,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.DiscardConsoleEntriesCommand
                     {
@@ -1662,7 +1662,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.EnableCommand
                     {
@@ -1727,7 +1727,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.EvaluateCommand
                     {
@@ -1756,7 +1756,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.GetIsolateIdCommand
                     {
@@ -1775,7 +1775,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.GetHeapUsageCommand
                     {
@@ -1812,7 +1812,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.GetPropertiesCommand
                     {
@@ -1838,7 +1838,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.GlobalLexicalScopeNamesCommand
                     {
@@ -1862,7 +1862,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.QueryObjectsCommand
                     {
@@ -1886,7 +1886,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.ReleaseObjectCommand
                     {
@@ -1909,7 +1909,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.ReleaseObjectGroupCommand
                     {
@@ -1928,7 +1928,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.RunIfWaitingForDebuggerCommand
                     {
@@ -1981,7 +1981,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.RunScriptCommand
                     {
@@ -2012,7 +2012,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.SetAsyncCallStackDepthCommand
                     {
@@ -2030,7 +2030,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.SetCustomObjectFormatterEnabledCommand
                     {
@@ -2048,7 +2048,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.SetMaxCallStackSizeToCaptureCommand
                     {
@@ -2068,7 +2068,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.TerminateExecutionCommand
                     {
@@ -2097,7 +2097,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.AddBindingCommand
                     {
@@ -2120,7 +2120,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Runtime.RemoveBindingCommand
                     {
@@ -2136,8 +2136,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Runtime.BindingCalledEvent, Task> BindingCalled
             {
-                add => InspectionClient.AddEventHandler("Runtime.bindingCalled", value);
-                remove => InspectionClient.RemoveEventHandler("Runtime.bindingCalled", value);
+                add => InspectorClient.AddEventHandler("Runtime.bindingCalled", value);
+                remove => InspectorClient.RemoveEventHandler("Runtime.bindingCalled", value);
             }
 
             /// <summary>
@@ -2145,8 +2145,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Runtime.ConsoleAPICalledEvent, Task> ConsoleAPICalled
             {
-                add => InspectionClient.AddEventHandler("Runtime.consoleAPICalled", value);
-                remove => InspectionClient.RemoveEventHandler("Runtime.consoleAPICalled", value);
+                add => InspectorClient.AddEventHandler("Runtime.consoleAPICalled", value);
+                remove => InspectorClient.RemoveEventHandler("Runtime.consoleAPICalled", value);
             }
 
             /// <summary>
@@ -2154,8 +2154,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Runtime.ExceptionRevokedEvent, Task> ExceptionRevoked
             {
-                add => InspectionClient.AddEventHandler("Runtime.exceptionRevoked", value);
-                remove => InspectionClient.RemoveEventHandler("Runtime.exceptionRevoked", value);
+                add => InspectorClient.AddEventHandler("Runtime.exceptionRevoked", value);
+                remove => InspectorClient.RemoveEventHandler("Runtime.exceptionRevoked", value);
             }
 
             /// <summary>
@@ -2163,8 +2163,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Runtime.ExceptionThrownEvent, Task> ExceptionThrown
             {
-                add => InspectionClient.AddEventHandler("Runtime.exceptionThrown", value);
-                remove => InspectionClient.RemoveEventHandler("Runtime.exceptionThrown", value);
+                add => InspectorClient.AddEventHandler("Runtime.exceptionThrown", value);
+                remove => InspectorClient.RemoveEventHandler("Runtime.exceptionThrown", value);
             }
 
             /// <summary>
@@ -2172,8 +2172,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Runtime.ExecutionContextCreatedEvent, Task> ExecutionContextCreated
             {
-                add => InspectionClient.AddEventHandler("Runtime.executionContextCreated", value);
-                remove => InspectionClient.RemoveEventHandler("Runtime.executionContextCreated", value);
+                add => InspectorClient.AddEventHandler("Runtime.executionContextCreated", value);
+                remove => InspectorClient.RemoveEventHandler("Runtime.executionContextCreated", value);
             }
 
             /// <summary>
@@ -2181,8 +2181,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Runtime.ExecutionContextDestroyedEvent, Task> ExecutionContextDestroyed
             {
-                add => InspectionClient.AddEventHandler("Runtime.executionContextDestroyed", value);
-                remove => InspectionClient.RemoveEventHandler("Runtime.executionContextDestroyed", value);
+                add => InspectorClient.AddEventHandler("Runtime.executionContextDestroyed", value);
+                remove => InspectorClient.RemoveEventHandler("Runtime.executionContextDestroyed", value);
             }
 
             /// <summary>
@@ -2190,8 +2190,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Runtime.ExecutionContextsClearedEvent, Task> ExecutionContextsCleared
             {
-                add => InspectionClient.AddEventHandler("Runtime.executionContextsCleared", value);
-                remove => InspectionClient.RemoveEventHandler("Runtime.executionContextsCleared", value);
+                add => InspectorClient.AddEventHandler("Runtime.executionContextsCleared", value);
+                remove => InspectorClient.RemoveEventHandler("Runtime.executionContextsCleared", value);
             }
 
             /// <summary>
@@ -2200,19 +2200,19 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             public event Func<Protocol.Runtime.InspectRequestedEvent, Task> InspectRequested
             {
-                add => InspectionClient.AddEventHandler("Runtime.inspectRequested", value);
-                remove => InspectionClient.RemoveEventHandler("Runtime.inspectRequested", value);
+                add => InspectorClient.AddEventHandler("Runtime.inspectRequested", value);
+                remove => InspectorClient.RemoveEventHandler("Runtime.inspectRequested", value);
             }
         }
 
         [Obsolete]
-        public class SchemaInspectionClient
+        public class SchemaInspectorClient
         {
-            private readonly InspectionClient InspectionClient;
+            private readonly InspectorClient InspectorClient;
 
-            public SchemaInspectionClient(InspectionClient inspectionClient)
+            public SchemaInspectorClient(InspectorClient inspectionClient)
             {
-                InspectionClient = inspectionClient;
+                InspectorClient = inspectionClient;
             }
 
             /// <summary>
@@ -2223,7 +2223,7 @@ namespace DumbPrograms.ChromeDevTools
                 CancellationToken cancellation = default
             )
             {
-                return InspectionClient.InvokeCommand
+                return InspectorClient.InvokeCommand
                 (
                     new Protocol.Schema.GetDomainsCommand
                     {

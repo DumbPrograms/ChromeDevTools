@@ -49,7 +49,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
             {
                 using (var writer = File.CreateText(Path.Combine(workingDir, filename + ".api.cs")))
                 {
-                    new InspectionClientApiGenerator().GenerateCode(writer, protocol);
+                    new InspectorClientApiGenerator().GenerateCode(writer, protocol);
                 }
             }
         }

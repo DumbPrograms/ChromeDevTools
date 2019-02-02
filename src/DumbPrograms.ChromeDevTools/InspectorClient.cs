@@ -14,7 +14,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace DumbPrograms.ChromeDevTools
 {
-    public partial class InspectionClient
+    public partial class InspectorClient
     {
         private readonly ClientWebSocket WebSocket;
         private readonly InspectionTarget InspectionTarget;
@@ -28,7 +28,7 @@ namespace DumbPrograms.ChromeDevTools
 
         private int CommandId = 0;
 
-        public InspectionClient(InspectionTarget inspectionTarget)
+        public InspectorClient(InspectionTarget inspectionTarget)
         {
             WebSocket = new ClientWebSocket();
             InspectionTarget = inspectionTarget;

@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace DumbPrograms.ChromeDevTools.Generator
 {
-    class InspectionClientApiGenerator : CodeGenerator
+    class InspectorClientApiGenerator : CodeGenerator
     {
         public void GenerateCode(TextWriter writer, ProtocolDescriptor protocol)
         {
@@ -18,9 +18,9 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
             using (WILBlock("namespace DumbPrograms.ChromeDevTools"))
             {
-                const string InspectionClient = "InspectionClient";
+                const string InspectorClient = nameof(InspectorClient);
 
-                using (WILBlock($"partial class {InspectionClient}"))
+                using (WILBlock($"partial class {InspectorClient}"))
                 {
                     foreach (var domain in protocol.Domains)
                     {
@@ -29,10 +29,10 @@ namespace DumbPrograms.ChromeDevTools.Generator
                         WILSummary(domain.Description);
 
                         WILObsolete(domain.Deprecated);
-                        WIL($"public {domain.Name}{InspectionClient} {domain.Name} => {fieldName} ?? ({fieldName} = new {domain.Name}{InspectionClient}(this));");
+                        WIL($"public {domain.Name}{InspectorClient} {domain.Name} => {fieldName} ?? ({fieldName} = new {domain.Name}{InspectorClient}(this));");
 
                         WILObsolete(domain.Deprecated);
-                        WIL($"private {domain.Name}{InspectionClient} {fieldName};");
+                        WIL($"private {domain.Name}{InspectorClient} {fieldName};");
                     }
 
                     foreach (var domain in protocol.Domains)
@@ -41,15 +41,15 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
                         WILObsolete(domain.Deprecated);
 
-                        using (WILBlock($"public class {domain.Name}{InspectionClient}"))
+                        using (WILBlock($"public class {domain.Name}{InspectorClient}"))
                         {
-                            WIL($"private readonly {InspectionClient} {InspectionClient};");
+                            WIL($"private readonly {InspectorClient} {InspectorClient};");
 
                             WL();
 
-                            using (WILBlock($"public {domain.Name}{InspectionClient}({InspectionClient} inspectionClient)"))
+                            using (WILBlock($"public {domain.Name}{InspectorClient}({InspectorClient} inspectionClient)"))
                             {
-                                WIL($"{InspectionClient} = inspectionClient;");
+                                WIL($"{InspectorClient} = inspectionClient;");
                             }
 
                             if (domain.Commands != null)
@@ -80,7 +80,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     }
                                     using (WILBlock())
                                     {
-                                        using (WILBlock($"return {InspectionClient}.InvokeCommand", BlockType.Brace))
+                                        using (WILBlock($"return {InspectorClient}.InvokeCommand", BlockType.Brace))
                                         {
                                             using (WILBlock($"new {commandType}"))
                                             {
@@ -111,8 +111,8 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
                                     using (WILBlock($"public event Func<Protocol.{domain.Name}.{csEventName}Event, Task> {csEventName}"))
                                     {
-                                        WIL($"add => {InspectionClient}.AddEventHandler(\"{domain.Name}.{@event.Name}\", value);");
-                                        WIL($"remove => {InspectionClient}.RemoveEventHandler(\"{domain.Name}.{@event.Name}\", value);");
+                                        WIL($"add => {InspectorClient}.AddEventHandler(\"{domain.Name}.{@event.Name}\", value);");
+                                        WIL($"remove => {InspectorClient}.RemoveEventHandler(\"{domain.Name}.{@event.Name}\", value);");
                                     }
                                 }
                             }
