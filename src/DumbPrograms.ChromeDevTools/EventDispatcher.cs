@@ -21,12 +21,19 @@ namespace DumbPrograms.ChromeDevTools
 
         public void DispatchEvent(TEvent e)
         {
-            SynchronizationContext.Current.Post(s =>
+            if (SynchronizationContext.Current != null)
             {
-                var (handlers, args) = ((Func<TEvent, Task> handlers, TEvent args))s;
-                handlers?.Invoke(args);
+                SynchronizationContext.Current.Post(s =>
+                {
+                    var (handlers, args) = ((Func<TEvent, Task> handlers, TEvent args))s;
+                    handlers?.Invoke(args);
+                }
+                , (Handlers, e));
             }
-            , (Handlers, e));
+            else
+            {
+                Handlers?.Invoke(e);
+            }
         }
     }
 }

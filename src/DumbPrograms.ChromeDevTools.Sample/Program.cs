@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace DumbPrograms.ChromeDevTools.Sample
@@ -23,16 +22,17 @@ namespace DumbPrograms.ChromeDevTools.Sample
 
             await inspector.Page.Enable();
 
-            var ev = new AutoResetEvent(false);
+            var tcs = new TaskCompletionSource<bool>();
 
             inspector.Page.LoadEventFired += async e =>
             {
                 Console.WriteLine($"Page loaded at {e.Timestamp}");
-                ev.Set();
+                tcs.SetResult(true);
             };
 
             var p = await inspector.Page.Navigate("https://www.baidu.com");
-            ev.WaitOne();
+
+            await tcs.Task;
         }
     }
 }

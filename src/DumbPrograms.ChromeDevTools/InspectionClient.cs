@@ -67,7 +67,7 @@ namespace DumbPrograms.ChromeDevTools
                 }
                 else
                 {
-                    stream.Position = 0;
+                    stream.SetLength(0);
                 }
 
                 while (true)
@@ -92,7 +92,8 @@ namespace DumbPrograms.ChromeDevTools
                         stream.Position = 0;
 
                         var reader = new StreamReader(stream, Encoding.UTF8);
-                        var message = JsonConvert.DeserializeObject<InspectionMessage>(reader.ReadToEnd());
+                        var messageText = reader.ReadToEnd();
+                        var message = JsonConvert.DeserializeObject<InspectionMessage>(messageText);
 
                         MessageReceived?.Invoke(message);
 
