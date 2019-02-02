@@ -21,7 +21,11 @@ namespace DumbPrograms.ChromeDevTools
 
         public void DispatchEvent(TEvent e)
         {
-            if (SynchronizationContext.Current != null)
+            if (SynchronizationContext.Current == null)
+            {
+                Handlers?.Invoke(e);
+            }
+            else
             {
                 SynchronizationContext.Current.Post(s =>
                 {
@@ -29,10 +33,6 @@ namespace DumbPrograms.ChromeDevTools
                     handlers?.Invoke(args);
                 }
                 , (Handlers, e));
-            }
-            else
-            {
-                Handlers?.Invoke(e);
             }
         }
     }
