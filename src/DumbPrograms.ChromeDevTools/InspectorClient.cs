@@ -21,7 +21,7 @@ namespace DumbPrograms.ChromeDevTools
         private readonly JsonSerializerSettings JsonSerializerSettings;
 
         private int Started;
-        private event Action<InspectionMessage> MessageReceived;
+        private event Func<InspectionMessage, Task> MessageReceived;
         private ConcurrentDictionary<string, EventDispatcher> EventDispatchers;
         private CancellationTokenSource ReceivingLoopCanceller;
         private Task ReceivingLoop;
@@ -95,7 +95,7 @@ namespace DumbPrograms.ChromeDevTools
                         var messageText = reader.ReadToEnd();
                         var message = JsonConvert.DeserializeObject<InspectionMessage>(messageText);
 
-                        MessageReceived?.Invoke(message);
+                        await MessageReceived?.Invoke(message);
 
                         break;
                     }
@@ -132,10 +132,12 @@ namespace DumbPrograms.ChromeDevTools
 
             return tcs.Task;
 
-            void Handler(InspectionMessage message)
+            Task Handler(InspectionMessage message)
             {
                 if (message.Id != id)
-                    return;
+                {
+                    return Task.FromResult(false);
+                }
 
                 if (message.Result is JObject result)
                 {
@@ -147,14 +149,16 @@ namespace DumbPrograms.ChromeDevTools
                 }
 
                 MessageReceived -= Handler;
+
+                return Task.FromResult(true);
             }
         }
 
-        private void DispatchSubscribedEvents(InspectionMessage message)
+        private async Task DispatchSubscribedEvents(InspectionMessage message)
         {
             if (message.Method != null && EventDispatchers.TryGetValue(message.Method, out var dispatcher))
             {
-                dispatcher.Dispatch(message.Params);
+                await dispatcher.Dispatch(message.Params).ConfigureAwait(false);
             }
         }
 
