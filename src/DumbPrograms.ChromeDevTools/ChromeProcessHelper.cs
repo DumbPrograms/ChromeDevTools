@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,29 +9,64 @@ namespace DumbPrograms.ChromeDevTools
     {
         private Process Chrome;
 
+        public string PathToChrome { get; }
         public int DebuggingPort { get; }
         public bool Headless { get; }
         public bool DisableGpu { get; }
+        public string UserDataDirectory { get; private set; }
+        public string AdditionalArguments { get; }
 
-        public static ChromeProcessHelper StartNew(int debuggingPort = 9222, bool headless = false, bool disableGpu = false)
+        public static ChromeProcessHelper StartNew(
+            string pathToChrome = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+            int debuggingPort = 9222,
+            bool headless = false,
+            bool disableGpu = false,
+            string userDataDirectory = null,
+            string additionalArguments = null)
         {
-            var helper = new ChromeProcessHelper(debuggingPort, headless, disableGpu);
+            var helper = new ChromeProcessHelper(pathToChrome, debuggingPort, headless, disableGpu, userDataDirectory, additionalArguments);
 
-            helper.Start();
+            helper.StartChromeProcess();
 
             return helper;
         }
 
-        private ChromeProcessHelper(int debuggingPort = 9222, bool headless = false, bool disableGpu = false)
+        private ChromeProcessHelper(
+            string pathToChrome, int debuggingPort, bool headless, bool disableGpu, string userDataDirectory, string additionalArguments)
         {
+            PathToChrome = pathToChrome;
             DebuggingPort = debuggingPort;
             Headless = headless;
             DisableGpu = disableGpu;
+            UserDataDirectory = userDataDirectory;
+            AdditionalArguments = additionalArguments;
         }
 
-        private void Start()
+        private void StartChromeProcess()
         {
-            var psi = new ProcessStartInfo(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe", "--remote-debugging-port=9222");
+            var args = new StringBuilder($"--remote-debugging-port={DebuggingPort}");
+
+            if (Headless)
+            {
+                args.Append(" --headless");
+            }
+
+            if (DisableGpu)
+            {
+                args.Append(" --disable-gpu");
+            }
+
+            if (!String.IsNullOrWhiteSpace(UserDataDirectory))
+            {
+                args.Append($" --user-data-dir=\"{UserDataDirectory}\"");
+            }
+
+            if (!String.IsNullOrWhiteSpace(AdditionalArguments))
+            {
+                args.Append(" ").Append(AdditionalArguments);
+            }
+
+            var psi = new ProcessStartInfo(PathToChrome, args.ToString());
             Chrome = Process.Start(psi);
         }
 
@@ -60,8 +94,19 @@ namespace DumbPrograms.ChromeDevTools
                 {
                     // dispose managed state (managed objects).
 
-                    Chrome.CloseMainWindow();
-                    Chrome.Dispose();
+                    try
+                    {
+                        Chrome.CloseMainWindow();
+
+                        if (!Chrome.WaitForExit(milliseconds: 1000))
+                        {
+                            Chrome.Kill();
+                        }
+                    }
+                    finally
+                    {
+                        Chrome.Dispose();
+                    }
                 }
 
                 // set large fields to null.
