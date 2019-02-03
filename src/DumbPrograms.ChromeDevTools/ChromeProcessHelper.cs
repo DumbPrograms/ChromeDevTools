@@ -70,9 +70,9 @@ namespace DumbPrograms.ChromeDevTools
             Chrome = Process.Start(psi);
         }
 
-        public async Task<BrowserClient> GetBrowserClient(string url = null)
+        public async Task<DevToolsClient> GetDevTools(string url = null)
         {
-            var client = new BrowserClient(DebuggingPort);
+            var client = new DevToolsClient(DebuggingPort);
 
             if (!String.IsNullOrWhiteSpace(url))
             {

@@ -10,13 +10,13 @@ namespace DumbPrograms.ChromeDevTools.Sample
         {
             using (var chrome = ChromeProcessHelper.StartNew())
             {
-                var client = await chrome.GetBrowserClient();
+                var devTools = await chrome.GetDevTools();
 
-                var targets = from t in await client.GetInspectableTargets()
+                var targets = from t in await devTools.GetInspectableTargets()
                               where t.Title == "New Tab"
                               select t;
 
-                var inspector = await client.Inspect(targets.First());
+                var inspector = await devTools.Inspect(targets.First());
 
                 await inspector.Page.Enable();
 
