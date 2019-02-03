@@ -16,15 +16,27 @@ namespace DumbPrograms.ChromeDevTools.Sample
                               where t.Title == "New Tab"
                               select t;
 
-                var inspector = await devTools.Inspect(targets.First());
+                var t0 = targets.First();
 
-                await inspector.Page.Enable();
+                var inspector0 = await devTools.Inspect(targets.First());
 
-                var p = await inspector.Page.Navigate("https://www.baidu.com");
+                await inspector0.Page.Enable();
 
-                var e = await inspector.Page.LoadEventFiredEvent();
+                await inspector0.Page.Navigate("https://www.baidu.com");
+
+                var e = await inspector0.Page.LoadEventFiredEvent();
 
                 Console.WriteLine($"Page loaded at {e.Timestamp.Value}");
+
+                var t1 = await devTools.NewTab("https://www.cnblogs.com");
+
+                var inspector1 = await devTools.Inspect(t1);
+
+                await inspector1.Page.Enable();
+
+                await inspector1.Page.LoadEventFiredEvent();
+
+                await devTools.CloseTab(t0.Id);
             }
         }
     }

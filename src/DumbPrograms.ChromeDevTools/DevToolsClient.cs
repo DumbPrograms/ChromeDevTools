@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -15,19 +13,19 @@ namespace DumbPrograms.ChromeDevTools
         {
             HttpClient = new HttpClient
             {
-                BaseAddress = new Uri($"http://localhost:{port}")
+                BaseAddress = new Uri($"http://localhost:{port}/json/")
             };
         }
 
-        public Task<BrowserVersion> GetBrowserVersion() => Get<BrowserVersion>("/json/version");
+        public Task<BrowserVersion> GetBrowserVersion() => Get<BrowserVersion>("version");
 
-        public Task<InspectionTarget[]> GetInspectableTargets() => Get<InspectionTarget[]>("/json");
+        public Task<InspectionTarget[]> GetInspectableTargets() => Get<InspectionTarget[]>("list");
 
-        public Task<InspectionTarget> NewTab(string url) => Get<InspectionTarget>($"/json/new?url={Uri.EscapeDataString(url)}");
+        public Task<InspectionTarget> NewTab(string url) => Get<InspectionTarget>($"new?{Uri.EscapeDataString(url)}");
 
-        public Task<string> ActivateTab(string id) => HttpClient.GetStringAsync($"/json/activate/{Uri.EscapeUriString(id)}");
+        public Task<string> ActivateTab(string id) => HttpClient.GetStringAsync($"activate/{Uri.EscapeUriString(id)}");
 
-        public Task<string> CloseTab(string id) => HttpClient.GetStringAsync($"/json/close/{Uri.EscapeUriString(id)}");
+        public Task<string> CloseTab(string id) => HttpClient.GetStringAsync($"close/{Uri.EscapeUriString(id)}");
 
         private async Task<T> Get<T>(string url) => JsonConvert.DeserializeObject<T>(await HttpClient.GetStringAsync(url));
 
