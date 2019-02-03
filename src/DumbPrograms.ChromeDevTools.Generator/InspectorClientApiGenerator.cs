@@ -115,6 +115,19 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                         WIL($"remove => {InspectorClient}.RemoveEventHandler(\"{domain.Name}.{@event.Name}\", value);");
                                     }
                                 }
+
+                                foreach (var @event in domain.Events)
+                                {
+                                    var csEventName = GetCSharpIdentifier(@event.Name);
+
+                                    WILSummary(@event.Description);
+                                    WILObsolete(@event.Deprecated);
+
+                                    using (WILBlock($"public Task<Protocol.{domain.Name}.{csEventName}Event> {csEventName}Event(Func<Protocol.{domain.Name}.{csEventName}Event, Task<bool>> until = null)"))
+                                    {
+                                        WIL($"return {InspectorClient}.SubscribeUntil(\"{domain.Name}.{@event.Name}\", until);");
+                                    }
+                                }
                             }
                         }
                     }

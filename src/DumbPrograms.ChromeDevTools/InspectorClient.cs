@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.IO;
 using System.Net.WebSockets;
-using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -128,11 +127,11 @@ namespace DumbPrograms.ChromeDevTools
         {
             var tcs = new TaskCompletionSource<TResponse>();
 
-            MessageReceived += Handler;
+            MessageReceived += CommandResponseHandler;
 
             return tcs.Task;
 
-            Task Handler(InspectionMessage message)
+            Task CommandResponseHandler(InspectionMessage message)
             {
                 if (message.Id != id)
                 {
@@ -148,7 +147,7 @@ namespace DumbPrograms.ChromeDevTools
                     tcs.SetException(new CommandFailedException(command, message.Error.Code, message.Error.Message));
                 }
 
-                MessageReceived -= Handler;
+                MessageReceived -= CommandResponseHandler;
 
                 return Task.FromResult(true);
             }
@@ -162,10 +161,12 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
-        private void AddEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
+        private EventDispatcher<TEvent> AddEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
         {
             var dispatcher = GetEventDispatcher<TEvent>(name);
             dispatcher.Handlers += handler;
+
+            return dispatcher;
         }
 
         private void RemoveEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
@@ -174,19 +175,23 @@ namespace DumbPrograms.ChromeDevTools
             dispatcher.Handlers -= handler;
         }
 
-        public IDisposable SubscribeEvent<TEvent>(Func<TEvent, Task> handler)
+        private Task<TEvent> SubscribeUntil<TEvent>(string name, Func<TEvent, Task<bool>> handler)
         {
-            var @event = typeof(TEvent).GetCustomAttribute<EventAttribute>();
-            if (@event != null)
+            var tcs = new TaskCompletionSource<TEvent>();
+
+            var dispatcher = GetEventDispatcher<TEvent>(name);
+            dispatcher.Handlers += UntilHandler;
+
+            return tcs.Task;
+
+            async Task UntilHandler(TEvent e)
             {
-                var dispatcher = GetEventDispatcher<TEvent>(@event.Name);
-
-                dispatcher.Handlers += handler;
-
-                return new EventUnsubscriber<TEvent>(dispatcher, handler);
+                if (handler == null || await handler(e))
+                {
+                    dispatcher.Handlers -= UntilHandler;
+                    tcs.SetResult(e);
+                }
             }
-
-            throw new ArgumentException($"{typeof(TEvent).Name} is not a valid protocol event type.", nameof(TEvent));
         }
 
         private EventDispatcher<TEvent> GetEventDispatcher<TEvent>(string name)
