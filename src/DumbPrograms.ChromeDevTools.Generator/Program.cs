@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
@@ -20,14 +19,15 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
             Console.WriteLine($"Parsing json files..");
 
+            var settings = new JsonSerializerSettings
+            {
+                MetadataPropertyHandling = MetadataPropertyHandling.Ignore
+            };
+
             foreach (var path in Directory.EnumerateFiles(workingDir, "*.json"))
             {
                 var filename = Path.GetFileNameWithoutExtension(path);
                 var jsonText = File.ReadAllText(path);
-                var settings = new JsonSerializerSettings
-                {
-                    MetadataPropertyHandling = MetadataPropertyHandling.Ignore
-                };
                 var protocol = JsonConvert.DeserializeObject<ProtocolDescriptor>(jsonText, settings);
 
                 descriptors.Add((filename, protocol));
