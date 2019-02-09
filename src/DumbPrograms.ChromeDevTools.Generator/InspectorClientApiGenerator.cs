@@ -123,9 +123,9 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     WILSummary(@event.Description);
                                     WILObsolete(@event.Deprecated);
 
-                                    using (WILBlock($"public Task<Protocol.{domain.Name}.{csEventName}Event> {csEventName}Event(Func<Protocol.{domain.Name}.{csEventName}Event, Task<bool>> unsubscribe = null)"))
+                                    using (WILBlock($"public Task<Protocol.{domain.Name}.{csEventName}Event> {csEventName}Event(Func<Protocol.{domain.Name}.{csEventName}Event, Task<bool>> until = null)"))
                                     {
-                                        WIL($"return {InspectorClient}.SubscribeUntil(\"{domain.Name}.{@event.Name}\", unsubscribe);");
+                                        WIL($"return {InspectorClient}.SubscribeUntil(\"{domain.Name}.{@event.Name}\", until);");
                                     }
                                 }
                             }

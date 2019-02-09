@@ -570,25 +570,25 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Event for when an animation has been cancelled.
             /// </summary>
-            public Task<Protocol.Animation.AnimationCanceledEvent> AnimationCanceledEvent(Func<Protocol.Animation.AnimationCanceledEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Animation.AnimationCanceledEvent> AnimationCanceledEvent(Func<Protocol.Animation.AnimationCanceledEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Animation.animationCanceled", unsubscribe);
+                return InspectorClient.SubscribeUntil("Animation.animationCanceled", until);
             }
 
             /// <summary>
             /// Event for each animation that has been created.
             /// </summary>
-            public Task<Protocol.Animation.AnimationCreatedEvent> AnimationCreatedEvent(Func<Protocol.Animation.AnimationCreatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Animation.AnimationCreatedEvent> AnimationCreatedEvent(Func<Protocol.Animation.AnimationCreatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Animation.animationCreated", unsubscribe);
+                return InspectorClient.SubscribeUntil("Animation.animationCreated", until);
             }
 
             /// <summary>
             /// Event for animation that has been started.
             /// </summary>
-            public Task<Protocol.Animation.AnimationStartedEvent> AnimationStartedEvent(Func<Protocol.Animation.AnimationStartedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Animation.AnimationStartedEvent> AnimationStartedEvent(Func<Protocol.Animation.AnimationStartedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Animation.animationStarted", unsubscribe);
+                return InspectorClient.SubscribeUntil("Animation.animationStarted", until);
             }
         }
 
@@ -696,14 +696,14 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandler("ApplicationCache.networkStateUpdated", value);
             }
 
-            public Task<Protocol.ApplicationCache.ApplicationCacheStatusUpdatedEvent> ApplicationCacheStatusUpdatedEvent(Func<Protocol.ApplicationCache.ApplicationCacheStatusUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.ApplicationCache.ApplicationCacheStatusUpdatedEvent> ApplicationCacheStatusUpdatedEvent(Func<Protocol.ApplicationCache.ApplicationCacheStatusUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("ApplicationCache.applicationCacheStatusUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("ApplicationCache.applicationCacheStatusUpdated", until);
             }
 
-            public Task<Protocol.ApplicationCache.NetworkStateUpdatedEvent> NetworkStateUpdatedEvent(Func<Protocol.ApplicationCache.NetworkStateUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.ApplicationCache.NetworkStateUpdatedEvent> NetworkStateUpdatedEvent(Func<Protocol.ApplicationCache.NetworkStateUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("ApplicationCache.networkStateUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("ApplicationCache.networkStateUpdated", until);
             }
         }
 
@@ -1611,42 +1611,42 @@ namespace DumbPrograms.ChromeDevTools
             /// Fires whenever a web font is updated.  A non-empty font parameter indicates a successfully loaded
             /// web font
             /// </summary>
-            public Task<Protocol.CSS.FontsUpdatedEvent> FontsUpdatedEvent(Func<Protocol.CSS.FontsUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.CSS.FontsUpdatedEvent> FontsUpdatedEvent(Func<Protocol.CSS.FontsUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("CSS.fontsUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("CSS.fontsUpdated", until);
             }
 
             /// <summary>
             /// Fires whenever a MediaQuery result changes (for example, after a browser window has been
             /// resized.) The current implementation considers only viewport-dependent media features.
             /// </summary>
-            public Task<Protocol.CSS.MediaQueryResultChangedEvent> MediaQueryResultChangedEvent(Func<Protocol.CSS.MediaQueryResultChangedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.CSS.MediaQueryResultChangedEvent> MediaQueryResultChangedEvent(Func<Protocol.CSS.MediaQueryResultChangedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("CSS.mediaQueryResultChanged", unsubscribe);
+                return InspectorClient.SubscribeUntil("CSS.mediaQueryResultChanged", until);
             }
 
             /// <summary>
             /// Fired whenever an active document stylesheet is added.
             /// </summary>
-            public Task<Protocol.CSS.StyleSheetAddedEvent> StyleSheetAddedEvent(Func<Protocol.CSS.StyleSheetAddedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.CSS.StyleSheetAddedEvent> StyleSheetAddedEvent(Func<Protocol.CSS.StyleSheetAddedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("CSS.styleSheetAdded", unsubscribe);
+                return InspectorClient.SubscribeUntil("CSS.styleSheetAdded", until);
             }
 
             /// <summary>
             /// Fired whenever a stylesheet is changed as a result of the client operation.
             /// </summary>
-            public Task<Protocol.CSS.StyleSheetChangedEvent> StyleSheetChangedEvent(Func<Protocol.CSS.StyleSheetChangedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.CSS.StyleSheetChangedEvent> StyleSheetChangedEvent(Func<Protocol.CSS.StyleSheetChangedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("CSS.styleSheetChanged", unsubscribe);
+                return InspectorClient.SubscribeUntil("CSS.styleSheetChanged", until);
             }
 
             /// <summary>
             /// Fired whenever an active document stylesheet is removed.
             /// </summary>
-            public Task<Protocol.CSS.StyleSheetRemovedEvent> StyleSheetRemovedEvent(Func<Protocol.CSS.StyleSheetRemovedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.CSS.StyleSheetRemovedEvent> StyleSheetRemovedEvent(Func<Protocol.CSS.StyleSheetRemovedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("CSS.styleSheetRemoved", unsubscribe);
+                return InspectorClient.SubscribeUntil("CSS.styleSheetRemoved", until);
             }
         }
 
@@ -1940,18 +1940,18 @@ namespace DumbPrograms.ChromeDevTools
             /// This is fired whenever the list of available sinks changes. A sink is a
             /// device or a software surface that you can cast to.
             /// </summary>
-            public Task<Protocol.Cast.SinksUpdatedEvent> SinksUpdatedEvent(Func<Protocol.Cast.SinksUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Cast.SinksUpdatedEvent> SinksUpdatedEvent(Func<Protocol.Cast.SinksUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Cast.sinksUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("Cast.sinksUpdated", until);
             }
 
             /// <summary>
             /// This is fired whenever the outstanding issue/error message changes.
             /// |issueMessage| is empty if there is no issue.
             /// </summary>
-            public Task<Protocol.Cast.IssueUpdatedEvent> IssueUpdatedEvent(Func<Protocol.Cast.IssueUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Cast.IssueUpdatedEvent> IssueUpdatedEvent(Func<Protocol.Cast.IssueUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Cast.issueUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("Cast.issueUpdated", until);
             }
         }
 
@@ -3243,114 +3243,114 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Fired when `Element`'s attribute is modified.
             /// </summary>
-            public Task<Protocol.DOM.AttributeModifiedEvent> AttributeModifiedEvent(Func<Protocol.DOM.AttributeModifiedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.AttributeModifiedEvent> AttributeModifiedEvent(Func<Protocol.DOM.AttributeModifiedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.attributeModified", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.attributeModified", until);
             }
 
             /// <summary>
             /// Fired when `Element`'s attribute is removed.
             /// </summary>
-            public Task<Protocol.DOM.AttributeRemovedEvent> AttributeRemovedEvent(Func<Protocol.DOM.AttributeRemovedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.AttributeRemovedEvent> AttributeRemovedEvent(Func<Protocol.DOM.AttributeRemovedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.attributeRemoved", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.attributeRemoved", until);
             }
 
             /// <summary>
             /// Mirrors `DOMCharacterDataModified` event.
             /// </summary>
-            public Task<Protocol.DOM.CharacterDataModifiedEvent> CharacterDataModifiedEvent(Func<Protocol.DOM.CharacterDataModifiedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.CharacterDataModifiedEvent> CharacterDataModifiedEvent(Func<Protocol.DOM.CharacterDataModifiedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.characterDataModified", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.characterDataModified", until);
             }
 
             /// <summary>
             /// Fired when `Container`'s child node count has changed.
             /// </summary>
-            public Task<Protocol.DOM.ChildNodeCountUpdatedEvent> ChildNodeCountUpdatedEvent(Func<Protocol.DOM.ChildNodeCountUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.ChildNodeCountUpdatedEvent> ChildNodeCountUpdatedEvent(Func<Protocol.DOM.ChildNodeCountUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.childNodeCountUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.childNodeCountUpdated", until);
             }
 
             /// <summary>
             /// Mirrors `DOMNodeInserted` event.
             /// </summary>
-            public Task<Protocol.DOM.ChildNodeInsertedEvent> ChildNodeInsertedEvent(Func<Protocol.DOM.ChildNodeInsertedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.ChildNodeInsertedEvent> ChildNodeInsertedEvent(Func<Protocol.DOM.ChildNodeInsertedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.childNodeInserted", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.childNodeInserted", until);
             }
 
             /// <summary>
             /// Mirrors `DOMNodeRemoved` event.
             /// </summary>
-            public Task<Protocol.DOM.ChildNodeRemovedEvent> ChildNodeRemovedEvent(Func<Protocol.DOM.ChildNodeRemovedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.ChildNodeRemovedEvent> ChildNodeRemovedEvent(Func<Protocol.DOM.ChildNodeRemovedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.childNodeRemoved", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.childNodeRemoved", until);
             }
 
             /// <summary>
             /// Called when distrubution is changed.
             /// </summary>
-            public Task<Protocol.DOM.DistributedNodesUpdatedEvent> DistributedNodesUpdatedEvent(Func<Protocol.DOM.DistributedNodesUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.DistributedNodesUpdatedEvent> DistributedNodesUpdatedEvent(Func<Protocol.DOM.DistributedNodesUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.distributedNodesUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.distributedNodesUpdated", until);
             }
 
             /// <summary>
             /// Fired when `Document` has been totally updated. Node ids are no longer valid.
             /// </summary>
-            public Task<Protocol.DOM.DocumentUpdatedEvent> DocumentUpdatedEvent(Func<Protocol.DOM.DocumentUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.DocumentUpdatedEvent> DocumentUpdatedEvent(Func<Protocol.DOM.DocumentUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.documentUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.documentUpdated", until);
             }
 
             /// <summary>
             /// Fired when `Element`'s inline style is modified via a CSS property modification.
             /// </summary>
-            public Task<Protocol.DOM.InlineStyleInvalidatedEvent> InlineStyleInvalidatedEvent(Func<Protocol.DOM.InlineStyleInvalidatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.InlineStyleInvalidatedEvent> InlineStyleInvalidatedEvent(Func<Protocol.DOM.InlineStyleInvalidatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.inlineStyleInvalidated", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.inlineStyleInvalidated", until);
             }
 
             /// <summary>
             /// Called when a pseudo element is added to an element.
             /// </summary>
-            public Task<Protocol.DOM.PseudoElementAddedEvent> PseudoElementAddedEvent(Func<Protocol.DOM.PseudoElementAddedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.PseudoElementAddedEvent> PseudoElementAddedEvent(Func<Protocol.DOM.PseudoElementAddedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.pseudoElementAdded", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.pseudoElementAdded", until);
             }
 
             /// <summary>
             /// Called when a pseudo element is removed from an element.
             /// </summary>
-            public Task<Protocol.DOM.PseudoElementRemovedEvent> PseudoElementRemovedEvent(Func<Protocol.DOM.PseudoElementRemovedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.PseudoElementRemovedEvent> PseudoElementRemovedEvent(Func<Protocol.DOM.PseudoElementRemovedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.pseudoElementRemoved", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.pseudoElementRemoved", until);
             }
 
             /// <summary>
             /// Fired when backend wants to provide client with the missing DOM structure. This happens upon
             /// most of the calls requesting node ids.
             /// </summary>
-            public Task<Protocol.DOM.SetChildNodesEvent> SetChildNodesEvent(Func<Protocol.DOM.SetChildNodesEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.SetChildNodesEvent> SetChildNodesEvent(Func<Protocol.DOM.SetChildNodesEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.setChildNodes", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.setChildNodes", until);
             }
 
             /// <summary>
             /// Called when shadow root is popped from the element.
             /// </summary>
-            public Task<Protocol.DOM.ShadowRootPoppedEvent> ShadowRootPoppedEvent(Func<Protocol.DOM.ShadowRootPoppedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.ShadowRootPoppedEvent> ShadowRootPoppedEvent(Func<Protocol.DOM.ShadowRootPoppedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.shadowRootPopped", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.shadowRootPopped", until);
             }
 
             /// <summary>
             /// Called when shadow root is pushed into the element.
             /// </summary>
-            public Task<Protocol.DOM.ShadowRootPushedEvent> ShadowRootPushedEvent(Func<Protocol.DOM.ShadowRootPushedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOM.ShadowRootPushedEvent> ShadowRootPushedEvent(Func<Protocol.DOM.ShadowRootPushedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOM.shadowRootPushed", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOM.shadowRootPushed", until);
             }
         }
 
@@ -3868,24 +3868,24 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandler("DOMStorage.domStorageItemsCleared", value);
             }
 
-            public Task<Protocol.DOMStorage.DomStorageItemAddedEvent> DomStorageItemAddedEvent(Func<Protocol.DOMStorage.DomStorageItemAddedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOMStorage.DomStorageItemAddedEvent> DomStorageItemAddedEvent(Func<Protocol.DOMStorage.DomStorageItemAddedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOMStorage.domStorageItemAdded", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOMStorage.domStorageItemAdded", until);
             }
 
-            public Task<Protocol.DOMStorage.DomStorageItemRemovedEvent> DomStorageItemRemovedEvent(Func<Protocol.DOMStorage.DomStorageItemRemovedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOMStorage.DomStorageItemRemovedEvent> DomStorageItemRemovedEvent(Func<Protocol.DOMStorage.DomStorageItemRemovedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOMStorage.domStorageItemRemoved", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOMStorage.domStorageItemRemoved", until);
             }
 
-            public Task<Protocol.DOMStorage.DomStorageItemUpdatedEvent> DomStorageItemUpdatedEvent(Func<Protocol.DOMStorage.DomStorageItemUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOMStorage.DomStorageItemUpdatedEvent> DomStorageItemUpdatedEvent(Func<Protocol.DOMStorage.DomStorageItemUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOMStorage.domStorageItemUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOMStorage.domStorageItemUpdated", until);
             }
 
-            public Task<Protocol.DOMStorage.DomStorageItemsClearedEvent> DomStorageItemsClearedEvent(Func<Protocol.DOMStorage.DomStorageItemsClearedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.DOMStorage.DomStorageItemsClearedEvent> DomStorageItemsClearedEvent(Func<Protocol.DOMStorage.DomStorageItemsClearedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("DOMStorage.domStorageItemsCleared", unsubscribe);
+                return InspectorClient.SubscribeUntil("DOMStorage.domStorageItemsCleared", until);
             }
         }
 
@@ -3979,9 +3979,9 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandler("Database.addDatabase", value);
             }
 
-            public Task<Protocol.Database.AddDatabaseEvent> AddDatabaseEvent(Func<Protocol.Database.AddDatabaseEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Database.AddDatabaseEvent> AddDatabaseEvent(Func<Protocol.Database.AddDatabaseEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Database.addDatabase", unsubscribe);
+                return InspectorClient.SubscribeUntil("Database.addDatabase", until);
             }
         }
 
@@ -4639,25 +4639,25 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Notification sent after the virtual time has advanced.
             /// </summary>
-            public Task<Protocol.Emulation.VirtualTimeAdvancedEvent> VirtualTimeAdvancedEvent(Func<Protocol.Emulation.VirtualTimeAdvancedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Emulation.VirtualTimeAdvancedEvent> VirtualTimeAdvancedEvent(Func<Protocol.Emulation.VirtualTimeAdvancedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Emulation.virtualTimeAdvanced", unsubscribe);
+                return InspectorClient.SubscribeUntil("Emulation.virtualTimeAdvanced", until);
             }
 
             /// <summary>
             /// Notification sent after the virtual time budget for the current VirtualTimePolicy has run out.
             /// </summary>
-            public Task<Protocol.Emulation.VirtualTimeBudgetExpiredEvent> VirtualTimeBudgetExpiredEvent(Func<Protocol.Emulation.VirtualTimeBudgetExpiredEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Emulation.VirtualTimeBudgetExpiredEvent> VirtualTimeBudgetExpiredEvent(Func<Protocol.Emulation.VirtualTimeBudgetExpiredEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Emulation.virtualTimeBudgetExpired", unsubscribe);
+                return InspectorClient.SubscribeUntil("Emulation.virtualTimeBudgetExpired", until);
             }
 
             /// <summary>
             /// Notification sent after the virtual time has paused.
             /// </summary>
-            public Task<Protocol.Emulation.VirtualTimePausedEvent> VirtualTimePausedEvent(Func<Protocol.Emulation.VirtualTimePausedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Emulation.VirtualTimePausedEvent> VirtualTimePausedEvent(Func<Protocol.Emulation.VirtualTimePausedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Emulation.virtualTimePaused", unsubscribe);
+                return InspectorClient.SubscribeUntil("Emulation.virtualTimePaused", until);
             }
         }
 
@@ -4765,9 +4765,9 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Issued when the target starts or stops needing BeginFrames.
             /// </summary>
-            public Task<Protocol.HeadlessExperimental.NeedsBeginFramesChangedEvent> NeedsBeginFramesChangedEvent(Func<Protocol.HeadlessExperimental.NeedsBeginFramesChangedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.HeadlessExperimental.NeedsBeginFramesChangedEvent> NeedsBeginFramesChangedEvent(Func<Protocol.HeadlessExperimental.NeedsBeginFramesChangedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("HeadlessExperimental.needsBeginFramesChanged", unsubscribe);
+                return InspectorClient.SubscribeUntil("HeadlessExperimental.needsBeginFramesChanged", until);
             }
         }
 
@@ -5680,25 +5680,25 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Fired when remote debugging connection is about to be terminated. Contains detach reason.
             /// </summary>
-            public Task<Protocol.Inspector.DetachedEvent> DetachedEvent(Func<Protocol.Inspector.DetachedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Inspector.DetachedEvent> DetachedEvent(Func<Protocol.Inspector.DetachedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Inspector.detached", unsubscribe);
+                return InspectorClient.SubscribeUntil("Inspector.detached", until);
             }
 
             /// <summary>
             /// Fired when debugging target has crashed
             /// </summary>
-            public Task<Protocol.Inspector.TargetCrashedEvent> TargetCrashedEvent(Func<Protocol.Inspector.TargetCrashedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Inspector.TargetCrashedEvent> TargetCrashedEvent(Func<Protocol.Inspector.TargetCrashedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Inspector.targetCrashed", unsubscribe);
+                return InspectorClient.SubscribeUntil("Inspector.targetCrashed", until);
             }
 
             /// <summary>
             /// Fired when debugging target has reloaded after crash
             /// </summary>
-            public Task<Protocol.Inspector.TargetReloadedAfterCrashEvent> TargetReloadedAfterCrashEvent(Func<Protocol.Inspector.TargetReloadedAfterCrashEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Inspector.TargetReloadedAfterCrashEvent> TargetReloadedAfterCrashEvent(Func<Protocol.Inspector.TargetReloadedAfterCrashEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Inspector.targetReloadedAfterCrash", unsubscribe);
+                return InspectorClient.SubscribeUntil("Inspector.targetReloadedAfterCrash", until);
             }
         }
 
@@ -5947,14 +5947,14 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandler("LayerTree.layerTreeDidChange", value);
             }
 
-            public Task<Protocol.LayerTree.LayerPaintedEvent> LayerPaintedEvent(Func<Protocol.LayerTree.LayerPaintedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.LayerTree.LayerPaintedEvent> LayerPaintedEvent(Func<Protocol.LayerTree.LayerPaintedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("LayerTree.layerPainted", unsubscribe);
+                return InspectorClient.SubscribeUntil("LayerTree.layerPainted", until);
             }
 
-            public Task<Protocol.LayerTree.LayerTreeDidChangeEvent> LayerTreeDidChangeEvent(Func<Protocol.LayerTree.LayerTreeDidChangeEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.LayerTree.LayerTreeDidChangeEvent> LayerTreeDidChangeEvent(Func<Protocol.LayerTree.LayerTreeDidChangeEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("LayerTree.layerTreeDidChange", unsubscribe);
+                return InspectorClient.SubscribeUntil("LayerTree.layerTreeDidChange", until);
             }
         }
 
@@ -6075,9 +6075,9 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Issued when new message was logged.
             /// </summary>
-            public Task<Protocol.Log.EntryAddedEvent> EntryAddedEvent(Func<Protocol.Log.EntryAddedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Log.EntryAddedEvent> EntryAddedEvent(Func<Protocol.Log.EntryAddedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Log.entryAdded", unsubscribe);
+                return InspectorClient.SubscribeUntil("Log.entryAdded", until);
             }
         }
 
@@ -7213,138 +7213,138 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Fired when data chunk was received over the network.
             /// </summary>
-            public Task<Protocol.Network.DataReceivedEvent> DataReceivedEvent(Func<Protocol.Network.DataReceivedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.DataReceivedEvent> DataReceivedEvent(Func<Protocol.Network.DataReceivedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.dataReceived", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.dataReceived", until);
             }
 
             /// <summary>
             /// Fired when EventSource message is received.
             /// </summary>
-            public Task<Protocol.Network.EventSourceMessageReceivedEvent> EventSourceMessageReceivedEvent(Func<Protocol.Network.EventSourceMessageReceivedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.EventSourceMessageReceivedEvent> EventSourceMessageReceivedEvent(Func<Protocol.Network.EventSourceMessageReceivedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.eventSourceMessageReceived", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.eventSourceMessageReceived", until);
             }
 
             /// <summary>
             /// Fired when HTTP request has failed to load.
             /// </summary>
-            public Task<Protocol.Network.LoadingFailedEvent> LoadingFailedEvent(Func<Protocol.Network.LoadingFailedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.LoadingFailedEvent> LoadingFailedEvent(Func<Protocol.Network.LoadingFailedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.loadingFailed", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.loadingFailed", until);
             }
 
             /// <summary>
             /// Fired when HTTP request has finished loading.
             /// </summary>
-            public Task<Protocol.Network.LoadingFinishedEvent> LoadingFinishedEvent(Func<Protocol.Network.LoadingFinishedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.LoadingFinishedEvent> LoadingFinishedEvent(Func<Protocol.Network.LoadingFinishedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.loadingFinished", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.loadingFinished", until);
             }
 
             /// <summary>
             /// Details of an intercepted HTTP request, which must be either allowed, blocked, modified or
             /// mocked.
             /// </summary>
-            public Task<Protocol.Network.RequestInterceptedEvent> RequestInterceptedEvent(Func<Protocol.Network.RequestInterceptedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.RequestInterceptedEvent> RequestInterceptedEvent(Func<Protocol.Network.RequestInterceptedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.requestIntercepted", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.requestIntercepted", until);
             }
 
             /// <summary>
             /// Fired if request ended up loading from cache.
             /// </summary>
-            public Task<Protocol.Network.RequestServedFromCacheEvent> RequestServedFromCacheEvent(Func<Protocol.Network.RequestServedFromCacheEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.RequestServedFromCacheEvent> RequestServedFromCacheEvent(Func<Protocol.Network.RequestServedFromCacheEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.requestServedFromCache", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.requestServedFromCache", until);
             }
 
             /// <summary>
             /// Fired when page is about to send HTTP request.
             /// </summary>
-            public Task<Protocol.Network.RequestWillBeSentEvent> RequestWillBeSentEvent(Func<Protocol.Network.RequestWillBeSentEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.RequestWillBeSentEvent> RequestWillBeSentEvent(Func<Protocol.Network.RequestWillBeSentEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.requestWillBeSent", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.requestWillBeSent", until);
             }
 
             /// <summary>
             /// Fired when resource loading priority is changed
             /// </summary>
-            public Task<Protocol.Network.ResourceChangedPriorityEvent> ResourceChangedPriorityEvent(Func<Protocol.Network.ResourceChangedPriorityEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.ResourceChangedPriorityEvent> ResourceChangedPriorityEvent(Func<Protocol.Network.ResourceChangedPriorityEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.resourceChangedPriority", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.resourceChangedPriority", until);
             }
 
             /// <summary>
             /// Fired when a signed exchange was received over the network
             /// </summary>
-            public Task<Protocol.Network.SignedExchangeReceivedEvent> SignedExchangeReceivedEvent(Func<Protocol.Network.SignedExchangeReceivedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.SignedExchangeReceivedEvent> SignedExchangeReceivedEvent(Func<Protocol.Network.SignedExchangeReceivedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.signedExchangeReceived", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.signedExchangeReceived", until);
             }
 
             /// <summary>
             /// Fired when HTTP response is available.
             /// </summary>
-            public Task<Protocol.Network.ResponseReceivedEvent> ResponseReceivedEvent(Func<Protocol.Network.ResponseReceivedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.ResponseReceivedEvent> ResponseReceivedEvent(Func<Protocol.Network.ResponseReceivedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.responseReceived", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.responseReceived", until);
             }
 
             /// <summary>
             /// Fired when WebSocket is closed.
             /// </summary>
-            public Task<Protocol.Network.WebSocketClosedEvent> WebSocketClosedEvent(Func<Protocol.Network.WebSocketClosedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.WebSocketClosedEvent> WebSocketClosedEvent(Func<Protocol.Network.WebSocketClosedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.webSocketClosed", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.webSocketClosed", until);
             }
 
             /// <summary>
             /// Fired upon WebSocket creation.
             /// </summary>
-            public Task<Protocol.Network.WebSocketCreatedEvent> WebSocketCreatedEvent(Func<Protocol.Network.WebSocketCreatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.WebSocketCreatedEvent> WebSocketCreatedEvent(Func<Protocol.Network.WebSocketCreatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.webSocketCreated", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.webSocketCreated", until);
             }
 
             /// <summary>
             /// Fired when WebSocket message error occurs.
             /// </summary>
-            public Task<Protocol.Network.WebSocketFrameErrorEvent> WebSocketFrameErrorEvent(Func<Protocol.Network.WebSocketFrameErrorEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.WebSocketFrameErrorEvent> WebSocketFrameErrorEvent(Func<Protocol.Network.WebSocketFrameErrorEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.webSocketFrameError", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.webSocketFrameError", until);
             }
 
             /// <summary>
             /// Fired when WebSocket message is received.
             /// </summary>
-            public Task<Protocol.Network.WebSocketFrameReceivedEvent> WebSocketFrameReceivedEvent(Func<Protocol.Network.WebSocketFrameReceivedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.WebSocketFrameReceivedEvent> WebSocketFrameReceivedEvent(Func<Protocol.Network.WebSocketFrameReceivedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.webSocketFrameReceived", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.webSocketFrameReceived", until);
             }
 
             /// <summary>
             /// Fired when WebSocket message is sent.
             /// </summary>
-            public Task<Protocol.Network.WebSocketFrameSentEvent> WebSocketFrameSentEvent(Func<Protocol.Network.WebSocketFrameSentEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.WebSocketFrameSentEvent> WebSocketFrameSentEvent(Func<Protocol.Network.WebSocketFrameSentEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.webSocketFrameSent", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.webSocketFrameSent", until);
             }
 
             /// <summary>
             /// Fired when WebSocket handshake response becomes available.
             /// </summary>
-            public Task<Protocol.Network.WebSocketHandshakeResponseReceivedEvent> WebSocketHandshakeResponseReceivedEvent(Func<Protocol.Network.WebSocketHandshakeResponseReceivedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.WebSocketHandshakeResponseReceivedEvent> WebSocketHandshakeResponseReceivedEvent(Func<Protocol.Network.WebSocketHandshakeResponseReceivedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.webSocketHandshakeResponseReceived", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.webSocketHandshakeResponseReceived", until);
             }
 
             /// <summary>
             /// Fired when WebSocket is about to initiate handshake.
             /// </summary>
-            public Task<Protocol.Network.WebSocketWillSendHandshakeRequestEvent> WebSocketWillSendHandshakeRequestEvent(Func<Protocol.Network.WebSocketWillSendHandshakeRequestEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Network.WebSocketWillSendHandshakeRequestEvent> WebSocketWillSendHandshakeRequestEvent(Func<Protocol.Network.WebSocketWillSendHandshakeRequestEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Network.webSocketWillSendHandshakeRequest", unsubscribe);
+                return InspectorClient.SubscribeUntil("Network.webSocketWillSendHandshakeRequest", until);
             }
         }
 
@@ -7827,25 +7827,25 @@ namespace DumbPrograms.ChromeDevTools
             /// Fired when the node should be inspected. This happens after call to `setInspectMode` or when
             /// user manually inspects an element.
             /// </summary>
-            public Task<Protocol.Overlay.InspectNodeRequestedEvent> InspectNodeRequestedEvent(Func<Protocol.Overlay.InspectNodeRequestedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Overlay.InspectNodeRequestedEvent> InspectNodeRequestedEvent(Func<Protocol.Overlay.InspectNodeRequestedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Overlay.inspectNodeRequested", unsubscribe);
+                return InspectorClient.SubscribeUntil("Overlay.inspectNodeRequested", until);
             }
 
             /// <summary>
             /// Fired when the node should be highlighted. This happens after call to `setInspectMode`.
             /// </summary>
-            public Task<Protocol.Overlay.NodeHighlightRequestedEvent> NodeHighlightRequestedEvent(Func<Protocol.Overlay.NodeHighlightRequestedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Overlay.NodeHighlightRequestedEvent> NodeHighlightRequestedEvent(Func<Protocol.Overlay.NodeHighlightRequestedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Overlay.nodeHighlightRequested", unsubscribe);
+                return InspectorClient.SubscribeUntil("Overlay.nodeHighlightRequested", until);
             }
 
             /// <summary>
             /// Fired when user asks to capture screenshot of some area on the page.
             /// </summary>
-            public Task<Protocol.Overlay.ScreenshotRequestedEvent> ScreenshotRequestedEvent(Func<Protocol.Overlay.ScreenshotRequestedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Overlay.ScreenshotRequestedEvent> ScreenshotRequestedEvent(Func<Protocol.Overlay.ScreenshotRequestedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Overlay.screenshotRequested", unsubscribe);
+                return InspectorClient.SubscribeUntil("Overlay.screenshotRequested", until);
             }
         }
 
@@ -9408,159 +9408,159 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandler("Page.compilationCacheProduced", value);
             }
 
-            public Task<Protocol.Page.DomContentEventFiredEvent> DomContentEventFiredEvent(Func<Protocol.Page.DomContentEventFiredEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.DomContentEventFiredEvent> DomContentEventFiredEvent(Func<Protocol.Page.DomContentEventFiredEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.domContentEventFired", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.domContentEventFired", until);
             }
 
             /// <summary>
             /// Fired when frame has been attached to its parent.
             /// </summary>
-            public Task<Protocol.Page.FrameAttachedEvent> FrameAttachedEvent(Func<Protocol.Page.FrameAttachedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.FrameAttachedEvent> FrameAttachedEvent(Func<Protocol.Page.FrameAttachedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.frameAttached", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.frameAttached", until);
             }
 
             /// <summary>
             /// Fired when frame no longer has a scheduled navigation.
             /// </summary>
-            public Task<Protocol.Page.FrameClearedScheduledNavigationEvent> FrameClearedScheduledNavigationEvent(Func<Protocol.Page.FrameClearedScheduledNavigationEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.FrameClearedScheduledNavigationEvent> FrameClearedScheduledNavigationEvent(Func<Protocol.Page.FrameClearedScheduledNavigationEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.frameClearedScheduledNavigation", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.frameClearedScheduledNavigation", until);
             }
 
             /// <summary>
             /// Fired when frame has been detached from its parent.
             /// </summary>
-            public Task<Protocol.Page.FrameDetachedEvent> FrameDetachedEvent(Func<Protocol.Page.FrameDetachedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.FrameDetachedEvent> FrameDetachedEvent(Func<Protocol.Page.FrameDetachedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.frameDetached", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.frameDetached", until);
             }
 
             /// <summary>
             /// Fired once navigation of the frame has completed. Frame is now associated with the new loader.
             /// </summary>
-            public Task<Protocol.Page.FrameNavigatedEvent> FrameNavigatedEvent(Func<Protocol.Page.FrameNavigatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.FrameNavigatedEvent> FrameNavigatedEvent(Func<Protocol.Page.FrameNavigatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.frameNavigated", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.frameNavigated", until);
             }
 
-            public Task<Protocol.Page.FrameResizedEvent> FrameResizedEvent(Func<Protocol.Page.FrameResizedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.FrameResizedEvent> FrameResizedEvent(Func<Protocol.Page.FrameResizedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.frameResized", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.frameResized", until);
             }
 
             /// <summary>
             /// Fired when frame schedules a potential navigation.
             /// </summary>
-            public Task<Protocol.Page.FrameScheduledNavigationEvent> FrameScheduledNavigationEvent(Func<Protocol.Page.FrameScheduledNavigationEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.FrameScheduledNavigationEvent> FrameScheduledNavigationEvent(Func<Protocol.Page.FrameScheduledNavigationEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.frameScheduledNavigation", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.frameScheduledNavigation", until);
             }
 
             /// <summary>
             /// Fired when frame has started loading.
             /// </summary>
-            public Task<Protocol.Page.FrameStartedLoadingEvent> FrameStartedLoadingEvent(Func<Protocol.Page.FrameStartedLoadingEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.FrameStartedLoadingEvent> FrameStartedLoadingEvent(Func<Protocol.Page.FrameStartedLoadingEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.frameStartedLoading", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.frameStartedLoading", until);
             }
 
             /// <summary>
             /// Fired when frame has stopped loading.
             /// </summary>
-            public Task<Protocol.Page.FrameStoppedLoadingEvent> FrameStoppedLoadingEvent(Func<Protocol.Page.FrameStoppedLoadingEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.FrameStoppedLoadingEvent> FrameStoppedLoadingEvent(Func<Protocol.Page.FrameStoppedLoadingEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.frameStoppedLoading", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.frameStoppedLoading", until);
             }
 
             /// <summary>
             /// Fired when interstitial page was hidden
             /// </summary>
-            public Task<Protocol.Page.InterstitialHiddenEvent> InterstitialHiddenEvent(Func<Protocol.Page.InterstitialHiddenEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.InterstitialHiddenEvent> InterstitialHiddenEvent(Func<Protocol.Page.InterstitialHiddenEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.interstitialHidden", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.interstitialHidden", until);
             }
 
             /// <summary>
             /// Fired when interstitial page was shown
             /// </summary>
-            public Task<Protocol.Page.InterstitialShownEvent> InterstitialShownEvent(Func<Protocol.Page.InterstitialShownEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.InterstitialShownEvent> InterstitialShownEvent(Func<Protocol.Page.InterstitialShownEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.interstitialShown", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.interstitialShown", until);
             }
 
             /// <summary>
             /// Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) has been
             /// closed.
             /// </summary>
-            public Task<Protocol.Page.JavascriptDialogClosedEvent> JavascriptDialogClosedEvent(Func<Protocol.Page.JavascriptDialogClosedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.JavascriptDialogClosedEvent> JavascriptDialogClosedEvent(Func<Protocol.Page.JavascriptDialogClosedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.javascriptDialogClosed", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.javascriptDialogClosed", until);
             }
 
             /// <summary>
             /// Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) is about to
             /// open.
             /// </summary>
-            public Task<Protocol.Page.JavascriptDialogOpeningEvent> JavascriptDialogOpeningEvent(Func<Protocol.Page.JavascriptDialogOpeningEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.JavascriptDialogOpeningEvent> JavascriptDialogOpeningEvent(Func<Protocol.Page.JavascriptDialogOpeningEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.javascriptDialogOpening", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.javascriptDialogOpening", until);
             }
 
             /// <summary>
             /// Fired for top level page lifecycle events such as navigation, load, paint, etc.
             /// </summary>
-            public Task<Protocol.Page.LifecycleEventEvent> LifecycleEventEvent(Func<Protocol.Page.LifecycleEventEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.LifecycleEventEvent> LifecycleEventEvent(Func<Protocol.Page.LifecycleEventEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.lifecycleEvent", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.lifecycleEvent", until);
             }
 
-            public Task<Protocol.Page.LoadEventFiredEvent> LoadEventFiredEvent(Func<Protocol.Page.LoadEventFiredEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.LoadEventFiredEvent> LoadEventFiredEvent(Func<Protocol.Page.LoadEventFiredEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.loadEventFired", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.loadEventFired", until);
             }
 
             /// <summary>
             /// Fired when same-document navigation happens, e.g. due to history API usage or anchor navigation.
             /// </summary>
-            public Task<Protocol.Page.NavigatedWithinDocumentEvent> NavigatedWithinDocumentEvent(Func<Protocol.Page.NavigatedWithinDocumentEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.NavigatedWithinDocumentEvent> NavigatedWithinDocumentEvent(Func<Protocol.Page.NavigatedWithinDocumentEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.navigatedWithinDocument", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.navigatedWithinDocument", until);
             }
 
             /// <summary>
             /// Compressed image data requested by the `startScreencast`.
             /// </summary>
-            public Task<Protocol.Page.ScreencastFrameEvent> ScreencastFrameEvent(Func<Protocol.Page.ScreencastFrameEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.ScreencastFrameEvent> ScreencastFrameEvent(Func<Protocol.Page.ScreencastFrameEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.screencastFrame", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.screencastFrame", until);
             }
 
             /// <summary>
             /// Fired when the page with currently enabled screencast was shown or hidden `.
             /// </summary>
-            public Task<Protocol.Page.ScreencastVisibilityChangedEvent> ScreencastVisibilityChangedEvent(Func<Protocol.Page.ScreencastVisibilityChangedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.ScreencastVisibilityChangedEvent> ScreencastVisibilityChangedEvent(Func<Protocol.Page.ScreencastVisibilityChangedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.screencastVisibilityChanged", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.screencastVisibilityChanged", until);
             }
 
             /// <summary>
             /// Fired when a new window is going to be opened, via window.open(), link click, form submission,
             /// etc.
             /// </summary>
-            public Task<Protocol.Page.WindowOpenEvent> WindowOpenEvent(Func<Protocol.Page.WindowOpenEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.WindowOpenEvent> WindowOpenEvent(Func<Protocol.Page.WindowOpenEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.windowOpen", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.windowOpen", until);
             }
 
             /// <summary>
             /// Issued for every compilation cache generated. Is only available
             /// if Page.setGenerateCompilationCache is enabled.
             /// </summary>
-            public Task<Protocol.Page.CompilationCacheProducedEvent> CompilationCacheProducedEvent(Func<Protocol.Page.CompilationCacheProducedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Page.CompilationCacheProducedEvent> CompilationCacheProducedEvent(Func<Protocol.Page.CompilationCacheProducedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Page.compilationCacheProduced", unsubscribe);
+                return InspectorClient.SubscribeUntil("Page.compilationCacheProduced", until);
             }
         }
 
@@ -9664,9 +9664,9 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Current values of the metrics.
             /// </summary>
-            public Task<Protocol.Performance.MetricsEvent> MetricsEvent(Func<Protocol.Performance.MetricsEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Performance.MetricsEvent> MetricsEvent(Func<Protocol.Performance.MetricsEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Performance.metrics", unsubscribe);
+                return InspectorClient.SubscribeUntil("Performance.metrics", until);
             }
         }
 
@@ -9821,17 +9821,17 @@ namespace DumbPrograms.ChromeDevTools
             /// certificate errors at the same time.
             /// </summary>
             [Obsolete]
-            public Task<Protocol.Security.CertificateErrorEvent> CertificateErrorEvent(Func<Protocol.Security.CertificateErrorEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Security.CertificateErrorEvent> CertificateErrorEvent(Func<Protocol.Security.CertificateErrorEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Security.certificateError", unsubscribe);
+                return InspectorClient.SubscribeUntil("Security.certificateError", until);
             }
 
             /// <summary>
             /// The security state of the page changed.
             /// </summary>
-            public Task<Protocol.Security.SecurityStateChangedEvent> SecurityStateChangedEvent(Func<Protocol.Security.SecurityStateChangedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Security.SecurityStateChangedEvent> SecurityStateChangedEvent(Func<Protocol.Security.SecurityStateChangedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Security.securityStateChanged", unsubscribe);
+                return InspectorClient.SubscribeUntil("Security.securityStateChanged", until);
             }
         }
 
@@ -10084,19 +10084,19 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandler("ServiceWorker.workerVersionUpdated", value);
             }
 
-            public Task<Protocol.ServiceWorker.WorkerErrorReportedEvent> WorkerErrorReportedEvent(Func<Protocol.ServiceWorker.WorkerErrorReportedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.ServiceWorker.WorkerErrorReportedEvent> WorkerErrorReportedEvent(Func<Protocol.ServiceWorker.WorkerErrorReportedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("ServiceWorker.workerErrorReported", unsubscribe);
+                return InspectorClient.SubscribeUntil("ServiceWorker.workerErrorReported", until);
             }
 
-            public Task<Protocol.ServiceWorker.WorkerRegistrationUpdatedEvent> WorkerRegistrationUpdatedEvent(Func<Protocol.ServiceWorker.WorkerRegistrationUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.ServiceWorker.WorkerRegistrationUpdatedEvent> WorkerRegistrationUpdatedEvent(Func<Protocol.ServiceWorker.WorkerRegistrationUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("ServiceWorker.workerRegistrationUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("ServiceWorker.workerRegistrationUpdated", until);
             }
 
-            public Task<Protocol.ServiceWorker.WorkerVersionUpdatedEvent> WorkerVersionUpdatedEvent(Func<Protocol.ServiceWorker.WorkerVersionUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.ServiceWorker.WorkerVersionUpdatedEvent> WorkerVersionUpdatedEvent(Func<Protocol.ServiceWorker.WorkerVersionUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("ServiceWorker.workerVersionUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("ServiceWorker.workerVersionUpdated", until);
             }
         }
 
@@ -10291,33 +10291,33 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// A cache's contents have been modified.
             /// </summary>
-            public Task<Protocol.Storage.CacheStorageContentUpdatedEvent> CacheStorageContentUpdatedEvent(Func<Protocol.Storage.CacheStorageContentUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Storage.CacheStorageContentUpdatedEvent> CacheStorageContentUpdatedEvent(Func<Protocol.Storage.CacheStorageContentUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Storage.cacheStorageContentUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("Storage.cacheStorageContentUpdated", until);
             }
 
             /// <summary>
             /// A cache has been added/deleted.
             /// </summary>
-            public Task<Protocol.Storage.CacheStorageListUpdatedEvent> CacheStorageListUpdatedEvent(Func<Protocol.Storage.CacheStorageListUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Storage.CacheStorageListUpdatedEvent> CacheStorageListUpdatedEvent(Func<Protocol.Storage.CacheStorageListUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Storage.cacheStorageListUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("Storage.cacheStorageListUpdated", until);
             }
 
             /// <summary>
             /// The origin's IndexedDB object store has been modified.
             /// </summary>
-            public Task<Protocol.Storage.IndexedDBContentUpdatedEvent> IndexedDBContentUpdatedEvent(Func<Protocol.Storage.IndexedDBContentUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Storage.IndexedDBContentUpdatedEvent> IndexedDBContentUpdatedEvent(Func<Protocol.Storage.IndexedDBContentUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Storage.indexedDBContentUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("Storage.indexedDBContentUpdated", until);
             }
 
             /// <summary>
             /// The origin's IndexedDB database list has been modified.
             /// </summary>
-            public Task<Protocol.Storage.IndexedDBListUpdatedEvent> IndexedDBListUpdatedEvent(Func<Protocol.Storage.IndexedDBListUpdatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Storage.IndexedDBListUpdatedEvent> IndexedDBListUpdatedEvent(Func<Protocol.Storage.IndexedDBListUpdatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Storage.indexedDBListUpdated", unsubscribe);
+                return InspectorClient.SubscribeUntil("Storage.indexedDBListUpdated", until);
             }
         }
 
@@ -10849,60 +10849,60 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Issued when attached to target because of auto-attach or `attachToTarget` command.
             /// </summary>
-            public Task<Protocol.Target.AttachedToTargetEvent> AttachedToTargetEvent(Func<Protocol.Target.AttachedToTargetEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Target.AttachedToTargetEvent> AttachedToTargetEvent(Func<Protocol.Target.AttachedToTargetEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Target.attachedToTarget", unsubscribe);
+                return InspectorClient.SubscribeUntil("Target.attachedToTarget", until);
             }
 
             /// <summary>
             /// Issued when detached from target for any reason (including `detachFromTarget` command). Can be
             /// issued multiple times per target if multiple sessions have been attached to it.
             /// </summary>
-            public Task<Protocol.Target.DetachedFromTargetEvent> DetachedFromTargetEvent(Func<Protocol.Target.DetachedFromTargetEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Target.DetachedFromTargetEvent> DetachedFromTargetEvent(Func<Protocol.Target.DetachedFromTargetEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Target.detachedFromTarget", unsubscribe);
+                return InspectorClient.SubscribeUntil("Target.detachedFromTarget", until);
             }
 
             /// <summary>
             /// Notifies about a new protocol message received from the session (as reported in
             /// `attachedToTarget` event).
             /// </summary>
-            public Task<Protocol.Target.ReceivedMessageFromTargetEvent> ReceivedMessageFromTargetEvent(Func<Protocol.Target.ReceivedMessageFromTargetEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Target.ReceivedMessageFromTargetEvent> ReceivedMessageFromTargetEvent(Func<Protocol.Target.ReceivedMessageFromTargetEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Target.receivedMessageFromTarget", unsubscribe);
+                return InspectorClient.SubscribeUntil("Target.receivedMessageFromTarget", until);
             }
 
             /// <summary>
             /// Issued when a possible inspection target is created.
             /// </summary>
-            public Task<Protocol.Target.TargetCreatedEvent> TargetCreatedEvent(Func<Protocol.Target.TargetCreatedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Target.TargetCreatedEvent> TargetCreatedEvent(Func<Protocol.Target.TargetCreatedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Target.targetCreated", unsubscribe);
+                return InspectorClient.SubscribeUntil("Target.targetCreated", until);
             }
 
             /// <summary>
             /// Issued when a target is destroyed.
             /// </summary>
-            public Task<Protocol.Target.TargetDestroyedEvent> TargetDestroyedEvent(Func<Protocol.Target.TargetDestroyedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Target.TargetDestroyedEvent> TargetDestroyedEvent(Func<Protocol.Target.TargetDestroyedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Target.targetDestroyed", unsubscribe);
+                return InspectorClient.SubscribeUntil("Target.targetDestroyed", until);
             }
 
             /// <summary>
             /// Issued when a target has crashed.
             /// </summary>
-            public Task<Protocol.Target.TargetCrashedEvent> TargetCrashedEvent(Func<Protocol.Target.TargetCrashedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Target.TargetCrashedEvent> TargetCrashedEvent(Func<Protocol.Target.TargetCrashedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Target.targetCrashed", unsubscribe);
+                return InspectorClient.SubscribeUntil("Target.targetCrashed", until);
             }
 
             /// <summary>
             /// Issued when some information about a target has changed. This only happens between
             /// `targetCreated` and `targetDestroyed`.
             /// </summary>
-            public Task<Protocol.Target.TargetInfoChangedEvent> TargetInfoChangedEvent(Func<Protocol.Target.TargetInfoChangedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Target.TargetInfoChangedEvent> TargetInfoChangedEvent(Func<Protocol.Target.TargetInfoChangedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Target.targetInfoChanged", unsubscribe);
+                return InspectorClient.SubscribeUntil("Target.targetInfoChanged", until);
             }
         }
 
@@ -10973,9 +10973,9 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Informs that port was successfully bound and got a specified connection id.
             /// </summary>
-            public Task<Protocol.Tethering.AcceptedEvent> AcceptedEvent(Func<Protocol.Tethering.AcceptedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Tethering.AcceptedEvent> AcceptedEvent(Func<Protocol.Tethering.AcceptedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Tethering.accepted", unsubscribe);
+                return InspectorClient.SubscribeUntil("Tethering.accepted", until);
             }
         }
 
@@ -11139,27 +11139,27 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandler("Tracing.tracingComplete", value);
             }
 
-            public Task<Protocol.Tracing.BufferUsageEvent> BufferUsageEvent(Func<Protocol.Tracing.BufferUsageEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Tracing.BufferUsageEvent> BufferUsageEvent(Func<Protocol.Tracing.BufferUsageEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Tracing.bufferUsage", unsubscribe);
+                return InspectorClient.SubscribeUntil("Tracing.bufferUsage", until);
             }
 
             /// <summary>
             /// Contains an bucket of collected trace events. When tracing is stopped collected events will be
             /// send as a sequence of dataCollected events followed by tracingComplete event.
             /// </summary>
-            public Task<Protocol.Tracing.DataCollectedEvent> DataCollectedEvent(Func<Protocol.Tracing.DataCollectedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Tracing.DataCollectedEvent> DataCollectedEvent(Func<Protocol.Tracing.DataCollectedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Tracing.dataCollected", unsubscribe);
+                return InspectorClient.SubscribeUntil("Tracing.dataCollected", until);
             }
 
             /// <summary>
             /// Signals that tracing is stopped and there is no trace buffers pending flush, all data were
             /// delivered via dataCollected events.
             /// </summary>
-            public Task<Protocol.Tracing.TracingCompleteEvent> TracingCompleteEvent(Func<Protocol.Tracing.TracingCompleteEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Tracing.TracingCompleteEvent> TracingCompleteEvent(Func<Protocol.Tracing.TracingCompleteEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Tracing.tracingComplete", unsubscribe);
+                return InspectorClient.SubscribeUntil("Tracing.tracingComplete", until);
             }
         }
 
@@ -11493,18 +11493,18 @@ namespace DumbPrograms.ChromeDevTools
             /// and responseStatusCode -- the request is at the response stage if either
             /// of these fields is present and in the request stage otherwise.
             /// </summary>
-            public Task<Protocol.Fetch.RequestPausedEvent> RequestPausedEvent(Func<Protocol.Fetch.RequestPausedEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Fetch.RequestPausedEvent> RequestPausedEvent(Func<Protocol.Fetch.RequestPausedEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Fetch.requestPaused", unsubscribe);
+                return InspectorClient.SubscribeUntil("Fetch.requestPaused", until);
             }
 
             /// <summary>
             /// Issued when the domain is enabled with handleAuthRequests set to true.
             /// The request is paused until client responds with continueWithAuth.
             /// </summary>
-            public Task<Protocol.Fetch.AuthRequiredEvent> AuthRequiredEvent(Func<Protocol.Fetch.AuthRequiredEvent, Task<bool>> unsubscribe = null)
+            public Task<Protocol.Fetch.AuthRequiredEvent> AuthRequiredEvent(Func<Protocol.Fetch.AuthRequiredEvent, Task<bool>> until = null)
             {
-                return InspectorClient.SubscribeUntil("Fetch.authRequired", unsubscribe);
+                return InspectorClient.SubscribeUntil("Fetch.authRequired", until);
             }
         }
     }
