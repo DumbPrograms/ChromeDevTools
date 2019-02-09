@@ -123,9 +123,9 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Issued when new console message is added.
             /// </summary>
-            public Task<Protocol.Console.MessageAddedEvent> MessageAddedEvent(Func<Protocol.Console.MessageAddedEvent, Task<bool>> until = null)
+            public Task<Protocol.Console.MessageAddedEvent> MessageAddedEvent(Func<Protocol.Console.MessageAddedEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Console.messageAdded", until);
+                return InspectorClient.SubscribeUntil("Console.messageAdded", unsubscribe);
             }
         }
 
@@ -951,42 +951,42 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Fired when breakpoint is resolved to an actual script and location.
             /// </summary>
-            public Task<Protocol.Debugger.BreakpointResolvedEvent> BreakpointResolvedEvent(Func<Protocol.Debugger.BreakpointResolvedEvent, Task<bool>> until = null)
+            public Task<Protocol.Debugger.BreakpointResolvedEvent> BreakpointResolvedEvent(Func<Protocol.Debugger.BreakpointResolvedEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Debugger.breakpointResolved", until);
+                return InspectorClient.SubscribeUntil("Debugger.breakpointResolved", unsubscribe);
             }
 
             /// <summary>
             /// Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.
             /// </summary>
-            public Task<Protocol.Debugger.PausedEvent> PausedEvent(Func<Protocol.Debugger.PausedEvent, Task<bool>> until = null)
+            public Task<Protocol.Debugger.PausedEvent> PausedEvent(Func<Protocol.Debugger.PausedEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Debugger.paused", until);
+                return InspectorClient.SubscribeUntil("Debugger.paused", unsubscribe);
             }
 
             /// <summary>
             /// Fired when the virtual machine resumed execution.
             /// </summary>
-            public Task<Protocol.Debugger.ResumedEvent> ResumedEvent(Func<Protocol.Debugger.ResumedEvent, Task<bool>> until = null)
+            public Task<Protocol.Debugger.ResumedEvent> ResumedEvent(Func<Protocol.Debugger.ResumedEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Debugger.resumed", until);
+                return InspectorClient.SubscribeUntil("Debugger.resumed", unsubscribe);
             }
 
             /// <summary>
             /// Fired when virtual machine fails to parse the script.
             /// </summary>
-            public Task<Protocol.Debugger.ScriptFailedToParseEvent> ScriptFailedToParseEvent(Func<Protocol.Debugger.ScriptFailedToParseEvent, Task<bool>> until = null)
+            public Task<Protocol.Debugger.ScriptFailedToParseEvent> ScriptFailedToParseEvent(Func<Protocol.Debugger.ScriptFailedToParseEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Debugger.scriptFailedToParse", until);
+                return InspectorClient.SubscribeUntil("Debugger.scriptFailedToParse", unsubscribe);
             }
 
             /// <summary>
             /// Fired when virtual machine parses script. This event is also fired for all known and uncollected
             /// scripts upon enabling debugger.
             /// </summary>
-            public Task<Protocol.Debugger.ScriptParsedEvent> ScriptParsedEvent(Func<Protocol.Debugger.ScriptParsedEvent, Task<bool>> until = null)
+            public Task<Protocol.Debugger.ScriptParsedEvent> ScriptParsedEvent(Func<Protocol.Debugger.ScriptParsedEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Debugger.scriptParsed", until);
+                return InspectorClient.SubscribeUntil("Debugger.scriptParsed", unsubscribe);
             }
         }
 
@@ -1259,17 +1259,17 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandler("HeapProfiler.resetProfiles", value);
             }
 
-            public Task<Protocol.HeapProfiler.AddHeapSnapshotChunkEvent> AddHeapSnapshotChunkEvent(Func<Protocol.HeapProfiler.AddHeapSnapshotChunkEvent, Task<bool>> until = null)
+            public Task<Protocol.HeapProfiler.AddHeapSnapshotChunkEvent> AddHeapSnapshotChunkEvent(Func<Protocol.HeapProfiler.AddHeapSnapshotChunkEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("HeapProfiler.addHeapSnapshotChunk", until);
+                return InspectorClient.SubscribeUntil("HeapProfiler.addHeapSnapshotChunk", unsubscribe);
             }
 
             /// <summary>
             /// If heap objects tracking has been started then backend may send update for one or more fragments
             /// </summary>
-            public Task<Protocol.HeapProfiler.HeapStatsUpdateEvent> HeapStatsUpdateEvent(Func<Protocol.HeapProfiler.HeapStatsUpdateEvent, Task<bool>> until = null)
+            public Task<Protocol.HeapProfiler.HeapStatsUpdateEvent> HeapStatsUpdateEvent(Func<Protocol.HeapProfiler.HeapStatsUpdateEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("HeapProfiler.heapStatsUpdate", until);
+                return InspectorClient.SubscribeUntil("HeapProfiler.heapStatsUpdate", unsubscribe);
             }
 
             /// <summary>
@@ -1277,19 +1277,19 @@ namespace DumbPrograms.ChromeDevTools
             /// seen object id and corresponding timestamp. If the were changes in the heap since last event
             /// then one or more heapStatsUpdate events will be sent before a new lastSeenObjectId event.
             /// </summary>
-            public Task<Protocol.HeapProfiler.LastSeenObjectIdEvent> LastSeenObjectIdEvent(Func<Protocol.HeapProfiler.LastSeenObjectIdEvent, Task<bool>> until = null)
+            public Task<Protocol.HeapProfiler.LastSeenObjectIdEvent> LastSeenObjectIdEvent(Func<Protocol.HeapProfiler.LastSeenObjectIdEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("HeapProfiler.lastSeenObjectId", until);
+                return InspectorClient.SubscribeUntil("HeapProfiler.lastSeenObjectId", unsubscribe);
             }
 
-            public Task<Protocol.HeapProfiler.ReportHeapSnapshotProgressEvent> ReportHeapSnapshotProgressEvent(Func<Protocol.HeapProfiler.ReportHeapSnapshotProgressEvent, Task<bool>> until = null)
+            public Task<Protocol.HeapProfiler.ReportHeapSnapshotProgressEvent> ReportHeapSnapshotProgressEvent(Func<Protocol.HeapProfiler.ReportHeapSnapshotProgressEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("HeapProfiler.reportHeapSnapshotProgress", until);
+                return InspectorClient.SubscribeUntil("HeapProfiler.reportHeapSnapshotProgress", unsubscribe);
             }
 
-            public Task<Protocol.HeapProfiler.ResetProfilesEvent> ResetProfilesEvent(Func<Protocol.HeapProfiler.ResetProfilesEvent, Task<bool>> until = null)
+            public Task<Protocol.HeapProfiler.ResetProfilesEvent> ResetProfilesEvent(Func<Protocol.HeapProfiler.ResetProfilesEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("HeapProfiler.resetProfiles", until);
+                return InspectorClient.SubscribeUntil("HeapProfiler.resetProfiles", unsubscribe);
             }
         }
 
@@ -1541,17 +1541,17 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandler("Profiler.consoleProfileStarted", value);
             }
 
-            public Task<Protocol.Profiler.ConsoleProfileFinishedEvent> ConsoleProfileFinishedEvent(Func<Protocol.Profiler.ConsoleProfileFinishedEvent, Task<bool>> until = null)
+            public Task<Protocol.Profiler.ConsoleProfileFinishedEvent> ConsoleProfileFinishedEvent(Func<Protocol.Profiler.ConsoleProfileFinishedEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Profiler.consoleProfileFinished", until);
+                return InspectorClient.SubscribeUntil("Profiler.consoleProfileFinished", unsubscribe);
             }
 
             /// <summary>
             /// Sent when new profile recording is started using console.profile() call.
             /// </summary>
-            public Task<Protocol.Profiler.ConsoleProfileStartedEvent> ConsoleProfileStartedEvent(Func<Protocol.Profiler.ConsoleProfileStartedEvent, Task<bool>> until = null)
+            public Task<Protocol.Profiler.ConsoleProfileStartedEvent> ConsoleProfileStartedEvent(Func<Protocol.Profiler.ConsoleProfileStartedEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Profiler.consoleProfileStarted", until);
+                return InspectorClient.SubscribeUntil("Profiler.consoleProfileStarted", unsubscribe);
             }
         }
 
@@ -2302,66 +2302,66 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Notification is issued every time when binding is called.
             /// </summary>
-            public Task<Protocol.Runtime.BindingCalledEvent> BindingCalledEvent(Func<Protocol.Runtime.BindingCalledEvent, Task<bool>> until = null)
+            public Task<Protocol.Runtime.BindingCalledEvent> BindingCalledEvent(Func<Protocol.Runtime.BindingCalledEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Runtime.bindingCalled", until);
+                return InspectorClient.SubscribeUntil("Runtime.bindingCalled", unsubscribe);
             }
 
             /// <summary>
             /// Issued when console API was called.
             /// </summary>
-            public Task<Protocol.Runtime.ConsoleAPICalledEvent> ConsoleAPICalledEvent(Func<Protocol.Runtime.ConsoleAPICalledEvent, Task<bool>> until = null)
+            public Task<Protocol.Runtime.ConsoleAPICalledEvent> ConsoleAPICalledEvent(Func<Protocol.Runtime.ConsoleAPICalledEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Runtime.consoleAPICalled", until);
+                return InspectorClient.SubscribeUntil("Runtime.consoleAPICalled", unsubscribe);
             }
 
             /// <summary>
             /// Issued when unhandled exception was revoked.
             /// </summary>
-            public Task<Protocol.Runtime.ExceptionRevokedEvent> ExceptionRevokedEvent(Func<Protocol.Runtime.ExceptionRevokedEvent, Task<bool>> until = null)
+            public Task<Protocol.Runtime.ExceptionRevokedEvent> ExceptionRevokedEvent(Func<Protocol.Runtime.ExceptionRevokedEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Runtime.exceptionRevoked", until);
+                return InspectorClient.SubscribeUntil("Runtime.exceptionRevoked", unsubscribe);
             }
 
             /// <summary>
             /// Issued when exception was thrown and unhandled.
             /// </summary>
-            public Task<Protocol.Runtime.ExceptionThrownEvent> ExceptionThrownEvent(Func<Protocol.Runtime.ExceptionThrownEvent, Task<bool>> until = null)
+            public Task<Protocol.Runtime.ExceptionThrownEvent> ExceptionThrownEvent(Func<Protocol.Runtime.ExceptionThrownEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Runtime.exceptionThrown", until);
+                return InspectorClient.SubscribeUntil("Runtime.exceptionThrown", unsubscribe);
             }
 
             /// <summary>
             /// Issued when new execution context is created.
             /// </summary>
-            public Task<Protocol.Runtime.ExecutionContextCreatedEvent> ExecutionContextCreatedEvent(Func<Protocol.Runtime.ExecutionContextCreatedEvent, Task<bool>> until = null)
+            public Task<Protocol.Runtime.ExecutionContextCreatedEvent> ExecutionContextCreatedEvent(Func<Protocol.Runtime.ExecutionContextCreatedEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Runtime.executionContextCreated", until);
+                return InspectorClient.SubscribeUntil("Runtime.executionContextCreated", unsubscribe);
             }
 
             /// <summary>
             /// Issued when execution context is destroyed.
             /// </summary>
-            public Task<Protocol.Runtime.ExecutionContextDestroyedEvent> ExecutionContextDestroyedEvent(Func<Protocol.Runtime.ExecutionContextDestroyedEvent, Task<bool>> until = null)
+            public Task<Protocol.Runtime.ExecutionContextDestroyedEvent> ExecutionContextDestroyedEvent(Func<Protocol.Runtime.ExecutionContextDestroyedEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Runtime.executionContextDestroyed", until);
+                return InspectorClient.SubscribeUntil("Runtime.executionContextDestroyed", unsubscribe);
             }
 
             /// <summary>
             /// Issued when all executionContexts were cleared in browser
             /// </summary>
-            public Task<Protocol.Runtime.ExecutionContextsClearedEvent> ExecutionContextsClearedEvent(Func<Protocol.Runtime.ExecutionContextsClearedEvent, Task<bool>> until = null)
+            public Task<Protocol.Runtime.ExecutionContextsClearedEvent> ExecutionContextsClearedEvent(Func<Protocol.Runtime.ExecutionContextsClearedEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Runtime.executionContextsCleared", until);
+                return InspectorClient.SubscribeUntil("Runtime.executionContextsCleared", unsubscribe);
             }
 
             /// <summary>
             /// Issued when object should be inspected (for example, as a result of inspect() command line API
             /// call).
             /// </summary>
-            public Task<Protocol.Runtime.InspectRequestedEvent> InspectRequestedEvent(Func<Protocol.Runtime.InspectRequestedEvent, Task<bool>> until = null)
+            public Task<Protocol.Runtime.InspectRequestedEvent> InspectRequestedEvent(Func<Protocol.Runtime.InspectRequestedEvent, Task<bool>> unsubscribe = null)
             {
-                return InspectorClient.SubscribeUntil("Runtime.inspectRequested", until);
+                return InspectorClient.SubscribeUntil("Runtime.inspectRequested", unsubscribe);
             }
         }
 
