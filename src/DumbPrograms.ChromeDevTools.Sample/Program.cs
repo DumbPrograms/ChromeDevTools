@@ -13,7 +13,7 @@ namespace DumbPrograms.ChromeDevTools.Sample
                 var devTools = await chrome.GetDevTools();
 
                 var targets = from t in await devTools.GetInspectableTargets()
-                              where t.Title == "New Tab"
+                              where t.Type == "page"
                               select t;
 
                 var t0 = targets.First();
@@ -34,7 +34,12 @@ namespace DumbPrograms.ChromeDevTools.Sample
 
                 await inspector1.Page.Enable();
 
-                await inspector1.Page.LoadEventFiredEvent();
+                Console.WriteLine("Click some links several times..");
+
+                var i = 0;
+                await inspector1.Page.LoadEventFiredEvent(_ => Task.FromResult(++i > 2));
+
+                Console.WriteLine(i);
 
                 await devTools.CloseTab(t0.Id);
             }
