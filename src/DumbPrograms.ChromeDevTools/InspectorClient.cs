@@ -94,7 +94,7 @@ namespace DumbPrograms.ChromeDevTools
                         var messageText = reader.ReadToEnd();
                         var message = JsonConvert.DeserializeObject<InspectionMessage>(messageText);
 
-                        await MessageReceived?.Invoke(message);
+                        MessageReceived?.Invoke(message);
 
                         break;
                     }
