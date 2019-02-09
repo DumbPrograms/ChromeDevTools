@@ -173,7 +173,7 @@ namespace DumbPrograms.ChromeDevTools
             dispatcher.Handlers -= handler;
         }
 
-        private Task<TEvent> SubscribeUntil<TEvent>(string name, Func<TEvent, Task<bool>> handler)
+        private Task<TEvent> SubscribeUntil<TEvent>(string name, Func<TEvent, Task<bool>> until)
         {
             var tcs = new TaskCompletionSource<TEvent>();
 
@@ -184,7 +184,7 @@ namespace DumbPrograms.ChromeDevTools
 
             async Task UntilHandler(TEvent e)
             {
-                if (handler == null || await handler(e).ConfigureAwait(false))
+                if (until == null || await until(e).ConfigureAwait(false))
                 {
                     dispatcher.Handlers -= UntilHandler;
                     tcs.SetResult(e);
