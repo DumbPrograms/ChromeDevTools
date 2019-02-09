@@ -161,12 +161,10 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
-        private EventDispatcher<TEvent> AddEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
+        private void AddEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
         {
             var dispatcher = GetEventDispatcher<TEvent>(name);
             dispatcher.Handlers += handler;
-
-            return dispatcher;
         }
 
         private void RemoveEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
@@ -186,7 +184,7 @@ namespace DumbPrograms.ChromeDevTools
 
             async Task UntilHandler(TEvent e)
             {
-                if (handler == null || await handler(e))
+                if (handler == null || await handler(e).ConfigureAwait(false))
                 {
                     dispatcher.Handlers -= UntilHandler;
                     tcs.SetResult(e);
