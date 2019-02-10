@@ -18,7 +18,7 @@ namespace DumbPrograms.ChromeDevTools.Sample
 
                 var t0 = targets.First();
 
-                var inspector0 = await devTools.Inspect(targets.First());
+                var inspector0 = await devTools.Inspect(t0);
 
                 await inspector0.Page.Enable();
 
