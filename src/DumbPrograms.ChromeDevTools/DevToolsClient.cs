@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using DumbPrograms.ChromeDevTools.Protocol;
 using Newtonsoft.Json;
 
 namespace DumbPrograms.ChromeDevTools

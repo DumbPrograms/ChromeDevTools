@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace DumbPrograms.ChromeDevTools
+namespace DumbPrograms.ChromeDevTools.Protocol
 {
     public class BrowserVersion
     {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DumbPrograms.ChromeDevTools
+﻿namespace DumbPrograms.ChromeDevTools.Protocol
 {
     public class InspectionTarget
     {
