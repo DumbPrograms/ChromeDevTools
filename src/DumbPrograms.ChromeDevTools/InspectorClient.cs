@@ -38,7 +38,7 @@ namespace DumbPrograms.ChromeDevTools
             };
         }
 
-        public async Task Start(CancellationToken cancellation = default)
+        public async Task<bool> Start(CancellationToken cancellation = default)
         {
             if (Interlocked.CompareExchange(ref Started, 1, 0) == 0)
             {
@@ -51,6 +51,67 @@ namespace DumbPrograms.ChromeDevTools
                 ReceivingLoopCanceller = new CancellationTokenSource();
                 ReceivingLoop = StartReceivingLoop(ReceivingLoopCanceller.Token);
             }
+
+            return true;
+        }
+
+        public async Task<bool> Stop(CancellationToken cancellation = default)
+        {
+            throw new NotImplementedException();
+
+            if (Interlocked.CompareExchange(ref Started, 0, 1) == 1)
+            {
+                ReceivingLoopCanceller.Cancel();
+                ReceivingLoop = null;
+
+                MessageReceived -= DispatchSubscribedEvents;
+                EventDispatchers = new ConcurrentDictionary<string, EventDispatcher>();
+
+                await WebSocket.CloseAsync(WebSocketCloseStatus.Empty, "", cancellation)
+                               .ConfigureAwait(false);
+            }
+
+            return true;
+        }
+
+        public async Task<TResponse> InvokeCommand<TResponse>(ICommand<TResponse> command, CancellationToken cancellation = default)
+        {
+            if (command == null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+
+            return await InvokeCommandCore(command, cancellation).ConfigureAwait(false);
+        }
+
+        public void AddEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
+        {
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("The name of the event must be specified.", nameof(name));
+            }
+
+            AddEventHandlerCore(name, handler);
+        }
+
+        public void RemoveEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
+        {
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("The name of the event must be specified.", nameof(name));
+            }
+
+            RemoveEventHandlerCore(name, handler);
+        }
+
+        public async Task<TEvent> SubscribeUntil<TEvent>(string name, Func<TEvent, Task<bool>> until = null)
+        {
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("The name of the event must be specified.", nameof(name));
+            }
+
+            return await SubscribeUntilCore(name, until).ConfigureAwait(false);
         }
 
         private async Task StartReceivingLoop(CancellationToken cancellation)
@@ -102,7 +163,7 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
-        public async Task<TResponse> InvokeCommand<TResponse>(ICommand<TResponse> command, CancellationToken cancellation = default)
+        private async Task<TResponse> InvokeCommandCore<TResponse>(ICommand<TResponse> command, CancellationToken cancellation)
         {
             var id = Interlocked.Increment(ref CommandId);
             var response = RegisterCommandResponseHandler<TResponse>(id, command, cancellation);
@@ -161,19 +222,19 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
-        private void AddEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
+        private void AddEventHandlerCore<TEvent>(string name, Func<TEvent, Task> handler)
         {
             var dispatcher = GetEventDispatcher<TEvent>(name);
             dispatcher.Handlers += handler;
         }
 
-        private void RemoveEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
+        private void RemoveEventHandlerCore<TEvent>(string name, Func<TEvent, Task> handler)
         {
             var dispatcher = GetEventDispatcher<TEvent>(name);
             dispatcher.Handlers -= handler;
         }
 
-        private Task<TEvent> SubscribeUntil<TEvent>(string name, Func<TEvent, Task<bool>> until)
+        private Task<TEvent> SubscribeUntilCore<TEvent>(string name, Func<TEvent, Task<bool>> until)
         {
             var tcs = new TaskCompletionSource<TEvent>();
 

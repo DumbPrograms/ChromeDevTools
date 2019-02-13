@@ -80,7 +80,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                     }
                                     using (WILBlock())
                                     {
-                                        using (WILBlock($"return {InspectorClient}.InvokeCommand", BlockType.Brace))
+                                        using (WILBlock($"return {InspectorClient}.InvokeCommandCore", BlockType.Brace))
                                         {
                                             using (WILBlock($"new {commandType}"))
                                             {
@@ -111,8 +111,8 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
                                     using (WILBlock($"public event Func<Protocol.{domain.Name}.{csEventName}Event, Task> {csEventName}"))
                                     {
-                                        WIL($"add => {InspectorClient}.AddEventHandler(\"{domain.Name}.{@event.Name}\", value);");
-                                        WIL($"remove => {InspectorClient}.RemoveEventHandler(\"{domain.Name}.{@event.Name}\", value);");
+                                        WIL($"add => {InspectorClient}.AddEventHandlerCore(\"{domain.Name}.{@event.Name}\", value);");
+                                        WIL($"remove => {InspectorClient}.RemoveEventHandlerCore(\"{domain.Name}.{@event.Name}\", value);");
                                     }
                                 }
 
@@ -125,7 +125,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
                                     using (WILBlock($"public Task<Protocol.{domain.Name}.{csEventName}Event> {csEventName}Event(Func<Protocol.{domain.Name}.{csEventName}Event, Task<bool>> until = null)"))
                                     {
-                                        WIL($"return {InspectorClient}.SubscribeUntil(\"{domain.Name}.{@event.Name}\", until);");
+                                        WIL($"return {InspectorClient}.SubscribeUntilCore(\"{domain.Name}.{@event.Name}\", until);");
                                     }
                                 }
                             }
