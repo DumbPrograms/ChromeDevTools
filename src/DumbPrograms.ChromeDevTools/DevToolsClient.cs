@@ -34,7 +34,7 @@ namespace DumbPrograms.ChromeDevTools
         {
             var client = new InspectorClient(target);
 
-            await client.Start();
+            await client.Connect();
 
             return client;
         }

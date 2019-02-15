@@ -18,28 +18,31 @@ namespace DumbPrograms.ChromeDevTools.Sample
 
                 var t0 = targets.First();
 
-                var inspector0 = await devTools.Inspect(t0);
+                using (var inspector = await devTools.Inspect(t0))
+                {
+                    await inspector.Page.Enable();
 
-                await inspector0.Page.Enable();
+                    await inspector.Page.Navigate("https://www.baidu.com");
 
-                await inspector0.Page.Navigate("https://www.baidu.com");
+                    var e = await inspector.Page.LoadEventFiredEvent();
 
-                var e = await inspector0.Page.LoadEventFiredEvent();
-
-                Console.WriteLine($"Page loaded at {e.Timestamp.Value}");
+                    Console.WriteLine($"Page loaded at {e.Timestamp.Value}");
+                }
 
                 var t1 = await devTools.NewTab("https://www.cnblogs.com");
 
-                var inspector1 = await devTools.Inspect(t1);
+                using (var inspector = await devTools.Inspect(t1))
+                {
+                    await inspector.Page.Enable();
 
-                await inspector1.Page.Enable();
+                    Console.WriteLine("Click some links several times..");
 
-                Console.WriteLine("Click some links several times..");
+                    var i = 0;
+                    await inspector.Page.LoadEventFiredEvent(_ => Task.FromResult(++i > 2));
 
-                var i = 0;
-                await inspector1.Page.LoadEventFiredEvent(_ => Task.FromResult(++i > 2));
+                    Console.WriteLine(i);
+                }
 
-                Console.WriteLine(i);
 
                 await devTools.CloseTab(t0.Id);
             }

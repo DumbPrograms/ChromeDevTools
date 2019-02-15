@@ -13,10 +13,10 @@ using Newtonsoft.Json.Serialization;
 
 namespace DumbPrograms.ChromeDevTools
 {
-    public partial class InspectorClient
+    public partial class InspectorClient : IDisposable
     {
+        private readonly string InspectionTargetUrl;
         private readonly ClientWebSocket WebSocket;
-        private readonly InspectionTarget InspectionTarget;
         private readonly JsonSerializerSettings JsonSerializerSettings;
 
         private int Started;
@@ -29,7 +29,7 @@ namespace DumbPrograms.ChromeDevTools
         public InspectorClient(InspectionTarget inspectionTarget)
         {
             WebSocket = new ClientWebSocket();
-            InspectionTarget = inspectionTarget;
+            InspectionTargetUrl = inspectionTarget.WebSocketDebuggerUrl;
             JsonSerializerSettings = new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore,
@@ -40,11 +40,11 @@ namespace DumbPrograms.ChromeDevTools
             MessageReceived += DispatchSubscribedEvents;
         }
 
-        public async Task<bool> Start(CancellationToken cancellation = default)
+        public async Task<bool> Connect(CancellationToken cancellation = default)
         {
             if (Interlocked.CompareExchange(ref Started, 1, 0) == 0)
             {
-                await WebSocket.ConnectAsync(new Uri(InspectionTarget.WebSocketDebuggerUrl), cancellation)
+                await WebSocket.ConnectAsync(new Uri(InspectionTargetUrl), cancellation)
                                .ConfigureAwait(false);
 
                 MessageLoopCanceller = new CancellationTokenSource();
@@ -56,19 +56,39 @@ namespace DumbPrograms.ChromeDevTools
             return false;
         }
 
-        public async Task<bool> Stop(CancellationToken cancellation = default)
+        public async Task<bool> Disconnect(CancellationToken cancellation = default)
         {
             if (Interlocked.CompareExchange(ref Started, 0, 1) == 1)
             {
                 MessageLoopCanceller.Cancel();
 
-                await WebSocket.CloseAsync(WebSocketCloseStatus.Empty, "", cancellation)
-                               .ConfigureAwait(false);
+                if (WebSocket.State == WebSocketState.Open || WebSocket.State == WebSocketState.CloseReceived)
+                {
+                    try
+                    {
+                        await WebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "", cancellation)
+                                       .ConfigureAwait(false);
+                    }
+                    catch (WebSocketException)
+                    {
+                        // Chrome just close the connection without completing the close handshake.
+                    }
+                }
 
                 return true;
             }
 
             return false;
+        }
+
+        public void Dispose()
+        {
+            MessageReceived = null;
+
+            _ = Disconnect();
+
+            MessageLoopCanceller.Dispose();
+            WebSocket.Dispose();
         }
 
         public async Task<TResponse> InvokeCommand<TResponse>(ICommand<TResponse> command, CancellationToken cancellation = default)
@@ -118,7 +138,7 @@ namespace DumbPrograms.ChromeDevTools
 
             while (!cancellation.IsCancellationRequested)
             {
-                if (stream.Length > 1024 * 8)
+                if (stream.Length > 1024 * 4)
                 {
                     stream = new MemoryStream();
                 }
@@ -129,15 +149,19 @@ namespace DumbPrograms.ChromeDevTools
 
                 while (true)
                 {
-                    var receive = await WebSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellation).ConfigureAwait(false);
+                    WebSocketReceiveResult receive;
+                    try
+                    {
+                        receive = await WebSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellation).ConfigureAwait(false);
+                    }
+                    catch (WebSocketException)
+                    {
+                        goto exit;
+                    }
 
                     if (receive.MessageType == WebSocketMessageType.Close)
                     {
-                        await WebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "", cancellationToken: default).ConfigureAwait(false);
-
-                        MessageLoopCanceller.Cancel();
-
-                        return;
+                        goto exit;
                     }
 
                     Debug.Assert(receive.MessageType == WebSocketMessageType.Text);
@@ -158,27 +182,44 @@ namespace DumbPrograms.ChromeDevTools
                     }
                 }
             }
+
+            exit:
+            await Disconnect().ConfigureAwait(false);
         }
 
         private async Task<TResponse> InvokeCommandCore<TResponse>(ICommand<TResponse> command, CancellationToken cancellation)
         {
-            var id = Interlocked.Increment(ref CommandId);
-            var response = RegisterCommandResponseHandler<TResponse>(id, command, cancellation);
-
-            var frame = new InspectionMessage
+            if (WebSocket.State == WebSocketState.Open)
             {
-                Id = id,
-                Method = command.Name,
-                Params = JObject.Parse(JsonConvert.SerializeObject(command, JsonSerializerSettings))
-            };
+                var id = Interlocked.Increment(ref CommandId);
 
-            var frameText = JsonConvert.SerializeObject(frame, JsonSerializerSettings);
-            var bytes = Encoding.UTF8.GetBytes(frameText);
+                var frame = new InspectionMessage
+                {
+                    Id = id,
+                    Method = command.Name,
+                    Params = JObject.Parse(JsonConvert.SerializeObject(command, JsonSerializerSettings))
+                };
 
-            await WebSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, endOfMessage: true, cancellation)
-                           .ConfigureAwait(false);
+                var frameText = JsonConvert.SerializeObject(frame, JsonSerializerSettings);
+                var bytes = Encoding.UTF8.GetBytes(frameText);
 
-            return await response.ConfigureAwait(false);
+                try
+                {
+                    var response = RegisterCommandResponseHandler<TResponse>(id, command, cancellation);
+
+                    await WebSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, endOfMessage: true, cancellation)
+                                   .ConfigureAwait(false);
+
+                    return await response.ConfigureAwait(false);
+                }
+                catch (WebSocketException)
+                {
+                }
+            }
+
+            await Disconnect().ConfigureAwait(false);
+
+            throw new CommandFailedException(command, -1, "The inspector is disconnected.");
         }
 
         private Task<TResponse> RegisterCommandResponseHandler<TResponse>(int id, ICommand command, CancellationToken cancellation)
@@ -258,5 +299,10 @@ namespace DumbPrograms.ChromeDevTools
 
         private EventDispatcher<TEvent> GetEventDispatcher<TEvent>(string name)
             => (EventDispatcher<TEvent>)EventDispatchers.GetOrAdd(name, n => new EventDispatcher<TEvent>());
+
+        public override string ToString()
+        {
+            return InspectionTargetUrl;
+        }
     }
 }
