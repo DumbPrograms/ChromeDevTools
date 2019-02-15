@@ -22,8 +22,7 @@ namespace DumbPrograms.ChromeDevTools
         private int Started;
         private event Func<InspectionMessage, Task> MessageReceived;
         private ConcurrentDictionary<string, EventDispatcher> EventDispatchers;
-        private CancellationTokenSource ReceivingLoopCanceller;
-        private Task ReceivingLoop;
+        private CancellationTokenSource MessageLoopCanceller;
 
         private int CommandId = 0;
 
@@ -36,6 +35,9 @@ namespace DumbPrograms.ChromeDevTools
                 NullValueHandling = NullValueHandling.Ignore,
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
+
+            EventDispatchers = new ConcurrentDictionary<string, EventDispatcher>();
+            MessageReceived += DispatchSubscribedEvents;
         }
 
         public async Task<bool> Start(CancellationToken cancellation = default)
@@ -45,33 +47,28 @@ namespace DumbPrograms.ChromeDevTools
                 await WebSocket.ConnectAsync(new Uri(InspectionTarget.WebSocketDebuggerUrl), cancellation)
                                .ConfigureAwait(false);
 
-                EventDispatchers = new ConcurrentDictionary<string, EventDispatcher>();
-                MessageReceived += DispatchSubscribedEvents;
+                MessageLoopCanceller = new CancellationTokenSource();
+                _ = StartMessageLoop(MessageLoopCanceller.Token).ConfigureAwait(false);
 
-                ReceivingLoopCanceller = new CancellationTokenSource();
-                ReceivingLoop = StartReceivingLoop(ReceivingLoopCanceller.Token);
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public async Task<bool> Stop(CancellationToken cancellation = default)
         {
-            throw new NotImplementedException();
-
             if (Interlocked.CompareExchange(ref Started, 0, 1) == 1)
             {
-                ReceivingLoopCanceller.Cancel();
-                ReceivingLoop = null;
-
-                MessageReceived -= DispatchSubscribedEvents;
-                EventDispatchers = new ConcurrentDictionary<string, EventDispatcher>();
+                MessageLoopCanceller.Cancel();
 
                 await WebSocket.CloseAsync(WebSocketCloseStatus.Empty, "", cancellation)
                                .ConfigureAwait(false);
+
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public async Task<TResponse> InvokeCommand<TResponse>(ICommand<TResponse> command, CancellationToken cancellation = default)
@@ -114,7 +111,7 @@ namespace DumbPrograms.ChromeDevTools
             return await SubscribeUntilCore(name, until).ConfigureAwait(false);
         }
 
-        private async Task StartReceivingLoop(CancellationToken cancellation)
+        private async Task StartMessageLoop(CancellationToken cancellation)
         {
             var buffer = new byte[1024];
             var stream = new MemoryStream();
@@ -134,21 +131,21 @@ namespace DumbPrograms.ChromeDevTools
                 {
                     var receive = await WebSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellation).ConfigureAwait(false);
 
-                    stream.Write(buffer, 0, receive.Count);
-
                     if (receive.MessageType == WebSocketMessageType.Close)
                     {
                         await WebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "", cancellationToken: default).ConfigureAwait(false);
 
-                        ReceivingLoopCanceller.Cancel();
+                        MessageLoopCanceller.Cancel();
 
                         return;
                     }
 
+                    Debug.Assert(receive.MessageType == WebSocketMessageType.Text);
+
+                    stream.Write(buffer, 0, receive.Count);
+
                     if (receive.EndOfMessage)
                     {
-                        Debug.Assert(receive.MessageType == WebSocketMessageType.Text);
-
                         stream.Position = 0;
 
                         var reader = new StreamReader(stream, Encoding.UTF8);
@@ -214,12 +211,18 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
-        private async Task DispatchSubscribedEvents(InspectionMessage message)
+        private Task DispatchSubscribedEvents(InspectionMessage message)
         {
-            if (message.Method != null && EventDispatchers.TryGetValue(message.Method, out var dispatcher))
+            EventDispatcher dispatcher = null;
+
+            if (message.Method != null && EventDispatchers?.TryGetValue(message.Method, out dispatcher) == true)
             {
-                await dispatcher.Dispatch(message.Params).ConfigureAwait(false);
+                Debug.Assert(dispatcher != null);
+
+                dispatcher.Dispatch(message.Params);
             }
+
+            return Task.FromResult(true);
         }
 
         private void AddEventHandlerCore<TEvent>(string name, Func<TEvent, Task> handler)
