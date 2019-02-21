@@ -138,7 +138,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                 case JsonTypes.Boolean:
                     return optional ? "bool?" : "bool";
                 case JsonTypes.Integer:
-                    return optional ? "int?" : "int";
+                    return optional ? "long?" : "long";
                 case JsonTypes.Number:
                     return optional ? "double?" : "double";
                 case JsonTypes.String:

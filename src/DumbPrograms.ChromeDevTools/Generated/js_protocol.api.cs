@@ -493,7 +493,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task SetAsyncCallStackDepth
             (
-                int @maxDepth, 
+                long @maxDepth, 
                 CancellationToken cancellation = default
             )
             {
@@ -619,11 +619,11 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task<Protocol.Debugger.SetBreakpointByUrlResponse> SetBreakpointByUrl
             (
-                int @lineNumber, 
+                long @lineNumber, 
                 string @url = default, 
                 string @urlRegex = default, 
                 string @scriptHash = default, 
-                int? @columnNumber = default, 
+                long? @columnNumber = default, 
                 string @condition = default, 
                 CancellationToken cancellation = default
             )
@@ -821,7 +821,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task SetVariableValue
             (
-                int @scopeNumber, 
+                long @scopeNumber, 
                 string @variableName, 
                 Protocol.Runtime.CallArgument @newValue, 
                 Protocol.Debugger.CallFrameId @callFrameId, 
@@ -1359,7 +1359,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task SetSamplingInterval
             (
-                int @interval, 
+                long @interval, 
                 CancellationToken cancellation = default
             )
             {
@@ -2103,7 +2103,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task SetAsyncCallStackDepth
             (
-                int @maxDepth, 
+                long @maxDepth, 
                 CancellationToken cancellation = default
             )
             {
@@ -2139,7 +2139,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="size" />
             public Task SetMaxCallStackSizeToCapture
             (
-                int @size, 
+                long @size, 
                 CancellationToken cancellation = default
             )
             {

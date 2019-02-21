@@ -47,13 +47,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Line number in the resource that generated this message (1-based).
             /// </summary>
             [JsonProperty("line")]
-            public int? Line { get; set; }
+            public long? Line { get; set; }
 
             /// <summary>
             /// Optional. Column number in the resource that generated this message (1-based).
             /// </summary>
             [JsonProperty("column")]
-            public int? Column { get; set; }
+            public long? Column { get; set; }
         }
 
         #endregion
@@ -147,13 +147,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Line number in the script (0-based).
             /// </summary>
             [JsonProperty("lineNumber")]
-            public int LineNumber { get; set; }
+            public long LineNumber { get; set; }
 
             /// <summary>
             /// Optional. Column number in the script (0-based).
             /// </summary>
             [JsonProperty("columnNumber")]
-            public int? ColumnNumber { get; set; }
+            public long? ColumnNumber { get; set; }
         }
 
         /// <summary>
@@ -163,10 +163,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
 
             [JsonProperty("lineNumber")]
-            public int LineNumber { get; set; }
+            public long LineNumber { get; set; }
 
             [JsonProperty("columnNumber")]
-            public int ColumnNumber { get; set; }
+            public long ColumnNumber { get; set; }
         }
 
         /// <summary>
@@ -295,13 +295,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Line number in the script (0-based).
             /// </summary>
             [JsonProperty("lineNumber")]
-            public int LineNumber { get; set; }
+            public long LineNumber { get; set; }
 
             /// <summary>
             /// Optional. Column number in the script (0-based).
             /// </summary>
             [JsonProperty("columnNumber")]
-            public int? ColumnNumber { get; set; }
+            public long? ColumnNumber { get; set; }
 
             /// <summary>
             /// Optional. 
@@ -650,7 +650,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// call stacks (default).
             /// </summary>
             [JsonProperty("maxDepth")]
-            public int MaxDepth { get; set; }
+            public long MaxDepth { get; set; }
         }
 
         /// <summary>
@@ -740,7 +740,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Line number to set breakpoint at.
             /// </summary>
             [JsonProperty("lineNumber")]
-            public int LineNumber { get; set; }
+            public long LineNumber { get; set; }
 
             /// <summary>
             /// Optional. URL of the resources to set breakpoint on.
@@ -765,7 +765,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Offset in the line to set breakpoint at.
             /// </summary>
             [JsonProperty("columnNumber")]
-            public int? ColumnNumber { get; set; }
+            public long? ColumnNumber { get; set; }
 
             /// <summary>
             /// Optional. Expression to use as a breakpoint condition. When specified, debugger will only stop on the
@@ -955,7 +955,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// scope types are allowed. Other scopes could be manipulated manually.
             /// </summary>
             [JsonProperty("scopeNumber")]
-            public int ScopeNumber { get; set; }
+            public long ScopeNumber { get; set; }
 
             /// <summary>
             /// Variable name.
@@ -1113,25 +1113,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Line offset of the script within the resource with given URL (for script tags).
             /// </summary>
             [JsonProperty("startLine")]
-            public int StartLine { get; set; }
+            public long StartLine { get; set; }
 
             /// <summary>
             /// Column offset of the script within the resource with given URL.
             /// </summary>
             [JsonProperty("startColumn")]
-            public int StartColumn { get; set; }
+            public long StartColumn { get; set; }
 
             /// <summary>
             /// Last line of the script.
             /// </summary>
             [JsonProperty("endLine")]
-            public int EndLine { get; set; }
+            public long EndLine { get; set; }
 
             /// <summary>
             /// Length of the last line of the script.
             /// </summary>
             [JsonProperty("endColumn")]
-            public int EndColumn { get; set; }
+            public long EndColumn { get; set; }
 
             /// <summary>
             /// Specifies script creation context.
@@ -1173,7 +1173,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. This script length.
             /// </summary>
             [JsonProperty("length")]
-            public int? Length { get; set; }
+            public long? Length { get; set; }
 
             /// <summary>
             /// Optional. JavaScript top stack frame of where the script parsed event was triggered if available.
@@ -1206,25 +1206,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Line offset of the script within the resource with given URL (for script tags).
             /// </summary>
             [JsonProperty("startLine")]
-            public int StartLine { get; set; }
+            public long StartLine { get; set; }
 
             /// <summary>
             /// Column offset of the script within the resource with given URL.
             /// </summary>
             [JsonProperty("startColumn")]
-            public int StartColumn { get; set; }
+            public long StartColumn { get; set; }
 
             /// <summary>
             /// Last line of the script.
             /// </summary>
             [JsonProperty("endLine")]
-            public int EndLine { get; set; }
+            public long EndLine { get; set; }
 
             /// <summary>
             /// Length of the last line of the script.
             /// </summary>
             [JsonProperty("endColumn")]
-            public int EndColumn { get; set; }
+            public long EndColumn { get; set; }
 
             /// <summary>
             /// Specifies script creation context.
@@ -1272,7 +1272,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. This script length.
             /// </summary>
             [JsonProperty("length")]
-            public int? Length { get; set; }
+            public long? Length { get; set; }
 
             /// <summary>
             /// Optional. JavaScript top stack frame of where the script parsed event was triggered if available.
@@ -1319,7 +1319,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Node id. Ids are unique across all profiles collected between startSampling and stopSampling.
             /// </summary>
             [JsonProperty("id")]
-            public int Id { get; set; }
+            public long Id { get; set; }
 
             /// <summary>
             /// Child nodes.
@@ -1344,7 +1344,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Id of the corresponding profile tree node.
             /// </summary>
             [JsonProperty("nodeId")]
-            public int NodeId { get; set; }
+            public long NodeId { get; set; }
 
             /// <summary>
             /// Time-ordered sample ordinal number. It is unique across all profiles retrieved
@@ -1547,7 +1547,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// a total size of the objects for the fragment.
             /// </summary>
             [JsonProperty("statsUpdate")]
-            public int[] StatsUpdate { get; set; }
+            public long[] StatsUpdate { get; set; }
         }
 
         /// <summary>
@@ -1560,7 +1560,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
 
             [JsonProperty("lastSeenObjectId")]
-            public int LastSeenObjectId { get; set; }
+            public long LastSeenObjectId { get; set; }
 
             [JsonProperty("timestamp")]
             public double Timestamp { get; set; }
@@ -1571,10 +1571,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
 
             [JsonProperty("done")]
-            public int Done { get; set; }
+            public long Done { get; set; }
 
             [JsonProperty("total")]
-            public int Total { get; set; }
+            public long Total { get; set; }
 
             /// <summary>
             /// Optional. 
@@ -1606,7 +1606,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Unique id of the node.
             /// </summary>
             [JsonProperty("id")]
-            public int Id { get; set; }
+            public long Id { get; set; }
 
             /// <summary>
             /// Function location.
@@ -1618,13 +1618,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Number of samples where this node was on top of the call stack.
             /// </summary>
             [JsonProperty("hitCount")]
-            public int? HitCount { get; set; }
+            public long? HitCount { get; set; }
 
             /// <summary>
             /// Optional. Child node ids.
             /// </summary>
             [JsonProperty("children")]
-            public int[] Children { get; set; }
+            public long[] Children { get; set; }
 
             /// <summary>
             /// Optional. The reason of being not optimized. The function may be deoptimized or marked as don't
@@ -1668,14 +1668,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Ids of samples top nodes.
             /// </summary>
             [JsonProperty("samples")]
-            public int[] Samples { get; set; }
+            public long[] Samples { get; set; }
 
             /// <summary>
             /// Optional. Time intervals between adjacent samples in microseconds. The first delta is relative to the
             /// profile startTime.
             /// </summary>
             [JsonProperty("timeDeltas")]
-            public int[] TimeDeltas { get; set; }
+            public long[] TimeDeltas { get; set; }
         }
 
         /// <summary>
@@ -1688,13 +1688,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Source line number (1-based).
             /// </summary>
             [JsonProperty("line")]
-            public int Line { get; set; }
+            public long Line { get; set; }
 
             /// <summary>
             /// Number of samples attributed to the source line.
             /// </summary>
             [JsonProperty("ticks")]
-            public int Ticks { get; set; }
+            public long Ticks { get; set; }
         }
 
         /// <summary>
@@ -1707,19 +1707,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// JavaScript script source offset for the range start.
             /// </summary>
             [JsonProperty("startOffset")]
-            public int StartOffset { get; set; }
+            public long StartOffset { get; set; }
 
             /// <summary>
             /// JavaScript script source offset for the range end.
             /// </summary>
             [JsonProperty("endOffset")]
-            public int EndOffset { get; set; }
+            public long EndOffset { get; set; }
 
             /// <summary>
             /// Collected execution count of the source range.
             /// </summary>
             [JsonProperty("count")]
-            public int Count { get; set; }
+            public long Count { get; set; }
         }
 
         /// <summary>
@@ -1795,7 +1795,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Source offset of the parameter or end of function for return values.
             /// </summary>
             [JsonProperty("offset")]
-            public int Offset { get; set; }
+            public long Offset { get; set; }
 
             /// <summary>
             /// The types for this parameter or return value.
@@ -1873,7 +1873,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// New sampling interval in microseconds.
             /// </summary>
             [JsonProperty("interval")]
-            public int Interval { get; set; }
+            public long Interval { get; set; }
         }
 
         public class StartCommand : ICommand<VoidResponse>
@@ -2363,8 +2363,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Id of an execution context.
         /// </summary>
-        [JsonConverter(typeof(JSAliasConverter<ExecutionContextId, int>))]
-        public class ExecutionContextId : JSAlias<int>
+        [JsonConverter(typeof(JSAliasConverter<ExecutionContextId, long>))]
+        public class ExecutionContextId : JSAlias<long>
         {
         }
 
@@ -2411,7 +2411,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Exception id.
             /// </summary>
             [JsonProperty("exceptionId")]
-            public int ExceptionId { get; set; }
+            public long ExceptionId { get; set; }
 
             /// <summary>
             /// Exception text, which should be used together with exception object when available.
@@ -2423,13 +2423,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Line number of the exception location (0-based).
             /// </summary>
             [JsonProperty("lineNumber")]
-            public int LineNumber { get; set; }
+            public long LineNumber { get; set; }
 
             /// <summary>
             /// Column number of the exception location (0-based).
             /// </summary>
             [JsonProperty("columnNumber")]
-            public int ColumnNumber { get; set; }
+            public long ColumnNumber { get; set; }
 
             /// <summary>
             /// Optional. Script ID of the exception location.
@@ -2506,13 +2506,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// JavaScript script line number (0-based).
             /// </summary>
             [JsonProperty("lineNumber")]
-            public int LineNumber { get; set; }
+            public long LineNumber { get; set; }
 
             /// <summary>
             /// JavaScript script column number (0-based).
             /// </summary>
             [JsonProperty("columnNumber")]
-            public int ColumnNumber { get; set; }
+            public long ColumnNumber { get; set; }
         }
 
         /// <summary>
@@ -3148,7 +3148,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// call stacks (default).
             /// </summary>
             [JsonProperty("maxDepth")]
-            public int MaxDepth { get; set; }
+            public long MaxDepth { get; set; }
         }
 
         public class SetCustomObjectFormatterEnabledCommand : ICommand<VoidResponse>
@@ -3164,7 +3164,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Runtime.setMaxCallStackSizeToCapture";
 
             [JsonProperty("size")]
-            public int Size { get; set; }
+            public long Size { get; set; }
         }
 
         /// <summary>
@@ -3299,7 +3299,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The id of revoked exception, as reported in `exceptionThrown`.
             /// </summary>
             [JsonProperty("exceptionId")]
-            public int ExceptionId { get; set; }
+            public long ExceptionId { get; set; }
         }
 
         /// <summary>

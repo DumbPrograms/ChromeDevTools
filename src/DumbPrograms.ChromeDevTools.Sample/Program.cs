@@ -35,10 +35,16 @@ namespace DumbPrograms.ChromeDevTools.Sample
                 {
                     await inspector.Page.Enable();
 
-                    Console.WriteLine("Click some links several times..");
-
                     var i = 0;
-                    await inspector.Page.LoadEventFiredEvent(_ => Task.FromResult(++i > 2));
+                    await inspector.Page.LoadEventFiredEvent(async _ =>
+                    {
+                        var doc = await inspector.DOM.GetDocument();
+                        var title = await inspector.DOM.QuerySelector(doc.Root.NodeId, "title");
+                        var html = await inspector.DOM.GetOuterHTML(title.NodeId);
+                        Console.WriteLine(html.OuterHTML);
+
+                        return true;
+                    });
 
                     Console.WriteLine(i);
                 }

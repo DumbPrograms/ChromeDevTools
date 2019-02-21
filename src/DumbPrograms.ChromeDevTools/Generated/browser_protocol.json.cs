@@ -832,7 +832,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Resource size.
             /// </summary>
             [JsonProperty("size")]
-            public int Size { get; set; }
+            public long Size { get; set; }
 
             /// <summary>
             /// Resource type.
@@ -900,7 +900,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Application cache status.
             /// </summary>
             [JsonProperty("status")]
-            public int Status { get; set; }
+            public long Status { get; set; }
         }
 
         #endregion
@@ -1007,7 +1007,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Updated application cache status.
             /// </summary>
             [JsonProperty("status")]
-            public int Status { get; set; }
+            public long Status { get; set; }
         }
 
         [Event("ApplicationCache.networkStateUpdated")]
@@ -1075,13 +1075,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Size before re-encoding.
             /// </summary>
             [JsonProperty("originalSize")]
-            public int OriginalSize { get; set; }
+            public long OriginalSize { get; set; }
 
             /// <summary>
             /// Size after re-encoding.
             /// </summary>
             [JsonProperty("encodedSize")]
-            public int EncodedSize { get; set; }
+            public long EncodedSize { get; set; }
         }
 
         #endregion
@@ -1095,8 +1095,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Types
 
-        [JsonConverter(typeof(JSAliasConverter<WindowID, int>))]
-        public class WindowID : JSAlias<int>
+        [JsonConverter(typeof(JSAliasConverter<WindowID, long>))]
+        public class WindowID : JSAlias<long>
         {
         }
 
@@ -1122,25 +1122,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. The offset from the left edge of the screen to the window in pixels.
             /// </summary>
             [JsonProperty("left")]
-            public int? Left { get; set; }
+            public long? Left { get; set; }
 
             /// <summary>
             /// Optional. The offset from the top edge of the screen to the window in pixels.
             /// </summary>
             [JsonProperty("top")]
-            public int? Top { get; set; }
+            public long? Top { get; set; }
 
             /// <summary>
             /// Optional. The window width in pixels.
             /// </summary>
             [JsonProperty("width")]
-            public int? Width { get; set; }
+            public long? Width { get; set; }
 
             /// <summary>
             /// Optional. The window height in pixels.
             /// </summary>
             [JsonProperty("height")]
-            public int? Height { get; set; }
+            public long? Height { get; set; }
 
             /// <summary>
             /// Optional. The window state. Default to normal.
@@ -1180,19 +1180,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Minimum value (inclusive).
             /// </summary>
             [JsonProperty("low")]
-            public int Low { get; set; }
+            public long Low { get; set; }
 
             /// <summary>
             /// Maximum value (exclusive).
             /// </summary>
             [JsonProperty("high")]
-            public int High { get; set; }
+            public long High { get; set; }
 
             /// <summary>
             /// Number of samples.
             /// </summary>
             [JsonProperty("count")]
-            public int Count { get; set; }
+            public long Count { get; set; }
         }
 
         /// <summary>
@@ -1211,13 +1211,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Sum of sample values.
             /// </summary>
             [JsonProperty("sum")]
-            public int Sum { get; set; }
+            public long Sum { get; set; }
 
             /// <summary>
             /// Total number of samples.
             /// </summary>
             [JsonProperty("count")]
-            public int Count { get; set; }
+            public long Count { get; set; }
 
             /// <summary>
             /// Buckets.
@@ -1589,7 +1589,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Matching selector indices in the rule's selectorList selectors (0-based).
             /// </summary>
             [JsonProperty("matchingSelectors")]
-            public int[] MatchingSelectors { get; set; }
+            public long[] MatchingSelectors { get; set; }
         }
 
         /// <summary>
@@ -1797,25 +1797,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Start line of range.
             /// </summary>
             [JsonProperty("startLine")]
-            public int StartLine { get; set; }
+            public long StartLine { get; set; }
 
             /// <summary>
             /// Start column of range (inclusive).
             /// </summary>
             [JsonProperty("startColumn")]
-            public int StartColumn { get; set; }
+            public long StartColumn { get; set; }
 
             /// <summary>
             /// End line of range
             /// </summary>
             [JsonProperty("endLine")]
-            public int EndLine { get; set; }
+            public long EndLine { get; set; }
 
             /// <summary>
             /// End column of range (exclusive).
             /// </summary>
             [JsonProperty("endColumn")]
-            public int EndColumn { get; set; }
+            public long EndColumn { get; set; }
         }
 
         public class ShorthandEntry
@@ -2846,7 +2846,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// HTTP response status code.
             /// </summary>
             [JsonProperty("responseStatus")]
-            public int ResponseStatus { get; set; }
+            public long ResponseStatus { get; set; }
 
             /// <summary>
             /// HTTP response status text.
@@ -3024,13 +3024,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Number of records to skip.
             /// </summary>
             [JsonProperty("skipCount")]
-            public int SkipCount { get; set; }
+            public long SkipCount { get; set; }
 
             /// <summary>
             /// Number of records to fetch.
             /// </summary>
             [JsonProperty("pageSize")]
-            public int PageSize { get; set; }
+            public long PageSize { get; set; }
 
             /// <summary>
             /// Optional. If present, only return the entries containing this substring in the path
@@ -3175,8 +3175,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Unique DOM node identifier.
         /// </summary>
-        [JsonConverter(typeof(JSAliasConverter<NodeId, int>))]
-        public class NodeId : JSAlias<int>
+        [JsonConverter(typeof(JSAliasConverter<NodeId, long>))]
+        public class NodeId : JSAlias<long>
         {
         }
 
@@ -3184,8 +3184,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// Unique DOM node identifier used to reference a node that may not have been pushed to the
         /// front-end.
         /// </summary>
-        [JsonConverter(typeof(JSAliasConverter<BackendNodeId, int>))]
-        public class BackendNodeId : JSAlias<int>
+        [JsonConverter(typeof(JSAliasConverter<BackendNodeId, long>))]
+        public class BackendNodeId : JSAlias<long>
         {
         }
 
@@ -3199,7 +3199,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// `Node`'s nodeType.
             /// </summary>
             [JsonProperty("nodeType")]
-            public int NodeType { get; set; }
+            public long NodeType { get; set; }
 
             /// <summary>
             /// `Node`'s nodeName.
@@ -3276,7 +3276,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// `Node`'s nodeType.
             /// </summary>
             [JsonProperty("nodeType")]
-            public int NodeType { get; set; }
+            public long NodeType { get; set; }
 
             /// <summary>
             /// `Node`'s nodeName.
@@ -3300,7 +3300,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Child count for `Container` nodes.
             /// </summary>
             [JsonProperty("childNodeCount")]
-            public int? ChildNodeCount { get; set; }
+            public long? ChildNodeCount { get; set; }
 
             /// <summary>
             /// Optional. Child nodes of this node when requested with children.
@@ -3433,19 +3433,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The red component, in the [0-255] range.
             /// </summary>
             [JsonProperty("r")]
-            public int R { get; set; }
+            public long R { get; set; }
 
             /// <summary>
             /// The green component, in the [0-255] range.
             /// </summary>
             [JsonProperty("g")]
-            public int G { get; set; }
+            public long G { get; set; }
 
             /// <summary>
             /// The blue component, in the [0-255] range.
             /// </summary>
             [JsonProperty("b")]
-            public int B { get; set; }
+            public long B { get; set; }
 
             /// <summary>
             /// Optional. The alpha component, in the [0-1] range (default: 1).
@@ -3496,13 +3496,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Node width
             /// </summary>
             [JsonProperty("width")]
-            public int Width { get; set; }
+            public long Width { get; set; }
 
             /// <summary>
             /// Node height
             /// </summary>
             [JsonProperty("height")]
-            public int Height { get; set; }
+            public long Height { get; set; }
 
             /// <summary>
             /// Optional. Shape outside coordinates
@@ -3664,7 +3664,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// entire subtree or provide an integer larger than 0.
             /// </summary>
             [JsonProperty("depth")]
-            public int? Depth { get; set; }
+            public long? Depth { get; set; }
 
             /// <summary>
             /// Optional. Whether or not iframes and shadow roots should be traversed when returning the subtree
@@ -3850,7 +3850,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// entire subtree or provide an integer larger than 0.
             /// </summary>
             [JsonProperty("depth")]
-            public int? Depth { get; set; }
+            public long? Depth { get; set; }
 
             /// <summary>
             /// Optional. Whether or not iframes and shadow roots should be traversed when returning the subtree
@@ -3882,7 +3882,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// entire subtree or provide an integer larger than 0.
             /// </summary>
             [JsonProperty("depth")]
-            public int? Depth { get; set; }
+            public long? Depth { get; set; }
 
             /// <summary>
             /// Optional. Whether or not iframes and shadow roots should be traversed when returning the subtree
@@ -3914,13 +3914,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// X coordinate.
             /// </summary>
             [JsonProperty("x")]
-            public int X { get; set; }
+            public long X { get; set; }
 
             /// <summary>
             /// Y coordinate.
             /// </summary>
             [JsonProperty("y")]
-            public int Y { get; set; }
+            public long Y { get; set; }
 
             /// <summary>
             /// Optional. False to skip to the nearest non-UA shadow root ancestor (default: false).
@@ -4023,13 +4023,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Start index of the search result to be returned.
             /// </summary>
             [JsonProperty("fromIndex")]
-            public int FromIndex { get; set; }
+            public long FromIndex { get; set; }
 
             /// <summary>
             /// End index of the search result to be returned.
             /// </summary>
             [JsonProperty("toIndex")]
-            public int ToIndex { get; set; }
+            public long ToIndex { get; set; }
         }
 
         public class GetSearchResultsResponse
@@ -4145,7 +4145,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Number of search results.
             /// </summary>
             [JsonProperty("resultCount")]
-            public int ResultCount { get; set; }
+            public long ResultCount { get; set; }
         }
 
         /// <summary>
@@ -4319,7 +4319,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// entire subtree or provide an integer larger than 0.
             /// </summary>
             [JsonProperty("depth")]
-            public int? Depth { get; set; }
+            public long? Depth { get; set; }
 
             /// <summary>
             /// Optional. Whether or not iframes and shadow roots should be traversed when returning the sub-tree
@@ -4706,7 +4706,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// New node count.
             /// </summary>
             [JsonProperty("childNodeCount")]
-            public int ChildNodeCount { get; set; }
+            public long ChildNodeCount { get; set; }
         }
 
         /// <summary>
@@ -4961,13 +4961,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Line number in the script (0-based).
             /// </summary>
             [JsonProperty("lineNumber")]
-            public int LineNumber { get; set; }
+            public long LineNumber { get; set; }
 
             /// <summary>
             /// Column number in the script (0-based).
             /// </summary>
             [JsonProperty("columnNumber")]
-            public int ColumnNumber { get; set; }
+            public long ColumnNumber { get; set; }
 
             /// <summary>
             /// Optional. Event handler function value.
@@ -5010,7 +5010,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// entire subtree or provide an integer larger than 0.
             /// </summary>
             [JsonProperty("depth")]
-            public int? Depth { get; set; }
+            public long? Depth { get; set; }
 
             /// <summary>
             /// Optional. Whether or not iframes and shadow roots should be traversed when returning the subtree
@@ -5188,7 +5188,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// `Node`'s nodeType.
             /// </summary>
             [JsonProperty("nodeType")]
-            public int NodeType { get; set; }
+            public long NodeType { get; set; }
 
             /// <summary>
             /// `Node`'s nodeName.
@@ -5237,7 +5237,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// any.
             /// </summary>
             [JsonProperty("childNodeIndexes")]
-            public int[] ChildNodeIndexes { get; set; }
+            public long[] ChildNodeIndexes { get; set; }
 
             /// <summary>
             /// Optional. Attributes of an `Element` node.
@@ -5250,14 +5250,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// `getSnapshot`, if any.
             /// </summary>
             [JsonProperty("pseudoElementIndexes")]
-            public int[] PseudoElementIndexes { get; set; }
+            public long[] PseudoElementIndexes { get; set; }
 
             /// <summary>
             /// Optional. The index of the node's related layout tree node in the `layoutTreeNodes` array returned by
             /// `getSnapshot`, if any.
             /// </summary>
             [JsonProperty("layoutNodeIndex")]
-            public int? LayoutNodeIndex { get; set; }
+            public long? LayoutNodeIndex { get; set; }
 
             /// <summary>
             /// Optional. Document URL that `Document` or `FrameOwner` node points to.
@@ -5306,7 +5306,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// `getSnapshot`, if any.
             /// </summary>
             [JsonProperty("contentDocumentIndex")]
-            public int? ContentDocumentIndex { get; set; }
+            public long? ContentDocumentIndex { get; set; }
 
             /// <summary>
             /// Optional. Type of a pseudo element node.
@@ -5377,14 +5377,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// would be represented as a surrogate pair in UTF-16 have length 2.
             /// </summary>
             [JsonProperty("startCharacterIndex")]
-            public int StartCharacterIndex { get; set; }
+            public long StartCharacterIndex { get; set; }
 
             /// <summary>
             /// The number of characters in this post layout textbox substring. Characters that would be
             /// represented as a surrogate pair in UTF-16 have length 2.
             /// </summary>
             [JsonProperty("numCharacters")]
-            public int NumCharacters { get; set; }
+            public long NumCharacters { get; set; }
         }
 
         /// <summary>
@@ -5397,7 +5397,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The index of the related DOM node in the `domNodes` array returned by `getSnapshot`.
             /// </summary>
             [JsonProperty("domNodeIndex")]
-            public int DomNodeIndex { get; set; }
+            public long DomNodeIndex { get; set; }
 
             /// <summary>
             /// The bounding box in document coordinates. Note that scroll offset of the document is ignored.
@@ -5421,7 +5421,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Index into the `computedStyles` array returned by `getSnapshot`.
             /// </summary>
             [JsonProperty("styleIndex")]
-            public int? StyleIndex { get; set; }
+            public long? StyleIndex { get; set; }
 
             /// <summary>
             /// Optional. Global paint order index, which is determined by the stacking order of the nodes. Nodes
@@ -5429,7 +5429,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// getSnapshot was true.
             /// </summary>
             [JsonProperty("paintOrder")]
-            public int? PaintOrder { get; set; }
+            public long? PaintOrder { get; set; }
 
             /// <summary>
             /// Optional. Set to true to indicate the element begins a new stacking context.
@@ -5473,8 +5473,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// Index of the string in the strings table.
         /// </summary>
-        [JsonConverter(typeof(JSAliasConverter<StringIndex, int>))]
-        public class StringIndex : JSAlias<int>
+        [JsonConverter(typeof(JSAliasConverter<StringIndex, long>))]
+        public class StringIndex : JSAlias<long>
         {
         }
 
@@ -5493,7 +5493,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
 
             [JsonProperty("index")]
-            public int[] Index { get; set; }
+            public long[] Index { get; set; }
 
             [JsonProperty("value")]
             public StringIndex[] Value { get; set; }
@@ -5503,17 +5503,17 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
 
             [JsonProperty("index")]
-            public int[] Index { get; set; }
+            public long[] Index { get; set; }
         }
 
         public class RareIntegerData
         {
 
             [JsonProperty("index")]
-            public int[] Index { get; set; }
+            public long[] Index { get; set; }
 
             [JsonProperty("value")]
-            public int[] Value { get; set; }
+            public long[] Value { get; set; }
         }
 
         [JsonConverter(typeof(JSAliasConverter<Rectangle, double[]>))]
@@ -5610,13 +5610,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Parent node index.
             /// </summary>
             [JsonProperty("parentIndex")]
-            public int[] ParentIndex { get; set; }
+            public long[] ParentIndex { get; set; }
 
             /// <summary>
             /// Optional. `Node`'s nodeType.
             /// </summary>
             [JsonProperty("nodeType")]
-            public int[] NodeType { get; set; }
+            public long[] NodeType { get; set; }
 
             /// <summary>
             /// Optional. `Node`'s nodeName.
@@ -5709,7 +5709,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The index of the related DOM node in the `domNodes` array returned by `getSnapshot`.
             /// </summary>
             [JsonProperty("nodeIndex")]
-            public int[] NodeIndex { get; set; }
+            public long[] NodeIndex { get; set; }
 
             /// <summary>
             /// Index into the `computedStyles` array returned by `captureSnapshot`.
@@ -5747,7 +5747,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Intex of th elayout tree node that owns this box collection.
             /// </summary>
             [JsonProperty("layoutIndex")]
-            public int[] LayoutIndex { get; set; }
+            public long[] LayoutIndex { get; set; }
 
             /// <summary>
             /// The absolute position bounding box.
@@ -5760,14 +5760,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// would be represented as a surrogate pair in UTF-16 have length 2.
             /// </summary>
             [JsonProperty("start")]
-            public int[] Start { get; set; }
+            public long[] Start { get; set; }
 
             /// <summary>
             /// The number of characters in this post layout textbox substring. Characters that would be
             /// represented as a surrogate pair in UTF-16 have length 2.
             /// </summary>
             [JsonProperty("length")]
-            public int[] Length { get; set; }
+            public long[] Length { get; set; }
         }
 
         #endregion
@@ -6104,7 +6104,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Error code.
             /// </summary>
             [JsonProperty("code")]
-            public int Code { get; set; }
+            public long Code { get; set; }
         }
 
         #endregion
@@ -6256,7 +6256,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Orientation angle.
             /// </summary>
             [JsonProperty("angle")]
-            public int Angle { get; set; }
+            public long Angle { get; set; }
         }
 
         /// <summary>
@@ -6376,13 +6376,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Overriding width value in pixels (minimum 0, maximum 10000000). 0 disables the override.
             /// </summary>
             [JsonProperty("width")]
-            public int Width { get; set; }
+            public long Width { get; set; }
 
             /// <summary>
             /// Overriding height value in pixels (minimum 0, maximum 10000000). 0 disables the override.
             /// </summary>
             [JsonProperty("height")]
-            public int Height { get; set; }
+            public long Height { get; set; }
 
             /// <summary>
             /// Overriding device scale factor value. 0 disables the override.
@@ -6407,25 +6407,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Overriding screen width value in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("screenWidth")]
-            public int? ScreenWidth { get; set; }
+            public long? ScreenWidth { get; set; }
 
             /// <summary>
             /// Optional. Overriding screen height value in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("screenHeight")]
-            public int? ScreenHeight { get; set; }
+            public long? ScreenHeight { get; set; }
 
             /// <summary>
             /// Optional. Overriding view X position on screen in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("positionX")]
-            public int? PositionX { get; set; }
+            public long? PositionX { get; set; }
 
             /// <summary>
             /// Optional. Overriding view Y position on screen in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("positionY")]
-            public int? PositionY { get; set; }
+            public long? PositionY { get; set; }
 
             /// <summary>
             /// Optional. Do not set visible view size, rely upon explicit setVisibleSize call.
@@ -6587,7 +6587,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Maximum touch points supported. Defaults to one.
             /// </summary>
             [JsonProperty("maxTouchPoints")]
-            public int? MaxTouchPoints { get; set; }
+            public long? MaxTouchPoints { get; set; }
         }
 
         /// <summary>
@@ -6613,7 +6613,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// forwards to prevent deadlock.
             /// </summary>
             [JsonProperty("maxVirtualTimeTaskStarvationCount")]
-            public int? MaxVirtualTimeTaskStarvationCount { get; set; }
+            public long? MaxVirtualTimeTaskStarvationCount { get; set; }
 
             /// <summary>
             /// Optional. If set the virtual time policy change should be deferred until any frame starts navigating.
@@ -6653,13 +6653,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Frame width (DIP).
             /// </summary>
             [JsonProperty("width")]
-            public int Width { get; set; }
+            public long Width { get; set; }
 
             /// <summary>
             /// Frame height (DIP).
             /// </summary>
             [JsonProperty("height")]
-            public int Height { get; set; }
+            public long Height { get; set; }
         }
 
         /// <summary>
@@ -6757,7 +6757,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Compression quality from range [0..100] (jpeg only).
             /// </summary>
             [JsonProperty("quality")]
-            public int? Quality { get; set; }
+            public long? Quality { get; set; }
         }
 
         #endregion
@@ -6912,13 +6912,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// following the last read). Some types of streams may only support sequential reads.
             /// </summary>
             [JsonProperty("offset")]
-            public int? Offset { get; set; }
+            public long? Offset { get; set; }
 
             /// <summary>
             /// Optional. Maximum number of bytes to read (left upon the agent discretion if not specified).
             /// </summary>
             [JsonProperty("size")]
-            public int? Size { get; set; }
+            public long? Size { get; set; }
         }
 
         public class ReadResponse
@@ -7305,13 +7305,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Number of records to skip.
             /// </summary>
             [JsonProperty("skipCount")]
-            public int SkipCount { get; set; }
+            public long SkipCount { get; set; }
 
             /// <summary>
             /// Number of records to fetch.
             /// </summary>
             [JsonProperty("pageSize")]
-            public int PageSize { get; set; }
+            public long PageSize { get; set; }
 
             /// <summary>
             /// Optional. Key range.
@@ -7483,7 +7483,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// (default: 0).
             /// </summary>
             [JsonProperty("modifiers")]
-            public int? Modifiers { get; set; }
+            public long? Modifiers { get; set; }
 
             /// <summary>
             /// Optional. Time at which the event occurred.
@@ -7528,13 +7528,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Windows virtual key code (default: 0).
             /// </summary>
             [JsonProperty("windowsVirtualKeyCode")]
-            public int? WindowsVirtualKeyCode { get; set; }
+            public long? WindowsVirtualKeyCode { get; set; }
 
             /// <summary>
             /// Optional. Native virtual key code (default: 0).
             /// </summary>
             [JsonProperty("nativeVirtualKeyCode")]
-            public int? NativeVirtualKeyCode { get; set; }
+            public long? NativeVirtualKeyCode { get; set; }
 
             /// <summary>
             /// Optional. Whether the event was generated from auto repeat (default: false).
@@ -7559,7 +7559,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// 0).
             /// </summary>
             [JsonProperty("location")]
-            public int? Location { get; set; }
+            public long? Location { get; set; }
         }
 
         /// <summary>
@@ -7608,7 +7608,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// (default: 0).
             /// </summary>
             [JsonProperty("modifiers")]
-            public int? Modifiers { get; set; }
+            public long? Modifiers { get; set; }
 
             /// <summary>
             /// Optional. Time at which the event occurred.
@@ -7627,13 +7627,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Left=1, Right=2, Middle=4, Back=8, Forward=16, None=0.
             /// </summary>
             [JsonProperty("buttons")]
-            public int? Buttons { get; set; }
+            public long? Buttons { get; set; }
 
             /// <summary>
             /// Optional. Number of times the mouse button was clicked (default: 0).
             /// </summary>
             [JsonProperty("clickCount")]
-            public int? ClickCount { get; set; }
+            public long? ClickCount { get; set; }
 
             /// <summary>
             /// Optional. X delta in CSS pixels for mouse wheel event (default: 0).
@@ -7681,7 +7681,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// (default: 0).
             /// </summary>
             [JsonProperty("modifiers")]
-            public int? Modifiers { get; set; }
+            public long? Modifiers { get; set; }
 
             /// <summary>
             /// Optional. Time at which the event occurred.
@@ -7707,13 +7707,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// X coordinate of the mouse pointer in DIP.
             /// </summary>
             [JsonProperty("x")]
-            public int X { get; set; }
+            public long X { get; set; }
 
             /// <summary>
             /// Y coordinate of the mouse pointer in DIP.
             /// </summary>
             [JsonProperty("y")]
-            public int Y { get; set; }
+            public long Y { get; set; }
 
             /// <summary>
             /// Mouse button.
@@ -7744,13 +7744,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// (default: 0).
             /// </summary>
             [JsonProperty("modifiers")]
-            public int? Modifiers { get; set; }
+            public long? Modifiers { get; set; }
 
             /// <summary>
             /// Optional. Number of times the mouse button was clicked (default: 0).
             /// </summary>
             [JsonProperty("clickCount")]
-            public int? ClickCount { get; set; }
+            public long? ClickCount { get; set; }
         }
 
         /// <summary>
@@ -7796,7 +7796,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Relative pointer speed in pixels per second (default: 800).
             /// </summary>
             [JsonProperty("relativeSpeed")]
-            public int? RelativeSpeed { get; set; }
+            public long? RelativeSpeed { get; set; }
 
             /// <summary>
             /// Optional. Which type of input events to be generated (default: 'default', which queries the platform
@@ -7861,7 +7861,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Swipe speed in pixels per second (default: 800).
             /// </summary>
             [JsonProperty("speed")]
-            public int? Speed { get; set; }
+            public long? Speed { get; set; }
 
             /// <summary>
             /// Optional. Which type of input events to be generated (default: 'default', which queries the platform
@@ -7874,13 +7874,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. The number of times to repeat the gesture (default: 0).
             /// </summary>
             [JsonProperty("repeatCount")]
-            public int? RepeatCount { get; set; }
+            public long? RepeatCount { get; set; }
 
             /// <summary>
             /// Optional. The number of milliseconds delay between each repeat. (default: 250).
             /// </summary>
             [JsonProperty("repeatDelayMs")]
-            public int? RepeatDelayMs { get; set; }
+            public long? RepeatDelayMs { get; set; }
 
             /// <summary>
             /// Optional. The name of the interaction markers to generate, if not empty (default: "").
@@ -7912,13 +7912,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Duration between touchdown and touchup events in ms (default: 50).
             /// </summary>
             [JsonProperty("duration")]
-            public int? Duration { get; set; }
+            public long? Duration { get; set; }
 
             /// <summary>
             /// Optional. Number of times to perform the tap (e.g. 2 for double tap, default: 1).
             /// </summary>
             [JsonProperty("tapCount")]
-            public int? TapCount { get; set; }
+            public long? TapCount { get; set; }
 
             /// <summary>
             /// Optional. Which type of input events to be generated (default: 'default', which queries the platform
@@ -8161,7 +8161,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Indicates how many time this layer has painted.
             /// </summary>
             [JsonProperty("paintCount")]
-            public int PaintCount { get; set; }
+            public long PaintCount { get; set; }
 
             /// <summary>
             /// Indicates whether this layer hosts any content, rather than being used for
@@ -8303,7 +8303,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. The maximum number of times to replay the snapshot (1, if not specified).
             /// </summary>
             [JsonProperty("minRepeatCount")]
-            public int? MinRepeatCount { get; set; }
+            public long? MinRepeatCount { get; set; }
 
             /// <summary>
             /// Optional. The minimum duration (in seconds) to replay the snapshot.
@@ -8359,13 +8359,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. The first step to replay from (replay from the very start if not specified).
             /// </summary>
             [JsonProperty("fromStep")]
-            public int? FromStep { get; set; }
+            public long? FromStep { get; set; }
 
             /// <summary>
             /// Optional. The last step to replay to (replay till the end if not specified).
             /// </summary>
             [JsonProperty("toStep")]
-            public int? ToStep { get; set; }
+            public long? ToStep { get; set; }
 
             /// <summary>
             /// Optional. The scale to apply while replaying (defaults to 1).
@@ -8491,7 +8491,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Line number in the resource.
             /// </summary>
             [JsonProperty("lineNumber")]
-            public int? LineNumber { get; set; }
+            public long? LineNumber { get; set; }
 
             /// <summary>
             /// Optional. JavaScript stack trace.
@@ -8707,13 +8707,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
 
             [JsonProperty("documents")]
-            public int Documents { get; set; }
+            public long Documents { get; set; }
 
             [JsonProperty("nodes")]
-            public int Nodes { get; set; }
+            public long Nodes { get; set; }
 
             [JsonProperty("jsEventListeners")]
-            public int JsEventListeners { get; set; }
+            public long JsEventListeners { get; set; }
         }
 
         public class PrepareForLeakDetectionCommand : ICommand<VoidResponse>
@@ -8760,7 +8760,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Average number of bytes between samples.
             /// </summary>
             [JsonProperty("samplingInterval")]
-            public int? SamplingInterval { get; set; }
+            public long? SamplingInterval { get; set; }
 
             /// <summary>
             /// Optional. Do not randomize intervals between samples.
@@ -9325,7 +9325,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// HTTP response status code.
             /// </summary>
             [JsonProperty("status")]
-            public int Status { get; set; }
+            public long Status { get; set; }
 
             /// <summary>
             /// HTTP response status text.
@@ -9385,7 +9385,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Remote port.
             /// </summary>
             [JsonProperty("remotePort")]
-            public int? RemotePort { get; set; }
+            public long? RemotePort { get; set; }
 
             /// <summary>
             /// Optional. Specifies that the request was served from the disk cache.
@@ -9453,7 +9453,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// HTTP response status code.
             /// </summary>
             [JsonProperty("status")]
-            public int Status { get; set; }
+            public long Status { get; set; }
 
             /// <summary>
             /// HTTP response status text.
@@ -9616,7 +9616,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Cookie size.
             /// </summary>
             [JsonProperty("size")]
-            public int Size { get; set; }
+            public long Size { get; set; }
 
             /// <summary>
             /// True if cookie is http-only.
@@ -9849,13 +9849,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Signed exchange signature date.
             /// </summary>
             [JsonProperty("date")]
-            public int Date { get; set; }
+            public long Date { get; set; }
 
             /// <summary>
             /// Signed exchange signature expires.
             /// </summary>
             [JsonProperty("expires")]
-            public int Expires { get; set; }
+            public long Expires { get; set; }
 
             /// <summary>
             /// Optional. The encoded certificates.
@@ -9887,7 +9887,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Signed exchange response code.
             /// </summary>
             [JsonProperty("responseCode")]
-            public int ResponseCode { get; set; }
+            public long ResponseCode { get; set; }
 
             /// <summary>
             /// Signed exchange response headers.
@@ -9932,7 +9932,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. The index of the signature which caused the error.
             /// </summary>
             [JsonProperty("signatureIndex")]
-            public int? SignatureIndex { get; set; }
+            public long? SignatureIndex { get; set; }
 
             /// <summary>
             /// Optional. The field which caused the error.
@@ -10201,19 +10201,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Buffer size in bytes to use when preserving network payloads (XHRs, etc).
             /// </summary>
             [JsonProperty("maxTotalBufferSize")]
-            public int? MaxTotalBufferSize { get; set; }
+            public long? MaxTotalBufferSize { get; set; }
 
             /// <summary>
             /// Optional. Per-resource buffer size in bytes to use when preserving network payloads (XHRs, etc).
             /// </summary>
             [JsonProperty("maxResourceBufferSize")]
-            public int? MaxResourceBufferSize { get; set; }
+            public long? MaxResourceBufferSize { get; set; }
 
             /// <summary>
             /// Optional. Longest post body size (in bytes) that would be included in requestWillBeSent notification
             /// </summary>
             [JsonProperty("maxPostDataSize")]
-            public int? MaxPostDataSize { get; set; }
+            public long? MaxPostDataSize { get; set; }
         }
 
         /// <summary>
@@ -10584,13 +10584,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Maximum total buffer size.
             /// </summary>
             [JsonProperty("maxTotalSize")]
-            public int MaxTotalSize { get; set; }
+            public long MaxTotalSize { get; set; }
 
             /// <summary>
             /// Maximum per-resource size.
             /// </summary>
             [JsonProperty("maxResourceSize")]
-            public int MaxResourceSize { get; set; }
+            public long MaxResourceSize { get; set; }
         }
 
         /// <summary>
@@ -10675,13 +10675,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Data chunk length.
             /// </summary>
             [JsonProperty("dataLength")]
-            public int DataLength { get; set; }
+            public long DataLength { get; set; }
 
             /// <summary>
             /// Actual bytes received (might be less than dataLength for compressed encodings).
             /// </summary>
             [JsonProperty("encodedDataLength")]
-            public int EncodedDataLength { get; set; }
+            public long EncodedDataLength { get; set; }
         }
 
         /// <summary>
@@ -10868,7 +10868,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// request or auth retry occurred.
             /// </summary>
             [JsonProperty("responseStatusCode")]
-            public int? ResponseStatusCode { get; set; }
+            public long? ResponseStatusCode { get; set; }
 
             /// <summary>
             /// Optional. Response headers if intercepted at the response stage or if redirect occurred while
@@ -11490,25 +11490,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// X coordinate
             /// </summary>
             [JsonProperty("x")]
-            public int X { get; set; }
+            public long X { get; set; }
 
             /// <summary>
             /// Y coordinate
             /// </summary>
             [JsonProperty("y")]
-            public int Y { get; set; }
+            public long Y { get; set; }
 
             /// <summary>
             /// Rectangle width
             /// </summary>
             [JsonProperty("width")]
-            public int Width { get; set; }
+            public long Width { get; set; }
 
             /// <summary>
             /// Rectangle height
             /// </summary>
             [JsonProperty("height")]
-            public int Height { get; set; }
+            public long Height { get; set; }
 
             /// <summary>
             /// Optional. The highlight fill color (default: transparent).
@@ -11901,7 +11901,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Unique id of the navigation history entry.
             /// </summary>
             [JsonProperty("id")]
-            public int Id { get; set; }
+            public long Id { get; set; }
 
             /// <summary>
             /// URL of the navigation history entry.
@@ -12005,19 +12005,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// If criticial, this is a non-recoverable parse error.
             /// </summary>
             [JsonProperty("critical")]
-            public int Critical { get; set; }
+            public long Critical { get; set; }
 
             /// <summary>
             /// Error line.
             /// </summary>
             [JsonProperty("line")]
-            public int Line { get; set; }
+            public long Line { get; set; }
 
             /// <summary>
             /// Error column.
             /// </summary>
             [JsonProperty("column")]
-            public int Column { get; set; }
+            public long Column { get; set; }
         }
 
         /// <summary>
@@ -12030,25 +12030,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Horizontal offset relative to the document (CSS pixels).
             /// </summary>
             [JsonProperty("pageX")]
-            public int PageX { get; set; }
+            public long PageX { get; set; }
 
             /// <summary>
             /// Vertical offset relative to the document (CSS pixels).
             /// </summary>
             [JsonProperty("pageY")]
-            public int PageY { get; set; }
+            public long PageY { get; set; }
 
             /// <summary>
             /// Width (CSS pixels), excludes scrollbar if present.
             /// </summary>
             [JsonProperty("clientWidth")]
-            public int ClientWidth { get; set; }
+            public long ClientWidth { get; set; }
 
             /// <summary>
             /// Height (CSS pixels), excludes scrollbar if present.
             /// </summary>
             [JsonProperty("clientHeight")]
-            public int ClientHeight { get; set; }
+            public long ClientHeight { get; set; }
         }
 
         /// <summary>
@@ -12202,13 +12202,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Default standard font size.
             /// </summary>
             [JsonProperty("standard")]
-            public int? Standard { get; set; }
+            public long? Standard { get; set; }
 
             /// <summary>
             /// Optional. Default fixed font size.
             /// </summary>
             [JsonProperty("fixed")]
-            public int? Fixed { get; set; }
+            public long? Fixed { get; set; }
         }
 
         #endregion
@@ -12291,7 +12291,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Compression quality from range [0..100] (jpeg only).
             /// </summary>
             [JsonProperty("quality")]
-            public int? Quality { get; set; }
+            public long? Quality { get; set; }
 
             /// <summary>
             /// Optional. Capture the screenshot of a given region only.
@@ -12549,7 +12549,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Index of the current navigation history entry.
             /// </summary>
             [JsonProperty("currentIndex")]
-            public int CurrentIndex { get; set; }
+            public long CurrentIndex { get; set; }
 
             /// <summary>
             /// Array of navigation history entries.
@@ -12706,7 +12706,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Unique id of the entry to navigate to.
             /// </summary>
             [JsonProperty("entryId")]
-            public int EntryId { get; set; }
+            public long EntryId { get; set; }
         }
 
         /// <summary>
@@ -12883,7 +12883,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Frame number.
             /// </summary>
             [JsonProperty("sessionId")]
-            public int SessionId { get; set; }
+            public long SessionId { get; set; }
         }
 
         /// <summary>
@@ -12976,13 +12976,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Overriding width value in pixels (minimum 0, maximum 10000000). 0 disables the override.
             /// </summary>
             [JsonProperty("width")]
-            public int Width { get; set; }
+            public long Width { get; set; }
 
             /// <summary>
             /// Overriding height value in pixels (minimum 0, maximum 10000000). 0 disables the override.
             /// </summary>
             [JsonProperty("height")]
-            public int Height { get; set; }
+            public long Height { get; set; }
 
             /// <summary>
             /// Overriding device scale factor value. 0 disables the override.
@@ -13007,25 +13007,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Overriding screen width value in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("screenWidth")]
-            public int? ScreenWidth { get; set; }
+            public long? ScreenWidth { get; set; }
 
             /// <summary>
             /// Optional. Overriding screen height value in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("screenHeight")]
-            public int? ScreenHeight { get; set; }
+            public long? ScreenHeight { get; set; }
 
             /// <summary>
             /// Optional. Overriding view X position on screen in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("positionX")]
-            public int? PositionX { get; set; }
+            public long? PositionX { get; set; }
 
             /// <summary>
             /// Optional. Overriding view Y position on screen in pixels (minimum 0, maximum 10000000).
             /// </summary>
             [JsonProperty("positionY")]
-            public int? PositionY { get; set; }
+            public long? PositionY { get; set; }
 
             /// <summary>
             /// Optional. Do not set visible view size, rely upon explicit setVisibleSize call.
@@ -13222,25 +13222,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Compression quality from range [0..100].
             /// </summary>
             [JsonProperty("quality")]
-            public int? Quality { get; set; }
+            public long? Quality { get; set; }
 
             /// <summary>
             /// Optional. Maximum screenshot width.
             /// </summary>
             [JsonProperty("maxWidth")]
-            public int? MaxWidth { get; set; }
+            public long? MaxWidth { get; set; }
 
             /// <summary>
             /// Optional. Maximum screenshot height.
             /// </summary>
             [JsonProperty("maxHeight")]
-            public int? MaxHeight { get; set; }
+            public long? MaxHeight { get; set; }
 
             /// <summary>
             /// Optional. Send every n-th frame.
             /// </summary>
             [JsonProperty("everyNthFrame")]
-            public int? EveryNthFrame { get; set; }
+            public long? EveryNthFrame { get; set; }
         }
 
         /// <summary>
@@ -13657,7 +13657,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Frame number.
             /// </summary>
             [JsonProperty("sessionId")]
-            public int SessionId { get; set; }
+            public long SessionId { get; set; }
         }
 
         /// <summary>
@@ -13844,8 +13844,8 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         /// <summary>
         /// An internal certificate ID value.
         /// </summary>
-        [JsonConverter(typeof(JSAliasConverter<CertificateId, int>))]
-        public class CertificateId : JSAlias<int>
+        [JsonConverter(typeof(JSAliasConverter<CertificateId, long>))]
+        public class CertificateId : JSAlias<long>
         {
         }
 
@@ -14031,7 +14031,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The ID of the event.
             /// </summary>
             [JsonProperty("eventId")]
-            public int EventId { get; set; }
+            public long EventId { get; set; }
 
             /// <summary>
             /// The action to take on the certificate error.
@@ -14075,7 +14075,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// The ID of the event.
             /// </summary>
             [JsonProperty("eventId")]
-            public int EventId { get; set; }
+            public long EventId { get; set; }
 
             /// <summary>
             /// The type of the error.
@@ -14239,10 +14239,10 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string SourceURL { get; set; }
 
             [JsonProperty("lineNumber")]
-            public int LineNumber { get; set; }
+            public long LineNumber { get; set; }
 
             [JsonProperty("columnNumber")]
-            public int ColumnNumber { get; set; }
+            public long ColumnNumber { get; set; }
         }
 
         #endregion
@@ -14708,7 +14708,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Specifies process id.
             /// </summary>
             [JsonProperty("id")]
-            public int Id { get; set; }
+            public long Id { get; set; }
 
             /// <summary>
             /// Specifies cumulative CPU usage in seconds across all threads of the
@@ -14849,7 +14849,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Host { get; set; }
 
             [JsonProperty("port")]
-            public int Port { get; set; }
+            public long Port { get; set; }
         }
 
         #endregion
@@ -15008,13 +15008,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Frame width in DIP (headless chrome only).
             /// </summary>
             [JsonProperty("width")]
-            public int? Width { get; set; }
+            public long? Width { get; set; }
 
             /// <summary>
             /// Optional. Frame height in DIP (headless chrome only).
             /// </summary>
             [JsonProperty("height")]
-            public int? Height { get; set; }
+            public long? Height { get; set; }
 
             /// <summary>
             /// Optional. The browser context to create the page in.
@@ -15304,7 +15304,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Termination error code.
             /// </summary>
             [JsonProperty("errorCode")]
-            public int ErrorCode { get; set; }
+            public long ErrorCode { get; set; }
         }
 
         /// <summary>
@@ -15341,7 +15341,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Port number to bind.
             /// </summary>
             [JsonProperty("port")]
-            public int Port { get; set; }
+            public long Port { get; set; }
         }
 
         /// <summary>
@@ -15355,7 +15355,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Port number to unbind.
             /// </summary>
             [JsonProperty("port")]
-            public int Port { get; set; }
+            public long Port { get; set; }
         }
 
         #endregion
@@ -15373,7 +15373,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Port number that was successfully bound.
             /// </summary>
             [JsonProperty("port")]
-            public int Port { get; set; }
+            public long Port { get; set; }
 
             /// <summary>
             /// Connection id to be used.
@@ -15867,7 +15867,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// An HTTP response code.
             /// </summary>
             [JsonProperty("responseCode")]
-            public int ResponseCode { get; set; }
+            public long ResponseCode { get; set; }
 
             /// <summary>
             /// Response headers.
@@ -16059,7 +16059,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// Optional. Response code if intercepted at response stage.
             /// </summary>
             [JsonProperty("responseStatusCode")]
-            public int? ResponseStatusCode { get; set; }
+            public long? ResponseStatusCode { get; set; }
 
             /// <summary>
             /// Optional. Response headers if intercepted at the response stage.

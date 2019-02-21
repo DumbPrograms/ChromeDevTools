@@ -1779,8 +1779,8 @@ namespace DumbPrograms.ChromeDevTools
             public Task<Protocol.CacheStorage.RequestEntriesResponse> RequestEntries
             (
                 Protocol.CacheStorage.CacheId @cacheId, 
-                int @skipCount, 
-                int @pageSize, 
+                long @skipCount, 
+                long @pageSize, 
                 string @pathFilter = default, 
                 CancellationToken cancellation = default
             )
@@ -2048,7 +2048,7 @@ namespace DumbPrograms.ChromeDevTools
                 Protocol.DOM.NodeId @nodeId = default, 
                 Protocol.DOM.BackendNodeId @backendNodeId = default, 
                 Protocol.Runtime.RemoteObjectId @objectId = default, 
-                int? @depth = default, 
+                long? @depth = default, 
                 bool? @pierce = default, 
                 CancellationToken cancellation = default
             )
@@ -2264,7 +2264,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task<Protocol.DOM.GetDocumentResponse> GetDocument
             (
-                int? @depth = default, 
+                long? @depth = default, 
                 bool? @pierce = default, 
                 CancellationToken cancellation = default
             )
@@ -2294,7 +2294,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task<Protocol.DOM.GetFlattenedDocumentResponse> GetFlattenedDocument
             (
-                int? @depth = default, 
+                long? @depth = default, 
                 bool? @pierce = default, 
                 CancellationToken cancellation = default
             )
@@ -2326,8 +2326,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task<Protocol.DOM.GetNodeForLocationResponse> GetNodeForLocation
             (
-                int @x, 
-                int @y, 
+                long @x, 
+                long @y, 
                 bool? @includeUserAgentShadowDOM = default, 
                 CancellationToken cancellation = default
             )
@@ -2417,8 +2417,8 @@ namespace DumbPrograms.ChromeDevTools
             public Task<Protocol.DOM.GetSearchResultsResponse> GetSearchResults
             (
                 string @searchId, 
-                int @fromIndex, 
-                int @toIndex, 
+                long @fromIndex, 
+                long @toIndex, 
                 CancellationToken cancellation = default
             )
             {
@@ -2760,7 +2760,7 @@ namespace DumbPrograms.ChromeDevTools
             public Task RequestChildNodes
             (
                 Protocol.DOM.NodeId @nodeId, 
-                int? @depth = default, 
+                long? @depth = default, 
                 bool? @pierce = default, 
                 CancellationToken cancellation = default
             )
@@ -3380,7 +3380,7 @@ namespace DumbPrograms.ChromeDevTools
             public Task<Protocol.DOMDebugger.GetEventListenersResponse> GetEventListeners
             (
                 Protocol.Runtime.RemoteObjectId @objectId, 
-                int? @depth = default, 
+                long? @depth = default, 
                 bool? @pierce = default, 
                 CancellationToken cancellation = default
             )
@@ -4243,15 +4243,15 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task SetDeviceMetricsOverride
             (
-                int @width, 
-                int @height, 
+                long @width, 
+                long @height, 
                 double @deviceScaleFactor, 
                 bool @mobile, 
                 double? @scale = default, 
-                int? @screenWidth = default, 
-                int? @screenHeight = default, 
-                int? @positionX = default, 
-                int? @positionY = default, 
+                long? @screenWidth = default, 
+                long? @screenHeight = default, 
+                long? @positionX = default, 
+                long? @positionY = default, 
                 bool? @dontSetVisibleSize = default, 
                 Protocol.Emulation.ScreenOrientation @screenOrientation = default, 
                 Protocol.Page.Viewport @viewport = default, 
@@ -4484,7 +4484,7 @@ namespace DumbPrograms.ChromeDevTools
             public Task SetTouchEmulationEnabled
             (
                 bool @enabled, 
-                int? @maxTouchPoints = default, 
+                long? @maxTouchPoints = default, 
                 CancellationToken cancellation = default
             )
             {
@@ -4524,7 +4524,7 @@ namespace DumbPrograms.ChromeDevTools
             (
                 Protocol.Emulation.VirtualTimePolicy @policy, 
                 double? @budget = default, 
-                int? @maxVirtualTimeTaskStarvationCount = default, 
+                long? @maxVirtualTimeTaskStarvationCount = default, 
                 bool? @waitForNavigation = default, 
                 Protocol.Network.TimeSinceEpoch @initialVirtualTime = default, 
                 CancellationToken cancellation = default
@@ -4559,8 +4559,8 @@ namespace DumbPrograms.ChromeDevTools
             [Obsolete]
             public Task SetVisibleSize
             (
-                int @width, 
-                int @height, 
+                long @width, 
+                long @height, 
                 CancellationToken cancellation = default
             )
             {
@@ -4819,8 +4819,8 @@ namespace DumbPrograms.ChromeDevTools
             public Task<Protocol.IO.ReadResponse> Read
             (
                 Protocol.IO.StreamHandle @handle, 
-                int? @offset = default, 
-                int? @size = default, 
+                long? @offset = default, 
+                long? @size = default, 
                 CancellationToken cancellation = default
             )
             {
@@ -5029,8 +5029,8 @@ namespace DumbPrograms.ChromeDevTools
                 string @databaseName, 
                 string @objectStoreName, 
                 string @indexName, 
-                int @skipCount, 
-                int @pageSize, 
+                long @skipCount, 
+                long @pageSize, 
                 Protocol.IndexedDB.KeyRange @keyRange = default, 
                 CancellationToken cancellation = default
             )
@@ -5166,19 +5166,19 @@ namespace DumbPrograms.ChromeDevTools
             public Task DispatchKeyEvent
             (
                 string @type, 
-                int? @modifiers = default, 
+                long? @modifiers = default, 
                 Protocol.Input.TimeSinceEpoch @timestamp = default, 
                 string @text = default, 
                 string @unmodifiedText = default, 
                 string @keyIdentifier = default, 
                 string @code = default, 
                 string @key = default, 
-                int? @windowsVirtualKeyCode = default, 
-                int? @nativeVirtualKeyCode = default, 
+                long? @windowsVirtualKeyCode = default, 
+                long? @nativeVirtualKeyCode = default, 
                 bool? @autoRepeat = default, 
                 bool? @isKeypad = default, 
                 bool? @isSystemKey = default, 
-                int? @location = default, 
+                long? @location = default, 
                 CancellationToken cancellation = default
             )
             {
@@ -5274,11 +5274,11 @@ namespace DumbPrograms.ChromeDevTools
                 string @type, 
                 double @x, 
                 double @y, 
-                int? @modifiers = default, 
+                long? @modifiers = default, 
                 Protocol.Input.TimeSinceEpoch @timestamp = default, 
                 string @button = default, 
-                int? @buttons = default, 
-                int? @clickCount = default, 
+                long? @buttons = default, 
+                long? @clickCount = default, 
                 double? @deltaX = default, 
                 double? @deltaY = default, 
                 string @pointerType = default, 
@@ -5329,7 +5329,7 @@ namespace DumbPrograms.ChromeDevTools
             (
                 string @type, 
                 Protocol.Input.TouchPoint[] @touchPoints, 
-                int? @modifiers = default, 
+                long? @modifiers = default, 
                 Protocol.Input.TimeSinceEpoch @timestamp = default, 
                 CancellationToken cancellation = default
             )
@@ -5382,14 +5382,14 @@ namespace DumbPrograms.ChromeDevTools
             public Task EmulateTouchFromMouseEvent
             (
                 string @type, 
-                int @x, 
-                int @y, 
+                long @x, 
+                long @y, 
                 string @button, 
                 Protocol.Input.TimeSinceEpoch @timestamp = default, 
                 double? @deltaX = default, 
                 double? @deltaY = default, 
-                int? @modifiers = default, 
-                int? @clickCount = default, 
+                long? @modifiers = default, 
+                long? @clickCount = default, 
                 CancellationToken cancellation = default
             )
             {
@@ -5459,7 +5459,7 @@ namespace DumbPrograms.ChromeDevTools
                 double @x, 
                 double @y, 
                 double @scaleFactor, 
-                int? @relativeSpeed = default, 
+                long? @relativeSpeed = default, 
                 Protocol.Input.GestureSourceType @gestureSourceType = default, 
                 CancellationToken cancellation = default
             )
@@ -5530,10 +5530,10 @@ namespace DumbPrograms.ChromeDevTools
                 double? @xOverscroll = default, 
                 double? @yOverscroll = default, 
                 bool? @preventFling = default, 
-                int? @speed = default, 
+                long? @speed = default, 
                 Protocol.Input.GestureSourceType @gestureSourceType = default, 
-                int? @repeatCount = default, 
-                int? @repeatDelayMs = default, 
+                long? @repeatCount = default, 
+                long? @repeatDelayMs = default, 
                 string @interactionMarkerName = default, 
                 CancellationToken cancellation = default
             )
@@ -5583,8 +5583,8 @@ namespace DumbPrograms.ChromeDevTools
             (
                 double @x, 
                 double @y, 
-                int? @duration = default, 
-                int? @tapCount = default, 
+                long? @duration = default, 
+                long? @tapCount = default, 
                 Protocol.Input.GestureSourceType @gestureSourceType = default, 
                 CancellationToken cancellation = default
             )
@@ -5831,7 +5831,7 @@ namespace DumbPrograms.ChromeDevTools
             public Task<Protocol.LayerTree.ProfileSnapshotResponse> ProfileSnapshot
             (
                 Protocol.LayerTree.SnapshotId @snapshotId, 
-                int? @minRepeatCount = default, 
+                long? @minRepeatCount = default, 
                 double? @minDuration = default, 
                 Protocol.DOM.Rect @clipRect = default, 
                 CancellationToken cancellation = default
@@ -5892,8 +5892,8 @@ namespace DumbPrograms.ChromeDevTools
             public Task<Protocol.LayerTree.ReplaySnapshotResponse> ReplaySnapshot
             (
                 Protocol.LayerTree.SnapshotId @snapshotId, 
-                int? @fromStep = default, 
-                int? @toStep = default, 
+                long? @fromStep = default, 
+                long? @toStep = default, 
                 double? @scale = default, 
                 CancellationToken cancellation = default
             )
@@ -6177,7 +6177,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task StartSampling
             (
-                int? @samplingInterval = default, 
+                long? @samplingInterval = default, 
                 bool? @suppressRandomness = default, 
                 CancellationToken cancellation = default
             )
@@ -6551,9 +6551,9 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task Enable
             (
-                int? @maxTotalBufferSize = default, 
-                int? @maxResourceBufferSize = default, 
-                int? @maxPostDataSize = default, 
+                long? @maxTotalBufferSize = default, 
+                long? @maxResourceBufferSize = default, 
+                long? @maxPostDataSize = default, 
                 CancellationToken cancellation = default
             )
             {
@@ -6959,8 +6959,8 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task SetDataSizeLimitsForTest
             (
-                int @maxTotalSize, 
-                int @maxResourceSize, 
+                long @maxTotalSize, 
+                long @maxResourceSize, 
                 CancellationToken cancellation = default
             )
             {
@@ -7562,10 +7562,10 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task HighlightRect
             (
-                int @x, 
-                int @y, 
-                int @width, 
-                int @height, 
+                long @x, 
+                long @y, 
+                long @width, 
+                long @height, 
                 Protocol.DOM.RGBA @color = default, 
                 Protocol.DOM.RGBA @outlineColor = default, 
                 CancellationToken cancellation = default
@@ -7944,7 +7944,7 @@ namespace DumbPrograms.ChromeDevTools
             public Task<Protocol.Page.CaptureScreenshotResponse> CaptureScreenshot
             (
                 string @format = default, 
-                int? @quality = default, 
+                long? @quality = default, 
                 Protocol.Page.Viewport @clip = default, 
                 bool? @fromSurface = default, 
                 CancellationToken cancellation = default
@@ -8372,7 +8372,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task NavigateToHistoryEntry
             (
-                int @entryId, 
+                long @entryId, 
                 CancellationToken cancellation = default
             )
             {
@@ -8571,7 +8571,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task ScreencastFrameAck
             (
-                int @sessionId, 
+                long @sessionId, 
                 CancellationToken cancellation = default
             )
             {
@@ -8720,15 +8720,15 @@ namespace DumbPrograms.ChromeDevTools
             [Obsolete]
             public Task SetDeviceMetricsOverride
             (
-                int @width, 
-                int @height, 
+                long @width, 
+                long @height, 
                 double @deviceScaleFactor, 
                 bool @mobile, 
                 double? @scale = default, 
-                int? @screenWidth = default, 
-                int? @screenHeight = default, 
-                int? @positionX = default, 
-                int? @positionY = default, 
+                long? @screenWidth = default, 
+                long? @screenHeight = default, 
+                long? @positionX = default, 
+                long? @positionY = default, 
                 bool? @dontSetVisibleSize = default, 
                 Protocol.Emulation.ScreenOrientation @screenOrientation = default, 
                 Protocol.Page.Viewport @viewport = default, 
@@ -9002,10 +9002,10 @@ namespace DumbPrograms.ChromeDevTools
             public Task StartScreencast
             (
                 string @format = default, 
-                int? @quality = default, 
-                int? @maxWidth = default, 
-                int? @maxHeight = default, 
-                int? @everyNthFrame = default, 
+                long? @quality = default, 
+                long? @maxWidth = default, 
+                long? @maxHeight = default, 
+                long? @everyNthFrame = default, 
                 CancellationToken cancellation = default
             )
             {
@@ -9750,7 +9750,7 @@ namespace DumbPrograms.ChromeDevTools
             [Obsolete]
             public Task HandleCertificateError
             (
-                int @eventId, 
+                long @eventId, 
                 Protocol.Security.CertificateErrorAction @action, 
                 CancellationToken cancellation = default
             )
@@ -10554,8 +10554,8 @@ namespace DumbPrograms.ChromeDevTools
             public Task<Protocol.Target.CreateTargetResponse> CreateTarget
             (
                 string @url, 
-                int? @width = default, 
-                int? @height = default, 
+                long? @width = default, 
+                long? @height = default, 
                 Protocol.Target.BrowserContextID @browserContextId = default, 
                 bool? @enableBeginFrameControl = default, 
                 CancellationToken cancellation = default
@@ -10923,7 +10923,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task Bind
             (
-                int @port, 
+                long @port, 
                 CancellationToken cancellation = default
             )
             {
@@ -10946,7 +10946,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             public Task Unbind
             (
-                int @port, 
+                long @port, 
                 CancellationToken cancellation = default
             )
             {
@@ -11310,7 +11310,7 @@ namespace DumbPrograms.ChromeDevTools
             public Task FulfillRequest
             (
                 Protocol.Fetch.RequestId @requestId, 
-                int @responseCode, 
+                long @responseCode, 
                 Protocol.Fetch.HeaderEntry[] @responseHeaders, 
                 string @body = default, 
                 string @responsePhrase = default, 
