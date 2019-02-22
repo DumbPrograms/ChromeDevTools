@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 
 /src/DumbPrograms.ChromeDevTools.Generator/Properties/launchSettings.json
+/src/DumbPrograms.ChromeDevTools/Generated/*.json
