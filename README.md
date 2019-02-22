@@ -1,4 +1,6 @@
 # ChromeDevTools
+[![Build status](https://ci.appveyor.com/api/projects/status/yvk96lqo7xgj5ib7?svg=true)](https://ci.appveyor.com/project/diryboy/chromedevtools)
+
 .Net library to interact with Chrome using the Chrome DevTools Protocol
 
 When Chrome is started with `--remote-debugging-port=9222`, it can be controlled programatically via REST API and WebSocket using [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/).
