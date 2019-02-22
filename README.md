@@ -1,5 +1,7 @@
 # ChromeDevTools
+
 [![Build status](https://ci.appveyor.com/api/projects/status/yvk96lqo7xgj5ib7?svg=true)](https://ci.appveyor.com/project/diryboy/chromedevtools)
+![Nuget](https://img.shields.io/nuget/v/DumbPrograms.ChromeDevTools.svg?logo=nuget)
 
 .Net library to interact with Chrome using the Chrome DevTools Protocol
 
