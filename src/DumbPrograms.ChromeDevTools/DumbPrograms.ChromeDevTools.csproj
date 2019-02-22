@@ -5,6 +5,13 @@
     <OutputPath>$(SolutionDir)bin\$(Configuration)</OutputPath>
     <RefreshProtocolJsonFiles>false</RefreshProtocolJsonFiles>
     <LangVersion>7.3</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.0</Version>
+    <Company />
+    <Product />
+    <Authors>Paul Chen</Authors>
+    <RepositoryUrl>https://github.com/DumbPrograms/ChromeDevTools</RepositoryUrl>
+    <Description>.Net library to interact with Chrome using the Chrome DevTools Protocol</Description>
   </PropertyGroup>
 
   <ItemGroup>
