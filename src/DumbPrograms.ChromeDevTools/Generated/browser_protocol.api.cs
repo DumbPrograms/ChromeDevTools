@@ -854,6 +854,24 @@ namespace DumbPrograms.ChromeDevTools
             }
 
             /// <summary>
+            /// Crashes GPU process.
+            /// </summary>
+            public Task CrashGpuProcess
+            (
+                CancellationToken cancellation = default
+            )
+            {
+                return InspectorClient.InvokeCommandCore
+                (
+                    new Protocol.Browser.CrashGpuProcessCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
+            }
+
+            /// <summary>
             /// Returns version information.
             /// </summary>
             public Task<Protocol.Browser.GetVersionResponse> GetVersion
@@ -1742,10 +1760,14 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="requestURL">
             /// URL spec of the request.
             /// </param>
+            /// <param name="requestHeaders">
+            /// headers of the request.
+            /// </param>
             public Task<Protocol.CacheStorage.RequestCachedResponseResponse> RequestCachedResponse
             (
                 Protocol.CacheStorage.CacheId @cacheId, 
                 string @requestURL, 
+                Protocol.CacheStorage.Header[] @requestHeaders, 
                 CancellationToken cancellation = default
             )
             {
@@ -1755,6 +1777,7 @@ namespace DumbPrograms.ChromeDevTools
                     {
                         CacheId = @cacheId,
                         RequestURL = @requestURL,
+                        RequestHeaders = @requestHeaders,
                     }
                     , cancellation
                 )
@@ -2815,11 +2838,15 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectGroup">
             /// Symbolic group name that can be used to release multiple objects.
             /// </param>
+            /// <param name="executionContextId">
+            /// Execution context in which to resolve the node.
+            /// </param>
             public Task<Protocol.DOM.ResolveNodeResponse> ResolveNode
             (
                 Protocol.DOM.NodeId @nodeId = default, 
                 Protocol.DOM.BackendNodeId @backendNodeId = default, 
                 string @objectGroup = default, 
+                Protocol.Runtime.ExecutionContextId @executionContextId = default, 
                 CancellationToken cancellation = default
             )
             {
@@ -2830,6 +2857,7 @@ namespace DumbPrograms.ChromeDevTools
                         NodeId = @nodeId,
                         BackendNodeId = @backendNodeId,
                         ObjectGroup = @objectGroup,
+                        ExecutionContextId = @executionContextId,
                     }
                     , cancellation
                 )
@@ -4610,15 +4638,6 @@ namespace DumbPrograms.ChromeDevTools
             }
 
             /// <summary>
-            /// Notification sent after the virtual time has advanced.
-            /// </summary>
-            public event Func<Protocol.Emulation.VirtualTimeAdvancedEvent, Task> VirtualTimeAdvanced
-            {
-                add => InspectorClient.AddEventHandlerCore("Emulation.virtualTimeAdvanced", value);
-                remove => InspectorClient.RemoveEventHandlerCore("Emulation.virtualTimeAdvanced", value);
-            }
-
-            /// <summary>
             /// Notification sent after the virtual time budget for the current VirtualTimePolicy has run out.
             /// </summary>
             public event Func<Protocol.Emulation.VirtualTimeBudgetExpiredEvent, Task> VirtualTimeBudgetExpired
@@ -4628,36 +4647,11 @@ namespace DumbPrograms.ChromeDevTools
             }
 
             /// <summary>
-            /// Notification sent after the virtual time has paused.
-            /// </summary>
-            public event Func<Protocol.Emulation.VirtualTimePausedEvent, Task> VirtualTimePaused
-            {
-                add => InspectorClient.AddEventHandlerCore("Emulation.virtualTimePaused", value);
-                remove => InspectorClient.RemoveEventHandlerCore("Emulation.virtualTimePaused", value);
-            }
-
-            /// <summary>
-            /// Notification sent after the virtual time has advanced.
-            /// </summary>
-            public Task<Protocol.Emulation.VirtualTimeAdvancedEvent> VirtualTimeAdvancedEvent(Func<Protocol.Emulation.VirtualTimeAdvancedEvent, Task<bool>> until = null)
-            {
-                return InspectorClient.SubscribeUntilCore("Emulation.virtualTimeAdvanced", until);
-            }
-
-            /// <summary>
             /// Notification sent after the virtual time budget for the current VirtualTimePolicy has run out.
             /// </summary>
             public Task<Protocol.Emulation.VirtualTimeBudgetExpiredEvent> VirtualTimeBudgetExpiredEvent(Func<Protocol.Emulation.VirtualTimeBudgetExpiredEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("Emulation.virtualTimeBudgetExpired", until);
-            }
-
-            /// <summary>
-            /// Notification sent after the virtual time has paused.
-            /// </summary>
-            public Task<Protocol.Emulation.VirtualTimePausedEvent> VirtualTimePausedEvent(Func<Protocol.Emulation.VirtualTimePausedEvent, Task<bool>> until = null)
-            {
-                return InspectorClient.SubscribeUntilCore("Emulation.virtualTimePaused", until);
             }
         }
 
@@ -5046,6 +5040,40 @@ namespace DumbPrograms.ChromeDevTools
                         SkipCount = @skipCount,
                         PageSize = @pageSize,
                         KeyRange = @keyRange,
+                    }
+                    , cancellation
+                )
+                ;
+            }
+
+            /// <summary>
+            /// Gets the auto increment number of an object store. Only meaningful
+            /// when objectStore.autoIncrement is true.
+            /// </summary>
+            /// <param name="securityOrigin">
+            /// Security origin.
+            /// </param>
+            /// <param name="databaseName">
+            /// Database name.
+            /// </param>
+            /// <param name="objectStoreName">
+            /// Object store name.
+            /// </param>
+            public Task<Protocol.IndexedDB.GetKeyGeneratorCurrentNumberResponse> GetKeyGeneratorCurrentNumber
+            (
+                string @securityOrigin, 
+                string @databaseName, 
+                string @objectStoreName, 
+                CancellationToken cancellation = default
+            )
+            {
+                return InspectorClient.InvokeCommandCore
+                (
+                    new Protocol.IndexedDB.GetKeyGeneratorCurrentNumberCommand
+                    {
+                        SecurityOrigin = @securityOrigin,
+                        DatabaseName = @databaseName,
+                        ObjectStoreName = @objectStoreName,
                     }
                     , cancellation
                 )
@@ -6113,6 +6141,24 @@ namespace DumbPrograms.ChromeDevTools
                 return InspectorClient.InvokeCommandCore
                 (
                     new Protocol.Memory.PrepareForLeakDetectionCommand
+                    {
+                    }
+                    , cancellation
+                )
+                ;
+            }
+
+            /// <summary>
+            /// Simulate OomIntervention by purging V8 memory.
+            /// </summary>
+            public Task ForciblyPurgeJavaScriptMemory
+            (
+                CancellationToken cancellation = default
+            )
+            {
+                return InspectorClient.InvokeCommandCore
+                (
+                    new Protocol.Memory.ForciblyPurgeJavaScriptMemoryCommand
                     {
                     }
                     , cancellation
@@ -7483,12 +7529,16 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectId">
             /// JavaScript object id of the node to be highlighted.
             /// </param>
+            /// <param name="selector">
+            /// Selectors to highlight relevant nodes.
+            /// </param>
             public Task HighlightNode
             (
                 Protocol.Overlay.HighlightConfig @highlightConfig, 
                 Protocol.DOM.NodeId @nodeId = default, 
                 Protocol.DOM.BackendNodeId @backendNodeId = default, 
                 Protocol.Runtime.RemoteObjectId @objectId = default, 
+                string @selector = default, 
                 CancellationToken cancellation = default
             )
             {
@@ -7500,6 +7550,7 @@ namespace DumbPrograms.ChromeDevTools
                         NodeId = @nodeId,
                         BackendNodeId = @backendNodeId,
                         ObjectId = @objectId,
+                        Selector = @selector,
                     }
                     , cancellation
                 )
@@ -7611,6 +7662,29 @@ namespace DumbPrograms.ChromeDevTools
                     {
                         Mode = @mode,
                         HighlightConfig = @highlightConfig,
+                    }
+                    , cancellation
+                )
+                ;
+            }
+
+            /// <summary>
+            /// Highlights owner element of all frames detected to be ads.
+            /// </summary>
+            /// <param name="show">
+            /// True for showing ad highlights
+            /// </param>
+            public Task SetShowAdHighlights
+            (
+                bool @show, 
+                CancellationToken cancellation = default
+            )
+            {
+                return InspectorClient.InvokeCommandCore
+                (
+                    new Protocol.Overlay.SetShowAdHighlightsCommand
+                    {
+                        Show = @show,
                     }
                     , cancellation
                 )
@@ -7824,6 +7898,15 @@ namespace DumbPrograms.ChromeDevTools
             }
 
             /// <summary>
+            /// Fired when user cancels the inspect mode.
+            /// </summary>
+            public event Func<Protocol.Overlay.InspectModeCanceledEvent, Task> InspectModeCanceled
+            {
+                add => InspectorClient.AddEventHandlerCore("Overlay.inspectModeCanceled", value);
+                remove => InspectorClient.RemoveEventHandlerCore("Overlay.inspectModeCanceled", value);
+            }
+
+            /// <summary>
             /// Fired when the node should be inspected. This happens after call to `setInspectMode` or when
             /// user manually inspects an element.
             /// </summary>
@@ -7846,6 +7929,14 @@ namespace DumbPrograms.ChromeDevTools
             public Task<Protocol.Overlay.ScreenshotRequestedEvent> ScreenshotRequestedEvent(Func<Protocol.Overlay.ScreenshotRequestedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("Overlay.screenshotRequested", until);
+            }
+
+            /// <summary>
+            /// Fired when user cancels the inspect mode.
+            /// </summary>
+            public Task<Protocol.Overlay.InspectModeCanceledEvent> InspectModeCanceledEvent(Func<Protocol.Overlay.InspectModeCanceledEvent, Task<bool>> until = null)
+            {
+                return InspectorClient.SubscribeUntilCore("Overlay.inspectModeCanceled", until);
             }
         }
 

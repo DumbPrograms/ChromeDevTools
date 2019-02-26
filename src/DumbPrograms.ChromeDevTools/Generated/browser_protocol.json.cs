@@ -1168,6 +1168,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public static PermissionType ProtectedMediaIdentifier => New<PermissionType>("protectedMediaIdentifier");
             public static PermissionType Sensors => New<PermissionType>("sensors");
             public static PermissionType VideoCapture => New<PermissionType>("videoCapture");
+            public static PermissionType IdleDetection => New<PermissionType>("idleDetection");
         }
 
         /// <summary>
@@ -1278,6 +1279,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class CrashCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Browser.crash";
+        }
+
+        /// <summary>
+        /// Crashes GPU process.
+        /// </summary>
+        public class CrashGpuProcessCommand : ICommand<VoidResponse>
+        {
+            string ICommand.Name { get; } = "Browser.crashGpuProcess";
         }
 
         /// <summary>
@@ -2995,6 +3004,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("requestURL")]
             public string RequestURL { get; set; }
+
+            /// <summary>
+            /// headers of the request.
+            /// </summary>
+            [JsonProperty("requestHeaders")]
+            public Header[] RequestHeaders { get; set; }
         }
 
         public class RequestCachedResponseResponse
@@ -3939,7 +3954,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public BackendNodeId BackendNodeId { get; set; }
 
             /// <summary>
-            /// Optional. Id of the node at given coordinates, only when enabled.
+            /// Optional. Id of the node at given coordinates, only when enabled and requested document.
             /// </summary>
             [JsonProperty("nodeId")]
             public NodeId NodeId { get; set; }
@@ -4379,6 +4394,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("objectGroup")]
             public string ObjectGroup { get; set; }
+
+            /// <summary>
+            /// Optional. Execution context in which to resolve the node.
+            /// </summary>
+            [JsonProperty("executionContextId")]
+            public Runtime.ExecutionContextId ExecutionContextId { get; set; }
         }
 
         public class ResolveNodeResponse
@@ -4613,7 +4634,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public BackendNodeId BackendNodeId { get; set; }
 
             /// <summary>
-            /// Optional. Id of the node at given coordinates, only when enabled.
+            /// Optional. Id of the node at given coordinates, only when enabled and requested document.
             /// </summary>
             [JsonProperty("nodeId")]
             public NodeId NodeId { get; set; }
@@ -6693,41 +6714,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #region Events
 
         /// <summary>
-        /// Notification sent after the virtual time has advanced.
-        /// </summary>
-        [Event("Emulation.virtualTimeAdvanced")]
-        public class VirtualTimeAdvancedEvent
-        {
-
-            /// <summary>
-            /// The amount of virtual time that has elapsed in milliseconds since virtual time was first
-            /// enabled.
-            /// </summary>
-            [JsonProperty("virtualTimeElapsed")]
-            public double VirtualTimeElapsed { get; set; }
-        }
-
-        /// <summary>
         /// Notification sent after the virtual time budget for the current VirtualTimePolicy has run out.
         /// </summary>
         [Event("Emulation.virtualTimeBudgetExpired")]
         public class VirtualTimeBudgetExpiredEvent
         {
-        }
-
-        /// <summary>
-        /// Notification sent after the virtual time has paused.
-        /// </summary>
-        [Event("Emulation.virtualTimePaused")]
-        public class VirtualTimePausedEvent
-        {
-
-            /// <summary>
-            /// The amount of virtual time that has elapsed in milliseconds since virtual time was first
-            /// enabled.
-            /// </summary>
-            [JsonProperty("virtualTimeElapsed")]
-            public double VirtualTimeElapsed { get; set; }
         }
 
         #endregion
@@ -7334,6 +7325,44 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("hasMore")]
             public bool HasMore { get; set; }
+        }
+
+        /// <summary>
+        /// Gets the auto increment number of an object store. Only meaningful
+        /// when objectStore.autoIncrement is true.
+        /// </summary>
+        public class GetKeyGeneratorCurrentNumberCommand : ICommand<GetKeyGeneratorCurrentNumberResponse>
+        {
+            string ICommand.Name { get; } = "IndexedDB.getKeyGeneratorCurrentNumber";
+
+            /// <summary>
+            /// Security origin.
+            /// </summary>
+            [JsonProperty("securityOrigin")]
+            public string SecurityOrigin { get; set; }
+
+            /// <summary>
+            /// Database name.
+            /// </summary>
+            [JsonProperty("databaseName")]
+            public string DatabaseName { get; set; }
+
+            /// <summary>
+            /// Object store name.
+            /// </summary>
+            [JsonProperty("objectStoreName")]
+            public string ObjectStoreName { get; set; }
+        }
+
+        public class GetKeyGeneratorCurrentNumberResponse
+        {
+
+            /// <summary>
+            /// the current value of key generator, to become the next inserted
+            /// key into the object store.
+            /// </summary>
+            [JsonProperty("currentNumber")]
+            public double CurrentNumber { get; set; }
         }
 
         /// <summary>
@@ -8722,6 +8751,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         }
 
         /// <summary>
+        /// Simulate OomIntervention by purging V8 memory.
+        /// </summary>
+        public class ForciblyPurgeJavaScriptMemoryCommand : ICommand<VoidResponse>
+        {
+            string ICommand.Name { get; } = "Memory.forciblyPurgeJavaScriptMemory";
+        }
+
+        /// <summary>
         /// Enable/disable suppressing memory pressure notifications in all processes.
         /// </summary>
         public class SetPressureNotificationsSuppressedCommand : ICommand<VoidResponse>
@@ -9876,12 +9913,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("requestUrl")]
             public string RequestUrl { get; set; }
-
-            /// <summary>
-            /// Signed exchange request method.
-            /// </summary>
-            [JsonProperty("requestMethod")]
-            public string RequestMethod { get; set; }
 
             /// <summary>
             /// Signed exchange response code.
@@ -11322,12 +11353,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public DOM.RGBA ShapeMarginColor { get; set; }
 
             /// <summary>
-            /// Optional. Selectors to highlight relevant nodes.
-            /// </summary>
-            [JsonProperty("selectorList")]
-            public string SelectorList { get; set; }
-
-            /// <summary>
             /// Optional. The grid layout color (default: transparent).
             /// </summary>
             [JsonProperty("cssGridColor")]
@@ -11339,6 +11364,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             public static InspectMode SearchForNode => New<InspectMode>("searchForNode");
             public static InspectMode SearchForUAShadowDOM => New<InspectMode>("searchForUAShadowDOM");
+            public static InspectMode CaptureAreaScreenshot => New<InspectMode>("captureAreaScreenshot");
             public static InspectMode None => New<InspectMode>("none");
         }
 
@@ -11451,6 +11477,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("objectId")]
             public Runtime.RemoteObjectId ObjectId { get; set; }
+
+            /// <summary>
+            /// Optional. Selectors to highlight relevant nodes.
+            /// </summary>
+            [JsonProperty("selector")]
+            public string Selector { get; set; }
         }
 
         /// <summary>
@@ -11543,6 +11575,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("highlightConfig")]
             public HighlightConfig HighlightConfig { get; set; }
+        }
+
+        /// <summary>
+        /// Highlights owner element of all frames detected to be ads.
+        /// </summary>
+        public class SetShowAdHighlightsCommand : ICommand<VoidResponse>
+        {
+            string ICommand.Name { get; } = "Overlay.setShowAdHighlights";
+
+            /// <summary>
+            /// True for showing ad highlights
+            /// </summary>
+            [JsonProperty("show")]
+            public bool Show { get; set; }
         }
 
         public class SetPausedInDebuggerMessageCommand : ICommand<VoidResponse>
@@ -11693,6 +11739,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             /// </summary>
             [JsonProperty("viewport")]
             public Page.Viewport Viewport { get; set; }
+        }
+
+        /// <summary>
+        /// Fired when user cancels the inspect mode.
+        /// </summary>
+        [Event("Overlay.inspectModeCanceled")]
+        public class InspectModeCanceledEvent
+        {
         }
 
         #endregion
