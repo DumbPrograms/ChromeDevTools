@@ -5,9 +5,6 @@ using Newtonsoft.Json;
 namespace DumbPrograms.ChromeDevTools.Protocol
 {
 
-    /// <summary>
-    /// This domain is deprecated - use Runtime or Log instead.
-    /// </summary>
     namespace Console
     {
 
@@ -106,10 +103,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// Debugger domain exposes JavaScript debugging capabilities. It allows setting and removing
-    /// breakpoints, stepping through execution, exploring stack traces, etc.
-    /// </summary>
     namespace Debugger
     {
 
@@ -162,9 +155,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class ScriptPosition
         {
 
+            /// <summary></summary>
             [JsonProperty("lineNumber")]
             public long LineNumber { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("columnNumber")]
             public long ColumnNumber { get; set; }
         }
@@ -282,6 +277,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string LineContent { get; set; }
         }
 
+        /// <summary />
         public class BreakLocation
         {
 
@@ -351,6 +347,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Debugger.enable";
         }
 
+        /// <summary>
+        /// Response of Enable.
+        /// </summary>
         public class EnableResponse
         {
 
@@ -426,6 +425,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.TimeDelta Timeout { get; set; }
         }
 
+        /// <summary>
+        /// Response of EvaluateOnCallFrame.
+        /// </summary>
         public class EvaluateOnCallFrameResponse
         {
 
@@ -470,6 +472,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? RestrictToFunction { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetPossibleBreakpoints.
+        /// </summary>
         public class GetPossibleBreakpointsResponse
         {
 
@@ -494,6 +499,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.ScriptId ScriptId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetScriptSource.
+        /// </summary>
         public class GetScriptSourceResponse
         {
 
@@ -511,13 +519,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Debugger.getStackTrace";
 
+            /// <summary></summary>
             [JsonProperty("stackTraceId")]
             public Runtime.StackTraceId StackTraceId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetStackTrace.
+        /// </summary>
         public class GetStackTraceResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("stackTrace")]
             public Runtime.StackTrace StackTrace { get; set; }
         }
@@ -530,6 +543,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Debugger.pause";
         }
 
+        /// <summary />
         public class PauseOnAsyncCallCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Debugger.pauseOnAsyncCall";
@@ -548,6 +562,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Debugger.removeBreakpoint";
 
+            /// <summary></summary>
             [JsonProperty("breakpointId")]
             public BreakpointId BreakpointId { get; set; }
         }
@@ -566,6 +581,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public CallFrameId CallFrameId { get; set; }
         }
 
+        /// <summary>
+        /// Response of RestartFrame.
+        /// </summary>
         public class RestartFrameResponse
         {
 
@@ -628,6 +646,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? IsRegex { get; set; }
         }
 
+        /// <summary>
+        /// Response of SearchInContent.
+        /// </summary>
         public class SearchInContentResponse
         {
 
@@ -685,6 +706,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("scriptId")]
             public Runtime.ScriptId ScriptId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("positions")]
             public ScriptPosition[] Positions { get; set; }
         }
@@ -710,6 +732,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Condition { get; set; }
         }
 
+        /// <summary>
+        /// Response of SetBreakpoint.
+        /// </summary>
         public class SetBreakpointResponse
         {
 
@@ -775,6 +800,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Condition { get; set; }
         }
 
+        /// <summary>
+        /// Response of SetBreakpointByUrl.
+        /// </summary>
         public class SetBreakpointByUrlResponse
         {
 
@@ -814,6 +842,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Condition { get; set; }
         }
 
+        /// <summary>
+        /// Response of SetBreakpointOnFunctionCall.
+        /// </summary>
         public class SetBreakpointOnFunctionCallResponse
         {
 
@@ -894,6 +925,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? DryRun { get; set; }
         }
 
+        /// <summary>
+        /// Response of SetScriptSource.
+        /// </summary>
         public class SetScriptSourceResponse
         {
 
@@ -1360,9 +1394,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SamplingHeapProfile
         {
 
+            /// <summary></summary>
             [JsonProperty("head")]
             public SamplingHeapProfileNode Head { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("samples")]
             public SamplingHeapProfileSample[] Samples { get; set; }
         }
@@ -1386,21 +1422,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public HeapSnapshotObjectId HeapObjectId { get; set; }
         }
 
+        /// <summary />
         public class CollectGarbageCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.collectGarbage";
         }
 
+        /// <summary />
         public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.disable";
         }
 
+        /// <summary />
         public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.enable";
         }
 
+        /// <summary />
         public class GetHeapObjectIdCommand : ICommand<GetHeapObjectIdResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.getHeapObjectId";
@@ -1412,6 +1452,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.RemoteObjectId ObjectId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetHeapObjectId.
+        /// </summary>
         public class GetHeapObjectIdResponse
         {
 
@@ -1422,10 +1465,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public HeapSnapshotObjectId HeapSnapshotObjectId { get; set; }
         }
 
+        /// <summary />
         public class GetObjectByHeapObjectIdCommand : ICommand<GetObjectByHeapObjectIdResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.getObjectByHeapObjectId";
 
+            /// <summary></summary>
             [JsonProperty("objectId")]
             public HeapSnapshotObjectId ObjectId { get; set; }
 
@@ -1436,6 +1481,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string ObjectGroup { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetObjectByHeapObjectId.
+        /// </summary>
         public class GetObjectByHeapObjectIdResponse
         {
 
@@ -1446,11 +1494,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.RemoteObject Result { get; set; }
         }
 
+        /// <summary />
         public class GetSamplingProfileCommand : ICommand<GetSamplingProfileResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.getSamplingProfile";
         }
 
+        /// <summary>
+        /// Response of GetSamplingProfile.
+        /// </summary>
         public class GetSamplingProfileResponse
         {
 
@@ -1461,6 +1513,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public SamplingHeapProfile Profile { get; set; }
         }
 
+        /// <summary />
         public class StartSamplingCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.startSampling";
@@ -1473,6 +1526,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public double? SamplingInterval { get; set; }
         }
 
+        /// <summary />
         public class StartTrackingHeapObjectsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.startTrackingHeapObjects";
@@ -1484,11 +1538,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? TrackAllocations { get; set; }
         }
 
+        /// <summary />
         public class StopSamplingCommand : ICommand<StopSamplingResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.stopSampling";
         }
 
+        /// <summary>
+        /// Response of StopSampling.
+        /// </summary>
         public class StopSamplingResponse
         {
 
@@ -1499,6 +1557,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public SamplingHeapProfile Profile { get; set; }
         }
 
+        /// <summary />
         public class StopTrackingHeapObjectsCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.stopTrackingHeapObjects";
@@ -1511,6 +1570,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? ReportProgress { get; set; }
         }
 
+        /// <summary />
         public class TakeHeapSnapshotCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "HeapProfiler.takeHeapSnapshot";
@@ -1526,10 +1586,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
+        /// <summary />
         [Event("HeapProfiler.addHeapSnapshotChunk")]
         public class AddHeapSnapshotChunkEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("chunk")]
             public string Chunk { get; set; }
         }
@@ -1559,20 +1621,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class LastSeenObjectIdEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("lastSeenObjectId")]
             public long LastSeenObjectId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("timestamp")]
             public double Timestamp { get; set; }
         }
 
+        /// <summary />
         [Event("HeapProfiler.reportHeapSnapshotProgress")]
         public class ReportHeapSnapshotProgressEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("done")]
             public long Done { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("total")]
             public long Total { get; set; }
 
@@ -1583,6 +1650,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? Finished { get; set; }
         }
 
+        /// <summary />
         [Event("HeapProfiler.resetProfiles")]
         public class ResetProfilesEvent
         {
@@ -1833,11 +1901,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Commands
 
+        /// <summary />
         public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Profiler.disable";
         }
 
+        /// <summary />
         public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Profiler.enable";
@@ -1852,6 +1922,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Profiler.getBestEffortCoverage";
         }
 
+        /// <summary>
+        /// Response of GetBestEffortCoverage.
+        /// </summary>
         public class GetBestEffortCoverageResponse
         {
 
@@ -1876,6 +1949,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public long Interval { get; set; }
         }
 
+        /// <summary />
         public class StartCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Profiler.start";
@@ -1911,11 +1985,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Profiler.startTypeProfile";
         }
 
+        /// <summary />
         public class StopCommand : ICommand<StopResponse>
         {
             string ICommand.Name { get; } = "Profiler.stop";
         }
 
+        /// <summary>
+        /// Response of Stop.
+        /// </summary>
         public class StopResponse
         {
 
@@ -1952,6 +2030,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Profiler.takePreciseCoverage";
         }
 
+        /// <summary>
+        /// Response of TakePreciseCoverage.
+        /// </summary>
         public class TakePreciseCoverageResponse
         {
 
@@ -1970,6 +2051,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Profiler.takeTypeProfile";
         }
 
+        /// <summary>
+        /// Response of TakeTypeProfile.
+        /// </summary>
         public class TakeTypeProfileResponse
         {
 
@@ -1984,10 +2068,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
+        /// <summary />
         [Event("Profiler.consoleProfileFinished")]
         public class ConsoleProfileFinishedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("id")]
             public string Id { get; set; }
 
@@ -1997,6 +2083,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("location")]
             public Debugger.Location Location { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("profile")]
             public Profile Profile { get; set; }
 
@@ -2014,6 +2101,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class ConsoleProfileStartedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("id")]
             public string Id { get; set; }
 
@@ -2033,13 +2121,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// Runtime domain exposes JavaScript runtime by means of remote evaluation and mirror objects.
-    /// Evaluation results are returned as mirror object that expose object type, string representation
-    /// and unique identifier that can be used for further object reference. Original objects are
-    /// maintained in memory unless they are either explicitly released or are released along with the
-    /// other objects in their object group.
-    /// </summary>
     namespace Runtime
     {
 
@@ -2132,6 +2213,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public CustomPreview CustomPreview { get; set; }
         }
 
+        /// <summary />
         public class CustomPreview
         {
 
@@ -2194,6 +2276,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public EntryPreview[] Entries { get; set; }
         }
 
+        /// <summary />
         public class PropertyPreview
         {
 
@@ -2228,6 +2311,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Subtype { get; set; }
         }
 
+        /// <summary />
         public class EntryPreview
         {
 
@@ -2562,6 +2646,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class StackTraceId
         {
 
+            /// <summary></summary>
             [JsonProperty("id")]
             public string Id { get; set; }
 
@@ -2602,6 +2687,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? GeneratePreview { get; set; }
         }
 
+        /// <summary>
+        /// Response of AwaitPromise.
+        /// </summary>
         public class AwaitPromiseResponse
         {
 
@@ -2693,6 +2781,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string ObjectGroup { get; set; }
         }
 
+        /// <summary>
+        /// Response of CallFunctionOn.
+        /// </summary>
         public class CallFunctionOnResponse
         {
 
@@ -2742,6 +2833,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public ExecutionContextId ExecutionContextId { get; set; }
         }
 
+        /// <summary>
+        /// Response of CompileScript.
+        /// </summary>
         public class CompileScriptResponse
         {
 
@@ -2861,6 +2955,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public TimeDelta Timeout { get; set; }
         }
 
+        /// <summary>
+        /// Response of Evaluate.
+        /// </summary>
         public class EvaluateResponse
         {
 
@@ -2885,6 +2982,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Runtime.getIsolateId";
         }
 
+        /// <summary>
+        /// Response of GetIsolateId.
+        /// </summary>
         public class GetIsolateIdResponse
         {
 
@@ -2904,6 +3004,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Runtime.getHeapUsage";
         }
 
+        /// <summary>
+        /// Response of GetHeapUsage.
+        /// </summary>
         public class GetHeapUsageResponse
         {
 
@@ -2955,6 +3058,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? GeneratePreview { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetProperties.
+        /// </summary>
         public class GetPropertiesResponse
         {
 
@@ -2991,13 +3097,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public ExecutionContextId ExecutionContextId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GlobalLexicalScopeNames.
+        /// </summary>
         public class GlobalLexicalScopeNamesResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("names")]
             public string[] Names { get; set; }
         }
 
+        /// <summary />
         public class QueryObjectsCommand : ICommand<QueryObjectsResponse>
         {
             string ICommand.Name { get; } = "Runtime.queryObjects";
@@ -3015,6 +3126,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string ObjectGroup { get; set; }
         }
 
+        /// <summary>
+        /// Response of QueryObjects.
+        /// </summary>
         public class QueryObjectsResponse
         {
 
@@ -3120,6 +3234,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? AwaitPromise { get; set; }
         }
 
+        /// <summary>
+        /// Response of RunScript.
+        /// </summary>
         public class RunScriptResponse
         {
 
@@ -3151,18 +3268,22 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public long MaxDepth { get; set; }
         }
 
+        /// <summary />
         public class SetCustomObjectFormatterEnabledCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.setCustomObjectFormatterEnabled";
 
+            /// <summary></summary>
             [JsonProperty("enabled")]
             public bool Enabled { get; set; }
         }
 
+        /// <summary />
         public class SetMaxCallStackSizeToCaptureCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Runtime.setMaxCallStackSizeToCapture";
 
+            /// <summary></summary>
             [JsonProperty("size")]
             public long Size { get; set; }
         }
@@ -3190,6 +3311,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Runtime.addBinding";
 
+            /// <summary></summary>
             [JsonProperty("name")]
             public string Name { get; set; }
 
@@ -3208,6 +3330,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Runtime.removeBinding";
 
+            /// <summary></summary>
             [JsonProperty("name")]
             public string Name { get; set; }
         }
@@ -3223,9 +3346,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class BindingCalledEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("name")]
             public string Name { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("payload")]
             public string Payload { get; set; }
 
@@ -3315,6 +3440,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("timestamp")]
             public Timestamp Timestamp { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("exceptionDetails")]
             public ExceptionDetails ExceptionDetails { get; set; }
         }
@@ -3363,9 +3489,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class InspectRequestedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("object")]
             public RemoteObject Object { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("hints")]
             public object Hints { get; set; }
         }
@@ -3373,9 +3501,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// This domain is deprecated.
-    /// </summary>
     namespace Schema
     {
 
@@ -3412,6 +3537,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Schema.getDomains";
         }
 
+        /// <summary>
+        /// Response of GetDomains.
+        /// </summary>
         public class GetDomainsResponse
         {
 

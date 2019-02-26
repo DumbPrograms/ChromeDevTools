@@ -20,8 +20,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
             {
                 foreach (var domain in protocol.Domains)
                 {
-                    WILSummary(domain.Description);
-
+                    WL();
                     using (WILBlock($"namespace {domain.Name}"))
                     {
                         if (domain.Types != null)
@@ -52,6 +51,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
                                                 foreach (var value in type.EnumValues)
                                                 {
+                                                    WILSummary($"{type.Name} of '{value}'");
                                                     WIL($"public static {type.Name} {GetCSharpIdentifier(value)} => New<{type.Name}>(\"{value}\");");
                                                 }
                                             }
@@ -94,7 +94,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
                                 if (command.Returns != null)
                                 {
-                                    WL();
+                                    WILSummary($"Response of {commandClassName}.");
                                     using (WILBlock($"public class {commandClassName}Response"))
                                     {
                                         WILProperties(command.Returns);

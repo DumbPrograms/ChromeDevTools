@@ -37,7 +37,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
                     foreach (var domain in protocol.Domains)
                     {
-                        WL();
+                        WILSummary($"Inspector client for domain {domain.Name}.");
 
                         WILObsolete(domain.Deprecated);
 
@@ -47,7 +47,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
 
                             WL();
 
-                            using (WILBlock($"public {domain.Name}{InspectorClient}({InspectorClient} inspectionClient)"))
+                            using (WILBlock($"internal {domain.Name}{InspectorClient}({InspectorClient} inspectionClient)"))
                             {
                                 WIL($"{InspectorClient} = inspectionClient;");
                             }
@@ -65,6 +65,7 @@ namespace DumbPrograms.ChromeDevTools.Generator
                                             WILXmlDocElement(new XElement("param", new XAttribute("name", parameter.Name), parameter.Description));
                                         }
                                     }
+                                    WILXmlDocElement(new XElement("param", new XAttribute("name", "cancellation")));
 
                                     WILObsolete(command.Deprecated);
 

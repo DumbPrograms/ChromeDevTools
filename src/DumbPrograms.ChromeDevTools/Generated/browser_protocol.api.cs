@@ -7,12 +7,15 @@ namespace DumbPrograms.ChromeDevTools
     partial class InspectorClient
     {
 
+        /// <summary />
         public AccessibilityInspectorClient Accessibility => __Accessibility__ ?? (__Accessibility__ = new AccessibilityInspectorClient(this));
         private AccessibilityInspectorClient __Accessibility__;
 
+        /// <summary />
         public AnimationInspectorClient Animation => __Animation__ ?? (__Animation__ = new AnimationInspectorClient(this));
         private AnimationInspectorClient __Animation__;
 
+        /// <summary />
         public ApplicationCacheInspectorClient ApplicationCache => __ApplicationCache__ ?? (__ApplicationCache__ = new ApplicationCacheInspectorClient(this));
         private ApplicationCacheInspectorClient __ApplicationCache__;
 
@@ -39,6 +42,7 @@ namespace DumbPrograms.ChromeDevTools
         public CSSInspectorClient CSS => __CSS__ ?? (__CSS__ = new CSSInspectorClient(this));
         private CSSInspectorClient __CSS__;
 
+        /// <summary />
         public CacheStorageInspectorClient CacheStorage => __CacheStorage__ ?? (__CacheStorage__ = new CacheStorageInspectorClient(this));
         private CacheStorageInspectorClient __CacheStorage__;
 
@@ -80,9 +84,11 @@ namespace DumbPrograms.ChromeDevTools
         public DOMStorageInspectorClient DOMStorage => __DOMStorage__ ?? (__DOMStorage__ = new DOMStorageInspectorClient(this));
         private DOMStorageInspectorClient __DOMStorage__;
 
+        /// <summary />
         public DatabaseInspectorClient Database => __Database__ ?? (__Database__ = new DatabaseInspectorClient(this));
         private DatabaseInspectorClient __Database__;
 
+        /// <summary />
         public DeviceOrientationInspectorClient DeviceOrientation => __DeviceOrientation__ ?? (__DeviceOrientation__ = new DeviceOrientationInspectorClient(this));
         private DeviceOrientationInspectorClient __DeviceOrientation__;
 
@@ -104,15 +110,19 @@ namespace DumbPrograms.ChromeDevTools
         public IOInspectorClient IO => __IO__ ?? (__IO__ = new IOInspectorClient(this));
         private IOInspectorClient __IO__;
 
+        /// <summary />
         public IndexedDBInspectorClient IndexedDB => __IndexedDB__ ?? (__IndexedDB__ = new IndexedDBInspectorClient(this));
         private IndexedDBInspectorClient __IndexedDB__;
 
+        /// <summary />
         public InputInspectorClient Input => __Input__ ?? (__Input__ = new InputInspectorClient(this));
         private InputInspectorClient __Input__;
 
+        /// <summary />
         public InspectorInspectorClient Inspector => __Inspector__ ?? (__Inspector__ = new InspectorInspectorClient(this));
         private InspectorInspectorClient __Inspector__;
 
+        /// <summary />
         public LayerTreeInspectorClient LayerTree => __LayerTree__ ?? (__LayerTree__ = new LayerTreeInspectorClient(this));
         private LayerTreeInspectorClient __LayerTree__;
 
@@ -122,6 +132,7 @@ namespace DumbPrograms.ChromeDevTools
         public LogInspectorClient Log => __Log__ ?? (__Log__ = new LogInspectorClient(this));
         private LogInspectorClient __Log__;
 
+        /// <summary />
         public MemoryInspectorClient Memory => __Memory__ ?? (__Memory__ = new MemoryInspectorClient(this));
         private MemoryInspectorClient __Memory__;
 
@@ -144,6 +155,7 @@ namespace DumbPrograms.ChromeDevTools
         public PageInspectorClient Page => __Page__ ?? (__Page__ = new PageInspectorClient(this));
         private PageInspectorClient __Page__;
 
+        /// <summary />
         public PerformanceInspectorClient Performance => __Performance__ ?? (__Performance__ = new PerformanceInspectorClient(this));
         private PerformanceInspectorClient __Performance__;
 
@@ -153,9 +165,11 @@ namespace DumbPrograms.ChromeDevTools
         public SecurityInspectorClient Security => __Security__ ?? (__Security__ = new SecurityInspectorClient(this));
         private SecurityInspectorClient __Security__;
 
+        /// <summary />
         public ServiceWorkerInspectorClient ServiceWorker => __ServiceWorker__ ?? (__ServiceWorker__ = new ServiceWorkerInspectorClient(this));
         private ServiceWorkerInspectorClient __ServiceWorker__;
 
+        /// <summary />
         public StorageInspectorClient Storage => __Storage__ ?? (__Storage__ = new StorageInspectorClient(this));
         private StorageInspectorClient __Storage__;
 
@@ -177,6 +191,7 @@ namespace DumbPrograms.ChromeDevTools
         public TetheringInspectorClient Tethering => __Tethering__ ?? (__Tethering__ = new TetheringInspectorClient(this));
         private TetheringInspectorClient __Tethering__;
 
+        /// <summary />
         public TracingInspectorClient Tracing => __Tracing__ ?? (__Tracing__ = new TracingInspectorClient(this));
         private TracingInspectorClient __Tracing__;
 
@@ -193,11 +208,14 @@ namespace DumbPrograms.ChromeDevTools
         public FetchInspectorClient Fetch => __Fetch__ ?? (__Fetch__ = new FetchInspectorClient(this));
         private FetchInspectorClient __Fetch__;
 
+        /// <summary>
+        /// Inspector client for domain Accessibility.
+        /// </summary>
         public class AccessibilityInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public AccessibilityInspectorClient(InspectorClient inspectionClient)
+            internal AccessibilityInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -205,6 +223,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables the accessibility domain.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -224,6 +243,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Enables the accessibility domain which causes `AXNodeId`s to remain consistent between method calls.
             /// This turns on accessibility for the page, which can impact performance until accessibility is disabled.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -254,6 +274,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="fetchRelatives">
             /// Whether to fetch this nodes ancestors, siblings and children. Defaults to true.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Accessibility.GetPartialAXTreeResponse> GetPartialAXTree
             (
                 Protocol.DOM.NodeId @nodeId = default, 
@@ -280,6 +301,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Fetches the entire accessibility tree
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Accessibility.GetFullAXTreeResponse> GetFullAXTree
             (
                 CancellationToken cancellation = default
@@ -296,11 +318,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Animation.
+        /// </summary>
         public class AnimationInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public AnimationInspectorClient(InspectorClient inspectionClient)
+            internal AnimationInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -308,6 +333,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables animation domain notifications.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -326,6 +352,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables animation domain notifications.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -347,6 +374,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="id">
             /// Id of animation.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Animation.GetCurrentTimeResponse> GetCurrentTime
             (
                 string @id, 
@@ -367,6 +395,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Gets the playback rate of the document timeline.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Animation.GetPlaybackRateResponse> GetPlaybackRate
             (
                 CancellationToken cancellation = default
@@ -388,6 +417,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="animations">
             /// List of animation ids to seek.
             /// </param>
+            /// <param name="cancellation" />
             public Task ReleaseAnimations
             (
                 string[] @animations, 
@@ -411,6 +441,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="animationId">
             /// Animation id.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Animation.ResolveAnimationResponse> ResolveAnimation
             (
                 string @animationId, 
@@ -437,6 +468,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="currentTime">
             /// Set the current time of each animation.
             /// </param>
+            /// <param name="cancellation" />
             public Task SeekAnimations
             (
                 string[] @animations, 
@@ -465,6 +497,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="paused">
             /// Paused state to set to.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetPaused
             (
                 string[] @animations, 
@@ -490,6 +523,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="playbackRate">
             /// Playback rate for animations on page
             /// </param>
+            /// <param name="cancellation" />
             public Task SetPlaybackRate
             (
                 double @playbackRate, 
@@ -519,6 +553,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="delay">
             /// Delay of the animation.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetTiming
             (
                 string @animationId, 
@@ -592,11 +627,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain ApplicationCache.
+        /// </summary>
         public class ApplicationCacheInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public ApplicationCacheInspectorClient(InspectorClient inspectionClient)
+            internal ApplicationCacheInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -604,6 +642,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables application cache domain notifications.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -625,6 +664,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="frameId">
             /// Identifier of the frame containing document whose application cache is retrieved.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.ApplicationCache.GetApplicationCacheForFrameResponse> GetApplicationCacheForFrame
             (
                 Protocol.Page.FrameId @frameId, 
@@ -646,6 +686,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns array of frame identifiers with manifest urls for each frame containing a document
             /// associated with some application cache.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.ApplicationCache.GetFramesWithManifestsResponse> GetFramesWithManifests
             (
                 CancellationToken cancellation = default
@@ -667,6 +708,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="frameId">
             /// Identifier of the frame containing document whose manifest is retrieved.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.ApplicationCache.GetManifestForFrameResponse> GetManifestForFrame
             (
                 Protocol.Page.FrameId @frameId, 
@@ -684,34 +726,41 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             public event Func<Protocol.ApplicationCache.ApplicationCacheStatusUpdatedEvent, Task> ApplicationCacheStatusUpdated
             {
                 add => InspectorClient.AddEventHandlerCore("ApplicationCache.applicationCacheStatusUpdated", value);
                 remove => InspectorClient.RemoveEventHandlerCore("ApplicationCache.applicationCacheStatusUpdated", value);
             }
 
+            /// <summary />
             public event Func<Protocol.ApplicationCache.NetworkStateUpdatedEvent, Task> NetworkStateUpdated
             {
                 add => InspectorClient.AddEventHandlerCore("ApplicationCache.networkStateUpdated", value);
                 remove => InspectorClient.RemoveEventHandlerCore("ApplicationCache.networkStateUpdated", value);
             }
 
+            /// <summary />
             public Task<Protocol.ApplicationCache.ApplicationCacheStatusUpdatedEvent> ApplicationCacheStatusUpdatedEvent(Func<Protocol.ApplicationCache.ApplicationCacheStatusUpdatedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("ApplicationCache.applicationCacheStatusUpdated", until);
             }
 
+            /// <summary />
             public Task<Protocol.ApplicationCache.NetworkStateUpdatedEvent> NetworkStateUpdatedEvent(Func<Protocol.ApplicationCache.NetworkStateUpdatedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("ApplicationCache.networkStateUpdated", until);
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Audits.
+        /// </summary>
         public class AuditsInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public AuditsInspectorClient(InspectorClient inspectionClient)
+            internal AuditsInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -732,6 +781,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="sizeOnly">
             /// Whether to only return the size information (defaults to false).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Audits.GetEncodedResponseResponse> GetEncodedResponse
             (
                 Protocol.Network.RequestId @requestId, 
@@ -756,11 +806,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Browser.
+        /// </summary>
         public class BrowserInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public BrowserInspectorClient(InspectorClient inspectionClient)
+            internal BrowserInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -773,6 +826,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="browserContextId">
             /// BrowserContext to override permissions. When omitted, default browser context is used.
             /// </param>
+            /// <param name="cancellation" />
             public Task GrantPermissions
             (
                 string @origin, 
@@ -800,6 +854,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="browserContextId">
             /// BrowserContext to reset permissions. When omitted, default browser context is used.
             /// </param>
+            /// <param name="cancellation" />
             public Task ResetPermissions
             (
                 Protocol.Target.BrowserContextID @browserContextId = default, 
@@ -820,6 +875,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Close browser gracefully.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Close
             (
                 CancellationToken cancellation = default
@@ -838,6 +894,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Crashes browser on the main thread.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Crash
             (
                 CancellationToken cancellation = default
@@ -856,6 +913,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Crashes GPU process.
             /// </summary>
+            /// <param name="cancellation" />
             public Task CrashGpuProcess
             (
                 CancellationToken cancellation = default
@@ -874,6 +932,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns version information.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Browser.GetVersionResponse> GetVersion
             (
                 CancellationToken cancellation = default
@@ -893,6 +952,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns the command line switches for the browser process if, and only if
             /// --enable-automation is on the commandline.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Browser.GetBrowserCommandLineResponse> GetBrowserCommandLine
             (
                 CancellationToken cancellation = default
@@ -919,6 +979,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="delta">
             /// If true, retrieve delta since last call.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Browser.GetHistogramsResponse> GetHistograms
             (
                 string @query = default, 
@@ -947,6 +1008,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="delta">
             /// If true, retrieve delta since last call.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Browser.GetHistogramResponse> GetHistogram
             (
                 string @name, 
@@ -972,6 +1034,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="windowId">
             /// Browser window id.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Browser.GetWindowBoundsResponse> GetWindowBounds
             (
                 Protocol.Browser.WindowID @windowId, 
@@ -995,6 +1058,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="targetId">
             /// Devtools agent host id. If called as a part of the session, associated targetId is used.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Browser.GetWindowForTargetResponse> GetWindowForTarget
             (
                 Protocol.Target.TargetID @targetId = default, 
@@ -1022,6 +1086,7 @@ namespace DumbPrograms.ChromeDevTools
             /// New window bounds. The 'minimized', 'maximized' and 'fullscreen' states cannot be combined
             /// with 'left', 'top', 'width' or 'height'. Leaves unspecified fields unchanged.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetWindowBounds
             (
                 Protocol.Browser.WindowID @windowId, 
@@ -1048,6 +1113,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="image">
             /// Png encoded image.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetDockTile
             (
                 string @badgeLabel = default, 
@@ -1068,11 +1134,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain CSS.
+        /// </summary>
         public class CSSInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public CSSInspectorClient(InspectorClient inspectionClient)
+            internal CSSInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -1090,6 +1159,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="location">
             /// Text position of a new rule in the target style sheet.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.AddRuleResponse> AddRule
             (
                 Protocol.CSS.StyleSheetId @styleSheetId, 
@@ -1115,6 +1185,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns all class names from specified stylesheet.
             /// </summary>
             /// <param name="styleSheetId" />
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.CollectClassNamesResponse> CollectClassNames
             (
                 Protocol.CSS.StyleSheetId @styleSheetId, 
@@ -1138,6 +1209,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="frameId">
             /// Identifier of the frame where "via-inspector" stylesheet should be created.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.CreateStyleSheetResponse> CreateStyleSheet
             (
                 Protocol.Page.FrameId @frameId, 
@@ -1158,6 +1230,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables the CSS agent for the given page.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -1177,6 +1250,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Enables the CSS agent for the given page. Clients should not assume that the CSS agent has been
             /// enabled until the result of this command is received.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -1202,6 +1276,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="forcedPseudoClasses">
             /// Element pseudo classes to force when computing the element's style.
             /// </param>
+            /// <param name="cancellation" />
             public Task ForcePseudoState
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -1221,9 +1296,11 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="nodeId">
             /// Id of the node to get background colors for.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.GetBackgroundColorsResponse> GetBackgroundColors
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -1245,6 +1322,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns the computed style for a DOM node identified by `nodeId`.
             /// </summary>
             /// <param name="nodeId" />
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.GetComputedStyleForNodeResponse> GetComputedStyleForNode
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -1267,6 +1345,7 @@ namespace DumbPrograms.ChromeDevTools
             /// attributes) for a DOM node identified by `nodeId`.
             /// </summary>
             /// <param name="nodeId" />
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.GetInlineStylesForNodeResponse> GetInlineStylesForNode
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -1288,6 +1367,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns requested styles for a DOM node identified by `nodeId`.
             /// </summary>
             /// <param name="nodeId" />
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.GetMatchedStylesForNodeResponse> GetMatchedStylesForNode
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -1308,6 +1388,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns all media queries parsed by the rendering engine.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.GetMediaQueriesResponse> GetMediaQueries
             (
                 CancellationToken cancellation = default
@@ -1328,6 +1409,7 @@ namespace DumbPrograms.ChromeDevTools
             /// node.
             /// </summary>
             /// <param name="nodeId" />
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.GetPlatformFontsForNodeResponse> GetPlatformFontsForNode
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -1349,6 +1431,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns the current textual content for a stylesheet.
             /// </summary>
             /// <param name="styleSheetId" />
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.GetStyleSheetTextResponse> GetStyleSheetText
             (
                 Protocol.CSS.StyleSheetId @styleSheetId, 
@@ -1375,6 +1458,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </param>
             /// <param name="propertyName" />
             /// <param name="value" />
+            /// <param name="cancellation" />
             public Task SetEffectivePropertyValueForNode
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -1402,6 +1486,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="styleSheetId" />
             /// <param name="range" />
             /// <param name="keyText" />
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.SetKeyframeKeyResponse> SetKeyframeKey
             (
                 Protocol.CSS.StyleSheetId @styleSheetId, 
@@ -1429,6 +1514,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="styleSheetId" />
             /// <param name="range" />
             /// <param name="text" />
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.SetMediaTextResponse> SetMediaText
             (
                 Protocol.CSS.StyleSheetId @styleSheetId, 
@@ -1456,6 +1542,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="styleSheetId" />
             /// <param name="range" />
             /// <param name="selector" />
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.SetRuleSelectorResponse> SetRuleSelector
             (
                 Protocol.CSS.StyleSheetId @styleSheetId, 
@@ -1482,6 +1569,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             /// <param name="styleSheetId" />
             /// <param name="text" />
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.SetStyleSheetTextResponse> SetStyleSheetText
             (
                 Protocol.CSS.StyleSheetId @styleSheetId, 
@@ -1505,6 +1593,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Applies specified style edits one after another in the given order.
             /// </summary>
             /// <param name="edits" />
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.SetStyleTextsResponse> SetStyleTexts
             (
                 Protocol.CSS.StyleDeclarationEdit[] @edits, 
@@ -1525,6 +1614,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables the selector recording.
             /// </summary>
+            /// <param name="cancellation" />
             public Task StartRuleUsageTracking
             (
                 CancellationToken cancellation = default
@@ -1544,6 +1634,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Stop tracking rule usage and return the list of rules that were used since last call to
             /// `takeCoverageDelta` (or since start of coverage instrumentation)
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.StopRuleUsageTrackingResponse> StopRuleUsageTracking
             (
                 CancellationToken cancellation = default
@@ -1563,6 +1654,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Obtain list of rules that became used since last call to this method (or since start of coverage
             /// instrumentation)
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.CSS.TakeCoverageDeltaResponse> TakeCoverageDelta
             (
                 CancellationToken cancellation = default
@@ -1668,11 +1760,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain CacheStorage.
+        /// </summary>
         public class CacheStorageInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public CacheStorageInspectorClient(InspectorClient inspectionClient)
+            internal CacheStorageInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -1683,6 +1778,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="cacheId">
             /// Id of cache for deletion.
             /// </param>
+            /// <param name="cancellation" />
             public Task DeleteCache
             (
                 Protocol.CacheStorage.CacheId @cacheId, 
@@ -1709,6 +1805,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="request">
             /// URL spec of the request.
             /// </param>
+            /// <param name="cancellation" />
             public Task DeleteEntry
             (
                 Protocol.CacheStorage.CacheId @cacheId, 
@@ -1734,6 +1831,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="securityOrigin">
             /// Security origin.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.CacheStorage.RequestCacheNamesResponse> RequestCacheNames
             (
                 string @securityOrigin, 
@@ -1763,6 +1861,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="requestHeaders">
             /// headers of the request.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.CacheStorage.RequestCachedResponseResponse> RequestCachedResponse
             (
                 Protocol.CacheStorage.CacheId @cacheId, 
@@ -1799,6 +1898,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="pathFilter">
             /// If present, only return the entries containing this substring in the path
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.CacheStorage.RequestEntriesResponse> RequestEntries
             (
                 Protocol.CacheStorage.CacheId @cacheId, 
@@ -1823,11 +1923,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Cast.
+        /// </summary>
         public class CastInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public CastInspectorClient(InspectorClient inspectionClient)
+            internal CastInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -1840,6 +1943,7 @@ namespace DumbPrograms.ChromeDevTools
             /// an |issueUpdated| event is fired.
             /// </summary>
             /// <param name="presentationUrl" />
+            /// <param name="cancellation" />
             public Task Enable
             (
                 string @presentationUrl = default, 
@@ -1860,6 +1964,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Stops observing for sinks and issues.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -1880,6 +1985,7 @@ namespace DumbPrograms.ChromeDevTools
             /// sink via Presentation API, Remote Playback API, or Cast SDK.
             /// </summary>
             /// <param name="sinkName" />
+            /// <param name="cancellation" />
             public Task SetSinkToUse
             (
                 string @sinkName, 
@@ -1901,6 +2007,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Starts mirroring the tab to the sink.
             /// </summary>
             /// <param name="sinkName" />
+            /// <param name="cancellation" />
             public Task StartTabMirroring
             (
                 string @sinkName, 
@@ -1922,6 +2029,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Stops the active Cast session on the sink.
             /// </summary>
             /// <param name="sinkName" />
+            /// <param name="cancellation" />
             public Task StopCasting
             (
                 string @sinkName, 
@@ -1978,11 +2086,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain DOM.
+        /// </summary>
         public class DOMInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public DOMInspectorClient(InspectorClient inspectionClient)
+            internal DOMInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -1993,6 +2104,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="nodeId">
             /// Id of the node to collect class names.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.CollectClassNamesFromSubtreeResponse> CollectClassNamesFromSubtree
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -2024,6 +2136,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Drop the copy before this node (if absent, the copy becomes the last child of
             /// `targetNodeId`).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.CopyToResponse> CopyTo
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -2066,6 +2179,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Whether or not iframes and shadow roots should be traversed when returning the subtree
             /// (default is false).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.DescribeNodeResponse> DescribeNode
             (
                 Protocol.DOM.NodeId @nodeId = default, 
@@ -2094,6 +2208,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables DOM agent for the given page.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -2116,6 +2231,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="searchId">
             /// Unique search session identifier.
             /// </param>
+            /// <param name="cancellation" />
             public Task DiscardSearchResults
             (
                 string @searchId, 
@@ -2136,6 +2252,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables DOM agent for the given page.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -2163,6 +2280,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectId">
             /// JavaScript object id of the node wrapper.
             /// </param>
+            /// <param name="cancellation" />
             public Task Focus
             (
                 Protocol.DOM.NodeId @nodeId = default, 
@@ -2190,6 +2308,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="nodeId">
             /// Id of the node to retrieve attibutes for.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.GetAttributesResponse> GetAttributes
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -2219,6 +2338,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectId">
             /// JavaScript object id of the node wrapper.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.GetBoxModelResponse> GetBoxModel
             (
                 Protocol.DOM.NodeId @nodeId = default, 
@@ -2253,6 +2373,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectId">
             /// JavaScript object id of the node wrapper.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.GetContentQuadsResponse> GetContentQuads
             (
                 Protocol.DOM.NodeId @nodeId = default, 
@@ -2285,6 +2406,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Whether or not iframes and shadow roots should be traversed when returning the subtree
             /// (default is false).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.GetDocumentResponse> GetDocument
             (
                 long? @depth = default, 
@@ -2315,6 +2437,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Whether or not iframes and shadow roots should be traversed when returning the subtree
             /// (default is false).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.GetFlattenedDocumentResponse> GetFlattenedDocument
             (
                 long? @depth = default, 
@@ -2347,6 +2470,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="includeUserAgentShadowDOM">
             /// False to skip to the nearest non-UA shadow root ancestor (default: false).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.GetNodeForLocationResponse> GetNodeForLocation
             (
                 long @x, 
@@ -2380,6 +2504,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectId">
             /// JavaScript object id of the node wrapper.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.GetOuterHTMLResponse> GetOuterHTML
             (
                 Protocol.DOM.NodeId @nodeId = default, 
@@ -2407,6 +2532,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="nodeId">
             /// Id of the node.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.GetRelayoutBoundaryResponse> GetRelayoutBoundary
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -2437,6 +2563,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="toIndex">
             /// End index of the search result to be returned.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.GetSearchResultsResponse> GetSearchResults
             (
                 string @searchId, 
@@ -2461,6 +2588,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Hides any highlight.
             /// </summary>
+            /// <param name="cancellation" />
             public Task HideHighlight
             (
                 CancellationToken cancellation = default
@@ -2479,6 +2607,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Highlights DOM node.
             /// </summary>
+            /// <param name="cancellation" />
             public Task HighlightNode
             (
                 CancellationToken cancellation = default
@@ -2497,6 +2626,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Highlights given rectangle.
             /// </summary>
+            /// <param name="cancellation" />
             public Task HighlightRect
             (
                 CancellationToken cancellation = default
@@ -2515,6 +2645,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Marks last undoable state.
             /// </summary>
+            /// <param name="cancellation" />
             public Task MarkUndoableState
             (
                 CancellationToken cancellation = default
@@ -2543,6 +2674,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Drop node before this one (if absent, the moved node becomes the last child of
             /// `targetNodeId`).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.MoveToResponse> MoveTo
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -2574,6 +2706,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="includeUserAgentShadowDOM">
             /// True to search in user agent shadow DOM.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.PerformSearchResponse> PerformSearch
             (
                 string @query, 
@@ -2599,6 +2732,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="path">
             /// Path to node in the proprietary format.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.PushNodeByPathToFrontendResponse> PushNodeByPathToFrontend
             (
                 string @path, 
@@ -2622,6 +2756,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="backendNodeIds">
             /// The array of backend node ids.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.PushNodesByBackendIdsToFrontendResponse> PushNodesByBackendIdsToFrontend
             (
                 Protocol.DOM.BackendNodeId[] @backendNodeIds, 
@@ -2648,6 +2783,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="selector">
             /// Selector string.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.QuerySelectorResponse> QuerySelector
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -2676,6 +2812,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="selector">
             /// Selector string.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.QuerySelectorAllResponse> QuerySelectorAll
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -2698,6 +2835,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Re-does the last undone action.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Redo
             (
                 CancellationToken cancellation = default
@@ -2722,6 +2860,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="name">
             /// Name of the attribute to remove.
             /// </param>
+            /// <param name="cancellation" />
             public Task RemoveAttribute
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -2747,6 +2886,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="nodeId">
             /// Id of the node to remove.
             /// </param>
+            /// <param name="cancellation" />
             public Task RemoveNode
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -2780,6 +2920,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Whether or not iframes and shadow roots should be traversed when returning the sub-tree
             /// (default is false).
             /// </param>
+            /// <param name="cancellation" />
             public Task RequestChildNodes
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -2809,6 +2950,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectId">
             /// JavaScript object id to convert into node.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.RequestNodeResponse> RequestNode
             (
                 Protocol.Runtime.RemoteObjectId @objectId, 
@@ -2841,6 +2983,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="executionContextId">
             /// Execution context in which to resolve the node.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.ResolveNodeResponse> ResolveNode
             (
                 Protocol.DOM.NodeId @nodeId = default, 
@@ -2876,6 +3019,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="value">
             /// Attribute value.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetAttributeValue
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -2911,6 +3055,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Attribute name to replace with new attributes derived from text in case text parsed
             /// successfully.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetAttributesAsText
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -2947,6 +3092,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectId">
             /// JavaScript object id of the node wrapper.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetFileInputFiles
             (
                 string[] @files, 
@@ -2977,6 +3123,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectId">
             /// JavaScript object id of the node wrapper.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.GetFileInfoResponse> GetFileInfo
             (
                 Protocol.Runtime.RemoteObjectId @objectId, 
@@ -3001,6 +3148,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="nodeId">
             /// DOM node id to be accessible by means of $x command line API.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetInspectedNode
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -3027,6 +3175,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="name">
             /// New node's name.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.SetNodeNameResponse> SetNodeName
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -3055,6 +3204,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="value">
             /// New node's value.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetNodeValue
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -3083,6 +3233,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="outerHTML">
             /// Outer HTML markup to set.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetOuterHTML
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -3105,6 +3256,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Undoes the last performed action.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Undo
             (
                 CancellationToken cancellation = default
@@ -3124,6 +3276,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns iframe node that owns iframe with the given domain.
             /// </summary>
             /// <param name="frameId" />
+            /// <param name="cancellation" />
             public Task<Protocol.DOM.GetFrameOwnerResponse> GetFrameOwner
             (
                 Protocol.Page.FrameId @frameId, 
@@ -3382,11 +3535,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain DOMDebugger.
+        /// </summary>
         public class DOMDebuggerInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public DOMDebuggerInspectorClient(InspectorClient inspectionClient)
+            internal DOMDebuggerInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -3405,6 +3561,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Whether or not iframes and shadow roots should be traversed when returning the subtree
             /// (default is false). Reports listeners for all contexts if pierce is enabled.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOMDebugger.GetEventListenersResponse> GetEventListeners
             (
                 Protocol.Runtime.RemoteObjectId @objectId, 
@@ -3435,6 +3592,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="type">
             /// Type of the breakpoint to remove.
             /// </param>
+            /// <param name="cancellation" />
             public Task RemoveDOMBreakpoint
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -3463,6 +3621,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="targetName">
             /// EventTarget interface name.
             /// </param>
+            /// <param name="cancellation" />
             public Task RemoveEventListenerBreakpoint
             (
                 string @eventName, 
@@ -3488,6 +3647,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="eventName">
             /// Instrumentation name to stop on.
             /// </param>
+            /// <param name="cancellation" />
             public Task RemoveInstrumentationBreakpoint
             (
                 string @eventName, 
@@ -3511,6 +3671,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="url">
             /// Resource URL substring.
             /// </param>
+            /// <param name="cancellation" />
             public Task RemoveXHRBreakpoint
             (
                 string @url, 
@@ -3537,6 +3698,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="type">
             /// Type of the operation to stop upon.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetDOMBreakpoint
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -3566,6 +3728,7 @@ namespace DumbPrograms.ChromeDevTools
             /// EventTarget interface name to stop on. If equal to `"*"` or not provided, will stop on any
             /// EventTarget.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetEventListenerBreakpoint
             (
                 string @eventName, 
@@ -3591,6 +3754,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="eventName">
             /// Instrumentation name to stop on.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetInstrumentationBreakpoint
             (
                 string @eventName, 
@@ -3614,6 +3778,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="url">
             /// Resource URL substring. All XHRs having this substring in the URL will get stopped upon.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetXHRBreakpoint
             (
                 string @url, 
@@ -3632,11 +3797,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain DOMSnapshot.
+        /// </summary>
         public class DOMSnapshotInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public DOMSnapshotInspectorClient(InspectorClient inspectionClient)
+            internal DOMSnapshotInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -3644,6 +3812,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables DOM snapshot agent for the given page.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -3662,6 +3831,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables DOM snapshot agent for the given page.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -3695,6 +3865,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="includeUserAgentShadowTree">
             /// Whether to include UA shadow tree in the snapshot (default false).
             /// </param>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task<Protocol.DOMSnapshot.GetSnapshotResponse> GetSnapshot
             (
@@ -3728,6 +3899,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="computedStyles">
             /// Whitelist of computed styles to return.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.DOMSnapshot.CaptureSnapshotResponse> CaptureSnapshot
             (
                 string[] @computedStyles, 
@@ -3746,16 +3918,21 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain DOMStorage.
+        /// </summary>
         public class DOMStorageInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public DOMStorageInspectorClient(InspectorClient inspectionClient)
+            internal DOMStorageInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
 
+            /// <summary />
             /// <param name="storageId" />
+            /// <param name="cancellation" />
             public Task Clear
             (
                 Protocol.DOMStorage.StorageId @storageId, 
@@ -3776,6 +3953,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables storage tracking, prevents storage events from being sent to the client.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -3794,6 +3972,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables storage tracking, storage events will now be delivered to the client.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -3809,7 +3988,9 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="storageId" />
+            /// <param name="cancellation" />
             public Task<Protocol.DOMStorage.GetDOMStorageItemsResponse> GetDOMStorageItems
             (
                 Protocol.DOMStorage.StorageId @storageId, 
@@ -3827,8 +4008,10 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="storageId" />
             /// <param name="key" />
+            /// <param name="cancellation" />
             public Task RemoveDOMStorageItem
             (
                 Protocol.DOMStorage.StorageId @storageId, 
@@ -3848,9 +4031,11 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="storageId" />
             /// <param name="key" />
             /// <param name="value" />
+            /// <param name="cancellation" />
             public Task SetDOMStorageItem
             (
                 Protocol.DOMStorage.StorageId @storageId, 
@@ -3872,56 +4057,67 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             public event Func<Protocol.DOMStorage.DomStorageItemAddedEvent, Task> DomStorageItemAdded
             {
                 add => InspectorClient.AddEventHandlerCore("DOMStorage.domStorageItemAdded", value);
                 remove => InspectorClient.RemoveEventHandlerCore("DOMStorage.domStorageItemAdded", value);
             }
 
+            /// <summary />
             public event Func<Protocol.DOMStorage.DomStorageItemRemovedEvent, Task> DomStorageItemRemoved
             {
                 add => InspectorClient.AddEventHandlerCore("DOMStorage.domStorageItemRemoved", value);
                 remove => InspectorClient.RemoveEventHandlerCore("DOMStorage.domStorageItemRemoved", value);
             }
 
+            /// <summary />
             public event Func<Protocol.DOMStorage.DomStorageItemUpdatedEvent, Task> DomStorageItemUpdated
             {
                 add => InspectorClient.AddEventHandlerCore("DOMStorage.domStorageItemUpdated", value);
                 remove => InspectorClient.RemoveEventHandlerCore("DOMStorage.domStorageItemUpdated", value);
             }
 
+            /// <summary />
             public event Func<Protocol.DOMStorage.DomStorageItemsClearedEvent, Task> DomStorageItemsCleared
             {
                 add => InspectorClient.AddEventHandlerCore("DOMStorage.domStorageItemsCleared", value);
                 remove => InspectorClient.RemoveEventHandlerCore("DOMStorage.domStorageItemsCleared", value);
             }
 
+            /// <summary />
             public Task<Protocol.DOMStorage.DomStorageItemAddedEvent> DomStorageItemAddedEvent(Func<Protocol.DOMStorage.DomStorageItemAddedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("DOMStorage.domStorageItemAdded", until);
             }
 
+            /// <summary />
             public Task<Protocol.DOMStorage.DomStorageItemRemovedEvent> DomStorageItemRemovedEvent(Func<Protocol.DOMStorage.DomStorageItemRemovedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("DOMStorage.domStorageItemRemoved", until);
             }
 
+            /// <summary />
             public Task<Protocol.DOMStorage.DomStorageItemUpdatedEvent> DomStorageItemUpdatedEvent(Func<Protocol.DOMStorage.DomStorageItemUpdatedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("DOMStorage.domStorageItemUpdated", until);
             }
 
+            /// <summary />
             public Task<Protocol.DOMStorage.DomStorageItemsClearedEvent> DomStorageItemsClearedEvent(Func<Protocol.DOMStorage.DomStorageItemsClearedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("DOMStorage.domStorageItemsCleared", until);
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Database.
+        /// </summary>
         public class DatabaseInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public DatabaseInspectorClient(InspectorClient inspectionClient)
+            internal DatabaseInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -3929,6 +4125,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables database tracking, prevents database events from being sent to the client.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -3947,6 +4144,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables database tracking, database events will now be delivered to the client.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -3962,8 +4160,10 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="databaseId" />
             /// <param name="query" />
+            /// <param name="cancellation" />
             public Task<Protocol.Database.ExecuteSQLResponse> ExecuteSQL
             (
                 Protocol.Database.DatabaseId @databaseId, 
@@ -3983,7 +4183,9 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="databaseId" />
+            /// <param name="cancellation" />
             public Task<Protocol.Database.GetDatabaseTableNamesResponse> GetDatabaseTableNames
             (
                 Protocol.Database.DatabaseId @databaseId, 
@@ -4001,23 +4203,28 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             public event Func<Protocol.Database.AddDatabaseEvent, Task> AddDatabase
             {
                 add => InspectorClient.AddEventHandlerCore("Database.addDatabase", value);
                 remove => InspectorClient.RemoveEventHandlerCore("Database.addDatabase", value);
             }
 
+            /// <summary />
             public Task<Protocol.Database.AddDatabaseEvent> AddDatabaseEvent(Func<Protocol.Database.AddDatabaseEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("Database.addDatabase", until);
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain DeviceOrientation.
+        /// </summary>
         public class DeviceOrientationInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public DeviceOrientationInspectorClient(InspectorClient inspectionClient)
+            internal DeviceOrientationInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -4025,6 +4232,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears the overridden Device Orientation.
             /// </summary>
+            /// <param name="cancellation" />
             public Task ClearDeviceOrientationOverride
             (
                 CancellationToken cancellation = default
@@ -4052,6 +4260,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="gamma">
             /// Mock gamma
             /// </param>
+            /// <param name="cancellation" />
             public Task SetDeviceOrientationOverride
             (
                 double @alpha, 
@@ -4074,11 +4283,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Emulation.
+        /// </summary>
         public class EmulationInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public EmulationInspectorClient(InspectorClient inspectionClient)
+            internal EmulationInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -4086,6 +4298,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Tells whether emulation is supported.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Emulation.CanEmulateResponse> CanEmulate
             (
                 CancellationToken cancellation = default
@@ -4104,6 +4317,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears the overriden device metrics.
             /// </summary>
+            /// <param name="cancellation" />
             public Task ClearDeviceMetricsOverride
             (
                 CancellationToken cancellation = default
@@ -4122,6 +4336,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears the overriden Geolocation Position and Error.
             /// </summary>
+            /// <param name="cancellation" />
             public Task ClearGeolocationOverride
             (
                 CancellationToken cancellation = default
@@ -4140,6 +4355,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Requests that page scale factor is reset to initial values.
             /// </summary>
+            /// <param name="cancellation" />
             public Task ResetPageScaleFactor
             (
                 CancellationToken cancellation = default
@@ -4161,6 +4377,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="enabled">
             /// Whether to enable to disable focus emulation.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetFocusEmulationEnabled
             (
                 bool @enabled, 
@@ -4184,6 +4401,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="rate">
             /// Throttling rate as a slowdown factor (1 is no throttle, 2 is 2x slowdown, etc).
             /// </param>
+            /// <param name="cancellation" />
             public Task SetCPUThrottlingRate
             (
                 double @rate, 
@@ -4209,6 +4427,7 @@ namespace DumbPrograms.ChromeDevTools
             /// RGBA of the default background color. If not specified, any existing override will be
             /// cleared.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetDefaultBackgroundColorOverride
             (
                 Protocol.DOM.RGBA @color = default, 
@@ -4269,6 +4488,7 @@ namespace DumbPrograms.ChromeDevTools
             /// If set, the visible area of the page will be overridden to this viewport. This viewport
             /// change is not observed by the page, e.g. viewport-relative elements do not change positions.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetDeviceMetricsOverride
             (
                 long @width, 
@@ -4308,9 +4528,11 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="hidden">
             /// Whether scrollbars should be always hidden.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetScrollbarsHidden
             (
                 bool @hidden, 
@@ -4328,9 +4550,11 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="disabled">
             /// Whether document.coookie API should be disabled.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetDocumentCookieDisabled
             (
                 bool @disabled, 
@@ -4348,12 +4572,14 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="enabled">
             /// Whether touch emulation based on mouse input should be enabled.
             /// </param>
             /// <param name="configuration">
             /// Touch/gesture events configuration. Default: current platform.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetEmitTouchEventsForMouse
             (
                 bool @enabled, 
@@ -4379,6 +4605,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="media">
             /// Media type to emulate. Empty string disables the override.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetEmulatedMedia
             (
                 string @media, 
@@ -4409,6 +4636,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="accuracy">
             /// Mock accuracy
             /// </param>
+            /// <param name="cancellation" />
             public Task SetGeolocationOverride
             (
                 double? @latitude = default, 
@@ -4436,6 +4664,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="platform">
             /// The platform navigator.platform should return.
             /// </param>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task SetNavigatorOverrides
             (
@@ -4460,6 +4689,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="pageScaleFactor">
             /// Page scale factor.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetPageScaleFactor
             (
                 double @pageScaleFactor, 
@@ -4483,6 +4713,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="value">
             /// Whether script execution should be disabled in the page.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetScriptExecutionDisabled
             (
                 bool @value, 
@@ -4509,6 +4740,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="maxTouchPoints">
             /// Maximum touch points supported. Defaults to one.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetTouchEmulationEnabled
             (
                 bool @enabled, 
@@ -4548,6 +4780,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="initialVirtualTime">
             /// If set, base::Time::Now will be overriden to initially return this value.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Emulation.SetVirtualTimePolicyResponse> SetVirtualTimePolicy
             (
                 Protocol.Emulation.VirtualTimePolicy @policy, 
@@ -4584,6 +4817,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="height">
             /// Frame height (DIP).
             /// </param>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task SetVisibleSize
             (
@@ -4616,6 +4850,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="platform">
             /// The platform navigator.platform should return.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetUserAgentOverride
             (
                 string @userAgent, 
@@ -4655,11 +4890,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain HeadlessExperimental.
+        /// </summary>
         public class HeadlessExperimentalInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public HeadlessExperimentalInspectorClient(InspectorClient inspectionClient)
+            internal HeadlessExperimentalInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -4688,6 +4926,7 @@ namespace DumbPrograms.ChromeDevTools
             /// no screenshot will be captured. Note that capturing a screenshot can fail, for example,
             /// during renderer initialization. In such a case, no screenshot data will be returned.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.HeadlessExperimental.BeginFrameResponse> BeginFrame
             (
                 double? @frameTimeTicks = default, 
@@ -4714,6 +4953,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables headless events for the target.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -4732,6 +4972,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables headless events for the target.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -4765,11 +5006,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain IO.
+        /// </summary>
         public class IOInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public IOInspectorClient(InspectorClient inspectionClient)
+            internal IOInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -4780,6 +5024,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="handle">
             /// Handle of the stream to close.
             /// </param>
+            /// <param name="cancellation" />
             public Task Close
             (
                 Protocol.IO.StreamHandle @handle, 
@@ -4810,6 +5055,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="size">
             /// Maximum number of bytes to read (left upon the agent discretion if not specified).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.IO.ReadResponse> Read
             (
                 Protocol.IO.StreamHandle @handle, 
@@ -4837,6 +5083,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectId">
             /// Object id of a Blob object wrapper.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.IO.ResolveBlobResponse> ResolveBlob
             (
                 Protocol.Runtime.RemoteObjectId @objectId, 
@@ -4855,11 +5102,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain IndexedDB.
+        /// </summary>
         public class IndexedDBInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public IndexedDBInspectorClient(InspectorClient inspectionClient)
+            internal IndexedDBInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -4876,6 +5126,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectStoreName">
             /// Object store name.
             /// </param>
+            /// <param name="cancellation" />
             public Task ClearObjectStore
             (
                 string @securityOrigin, 
@@ -4906,6 +5157,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="databaseName">
             /// Database name.
             /// </param>
+            /// <param name="cancellation" />
             public Task DeleteDatabase
             (
                 string @securityOrigin, 
@@ -4934,6 +5186,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="keyRange">
             /// Range of entry keys to delete
             /// </param>
+            /// <param name="cancellation" />
             public Task DeleteObjectStoreEntries
             (
                 string @securityOrigin, 
@@ -4960,6 +5213,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables events from backend.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -4978,6 +5232,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables events from backend.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -5017,6 +5272,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="keyRange">
             /// Key range.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.IndexedDB.RequestDataResponse> RequestData
             (
                 string @securityOrigin, 
@@ -5059,6 +5315,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectStoreName">
             /// Object store name.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.IndexedDB.GetKeyGeneratorCurrentNumberResponse> GetKeyGeneratorCurrentNumber
             (
                 string @securityOrigin, 
@@ -5089,6 +5346,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="databaseName">
             /// Database name.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.IndexedDB.RequestDatabaseResponse> RequestDatabase
             (
                 string @securityOrigin, 
@@ -5114,6 +5372,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="securityOrigin">
             /// Security origin.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.IndexedDB.RequestDatabaseNamesResponse> RequestDatabaseNames
             (
                 string @securityOrigin, 
@@ -5132,11 +5391,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Input.
+        /// </summary>
         public class InputInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public InputInspectorClient(InspectorClient inspectionClient)
+            internal InputInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -5191,6 +5453,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Whether the event was from the left or right side of the keyboard. 1=Left, 2=Right (default:
             /// 0).
             /// </param>
+            /// <param name="cancellation" />
             public Task DispatchKeyEvent
             (
                 string @type, 
@@ -5241,6 +5504,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="text">
             /// The text to insert.
             /// </param>
+            /// <param name="cancellation" />
             public Task InsertText
             (
                 string @text, 
@@ -5297,6 +5561,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="pointerType">
             /// Pointer type (default: "mouse").
             /// </param>
+            /// <param name="cancellation" />
             public Task DispatchMouseEvent
             (
                 string @type, 
@@ -5353,6 +5618,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="timestamp">
             /// Time at which the event occurred.
             /// </param>
+            /// <param name="cancellation" />
             public Task DispatchTouchEvent
             (
                 string @type, 
@@ -5407,6 +5673,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="clickCount">
             /// Number of times the mouse button was clicked (default: 0).
             /// </param>
+            /// <param name="cancellation" />
             public Task EmulateTouchFromMouseEvent
             (
                 string @type, 
@@ -5446,6 +5713,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="ignore">
             /// Ignores input events processing when set to true.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetIgnoreInputEvents
             (
                 bool @ignore, 
@@ -5482,6 +5750,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Which type of input events to be generated (default: 'default', which queries the platform
             /// for the preferred input type).
             /// </param>
+            /// <param name="cancellation" />
             public Task SynthesizePinchGesture
             (
                 double @x, 
@@ -5549,6 +5818,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="interactionMarkerName">
             /// The name of the interaction markers to generate, if not empty (default: "").
             /// </param>
+            /// <param name="cancellation" />
             public Task SynthesizeScrollGesture
             (
                 double @x, 
@@ -5607,6 +5877,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Which type of input events to be generated (default: 'default', which queries the platform
             /// for the preferred input type).
             /// </param>
+            /// <param name="cancellation" />
             public Task SynthesizeTapGesture
             (
                 double @x, 
@@ -5633,11 +5904,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Inspector.
+        /// </summary>
         public class InspectorInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public InspectorInspectorClient(InspectorClient inspectionClient)
+            internal InspectorInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -5645,6 +5919,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables inspector domain notifications.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -5663,6 +5938,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables inspector domain notifications.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -5730,11 +6006,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain LayerTree.
+        /// </summary>
         public class LayerTreeInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public LayerTreeInspectorClient(InspectorClient inspectionClient)
+            internal LayerTreeInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -5745,6 +6024,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="layerId">
             /// The id of the layer for which we want to get the reasons it was composited.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.LayerTree.CompositingReasonsResponse> CompositingReasons
             (
                 Protocol.LayerTree.LayerId @layerId, 
@@ -5765,6 +6045,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables compositing tree inspection.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -5783,6 +6064,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables compositing tree inspection.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -5804,6 +6086,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="tiles">
             /// An array of tiles composing the snapshot.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.LayerTree.LoadSnapshotResponse> LoadSnapshot
             (
                 Protocol.LayerTree.PictureTile[] @tiles, 
@@ -5827,6 +6110,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="layerId">
             /// The id of the layer.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.LayerTree.MakeSnapshotResponse> MakeSnapshot
             (
                 Protocol.LayerTree.LayerId @layerId, 
@@ -5844,6 +6128,7 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="snapshotId">
             /// The id of the layer snapshot.
             /// </param>
@@ -5856,6 +6141,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="clipRect">
             /// The clip rectangle to apply when replaying the snapshot.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.LayerTree.ProfileSnapshotResponse> ProfileSnapshot
             (
                 Protocol.LayerTree.SnapshotId @snapshotId, 
@@ -5885,6 +6171,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="snapshotId">
             /// The id of the layer snapshot.
             /// </param>
+            /// <param name="cancellation" />
             public Task ReleaseSnapshot
             (
                 Protocol.LayerTree.SnapshotId @snapshotId, 
@@ -5917,6 +6204,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="scale">
             /// The scale to apply while replaying (defaults to 1).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.LayerTree.ReplaySnapshotResponse> ReplaySnapshot
             (
                 Protocol.LayerTree.SnapshotId @snapshotId, 
@@ -5946,6 +6234,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="snapshotId">
             /// The id of the layer snapshot.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.LayerTree.SnapshotCommandLogResponse> SnapshotCommandLog
             (
                 Protocol.LayerTree.SnapshotId @snapshotId, 
@@ -5963,34 +6252,41 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             public event Func<Protocol.LayerTree.LayerPaintedEvent, Task> LayerPainted
             {
                 add => InspectorClient.AddEventHandlerCore("LayerTree.layerPainted", value);
                 remove => InspectorClient.RemoveEventHandlerCore("LayerTree.layerPainted", value);
             }
 
+            /// <summary />
             public event Func<Protocol.LayerTree.LayerTreeDidChangeEvent, Task> LayerTreeDidChange
             {
                 add => InspectorClient.AddEventHandlerCore("LayerTree.layerTreeDidChange", value);
                 remove => InspectorClient.RemoveEventHandlerCore("LayerTree.layerTreeDidChange", value);
             }
 
+            /// <summary />
             public Task<Protocol.LayerTree.LayerPaintedEvent> LayerPaintedEvent(Func<Protocol.LayerTree.LayerPaintedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("LayerTree.layerPainted", until);
             }
 
+            /// <summary />
             public Task<Protocol.LayerTree.LayerTreeDidChangeEvent> LayerTreeDidChangeEvent(Func<Protocol.LayerTree.LayerTreeDidChangeEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("LayerTree.layerTreeDidChange", until);
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Log.
+        /// </summary>
         public class LogInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public LogInspectorClient(InspectorClient inspectionClient)
+            internal LogInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -5998,6 +6294,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears the log.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Clear
             (
                 CancellationToken cancellation = default
@@ -6016,6 +6313,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables log domain, prevents further log entries from being reported to the client.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -6035,6 +6333,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Enables log domain, sends the entries collected so far to the client by means of the
             /// `entryAdded` notification.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -6056,6 +6355,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="config">
             /// Configuration for violations.
             /// </param>
+            /// <param name="cancellation" />
             public Task StartViolationsReport
             (
                 Protocol.Log.ViolationSetting[] @config, 
@@ -6076,6 +6376,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Stop violation reporting.
             /// </summary>
+            /// <param name="cancellation" />
             public Task StopViolationsReport
             (
                 CancellationToken cancellation = default
@@ -6109,15 +6410,20 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Memory.
+        /// </summary>
         public class MemoryInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public MemoryInspectorClient(InspectorClient inspectionClient)
+            internal MemoryInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task<Protocol.Memory.GetDOMCountersResponse> GetDOMCounters
             (
                 CancellationToken cancellation = default
@@ -6133,6 +6439,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task PrepareForLeakDetection
             (
                 CancellationToken cancellation = default
@@ -6151,6 +6459,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Simulate OomIntervention by purging V8 memory.
             /// </summary>
+            /// <param name="cancellation" />
             public Task ForciblyPurgeJavaScriptMemory
             (
                 CancellationToken cancellation = default
@@ -6172,6 +6481,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="suppressed">
             /// If true, memory pressure notifications will be suppressed.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetPressureNotificationsSuppressed
             (
                 bool @suppressed, 
@@ -6195,6 +6505,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="level">
             /// Memory pressure level of the notification.
             /// </param>
+            /// <param name="cancellation" />
             public Task SimulatePressureNotification
             (
                 Protocol.Memory.PressureLevel @level, 
@@ -6221,6 +6532,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="suppressRandomness">
             /// Do not randomize intervals between samples.
             /// </param>
+            /// <param name="cancellation" />
             public Task StartSampling
             (
                 long? @samplingInterval = default, 
@@ -6243,6 +6555,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Stop collecting native memory profile.
             /// </summary>
+            /// <param name="cancellation" />
             public Task StopSampling
             (
                 CancellationToken cancellation = default
@@ -6262,6 +6575,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Retrieve native memory allocations profile
             /// collected since renderer process startup.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Memory.GetAllTimeSamplingProfileResponse> GetAllTimeSamplingProfile
             (
                 CancellationToken cancellation = default
@@ -6281,6 +6595,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Retrieve native memory allocations profile
             /// collected since browser process startup.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Memory.GetBrowserSamplingProfileResponse> GetBrowserSamplingProfile
             (
                 CancellationToken cancellation = default
@@ -6300,6 +6615,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Retrieve native memory allocations profile collected since last
             /// `startSampling` call.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Memory.GetSamplingProfileResponse> GetSamplingProfile
             (
                 CancellationToken cancellation = default
@@ -6316,11 +6632,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Network.
+        /// </summary>
         public class NetworkInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public NetworkInspectorClient(InspectorClient inspectionClient)
+            internal NetworkInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -6328,6 +6647,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Tells whether clearing browser cache is supported.
             /// </summary>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task<Protocol.Network.CanClearBrowserCacheResponse> CanClearBrowserCache
             (
@@ -6347,6 +6667,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Tells whether clearing browser cookies is supported.
             /// </summary>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task<Protocol.Network.CanClearBrowserCookiesResponse> CanClearBrowserCookies
             (
@@ -6366,6 +6687,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Tells whether emulation of network conditions is supported.
             /// </summary>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task<Protocol.Network.CanEmulateNetworkConditionsResponse> CanEmulateNetworkConditions
             (
@@ -6385,6 +6707,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears browser cache.
             /// </summary>
+            /// <param name="cancellation" />
             public Task ClearBrowserCache
             (
                 CancellationToken cancellation = default
@@ -6403,6 +6726,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears browser cookies.
             /// </summary>
+            /// <param name="cancellation" />
             public Task ClearBrowserCookies
             (
                 CancellationToken cancellation = default
@@ -6452,6 +6776,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="authChallengeResponse">
             /// Response to a requestIntercepted with an authChallenge. Must not be set otherwise.
             /// </param>
+            /// <param name="cancellation" />
             public Task ContinueInterceptedRequest
             (
                 Protocol.Network.InterceptionId @interceptionId, 
@@ -6499,6 +6824,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="path">
             /// If specified, deletes only cookies with the exact path.
             /// </param>
+            /// <param name="cancellation" />
             public Task DeleteCookies
             (
                 string @name, 
@@ -6525,6 +6851,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables network tracking, prevents network events from being sent to the client.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -6558,6 +6885,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="connectionType">
             /// Connection type if known.
             /// </param>
+            /// <param name="cancellation" />
             public Task EmulateNetworkConditions
             (
                 bool @offline, 
@@ -6595,6 +6923,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="maxPostDataSize">
             /// Longest post body size (in bytes) that would be included in requestWillBeSent notification
             /// </param>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 long? @maxTotalBufferSize = default, 
@@ -6620,6 +6949,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns all browser cookies. Depending on the backend support, will return detailed cookie
             /// information in the `cookies` field.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Network.GetAllCookiesResponse> GetAllCookies
             (
                 CancellationToken cancellation = default
@@ -6641,6 +6971,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="origin">
             /// Origin to get certificate for.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Network.GetCertificateResponse> GetCertificate
             (
                 string @origin, 
@@ -6665,6 +6996,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="urls">
             /// The list of URLs for which applicable cookies will be fetched
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Network.GetCookiesResponse> GetCookies
             (
                 string[] @urls = default, 
@@ -6688,6 +7020,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="requestId">
             /// Identifier of the network request to get content for.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Network.GetResponseBodyResponse> GetResponseBody
             (
                 Protocol.Network.RequestId @requestId, 
@@ -6711,6 +7044,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="requestId">
             /// Identifier of the network request to get content for.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Network.GetRequestPostDataResponse> GetRequestPostData
             (
                 Protocol.Network.RequestId @requestId, 
@@ -6734,6 +7068,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="interceptionId">
             /// Identifier for the intercepted request to get body for.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Network.GetResponseBodyForInterceptionResponse> GetResponseBodyForInterception
             (
                 Protocol.Network.InterceptionId @interceptionId, 
@@ -6758,6 +7093,7 @@ namespace DumbPrograms.ChromeDevTools
             /// is specified.
             /// </summary>
             /// <param name="interceptionId" />
+            /// <param name="cancellation" />
             public Task<Protocol.Network.TakeResponseBodyForInterceptionAsStreamResponse> TakeResponseBodyForInterceptionAsStream
             (
                 Protocol.Network.InterceptionId @interceptionId, 
@@ -6783,6 +7119,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="requestId">
             /// Identifier of XHR to replay.
             /// </param>
+            /// <param name="cancellation" />
             public Task ReplayXHR
             (
                 Protocol.Network.RequestId @requestId, 
@@ -6815,6 +7152,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="isRegex">
             /// If true, treats string parameter as regex.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Network.SearchInResponseBodyResponse> SearchInResponseBody
             (
                 Protocol.Network.RequestId @requestId, 
@@ -6844,6 +7182,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="urls">
             /// URL patterns to block. Wildcards ('*') are allowed.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetBlockedURLs
             (
                 string[] @urls, 
@@ -6867,6 +7206,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="bypass">
             /// Bypass service worker and load from network.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetBypassServiceWorker
             (
                 bool @bypass, 
@@ -6890,6 +7230,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="cacheDisabled">
             /// Cache disabled state.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetCacheDisabled
             (
                 bool @cacheDisabled, 
@@ -6938,6 +7279,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="expires">
             /// Cookie expiration date, session cookie if not set
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Network.SetCookieResponse> SetCookie
             (
                 string @name, 
@@ -6977,6 +7319,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="cookies">
             /// Cookies to be set.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetCookies
             (
                 Protocol.Network.CookieParam[] @cookies, 
@@ -7003,6 +7346,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="maxResourceSize">
             /// Maximum per-resource size.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetDataSizeLimitsForTest
             (
                 long @maxTotalSize, 
@@ -7028,6 +7372,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="headers">
             /// Map with extra HTTP headers.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetExtraHTTPHeaders
             (
                 Protocol.Network.Headers @headers, 
@@ -7052,6 +7397,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Requests matching any of these patterns will be forwarded and wait for the corresponding
             /// continueInterceptedRequest call.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetRequestInterception
             (
                 Protocol.Network.RequestPattern[] @patterns, 
@@ -7081,6 +7427,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="platform">
             /// The platform navigator.platform should return.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetUserAgentOverride
             (
                 string @userAgent, 
@@ -7394,11 +7741,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Overlay.
+        /// </summary>
         public class OverlayInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public OverlayInspectorClient(InspectorClient inspectionClient)
+            internal OverlayInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -7406,6 +7756,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables domain notifications.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -7424,6 +7775,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables domain notifications.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -7445,6 +7797,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="nodeId">
             /// Id of the node to get highlight object for.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Overlay.GetHighlightObjectForTestResponse> GetHighlightObjectForTest
             (
                 Protocol.DOM.NodeId @nodeId, 
@@ -7465,6 +7818,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Hides any highlight.
             /// </summary>
+            /// <param name="cancellation" />
             public Task HideHighlight
             (
                 CancellationToken cancellation = default
@@ -7492,6 +7846,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="contentOutlineColor">
             /// The content box highlight outline color (default: transparent).
             /// </param>
+            /// <param name="cancellation" />
             public Task HighlightFrame
             (
                 Protocol.Page.FrameId @frameId, 
@@ -7532,6 +7887,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="selector">
             /// Selectors to highlight relevant nodes.
             /// </param>
+            /// <param name="cancellation" />
             public Task HighlightNode
             (
                 Protocol.Overlay.HighlightConfig @highlightConfig, 
@@ -7569,6 +7925,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="outlineColor">
             /// The highlight outline color (default: transparent).
             /// </param>
+            /// <param name="cancellation" />
             public Task HighlightQuad
             (
                 Protocol.DOM.Quad @quad, 
@@ -7611,6 +7968,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="outlineColor">
             /// The highlight outline color (default: transparent).
             /// </param>
+            /// <param name="cancellation" />
             public Task HighlightRect
             (
                 long @x, 
@@ -7649,6 +8007,7 @@ namespace DumbPrograms.ChromeDevTools
             /// A descriptor for the highlight appearance of hovered-over nodes. May be omitted if `enabled
             /// == false`.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetInspectMode
             (
                 Protocol.Overlay.InspectMode @mode, 
@@ -7674,6 +8033,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="show">
             /// True for showing ad highlights
             /// </param>
+            /// <param name="cancellation" />
             public Task SetShowAdHighlights
             (
                 bool @show, 
@@ -7691,9 +8051,11 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="message">
             /// The message to display, also triggers resume and step over controls.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetPausedInDebuggerMessage
             (
                 string @message = default, 
@@ -7717,6 +8079,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="show">
             /// True for showing debug borders
             /// </param>
+            /// <param name="cancellation" />
             public Task SetShowDebugBorders
             (
                 bool @show, 
@@ -7740,6 +8103,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="show">
             /// True for showing the FPS counter
             /// </param>
+            /// <param name="cancellation" />
             public Task SetShowFPSCounter
             (
                 bool @show, 
@@ -7763,6 +8127,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="result">
             /// True for showing paint rectangles
             /// </param>
+            /// <param name="cancellation" />
             public Task SetShowPaintRects
             (
                 bool @result, 
@@ -7786,6 +8151,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="show">
             /// True for showing scroll bottleneck rects
             /// </param>
+            /// <param name="cancellation" />
             public Task SetShowScrollBottleneckRects
             (
                 bool @show, 
@@ -7809,6 +8175,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="show">
             /// True for showing hit-test borders
             /// </param>
+            /// <param name="cancellation" />
             public Task SetShowHitTestBorders
             (
                 bool @show, 
@@ -7832,6 +8199,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="show">
             /// Whether to paint size or not.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetShowViewportSizeOnResize
             (
                 bool @show, 
@@ -7849,9 +8217,11 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="suspended">
             /// Whether overlay should be suspended and not consume any resources until resumed.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetSuspended
             (
                 bool @suspended, 
@@ -7940,11 +8310,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Page.
+        /// </summary>
         public class PageInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public PageInspectorClient(InspectorClient inspectionClient)
+            internal PageInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -7953,6 +8326,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Deprecated, please use addScriptToEvaluateOnNewDocument instead.
             /// </summary>
             /// <param name="scriptSource" />
+            /// <param name="cancellation" />
             [Obsolete]
             public Task<Protocol.Page.AddScriptToEvaluateOnLoadResponse> AddScriptToEvaluateOnLoad
             (
@@ -7980,6 +8354,7 @@ namespace DumbPrograms.ChromeDevTools
             /// This world name will be used as the ExecutionContextDescription::name when the corresponding
             /// event is emitted.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Page.AddScriptToEvaluateOnNewDocumentResponse> AddScriptToEvaluateOnNewDocument
             (
                 string @source, 
@@ -8002,6 +8377,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Brings page to front (activates tab).
             /// </summary>
+            /// <param name="cancellation" />
             public Task BringToFront
             (
                 CancellationToken cancellation = default
@@ -8032,6 +8408,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="fromSurface">
             /// Capture the screenshot from the surface, rather than the view. Defaults to true.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Page.CaptureScreenshotResponse> CaptureScreenshot
             (
                 string @format = default, 
@@ -8062,6 +8439,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="format">
             /// Format (defaults to mhtml).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Page.CaptureSnapshotResponse> CaptureSnapshot
             (
                 string @format = default, 
@@ -8082,6 +8460,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears the overriden device metrics.
             /// </summary>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task ClearDeviceMetricsOverride
             (
@@ -8101,6 +8480,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears the overridden Device Orientation.
             /// </summary>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task ClearDeviceOrientationOverride
             (
@@ -8120,6 +8500,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears the overriden Geolocation Position and Error.
             /// </summary>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task ClearGeolocationOverride
             (
@@ -8149,6 +8530,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Whether or not universal access should be granted to the isolated world. This is a powerful
             /// option, use with caution.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Page.CreateIsolatedWorldResponse> CreateIsolatedWorld
             (
                 Protocol.Page.FrameId @frameId, 
@@ -8179,6 +8561,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="url">
             /// URL to match cooke domain and path.
             /// </param>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task DeleteCookie
             (
@@ -8202,6 +8585,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables page domain notifications.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -8220,6 +8604,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables page domain notifications.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -8235,6 +8620,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task<Protocol.Page.GetAppManifestResponse> GetAppManifest
             (
                 CancellationToken cancellation = default
@@ -8254,6 +8641,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns all browser cookies. Depending on the backend support, will return detailed cookie
             /// information in the `cookies` field.
             /// </summary>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task<Protocol.Page.GetCookiesResponse> GetCookies
             (
@@ -8273,6 +8661,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns present frame tree structure.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Page.GetFrameTreeResponse> GetFrameTree
             (
                 CancellationToken cancellation = default
@@ -8291,6 +8680,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns metrics relating to the layouting of the page, such as viewport bounds/scale.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Page.GetLayoutMetricsResponse> GetLayoutMetrics
             (
                 CancellationToken cancellation = default
@@ -8309,6 +8699,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns navigation history for the current page.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Page.GetNavigationHistoryResponse> GetNavigationHistory
             (
                 CancellationToken cancellation = default
@@ -8327,6 +8718,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Resets navigation history for the current page.
             /// </summary>
+            /// <param name="cancellation" />
             public Task ResetNavigationHistory
             (
                 CancellationToken cancellation = default
@@ -8351,6 +8743,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="url">
             /// URL of the resource to get content for.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Page.GetResourceContentResponse> GetResourceContent
             (
                 Protocol.Page.FrameId @frameId, 
@@ -8373,6 +8766,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns present frame / resource tree structure.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Page.GetResourceTreeResponse> GetResourceTree
             (
                 CancellationToken cancellation = default
@@ -8398,6 +8792,7 @@ namespace DumbPrograms.ChromeDevTools
             /// The text to enter into the dialog prompt before accepting. Used only if this is a prompt
             /// dialog.
             /// </param>
+            /// <param name="cancellation" />
             public Task HandleJavaScriptDialog
             (
                 bool @accept, 
@@ -8432,6 +8827,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="frameId">
             /// Frame id to navigate, if not specified navigates the top frame.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Page.NavigateResponse> Navigate
             (
                 string @url, 
@@ -8461,6 +8857,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="entryId">
             /// Unique id of the entry to navigate to.
             /// </param>
+            /// <param name="cancellation" />
             public Task NavigateToHistoryEntry
             (
                 long @entryId, 
@@ -8537,6 +8934,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Whether or not to prefer page size as defined by css. Defaults to false,
             /// in which case the content will be scaled to fit the paper size.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Page.PrintToPDFResponse> PrintToPDF
             (
                 bool? @landscape = default, 
@@ -8592,6 +8990,7 @@ namespace DumbPrograms.ChromeDevTools
             /// If set, the script will be injected into all frames of the inspected page after reload.
             /// Argument will be ignored if reloading dataURL origin.
             /// </param>
+            /// <param name="cancellation" />
             public Task Reload
             (
                 bool? @ignoreCache = default, 
@@ -8615,6 +9014,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Deprecated, please use removeScriptToEvaluateOnNewDocument instead.
             /// </summary>
             /// <param name="identifier" />
+            /// <param name="cancellation" />
             [Obsolete]
             public Task RemoveScriptToEvaluateOnLoad
             (
@@ -8637,6 +9037,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Removes given script from the list.
             /// </summary>
             /// <param name="identifier" />
+            /// <param name="cancellation" />
             public Task RemoveScriptToEvaluateOnNewDocument
             (
                 Protocol.Page.ScriptIdentifier @identifier, 
@@ -8660,6 +9061,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="sessionId">
             /// Frame number.
             /// </param>
+            /// <param name="cancellation" />
             public Task ScreencastFrameAck
             (
                 long @sessionId, 
@@ -8695,6 +9097,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="isRegex">
             /// If true, treats string parameter as regex.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Page.SearchInResourceResponse> SearchInResource
             (
                 Protocol.Page.FrameId @frameId, 
@@ -8726,6 +9129,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="enabled">
             /// Whether to block ads.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetAdBlockingEnabled
             (
                 bool @enabled, 
@@ -8749,6 +9153,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="enabled">
             /// Whether to bypass page CSP.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetBypassCSP
             (
                 bool @enabled, 
@@ -8808,6 +9213,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="viewport">
             /// The viewport dimensions and scale. If not set, the override is cleared.
             /// </param>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task SetDeviceMetricsOverride
             (
@@ -8860,6 +9266,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="gamma">
             /// Mock gamma
             /// </param>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task SetDeviceOrientationOverride
             (
@@ -8888,6 +9295,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="fontFamilies">
             /// Specifies font families to set. If a font family is not specified, it won't be changed.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetFontFamilies
             (
                 Protocol.Page.FontFamilies @fontFamilies, 
@@ -8911,6 +9319,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="fontSizes">
             /// Specifies font sizes to set. If a font size is not specified, it won't be changed.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetFontSizes
             (
                 Protocol.Page.FontSizes @fontSizes, 
@@ -8937,6 +9346,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="html">
             /// HTML content to set.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetDocumentContent
             (
                 Protocol.Page.FrameId @frameId, 
@@ -8966,6 +9376,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="downloadPath">
             /// The default path to save downloaded files to. This is requred if behavior is set to 'allow'
             /// </param>
+            /// <param name="cancellation" />
             public Task SetDownloadBehavior
             (
                 string @behavior, 
@@ -8998,6 +9409,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="accuracy">
             /// Mock accuracy
             /// </param>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task SetGeolocationOverride
             (
@@ -9026,6 +9438,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="enabled">
             /// If true, starts emitting lifecycle events.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetLifecycleEventsEnabled
             (
                 bool @enabled, 
@@ -9052,6 +9465,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="configuration">
             /// Touch/gesture events configuration. Default: current platform.
             /// </param>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task SetTouchEmulationEnabled
             (
@@ -9090,6 +9504,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="everyNthFrame">
             /// Send every n-th frame.
             /// </param>
+            /// <param name="cancellation" />
             public Task StartScreencast
             (
                 string @format = default, 
@@ -9118,6 +9533,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Force the page stop all navigations and pending resource fetches.
             /// </summary>
+            /// <param name="cancellation" />
             public Task StopLoading
             (
                 CancellationToken cancellation = default
@@ -9136,6 +9552,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Crashes renderer on the IO thread, generates minidumps.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Crash
             (
                 CancellationToken cancellation = default
@@ -9154,6 +9571,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Tries to close page, running its beforeunload hooks, if any.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Close
             (
                 CancellationToken cancellation = default
@@ -9177,6 +9595,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="state">
             /// Target lifecycle state
             /// </param>
+            /// <param name="cancellation" />
             public Task SetWebLifecycleState
             (
                 string @state, 
@@ -9197,6 +9616,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Stops sending each frame in the `screencastFrame`.
             /// </summary>
+            /// <param name="cancellation" />
             public Task StopScreencast
             (
                 CancellationToken cancellation = default
@@ -9216,6 +9636,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Forces compilation cache to be generated for every subresource script.
             /// </summary>
             /// <param name="enabled" />
+            /// <param name="cancellation" />
             public Task SetProduceCompilationCache
             (
                 bool @enabled, 
@@ -9241,6 +9662,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="data">
             /// Base64-encoded data
             /// </param>
+            /// <param name="cancellation" />
             public Task AddCompilationCache
             (
                 string @url, 
@@ -9263,6 +9685,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Clears seeded compilation cache.
             /// </summary>
+            /// <param name="cancellation" />
             public Task ClearCompilationCache
             (
                 CancellationToken cancellation = default
@@ -9287,6 +9710,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="group">
             /// Specifies the endpoint group to deliver the report to.
             /// </param>
+            /// <param name="cancellation" />
             public Task GenerateTestReport
             (
                 string @message, 
@@ -9309,6 +9733,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Pauses page execution. Can be resumed using generic Runtime.runIfWaitingForDebugger.
             /// </summary>
+            /// <param name="cancellation" />
             public Task WaitForDebugger
             (
                 CancellationToken cancellation = default
@@ -9324,6 +9749,7 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             public event Func<Protocol.Page.DomContentEventFiredEvent, Task> DomContentEventFired
             {
                 add => InspectorClient.AddEventHandlerCore("Page.domContentEventFired", value);
@@ -9366,6 +9792,7 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandlerCore("Page.frameNavigated", value);
             }
 
+            /// <summary />
             public event Func<Protocol.Page.FrameResizedEvent, Task> FrameResized
             {
                 add => InspectorClient.AddEventHandlerCore("Page.frameResized", value);
@@ -9446,6 +9873,7 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandlerCore("Page.lifecycleEvent", value);
             }
 
+            /// <summary />
             public event Func<Protocol.Page.LoadEventFiredEvent, Task> LoadEventFired
             {
                 add => InspectorClient.AddEventHandlerCore("Page.loadEventFired", value);
@@ -9499,6 +9927,7 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandlerCore("Page.compilationCacheProduced", value);
             }
 
+            /// <summary />
             public Task<Protocol.Page.DomContentEventFiredEvent> DomContentEventFiredEvent(Func<Protocol.Page.DomContentEventFiredEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("Page.domContentEventFired", until);
@@ -9536,6 +9965,7 @@ namespace DumbPrograms.ChromeDevTools
                 return InspectorClient.SubscribeUntilCore("Page.frameNavigated", until);
             }
 
+            /// <summary />
             public Task<Protocol.Page.FrameResizedEvent> FrameResizedEvent(Func<Protocol.Page.FrameResizedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("Page.frameResized", until);
@@ -9607,6 +10037,7 @@ namespace DumbPrograms.ChromeDevTools
                 return InspectorClient.SubscribeUntilCore("Page.lifecycleEvent", until);
             }
 
+            /// <summary />
             public Task<Protocol.Page.LoadEventFiredEvent> LoadEventFiredEvent(Func<Protocol.Page.LoadEventFiredEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("Page.loadEventFired", until);
@@ -9655,11 +10086,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Performance.
+        /// </summary>
         public class PerformanceInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public PerformanceInspectorClient(InspectorClient inspectionClient)
+            internal PerformanceInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -9667,6 +10101,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disable collecting and reporting metrics.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -9685,6 +10120,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enable collecting and reporting metrics.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -9708,6 +10144,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="timeDomain">
             /// Time domain
             /// </param>
+            /// <param name="cancellation" />
             public Task SetTimeDomain
             (
                 string @timeDomain, 
@@ -9728,6 +10165,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Retrieve current values of run-time metrics.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Performance.GetMetricsResponse> GetMetrics
             (
                 CancellationToken cancellation = default
@@ -9761,11 +10199,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Security.
+        /// </summary>
         public class SecurityInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public SecurityInspectorClient(InspectorClient inspectionClient)
+            internal SecurityInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -9773,6 +10214,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables tracking security state changes.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -9791,6 +10233,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enables tracking security state changes.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -9812,6 +10255,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="ignore">
             /// If true, all certificate errors will be ignored.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetIgnoreCertificateErrors
             (
                 bool @ignore, 
@@ -9838,6 +10282,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="action">
             /// The action to take on the certificate error.
             /// </param>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task HandleCertificateError
             (
@@ -9865,6 +10310,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="override">
             /// If true, certificate errors will be overridden.
             /// </param>
+            /// <param name="cancellation" />
             [Obsolete]
             public Task SetOverrideCertificateErrors
             (
@@ -9926,18 +10372,23 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain ServiceWorker.
+        /// </summary>
         public class ServiceWorkerInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public ServiceWorkerInspectorClient(InspectorClient inspectionClient)
+            internal ServiceWorkerInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
 
+            /// <summary />
             /// <param name="origin" />
             /// <param name="registrationId" />
             /// <param name="data" />
+            /// <param name="cancellation" />
             public Task DeliverPushMessage
             (
                 string @origin, 
@@ -9959,6 +10410,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -9974,10 +10427,12 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="origin" />
             /// <param name="registrationId" />
             /// <param name="tag" />
             /// <param name="lastChance" />
+            /// <param name="cancellation" />
             public Task DispatchSyncEvent
             (
                 string @origin, 
@@ -10001,6 +10456,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -10016,7 +10473,9 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="versionId" />
+            /// <param name="cancellation" />
             public Task InspectWorker
             (
                 string @versionId, 
@@ -10034,7 +10493,9 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="forceUpdateOnPageLoad" />
+            /// <param name="cancellation" />
             public Task SetForceUpdateOnPageLoad
             (
                 bool @forceUpdateOnPageLoad, 
@@ -10052,7 +10513,9 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="scopeURL" />
+            /// <param name="cancellation" />
             public Task SkipWaiting
             (
                 string @scopeURL, 
@@ -10070,7 +10533,9 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="scopeURL" />
+            /// <param name="cancellation" />
             public Task StartWorker
             (
                 string @scopeURL, 
@@ -10088,6 +10553,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task StopAllWorkers
             (
                 CancellationToken cancellation = default
@@ -10103,7 +10570,9 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="versionId" />
+            /// <param name="cancellation" />
             public Task StopWorker
             (
                 string @versionId, 
@@ -10121,7 +10590,9 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="scopeURL" />
+            /// <param name="cancellation" />
             public Task Unregister
             (
                 string @scopeURL, 
@@ -10139,7 +10610,9 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="scopeURL" />
+            /// <param name="cancellation" />
             public Task UpdateRegistration
             (
                 string @scopeURL, 
@@ -10157,45 +10630,54 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             public event Func<Protocol.ServiceWorker.WorkerErrorReportedEvent, Task> WorkerErrorReported
             {
                 add => InspectorClient.AddEventHandlerCore("ServiceWorker.workerErrorReported", value);
                 remove => InspectorClient.RemoveEventHandlerCore("ServiceWorker.workerErrorReported", value);
             }
 
+            /// <summary />
             public event Func<Protocol.ServiceWorker.WorkerRegistrationUpdatedEvent, Task> WorkerRegistrationUpdated
             {
                 add => InspectorClient.AddEventHandlerCore("ServiceWorker.workerRegistrationUpdated", value);
                 remove => InspectorClient.RemoveEventHandlerCore("ServiceWorker.workerRegistrationUpdated", value);
             }
 
+            /// <summary />
             public event Func<Protocol.ServiceWorker.WorkerVersionUpdatedEvent, Task> WorkerVersionUpdated
             {
                 add => InspectorClient.AddEventHandlerCore("ServiceWorker.workerVersionUpdated", value);
                 remove => InspectorClient.RemoveEventHandlerCore("ServiceWorker.workerVersionUpdated", value);
             }
 
+            /// <summary />
             public Task<Protocol.ServiceWorker.WorkerErrorReportedEvent> WorkerErrorReportedEvent(Func<Protocol.ServiceWorker.WorkerErrorReportedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("ServiceWorker.workerErrorReported", until);
             }
 
+            /// <summary />
             public Task<Protocol.ServiceWorker.WorkerRegistrationUpdatedEvent> WorkerRegistrationUpdatedEvent(Func<Protocol.ServiceWorker.WorkerRegistrationUpdatedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("ServiceWorker.workerRegistrationUpdated", until);
             }
 
+            /// <summary />
             public Task<Protocol.ServiceWorker.WorkerVersionUpdatedEvent> WorkerVersionUpdatedEvent(Func<Protocol.ServiceWorker.WorkerVersionUpdatedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("ServiceWorker.workerVersionUpdated", until);
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Storage.
+        /// </summary>
         public class StorageInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public StorageInspectorClient(InspectorClient inspectionClient)
+            internal StorageInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -10209,6 +10691,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="storageTypes">
             /// Comma separated list of StorageType to clear.
             /// </param>
+            /// <param name="cancellation" />
             public Task ClearDataForOrigin
             (
                 string @origin, 
@@ -10234,6 +10717,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="origin">
             /// Security origin.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Storage.GetUsageAndQuotaResponse> GetUsageAndQuota
             (
                 string @origin, 
@@ -10257,6 +10741,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="origin">
             /// Security origin.
             /// </param>
+            /// <param name="cancellation" />
             public Task TrackCacheStorageForOrigin
             (
                 string @origin, 
@@ -10280,6 +10765,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="origin">
             /// Security origin.
             /// </param>
+            /// <param name="cancellation" />
             public Task TrackIndexedDBForOrigin
             (
                 string @origin, 
@@ -10303,6 +10789,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="origin">
             /// Security origin.
             /// </param>
+            /// <param name="cancellation" />
             public Task UntrackCacheStorageForOrigin
             (
                 string @origin, 
@@ -10326,6 +10813,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="origin">
             /// Security origin.
             /// </param>
+            /// <param name="cancellation" />
             public Task UntrackIndexedDBForOrigin
             (
                 string @origin, 
@@ -10412,11 +10900,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain SystemInfo.
+        /// </summary>
         public class SystemInfoInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public SystemInfoInspectorClient(InspectorClient inspectionClient)
+            internal SystemInfoInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -10424,6 +10915,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns information about the system.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.SystemInfo.GetInfoResponse> GetInfo
             (
                 CancellationToken cancellation = default
@@ -10442,6 +10934,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns information about all running processes.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.SystemInfo.GetProcessInfoResponse> GetProcessInfo
             (
                 CancellationToken cancellation = default
@@ -10458,11 +10951,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Target.
+        /// </summary>
         public class TargetInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public TargetInspectorClient(InspectorClient inspectionClient)
+            internal TargetInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -10471,6 +10967,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Activates (focuses) the target.
             /// </summary>
             /// <param name="targetId" />
+            /// <param name="cancellation" />
             public Task ActivateTarget
             (
                 Protocol.Target.TargetID @targetId, 
@@ -10495,6 +10992,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="flatten">
             /// Enables "flat" access to the session via specifying sessionId attribute in the commands.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Target.AttachToTargetResponse> AttachToTarget
             (
                 Protocol.Target.TargetID @targetId, 
@@ -10517,6 +11015,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Attaches to the browser target, only uses flat sessionId mode.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Target.AttachToBrowserTargetResponse> AttachToBrowserTarget
             (
                 CancellationToken cancellation = default
@@ -10536,6 +11035,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Closes the target. If the target is a page that gets closed too.
             /// </summary>
             /// <param name="targetId" />
+            /// <param name="cancellation" />
             public Task<Protocol.Target.CloseTargetResponse> CloseTarget
             (
                 Protocol.Target.TargetID @targetId, 
@@ -10567,6 +11067,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="bindingName">
             /// Binding name, 'cdp' if not specified.
             /// </param>
+            /// <param name="cancellation" />
             public Task ExposeDevToolsProtocol
             (
                 Protocol.Target.TargetID @targetId, 
@@ -10590,6 +11091,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Creates a new empty BrowserContext. Similar to an incognito profile but you can have more than
             /// one.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Target.CreateBrowserContextResponse> CreateBrowserContext
             (
                 CancellationToken cancellation = default
@@ -10608,6 +11110,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns all browser contexts created with `Target.createBrowserContext` method.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Target.GetBrowserContextsResponse> GetBrowserContexts
             (
                 CancellationToken cancellation = default
@@ -10642,6 +11145,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Whether BeginFrames for this target will be controlled via DevTools (headless chrome only,
             /// not supported on MacOS yet, false by default).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Target.CreateTargetResponse> CreateTarget
             (
                 string @url, 
@@ -10676,6 +11180,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="targetId">
             /// Deprecated.
             /// </param>
+            /// <param name="cancellation" />
             public Task DetachFromTarget
             (
                 Protocol.Target.SessionID @sessionId = default, 
@@ -10700,6 +11205,7 @@ namespace DumbPrograms.ChromeDevTools
             /// beforeunload hooks.
             /// </summary>
             /// <param name="browserContextId" />
+            /// <param name="cancellation" />
             public Task DisposeBrowserContext
             (
                 Protocol.Target.BrowserContextID @browserContextId, 
@@ -10721,6 +11227,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns information about a target.
             /// </summary>
             /// <param name="targetId" />
+            /// <param name="cancellation" />
             public Task<Protocol.Target.GetTargetInfoResponse> GetTargetInfo
             (
                 Protocol.Target.TargetID @targetId = default, 
@@ -10741,6 +11248,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Retrieves a list of available targets.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Target.GetTargetsResponse> GetTargets
             (
                 CancellationToken cancellation = default
@@ -10766,6 +11274,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="targetId">
             /// Deprecated.
             /// </param>
+            /// <param name="cancellation" />
             public Task SendMessageToTarget
             (
                 string @message, 
@@ -10802,6 +11311,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="flatten">
             /// Enables "flat" access to the session via specifying sessionId attribute in the commands.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetAutoAttach
             (
                 bool @autoAttach, 
@@ -10830,6 +11340,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="discover">
             /// Whether to discover available targets.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetDiscoverTargets
             (
                 bool @discover, 
@@ -10854,6 +11365,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="locations">
             /// List of remote locations.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetRemoteLocations
             (
                 Protocol.Target.RemoteLocation[] @locations, 
@@ -10997,11 +11509,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Tethering.
+        /// </summary>
         public class TetheringInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public TetheringInspectorClient(InspectorClient inspectionClient)
+            internal TetheringInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -11012,6 +11527,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="port">
             /// Port number to bind.
             /// </param>
+            /// <param name="cancellation" />
             public Task Bind
             (
                 long @port, 
@@ -11035,6 +11551,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="port">
             /// Port number to unbind.
             /// </param>
+            /// <param name="cancellation" />
             public Task Unbind
             (
                 long @port, 
@@ -11070,11 +11587,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Tracing.
+        /// </summary>
         public class TracingInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public TracingInspectorClient(InspectorClient inspectionClient)
+            internal TracingInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -11082,6 +11602,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Stop trace events collection.
             /// </summary>
+            /// <param name="cancellation" />
             public Task End
             (
                 CancellationToken cancellation = default
@@ -11100,6 +11621,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Gets supported tracing categories.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Tracing.GetCategoriesResponse> GetCategories
             (
                 CancellationToken cancellation = default
@@ -11121,6 +11643,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="syncId">
             /// The ID of this clock sync marker
             /// </param>
+            /// <param name="cancellation" />
             public Task RecordClockSyncMarker
             (
                 string @syncId, 
@@ -11141,6 +11664,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Request a global memory dump.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Tracing.RequestMemoryDumpResponse> RequestMemoryDump
             (
                 CancellationToken cancellation = default
@@ -11177,6 +11701,7 @@ namespace DumbPrograms.ChromeDevTools
             /// transfer mode (defaults to `none`)
             /// </param>
             /// <param name="traceConfig" />
+            /// <param name="cancellation" />
             public Task Start
             (
                 string @categories = default, 
@@ -11204,6 +11729,7 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             public event Func<Protocol.Tracing.BufferUsageEvent, Task> BufferUsage
             {
                 add => InspectorClient.AddEventHandlerCore("Tracing.bufferUsage", value);
@@ -11230,6 +11756,7 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandlerCore("Tracing.tracingComplete", value);
             }
 
+            /// <summary />
             public Task<Protocol.Tracing.BufferUsageEvent> BufferUsageEvent(Func<Protocol.Tracing.BufferUsageEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("Tracing.bufferUsage", until);
@@ -11254,11 +11781,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Testing.
+        /// </summary>
         public class TestingInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public TestingInspectorClient(InspectorClient inspectionClient)
+            internal TestingInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -11272,6 +11802,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="group">
             /// Specifies the endpoint group to deliver the report to.
             /// </param>
+            /// <param name="cancellation" />
             public Task GenerateTestReport
             (
                 string @message, 
@@ -11292,11 +11823,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Fetch.
+        /// </summary>
         public class FetchInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public FetchInspectorClient(InspectorClient inspectionClient)
+            internal FetchInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -11304,6 +11838,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables the fetch domain.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -11332,6 +11867,7 @@ namespace DumbPrograms.ChromeDevTools
             /// If true, authRequired events will be issued and requests will be paused
             /// expecting a call to continueWithAuth.
             /// </param>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 Protocol.Fetch.RequestPattern[] @patterns = default, 
@@ -11360,6 +11896,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="errorReason">
             /// Causes the request to fail with the given reason.
             /// </param>
+            /// <param name="cancellation" />
             public Task FailRequest
             (
                 Protocol.Fetch.RequestId @requestId, 
@@ -11398,6 +11935,7 @@ namespace DumbPrograms.ChromeDevTools
             /// A textual representation of responseCode.
             /// If absent, a standard phrase mathcing responseCode is used.
             /// </param>
+            /// <param name="cancellation" />
             public Task FulfillRequest
             (
                 Protocol.Fetch.RequestId @requestId, 
@@ -11441,6 +11979,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="headers">
             /// If set, overrides the request headrts.
             /// </param>
+            /// <param name="cancellation" />
             public Task ContinueRequest
             (
                 Protocol.Fetch.RequestId @requestId, 
@@ -11475,6 +12014,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="authChallengeResponse">
             /// Response to  with an authChallenge.
             /// </param>
+            /// <param name="cancellation" />
             public Task ContinueWithAuth
             (
                 Protocol.Fetch.RequestId @requestId, 
@@ -11505,6 +12045,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="requestId">
             /// Identifier for the intercepted request to get body for.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Fetch.GetResponseBodyResponse> GetResponseBody
             (
                 Protocol.Fetch.RequestId @requestId, 
@@ -11535,6 +12076,7 @@ namespace DumbPrograms.ChromeDevTools
             /// domain before body is received results in an undefined behavior.
             /// </summary>
             /// <param name="requestId" />
+            /// <param name="cancellation" />
             public Task<Protocol.Fetch.TakeResponseBodyAsStreamResponse> TakeResponseBodyAsStream
             (
                 Protocol.Fetch.RequestId @requestId, 

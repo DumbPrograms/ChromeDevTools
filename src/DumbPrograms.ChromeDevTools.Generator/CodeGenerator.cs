@@ -94,12 +94,6 @@ namespace DumbPrograms.ChromeDevTools.Generator
         protected void WILSummary(string description)
         {
             WL();
-
-            if (String.IsNullOrWhiteSpace(description))
-            {
-                return;
-            }
-
             WILXmlDocElement(new XElement("summary", description));
         }
 

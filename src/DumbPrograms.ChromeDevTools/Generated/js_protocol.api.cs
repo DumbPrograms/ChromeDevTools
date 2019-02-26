@@ -22,9 +22,11 @@ namespace DumbPrograms.ChromeDevTools
         public DebuggerInspectorClient Debugger => __Debugger__ ?? (__Debugger__ = new DebuggerInspectorClient(this));
         private DebuggerInspectorClient __Debugger__;
 
+        /// <summary />
         public HeapProfilerInspectorClient HeapProfiler => __HeapProfiler__ ?? (__HeapProfiler__ = new HeapProfilerInspectorClient(this));
         private HeapProfilerInspectorClient __HeapProfiler__;
 
+        /// <summary />
         public ProfilerInspectorClient Profiler => __Profiler__ ?? (__Profiler__ = new ProfilerInspectorClient(this));
         private ProfilerInspectorClient __Profiler__;
 
@@ -46,12 +48,15 @@ namespace DumbPrograms.ChromeDevTools
         [Obsolete]
         private SchemaInspectorClient __Schema__;
 
+        /// <summary>
+        /// Inspector client for domain Console.
+        /// </summary>
         [Obsolete]
         public class ConsoleInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public ConsoleInspectorClient(InspectorClient inspectionClient)
+            internal ConsoleInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -59,6 +64,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Does nothing.
             /// </summary>
+            /// <param name="cancellation" />
             public Task ClearMessages
             (
                 CancellationToken cancellation = default
@@ -77,6 +83,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables console domain, prevents further console messages from being reported to the client.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -96,6 +103,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Enables console domain, sends the messages collected so far to the client by means of the
             /// `messageAdded` notification.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -129,11 +137,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Debugger.
+        /// </summary>
         public class DebuggerInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public DebuggerInspectorClient(InspectorClient inspectionClient)
+            internal DebuggerInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -145,6 +156,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Location to continue to.
             /// </param>
             /// <param name="targetCallFrames" />
+            /// <param name="cancellation" />
             public Task ContinueToLocation
             (
                 Protocol.Debugger.Location @location, 
@@ -167,6 +179,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables debugger for given page.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -186,6 +199,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Enables debugger for the given page. Clients should not assume that the debugging has been
             /// enabled until the result for this command is received.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Debugger.EnableResponse> Enable
             (
                 CancellationToken cancellation = default
@@ -234,6 +248,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="timeout">
             /// Terminate execution after timing out (number of milliseconds).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Debugger.EvaluateOnCallFrameResponse> EvaluateOnCallFrame
             (
                 Protocol.Debugger.CallFrameId @callFrameId, 
@@ -281,6 +296,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="restrictToFunction">
             /// Only consider locations which are in the same (non-nested) function as start.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Debugger.GetPossibleBreakpointsResponse> GetPossibleBreakpoints
             (
                 Protocol.Debugger.Location @start, 
@@ -308,6 +324,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="scriptId">
             /// Id of the script to get source for.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Debugger.GetScriptSourceResponse> GetScriptSource
             (
                 Protocol.Runtime.ScriptId @scriptId, 
@@ -329,6 +346,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns stack trace with given `stackTraceId`.
             /// </summary>
             /// <param name="stackTraceId" />
+            /// <param name="cancellation" />
             public Task<Protocol.Debugger.GetStackTraceResponse> GetStackTrace
             (
                 Protocol.Runtime.StackTraceId @stackTraceId, 
@@ -349,6 +367,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Stops on the next JavaScript statement.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Pause
             (
                 CancellationToken cancellation = default
@@ -364,9 +383,11 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="parentStackTraceId">
             /// Debugger will pause when async call with given stack trace is started.
             /// </param>
+            /// <param name="cancellation" />
             public Task PauseOnAsyncCall
             (
                 Protocol.Runtime.StackTraceId @parentStackTraceId, 
@@ -388,6 +409,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Removes JavaScript breakpoint.
             /// </summary>
             /// <param name="breakpointId" />
+            /// <param name="cancellation" />
             public Task RemoveBreakpoint
             (
                 Protocol.Debugger.BreakpointId @breakpointId, 
@@ -411,6 +433,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="callFrameId">
             /// Call frame identifier to evaluate on.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Debugger.RestartFrameResponse> RestartFrame
             (
                 Protocol.Debugger.CallFrameId @callFrameId, 
@@ -431,6 +454,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Resumes JavaScript execution.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Resume
             (
                 CancellationToken cancellation = default
@@ -461,6 +485,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="isRegex">
             /// If true, treats string parameter as regex.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Debugger.SearchInContentResponse> SearchInContent
             (
                 Protocol.Runtime.ScriptId @scriptId, 
@@ -491,6 +516,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Maximum depth of async call stacks. Setting to `0` will effectively disable collecting async
             /// call stacks (default).
             /// </param>
+            /// <param name="cancellation" />
             public Task SetAsyncCallStackDepth
             (
                 long @maxDepth, 
@@ -516,6 +542,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="patterns">
             /// Array of regexps that will be used to check script url for blackbox state.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetBlackboxPatterns
             (
                 string[] @patterns, 
@@ -543,6 +570,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Id of the script.
             /// </param>
             /// <param name="positions" />
+            /// <param name="cancellation" />
             public Task SetBlackboxedRanges
             (
                 Protocol.Runtime.ScriptId @scriptId, 
@@ -572,6 +600,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Expression to use as a breakpoint condition. When specified, debugger will only stop on the
             /// breakpoint if this expression evaluates to true.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Debugger.SetBreakpointResponse> SetBreakpoint
             (
                 Protocol.Debugger.Location @location, 
@@ -617,6 +646,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Expression to use as a breakpoint condition. When specified, debugger will only stop on the
             /// breakpoint if this expression evaluates to true.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Debugger.SetBreakpointByUrlResponse> SetBreakpointByUrl
             (
                 long @lineNumber, 
@@ -656,6 +686,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Expression to use as a breakpoint condition. When specified, debugger will
             /// stop on the breakpoint if this expression evaluates to true.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Debugger.SetBreakpointOnFunctionCallResponse> SetBreakpointOnFunctionCall
             (
                 Protocol.Runtime.RemoteObjectId @objectId, 
@@ -681,6 +712,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="active">
             /// New value for breakpoints active state.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetBreakpointsActive
             (
                 bool @active, 
@@ -705,6 +737,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="state">
             /// Pause on exceptions mode.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetPauseOnExceptions
             (
                 string @state, 
@@ -728,6 +761,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="newValue">
             /// New return value.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetReturnValue
             (
                 Protocol.Runtime.CallArgument @newValue, 
@@ -758,6 +792,7 @@ namespace DumbPrograms.ChromeDevTools
             /// If true the change will not actually be applied. Dry run may be used to get result
             /// description without actually modifying the code.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Debugger.SetScriptSourceResponse> SetScriptSource
             (
                 Protocol.Runtime.ScriptId @scriptId, 
@@ -785,6 +820,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="skip">
             /// New value for skip pauses state.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetSkipAllPauses
             (
                 bool @skip, 
@@ -819,6 +855,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="callFrameId">
             /// Id of callframe that holds variable.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetVariableValue
             (
                 long @scopeNumber, 
@@ -849,6 +886,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Debugger will issue additional Debugger.paused notification if any async task is scheduled
             /// before next pause.
             /// </param>
+            /// <param name="cancellation" />
             public Task StepInto
             (
                 bool? @breakOnAsyncCall = default, 
@@ -869,6 +907,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Steps out of the function call.
             /// </summary>
+            /// <param name="cancellation" />
             public Task StepOut
             (
                 CancellationToken cancellation = default
@@ -887,6 +926,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Steps over the statement.
             /// </summary>
+            /// <param name="cancellation" />
             public Task StepOver
             (
                 CancellationToken cancellation = default
@@ -990,11 +1030,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain HeapProfiler.
+        /// </summary>
         public class HeapProfilerInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public HeapProfilerInspectorClient(InspectorClient inspectionClient)
+            internal HeapProfilerInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -1006,6 +1049,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="heapObjectId">
             /// Heap snapshot object id to be accessible by means of $x command line API.
             /// </param>
+            /// <param name="cancellation" />
             public Task AddInspectedHeapObject
             (
                 Protocol.HeapProfiler.HeapSnapshotObjectId @heapObjectId, 
@@ -1023,6 +1067,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task CollectGarbage
             (
                 CancellationToken cancellation = default
@@ -1038,6 +1084,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -1053,6 +1101,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -1068,9 +1118,11 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="objectId">
             /// Identifier of the object to get heap object id for.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.HeapProfiler.GetHeapObjectIdResponse> GetHeapObjectId
             (
                 Protocol.Runtime.RemoteObjectId @objectId, 
@@ -1088,10 +1140,12 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="objectId" />
             /// <param name="objectGroup">
             /// Symbolic group name that can be used to release multiple objects.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.HeapProfiler.GetObjectByHeapObjectIdResponse> GetObjectByHeapObjectId
             (
                 Protocol.HeapProfiler.HeapSnapshotObjectId @objectId, 
@@ -1111,6 +1165,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task<Protocol.HeapProfiler.GetSamplingProfileResponse> GetSamplingProfile
             (
                 CancellationToken cancellation = default
@@ -1126,10 +1182,12 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="samplingInterval">
             /// Average sample interval in bytes. Poisson distribution is used for the intervals. The
             /// default value is 32768 bytes.
             /// </param>
+            /// <param name="cancellation" />
             public Task StartSampling
             (
                 double? @samplingInterval = default, 
@@ -1147,7 +1205,9 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="trackAllocations" />
+            /// <param name="cancellation" />
             public Task StartTrackingHeapObjects
             (
                 bool? @trackAllocations = default, 
@@ -1165,6 +1225,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task<Protocol.HeapProfiler.StopSamplingResponse> StopSampling
             (
                 CancellationToken cancellation = default
@@ -1180,10 +1242,12 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="reportProgress">
             /// If true 'reportHeapSnapshotProgress' events will be generated while snapshot is being taken
             /// when the tracking is stopped.
             /// </param>
+            /// <param name="cancellation" />
             public Task StopTrackingHeapObjects
             (
                 bool? @reportProgress = default, 
@@ -1201,9 +1265,11 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="reportProgress">
             /// If true 'reportHeapSnapshotProgress' events will be generated while snapshot is being taken.
             /// </param>
+            /// <param name="cancellation" />
             public Task TakeHeapSnapshot
             (
                 bool? @reportProgress = default, 
@@ -1221,6 +1287,7 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             public event Func<Protocol.HeapProfiler.AddHeapSnapshotChunkEvent, Task> AddHeapSnapshotChunk
             {
                 add => InspectorClient.AddEventHandlerCore("HeapProfiler.addHeapSnapshotChunk", value);
@@ -1247,18 +1314,21 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandlerCore("HeapProfiler.lastSeenObjectId", value);
             }
 
+            /// <summary />
             public event Func<Protocol.HeapProfiler.ReportHeapSnapshotProgressEvent, Task> ReportHeapSnapshotProgress
             {
                 add => InspectorClient.AddEventHandlerCore("HeapProfiler.reportHeapSnapshotProgress", value);
                 remove => InspectorClient.RemoveEventHandlerCore("HeapProfiler.reportHeapSnapshotProgress", value);
             }
 
+            /// <summary />
             public event Func<Protocol.HeapProfiler.ResetProfilesEvent, Task> ResetProfiles
             {
                 add => InspectorClient.AddEventHandlerCore("HeapProfiler.resetProfiles", value);
                 remove => InspectorClient.RemoveEventHandlerCore("HeapProfiler.resetProfiles", value);
             }
 
+            /// <summary />
             public Task<Protocol.HeapProfiler.AddHeapSnapshotChunkEvent> AddHeapSnapshotChunkEvent(Func<Protocol.HeapProfiler.AddHeapSnapshotChunkEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("HeapProfiler.addHeapSnapshotChunk", until);
@@ -1282,26 +1352,33 @@ namespace DumbPrograms.ChromeDevTools
                 return InspectorClient.SubscribeUntilCore("HeapProfiler.lastSeenObjectId", until);
             }
 
+            /// <summary />
             public Task<Protocol.HeapProfiler.ReportHeapSnapshotProgressEvent> ReportHeapSnapshotProgressEvent(Func<Protocol.HeapProfiler.ReportHeapSnapshotProgressEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("HeapProfiler.reportHeapSnapshotProgress", until);
             }
 
+            /// <summary />
             public Task<Protocol.HeapProfiler.ResetProfilesEvent> ResetProfilesEvent(Func<Protocol.HeapProfiler.ResetProfilesEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("HeapProfiler.resetProfiles", until);
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Profiler.
+        /// </summary>
         public class ProfilerInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public ProfilerInspectorClient(InspectorClient inspectionClient)
+            internal ProfilerInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -1317,6 +1394,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -1336,6 +1415,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Collect coverage data for the current isolate. The coverage data may be incomplete due to
             /// garbage collection.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Profiler.GetBestEffortCoverageResponse> GetBestEffortCoverage
             (
                 CancellationToken cancellation = default
@@ -1357,6 +1437,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="interval">
             /// New sampling interval in microseconds.
             /// </param>
+            /// <param name="cancellation" />
             public Task SetSamplingInterval
             (
                 long @interval, 
@@ -1374,6 +1455,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task Start
             (
                 CancellationToken cancellation = default
@@ -1400,6 +1483,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="detailed">
             /// Collect block-based coverage.
             /// </param>
+            /// <param name="cancellation" />
             public Task StartPreciseCoverage
             (
                 bool? @callCount = default, 
@@ -1422,6 +1506,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Enable type profile.
             /// </summary>
+            /// <param name="cancellation" />
             public Task StartTypeProfile
             (
                 CancellationToken cancellation = default
@@ -1437,6 +1522,8 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
+            /// <param name="cancellation" />
             public Task<Protocol.Profiler.StopResponse> Stop
             (
                 CancellationToken cancellation = default
@@ -1456,6 +1543,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Disable precise code coverage. Disabling releases unnecessary execution count records and allows
             /// executing optimized code.
             /// </summary>
+            /// <param name="cancellation" />
             public Task StopPreciseCoverage
             (
                 CancellationToken cancellation = default
@@ -1474,6 +1562,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disable type profile. Disabling releases type profile data collected so far.
             /// </summary>
+            /// <param name="cancellation" />
             public Task StopTypeProfile
             (
                 CancellationToken cancellation = default
@@ -1493,6 +1582,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Collect coverage data for the current isolate, and resets execution counters. Precise code
             /// coverage needs to have started.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Profiler.TakePreciseCoverageResponse> TakePreciseCoverage
             (
                 CancellationToken cancellation = default
@@ -1511,6 +1601,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Collect type profile.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Profiler.TakeTypeProfileResponse> TakeTypeProfile
             (
                 CancellationToken cancellation = default
@@ -1526,6 +1617,7 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             public event Func<Protocol.Profiler.ConsoleProfileFinishedEvent, Task> ConsoleProfileFinished
             {
                 add => InspectorClient.AddEventHandlerCore("Profiler.consoleProfileFinished", value);
@@ -1541,6 +1633,7 @@ namespace DumbPrograms.ChromeDevTools
                 remove => InspectorClient.RemoveEventHandlerCore("Profiler.consoleProfileStarted", value);
             }
 
+            /// <summary />
             public Task<Protocol.Profiler.ConsoleProfileFinishedEvent> ConsoleProfileFinishedEvent(Func<Protocol.Profiler.ConsoleProfileFinishedEvent, Task<bool>> until = null)
             {
                 return InspectorClient.SubscribeUntilCore("Profiler.consoleProfileFinished", until);
@@ -1555,11 +1648,14 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Runtime.
+        /// </summary>
         public class RuntimeInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public RuntimeInspectorClient(InspectorClient inspectionClient)
+            internal RuntimeInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -1576,6 +1672,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="generatePreview">
             /// Whether preview should be generated for the result.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Runtime.AwaitPromiseResponse> AwaitPromise
             (
                 Protocol.Runtime.RemoteObjectId @promiseObjectId, 
@@ -1637,6 +1734,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Symbolic group name that can be used to release multiple objects. If objectGroup is not
             /// specified and objectId is, objectGroup will be inherited from object.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Runtime.CallFunctionOnResponse> CallFunctionOn
             (
                 string @functionDeclaration, 
@@ -1688,6 +1786,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Specifies in which execution context to perform script run. If the parameter is omitted the
             /// evaluation will be performed in the context of the inspected page.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Runtime.CompileScriptResponse> CompileScript
             (
                 string @expression, 
@@ -1714,6 +1813,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Disables reporting of execution contexts creation.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Disable
             (
                 CancellationToken cancellation = default
@@ -1732,6 +1832,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Discards collected exceptions and console API calls.
             /// </summary>
+            /// <param name="cancellation" />
             public Task DiscardConsoleEntries
             (
                 CancellationToken cancellation = default
@@ -1752,6 +1853,7 @@ namespace DumbPrograms.ChromeDevTools
             /// When the reporting gets enabled the event will be sent immediately for each existing execution
             /// context.
             /// </summary>
+            /// <param name="cancellation" />
             public Task Enable
             (
                 CancellationToken cancellation = default
@@ -1806,6 +1908,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="timeout">
             /// Terminate execution after timing out (number of milliseconds).
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Runtime.EvaluateResponse> Evaluate
             (
                 string @expression, 
@@ -1846,6 +1949,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns the isolate id.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Runtime.GetIsolateIdResponse> GetIsolateId
             (
                 CancellationToken cancellation = default
@@ -1865,6 +1969,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Returns the JavaScript heap usage.
             /// It is the total usage of the corresponding isolate not scoped to a particular Runtime.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Runtime.GetHeapUsageResponse> GetHeapUsage
             (
                 CancellationToken cancellation = default
@@ -1898,6 +2003,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="generatePreview">
             /// Whether preview should be generated for the results.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Runtime.GetPropertiesResponse> GetProperties
             (
                 Protocol.Runtime.RemoteObjectId @objectId, 
@@ -1927,6 +2033,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="executionContextId">
             /// Specifies in which execution context to lookup global scope variables.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Runtime.GlobalLexicalScopeNamesResponse> GlobalLexicalScopeNames
             (
                 Protocol.Runtime.ExecutionContextId @executionContextId = default, 
@@ -1944,12 +2051,14 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="prototypeObjectId">
             /// Identifier of the prototype to return objects for.
             /// </param>
             /// <param name="objectGroup">
             /// Symbolic group name that can be used to release the results.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Runtime.QueryObjectsResponse> QueryObjects
             (
                 Protocol.Runtime.RemoteObjectId @prototypeObjectId, 
@@ -1975,6 +2084,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectId">
             /// Identifier of the object to release.
             /// </param>
+            /// <param name="cancellation" />
             public Task ReleaseObject
             (
                 Protocol.Runtime.RemoteObjectId @objectId, 
@@ -1998,6 +2108,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <param name="objectGroup">
             /// Symbolic object group name.
             /// </param>
+            /// <param name="cancellation" />
             public Task ReleaseObjectGroup
             (
                 string @objectGroup, 
@@ -2018,6 +2129,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Tells inspected instance to run if it was waiting for debugger to attach.
             /// </summary>
+            /// <param name="cancellation" />
             public Task RunIfWaitingForDebugger
             (
                 CancellationToken cancellation = default
@@ -2063,6 +2175,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Whether execution should `await` for resulting value and return once awaited promise is
             /// resolved.
             /// </param>
+            /// <param name="cancellation" />
             public Task<Protocol.Runtime.RunScriptResponse> RunScript
             (
                 Protocol.Runtime.ScriptId @scriptId, 
@@ -2101,6 +2214,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Maximum depth of async call stacks. Setting to `0` will effectively disable collecting async
             /// call stacks (default).
             /// </param>
+            /// <param name="cancellation" />
             public Task SetAsyncCallStackDepth
             (
                 long @maxDepth, 
@@ -2118,7 +2232,9 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="enabled" />
+            /// <param name="cancellation" />
             public Task SetCustomObjectFormatterEnabled
             (
                 bool @enabled, 
@@ -2136,7 +2252,9 @@ namespace DumbPrograms.ChromeDevTools
                 ;
             }
 
+            /// <summary />
             /// <param name="size" />
+            /// <param name="cancellation" />
             public Task SetMaxCallStackSizeToCapture
             (
                 long @size, 
@@ -2158,6 +2276,7 @@ namespace DumbPrograms.ChromeDevTools
             /// Terminate current or next JavaScript execution.
             /// Will cancel the termination when the outer-most script execution ends.
             /// </summary>
+            /// <param name="cancellation" />
             public Task TerminateExecution
             (
                 CancellationToken cancellation = default
@@ -2185,6 +2304,7 @@ namespace DumbPrograms.ChromeDevTools
             /// </summary>
             /// <param name="name" />
             /// <param name="executionContextId" />
+            /// <param name="cancellation" />
             public Task AddBinding
             (
                 string @name, 
@@ -2209,6 +2329,7 @@ namespace DumbPrograms.ChromeDevTools
             /// unsubscribes current runtime agent from Runtime.bindingCalled notifications.
             /// </summary>
             /// <param name="name" />
+            /// <param name="cancellation" />
             public Task RemoveBinding
             (
                 string @name, 
@@ -2365,12 +2486,15 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// Inspector client for domain Schema.
+        /// </summary>
         [Obsolete]
         public class SchemaInspectorClient
         {
             private readonly InspectorClient InspectorClient;
 
-            public SchemaInspectorClient(InspectorClient inspectionClient)
+            internal SchemaInspectorClient(InspectorClient inspectionClient)
             {
                 InspectorClient = inspectionClient;
             }
@@ -2378,6 +2502,7 @@ namespace DumbPrograms.ChromeDevTools
             /// <summary>
             /// Returns supported domains.
             /// </summary>
+            /// <param name="cancellation" />
             public Task<Protocol.Schema.GetDomainsResponse> GetDomains
             (
                 CancellationToken cancellation = default

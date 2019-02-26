@@ -24,22 +24,90 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<AXValueType, string>))]
         public class AXValueType : JSEnum
         {
+
+            /// <summary>
+            /// AXValueType of 'boolean'
+            /// </summary>
             public static AXValueType Boolean => New<AXValueType>("boolean");
+
+            /// <summary>
+            /// AXValueType of 'tristate'
+            /// </summary>
             public static AXValueType Tristate => New<AXValueType>("tristate");
+
+            /// <summary>
+            /// AXValueType of 'booleanOrUndefined'
+            /// </summary>
             public static AXValueType BooleanOrUndefined => New<AXValueType>("booleanOrUndefined");
+
+            /// <summary>
+            /// AXValueType of 'idref'
+            /// </summary>
             public static AXValueType Idref => New<AXValueType>("idref");
+
+            /// <summary>
+            /// AXValueType of 'idrefList'
+            /// </summary>
             public static AXValueType IdrefList => New<AXValueType>("idrefList");
+
+            /// <summary>
+            /// AXValueType of 'integer'
+            /// </summary>
             public static AXValueType Integer => New<AXValueType>("integer");
+
+            /// <summary>
+            /// AXValueType of 'node'
+            /// </summary>
             public static AXValueType Node => New<AXValueType>("node");
+
+            /// <summary>
+            /// AXValueType of 'nodeList'
+            /// </summary>
             public static AXValueType NodeList => New<AXValueType>("nodeList");
+
+            /// <summary>
+            /// AXValueType of 'number'
+            /// </summary>
             public static AXValueType Number => New<AXValueType>("number");
+
+            /// <summary>
+            /// AXValueType of 'string'
+            /// </summary>
             public static AXValueType String => New<AXValueType>("string");
+
+            /// <summary>
+            /// AXValueType of 'computedString'
+            /// </summary>
             public static AXValueType ComputedString => New<AXValueType>("computedString");
+
+            /// <summary>
+            /// AXValueType of 'token'
+            /// </summary>
             public static AXValueType Token => New<AXValueType>("token");
+
+            /// <summary>
+            /// AXValueType of 'tokenList'
+            /// </summary>
             public static AXValueType TokenList => New<AXValueType>("tokenList");
+
+            /// <summary>
+            /// AXValueType of 'domRelation'
+            /// </summary>
             public static AXValueType DomRelation => New<AXValueType>("domRelation");
+
+            /// <summary>
+            /// AXValueType of 'role'
+            /// </summary>
             public static AXValueType Role => New<AXValueType>("role");
+
+            /// <summary>
+            /// AXValueType of 'internalRole'
+            /// </summary>
             public static AXValueType InternalRole => New<AXValueType>("internalRole");
+
+            /// <summary>
+            /// AXValueType of 'valueUndefined'
+            /// </summary>
             public static AXValueType ValueUndefined => New<AXValueType>("valueUndefined");
         }
 
@@ -49,11 +117,35 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<AXValueSourceType, string>))]
         public class AXValueSourceType : JSEnum
         {
+
+            /// <summary>
+            /// AXValueSourceType of 'attribute'
+            /// </summary>
             public static AXValueSourceType Attribute => New<AXValueSourceType>("attribute");
+
+            /// <summary>
+            /// AXValueSourceType of 'implicit'
+            /// </summary>
             public static AXValueSourceType Implicit => New<AXValueSourceType>("implicit");
+
+            /// <summary>
+            /// AXValueSourceType of 'style'
+            /// </summary>
             public static AXValueSourceType Style => New<AXValueSourceType>("style");
+
+            /// <summary>
+            /// AXValueSourceType of 'contents'
+            /// </summary>
             public static AXValueSourceType Contents => New<AXValueSourceType>("contents");
+
+            /// <summary>
+            /// AXValueSourceType of 'placeholder'
+            /// </summary>
             public static AXValueSourceType Placeholder => New<AXValueSourceType>("placeholder");
+
+            /// <summary>
+            /// AXValueSourceType of 'relatedElement'
+            /// </summary>
             public static AXValueSourceType RelatedElement => New<AXValueSourceType>("relatedElement");
         }
 
@@ -63,13 +155,45 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<AXValueNativeSourceType, string>))]
         public class AXValueNativeSourceType : JSEnum
         {
+
+            /// <summary>
+            /// AXValueNativeSourceType of 'figcaption'
+            /// </summary>
             public static AXValueNativeSourceType Figcaption => New<AXValueNativeSourceType>("figcaption");
+
+            /// <summary>
+            /// AXValueNativeSourceType of 'label'
+            /// </summary>
             public static AXValueNativeSourceType Label => New<AXValueNativeSourceType>("label");
+
+            /// <summary>
+            /// AXValueNativeSourceType of 'labelfor'
+            /// </summary>
             public static AXValueNativeSourceType Labelfor => New<AXValueNativeSourceType>("labelfor");
+
+            /// <summary>
+            /// AXValueNativeSourceType of 'labelwrapped'
+            /// </summary>
             public static AXValueNativeSourceType Labelwrapped => New<AXValueNativeSourceType>("labelwrapped");
+
+            /// <summary>
+            /// AXValueNativeSourceType of 'legend'
+            /// </summary>
             public static AXValueNativeSourceType Legend => New<AXValueNativeSourceType>("legend");
+
+            /// <summary>
+            /// AXValueNativeSourceType of 'tablecaption'
+            /// </summary>
             public static AXValueNativeSourceType Tablecaption => New<AXValueNativeSourceType>("tablecaption");
+
+            /// <summary>
+            /// AXValueNativeSourceType of 'title'
+            /// </summary>
             public static AXValueNativeSourceType Title => New<AXValueNativeSourceType>("title");
+
+            /// <summary>
+            /// AXValueNativeSourceType of 'other'
+            /// </summary>
             public static AXValueNativeSourceType Other => New<AXValueNativeSourceType>("other");
         }
 
@@ -134,6 +258,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string InvalidReason { get; set; }
         }
 
+        /// <summary />
         public class AXRelatedNode
         {
 
@@ -156,6 +281,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Text { get; set; }
         }
 
+        /// <summary />
         public class AXProperty
         {
 
@@ -214,44 +340,200 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<AXPropertyName, string>))]
         public class AXPropertyName : JSEnum
         {
+
+            /// <summary>
+            /// AXPropertyName of 'busy'
+            /// </summary>
             public static AXPropertyName Busy => New<AXPropertyName>("busy");
+
+            /// <summary>
+            /// AXPropertyName of 'disabled'
+            /// </summary>
             public static AXPropertyName Disabled => New<AXPropertyName>("disabled");
+
+            /// <summary>
+            /// AXPropertyName of 'editable'
+            /// </summary>
             public static AXPropertyName Editable => New<AXPropertyName>("editable");
+
+            /// <summary>
+            /// AXPropertyName of 'focusable'
+            /// </summary>
             public static AXPropertyName Focusable => New<AXPropertyName>("focusable");
+
+            /// <summary>
+            /// AXPropertyName of 'focused'
+            /// </summary>
             public static AXPropertyName Focused => New<AXPropertyName>("focused");
+
+            /// <summary>
+            /// AXPropertyName of 'hidden'
+            /// </summary>
             public static AXPropertyName Hidden => New<AXPropertyName>("hidden");
+
+            /// <summary>
+            /// AXPropertyName of 'hiddenRoot'
+            /// </summary>
             public static AXPropertyName HiddenRoot => New<AXPropertyName>("hiddenRoot");
+
+            /// <summary>
+            /// AXPropertyName of 'invalid'
+            /// </summary>
             public static AXPropertyName Invalid => New<AXPropertyName>("invalid");
+
+            /// <summary>
+            /// AXPropertyName of 'keyshortcuts'
+            /// </summary>
             public static AXPropertyName Keyshortcuts => New<AXPropertyName>("keyshortcuts");
+
+            /// <summary>
+            /// AXPropertyName of 'settable'
+            /// </summary>
             public static AXPropertyName Settable => New<AXPropertyName>("settable");
+
+            /// <summary>
+            /// AXPropertyName of 'roledescription'
+            /// </summary>
             public static AXPropertyName Roledescription => New<AXPropertyName>("roledescription");
+
+            /// <summary>
+            /// AXPropertyName of 'live'
+            /// </summary>
             public static AXPropertyName Live => New<AXPropertyName>("live");
+
+            /// <summary>
+            /// AXPropertyName of 'atomic'
+            /// </summary>
             public static AXPropertyName Atomic => New<AXPropertyName>("atomic");
+
+            /// <summary>
+            /// AXPropertyName of 'relevant'
+            /// </summary>
             public static AXPropertyName Relevant => New<AXPropertyName>("relevant");
+
+            /// <summary>
+            /// AXPropertyName of 'root'
+            /// </summary>
             public static AXPropertyName Root => New<AXPropertyName>("root");
+
+            /// <summary>
+            /// AXPropertyName of 'autocomplete'
+            /// </summary>
             public static AXPropertyName Autocomplete => New<AXPropertyName>("autocomplete");
+
+            /// <summary>
+            /// AXPropertyName of 'hasPopup'
+            /// </summary>
             public static AXPropertyName HasPopup => New<AXPropertyName>("hasPopup");
+
+            /// <summary>
+            /// AXPropertyName of 'level'
+            /// </summary>
             public static AXPropertyName Level => New<AXPropertyName>("level");
+
+            /// <summary>
+            /// AXPropertyName of 'multiselectable'
+            /// </summary>
             public static AXPropertyName Multiselectable => New<AXPropertyName>("multiselectable");
+
+            /// <summary>
+            /// AXPropertyName of 'orientation'
+            /// </summary>
             public static AXPropertyName Orientation => New<AXPropertyName>("orientation");
+
+            /// <summary>
+            /// AXPropertyName of 'multiline'
+            /// </summary>
             public static AXPropertyName Multiline => New<AXPropertyName>("multiline");
+
+            /// <summary>
+            /// AXPropertyName of 'readonly'
+            /// </summary>
             public static AXPropertyName Readonly => New<AXPropertyName>("readonly");
+
+            /// <summary>
+            /// AXPropertyName of 'required'
+            /// </summary>
             public static AXPropertyName Required => New<AXPropertyName>("required");
+
+            /// <summary>
+            /// AXPropertyName of 'valuemin'
+            /// </summary>
             public static AXPropertyName Valuemin => New<AXPropertyName>("valuemin");
+
+            /// <summary>
+            /// AXPropertyName of 'valuemax'
+            /// </summary>
             public static AXPropertyName Valuemax => New<AXPropertyName>("valuemax");
+
+            /// <summary>
+            /// AXPropertyName of 'valuetext'
+            /// </summary>
             public static AXPropertyName Valuetext => New<AXPropertyName>("valuetext");
+
+            /// <summary>
+            /// AXPropertyName of 'checked'
+            /// </summary>
             public static AXPropertyName Checked => New<AXPropertyName>("checked");
+
+            /// <summary>
+            /// AXPropertyName of 'expanded'
+            /// </summary>
             public static AXPropertyName Expanded => New<AXPropertyName>("expanded");
+
+            /// <summary>
+            /// AXPropertyName of 'modal'
+            /// </summary>
             public static AXPropertyName Modal => New<AXPropertyName>("modal");
+
+            /// <summary>
+            /// AXPropertyName of 'pressed'
+            /// </summary>
             public static AXPropertyName Pressed => New<AXPropertyName>("pressed");
+
+            /// <summary>
+            /// AXPropertyName of 'selected'
+            /// </summary>
             public static AXPropertyName Selected => New<AXPropertyName>("selected");
+
+            /// <summary>
+            /// AXPropertyName of 'activedescendant'
+            /// </summary>
             public static AXPropertyName Activedescendant => New<AXPropertyName>("activedescendant");
+
+            /// <summary>
+            /// AXPropertyName of 'controls'
+            /// </summary>
             public static AXPropertyName Controls => New<AXPropertyName>("controls");
+
+            /// <summary>
+            /// AXPropertyName of 'describedby'
+            /// </summary>
             public static AXPropertyName Describedby => New<AXPropertyName>("describedby");
+
+            /// <summary>
+            /// AXPropertyName of 'details'
+            /// </summary>
             public static AXPropertyName Details => New<AXPropertyName>("details");
+
+            /// <summary>
+            /// AXPropertyName of 'errormessage'
+            /// </summary>
             public static AXPropertyName Errormessage => New<AXPropertyName>("errormessage");
+
+            /// <summary>
+            /// AXPropertyName of 'flowto'
+            /// </summary>
             public static AXPropertyName Flowto => New<AXPropertyName>("flowto");
+
+            /// <summary>
+            /// AXPropertyName of 'labelledby'
+            /// </summary>
             public static AXPropertyName Labelledby => New<AXPropertyName>("labelledby");
+
+            /// <summary>
+            /// AXPropertyName of 'owns'
+            /// </summary>
             public static AXPropertyName Owns => New<AXPropertyName>("owns");
         }
 
@@ -375,6 +657,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? FetchRelatives { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetPartialAXTree.
+        /// </summary>
         public class GetPartialAXTreeResponse
         {
 
@@ -394,9 +679,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Accessibility.getFullAXTree";
         }
 
+        /// <summary>
+        /// Response of GetFullAXTree.
+        /// </summary>
         public class GetFullAXTreeResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("nodes")]
             public AXNode[] Nodes { get; set; }
         }
@@ -616,6 +905,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Id { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetCurrentTime.
+        /// </summary>
         public class GetCurrentTimeResponse
         {
 
@@ -634,6 +926,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Animation.getPlaybackRate";
         }
 
+        /// <summary>
+        /// Response of GetPlaybackRate.
+        /// </summary>
         public class GetPlaybackRateResponse
         {
 
@@ -672,6 +967,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string AnimationId { get; set; }
         }
 
+        /// <summary>
+        /// Response of ResolveAnimation.
+        /// </summary>
         public class ResolveAnimationResponse
         {
 
@@ -929,6 +1227,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Page.FrameId FrameId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetApplicationCacheForFrame.
+        /// </summary>
         public class GetApplicationCacheForFrameResponse
         {
 
@@ -948,6 +1249,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "ApplicationCache.getFramesWithManifests";
         }
 
+        /// <summary>
+        /// Response of GetFramesWithManifests.
+        /// </summary>
         public class GetFramesWithManifestsResponse
         {
 
@@ -973,6 +1277,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Page.FrameId FrameId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetManifestForFrame.
+        /// </summary>
         public class GetManifestForFrameResponse
         {
 
@@ -987,6 +1294,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
+        /// <summary />
         [Event("ApplicationCache.applicationCacheStatusUpdated")]
         public class ApplicationCacheStatusUpdatedEvent
         {
@@ -1010,10 +1318,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public long Status { get; set; }
         }
 
+        /// <summary />
         [Event("ApplicationCache.networkStateUpdated")]
         public class NetworkStateUpdatedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("isNowOnline")]
             public bool IsNowOnline { get; set; }
         }
@@ -1021,9 +1331,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// Audits domain allows investigation of page violations and possible improvements.
-    /// </summary>
     namespace Audits
     {
 
@@ -1062,6 +1369,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? SizeOnly { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetEncodedResponse.
+        /// </summary>
         public class GetEncodedResponseResponse
         {
 
@@ -1087,14 +1397,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// The Browser domain defines methods and events for browser managing.
-    /// </summary>
     namespace Browser
     {
 
         #region Types
 
+        /// <summary />
         [JsonConverter(typeof(JSAliasConverter<WindowID, long>))]
         public class WindowID : JSAlias<long>
         {
@@ -1106,9 +1414,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<WindowState, string>))]
         public class WindowState : JSEnum
         {
+
+            /// <summary>
+            /// WindowState of 'normal'
+            /// </summary>
             public static WindowState Normal => New<WindowState>("normal");
+
+            /// <summary>
+            /// WindowState of 'minimized'
+            /// </summary>
             public static WindowState Minimized => New<WindowState>("minimized");
+
+            /// <summary>
+            /// WindowState of 'maximized'
+            /// </summary>
             public static WindowState Maximized => New<WindowState>("maximized");
+
+            /// <summary>
+            /// WindowState of 'fullscreen'
+            /// </summary>
             public static WindowState Fullscreen => New<WindowState>("fullscreen");
         }
 
@@ -1149,25 +1473,94 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public WindowState WindowState { get; set; }
         }
 
+        /// <summary />
         [JsonConverter(typeof(JSAliasConverter<PermissionType, string>))]
         public class PermissionType : JSEnum
         {
+
+            /// <summary>
+            /// PermissionType of 'accessibilityEvents'
+            /// </summary>
             public static PermissionType AccessibilityEvents => New<PermissionType>("accessibilityEvents");
+
+            /// <summary>
+            /// PermissionType of 'audioCapture'
+            /// </summary>
             public static PermissionType AudioCapture => New<PermissionType>("audioCapture");
+
+            /// <summary>
+            /// PermissionType of 'backgroundSync'
+            /// </summary>
             public static PermissionType BackgroundSync => New<PermissionType>("backgroundSync");
+
+            /// <summary>
+            /// PermissionType of 'backgroundFetch'
+            /// </summary>
             public static PermissionType BackgroundFetch => New<PermissionType>("backgroundFetch");
+
+            /// <summary>
+            /// PermissionType of 'clipboardRead'
+            /// </summary>
             public static PermissionType ClipboardRead => New<PermissionType>("clipboardRead");
+
+            /// <summary>
+            /// PermissionType of 'clipboardWrite'
+            /// </summary>
             public static PermissionType ClipboardWrite => New<PermissionType>("clipboardWrite");
+
+            /// <summary>
+            /// PermissionType of 'durableStorage'
+            /// </summary>
             public static PermissionType DurableStorage => New<PermissionType>("durableStorage");
+
+            /// <summary>
+            /// PermissionType of 'flash'
+            /// </summary>
             public static PermissionType Flash => New<PermissionType>("flash");
+
+            /// <summary>
+            /// PermissionType of 'geolocation'
+            /// </summary>
             public static PermissionType Geolocation => New<PermissionType>("geolocation");
+
+            /// <summary>
+            /// PermissionType of 'midi'
+            /// </summary>
             public static PermissionType Midi => New<PermissionType>("midi");
+
+            /// <summary>
+            /// PermissionType of 'midiSysex'
+            /// </summary>
             public static PermissionType MidiSysex => New<PermissionType>("midiSysex");
+
+            /// <summary>
+            /// PermissionType of 'notifications'
+            /// </summary>
             public static PermissionType Notifications => New<PermissionType>("notifications");
+
+            /// <summary>
+            /// PermissionType of 'paymentHandler'
+            /// </summary>
             public static PermissionType PaymentHandler => New<PermissionType>("paymentHandler");
+
+            /// <summary>
+            /// PermissionType of 'protectedMediaIdentifier'
+            /// </summary>
             public static PermissionType ProtectedMediaIdentifier => New<PermissionType>("protectedMediaIdentifier");
+
+            /// <summary>
+            /// PermissionType of 'sensors'
+            /// </summary>
             public static PermissionType Sensors => New<PermissionType>("sensors");
+
+            /// <summary>
+            /// PermissionType of 'videoCapture'
+            /// </summary>
             public static PermissionType VideoCapture => New<PermissionType>("videoCapture");
+
+            /// <summary>
+            /// PermissionType of 'idleDetection'
+            /// </summary>
             public static PermissionType IdleDetection => New<PermissionType>("idleDetection");
         }
 
@@ -1238,9 +1631,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Browser.grantPermissions";
 
+            /// <summary></summary>
             [JsonProperty("origin")]
             public string Origin { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("permissions")]
             public PermissionType[] Permissions { get; set; }
 
@@ -1297,6 +1692,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Browser.getVersion";
         }
 
+        /// <summary>
+        /// Response of GetVersion.
+        /// </summary>
         public class GetVersionResponse
         {
 
@@ -1340,6 +1738,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Browser.getBrowserCommandLine";
         }
 
+        /// <summary>
+        /// Response of GetBrowserCommandLine.
+        /// </summary>
         public class GetBrowserCommandLineResponse
         {
 
@@ -1372,6 +1773,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? Delta { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetHistograms.
+        /// </summary>
         public class GetHistogramsResponse
         {
 
@@ -1402,6 +1806,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? Delta { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetHistogram.
+        /// </summary>
         public class GetHistogramResponse
         {
 
@@ -1426,6 +1833,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public WindowID WindowId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetWindowBounds.
+        /// </summary>
         public class GetWindowBoundsResponse
         {
 
@@ -1451,6 +1861,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Target.TargetID TargetId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetWindowForTarget.
+        /// </summary>
         public class GetWindowForTargetResponse
         {
 
@@ -1512,19 +1925,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// This domain exposes CSS read/write operations. All CSS objects (stylesheets, rules, and styles)
-    /// have an associated `id` used in subsequent operations on the related object. Each object type has
-    /// a specific `id` structure, and those are not interchangeable between objects of different kinds.
-    /// CSS objects can be loaded using the `get*ForNode()` calls (which accept a DOM node id). A client
-    /// can also keep track of stylesheets via the `styleSheetAdded`/`styleSheetRemoved` events and
-    /// subsequently load the required stylesheet contents using the `getStyleSheet[Text]()` methods.
-    /// </summary>
     namespace CSS
     {
 
         #region Types
 
+        /// <summary />
         [JsonConverter(typeof(JSAliasConverter<StyleSheetId, string>))]
         public class StyleSheetId : JSAlias<string>
         {
@@ -1538,9 +1944,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<StyleSheetOrigin, string>))]
         public class StyleSheetOrigin : JSEnum
         {
+
+            /// <summary>
+            /// StyleSheetOrigin of 'injected'
+            /// </summary>
             public static StyleSheetOrigin Injected => New<StyleSheetOrigin>("injected");
+
+            /// <summary>
+            /// StyleSheetOrigin of 'user-agent'
+            /// </summary>
             public static StyleSheetOrigin UserAgent => New<StyleSheetOrigin>("user-agent");
+
+            /// <summary>
+            /// StyleSheetOrigin of 'inspector'
+            /// </summary>
             public static StyleSheetOrigin Inspector => New<StyleSheetOrigin>("inspector");
+
+            /// <summary>
+            /// StyleSheetOrigin of 'regular'
+            /// </summary>
             public static StyleSheetOrigin Regular => New<StyleSheetOrigin>("regular");
         }
 
@@ -1827,6 +2249,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public long EndColumn { get; set; }
         }
 
+        /// <summary />
         public class ShorthandEntry
         {
 
@@ -1849,6 +2272,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? Important { get; set; }
         }
 
+        /// <summary />
         public class CSSComputedStyleProperty
         {
 
@@ -2248,6 +2672,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public SourceRange Location { get; set; }
         }
 
+        /// <summary>
+        /// Response of AddRule.
+        /// </summary>
         public class AddRuleResponse
         {
 
@@ -2265,10 +2692,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "CSS.collectClassNames";
 
+            /// <summary></summary>
             [JsonProperty("styleSheetId")]
             public StyleSheetId StyleSheetId { get; set; }
         }
 
+        /// <summary>
+        /// Response of CollectClassNames.
+        /// </summary>
         public class CollectClassNamesResponse
         {
 
@@ -2293,6 +2724,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Page.FrameId FrameId { get; set; }
         }
 
+        /// <summary>
+        /// Response of CreateStyleSheet.
+        /// </summary>
         public class CreateStyleSheetResponse
         {
 
@@ -2341,6 +2775,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string[] ForcedPseudoClasses { get; set; }
         }
 
+        /// <summary />
         public class GetBackgroundColorsCommand : ICommand<GetBackgroundColorsResponse>
         {
             string ICommand.Name { get; } = "CSS.getBackgroundColors";
@@ -2352,6 +2787,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public DOM.NodeId NodeId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetBackgroundColors.
+        /// </summary>
         public class GetBackgroundColorsResponse
         {
 
@@ -2386,10 +2824,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "CSS.getComputedStyleForNode";
 
+            /// <summary></summary>
             [JsonProperty("nodeId")]
             public DOM.NodeId NodeId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetComputedStyleForNode.
+        /// </summary>
         public class GetComputedStyleForNodeResponse
         {
 
@@ -2408,10 +2850,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "CSS.getInlineStylesForNode";
 
+            /// <summary></summary>
             [JsonProperty("nodeId")]
             public DOM.NodeId NodeId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetInlineStylesForNode.
+        /// </summary>
         public class GetInlineStylesForNodeResponse
         {
 
@@ -2435,10 +2881,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "CSS.getMatchedStylesForNode";
 
+            /// <summary></summary>
             [JsonProperty("nodeId")]
             public DOM.NodeId NodeId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetMatchedStylesForNode.
+        /// </summary>
         public class GetMatchedStylesForNodeResponse
         {
 
@@ -2487,9 +2937,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "CSS.getMediaQueries";
         }
 
+        /// <summary>
+        /// Response of GetMediaQueries.
+        /// </summary>
         public class GetMediaQueriesResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("medias")]
             public CSSMedia[] Medias { get; set; }
         }
@@ -2502,10 +2956,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "CSS.getPlatformFontsForNode";
 
+            /// <summary></summary>
             [JsonProperty("nodeId")]
             public DOM.NodeId NodeId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetPlatformFontsForNode.
+        /// </summary>
         public class GetPlatformFontsForNodeResponse
         {
 
@@ -2523,10 +2981,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "CSS.getStyleSheetText";
 
+            /// <summary></summary>
             [JsonProperty("styleSheetId")]
             public StyleSheetId StyleSheetId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetStyleSheetText.
+        /// </summary>
         public class GetStyleSheetTextResponse
         {
 
@@ -2551,9 +3013,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("nodeId")]
             public DOM.NodeId NodeId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("propertyName")]
             public string PropertyName { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("value")]
             public string Value { get; set; }
         }
@@ -2565,16 +3029,22 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "CSS.setKeyframeKey";
 
+            /// <summary></summary>
             [JsonProperty("styleSheetId")]
             public StyleSheetId StyleSheetId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("range")]
             public SourceRange Range { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("keyText")]
             public string KeyText { get; set; }
         }
 
+        /// <summary>
+        /// Response of SetKeyframeKey.
+        /// </summary>
         public class SetKeyframeKeyResponse
         {
 
@@ -2592,16 +3062,22 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "CSS.setMediaText";
 
+            /// <summary></summary>
             [JsonProperty("styleSheetId")]
             public StyleSheetId StyleSheetId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("range")]
             public SourceRange Range { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("text")]
             public string Text { get; set; }
         }
 
+        /// <summary>
+        /// Response of SetMediaText.
+        /// </summary>
         public class SetMediaTextResponse
         {
 
@@ -2619,16 +3095,22 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "CSS.setRuleSelector";
 
+            /// <summary></summary>
             [JsonProperty("styleSheetId")]
             public StyleSheetId StyleSheetId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("range")]
             public SourceRange Range { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("selector")]
             public string Selector { get; set; }
         }
 
+        /// <summary>
+        /// Response of SetRuleSelector.
+        /// </summary>
         public class SetRuleSelectorResponse
         {
 
@@ -2646,13 +3128,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "CSS.setStyleSheetText";
 
+            /// <summary></summary>
             [JsonProperty("styleSheetId")]
             public StyleSheetId StyleSheetId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("text")]
             public string Text { get; set; }
         }
 
+        /// <summary>
+        /// Response of SetStyleSheetText.
+        /// </summary>
         public class SetStyleSheetTextResponse
         {
 
@@ -2670,10 +3157,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "CSS.setStyleTexts";
 
+            /// <summary></summary>
             [JsonProperty("edits")]
             public StyleDeclarationEdit[] Edits { get; set; }
         }
 
+        /// <summary>
+        /// Response of SetStyleTexts.
+        /// </summary>
         public class SetStyleTextsResponse
         {
 
@@ -2701,9 +3192,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "CSS.stopRuleUsageTracking";
         }
 
+        /// <summary>
+        /// Response of StopRuleUsageTracking.
+        /// </summary>
         public class StopRuleUsageTrackingResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("ruleUsage")]
             public RuleUsage[] RuleUsage { get; set; }
         }
@@ -2717,9 +3212,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "CSS.takeCoverageDelta";
         }
 
+        /// <summary>
+        /// Response of TakeCoverageDelta.
+        /// </summary>
         public class TakeCoverageDeltaResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("coverage")]
             public RuleUsage[] Coverage { get; set; }
         }
@@ -2773,6 +3272,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class StyleSheetChangedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("styleSheetId")]
             public StyleSheetId StyleSheetId { get; set; }
         }
@@ -2813,11 +3313,35 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<CachedResponseType, string>))]
         public class CachedResponseType : JSEnum
         {
+
+            /// <summary>
+            /// CachedResponseType of 'basic'
+            /// </summary>
             public static CachedResponseType Basic => New<CachedResponseType>("basic");
+
+            /// <summary>
+            /// CachedResponseType of 'cors'
+            /// </summary>
             public static CachedResponseType Cors => New<CachedResponseType>("cors");
+
+            /// <summary>
+            /// CachedResponseType of 'default'
+            /// </summary>
             public static CachedResponseType Default => New<CachedResponseType>("default");
+
+            /// <summary>
+            /// CachedResponseType of 'error'
+            /// </summary>
             public static CachedResponseType Error => New<CachedResponseType>("error");
+
+            /// <summary>
+            /// CachedResponseType of 'opaqueResponse'
+            /// </summary>
             public static CachedResponseType OpaqueResponse => New<CachedResponseType>("opaqueResponse");
+
+            /// <summary>
+            /// CachedResponseType of 'opaqueRedirect'
+            /// </summary>
             public static CachedResponseType OpaqueRedirect => New<CachedResponseType>("opaqueRedirect");
         }
 
@@ -2901,12 +3425,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string CacheName { get; set; }
         }
 
+        /// <summary />
         public class Header
         {
 
+            /// <summary></summary>
             [JsonProperty("name")]
             public string Name { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("value")]
             public string Value { get; set; }
         }
@@ -2976,6 +3503,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string SecurityOrigin { get; set; }
         }
 
+        /// <summary>
+        /// Response of RequestCacheNames.
+        /// </summary>
         public class RequestCacheNamesResponse
         {
 
@@ -3012,6 +3542,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Header[] RequestHeaders { get; set; }
         }
 
+        /// <summary>
+        /// Response of RequestCachedResponse.
+        /// </summary>
         public class RequestCachedResponseResponse
         {
 
@@ -3054,6 +3587,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string PathFilter { get; set; }
         }
 
+        /// <summary>
+        /// Response of RequestEntries.
+        /// </summary>
         public class RequestEntriesResponse
         {
 
@@ -3073,10 +3609,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// A domain for interacting with Cast, Presentation API, and Remote Playback API
-    /// functionalities.
-    /// </summary>
     namespace Cast
     {
 
@@ -3116,6 +3648,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Cast.setSinkToUse";
 
+            /// <summary></summary>
             [JsonProperty("sinkName")]
             public string SinkName { get; set; }
         }
@@ -3127,6 +3660,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Cast.startTabMirroring";
 
+            /// <summary></summary>
             [JsonProperty("sinkName")]
             public string SinkName { get; set; }
         }
@@ -3138,6 +3672,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Cast.stopCasting";
 
+            /// <summary></summary>
             [JsonProperty("sinkName")]
             public string SinkName { get; set; }
         }
@@ -3154,6 +3689,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SinksUpdatedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("sinkNames")]
             public string[] SinkNames { get; set; }
         }
@@ -3166,6 +3702,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class IssueUpdatedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("issueMessage")]
             public string IssueMessage { get; set; }
         }
@@ -3173,15 +3710,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// This domain exposes DOM read/write operations. Each DOM Node is represented with its mirror object
-    /// that has an `id`. This `id` can be used to get additional information on the Node, resolve it into
-    /// the JavaScript object wrapper, etc. It is important that client receives DOM events only for the
-    /// nodes that are known to the client. Backend keeps track of the nodes that were sent to the client
-    /// and never sends the same node twice. It is client's responsibility to collect information about
-    /// the nodes that were sent to the client.&lt;p&gt;Note that `iframe` owner elements will return
-    /// corresponding document elements as their child nodes.&lt;/p&gt;
-    /// </summary>
     namespace DOM
     {
 
@@ -3222,6 +3750,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("nodeName")]
             public string NodeName { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("backendNodeId")]
             public BackendNodeId BackendNodeId { get; set; }
         }
@@ -3232,20 +3761,80 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<PseudoType, string>))]
         public class PseudoType : JSEnum
         {
+
+            /// <summary>
+            /// PseudoType of 'first-line'
+            /// </summary>
             public static PseudoType FirstLine => New<PseudoType>("first-line");
+
+            /// <summary>
+            /// PseudoType of 'first-letter'
+            /// </summary>
             public static PseudoType FirstLetter => New<PseudoType>("first-letter");
+
+            /// <summary>
+            /// PseudoType of 'before'
+            /// </summary>
             public static PseudoType Before => New<PseudoType>("before");
+
+            /// <summary>
+            /// PseudoType of 'after'
+            /// </summary>
             public static PseudoType After => New<PseudoType>("after");
+
+            /// <summary>
+            /// PseudoType of 'backdrop'
+            /// </summary>
             public static PseudoType Backdrop => New<PseudoType>("backdrop");
+
+            /// <summary>
+            /// PseudoType of 'selection'
+            /// </summary>
             public static PseudoType Selection => New<PseudoType>("selection");
+
+            /// <summary>
+            /// PseudoType of 'first-line-inherited'
+            /// </summary>
             public static PseudoType FirstLineInherited => New<PseudoType>("first-line-inherited");
+
+            /// <summary>
+            /// PseudoType of 'scrollbar'
+            /// </summary>
             public static PseudoType Scrollbar => New<PseudoType>("scrollbar");
+
+            /// <summary>
+            /// PseudoType of 'scrollbar-thumb'
+            /// </summary>
             public static PseudoType ScrollbarThumb => New<PseudoType>("scrollbar-thumb");
+
+            /// <summary>
+            /// PseudoType of 'scrollbar-button'
+            /// </summary>
             public static PseudoType ScrollbarButton => New<PseudoType>("scrollbar-button");
+
+            /// <summary>
+            /// PseudoType of 'scrollbar-track'
+            /// </summary>
             public static PseudoType ScrollbarTrack => New<PseudoType>("scrollbar-track");
+
+            /// <summary>
+            /// PseudoType of 'scrollbar-track-piece'
+            /// </summary>
             public static PseudoType ScrollbarTrackPiece => New<PseudoType>("scrollbar-track-piece");
+
+            /// <summary>
+            /// PseudoType of 'scrollbar-corner'
+            /// </summary>
             public static PseudoType ScrollbarCorner => New<PseudoType>("scrollbar-corner");
+
+            /// <summary>
+            /// PseudoType of 'resizer'
+            /// </summary>
             public static PseudoType Resizer => New<PseudoType>("resizer");
+
+            /// <summary>
+            /// PseudoType of 'input-list-button'
+            /// </summary>
             public static PseudoType InputListButton => New<PseudoType>("input-list-button");
         }
 
@@ -3255,8 +3844,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<ShadowRootType, string>))]
         public class ShadowRootType : JSEnum
         {
+
+            /// <summary>
+            /// ShadowRootType of 'user-agent'
+            /// </summary>
             public static ShadowRootType UserAgent => New<ShadowRootType>("user-agent");
+
+            /// <summary>
+            /// ShadowRootType of 'open'
+            /// </summary>
             public static ShadowRootType Open => New<ShadowRootType>("open");
+
+            /// <summary>
+            /// ShadowRootType of 'closed'
+            /// </summary>
             public static ShadowRootType Closed => New<ShadowRootType>("closed");
         }
 
@@ -3600,6 +4201,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public NodeId NodeId { get; set; }
         }
 
+        /// <summary>
+        /// Response of CollectClassNamesFromSubtree.
+        /// </summary>
         public class CollectClassNamesFromSubtreeResponse
         {
 
@@ -3638,6 +4242,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public NodeId InsertBeforeNodeId { get; set; }
         }
 
+        /// <summary>
+        /// Response of CopyTo.
+        /// </summary>
         public class CopyToResponse
         {
 
@@ -3689,6 +4296,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? Pierce { get; set; }
         }
 
+        /// <summary>
+        /// Response of DescribeNode.
+        /// </summary>
         public class DescribeNodeResponse
         {
 
@@ -3770,6 +4380,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public NodeId NodeId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetAttributes.
+        /// </summary>
         public class GetAttributesResponse
         {
 
@@ -3806,6 +4419,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.RemoteObjectId ObjectId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetBoxModel.
+        /// </summary>
         public class GetBoxModelResponse
         {
 
@@ -3843,6 +4459,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.RemoteObjectId ObjectId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetContentQuads.
+        /// </summary>
         public class GetContentQuadsResponse
         {
 
@@ -3875,6 +4494,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? Pierce { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetDocument.
+        /// </summary>
         public class GetDocumentResponse
         {
 
@@ -3907,6 +4529,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? Pierce { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetFlattenedDocument.
+        /// </summary>
         public class GetFlattenedDocumentResponse
         {
 
@@ -3944,6 +4569,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? IncludeUserAgentShadowDOM { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetNodeForLocation.
+        /// </summary>
         public class GetNodeForLocationResponse
         {
 
@@ -3986,6 +4614,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.RemoteObjectId ObjectId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetOuterHTML.
+        /// </summary>
         public class GetOuterHTMLResponse
         {
 
@@ -4010,6 +4641,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public NodeId NodeId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetRelayoutBoundary.
+        /// </summary>
         public class GetRelayoutBoundaryResponse
         {
 
@@ -4047,6 +4681,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public long ToIndex { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetSearchResults.
+        /// </summary>
         public class GetSearchResultsResponse
         {
 
@@ -4116,6 +4753,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public NodeId InsertBeforeNodeId { get; set; }
         }
 
+        /// <summary>
+        /// Response of MoveTo.
+        /// </summary>
         public class MoveToResponse
         {
 
@@ -4147,6 +4787,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? IncludeUserAgentShadowDOM { get; set; }
         }
 
+        /// <summary>
+        /// Response of PerformSearch.
+        /// </summary>
         public class PerformSearchResponse
         {
 
@@ -4177,6 +4820,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Path { get; set; }
         }
 
+        /// <summary>
+        /// Response of PushNodeByPathToFrontend.
+        /// </summary>
         public class PushNodeByPathToFrontendResponse
         {
 
@@ -4201,6 +4847,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public BackendNodeId[] BackendNodeIds { get; set; }
         }
 
+        /// <summary>
+        /// Response of PushNodesByBackendIdsToFrontend.
+        /// </summary>
         public class PushNodesByBackendIdsToFrontendResponse
         {
 
@@ -4232,6 +4881,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Selector { get; set; }
         }
 
+        /// <summary>
+        /// Response of QuerySelector.
+        /// </summary>
         public class QuerySelectorResponse
         {
 
@@ -4262,6 +4914,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Selector { get; set; }
         }
 
+        /// <summary>
+        /// Response of QuerySelectorAll.
+        /// </summary>
         public class QuerySelectorAllResponse
         {
 
@@ -4360,6 +5015,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.RemoteObjectId ObjectId { get; set; }
         }
 
+        /// <summary>
+        /// Response of RequestNode.
+        /// </summary>
         public class RequestNodeResponse
         {
 
@@ -4402,6 +5060,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.ExecutionContextId ExecutionContextId { get; set; }
         }
 
+        /// <summary>
+        /// Response of ResolveNode.
+        /// </summary>
         public class ResolveNodeResponse
         {
 
@@ -4513,9 +5174,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.RemoteObjectId ObjectId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetFileInfo.
+        /// </summary>
         public class GetFileInfoResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("path")]
             public string Path { get; set; }
         }
@@ -4555,6 +5220,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Name { get; set; }
         }
 
+        /// <summary>
+        /// Response of SetNodeName.
+        /// </summary>
         public class SetNodeNameResponse
         {
 
@@ -4620,10 +5288,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "DOM.getFrameOwner";
 
+            /// <summary></summary>
             [JsonProperty("frameId")]
             public Page.FrameId FrameId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetFrameOwner.
+        /// </summary>
         public class GetFrameOwnerResponse
         {
 
@@ -4922,10 +5594,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// DOM debugging allows setting breakpoints on particular DOM operations and events. JavaScript
-    /// execution will stop on these operations as if there was a regular breakpoint set.
-    /// </summary>
     namespace DOMDebugger
     {
 
@@ -4937,8 +5605,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<DOMBreakpointType, string>))]
         public class DOMBreakpointType : JSEnum
         {
+
+            /// <summary>
+            /// DOMBreakpointType of 'subtree-modified'
+            /// </summary>
             public static DOMBreakpointType SubtreeModified => New<DOMBreakpointType>("subtree-modified");
+
+            /// <summary>
+            /// DOMBreakpointType of 'attribute-modified'
+            /// </summary>
             public static DOMBreakpointType AttributeModified => New<DOMBreakpointType>("attribute-modified");
+
+            /// <summary>
+            /// DOMBreakpointType of 'node-removed'
+            /// </summary>
             public static DOMBreakpointType NodeRemoved => New<DOMBreakpointType>("node-removed");
         }
 
@@ -5041,6 +5721,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? Pierce { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetEventListeners.
+        /// </summary>
         public class GetEventListenersResponse
         {
 
@@ -5191,9 +5874,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// This domain facilitates obtaining document snapshots with DOM, layout, and style information.
-    /// </summary>
     namespace DOMSnapshot
     {
 
@@ -5513,30 +6193,38 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class RareStringData
         {
 
+            /// <summary></summary>
             [JsonProperty("index")]
             public long[] Index { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("value")]
             public StringIndex[] Value { get; set; }
         }
 
+        /// <summary />
         public class RareBooleanData
         {
 
+            /// <summary></summary>
             [JsonProperty("index")]
             public long[] Index { get; set; }
         }
 
+        /// <summary />
         public class RareIntegerData
         {
 
+            /// <summary></summary>
             [JsonProperty("index")]
             public long[] Index { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("value")]
             public long[] Value { get; set; }
         }
 
+        /// <summary />
         [JsonConverter(typeof(JSAliasConverter<Rectangle, double[]>))]
         public class Rectangle : JSAlias<double[]>
         {
@@ -5847,6 +6535,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? IncludeUserAgentShadowTree { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetSnapshot.
+        /// </summary>
         public class GetSnapshotResponse
         {
 
@@ -5886,6 +6577,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string[] ComputedStyles { get; set; }
         }
 
+        /// <summary>
+        /// Response of CaptureSnapshot.
+        /// </summary>
         public class CaptureSnapshotResponse
         {
 
@@ -5905,9 +6599,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// Query and modify DOM storage.
-    /// </summary>
     namespace DOMStorage
     {
 
@@ -5944,10 +6635,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Commands
 
+        /// <summary />
         public class ClearCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMStorage.clear";
 
+            /// <summary></summary>
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
         }
@@ -5968,42 +6661,55 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "DOMStorage.enable";
         }
 
+        /// <summary />
         public class GetDOMStorageItemsCommand : ICommand<GetDOMStorageItemsResponse>
         {
             string ICommand.Name { get; } = "DOMStorage.getDOMStorageItems";
 
+            /// <summary></summary>
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetDOMStorageItems.
+        /// </summary>
         public class GetDOMStorageItemsResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("entries")]
             public Item[] Entries { get; set; }
         }
 
+        /// <summary />
         public class RemoveDOMStorageItemCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMStorage.removeDOMStorageItem";
 
+            /// <summary></summary>
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("key")]
             public string Key { get; set; }
         }
 
+        /// <summary />
         public class SetDOMStorageItemCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "DOMStorage.setDOMStorageItem";
 
+            /// <summary></summary>
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("key")]
             public string Key { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("value")]
             public string Value { get; set; }
         }
@@ -6012,52 +6718,66 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
+        /// <summary />
         [Event("DOMStorage.domStorageItemAdded")]
         public class DomStorageItemAddedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("key")]
             public string Key { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("newValue")]
             public string NewValue { get; set; }
         }
 
+        /// <summary />
         [Event("DOMStorage.domStorageItemRemoved")]
         public class DomStorageItemRemovedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("key")]
             public string Key { get; set; }
         }
 
+        /// <summary />
         [Event("DOMStorage.domStorageItemUpdated")]
         public class DomStorageItemUpdatedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("key")]
             public string Key { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("oldValue")]
             public string OldValue { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("newValue")]
             public string NewValue { get; set; }
         }
 
+        /// <summary />
         [Event("DOMStorage.domStorageItemsCleared")]
         public class DomStorageItemsClearedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("storageId")]
             public StorageId StorageId { get; set; }
         }
@@ -6148,17 +6868,23 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Database.enable";
         }
 
+        /// <summary />
         public class ExecuteSQLCommand : ICommand<ExecuteSQLResponse>
         {
             string ICommand.Name { get; } = "Database.executeSQL";
 
+            /// <summary></summary>
             [JsonProperty("databaseId")]
             public DatabaseId DatabaseId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("query")]
             public string Query { get; set; }
         }
 
+        /// <summary>
+        /// Response of ExecuteSQL.
+        /// </summary>
         public class ExecuteSQLResponse
         {
 
@@ -6181,17 +6907,23 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Error SqlError { get; set; }
         }
 
+        /// <summary />
         public class GetDatabaseTableNamesCommand : ICommand<GetDatabaseTableNamesResponse>
         {
             string ICommand.Name { get; } = "Database.getDatabaseTableNames";
 
+            /// <summary></summary>
             [JsonProperty("databaseId")]
             public DatabaseId DatabaseId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetDatabaseTableNames.
+        /// </summary>
         public class GetDatabaseTableNamesResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("tableNames")]
             public string[] TableNames { get; set; }
         }
@@ -6200,10 +6932,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
+        /// <summary />
         [Event("Database.addDatabase")]
         public class AddDatabaseEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("database")]
             public Database Database { get; set; }
         }
@@ -6253,9 +6987,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// This domain emulates different environments for the page.
-    /// </summary>
     namespace Emulation
     {
 
@@ -6289,8 +7020,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<VirtualTimePolicy, string>))]
         public class VirtualTimePolicy : JSEnum
         {
+
+            /// <summary>
+            /// VirtualTimePolicy of 'advance'
+            /// </summary>
             public static VirtualTimePolicy Advance => New<VirtualTimePolicy>("advance");
+
+            /// <summary>
+            /// VirtualTimePolicy of 'pause'
+            /// </summary>
             public static VirtualTimePolicy Pause => New<VirtualTimePolicy>("pause");
+
+            /// <summary>
+            /// VirtualTimePolicy of 'pauseIfNetworkFetchesPending'
+            /// </summary>
             public static VirtualTimePolicy PauseIfNetworkFetchesPending => New<VirtualTimePolicy>("pauseIfNetworkFetchesPending");
         }
 
@@ -6306,6 +7049,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Emulation.canEmulate";
         }
 
+        /// <summary>
+        /// Response of CanEmulate.
+        /// </summary>
         public class CanEmulateResponse
         {
 
@@ -6468,6 +7214,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Page.Viewport Viewport { get; set; }
         }
 
+        /// <summary />
         public class SetScrollbarsHiddenCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setScrollbarsHidden";
@@ -6479,6 +7226,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool Hidden { get; set; }
         }
 
+        /// <summary />
         public class SetDocumentCookieDisabledCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setDocumentCookieDisabled";
@@ -6490,6 +7238,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool Disabled { get; set; }
         }
 
+        /// <summary />
         public class SetEmitTouchEventsForMouseCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Emulation.setEmitTouchEventsForMouse";
@@ -6619,6 +7368,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Emulation.setVirtualTimePolicy";
 
+            /// <summary></summary>
             [JsonProperty("policy")]
             public VirtualTimePolicy Policy { get; set; }
 
@@ -6650,6 +7400,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Network.TimeSinceEpoch InitialVirtualTime { get; set; }
         }
 
+        /// <summary>
+        /// Response of SetVirtualTimePolicy.
+        /// </summary>
         public class SetVirtualTimePolicyResponse
         {
 
@@ -6724,9 +7477,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// This domain provides experimental commands only supported in headless mode.
-    /// </summary>
     namespace HeadlessExperimental
     {
 
@@ -6796,6 +7546,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public ScreenshotParams Screenshot { get; set; }
         }
 
+        /// <summary>
+        /// Response of BeginFrame.
+        /// </summary>
         public class BeginFrameResponse
         {
 
@@ -6850,9 +7603,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// Input/Output operations for streams produced by DevTools.
-    /// </summary>
     namespace IO
     {
 
@@ -6912,6 +7662,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public long? Size { get; set; }
         }
 
+        /// <summary>
+        /// Response of Read.
+        /// </summary>
         public class ReadResponse
         {
 
@@ -6948,6 +7701,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Runtime.RemoteObjectId ObjectId { get; set; }
         }
 
+        /// <summary>
+        /// Response of ResolveBlob.
+        /// </summary>
         public class ResolveBlobResponse
         {
 
@@ -7229,12 +7985,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "IndexedDB.deleteObjectStoreEntries";
 
+            /// <summary></summary>
             [JsonProperty("securityOrigin")]
             public string SecurityOrigin { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("databaseName")]
             public string DatabaseName { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("objectStoreName")]
             public string ObjectStoreName { get; set; }
 
@@ -7311,6 +8070,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public KeyRange KeyRange { get; set; }
         }
 
+        /// <summary>
+        /// Response of RequestData.
+        /// </summary>
         public class RequestDataResponse
         {
 
@@ -7354,6 +8116,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string ObjectStoreName { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetKeyGeneratorCurrentNumber.
+        /// </summary>
         public class GetKeyGeneratorCurrentNumberResponse
         {
 
@@ -7385,6 +8150,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string DatabaseName { get; set; }
         }
 
+        /// <summary>
+        /// Response of RequestDatabase.
+        /// </summary>
         public class RequestDatabaseResponse
         {
 
@@ -7409,6 +8177,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string SecurityOrigin { get; set; }
         }
 
+        /// <summary>
+        /// Response of RequestDatabaseNames.
+        /// </summary>
         public class RequestDatabaseNamesResponse
         {
 
@@ -7427,6 +8198,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Types
 
+        /// <summary />
         public class TouchPoint
         {
 
@@ -7474,11 +8246,24 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public double? Id { get; set; }
         }
 
+        /// <summary />
         [JsonConverter(typeof(JSAliasConverter<GestureSourceType, string>))]
         public class GestureSourceType : JSEnum
         {
+
+            /// <summary>
+            /// GestureSourceType of 'default'
+            /// </summary>
             public static GestureSourceType Default => New<GestureSourceType>("default");
+
+            /// <summary>
+            /// GestureSourceType of 'touch'
+            /// </summary>
             public static GestureSourceType Touch => New<GestureSourceType>("touch");
+
+            /// <summary>
+            /// GestureSourceType of 'mouse'
+            /// </summary>
             public static GestureSourceType Mouse => New<GestureSourceType>("mouse");
         }
 
@@ -8244,6 +9029,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public LayerId LayerId { get; set; }
         }
 
+        /// <summary>
+        /// Response of CompositingReasons.
+        /// </summary>
         public class CompositingReasonsResponse
         {
 
@@ -8284,6 +9072,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public PictureTile[] Tiles { get; set; }
         }
 
+        /// <summary>
+        /// Response of LoadSnapshot.
+        /// </summary>
         public class LoadSnapshotResponse
         {
 
@@ -8308,6 +9099,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public LayerId LayerId { get; set; }
         }
 
+        /// <summary>
+        /// Response of MakeSnapshot.
+        /// </summary>
         public class MakeSnapshotResponse
         {
 
@@ -8318,6 +9112,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public SnapshotId SnapshotId { get; set; }
         }
 
+        /// <summary />
         public class ProfileSnapshotCommand : ICommand<ProfileSnapshotResponse>
         {
             string ICommand.Name { get; } = "LayerTree.profileSnapshot";
@@ -8347,6 +9142,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public DOM.Rect ClipRect { get; set; }
         }
 
+        /// <summary>
+        /// Response of ProfileSnapshot.
+        /// </summary>
         public class ProfileSnapshotResponse
         {
 
@@ -8403,6 +9201,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public double? Scale { get; set; }
         }
 
+        /// <summary>
+        /// Response of ReplaySnapshot.
+        /// </summary>
         public class ReplaySnapshotResponse
         {
 
@@ -8427,6 +9228,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public SnapshotId SnapshotId { get; set; }
         }
 
+        /// <summary>
+        /// Response of SnapshotCommandLog.
+        /// </summary>
         public class SnapshotCommandLogResponse
         {
 
@@ -8441,6 +9245,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
+        /// <summary />
         [Event("LayerTree.layerPainted")]
         public class LayerPaintedEvent
         {
@@ -8458,6 +9263,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public DOM.Rect Clip { get; set; }
         }
 
+        /// <summary />
         [Event("LayerTree.layerTreeDidChange")]
         public class LayerTreeDidChangeEvent
         {
@@ -8472,9 +9278,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// Provides access to log entries.
-    /// </summary>
     namespace Log
     {
 
@@ -8649,7 +9452,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<PressureLevel, string>))]
         public class PressureLevel : JSEnum
         {
+
+            /// <summary>
+            /// PressureLevel of 'moderate'
+            /// </summary>
             public static PressureLevel Moderate => New<PressureLevel>("moderate");
+
+            /// <summary>
+            /// PressureLevel of 'critical'
+            /// </summary>
             public static PressureLevel Critical => New<PressureLevel>("critical");
         }
 
@@ -8684,9 +9495,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class SamplingProfile
         {
 
+            /// <summary></summary>
             [JsonProperty("samples")]
             public SamplingProfileNode[] Samples { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("modules")]
             public Module[] Modules { get; set; }
         }
@@ -8727,24 +9540,32 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Commands
 
+        /// <summary />
         public class GetDOMCountersCommand : ICommand<GetDOMCountersResponse>
         {
             string ICommand.Name { get; } = "Memory.getDOMCounters";
         }
 
+        /// <summary>
+        /// Response of GetDOMCounters.
+        /// </summary>
         public class GetDOMCountersResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("documents")]
             public long Documents { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("nodes")]
             public long Nodes { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("jsEventListeners")]
             public long JsEventListeners { get; set; }
         }
 
+        /// <summary />
         public class PrepareForLeakDetectionCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Memory.prepareForLeakDetection";
@@ -8823,9 +9644,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Memory.getAllTimeSamplingProfile";
         }
 
+        /// <summary>
+        /// Response of GetAllTimeSamplingProfile.
+        /// </summary>
         public class GetAllTimeSamplingProfileResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("profile")]
             public SamplingProfile Profile { get; set; }
         }
@@ -8839,9 +9664,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Memory.getBrowserSamplingProfile";
         }
 
+        /// <summary>
+        /// Response of GetBrowserSamplingProfile.
+        /// </summary>
         public class GetBrowserSamplingProfileResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("profile")]
             public SamplingProfile Profile { get; set; }
         }
@@ -8855,9 +9684,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Memory.getSamplingProfile";
         }
 
+        /// <summary>
+        /// Response of GetSamplingProfile.
+        /// </summary>
         public class GetSamplingProfileResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("profile")]
             public SamplingProfile Profile { get; set; }
         }
@@ -8865,10 +9698,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// Network domain allows tracking network activities of the page. It exposes information about http,
-    /// file, data and other requests and responses, their headers, bodies, timing, etc.
-    /// </summary>
     namespace Network
     {
 
@@ -8880,21 +9709,85 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<ResourceType, string>))]
         public class ResourceType : JSEnum
         {
+
+            /// <summary>
+            /// ResourceType of 'Document'
+            /// </summary>
             public static ResourceType Document => New<ResourceType>("Document");
+
+            /// <summary>
+            /// ResourceType of 'Stylesheet'
+            /// </summary>
             public static ResourceType Stylesheet => New<ResourceType>("Stylesheet");
+
+            /// <summary>
+            /// ResourceType of 'Image'
+            /// </summary>
             public static ResourceType Image => New<ResourceType>("Image");
+
+            /// <summary>
+            /// ResourceType of 'Media'
+            /// </summary>
             public static ResourceType Media => New<ResourceType>("Media");
+
+            /// <summary>
+            /// ResourceType of 'Font'
+            /// </summary>
             public static ResourceType Font => New<ResourceType>("Font");
+
+            /// <summary>
+            /// ResourceType of 'Script'
+            /// </summary>
             public static ResourceType Script => New<ResourceType>("Script");
+
+            /// <summary>
+            /// ResourceType of 'TextTrack'
+            /// </summary>
             public static ResourceType TextTrack => New<ResourceType>("TextTrack");
+
+            /// <summary>
+            /// ResourceType of 'XHR'
+            /// </summary>
             public static ResourceType XHR => New<ResourceType>("XHR");
+
+            /// <summary>
+            /// ResourceType of 'Fetch'
+            /// </summary>
             public static ResourceType Fetch => New<ResourceType>("Fetch");
+
+            /// <summary>
+            /// ResourceType of 'EventSource'
+            /// </summary>
             public static ResourceType EventSource => New<ResourceType>("EventSource");
+
+            /// <summary>
+            /// ResourceType of 'WebSocket'
+            /// </summary>
             public static ResourceType WebSocket => New<ResourceType>("WebSocket");
+
+            /// <summary>
+            /// ResourceType of 'Manifest'
+            /// </summary>
             public static ResourceType Manifest => New<ResourceType>("Manifest");
+
+            /// <summary>
+            /// ResourceType of 'SignedExchange'
+            /// </summary>
             public static ResourceType SignedExchange => New<ResourceType>("SignedExchange");
+
+            /// <summary>
+            /// ResourceType of 'Ping'
+            /// </summary>
             public static ResourceType Ping => New<ResourceType>("Ping");
+
+            /// <summary>
+            /// ResourceType of 'CSPViolationReport'
+            /// </summary>
             public static ResourceType CSPViolationReport => New<ResourceType>("CSPViolationReport");
+
+            /// <summary>
+            /// ResourceType of 'Other'
+            /// </summary>
             public static ResourceType Other => New<ResourceType>("Other");
         }
 
@@ -8928,19 +9821,75 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<ErrorReason, string>))]
         public class ErrorReason : JSEnum
         {
+
+            /// <summary>
+            /// ErrorReason of 'Failed'
+            /// </summary>
             public static ErrorReason Failed => New<ErrorReason>("Failed");
+
+            /// <summary>
+            /// ErrorReason of 'Aborted'
+            /// </summary>
             public static ErrorReason Aborted => New<ErrorReason>("Aborted");
+
+            /// <summary>
+            /// ErrorReason of 'TimedOut'
+            /// </summary>
             public static ErrorReason TimedOut => New<ErrorReason>("TimedOut");
+
+            /// <summary>
+            /// ErrorReason of 'AccessDenied'
+            /// </summary>
             public static ErrorReason AccessDenied => New<ErrorReason>("AccessDenied");
+
+            /// <summary>
+            /// ErrorReason of 'ConnectionClosed'
+            /// </summary>
             public static ErrorReason ConnectionClosed => New<ErrorReason>("ConnectionClosed");
+
+            /// <summary>
+            /// ErrorReason of 'ConnectionReset'
+            /// </summary>
             public static ErrorReason ConnectionReset => New<ErrorReason>("ConnectionReset");
+
+            /// <summary>
+            /// ErrorReason of 'ConnectionRefused'
+            /// </summary>
             public static ErrorReason ConnectionRefused => New<ErrorReason>("ConnectionRefused");
+
+            /// <summary>
+            /// ErrorReason of 'ConnectionAborted'
+            /// </summary>
             public static ErrorReason ConnectionAborted => New<ErrorReason>("ConnectionAborted");
+
+            /// <summary>
+            /// ErrorReason of 'ConnectionFailed'
+            /// </summary>
             public static ErrorReason ConnectionFailed => New<ErrorReason>("ConnectionFailed");
+
+            /// <summary>
+            /// ErrorReason of 'NameNotResolved'
+            /// </summary>
             public static ErrorReason NameNotResolved => New<ErrorReason>("NameNotResolved");
+
+            /// <summary>
+            /// ErrorReason of 'InternetDisconnected'
+            /// </summary>
             public static ErrorReason InternetDisconnected => New<ErrorReason>("InternetDisconnected");
+
+            /// <summary>
+            /// ErrorReason of 'AddressUnreachable'
+            /// </summary>
             public static ErrorReason AddressUnreachable => New<ErrorReason>("AddressUnreachable");
+
+            /// <summary>
+            /// ErrorReason of 'BlockedByClient'
+            /// </summary>
             public static ErrorReason BlockedByClient => New<ErrorReason>("BlockedByClient");
+
+            /// <summary>
+            /// ErrorReason of 'BlockedByResponse'
+            /// </summary>
             public static ErrorReason BlockedByResponse => New<ErrorReason>("BlockedByResponse");
         }
 
@@ -8973,14 +9922,50 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<ConnectionType, string>))]
         public class ConnectionType : JSEnum
         {
+
+            /// <summary>
+            /// ConnectionType of 'none'
+            /// </summary>
             public static ConnectionType None => New<ConnectionType>("none");
+
+            /// <summary>
+            /// ConnectionType of 'cellular2g'
+            /// </summary>
             public static ConnectionType Cellular2g => New<ConnectionType>("cellular2g");
+
+            /// <summary>
+            /// ConnectionType of 'cellular3g'
+            /// </summary>
             public static ConnectionType Cellular3g => New<ConnectionType>("cellular3g");
+
+            /// <summary>
+            /// ConnectionType of 'cellular4g'
+            /// </summary>
             public static ConnectionType Cellular4g => New<ConnectionType>("cellular4g");
+
+            /// <summary>
+            /// ConnectionType of 'bluetooth'
+            /// </summary>
             public static ConnectionType Bluetooth => New<ConnectionType>("bluetooth");
+
+            /// <summary>
+            /// ConnectionType of 'ethernet'
+            /// </summary>
             public static ConnectionType Ethernet => New<ConnectionType>("ethernet");
+
+            /// <summary>
+            /// ConnectionType of 'wifi'
+            /// </summary>
             public static ConnectionType Wifi => New<ConnectionType>("wifi");
+
+            /// <summary>
+            /// ConnectionType of 'wimax'
+            /// </summary>
             public static ConnectionType Wimax => New<ConnectionType>("wimax");
+
+            /// <summary>
+            /// ConnectionType of 'other'
+            /// </summary>
             public static ConnectionType Other => New<ConnectionType>("other");
         }
 
@@ -8991,7 +9976,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<CookieSameSite, string>))]
         public class CookieSameSite : JSEnum
         {
+
+            /// <summary>
+            /// CookieSameSite of 'Strict'
+            /// </summary>
             public static CookieSameSite Strict => New<CookieSameSite>("Strict");
+
+            /// <summary>
+            /// CookieSameSite of 'Lax'
+            /// </summary>
             public static CookieSameSite Lax => New<CookieSameSite>("Lax");
         }
 
@@ -9105,10 +10098,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<ResourcePriority, string>))]
         public class ResourcePriority : JSEnum
         {
+
+            /// <summary>
+            /// ResourcePriority of 'VeryLow'
+            /// </summary>
             public static ResourcePriority VeryLow => New<ResourcePriority>("VeryLow");
+
+            /// <summary>
+            /// ResourcePriority of 'Low'
+            /// </summary>
             public static ResourcePriority Low => New<ResourcePriority>("Low");
+
+            /// <summary>
+            /// ResourcePriority of 'Medium'
+            /// </summary>
             public static ResourcePriority Medium => New<ResourcePriority>("Medium");
+
+            /// <summary>
+            /// ResourcePriority of 'High'
+            /// </summary>
             public static ResourcePriority High => New<ResourcePriority>("High");
+
+            /// <summary>
+            /// ResourcePriority of 'VeryHigh'
+            /// </summary>
             public static ResourcePriority VeryHigh => New<ResourcePriority>("VeryHigh");
         }
 
@@ -9325,8 +10338,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<CertificateTransparencyCompliance, string>))]
         public class CertificateTransparencyCompliance : JSEnum
         {
+
+            /// <summary>
+            /// CertificateTransparencyCompliance of 'unknown'
+            /// </summary>
             public static CertificateTransparencyCompliance Unknown => New<CertificateTransparencyCompliance>("unknown");
+
+            /// <summary>
+            /// CertificateTransparencyCompliance of 'not-compliant'
+            /// </summary>
             public static CertificateTransparencyCompliance NotCompliant => New<CertificateTransparencyCompliance>("not-compliant");
+
+            /// <summary>
+            /// CertificateTransparencyCompliance of 'compliant'
+            /// </summary>
             public static CertificateTransparencyCompliance Compliant => New<CertificateTransparencyCompliance>("compliant");
         }
 
@@ -9336,13 +10361,45 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<BlockedReason, string>))]
         public class BlockedReason : JSEnum
         {
+
+            /// <summary>
+            /// BlockedReason of 'other'
+            /// </summary>
             public static BlockedReason Other => New<BlockedReason>("other");
+
+            /// <summary>
+            /// BlockedReason of 'csp'
+            /// </summary>
             public static BlockedReason Csp => New<BlockedReason>("csp");
+
+            /// <summary>
+            /// BlockedReason of 'mixed-content'
+            /// </summary>
             public static BlockedReason MixedContent => New<BlockedReason>("mixed-content");
+
+            /// <summary>
+            /// BlockedReason of 'origin'
+            /// </summary>
             public static BlockedReason Origin => New<BlockedReason>("origin");
+
+            /// <summary>
+            /// BlockedReason of 'inspector'
+            /// </summary>
             public static BlockedReason Inspector => New<BlockedReason>("inspector");
+
+            /// <summary>
+            /// BlockedReason of 'subresource-filter'
+            /// </summary>
             public static BlockedReason SubresourceFilter => New<BlockedReason>("subresource-filter");
+
+            /// <summary>
+            /// BlockedReason of 'content-type'
+            /// </summary>
             public static BlockedReason ContentType => New<BlockedReason>("content-type");
+
+            /// <summary>
+            /// BlockedReason of 'collapsed-by-client'
+            /// </summary>
             public static BlockedReason CollapsedByClient => New<BlockedReason>("collapsed-by-client");
         }
 
@@ -9809,7 +10866,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<InterceptionStage, string>))]
         public class InterceptionStage : JSEnum
         {
+
+            /// <summary>
+            /// InterceptionStage of 'Request'
+            /// </summary>
             public static InterceptionStage Request => New<InterceptionStage>("Request");
+
+            /// <summary>
+            /// InterceptionStage of 'HeadersReceived'
+            /// </summary>
             public static InterceptionStage HeadersReceived => New<InterceptionStage>("HeadersReceived");
         }
 
@@ -9939,11 +11004,35 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<SignedExchangeErrorField, string>))]
         public class SignedExchangeErrorField : JSEnum
         {
+
+            /// <summary>
+            /// SignedExchangeErrorField of 'signatureSig'
+            /// </summary>
             public static SignedExchangeErrorField SignatureSig => New<SignedExchangeErrorField>("signatureSig");
+
+            /// <summary>
+            /// SignedExchangeErrorField of 'signatureIntegrity'
+            /// </summary>
             public static SignedExchangeErrorField SignatureIntegrity => New<SignedExchangeErrorField>("signatureIntegrity");
+
+            /// <summary>
+            /// SignedExchangeErrorField of 'signatureCertUrl'
+            /// </summary>
             public static SignedExchangeErrorField SignatureCertUrl => New<SignedExchangeErrorField>("signatureCertUrl");
+
+            /// <summary>
+            /// SignedExchangeErrorField of 'signatureCertSha256'
+            /// </summary>
             public static SignedExchangeErrorField SignatureCertSha256 => New<SignedExchangeErrorField>("signatureCertSha256");
+
+            /// <summary>
+            /// SignedExchangeErrorField of 'signatureValidityUrl'
+            /// </summary>
             public static SignedExchangeErrorField SignatureValidityUrl => New<SignedExchangeErrorField>("signatureValidityUrl");
+
+            /// <summary>
+            /// SignedExchangeErrorField of 'signatureTimestamps'
+            /// </summary>
             public static SignedExchangeErrorField SignatureTimestamps => New<SignedExchangeErrorField>("signatureTimestamps");
         }
 
@@ -10016,6 +11105,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Network.canClearBrowserCache";
         }
 
+        /// <summary>
+        /// Response of CanClearBrowserCache.
+        /// </summary>
         public class CanClearBrowserCacheResponse
         {
 
@@ -10035,6 +11127,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Network.canClearBrowserCookies";
         }
 
+        /// <summary>
+        /// Response of CanClearBrowserCookies.
+        /// </summary>
         public class CanClearBrowserCookiesResponse
         {
 
@@ -10054,6 +11149,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Network.canEmulateNetworkConditions";
         }
 
+        /// <summary>
+        /// Response of CanEmulateNetworkConditions.
+        /// </summary>
         public class CanEmulateNetworkConditionsResponse
         {
 
@@ -10090,6 +11188,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Network.continueInterceptedRequest";
 
+            /// <summary></summary>
             [JsonProperty("interceptionId")]
             public InterceptionId InterceptionId { get; set; }
 
@@ -10256,6 +11355,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Network.getAllCookies";
         }
 
+        /// <summary>
+        /// Response of GetAllCookies.
+        /// </summary>
         public class GetAllCookiesResponse
         {
 
@@ -10280,9 +11382,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Origin { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetCertificate.
+        /// </summary>
         public class GetCertificateResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("tableNames")]
             public string[] TableNames { get; set; }
         }
@@ -10302,6 +11408,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string[] Urls { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetCookies.
+        /// </summary>
         public class GetCookiesResponse
         {
 
@@ -10326,6 +11435,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public RequestId RequestId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetResponseBody.
+        /// </summary>
         public class GetResponseBodyResponse
         {
 
@@ -10356,6 +11468,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public RequestId RequestId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetRequestPostData.
+        /// </summary>
         public class GetRequestPostDataResponse
         {
 
@@ -10380,6 +11495,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public InterceptionId InterceptionId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetResponseBodyForInterception.
+        /// </summary>
         public class GetResponseBodyForInterceptionResponse
         {
 
@@ -10406,13 +11524,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Network.takeResponseBodyForInterceptionAsStream";
 
+            /// <summary></summary>
             [JsonProperty("interceptionId")]
             public InterceptionId InterceptionId { get; set; }
         }
 
+        /// <summary>
+        /// Response of TakeResponseBodyForInterceptionAsStream.
+        /// </summary>
         public class TakeResponseBodyForInterceptionAsStreamResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("stream")]
             public IO.StreamHandle Stream { get; set; }
         }
@@ -10465,6 +11588,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? IsRegex { get; set; }
         }
 
+        /// <summary>
+        /// Response of SearchInResponseBody.
+        /// </summary>
         public class SearchInResponseBodyResponse
         {
 
@@ -10580,6 +11706,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public TimeSinceEpoch Expires { get; set; }
         }
 
+        /// <summary>
+        /// Response of SetCookie.
+        /// </summary>
         public class SetCookieResponse
         {
 
@@ -10846,6 +11975,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("interceptionId")]
             public InterceptionId InterceptionId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("request")]
             public Request Request { get; set; }
 
@@ -11272,9 +12402,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// This domain provides various functionality related to drawing atop the inspected page.
-    /// </summary>
     namespace Overlay
     {
 
@@ -11359,12 +12486,29 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public DOM.RGBA CssGridColor { get; set; }
         }
 
+        /// <summary />
         [JsonConverter(typeof(JSAliasConverter<InspectMode, string>))]
         public class InspectMode : JSEnum
         {
+
+            /// <summary>
+            /// InspectMode of 'searchForNode'
+            /// </summary>
             public static InspectMode SearchForNode => New<InspectMode>("searchForNode");
+
+            /// <summary>
+            /// InspectMode of 'searchForUAShadowDOM'
+            /// </summary>
             public static InspectMode SearchForUAShadowDOM => New<InspectMode>("searchForUAShadowDOM");
+
+            /// <summary>
+            /// InspectMode of 'captureAreaScreenshot'
+            /// </summary>
             public static InspectMode CaptureAreaScreenshot => New<InspectMode>("captureAreaScreenshot");
+
+            /// <summary>
+            /// InspectMode of 'none'
+            /// </summary>
             public static InspectMode None => New<InspectMode>("none");
         }
 
@@ -11402,6 +12546,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public DOM.NodeId NodeId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetHighlightObjectForTest.
+        /// </summary>
         public class GetHighlightObjectForTestResponse
         {
 
@@ -11591,6 +12738,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool Show { get; set; }
         }
 
+        /// <summary />
         public class SetPausedInDebuggerMessageCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.setPausedInDebuggerMessage";
@@ -11686,6 +12834,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool Show { get; set; }
         }
 
+        /// <summary />
         public class SetSuspendedCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "Overlay.setSuspended";
@@ -11723,6 +12872,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class NodeHighlightRequestedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("nodeId")]
             public DOM.NodeId NodeId { get; set; }
         }
@@ -11752,9 +12902,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// Actions and events related to the inspected page belong to the page domain.
-    /// </summary>
     namespace Page
     {
 
@@ -11930,18 +13077,70 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<TransitionType, string>))]
         public class TransitionType : JSEnum
         {
+
+            /// <summary>
+            /// TransitionType of 'link'
+            /// </summary>
             public static TransitionType Link => New<TransitionType>("link");
+
+            /// <summary>
+            /// TransitionType of 'typed'
+            /// </summary>
             public static TransitionType Typed => New<TransitionType>("typed");
+
+            /// <summary>
+            /// TransitionType of 'address_bar'
+            /// </summary>
             public static TransitionType AddressBar => New<TransitionType>("address_bar");
+
+            /// <summary>
+            /// TransitionType of 'auto_bookmark'
+            /// </summary>
             public static TransitionType AutoBookmark => New<TransitionType>("auto_bookmark");
+
+            /// <summary>
+            /// TransitionType of 'auto_subframe'
+            /// </summary>
             public static TransitionType AutoSubframe => New<TransitionType>("auto_subframe");
+
+            /// <summary>
+            /// TransitionType of 'manual_subframe'
+            /// </summary>
             public static TransitionType ManualSubframe => New<TransitionType>("manual_subframe");
+
+            /// <summary>
+            /// TransitionType of 'generated'
+            /// </summary>
             public static TransitionType Generated => New<TransitionType>("generated");
+
+            /// <summary>
+            /// TransitionType of 'auto_toplevel'
+            /// </summary>
             public static TransitionType AutoToplevel => New<TransitionType>("auto_toplevel");
+
+            /// <summary>
+            /// TransitionType of 'form_submit'
+            /// </summary>
             public static TransitionType FormSubmit => New<TransitionType>("form_submit");
+
+            /// <summary>
+            /// TransitionType of 'reload'
+            /// </summary>
             public static TransitionType Reload => New<TransitionType>("reload");
+
+            /// <summary>
+            /// TransitionType of 'keyword'
+            /// </summary>
             public static TransitionType Keyword => New<TransitionType>("keyword");
+
+            /// <summary>
+            /// TransitionType of 'keyword_generated'
+            /// </summary>
             public static TransitionType KeywordGenerated => New<TransitionType>("keyword_generated");
+
+            /// <summary>
+            /// TransitionType of 'other'
+            /// </summary>
             public static TransitionType Other => New<TransitionType>("other");
         }
 
@@ -12037,9 +13236,25 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<DialogType, string>))]
         public class DialogType : JSEnum
         {
+
+            /// <summary>
+            /// DialogType of 'alert'
+            /// </summary>
             public static DialogType Alert => New<DialogType>("alert");
+
+            /// <summary>
+            /// DialogType of 'confirm'
+            /// </summary>
             public static DialogType Confirm => New<DialogType>("confirm");
+
+            /// <summary>
+            /// DialogType of 'prompt'
+            /// </summary>
             public static DialogType Prompt => New<DialogType>("prompt");
+
+            /// <summary>
+            /// DialogType of 'beforeunload'
+            /// </summary>
             public static DialogType Beforeunload => New<DialogType>("beforeunload");
         }
 
@@ -12277,10 +13492,14 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Page.addScriptToEvaluateOnLoad";
 
+            /// <summary></summary>
             [JsonProperty("scriptSource")]
             public string ScriptSource { get; set; }
         }
 
+        /// <summary>
+        /// Response of AddScriptToEvaluateOnLoad.
+        /// </summary>
         public class AddScriptToEvaluateOnLoadResponse
         {
 
@@ -12298,6 +13517,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Page.addScriptToEvaluateOnNewDocument";
 
+            /// <summary></summary>
             [JsonProperty("source")]
             public string Source { get; set; }
 
@@ -12310,6 +13530,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string WorldName { get; set; }
         }
 
+        /// <summary>
+        /// Response of AddScriptToEvaluateOnNewDocument.
+        /// </summary>
         public class AddScriptToEvaluateOnNewDocumentResponse
         {
 
@@ -12360,6 +13583,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? FromSurface { get; set; }
         }
 
+        /// <summary>
+        /// Response of CaptureScreenshot.
+        /// </summary>
         public class CaptureScreenshotResponse
         {
 
@@ -12385,6 +13611,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Format { get; set; }
         }
 
+        /// <summary>
+        /// Response of CaptureSnapshot.
+        /// </summary>
         public class CaptureSnapshotResponse
         {
 
@@ -12449,6 +13678,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? GrantUniveralAccess { get; set; }
         }
 
+        /// <summary>
+        /// Response of CreateIsolatedWorld.
+        /// </summary>
         public class CreateIsolatedWorldResponse
         {
 
@@ -12496,11 +13728,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Page.enable";
         }
 
+        /// <summary />
         public class GetAppManifestCommand : ICommand<GetAppManifestResponse>
         {
             string ICommand.Name { get; } = "Page.getAppManifest";
         }
 
+        /// <summary>
+        /// Response of GetAppManifest.
+        /// </summary>
         public class GetAppManifestResponse
         {
 
@@ -12510,6 +13746,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("url")]
             public string Url { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("errors")]
             public AppManifestError[] Errors { get; set; }
 
@@ -12530,6 +13767,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Page.getCookies";
         }
 
+        /// <summary>
+        /// Response of GetCookies.
+        /// </summary>
         public class GetCookiesResponse
         {
 
@@ -12548,6 +13788,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Page.getFrameTree";
         }
 
+        /// <summary>
+        /// Response of GetFrameTree.
+        /// </summary>
         public class GetFrameTreeResponse
         {
 
@@ -12566,6 +13809,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Page.getLayoutMetrics";
         }
 
+        /// <summary>
+        /// Response of GetLayoutMetrics.
+        /// </summary>
         public class GetLayoutMetricsResponse
         {
 
@@ -12596,6 +13842,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Page.getNavigationHistory";
         }
 
+        /// <summary>
+        /// Response of GetNavigationHistory.
+        /// </summary>
         public class GetNavigationHistoryResponse
         {
 
@@ -12640,6 +13889,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Url { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetResourceContent.
+        /// </summary>
         public class GetResourceContentResponse
         {
 
@@ -12664,6 +13916,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Page.getResourceTree";
         }
 
+        /// <summary>
+        /// Response of GetResourceTree.
+        /// </summary>
         public class GetResourceTreeResponse
         {
 
@@ -12727,6 +13982,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public FrameId FrameId { get; set; }
         }
 
+        /// <summary>
+        /// Response of Navigate.
+        /// </summary>
         public class NavigateResponse
         {
 
@@ -12872,6 +14130,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? PreferCSSPageSize { get; set; }
         }
 
+        /// <summary>
+        /// Response of PrintToPDF.
+        /// </summary>
         public class PrintToPDFResponse
         {
 
@@ -12911,6 +14172,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Page.removeScriptToEvaluateOnLoad";
 
+            /// <summary></summary>
             [JsonProperty("identifier")]
             public ScriptIdentifier Identifier { get; set; }
         }
@@ -12922,6 +14184,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Page.removeScriptToEvaluateOnNewDocument";
 
+            /// <summary></summary>
             [JsonProperty("identifier")]
             public ScriptIdentifier Identifier { get; set; }
         }
@@ -12978,6 +14241,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? IsRegex { get; set; }
         }
 
+        /// <summary>
+        /// Response of SearchInResource.
+        /// </summary>
         public class SearchInResourceResponse
         {
 
@@ -13352,6 +14618,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Page.setProduceCompilationCache";
 
+            /// <summary></summary>
             [JsonProperty("enabled")]
             public bool Enabled { get; set; }
         }
@@ -13364,6 +14631,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Page.addCompilationCache";
 
+            /// <summary></summary>
             [JsonProperty("url")]
             public string Url { get; set; }
 
@@ -13414,10 +14682,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
+        /// <summary />
         [Event("Page.domContentEventFired")]
         public class DomContentEventFiredEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("timestamp")]
             public Network.MonotonicTime Timestamp { get; set; }
         }
@@ -13490,6 +14760,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public Frame Frame { get; set; }
         }
 
+        /// <summary />
         [Event("Page.frameResized")]
         public class FrameResizedEvent
         {
@@ -13653,17 +14924,21 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("loaderId")]
             public Network.LoaderId LoaderId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("name")]
             public string Name { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("timestamp")]
             public Network.MonotonicTime Timestamp { get; set; }
         }
 
+        /// <summary />
         [Event("Page.loadEventFired")]
         public class LoadEventFiredEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("timestamp")]
             public Network.MonotonicTime Timestamp { get; set; }
         }
@@ -13769,6 +15044,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class CompilationCacheProducedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("url")]
             public string Url { get; set; }
 
@@ -13850,6 +15126,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Performance.getMetrics";
         }
 
+        /// <summary>
+        /// Response of GetMetrics.
+        /// </summary>
         public class GetMetricsResponse
         {
 
@@ -13887,9 +15166,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// Security
-    /// </summary>
     namespace Security
     {
 
@@ -13910,8 +15186,20 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<MixedContentType, string>))]
         public class MixedContentType : JSEnum
         {
+
+            /// <summary>
+            /// MixedContentType of 'blockable'
+            /// </summary>
             public static MixedContentType Blockable => New<MixedContentType>("blockable");
+
+            /// <summary>
+            /// MixedContentType of 'optionally-blockable'
+            /// </summary>
             public static MixedContentType OptionallyBlockable => New<MixedContentType>("optionally-blockable");
+
+            /// <summary>
+            /// MixedContentType of 'none'
+            /// </summary>
             public static MixedContentType None => New<MixedContentType>("none");
         }
 
@@ -13921,10 +15209,30 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<SecurityState, string>))]
         public class SecurityState : JSEnum
         {
+
+            /// <summary>
+            /// SecurityState of 'unknown'
+            /// </summary>
             public static SecurityState Unknown => New<SecurityState>("unknown");
+
+            /// <summary>
+            /// SecurityState of 'neutral'
+            /// </summary>
             public static SecurityState Neutral => New<SecurityState>("neutral");
+
+            /// <summary>
+            /// SecurityState of 'insecure'
+            /// </summary>
             public static SecurityState Insecure => New<SecurityState>("insecure");
+
+            /// <summary>
+            /// SecurityState of 'secure'
+            /// </summary>
             public static SecurityState Secure => New<SecurityState>("secure");
+
+            /// <summary>
+            /// SecurityState of 'info'
+            /// </summary>
             public static SecurityState Info => New<SecurityState>("info");
         }
 
@@ -14035,7 +15343,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<CertificateErrorAction, string>))]
         public class CertificateErrorAction : JSEnum
         {
+
+            /// <summary>
+            /// CertificateErrorAction of 'continue'
+            /// </summary>
             public static CertificateErrorAction Continue => New<CertificateErrorAction>("continue");
+
+            /// <summary>
+            /// CertificateErrorAction of 'cancel'
+            /// </summary>
             public static CertificateErrorAction Cancel => New<CertificateErrorAction>("cancel");
         }
 
@@ -14197,33 +15513,78 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class ServiceWorkerRegistration
         {
 
+            /// <summary></summary>
             [JsonProperty("registrationId")]
             public string RegistrationId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("scopeURL")]
             public string ScopeURL { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("isDeleted")]
             public bool IsDeleted { get; set; }
         }
 
+        /// <summary />
         [JsonConverter(typeof(JSAliasConverter<ServiceWorkerVersionRunningStatus, string>))]
         public class ServiceWorkerVersionRunningStatus : JSEnum
         {
+
+            /// <summary>
+            /// ServiceWorkerVersionRunningStatus of 'stopped'
+            /// </summary>
             public static ServiceWorkerVersionRunningStatus Stopped => New<ServiceWorkerVersionRunningStatus>("stopped");
+
+            /// <summary>
+            /// ServiceWorkerVersionRunningStatus of 'starting'
+            /// </summary>
             public static ServiceWorkerVersionRunningStatus Starting => New<ServiceWorkerVersionRunningStatus>("starting");
+
+            /// <summary>
+            /// ServiceWorkerVersionRunningStatus of 'running'
+            /// </summary>
             public static ServiceWorkerVersionRunningStatus Running => New<ServiceWorkerVersionRunningStatus>("running");
+
+            /// <summary>
+            /// ServiceWorkerVersionRunningStatus of 'stopping'
+            /// </summary>
             public static ServiceWorkerVersionRunningStatus Stopping => New<ServiceWorkerVersionRunningStatus>("stopping");
         }
 
+        /// <summary />
         [JsonConverter(typeof(JSAliasConverter<ServiceWorkerVersionStatus, string>))]
         public class ServiceWorkerVersionStatus : JSEnum
         {
+
+            /// <summary>
+            /// ServiceWorkerVersionStatus of 'new'
+            /// </summary>
             public static ServiceWorkerVersionStatus New => New<ServiceWorkerVersionStatus>("new");
+
+            /// <summary>
+            /// ServiceWorkerVersionStatus of 'installing'
+            /// </summary>
             public static ServiceWorkerVersionStatus Installing => New<ServiceWorkerVersionStatus>("installing");
+
+            /// <summary>
+            /// ServiceWorkerVersionStatus of 'installed'
+            /// </summary>
             public static ServiceWorkerVersionStatus Installed => New<ServiceWorkerVersionStatus>("installed");
+
+            /// <summary>
+            /// ServiceWorkerVersionStatus of 'activating'
+            /// </summary>
             public static ServiceWorkerVersionStatus Activating => New<ServiceWorkerVersionStatus>("activating");
+
+            /// <summary>
+            /// ServiceWorkerVersionStatus of 'activated'
+            /// </summary>
             public static ServiceWorkerVersionStatus Activated => New<ServiceWorkerVersionStatus>("activated");
+
+            /// <summary>
+            /// ServiceWorkerVersionStatus of 'redundant'
+            /// </summary>
             public static ServiceWorkerVersionStatus Redundant => New<ServiceWorkerVersionStatus>("redundant");
         }
 
@@ -14233,18 +15594,23 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class ServiceWorkerVersion
         {
 
+            /// <summary></summary>
             [JsonProperty("versionId")]
             public string VersionId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("registrationId")]
             public string RegistrationId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("scriptURL")]
             public string ScriptURL { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("runningStatus")]
             public ServiceWorkerVersionRunningStatus RunningStatus { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("status")]
             public ServiceWorkerVersionStatus Status { get; set; }
 
@@ -14280,21 +15646,27 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class ServiceWorkerErrorMessage
         {
 
+            /// <summary></summary>
             [JsonProperty("errorMessage")]
             public string ErrorMessage { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("registrationId")]
             public string RegistrationId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("versionId")]
             public string VersionId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("sourceURL")]
             public string SourceURL { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("lineNumber")]
             public long LineNumber { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("columnNumber")]
             public long ColumnNumber { get; set; }
         }
@@ -14303,104 +15675,130 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Commands
 
+        /// <summary />
         public class DeliverPushMessageCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.deliverPushMessage";
 
+            /// <summary></summary>
             [JsonProperty("origin")]
             public string Origin { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("registrationId")]
             public string RegistrationId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("data")]
             public string Data { get; set; }
         }
 
+        /// <summary />
         public class DisableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.disable";
         }
 
+        /// <summary />
         public class DispatchSyncEventCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.dispatchSyncEvent";
 
+            /// <summary></summary>
             [JsonProperty("origin")]
             public string Origin { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("registrationId")]
             public string RegistrationId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("tag")]
             public string Tag { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("lastChance")]
             public bool LastChance { get; set; }
         }
 
+        /// <summary />
         public class EnableCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.enable";
         }
 
+        /// <summary />
         public class InspectWorkerCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.inspectWorker";
 
+            /// <summary></summary>
             [JsonProperty("versionId")]
             public string VersionId { get; set; }
         }
 
+        /// <summary />
         public class SetForceUpdateOnPageLoadCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.setForceUpdateOnPageLoad";
 
+            /// <summary></summary>
             [JsonProperty("forceUpdateOnPageLoad")]
             public bool ForceUpdateOnPageLoad { get; set; }
         }
 
+        /// <summary />
         public class SkipWaitingCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.skipWaiting";
 
+            /// <summary></summary>
             [JsonProperty("scopeURL")]
             public string ScopeURL { get; set; }
         }
 
+        /// <summary />
         public class StartWorkerCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.startWorker";
 
+            /// <summary></summary>
             [JsonProperty("scopeURL")]
             public string ScopeURL { get; set; }
         }
 
+        /// <summary />
         public class StopAllWorkersCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.stopAllWorkers";
         }
 
+        /// <summary />
         public class StopWorkerCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.stopWorker";
 
+            /// <summary></summary>
             [JsonProperty("versionId")]
             public string VersionId { get; set; }
         }
 
+        /// <summary />
         public class UnregisterCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.unregister";
 
+            /// <summary></summary>
             [JsonProperty("scopeURL")]
             public string ScopeURL { get; set; }
         }
 
+        /// <summary />
         public class UpdateRegistrationCommand : ICommand<VoidResponse>
         {
             string ICommand.Name { get; } = "ServiceWorker.updateRegistration";
 
+            /// <summary></summary>
             [JsonProperty("scopeURL")]
             public string ScopeURL { get; set; }
         }
@@ -14409,26 +15807,32 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
+        /// <summary />
         [Event("ServiceWorker.workerErrorReported")]
         public class WorkerErrorReportedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("errorMessage")]
             public ServiceWorkerErrorMessage ErrorMessage { get; set; }
         }
 
+        /// <summary />
         [Event("ServiceWorker.workerRegistrationUpdated")]
         public class WorkerRegistrationUpdatedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("registrations")]
             public ServiceWorkerRegistration[] Registrations { get; set; }
         }
 
+        /// <summary />
         [Event("ServiceWorker.workerVersionUpdated")]
         public class WorkerVersionUpdatedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("versions")]
             public ServiceWorkerVersion[] Versions { get; set; }
         }
@@ -14447,16 +15851,60 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<StorageType, string>))]
         public class StorageType : JSEnum
         {
+
+            /// <summary>
+            /// StorageType of 'appcache'
+            /// </summary>
             public static StorageType Appcache => New<StorageType>("appcache");
+
+            /// <summary>
+            /// StorageType of 'cookies'
+            /// </summary>
             public static StorageType Cookies => New<StorageType>("cookies");
+
+            /// <summary>
+            /// StorageType of 'file_systems'
+            /// </summary>
             public static StorageType FileSystems => New<StorageType>("file_systems");
+
+            /// <summary>
+            /// StorageType of 'indexeddb'
+            /// </summary>
             public static StorageType Indexeddb => New<StorageType>("indexeddb");
+
+            /// <summary>
+            /// StorageType of 'local_storage'
+            /// </summary>
             public static StorageType LocalStorage => New<StorageType>("local_storage");
+
+            /// <summary>
+            /// StorageType of 'shader_cache'
+            /// </summary>
             public static StorageType ShaderCache => New<StorageType>("shader_cache");
+
+            /// <summary>
+            /// StorageType of 'websql'
+            /// </summary>
             public static StorageType Websql => New<StorageType>("websql");
+
+            /// <summary>
+            /// StorageType of 'service_workers'
+            /// </summary>
             public static StorageType ServiceWorkers => New<StorageType>("service_workers");
+
+            /// <summary>
+            /// StorageType of 'cache_storage'
+            /// </summary>
             public static StorageType CacheStorage => New<StorageType>("cache_storage");
+
+            /// <summary>
+            /// StorageType of 'all'
+            /// </summary>
             public static StorageType All => New<StorageType>("all");
+
+            /// <summary>
+            /// StorageType of 'other'
+            /// </summary>
             public static StorageType Other => New<StorageType>("other");
         }
 
@@ -14517,6 +15965,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public string Origin { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetUsageAndQuota.
+        /// </summary>
         public class GetUsageAndQuotaResponse
         {
 
@@ -14676,9 +16127,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// The SystemInfo domain defines methods and events for querying low-level system information.
-    /// </summary>
     namespace SystemInfo
     {
 
@@ -14784,6 +16232,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "SystemInfo.getInfo";
         }
 
+        /// <summary>
+        /// Response of GetInfo.
+        /// </summary>
         public class GetInfoResponse
         {
 
@@ -14823,6 +16274,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "SystemInfo.getProcessInfo";
         }
 
+        /// <summary>
+        /// Response of GetProcessInfo.
+        /// </summary>
         public class GetProcessInfoResponse
         {
 
@@ -14836,14 +16290,12 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// Supports additional targets discovery and allows to attach to them.
-    /// </summary>
     namespace Target
     {
 
         #region Types
 
+        /// <summary />
         [JsonConverter(typeof(JSAliasConverter<TargetID, string>))]
         public class TargetID : JSAlias<string>
         {
@@ -14857,23 +16309,29 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
         }
 
+        /// <summary />
         [JsonConverter(typeof(JSAliasConverter<BrowserContextID, string>))]
         public class BrowserContextID : JSAlias<string>
         {
         }
 
+        /// <summary />
         public class TargetInfo
         {
 
+            /// <summary></summary>
             [JsonProperty("targetId")]
             public TargetID TargetId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("type")]
             public string Type { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("title")]
             public string Title { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("url")]
             public string Url { get; set; }
 
@@ -14896,12 +16354,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public BrowserContextID BrowserContextId { get; set; }
         }
 
+        /// <summary />
         public class RemoteLocation
         {
 
+            /// <summary></summary>
             [JsonProperty("host")]
             public string Host { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("port")]
             public long Port { get; set; }
         }
@@ -14917,6 +16378,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Target.activateTarget";
 
+            /// <summary></summary>
             [JsonProperty("targetId")]
             public TargetID TargetId { get; set; }
         }
@@ -14928,6 +16390,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Target.attachToTarget";
 
+            /// <summary></summary>
             [JsonProperty("targetId")]
             public TargetID TargetId { get; set; }
 
@@ -14938,6 +16401,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? Flatten { get; set; }
         }
 
+        /// <summary>
+        /// Response of AttachToTarget.
+        /// </summary>
         public class AttachToTargetResponse
         {
 
@@ -14956,6 +16422,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Target.attachToBrowserTarget";
         }
 
+        /// <summary>
+        /// Response of AttachToBrowserTarget.
+        /// </summary>
         public class AttachToBrowserTargetResponse
         {
 
@@ -14973,13 +16442,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Target.closeTarget";
 
+            /// <summary></summary>
             [JsonProperty("targetId")]
             public TargetID TargetId { get; set; }
         }
 
+        /// <summary>
+        /// Response of CloseTarget.
+        /// </summary>
         public class CloseTargetResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("success")]
             public bool Success { get; set; }
         }
@@ -14998,6 +16472,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Target.exposeDevToolsProtocol";
 
+            /// <summary></summary>
             [JsonProperty("targetId")]
             public TargetID TargetId { get; set; }
 
@@ -15017,6 +16492,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Target.createBrowserContext";
         }
 
+        /// <summary>
+        /// Response of CreateBrowserContext.
+        /// </summary>
         public class CreateBrowserContextResponse
         {
 
@@ -15035,6 +16513,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Target.getBrowserContexts";
         }
 
+        /// <summary>
+        /// Response of GetBrowserContexts.
+        /// </summary>
         public class GetBrowserContextsResponse
         {
 
@@ -15084,6 +16565,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public bool? EnableBeginFrameControl { get; set; }
         }
 
+        /// <summary>
+        /// Response of CreateTarget.
+        /// </summary>
         public class CreateTargetResponse
         {
 
@@ -15122,6 +16606,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Target.disposeBrowserContext";
 
+            /// <summary></summary>
             [JsonProperty("browserContextId")]
             public BrowserContextID BrowserContextId { get; set; }
         }
@@ -15140,9 +16625,13 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public TargetID TargetId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetTargetInfo.
+        /// </summary>
         public class GetTargetInfoResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("targetInfo")]
             public TargetInfo TargetInfo { get; set; }
         }
@@ -15155,6 +16644,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Target.getTargets";
         }
 
+        /// <summary>
+        /// Response of GetTargets.
+        /// </summary>
         public class GetTargetsResponse
         {
 
@@ -15172,6 +16664,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Target.sendMessageToTarget";
 
+            /// <summary></summary>
             [JsonProperty("message")]
             public string Message { get; set; }
 
@@ -15264,9 +16757,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("sessionId")]
             public SessionID SessionId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("targetInfo")]
             public TargetInfo TargetInfo { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("waitingForDebugger")]
             public bool WaitingForDebugger { get; set; }
         }
@@ -15306,6 +16801,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             [JsonProperty("sessionId")]
             public SessionID SessionId { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("message")]
             public string Message { get; set; }
 
@@ -15323,6 +16819,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class TargetCreatedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("targetInfo")]
             public TargetInfo TargetInfo { get; set; }
         }
@@ -15334,6 +16831,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class TargetDestroyedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("targetId")]
             public TargetID TargetId { get; set; }
         }
@@ -15345,6 +16843,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class TargetCrashedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("targetId")]
             public TargetID TargetId { get; set; }
 
@@ -15369,6 +16868,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class TargetInfoChangedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("targetInfo")]
             public TargetInfo TargetInfo { get; set; }
         }
@@ -15376,9 +16876,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// The Tethering domain defines methods and events for browser port binding.
-    /// </summary>
     namespace Tethering
     {
 
@@ -15451,6 +16948,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
         }
 
+        /// <summary />
         public class TraceConfig
         {
 
@@ -15509,7 +17007,15 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<StreamCompression, string>))]
         public class StreamCompression : JSEnum
         {
+
+            /// <summary>
+            /// StreamCompression of 'none'
+            /// </summary>
             public static StreamCompression None => New<StreamCompression>("none");
+
+            /// <summary>
+            /// StreamCompression of 'gzip'
+            /// </summary>
             public static StreamCompression Gzip => New<StreamCompression>("gzip");
         }
 
@@ -15533,6 +17039,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Tracing.getCategories";
         }
 
+        /// <summary>
+        /// Response of GetCategories.
+        /// </summary>
         public class GetCategoriesResponse
         {
 
@@ -15565,6 +17074,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             string ICommand.Name { get; } = "Tracing.requestMemoryDump";
         }
 
+        /// <summary>
+        /// Response of RequestMemoryDump.
+        /// </summary>
         public class RequestMemoryDumpResponse
         {
 
@@ -15631,6 +17143,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
 
         #region Events
 
+        /// <summary />
         [Event("Tracing.bufferUsage")]
         public class BufferUsageEvent
         {
@@ -15664,6 +17177,7 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class DataCollectedEvent
         {
 
+            /// <summary></summary>
             [JsonProperty("value")]
             public object[] Value { get; set; }
         }
@@ -15692,10 +17206,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// Testing domain is a dumping ground for the capabilities requires for browser or app testing that do not fit other
-    /// domains.
-    /// </summary>
     namespace Testing
     {
 
@@ -15724,9 +17234,6 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         #endregion
     }
 
-    /// <summary>
-    /// A domain for letting clients substitute browser's network layer with client code.
-    /// </summary>
     namespace Fetch
     {
 
@@ -15748,10 +17255,19 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         [JsonConverter(typeof(JSAliasConverter<RequestStage, string>))]
         public class RequestStage : JSEnum
         {
+
+            /// <summary>
+            /// RequestStage of 'Request'
+            /// </summary>
             public static RequestStage Request => New<RequestStage>("Request");
+
+            /// <summary>
+            /// RequestStage of 'Response'
+            /// </summary>
             public static RequestStage Response => New<RequestStage>("Response");
         }
 
+        /// <summary />
         public class RequestPattern
         {
 
@@ -15781,9 +17297,11 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         public class HeaderEntry
         {
 
+            /// <summary></summary>
             [JsonProperty("name")]
             public string Name { get; set; }
 
+            /// <summary></summary>
             [JsonProperty("value")]
             public string Value { get; set; }
         }
@@ -16020,6 +17538,9 @@ namespace DumbPrograms.ChromeDevTools.Protocol
             public RequestId RequestId { get; set; }
         }
 
+        /// <summary>
+        /// Response of GetResponseBody.
+        /// </summary>
         public class GetResponseBodyResponse
         {
 
@@ -16052,13 +17573,18 @@ namespace DumbPrograms.ChromeDevTools.Protocol
         {
             string ICommand.Name { get; } = "Fetch.takeResponseBodyAsStream";
 
+            /// <summary></summary>
             [JsonProperty("requestId")]
             public RequestId RequestId { get; set; }
         }
 
+        /// <summary>
+        /// Response of TakeResponseBodyAsStream.
+        /// </summary>
         public class TakeResponseBodyAsStreamResponse
         {
 
+            /// <summary></summary>
             [JsonProperty("stream")]
             public IO.StreamHandle Stream { get; set; }
         }
