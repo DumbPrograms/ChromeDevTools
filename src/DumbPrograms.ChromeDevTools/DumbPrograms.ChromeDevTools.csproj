@@ -15,8 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Generated\browser_protocol.json" />
-    <None Remove="Generated\js_protocol.json" />
+    <None Remove="Generated\*.json" />
   </ItemGroup>
 
   <ItemGroup>
