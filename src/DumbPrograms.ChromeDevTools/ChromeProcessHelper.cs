@@ -5,17 +5,36 @@ using System.Threading.Tasks;
 
 namespace DumbPrograms.ChromeDevTools
 {
+    /// <summary>
+    /// Helps passing commandline args and managing the Chrome process.
+    /// </summary>
     public class ChromeProcessHelper : IDisposable
     {
         private Process Chrome;
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public string PathToChrome { get; }
         public int DebuggingPort { get; }
         public bool Headless { get; }
         public bool DisableGpu { get; }
         public string UserDataDirectory { get; private set; }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
+        /// <summary>
+        /// Additonal arguments that passes as is.
+        /// </summary>
         public string AdditionalArguments { get; }
 
+        /// <summary>
+        /// Starts new Chrome process using arguments specified in parameters.
+        /// </summary>
+        /// <param name="pathToChrome"></param>
+        /// <param name="debuggingPort"></param>
+        /// <param name="headless"></param>
+        /// <param name="disableGpu"></param>
+        /// <param name="userDataDirectory"></param>
+        /// <param name="additionalArguments"></param>
+        /// <returns></returns>
         public static ChromeProcessHelper StartNew(
             string pathToChrome = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
             int debuggingPort = 9222,
@@ -70,6 +89,11 @@ namespace DumbPrograms.ChromeDevTools
             Chrome = Process.Start(psi);
         }
 
+        /// <summary>
+        /// Gets a <see cref="DevToolsClient"/> that works over the debugging port from the Chrome process.
+        /// </summary>
+        /// <param name="url">Optionally start a new tab with the url.</param>
+        /// <returns></returns>
         public async Task<DevToolsClient> GetDevTools(string url = null)
         {
             var client = new DevToolsClient(DebuggingPort);
@@ -86,6 +110,9 @@ namespace DumbPrograms.ChromeDevTools
 
         private bool Disposed = false; // To detect redundant calls
 
+        /// <summary>
+        /// </summary>
+        /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
         {
             if (!Disposed)
@@ -116,6 +143,8 @@ namespace DumbPrograms.ChromeDevTools
             }
         }
 
+        /// <summary>
+        /// </summary>
         // This code added to correctly implement the disposable pattern.
         public void Dispose()
         {

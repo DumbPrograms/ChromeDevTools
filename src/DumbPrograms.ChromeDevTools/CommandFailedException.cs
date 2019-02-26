@@ -9,10 +9,16 @@ namespace DumbPrograms.ChromeDevTools
     [Serializable]
     public class CommandFailedException : Exception
     {
+        /// <summary>
+        /// The command that was failed.
+        /// </summary>
         public ICommand Command { get; }
+
+        /// <summary>
+        /// </summary>
         public int ErrorCode { get; }
 
-        public CommandFailedException(ICommand command, int code, string message) : base(message)
+        internal CommandFailedException(ICommand command, int code, string message) : base(message)
         {
             Command = command;
             ErrorCode = code;
