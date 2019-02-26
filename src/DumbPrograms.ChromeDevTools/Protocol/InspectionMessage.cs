@@ -2,7 +2,7 @@
 
 namespace DumbPrograms.ChromeDevTools.Protocol
 {
-    public class InspectionMessage
+    class InspectionMessage
     {
         public int? Id { get; set; }
         public string Method { get; set; }

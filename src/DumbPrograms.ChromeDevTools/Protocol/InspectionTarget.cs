@@ -1,5 +1,8 @@
 ﻿namespace DumbPrograms.ChromeDevTools.Protocol
 {
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
     public class InspectionTarget
     {
         public string Id { get; set; }
