@@ -42,7 +42,7 @@ using (var inspector = await devTools.Inspect(t0))
 {
     await inspector.Page.Enable();
 
-    await inspector.Page.Navigate("https://www.baidu.com");
+    await inspector.Page.Navigate("https://github.com");
 
     var e = await inspector.Page.LoadEventFiredEvent();
 
