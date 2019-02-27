@@ -13,6 +13,8 @@
     <Authors>Paul Chen</Authors>
     <RepositoryUrl>https://github.com/DumbPrograms/ChromeDevTools</RepositoryUrl>
     <Description>.Net library to interact with Chrome using the Chrome DevTools Protocol</Description>
+    <PackageLicenseUrl>https://github.com/DumbPrograms/ChromeDevTools/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>2019 DumbPrograms</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
