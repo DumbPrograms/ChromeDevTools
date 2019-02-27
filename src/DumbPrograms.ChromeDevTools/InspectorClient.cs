@@ -13,6 +13,9 @@ using Newtonsoft.Json.Serialization;
 
 namespace DumbPrograms.ChromeDevTools
 {
+    /// <summary>
+    /// The client to inspect <see cref="InspectionTarget"/>s.
+    /// </summary>
     public partial class InspectorClient : IDisposable
     {
         private readonly string InspectionTargetUrl;
@@ -26,6 +29,10 @@ namespace DumbPrograms.ChromeDevTools
 
         private int CommandId = 0;
 
+        /// <summary>
+        /// Creates a client to inspect <paramref name="inspectionTarget"/>.
+        /// </summary>
+        /// <param name="inspectionTarget"></param>
         public InspectorClient(InspectionTarget inspectionTarget)
         {
             WebSocket = new ClientWebSocket();
@@ -40,6 +47,11 @@ namespace DumbPrograms.ChromeDevTools
             MessageReceived += DispatchSubscribedEvents;
         }
 
+        /// <summary>
+        /// Connects to the server url defined within the inspection target.
+        /// </summary>
+        /// <param name="cancellation"></param>
+        /// <returns>True when the connection is successful, otherwise false.</returns>
         public async Task<bool> Connect(CancellationToken cancellation = default)
         {
             if (Interlocked.CompareExchange(ref Started, 1, 0) == 0)
@@ -56,6 +68,11 @@ namespace DumbPrograms.ChromeDevTools
             return false;
         }
 
+        /// <summary>
+        /// Disconnects to the server url defined within the inspection target.
+        /// </summary>
+        /// <param name="cancellation"></param>
+        /// <returns>True when the disconnection was made, false when the client was already disconnected.</returns>
         public async Task<bool> Disconnect(CancellationToken cancellation = default)
         {
             if (Interlocked.CompareExchange(ref Started, 0, 1) == 1)
@@ -81,6 +98,8 @@ namespace DumbPrograms.ChromeDevTools
             return false;
         }
 
+        /// <summary>
+        /// </summary>
         public void Dispose()
         {
             MessageReceived = null;
@@ -91,6 +110,13 @@ namespace DumbPrograms.ChromeDevTools
             WebSocket.Dispose();
         }
 
+        /// <summary>
+        /// Sends a message to the server indicating we are invoking a command.
+        /// </summary>
+        /// <typeparam name="TResponse">The type that wraps the expected info to return.</typeparam>
+        /// <param name="command">The command to invoke.</param>
+        /// <param name="cancellation"></param>
+        /// <returns>The expected info represents by <typeparamref name="TResponse"/>.</returns>
         public async Task<TResponse> InvokeCommand<TResponse>(ICommand<TResponse> command, CancellationToken cancellation = default)
         {
             if (command == null)
@@ -101,6 +127,12 @@ namespace DumbPrograms.ChromeDevTools
             return await InvokeCommandCore(command, cancellation).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Signals the client to fire an event to <paramref name="handler"/> when a specific message is received.
+        /// </summary>
+        /// <typeparam name="TEvent">The type that contains the event data.</typeparam>
+        /// <param name="name">The name of the event.</param>
+        /// <param name="handler">The action to perform when the message is received. It's async and does not block the browser.</param>
         public void AddEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
         {
             if (String.IsNullOrWhiteSpace(name))
@@ -111,6 +143,12 @@ namespace DumbPrograms.ChromeDevTools
             AddEventHandlerCore(name, handler);
         }
 
+        /// <summary>
+        /// Removes the handler to an event.
+        /// </summary>
+        /// <typeparam name="TEvent">The type that contains the event data.</typeparam>
+        /// <param name="name">The name of the event.</param>
+        /// <param name="handler">The action to perform when the message is received.</param>
         public void RemoveEventHandler<TEvent>(string name, Func<TEvent, Task> handler)
         {
             if (String.IsNullOrWhiteSpace(name))
@@ -121,6 +159,13 @@ namespace DumbPrograms.ChromeDevTools
             RemoveEventHandlerCore(name, handler);
         }
 
+        /// <summary>
+        /// Listen for the messages of an event once, or <paramref name="until"/> the handler returns true.
+        /// </summary>
+        /// <typeparam name="TEvent">The type that contains the event data.</typeparam>
+        /// <param name="name">The name of the event.</param>
+        /// <param name="until">The action to perform when the message is received. It's async and does not block the browser.</param>
+        /// <returns>The last event data received.</returns>
         public async Task<TEvent> SubscribeUntil<TEvent>(string name, Func<TEvent, Task<bool>> until = null)
         {
             if (String.IsNullOrWhiteSpace(name))
@@ -300,6 +345,9 @@ namespace DumbPrograms.ChromeDevTools
         private EventDispatcher<TEvent> GetEventDispatcher<TEvent>(string name)
             => (EventDispatcher<TEvent>)EventDispatchers.GetOrAdd(name, n => new EventDispatcher<TEvent>());
 
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return InspectionTargetUrl;
