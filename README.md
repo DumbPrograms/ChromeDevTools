@@ -10,6 +10,10 @@ This library provides .Net friendly API to work with the protocol.
 
 ## Getting Started
 
+```
+PM> Install-Package DumbPrograms.ChromeDevTools
+```
+
 If you already have Chrome running with `--remote-debugging-port=9222`, you can simply start with
 
 ```C#
@@ -57,7 +61,7 @@ Just remember to `await` the API calls unless you don't want.
 
 Either use Visual Studio 2017 to open the solution and click the "Build Solution" button. Or
 
-```cmd
+```
 nuget restore
 msbuild
 ```
