@@ -54,7 +54,7 @@ using (var inspector = await devTools.Inspect(t0))
 }
 ```
 
-Please keep in mind that these APIs are almost always async, putting `Async` suffices to the methond names are unnecessary.
+Please keep in mind that these APIs are almost always async, putting `Async` suffices to the method names are unnecessary.
 Just remember to `await` the API calls unless you don't want.
 
 ## Building
