@@ -51,4 +51,18 @@ using (var inspector = await devTools.Inspect(t0))
 ```
 
 Please keep in mind that these APIs are almost always async, putting `Async` suffices to the methond names are unnecessary.
-Just remember to use `await` for the API calls unless you don't want.
+Just remember to `await` the API calls unless you don't want.
+
+## Building
+
+Either use Visual Studio 2017 to open the solution and click the "Build Solution" button. Or
+
+```cmd
+nuget restore
+msbuild
+```
+
+## Refreshing
+
+1. Make sure the Generator project is built.
+1. Build the DevTools project with either `-property:RefreshProtocolJsonFiles=true` or your json files placed in the `Generated` folder.
