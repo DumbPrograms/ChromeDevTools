@@ -7,14 +7,17 @@
     <LangVersion>7.3</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <DocumentationFile>$(OutputPath)\DumbPrograms.ChromeDevTools.xml</DocumentationFile>
-    <Version>0.1.0</Version>
+    <Version>0.1.30</Version>
     <Company />
     <Product />
     <Authors>Paul Chen</Authors>
-    <RepositoryUrl>https://github.com/DumbPrograms/ChromeDevTools</RepositoryUrl>
+    <RepositoryUrl>https://github.com/DumbPrograms/ChromeDevTools.git</RepositoryUrl>
     <Description>.Net library to interact with Chrome using the Chrome DevTools Protocol</Description>
     <PackageLicenseUrl>https://github.com/DumbPrograms/ChromeDevTools/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>2019 DumbPrograms</Copyright>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/DumbPrograms/ChromeDevTools</PackageProjectUrl>
+    <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,0 +1,29 @@
+version: '{branch}-{build}'
+pull_requests:
+  do_not_increment_build_number: true
+image: Visual Studio 2017
+configuration:
+- Debug
+- Release
+shallow_clone: true
+nuget:
+  disable_publish_on_pr: true
+  disable_publish_octopus: true
+before_build:
+- cmd: nuget restore
+build:
+  verbosity: minimal
+artifacts:
+- path: bin/Release/*.nupkg
+  name: nupkgs
+deploy:
+- provider: Environment
+  name: NuGet
+  on:
+    Configuration: Release
+    APPVEYOR_REPO_TAG: true
+- provider: Environment
+  name: GitHub-Release-Auto
+  on:
+    Configuration: Release
+    APPVEYOR_REPO_TAG: true
